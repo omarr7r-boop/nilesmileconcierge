@@ -1408,6 +1408,113 @@ tailwind.config = {
   .quick-bar.show{display:flex}
   body.quickbar-active .site-header{top:44px}
 }
+
+/* ═══════════ CLINIC PHOTOS CAROUSEL ═══════════ */
+.clinic-carousel-wrap{
+  position:relative;
+  margin-bottom:3rem;
+}
+
+.clinic-carousel-track{
+  display:flex;
+  gap:1.25rem;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  padding:.5rem .25rem 1.5rem;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(174,145,100,.4) transparent;
+}
+.clinic-carousel-track::-webkit-scrollbar{height:6px}
+.clinic-carousel-track::-webkit-scrollbar-track{background:rgba(79,96,112,.08);border-radius:3px}
+.clinic-carousel-track::-webkit-scrollbar-thumb{background:rgba(174,145,100,.5);border-radius:3px}
+
+.clinic-carousel-card{
+  flex:0 0 auto;
+  width:320px;
+  scroll-snap-align:start;
+  position:relative;
+  overflow:hidden;
+  border-radius:4px;
+  border:1px solid rgba(174,145,100,.2);
+  cursor:pointer;
+  background:#F6F3EE;
+  transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s;
+  box-shadow:0 4px 20px rgba(79,96,112,.08);
+}
+.clinic-carousel-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 40px rgba(79,96,112,.18);
+  border-color:rgba(174,145,100,.5);
+}
+.clinic-carousel-card img{
+  width:100%;
+  height:280px;
+  object-fit:cover;
+  display:block;
+  transition:transform .8s cubic-bezier(.22,1,.36,1);
+}
+.clinic-carousel-card:hover img{transform:scale(1.06)}
+
+.clinic-carousel-card-caption{
+  padding:1rem 1.25rem 1.25rem;
+  background:#fff;
+  border-top:1px solid rgba(174,145,100,.12);
+  text-align:center;
+}
+.clinic-carousel-card-caption p{
+  font-family:'Playfair Display',serif;
+  font-size:1rem;
+  color:#4F6070;
+  margin:0;
+  line-height:1.4;
+}
+.clinic-carousel-card-caption span{
+  display:block;
+  font-family:'Montserrat',sans-serif;
+  font-size:.65rem;
+  font-weight:600;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:#AE9164;
+  margin-top:.35rem;
+}
+
+@media(max-width:640px){
+  .clinic-carousel-card{width:260px}
+  .clinic-carousel-card img{height:220px}
+}
+
+/* Nav buttons */
+.clinic-nav{
+  position:absolute;
+  top:calc(50% - 40px);
+  transform:translateY(-50%);
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:rgba(79,96,112,.9);
+  border:1px solid rgba(174,145,100,.5);
+  color:#E8C88A;
+  font-size:1.6rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  z-index:5;
+  transition:all .3s cubic-bezier(.22,1,.36,1);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+.clinic-nav:hover{
+  background:linear-gradient(135deg,#AE9164,#E8C88A);
+  color:#1F2A36;
+  border-color:#E8C88A;
+  transform:translateY(-50%) scale(1.1);
+}
+.clinic-prev{left:-8px}
+.clinic-next{right:-8px}
+@media(max-width:768px){.clinic-nav{display:none}}
 </style>
 </head>
 <body>
@@ -3255,35 +3362,62 @@ tailwind.config = {
       <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">Our Partner Clinic Location</h2>
       <p class="text-nile-muted">We operate within Arkan Plaza Medical District — one of West Cairo's most prestigious medical hubs, 25 minutes from the Giza Pyramids.</p>
     </div>
-    <!-- ═══ Clinic Photos Gallery ═══ -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 stagger">
-      <div class="group overflow-hidden border border-nile-gold/20 rounded-sm">
-        <img src="images/photo_1_2026-09-27_00-36-40.jpg" 
-             alt="Reception area at our Cairo partner clinic" 
-             loading="lazy" 
-             width="400" 
-             height="300"
-             class="w-full h-40 md:h-52 object-cover group-hover:scale-110 transition duration-700">
+    <!-- ═══ Clinic Photos — Carousel ═══ -->
+    <div class="clinic-carousel-wrap">
+      <button class="clinic-nav clinic-prev" id="clinicPrev" aria-label="Previous">‹</button>
+      <div class="clinic-carousel-track" id="clinicTrack">
+        <!-- 1 — Reception -->
+        <div class="clinic-carousel-card">
+          <img src="images/SHW-1.jpg" 
+               alt="Reception area at our Cairo partner clinic" 
+               loading="lazy">
+          <div class="clinic-carousel-card-caption">
+            <p>Reception & Waiting Area</p>
+            <span>Cairo Partner Clinic</span>
+          </div>
+        </div>
+        <!-- 2 — Treatment Room -->
+        <div class="clinic-carousel-card">
+          <img src="images/Shiny-White-23.jpg" 
+               alt="Dental treatment room at our partner clinic" 
+               loading="lazy">
+          <div class="clinic-carousel-card-caption">
+            <p>Treatment Room</p>
+            <span>International Standards</span>
+          </div>
+        </div>
+        <!-- 3 — Modern Equipment -->
+        <div class="clinic-carousel-card">
+          <img src="images/photo_1_2026-09-27_00-36-40.jpg" 
+               alt="Modern dental equipment at our Cairo clinic" 
+               loading="lazy">
+          <div class="clinic-carousel-card-caption">
+            <p>Modern Equipment</p>
+            <span>Advanced Technology</span>
+          </div>
+        </div>
+        <!-- 4 — Interior -->
+        <div class="clinic-carousel-card">
+          <img src="images/photo_2_2026-09-27_00-36-40.jpg" 
+               alt="Clinic interior view" 
+               loading="lazy">
+          <div class="clinic-carousel-card-caption">
+            <p>Clinic Interior</p>
+            <span>Premium Design</span>
+          </div>
+        </div>
+        <!-- 5 — Full View -->
+        <div class="clinic-carousel-card">
+          <img src="images/photo_3_2026-09-27_00-36-40.jpg" 
+               alt="Full view of our Cairo partner clinic" 
+               loading="lazy">
+          <div class="clinic-carousel-card-caption">
+            <p>Full Clinic View</p>
+            <span>Our Cairo Facility</span>
+          </div>
+        </div>
       </div>
-      <div class="group overflow-hidden border border-nile-gold/20 rounded-sm">
-        <img src="images/photo_2_2026-09-27_00-36-40.jpg" 
-             alt="Modern dental treatment room" 
-             loading="lazy" 
-             width="400" 
-             height="300"
-             class="w-full h-40 md:h-52 object-cover group-hover:scale-110 transition duration-700">
-      </div>
-      <div class="group overflow-hidden border border-nile-gold/20 rounded-sm">
-        <img src="images/photo_3_2026-09-27_00-36-40.jpg" 
-             alt="Dental clinic interior with international-standard equipment" 
-             loading="lazy" 
-             width="400" 
-             height="300"
-             class="w-full h-40 md:h-52 object-cover group-hover:scale-110 transition duration-700">
-      </div>
-      <div class="group overflow-hidden border border-nile-gold/20 rounded-sm bg-nile-blue/5 flex items-center justify-center">
-        <p class="text-xs text-nile-muted text-center p-4">More clinic photos coming soon</p>
-      </div>
+      <button class="clinic-nav clinic-next" id="clinicNext" aria-label="Next">›</button>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -4379,6 +4513,45 @@ for(let i=0;i<particleCount;i++){
   
   window.addEventListener('scroll', updateToc, {passive:true});
   updateToc();
+})();
+/* ═══════════ CLINIC PHOTOS CAROUSEL ═══════════ */
+(function(){
+  const track = document.getElementById('clinicTrack');
+  const prev  = document.getElementById('clinicPrev');
+  const next  = document.getElementById('clinicNext');
+  if(!track) return;
+
+  const scrollAmount = 340;
+
+  if(prev) prev.addEventListener('click', () => {
+    track.scrollBy({left: -scrollAmount, behavior: 'smooth'});
+  });
+  if(next) next.addEventListener('click', () => {
+    track.scrollBy({left: scrollAmount, behavior: 'smooth'});
+  });
+
+  // ✅ Loop تلقائي كل 5 ثواني
+  let autoPlay = setInterval(autoScroll, 5000);
+
+  function autoScroll(){
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    if(track.scrollLeft >= maxScroll - 10){
+      // رجع للبداية
+      track.scrollTo({left: 0, behavior: 'smooth'});
+    } else {
+      track.scrollBy({left: scrollAmount, behavior: 'smooth'});
+    }
+  }
+
+  // وقف الأوتوبلاي عند اللمس/الهوفر
+  track.addEventListener('mouseenter', () => clearInterval(autoPlay));
+  track.addEventListener('touchstart', () => clearInterval(autoPlay), {passive:true});
+
+  // استئناف بعد شوية
+  track.addEventListener('mouseleave', () => {
+    clearInterval(autoPlay);
+    autoPlay = setInterval(autoScroll, 5000);
+  });
 })();
 </script>
 
