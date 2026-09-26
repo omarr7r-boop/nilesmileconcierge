@@ -1170,7 +1170,139 @@ tailwind.config = {
       transition-duration: 0.01ms !important;
     }
   }
-  </style>
+/* ═══════════ DISCOVER EGYPT GALLERY ═══════════ */
+.gallery-tabs{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;
+  margin-bottom:2.5rem;
+}
+.gallery-tab{
+  padding:.65rem 1.3rem;
+  font-family:'Montserrat',sans-serif;
+  font-size:.68rem;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#C9A96E;background:transparent;
+  border:1px solid rgba(201,169,110,.35);
+  border-radius:100px;cursor:pointer;
+  transition:all .35s cubic-bezier(.22,1,.36,1);
+}
+.gallery-tab:hover{
+  background:rgba(201,169,110,.1);border-color:#C9A96E;
+  transform:translateY(-2px);
+}
+.gallery-tab.active{
+  background:linear-gradient(135deg,#AE9164,#E8C88A,#AE9164);
+  color:#1F2A36;border-color:#E8C88A;
+  box-shadow:0 6px 20px rgba(174,145,100,.4);
+}
+
+.gallery-wrap{position:relative;}
+
+.gallery-track{
+  display:flex;gap:1.25rem;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  padding:.5rem .25rem 1.5rem;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(201,169,110,.4) transparent;
+}
+.gallery-track::-webkit-scrollbar{height:6px}
+.gallery-track::-webkit-scrollbar-track{background:rgba(255,255,255,.05);border-radius:3px}
+.gallery-track::-webkit-scrollbar-thumb{background:rgba(201,169,110,.4);border-radius:3px}
+
+.gallery-card{
+  flex:0 0 auto;width:320px;
+  scroll-snap-align:start;
+  position:relative;overflow:hidden;
+  border-radius:4px;
+  border:1px solid rgba(255,255,255,.08);
+  cursor:pointer;background:#1F2A36;
+  transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s;
+}
+.gallery-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 40px rgba(0,0,0,.4);
+}
+.gallery-card img{
+  width:100%;height:380px;object-fit:cover;
+  transition:transform .8s cubic-bezier(.22,1,.36,1);
+}
+.gallery-card:hover img{transform:scale(1.08)}
+.gallery-card-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(10,13,16,.95) 0%,rgba(10,13,16,.3) 50%,transparent 100%);
+  pointer-events:none;
+}
+.gallery-card-text{
+  position:absolute;bottom:0;left:0;right:0;padding:1.25rem;
+}
+.gallery-card-text h3{
+  font-family:'Playfair Display',serif;font-size:1.1rem;
+  color:#E8C88A;margin-bottom:.35rem;
+}
+.gallery-card-text p{
+  font-size:.75rem;color:rgba(255,255,255,.75);line-height:1.5;
+}
+
+@media(max-width:640px){
+  .gallery-card{width:260px}
+  .gallery-card img{height:320px}
+}
+
+.gallery-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:48px;height:48px;border-radius:50%;
+  background:rgba(10,13,16,.8);
+  border:1px solid rgba(201,169,110,.4);
+  color:#E8C88A;font-size:1.6rem;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:5;transition:all .3s;
+  backdrop-filter:blur(8px);
+}
+.gallery-nav:hover{
+  background:linear-gradient(135deg,#AE9164,#E8C88A);
+  color:#1F2A36;border-color:#E8C88A;
+  transform:translateY(-50%) scale(1.1);
+}
+.gallery-prev{left:-8px}
+.gallery-next{right:-8px}
+@media(max-width:768px){.gallery-nav{display:none}}
+
+/* Lightbox */
+.gallery-lightbox{
+  position:fixed;inset:0;z-index:2000;display:none;
+  align-items:center;justify-content:center;
+  padding:2rem;background:rgba(0,0,0,.94);
+  backdrop-filter:blur(10px);flex-direction:column;
+}
+.gallery-lightbox.open{display:flex;animation:lightboxIn .35s ease}
+@keyframes lightboxIn{from{opacity:0}to{opacity:1}}
+.gallery-lightbox img{
+  max-width:90vw;max-height:78vh;object-fit:contain;
+  border-radius:4px;box-shadow:0 30px 80px rgba(0,0,0,.6);
+  border:1px solid rgba(201,169,110,.3);
+}
+.lightbox-caption{text-align:center;margin-top:1.5rem;max-width:600px}
+.lightbox-caption h4{
+  font-family:'Playfair Display',serif;font-size:1.4rem;
+  color:#E8C88A;margin-bottom:.5rem;
+}
+.lightbox-caption p{color:rgba(255,255,255,.7);font-size:.9rem}
+.lightbox-close{
+  position:absolute;top:1.5rem;right:1.5rem;
+  width:48px;height:48px;border-radius:50%;
+  background:rgba(201,169,110,.15);
+  border:1px solid rgba(201,169,110,.4);
+  color:#E8C88A;font-size:2rem;line-height:1;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all .3s;
+}
+.lightbox-close:hover{
+  background:linear-gradient(135deg,#AE9164,#E8C88A);
+  color:#1F2A36;transform:rotate(90deg);
+}
+</style>
+  
 <style>
 /* ═══════════ QUICK ACTION BAR — Premium Pills ═══════════ */
 .quick-bar{
@@ -2002,14 +2134,13 @@ tailwind.config = {
       <p class="eyebrow mb-4">Seamless Travel</p>
       <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">Travel & Logistics — Handled</h2>
       <p class="text-nile-muted mb-6">From the moment you land in Cairo, every logistical detail is coordinated by our concierge team.</p>
-      <button onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('span').textContent = this.querySelector('span').textContent === 'Show Details ▾' ? 'Hide Details ▴' : 'Show Details ▾';" 
+      <button onclick="const c = this.nextElementSibling; c.classList.toggle('hidden'); this.querySelector('span').textContent = c.classList.contains('hidden') ? 'Show Details ▾' : 'Hide Details ▴';" 
               class="btn btn-outline-dark inline-flex items-center gap-2" 
               style="margin-bottom:1rem">
         <span>Show Details ▾</span>
       </button>
       <div class="hidden">
-      <p class="text-nile-muted">From the moment you land in Cairo, every logistical detail is coordinated by our concierge team. You focus on recovery — we handle everything else.</p>
-    </div>
+      <p class="text-nile-muted mb-6">From the moment you land in Cairo, every logistical detail is coordinated by our concierge team. You focus on recovery — we handle everything else.</p>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10 stagger">
       <div class="card card-left-gold p-6">
         <h3 class="font-serif text-nile-blue text-lg mb-2">Flight Assistance</h3>
@@ -3032,168 +3163,41 @@ tailwind.config = {
 <!-- ═══════════════════ DISCOVER EGYPT ═══════════════════ -->
 <section id="discover-egypt" class="section bg-nile-blue-dark text-white reveal">
   <div class="container">
-    <div class="text-center mb-12 max-w-3xl mx-auto">
+    <div class="text-center mb-10 max-w-3xl mx-auto">
       <p class="eyebrow eyebrow-light mb-4">Beyond Treatment</p>
       <h2 class="mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">While You Heal, Discover Egypt</h2>
       <p class="text-gray-400">Egypt is not just the Pyramids. It's 1,800 km of coastline on two seas, 7,000 years of civilization, and a winter climate that rivals the Caribbean.</p>
     </div>
-    <!-- Row 1: Historic Egypt -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 stagger">
-      <div class="relative group overflow-hidden border border-white/10">
-        <img src="images/spencer-davis-ONVA6s03hg8-unsplash.jpg" 
-             loading="lazy" decoding="async" width="800" height="600" 
-             alt="Giza Pyramids at sunset" 
-             class="w-full h-72 md:h-80 object-cover group-hover:scale-105 transition duration-700">
-        <div class="absolute inset-0 bg-gradient-to-t from-nile-blue-dark via-nile-blue-dark/50 to-transparent pointer-events-none"></div>
-        <div class="absolute bottom-0 p-6">
-          <h3 class="font-serif text-xl text-nile-beige mb-2">Pyramids of Giza</h3>
-          <p class="text-gray-300 text-sm">Private guided tour of the only surviving Ancient Wonder of the World.</p>
-        </div>
-      </div>
-      <div class="relative group overflow-hidden border border-white/10">
-        <img src="images/abdullah-helwa-xcSzp6zbW0-unsplash.jpg" 
-             loading="lazy" decoding="async" width="800" height="600" 
-             alt="Traditional felucca sailing on the Nile" 
-             class="w-full h-72 md:h-80 object-cover group-hover:scale-105 transition duration-700">
-        <div class="absolute inset-0 bg-gradient-to-t from-nile-blue-dark via-nile-blue-dark/50 to-transparent pointer-events-none"></div>
-        <div class="absolute bottom-0 p-6">
-          <h3 class="font-serif text-xl text-nile-beige mb-2">Aswan Feluccas</h3>
-          <p class="text-gray-300 text-sm">Traditional feluccas sailing on the Nile in beautiful Aswan.</p>
-        </div>
-      </div>
-      <div class="relative group overflow-hidden border border-white/10">
-        <img src="images/martijn-vonk-jaqKMLlkw2M-unsplash.jpg" 
-             loading="lazy" decoding="async" width="800" height="600" 
-             alt="Luxor Temple and Valley of the Kings" 
-             class="w-full h-72 md:h-80 object-cover group-hover:scale-105 transition duration-700">
-        <div class="absolute inset-0 bg-gradient-to-t from-nile-blue-dark via-nile-blue-dark/50 to-transparent pointer-events-none"></div>
-        <div class="absolute bottom-0 p-6">
-          <h3 class="font-serif text-xl text-nile-beige mb-2">Philae Temple</h3>
-          <p class="text-gray-300 text-sm">The majestic Philae Temple on the Nile in Aswan.</p>
-        </div>
-      </div>
+
+    <!-- Filter Tabs -->
+    <div class="gallery-tabs" id="galleryTabs">
+      <button class="gallery-tab active" data-cat="all">All</button>
+      <button class="gallery-tab" data-cat="historical">Historical Egypt</button>
+      <button class="gallery-tab" data-cat="cairo">Cairo &amp; Nile</button>
+      <button class="gallery-tab" data-cat="redsea">Red Sea</button>
+      <button class="gallery-tab" data-cat="coast">Coast &amp; Beaches</button>
     </div>
 
-    <!-- Row 2: Islamic Cairo -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 stagger">
-      <div class="relative group overflow-hidden border border-white/10">
-        <img src="images/hatem-ramadan-59RY-ykUIAg-unsplash.jpg" 
-             loading="lazy" decoding="async" width="800" height="600" 
-             alt="Historic Cairo skyline" 
-             class="w-full h-72 md:h-80 object-cover group-hover:scale-105 transition duration-700">
-        <div class="absolute inset-0 bg-gradient-to-t from-nile-blue-dark via-nile-blue-dark/50 to-transparent pointer-events-none"></div>
-        <div class="absolute bottom-0 p-6">
-          <h3 class="font-serif text-xl text-nile-beige mb-2">Nile River, Cairo</h3>
-          <p class="text-gray-300 text-sm">Breathtaking views of the Nile River in the heart of Cairo.</p>
-        </div>
-      </div>
-      <div class="relative group overflow-hidden border border-white/10">
-        <img src="images/thales-botelho-de-sousa-MB2eocqNKiw-unsplash.jpg" 
-             loading="lazy" decoding="async" width="800" height="600" 
-             alt="Al-Muizz Street in Old Cairo" 
-             class="w-full h-72 md:h-80 object-cover group-hover:scale-105 transition duration-700">
-        <div class="absolute inset-0 bg-gradient-to-t from-nile-blue-dark via-nile-blue-dark/50 to-transparent pointer-events-none"></div>
-        <div class="absolute bottom-0 p-6">
-          <h3 class="font-serif text-xl text-nile-beige mb-2">Khan el-Khalili</h3>
-          <p class="text-gray-300 text-sm">Explore the bustling alleys of Cairo's most famous historic bazaar.</p>
-        </div>
-      </div>
-      <div class="relative group overflow-hidden border border-white/10">
-        <img src="images/shreyas-nair-AA3QOukE92w-unsplash.jpg" 
-             loading="lazy" decoding="async" width="800" height="600" 
-             alt="Ancient Egyptian statues" 
-             class="w-full h-72 md:h-80 object-cover group-hover:scale-105 transition duration-700">
-        <div class="absolute inset-0 bg-gradient-to-t from-nile-blue-dark via-nile-blue-dark/50 to-transparent pointer-events-none"></div>
-        <div class="absolute bottom-0 p-6">
-          <h3 class="font-serif text-xl text-nile-beige mb-2">Abu Simbel Temple</h3>
-          <p class="text-gray-300 text-sm">The magnificent rock-cut temples of Abu Simbel in Aswan.</p>
-        </div>
-      </div>
+    <!-- Horizontal Carousel -->
+    <div class="gallery-wrap">
+      <button class="gallery-nav gallery-prev" id="galleryPrev" aria-label="Previous">‹</button>
+      <div class="gallery-track" id="galleryTrack"></div>
+      <button class="gallery-nav gallery-next" id="galleryNext" aria-label="Next">›</button>
     </div>
 
-    <!-- Row 3: Red Sea -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 stagger">
-      <div class="relative group overflow-hidden border border-white/10">
-        <img src="images/bahaa-mourad-EitGuBFJ7l0-unsplash.jpg" 
-             loading="lazy" decoding="async" width="800" height="600" 
-             alt="Sharm El-Sheikh beach with turquoise waters" 
-             class="w-full h-72 md:h-80 object-cover group-hover:scale-105 transition duration-700">
-        <div class="absolute inset-0 bg-gradient-to-t from-nile-blue-dark via-nile-blue-dark/50 to-transparent pointer-events-none"></div>
-        <div class="absolute bottom-0 p-6">
-          <h3 class="font-serif text-xl text-nile-beige mb-2">Agiba Beach</h3>
-          <p class="text-gray-300 text-sm">Stunning aerial view of Agiba Beach in Marsa Matrouh.</p>
-        </div>
-      </div>
-      <div class="relative group overflow-hidden border border-white/10">
-        <img src="images/kristina-loburets-Kllwh5F4eY4-unsplash.jpg" 
-             loading="lazy" decoding="async" width="800" height="600" 
-             alt="Scuba diving in the Red Sea" 
-             class="w-full h-72 md:h-80 object-cover group-hover:scale-105 transition duration-700">
-        <div class="absolute inset-0 bg-gradient-to-t from-nile-blue-dark via-nile-blue-dark/50 to-transparent pointer-events-none"></div>
-        <div class="absolute bottom-0 p-6">
-          <h3 class="font-serif text-xl text-nile-beige mb-2">Red Sea Diving</h3>
-          <p class="text-gray-300 text-sm">Some of the world's richest coral reefs — Ras Mohammed, Dahab, Marsa Alam.</p>
-        </div>
-      </div>
-      <div class="relative group overflow-hidden border border-white/10">
-        <img src="images/nils-lr0qXcJaFlk-unsplash.jpg" 
-             loading="lazy" decoding="async" width="800" height="600" 
-             alt="Beach resort on the Red Sea" 
-             class="w-full h-72 md:h-80 object-cover group-hover:scale-105 transition duration-700">
-        <div class="absolute inset-0 bg-gradient-to-t from-nile-blue-dark via-nile-blue-dark/50 to-transparent pointer-events-none"></div>
-        <div class="absolute bottom-0 p-6">
-          <h3 class="font-serif text-xl text-nile-beige mb-2">Hurghada</h3>
-          <p class="text-gray-300 text-sm">Pristine beaches and warm turquoise waters of the Red Sea.</p>
-        </div>
-      </div>
-    </div>
-    <div class="bg-nile-gold/10 border-l-4 border-nile-gold p-6 max-w-5xl mx-auto mb-6">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-        <div class="md:col-span-2">
-          <h4 class="font-serif text-lg text-nile-beige mb-3">Winter Recovery: The Red Sea Advantage</h4>
-          <p class="text-gray-300 text-sm mb-3">The Red Sea maintains <strong class="text-nile-gold-bright">22–26°C water temperature</strong> year-round — winter offers the year's best underwater visibility (25+ meters).</p>
-          <p class="text-gray-300 text-sm">Ras Mohammed, Dahab, and Marsa Alam are within easy reach of Cairo — perfect for post-treatment recovery.</p>
-        </div>
-        <div class="md:col-span-1">
-          <img src="images/geoff-trodd-7lsPiZ2nK_M-unsplash.jpg" 
-               loading="lazy" 
-               decoding="async" 
-               width="400" 
-               height="300" 
-               alt="Vibrant coral reef at Ras Mohammed National Park" 
-               class="w-full h-48 md:h-56 object-cover rounded-sm border-2 border-nile-gold/30">
-        </div>
-      </div>
-    </div>
-    <p class="text-center text-xs text-gray-500">All tourism activities are optional add-ons, scheduled safely around your clinical treatment plan.</p>
+    <p class="text-center text-xs text-gray-500 mt-8">All tourism activities are optional add-ons, scheduled safely around your clinical treatment plan.</p>
   </div>
-        <!-- صورة جديدة: Agiba Beach (youhana-nassif) -->
-      <div class="relative group overflow-hidden border border-white/10">
-        <img src="images/youhana-nassif-9BZVfjEDWvU-unsplash.jpg" 
-             loading="lazy" decoding="async" width="800" height="600" 
-             alt="Agiba Beach in Marsa Matrouh" 
-             class="w-full h-72 md:h-80 object-cover group-hover:scale-105 transition duration-700">
-        <div class="absolute inset-0 bg-gradient-to-t from-nile-blue-dark via-nile-blue-dark/50 to-transparent pointer-events-none"></div>
-        <div class="absolute bottom-0 p-6">
-          <h3 class="font-serif text-xl text-nile-beige mb-2">Agiba Beach</h3>
-          <p class="text-gray-300 text-sm">Crystal clear waters and stunning cliffs at Agiba Beach, Marsa Matrouh.</p>
-        </div>
-      </div>
-
-      <!-- صورة جديدة: Hot Air Balloon (nathalie-lays) -->
-      <div class="relative group overflow-hidden border border-white/10">
-        <img src="images/nathalie-lays-klXlZELq3No-unsplash.jpg" 
-             loading="lazy" decoding="async" width="800" height="600" 
-             alt="Hot Air Balloon in Luxor" 
-             class="w-full h-72 md:h-80 object-cover group-hover:scale-105 transition duration-700">
-        <div class="absolute inset-0 bg-gradient-to-t from-nile-blue-dark via-nile-blue-dark/50 to-transparent pointer-events-none"></div>
-        <div class="absolute bottom-0 p-6">
-          <h3 class="font-serif text-xl text-nile-beige mb-2">Hot Air Balloon, Luxor</h3>
-          <p class="text-gray-300 text-sm">Soar above the ancient temples of Luxor on a breathtaking sunrise hot air balloon ride.</p>
-        </div>
-      </div>
 </section>
 
+<!-- Lightbox Modal -->
+<div id="galleryLightbox" class="gallery-lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
+  <img id="lightboxImg" src="" alt="">
+  <div class="lightbox-caption">
+    <h4 id="lightboxTitle"></h4>
+    <p id="lightboxDesc"></p>
+  </div>
+</div>
 <!-- ═══════════════════ LOCATION / MAPS ═══════════════════ -->
 <section class="section bg-white reveal">
   <div class="container">
@@ -3815,7 +3819,7 @@ tailwind.config = {
   const quickBar = document.getElementById('quickBar');
   let quickTick = false;
   function updateQuickBar(){
-    if(quickTick) return;
+    if(!quickBar || quickTick) return;
     quickTick = true;
     requestAnimationFrame(()=>{
       const y = window.scrollY;
@@ -4189,7 +4193,107 @@ for(let i=0;i<particleCount;i++){
   <a href="#faq" class="toc-dot" data-label="FAQ"></a>
   <a href="#consult" class="toc-dot" data-label="Free Review"></a>
 </div>
+<script>
+/* ═══════════ DISCOVER EGYPT — Dynamic Gallery ═══════════ */
+(function(){
+  const galleryData = [
+    // Historical
+    { src:'images/spencer-davis-ONVA6s03hg8-unsplash.jpg', title:'Pyramids of Giza', desc:'The only surviving Ancient Wonder of the World.', cat:'historical' },
+    { src:'images/rosario-janza-69qTN3L5c-unsplash.jpg', title:'Pyramids of Giza', desc:'Majestic view of the ancient pyramids.', cat:'historical' },
+    { src:'images/marco-d-abramo-aWx7N6qpZbM-unsplash.jpg', title:'Pyramids of Giza', desc:'Timeless wonders under the Egyptian sun.', cat:'historical' },
+    { src:'images/shreyas-nair-AA3QOukE92w-unsplash.jpg', title:'Abu Simbel Temple', desc:'The magnificent rock-cut temples of Abu Simbel.', cat:'historical' },
+    { src:'images/mo-gabrail-iuC3w8mLDCs-unsplash.jpg', title:'Dendera Temple', desc:'An ancient Egyptian temple with stunning carvings.', cat:'historical' },
+    { src:'images/ahmed-shabana-ADa9bb3tqR4-unsplash.jpg', title:"Saint Catherine's Monastery", desc:'A historic monastery in the Sinai Peninsula.', cat:'historical' },
+    { src:'images/abdullah-helwa-xcSzpi6zbW0-unsplash.jpg', title:'Aswan Feluccas', desc:'Traditional feluccas sailing on the Nile.', cat:'historical' },
+    { src:'images/michael-starkie-l7Wdq5aNLLI-unsplash.jpg', title:'Aswan Feluccas', desc:'A serene sunset on the Nile river.', cat:'historical' },
+    { src:'images/gjis-jakobs-LmgBEnYBOtM-unsplash.jpg', title:'Aswan Feluccas', desc:'Sailing on the legendary Nile river.', cat:'historical' },
+    { src:'images/martijn-vonk-jaqKMULkw2M-unsplash.jpg', title:'Philae Temple', desc:'The majestic temple on the Nile in Aswan.', cat:'historical' },
+    { src:'images/nathalie-lays-klXlZELq3No-unsplash.jpg', title:'Hot Air Balloon, Luxor', desc:'Sunrise balloon ride over the Valley of the Kings.', cat:'historical' },
+    // Cairo & Nile
+    { src:'images/jaydee-kerol-IpWl7cc5ag4-unsplash.jpg', title:'Nile River, Cairo', desc:'Breathtaking views of the Nile in Cairo.', cat:'cairo' },
+    { src:'images/hatem-ramadan-59RY-ykUIAg-unsplash.jpg', title:'Nile River, Cairo', desc:'The heart of Cairo flowing with history.', cat:'cairo' },
+    { src:'images/thales-botelho-de-sousa-MB2eogIiNKw-unsplash.jpg', title:'Khan el-Khalili', desc:"Cairo's most famous historic bazaar.", cat:'cairo' },
+    { src:'images/juan-nino-rdwqTZLaEk-unsplash.jpg', title:'Islamic Cairo', desc:'Historic mosque architecture.', cat:'cairo' },
+    { src:'images/johannes-hubner-Ck8sEhD2K4o-unsplash.jpg', title:'Islamic Cairo', desc:'A beautiful mosque minaret.', cat:'cairo' },
+    { src:'images/mohamed-ahmed-hXVQFxodBuY-unsplash.jpg', title:'Cairo Cityscape', desc:'View from Cairo Tower.', cat:'cairo' },
+    { src:'images/dmitrii-zhodzishskii-5aEHQbZQ2kU-unsplash.jpg', title:'Islamic Cairo', desc:'Interior of a historic mosque in Islamic Cairo.', cat:'cairo' },
+    // Red Sea
+    { src:'images/kristina-loburets-KIwh5F4eY4-unsplash.jpg', title:'Red Sea Diving', desc:'Diving with dolphins and vibrant marine life.', cat:'redsea' },
+    { src:'images/nils-Ir0qXcaJfik-unsplash.jpg', title:'Red Sea Beach', desc:'Pristine beaches and turquoise waters.', cat:'redsea' },
+    { src:'images/pascal-van-de-vende-l-wPdBmBwyuE-unsplash.jpg', title:'Red Sea Coral Reef', desc:'Vibrant coral reefs in Hurghada &amp; Sharm.', cat:'redsea' },
+    { src:'images/pascal-van-de-vende-I-CNdMGaVEozQ-unsplash.jpg', title:'Red Sea Coral Reef', desc:'Rich underwater ecosystems.', cat:'redsea' },
+    { src:'images/jean-baptiste-d-fF8JX8lZnTc-unsplash.jpg', title:'Red Sea Beach', desc:'Relaxing by the Red Sea.', cat:'redsea' },
+    { src:'images/geoff-trodd-qCkX-fMGziE-unsplash.jpg', title:'Red Sea Coral Reef', desc:'World-class diving spots.', cat:'redsea' },
+    { src:'images/geoff-trodd-ovRUj2lZi2l-unsplash.jpg', title:'Red Sea Sea Turtle', desc:'Swimming with sea turtles.', cat:'redsea' },
+    { src:'images/geoff-trodd-7l5PiZ2nK_M-unsplash.jpg', title:'Ras Mohammed Reef', desc:'Vibrant coral reef at Ras Mohammed.', cat:'redsea' },
+    // Coast
+    { src:'images/dmitrii-zhodzishskii-4-kii4XH-E9XeW-unsplash.jpg', title:'Citadel of Qaitbay', desc:'A 15th-century fortress in Alexandria.', cat:'coast' },
+    { src:'images/bogdan-kupriets-5_cDWMfmONWs-unsplash.jpg', title:'Alexandria Harbor', desc:"Beautiful views of Alexandria's historic harbor.", cat:'coast' },
+    { src:'images/flo-p-zpmvpEXM_Qc-unsplash.jpg', title:'Alexandria Harbor', desc:'The historic harbor of Alexandria.', cat:'coast' },
+    { src:'images/bahaa-mourad-EFtGuBFJ7l0-unsplash.jpg', title:'Agiba Beach', desc:'Stunning aerial view in Marsa Matrouh.', cat:'coast' },
+    { src:'images/youhana-nassif-9BZVfjEDWvU-unsplash.jpg', title:'Agiba Beach', desc:'Crystal clear waters and stunning cliffs.', cat:'coast' }
+  ];
 
+  const track = document.getElementById('galleryTrack');
+  const tabs = document.querySelectorAll('.gallery-tab');
+  const lightbox = document.getElementById('galleryLightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxTitle = document.getElementById('lightboxTitle');
+  const lightboxDesc = document.getElementById('lightboxDesc');
+
+  if(!track) return;
+
+  function render(category){
+    const items = category === 'all' ? galleryData : galleryData.filter(i => i.cat === category);
+    track.innerHTML = items.map(item => `
+      <div class="gallery-card">
+        <img src="${item.src}" loading="lazy" alt="${item.title}" onerror="this.parentElement.style.display='none'">
+        <div class="gallery-card-overlay"></div>
+        <div class="gallery-card-text">
+          <h3>${item.title}</h3>
+          <p>${item.desc}</p>
+        </div>
+      </div>
+    `).join('');
+    track.scrollLeft = 0;
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      render(tab.dataset.cat);
+    });
+  });
+
+  track.addEventListener('click', (e) => {
+    const card = e.target.closest('.gallery-card');
+    if(!card) return;
+    const img = card.querySelector('img');
+    if(!img || !img.src) return;
+    lightboxImg.src = img.src;
+    lightboxTitle.textContent = card.querySelector('h3').textContent;
+    lightboxDesc.textContent = card.querySelector('p').textContent;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLightbox(); });
+
+  const prev = document.getElementById('galleryPrev');
+  const next = document.getElementById('galleryNext');
+  if(prev) prev.addEventListener('click', () => track.scrollBy({left:-340, behavior:'smooth'}));
+  if(next) next.addEventListener('click', () => track.scrollBy({left:340, behavior:'smooth'}));
+
+  render('all');
+})();
+</script>
 <script>
 /* ═════════ STICKY TOC — Highlight current section ═════════ */
 (function(){
