@@ -1309,6 +1309,103 @@ tailwind.config = {
   background:linear-gradient(135deg,#AE9164,#E8C88A);
   color:#1F2A36;transform:rotate(90deg);
 }
+/* ═══════════ NEW STRATEGIC ORDER ═══════════ */
+/* 1 — Attention & Trust */
+main#main > section.hero                         { order: 1; }
+main#main > section#trust                        { order: 2; }
+
+/* 2 — Authority & Context */
+main#main > section#founder                      { order: 3; }
+
+/* 3 — VALUE FIRST: Pricing + Results + Offer */
+main#main > section#packages                     { order: 4; }
+main#main > section#results                      { order: 5; }
+main#main > section#reviews                      { order: 6; }
+<!-- ═══════════════════ PATIENT FEARS ═══════════════════ -->
+<section id="fears" class="section bg-nile-beige reveal">
+  <div class="container-narrow">
+    <div class="text-center mb-12">
+      <p class="eyebrow mb-4">Before You Decide</p>
+      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">Your Fears, Addressed — Honestly.</h2>
+      <p class="text-nile-muted" style="font-size:1.05rem">These are real questions we hear from patients considering treatment abroad. We answer them the way we would answer a friend.</p>
+    </div>
+    <div class="space-y-4 stagger">
+      <div class="card card-left-gold p-6 md:p-7">
+        <h3 class="font-serif text-nile-blue text-lg mb-2">"What if something goes wrong after I go home?"</h3>
+        <p class="text-nile-muted text-sm">You're not abandoned. You leave with a written aftercare protocol, a 24/7 WhatsApp line, and scheduled telehealth check-ins at 1 week, 1 month, and 3 months. If a problem arises, we coordinate directly with a licensed dentist in your country.</p>
+      </div>
+      <div class="card card-left-gold p-6 md:p-7">
+        <h3 class="font-serif text-nile-blue text-lg mb-2">"I'm scared of the pain. How bad will it be?"</h3>
+        <p class="text-nile-muted text-sm">Most patients describe the procedure as painless — you're under local anesthesia at minimum, and we offer oral or IV sedation for anxious patients. Post-op soreness is manageable and medication is prescribed.</p>
+      </div>
+      <div class="card card-left-gold p-6 md:p-7">
+        <h3 class="font-serif text-nile-blue text-lg mb-2">"Will the result look natural or fake?"</h3>
+        <p class="text-nile-muted text-sm">We use Digital Smile Design to simulate your result before any work begins. You approve shape, shade, and proportions in advance. Our materials — monolithic zirconia and E-max — are what top esthetic dentists use worldwide.</p>
+      </div>
+      <div class="card card-left-gold p-6 md:p-7">
+        <h3 class="font-serif text-nile-blue text-lg mb-2">"I don't want to feel like a number."</h3>
+        <p class="text-nile-muted text-sm">Neither do we. Nile Smile was founded by a licensed dental surgeon specifically to fix that problem in medical tourism. Every plan is clinically reviewed — never sold. Every price is written and locked.</p>
+      </div>
+      <div class="card card-left-gold p-6 md:p-7">
+        <h3 class="font-serif text-nile-blue text-lg mb-2">"Can I trust doctors in another country?"</h3>
+        <p class="text-nile-muted text-sm">You don't have to trust blindly. Before booking, we share your dentist's full name, credentials, licensing, portfolio, and clinic address. All dentists are licensed by the Egyptian Dental Syndicate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+/* 4 — Reassurance: Guarantees + How it works */
+main#main > section#guarantees                   { order: 7; }
+main#main > section:nth-of-type(28)              { order: 8; } /* How It Works */
+main#main > section:nth-of-type(29)              { order: 9; } /* Patient Journey */
+main#main > section:nth-of-type(30)              { order: 10; } /* Treatment Timeline */
+main#main > section:nth-of-type(31)              { order: 11; } /* Recovery Timeline */
+
+/* 5 — Destination & Global presence */
+main#main > section:nth-of-type(16)              { order: 12; } /* Why Egypt */
+main#main > section:nth-of-type(27)              { order: 13; } /* Global Map */
+
+/* 6 — Clinical depth (for those who want details) */
+main#main > section:nth-of-type(13)              { order: 14; } /* Clinical Outcomes */
+main#main > section#comfort                      { order: 15; } /* Anesthesia */
+main#main > section:nth-of-type(6)               { order: 16; } /* Tech Partners */
+main#main > section#science                      { order: 17; } /* Science */
+main#main > section:nth-of-type(8)               { order: 18; } /* Bone Graft */
+main#main > section:nth-of-type(9)               { order: 19; } /* Crown Materials */
+main#main > section:nth-of-type(10)              { order: 20; } /* Orthodontics */
+main#main > section:nth-of-type(11)              { order: 21; } /* Tech Stack */
+
+/* 7 — Full transparency: Risks & Legal */
+main#main > section:nth-of-type(12)              { order: 22; } /* Risks */
+main#main > section:nth-of-type(14)              { order: 23; } /* Travel */
+main#main > section:nth-of-type(15)              { order: 24; } /* Academic */
+main#main > section:nth-of-type(17)              { order: 25; } /* Comparison */
+main#main > section:nth-of-type(19)              { order: 26; } /* Itemized Pricing */
+main#main > section:nth-of-type(21)              { order: 27; } /* Payment Security */
+main#main > section:nth-of-type(22)              { order: 28; } /* Emergency Protocol */
+main#main > section:nth-of-type(23)              { order: 29; } /* Patient Rights */
+
+/* 8 — Social proof & Media */
+main#main > section:nth-of-type(25)              { order: 30; } /* Case Studies */
+main#main > section:nth-of-type(26)              { order: 31; } /* Trust & Media */
+
+/* 9 — Destination as lifestyle */
+main#main > section#discover-egypt               { order: 32; }
+
+/* 10 — Location & Audience */
+main#main > section:nth-of-type(33)              { order: 33; } /* Location / Maps */
+main#main > section:nth-of-type(34)              { order: 34; } /* Who Is This For */
+main#main > section#team                         { order: 35; } /* Team */
+
+/* 11 — Final conversion funnel */
+main#main > section#faq                          { order: 36; }
+main#main > section#consult                      { order: 37; }
+
+/* ═══════════ DISABLE CONTENT-VISIBILITY during reorder (fixes layout bugs) ═══════════ */
+main#main > section{
+  content-visibility: visible !important;
+  contain-intrinsic-size: auto !important;
+}
 </style>
   
 <style>
@@ -1408,7 +1505,104 @@ tailwind.config = {
   .quick-bar.show{display:flex}
   body.quickbar-active .site-header{top:44px}
 }
+/* ═══════════ CLINIC PHOTOS — GRID on DESKTOP, CAROUSEL on MOBILE ═══════════ */
+.clinic-desktop-grid{
+  display:grid;
+  grid-template-columns:repeat(5, 1fr);
+  gap:1rem;
+  margin-bottom:3rem;
+}
+.clinic-desktop-grid .clinic-grid-item{
+  position:relative;
+  overflow:hidden;
+  border-radius:4px;
+  border:1px solid rgba(174,145,100,.2);
+  transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s;
+  box-shadow:0 4px 20px rgba(79,96,112,.08);
+}
+.clinic-desktop-grid .clinic-grid-item:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 40px rgba(79,96,112,.18);
+  border-color:rgba(174,145,100,.5);
+}
+.clinic-desktop-grid img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  display:block;
+  transition:transform .8s cubic-bezier(.22,1,.36,1);
+}
+.clinic-desktop-grid .clinic-grid-item:hover img{transform:scale(1.06)}
 
+.clinic-desktop-grid .clinic-grid-caption{
+  padding:.75rem 1rem;
+  background:#fff;
+  border-top:1px solid rgba(174,145,100,.12);
+  text-align:center;
+}
+.clinic-desktop-grid .clinic-grid-caption p{
+  font-family:'Playfair Display',serif;
+  font-size:.85rem;
+  color:#4F6070;
+  margin:0;
+  line-height:1.3;
+}
+.clinic-desktop-grid .clinic-grid-caption span{
+  display:block;
+  font-family:'Montserrat',sans-serif;
+  font-size:.55rem;
+  font-weight:600;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:#AE9164;
+  margin-top:.25rem;
+}
+
+/* Hide carousel on desktop, hide grid on mobile */
+@media(min-width:1024px){
+  .clinic-carousel-wrap{display:none !important}
+}
+@media(max-width:1023px){
+  .clinic-desktop-grid{display:none !important}
+}
+    <!-- ═══ Clinic Photos — Desktop Grid ═══ -->
+    <div class="clinic-desktop-grid">
+      <div class="clinic-grid-item">
+        <img src="images/SHW-1.jpg" alt="Reception area" loading="lazy">
+        <div class="clinic-grid-caption">
+          <p>Reception & Waiting Area</p>
+          <span>Cairo Clinic</span>
+        </div>
+      </div>
+      <div class="clinic-grid-item">
+        <img src="images/Shiny-White-23.jpg" alt="Treatment room" loading="lazy">
+        <div class="clinic-grid-caption">
+          <p>Treatment Room</p>
+          <span>International Standards</span>
+        </div>
+      </div>
+      <div class="clinic-grid-item">
+        <img src="images/photo_1_2026-09-27_00-36-40.jpg" alt="Modern equipment" loading="lazy">
+        <div class="clinic-grid-caption">
+          <p>Modern Equipment</p>
+          <span>Advanced Technology</span>
+        </div>
+      </div>
+      <div class="clinic-grid-item">
+        <img src="images/photo_2_2026-09-27_00-36-40.jpg" alt="Clinic interior" loading="lazy">
+        <div class="clinic-grid-caption">
+          <p>Clinic Interior</p>
+          <span>Premium Design</span>
+        </div>
+      </div>
+      <div class="clinic-grid-item">
+        <img src="images/photo_3_2026-09-27_00-36-40.jpg" alt="Full clinic view" loading="lazy">
+        <div class="clinic-grid-caption">
+          <p>Full Clinic View</p>
+          <span>Our Cairo Facility</span>
+        </div>
+      </div>
+    </div>
 /* ═══════════ CLINIC PHOTOS CAROUSEL ═══════════ */
 .clinic-carousel-wrap{
   position:relative;
@@ -1649,6 +1843,8 @@ tailwind.config = {
     </p>
     <p class="mb-10 text-nile-gold-bright font-medium" style="font-size:.95rem">
       Founded by a licensed dental surgeon. Every treatment plan is clinically reviewed — <em class="italic">never sold</em>.
+      <br>
+      <span class="text-gray-300 text-xs">Same implant brands, same materials, same standards — different location.</span>
     </p>
 
     <div class="flex flex-col sm:flex-row gap-3 justify-center" style="max-width:34rem;margin:0 auto">
@@ -2816,7 +3012,7 @@ tailwind.config = {
 </section>
 
 <!-- ═══════════════════ RESULTS ═══════════════════ -->
-<section id="results" class="section bg-white reveal">
+<section id="results" class="section reveal" style="background:linear-gradient(180deg,#FBFAF7 0%,#F6F3EE 50%,#EDE6DA 100%)">
   <div class="container">
     <div class="text-center mb-16">
       <p class="eyebrow mb-4">Real Results</p>
@@ -3468,6 +3664,7 @@ tailwind.config = {
       <p class="eyebrow mb-4">Founding Patients Program</p>
       <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">We're New. That's Your Advantage.</h2>
       <p class="text-nile-muted" style="font-size:1.05rem">We're launching with <strong class="text-nile-blue">20 Founding Patient spots</strong> — an exclusive opportunity for patients who want world-class care at our lowest-ever pricing, in exchange for honest, verified feedback.</p>
+      <p class="text-nile-gold italic text-sm mt-4" style="font-size:.9rem">Why only 20? Because our founder personally oversees every single case. We chose depth over volume — from day one.</p>
     </div>
 
     <!-- Benefits Grid -->
@@ -3491,6 +3688,11 @@ tailwind.config = {
         <div class="icon-circle mx-auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
         <h3 class="font-serif text-nile-blue text-base mb-2">Direct Feedback Line</h3>
         <p class="text-nile-muted text-xs">Direct access to the founder for feedback, improvement, and requests.</p>
+      </div>
+      <div class="card card-top-gold p-7 text-center">
+        <div class="icon-circle mx-auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></div>
+        <h3 class="font-serif text-nile-blue text-base mb-2">Lifetime Priority Care</h3>
+        <p class="text-nile-muted text-xs">Every future visit — locked at founding-member pricing, forever.</p>
       </div>
     </div>
 
@@ -3542,6 +3744,43 @@ tailwind.config = {
       <p class="text-xs text-nile-muted italic text-center">
         <strong class="text-nile-blue">Note:</strong> We are a newly launched concierge service. Real patient testimonials are being documented with explicit written consent and will be published on this page as our first cohort completes treatment. We do not purchase, fabricate, or incentivize positive reviews — only honest, verified feedback.
       </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ PATIENT FEARS ═══════════════════ -->
+<section id="fears" class="section bg-white reveal">
+  <div class="container-narrow">
+    <div class="text-center mb-12">
+      <p class="eyebrow mb-4">Before You Decide</p>
+      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">Your Fears, Addressed — Honestly.</h2>
+      <p class="text-nile-muted" style="font-size:1.05rem">These are real questions we hear from patients considering treatment abroad. We answer them the way we would answer a friend.</p>
+    </div>
+    <div class="space-y-4 stagger">
+      <div class="card card-left-gold p-6 md:p-7">
+        <h3 class="font-serif text-nile-blue text-lg mb-2">"What if something goes wrong after I go home?"</h3>
+        <p class="text-nile-muted text-sm">You're not abandoned. You leave with a written aftercare protocol, a 24/7 WhatsApp line to your clinical coordinator, and scheduled telehealth check-ins at 1 week, 1 month, and 3 months. If a problem arises, we coordinate directly with a licensed dentist in your country — using your full treatment records.</p>
+      </div>
+      <div class="card card-left-gold p-6 md:p-7">
+        <h3 class="font-serif text-nile-blue text-lg mb-2">"I'm scared of the pain. How bad will it be?"</h3>
+        <p class="text-nile-muted text-sm">Most patients describe the procedure itself as painless — you're under local anesthesia at minimum, and we offer oral or IV sedation for anxious patients. Post-op soreness is manageable and medication is prescribed. You'll never be caught off guard.</p>
+      </div>
+      <div class="card card-left-gold p-6 md:p-7">
+        <h3 class="font-serif text-nile-blue text-lg mb-2">"Will the result look natural — or fake?"</h3>
+        <p class="text-nile-muted text-sm">We use Digital Smile Design to simulate your result before any work begins. You approve shape, shade, and proportions in advance. Our standard materials — monolithic zirconia and E-max — are what top esthetic dentists worldwide use for premium results.</p>
+      </div>
+      <div class="card card-left-gold p-6 md:p-7">
+        <h3 class="font-serif text-nile-blue text-lg mb-2">"I don't want to feel like a number, or a sale."</h3>
+        <p class="text-nile-muted text-sm">Neither do we. Nile Smile was founded by a licensed dental surgeon specifically to fix that problem in medical tourism. Every treatment plan is clinically reviewed — never sold. Every price is written and locked. No hidden fees. No aggressive upselling. No pressure.</p>
+      </div>
+      <div class="card card-left-gold p-6 md:p-7">
+        <h3 class="font-serif text-nile-blue text-lg mb-2">"Can I trust doctors in another country?"</h3>
+        <p class="text-nile-muted text-sm">You don't have to trust blindly. Before booking, we share your treating dentist's full name, credentials, licensing, case portfolio, and clinic address. All our partner dentists are licensed by the Egyptian Dental Syndicate and hold verifiable postgraduate qualifications.</p>
+      </div>
+      <div class="card card-left-gold p-6 md:p-7">
+        <h3 class="font-serif text-nile-blue text-lg mb-2">"What if I need to cancel or reschedule?"</h3>
+        <p class="text-nile-muted text-sm">Your deposit is fully refundable up to 30 days before arrival. If a medical issue arises, we work with you on a case-by-case basis. You are never locked in by fine print — we put everything in writing before you commit.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -4115,7 +4354,8 @@ document.querySelectorAll('a[href^="#"]').forEach(link=>{
 });
 
   /* ═════════ 7. GOLD PARTICLES ═════════ */
-  if(window.innerWidth > 768 && !prefersReduced){
+  // ⚠️ Particles disabled for cleaner UX — to re-enable, remove `&& false`
+  if(window.innerWidth > 768 && !prefersReduced && false){
     const frag = document.createDocumentFragment();
     const particleCount = window.innerWidth > 1024 ? 12 : 6;
 for(let i=0;i<particleCount;i++){
@@ -4233,9 +4473,7 @@ for(let i=0;i<particleCount;i++){
     
     // الأزرار الرئيسية تاخد breathe كمان
     if (text.includes('consultation') || 
-        text.includes('book free') || 
-        text.includes('treatment plan') ||
-        text.includes('send my')) {
+        text.includes('book free')) {
       btn.classList.add('breathe');
     }
   });
@@ -4552,6 +4790,99 @@ for(let i=0;i<particleCount;i++){
     clearInterval(autoPlay);
     autoPlay = setInterval(autoScroll, 5000);
   });
+    /* ═════════ 18. STRATEGIC SECTION REORDER ═════════ */
+  (function(){
+    const main = document.getElementById('main');
+    if(!main) return;
+
+    // ⚡ الترتيب الاستراتيجي — القيمة أولاً، ثم الطمأنة، ثم التفاصيل
+    const order = [
+      // 1. Attention & Trust
+      '.hero',
+      '#trust',
+
+      // 2. Authority
+      '#founder',
+
+      // 3. VALUE FIRST — أقوى 3 أقسام تحويلية
+      '#packages',
+      '#results',
+      '#reviews',
+
+      // 4. Reassurance
+      '#fears',
+      '#guarantees',
+
+      // 5. How it works + Timelines (متتالية منطقية)
+      // هنستخدم text match لأن مفيش IDs
+      '__text__:How It Works',
+      '__text__:Your Complete Journey',
+      '__text__:Your 10-Day Journey',
+      '__text__:What to Expect',
+
+      // 6. Destination & Global
+      '__text__:Why Egypt?',
+      '__text__:Our International Patients',
+
+      // 7. Clinical depth
+      '__text__:Our Documented Results',
+      '#comfort',
+      '__text__:Our Technology Partners',
+      '#science',
+      '__text__:Bone Graft Materials',
+      '__text__:Crown & Prosthesis Materials',
+      '__text__:Clear Aligners vs. Traditional Braces',
+      '__text__:Our Clinical Technology Stack',
+
+      // 8. Transparency
+      '__text__:Risks & Complications',
+      '__text__:Travel & Logistics',
+      '__text__:Trained at the World',
+      '__text__:Why Egypt Instead of Turkey',
+      '__text__:Itemized Clinical Fees',
+      '__text__:Your Money Protected',
+      '__text__:Emergency Protocol',
+      '__text__:Patient Rights',
+
+      // 9. Social proof
+      '__text__:Case Studies',
+      '__text__:Verified Reviews',
+
+      // 10. Lifestyle
+      '#discover-egypt',
+
+      // 11. Location & Audience
+      '__text__:Our Partner Clinic Location',
+      '__text__:Who This Service Is For',
+      '#team',
+
+      // 12. Final conversion
+      '#faq',
+      '#consult'
+    ];
+
+    // حرّك كل سكشن للآخر بنفس ترتيب الـ array = الترتيب الجديد
+    order.forEach(key => {
+      let el = null;
+      if(key.startsWith('__text__:')){
+        const text = key.replace('__text__:', '');
+        // ابحث عن section فيه h2 فيه النص المطلوب
+        const sections = main.querySelectorAll(':scope > section');
+        for(const s of sections){
+          const h2 = s.querySelector('h2, h1');
+          if(h2 && h2.textContent.includes(text)){
+            el = s;
+            break;
+          }
+        }
+      } else {
+        el = main.querySelector(':scope > ' + key);
+      }
+      if(el) main.appendChild(el);
+    });
+
+    // أي section مش موجودة في القائمة = سيبها في مكانها (مش هتتنقل)
+  })();
 })();
 </script>
 
