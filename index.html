@@ -142,10 +142,10 @@ thead tr{
   animation:logoGlowPulse 4.5s ease-in-out infinite;
 }
 .signature-line{
-  position:absolute;bottom:-2px;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,#AE9164,transparent);
-  transform:scaleX(0);transform-origin:left;
-  animation:sigDraw 3.5s ease-in-out infinite;pointer-events:none;
+  position:absolute;bottom:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,#AE9164,transparent);
+    transform:scaleX(0);transform-origin:left;
+    animation:sigDraw 4s ease-in-out infinite;pointer-events:none;
 }
 @keyframes sigDraw{
   0%,100%{transform:scaleX(0);opacity:.4}
@@ -686,6 +686,8 @@ tailwind.config = {
     position:relative;
     padding:4px 8px 4px 4px;
     transform-origin:left center;
+    overflow:hidden;        /* ✅ جديد — يقص الللايت جوه اللوجو بس */
+    border-radius:3px;      /* ✅ عشان الحواف تبان ناعمة */
   }
   /* ============ LOGO — SMOOTH SHRINK ============ */
   .logo-inner{
@@ -764,7 +766,7 @@ tailwind.config = {
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    background: rgba(246,243,238,0.94);
+    background: rgba(246,243,238,0.98);
     backdrop-filter: blur(16px) saturate(1.2);
     -webkit-backdrop-filter: blur(16px) saturate(1.2);
     border-bottom: 1px solid rgba(174,145,100,0.15);
@@ -952,7 +954,13 @@ tailwind.config = {
   }
 
   /* ============ HERO ============ */
-  .hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:9rem 1.5rem 4rem;overflow:hidden;background:#1a1a1a}
+  .hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:10rem 1.5rem 4rem;overflow:hidden;background:#1a1a1a}
+  @media(max-width:768px){
+    .hero{padding:12rem 1.25rem 5rem}
+  }
+  @media(max-width:480px){
+    .hero{padding:13rem 1rem 5rem}
+  }
   .hero-bg{position:absolute;inset:0;z-index:0}
   .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center;will-change:transform}
   .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,20,.72) 0%,rgba(20,20,20,.55) 40%,rgba(20,20,20,.85) 100%)}
@@ -1398,7 +1406,7 @@ tailwind.config = {
 }
 @media(max-width:1023px){
   .quick-bar.show{display:flex}
-  .site-header{top:44px}
+  body.quickbar-active .site-header{top:44px}
 }
 </style>
 </head>
@@ -2710,30 +2718,71 @@ tailwind.config = {
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+      <!-- Case 1 -->
       <div class="card overflow-hidden">
         <div class="grid grid-cols-2">
-          <div class="ph h-48 md:h-64 flex items-center justify-center"><p class="text-xs text-nile-gold uppercase tracking-widest">BEFORE</p></div>
-          <div class="ph h-48 md:h-64 flex items-center justify-center"><p class="text-xs text-nile-gold-bright uppercase tracking-widest">AFTER</p></div>
+          <div class="relative">
+            <img src="images/before1_8_2026-09-27_00-36-40.jpg" 
+                 alt="Before — Full mouth restoration"
+                 loading="lazy"
+                 class="w-full h-48 md:h-64 object-cover">
+            <span class="absolute top-3 left-3 bg-nile-gold text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">Before</span>
+          </div>
+          <div class="relative">
+            <img src="images/after1_9_2026-09-27_00-36-40.jpg" 
+                 alt="After — Full mouth restoration"
+                 loading="lazy"
+                 class="w-full h-48 md:h-64 object-cover">
+            <span class="absolute top-3 right-3 bg-green-600 text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">After</span>
+          </div>
         </div>
         <div class="p-6 text-center border-t border-nile-gold/20">
           <p class="text-xs text-nile-muted mb-2 uppercase tracking-wide">All-on-4 • 12 Days • Toronto, Canada</p>
           <p class="font-serif text-lg text-nile-blue">Full Mouth Restoration</p>
         </div>
       </div>
+
+      <!-- Case 2 -->
       <div class="card overflow-hidden">
         <div class="grid grid-cols-2">
-          <div class="ph h-48 md:h-64 flex items-center justify-center"><p class="text-xs text-nile-gold uppercase tracking-widest">BEFORE</p></div>
-          <div class="ph h-48 md:h-64 flex items-center justify-center"><p class="text-xs text-nile-gold-bright uppercase tracking-widest">AFTER</p></div>
+          <div class="relative">
+            <img src="images/before2_4_2026-09-27_00-36-40.jpg" 
+                 alt="Before — Smile makeover"
+                 loading="lazy"
+                 class="w-full h-48 md:h-64 object-cover">
+            <span class="absolute top-3 left-3 bg-nile-gold text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">Before</span>
+          </div>
+          <div class="relative">
+            <img src="images/after2_5_2026-09-27_00-36-40.jpg" 
+                 alt="After — Smile makeover"
+                 loading="lazy"
+                 class="w-full h-48 md:h-64 object-cover">
+            <span class="absolute top-3 right-3 bg-green-600 text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">After</span>
+          </div>
         </div>
         <div class="p-6 text-center border-t border-nile-gold/20">
           <p class="text-xs text-nile-muted mb-2 uppercase tracking-wide">Zirconia Crowns • 8 Days • London, UK</p>
           <p class="font-serif text-lg text-nile-blue">Smile Makeover</p>
         </div>
       </div>
+
+      <!-- Case 3 -->
       <div class="card overflow-hidden">
         <div class="grid grid-cols-2">
-          <div class="ph h-48 md:h-64 flex items-center justify-center"><p class="text-xs text-nile-gold uppercase tracking-widest">BEFORE</p></div>
-          <div class="ph h-48 md:h-64 flex items-center justify-center"><p class="text-xs text-nile-gold-bright uppercase tracking-widest">AFTER</p></div>
+          <div class="relative">
+            <img src="images/before3_7_2026-09-27_00-36-40.jpg" 
+                 alt="Before — Surgical restoration"
+                 loading="lazy"
+                 class="w-full h-48 md:h-64 object-cover">
+            <span class="absolute top-3 left-3 bg-nile-gold text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">Before</span>
+          </div>
+          <div class="relative">
+            <img src="images/after3_6_2026-09-27_00-36-40.jpg" 
+                 alt="After — Surgical restoration"
+                 loading="lazy"
+                 class="w-full h-48 md:h-64 object-cover">
+            <span class="absolute top-3 right-3 bg-green-600 text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">After</span>
+          </div>
         </div>
         <div class="p-6 text-center border-t border-nile-gold/20">
           <p class="text-xs text-nile-muted mb-2 uppercase tracking-wide">Implants • 10 Days • New York, USA</p>
@@ -3209,23 +3258,28 @@ tailwind.config = {
     <!-- ═══ Clinic Photos Gallery ═══ -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 stagger">
       <div class="group overflow-hidden border border-nile-gold/20 rounded-sm">
-        <img src="images/SHW-1.jpg" 
-             alt="Modern dental treatment room at our Cairo partner clinic" 
+        <img src="images/photo_1_2026-09-27_00-36-40.jpg" 
+             alt="Reception area at our Cairo partner clinic" 
              loading="lazy" 
              width="400" 
              height="300"
              class="w-full h-40 md:h-52 object-cover group-hover:scale-110 transition duration-700">
       </div>
       <div class="group overflow-hidden border border-nile-gold/20 rounded-sm">
-        <img src="images/Shiny-White-23.jpg" 
-             alt="Dental clinic interior with international-standard equipment" 
+        <img src="images/photo_2_2026-09-27_00-36-40.jpg" 
+             alt="Modern dental treatment room" 
              loading="lazy" 
              width="400" 
              height="300"
              class="w-full h-40 md:h-52 object-cover group-hover:scale-110 transition duration-700">
       </div>
-      <div class="group overflow-hidden border border-nile-gold/20 rounded-sm bg-nile-blue/5 flex items-center justify-center">
-        <p class="text-xs text-nile-muted text-center p-4">More clinic photos coming soon</p>
+      <div class="group overflow-hidden border border-nile-gold/20 rounded-sm">
+        <img src="images/photo_3_2026-09-27_00-36-40.jpg" 
+             alt="Dental clinic interior with international-standard equipment" 
+             loading="lazy" 
+             width="400" 
+             height="300"
+             class="w-full h-40 md:h-52 object-cover group-hover:scale-110 transition duration-700">
       </div>
       <div class="group overflow-hidden border border-nile-gold/20 rounded-sm bg-nile-blue/5 flex items-center justify-center">
         <p class="text-xs text-nile-muted text-center p-4">More clinic photos coming soon</p>
@@ -3823,8 +3877,13 @@ tailwind.config = {
     quickTick = true;
     requestAnimationFrame(()=>{
       const y = window.scrollY;
-      if(y > 400) quickBar.classList.add('show');
-      else quickBar.classList.remove('show');
+      if(y > 400){
+        quickBar.classList.add('show');
+        document.body.classList.add('quickbar-active');
+      } else {
+        quickBar.classList.remove('show');
+        document.body.classList.remove('quickbar-active');
+      }
       quickTick = false;
     });
   }
