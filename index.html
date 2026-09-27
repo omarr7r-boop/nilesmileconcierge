@@ -1322,7 +1322,7 @@ tailwind.config = {
   background:linear-gradient(135deg,#AE9164,#E8C88A);
   color:#1F2A36;transform:rotate(90deg);
 }
-/* ═══════════ NEW STRATEGIC ORDER — V2 (IDs only) ═══════════ */
+/* ═══════════ NEW STRATEGIC ORDER — V3 (Clean, no duplicates) ═══════════ */
 
 /* 🎬 ATTENTION */
 main#main > section.hero                         { order: 1; }
@@ -1330,62 +1330,61 @@ main#main > section#trust                        { order: 2; }
 
 /* 🏛️ AUTHORITY */
 main#main > section#founder                      { order: 3; }
-main#main > section#clinic-preview               { order: 4; }
 
 /* 💰 VALUE */
-main#main > section#packages                     { order: 5; }
-main#main > section#results                      { order: 6; }
-main#main > section#reviews                      { order: 7; }
+main#main > section#packages                     { order: 4; }
+main#main > section#results                      { order: 5; }
+main#main > section#reviews                      { order: 6; }
 
 /* 😌 REASSURANCE */
-main#main > section#fears                        { order: 8; }
-main#main > section#guarantees                   { order: 9; }
+main#main > section#fears                        { order: 7; }
+main#main > section#guarantees                   { order: 8; }
 
 /* 📖 PROCESS */
-main#main > section#how-it-works                 { order: 10; }
-main#main > section#journey                      { order: 11; }
-main#main > section#timeline                     { order: 12; }
-main#main > section#recovery                     { order: 13; }
+main#main > section#how-it-works                 { order: 9; }
+main#main > section#journey                      { order: 10; }
+main#main > section#timeline                     { order: 11; }
+main#main > section#recovery                     { order: 12; }
 
 /* 🌍 CONTEXT */
-main#main > section#why-egypt                    { order: 14; }
-main#main > section#global-map                   { order: 15; }
+main#main > section#why-egypt                    { order: 13; }
+main#main > section#global-map                   { order: 14; }
 
 /* 🔬 CLINICAL DEPTH */
-main#main > section#outcomes                     { order: 16; }
-main#main > section#comfort                      { order: 17; }
-main#main > section#tech-partners                { order: 18; }
-main#main > section#science                      { order: 19; }
-main#main > section#bone-graft                   { order: 20; }
-main#main > section#crown-materials              { order: 21; }
-main#main > section#orthodontics                 { order: 22; }
-main#main > section#tech-stack                   { order: 23; }
+main#main > section#outcomes                     { order: 15; }
+main#main > section#comfort                      { order: 16; }
+main#main > section#tech-partners                { order: 17; }
+main#main > section#science                      { order: 18; }
+main#main > section#bone-graft                   { order: 19; }
+main#main > section#crown-materials              { order: 20; }
+main#main > section#orthodontics                 { order: 21; }
+main#main > section#tech-stack                   { order: 22; }
 
 /* 📜 TRANSPARENCY */
-main#main > section#risks                        { order: 24; }
-main#main > section#travel                       { order: 25; }
-main#main > section#academic                     { order: 26; }
-main#main > section#comparison                   { order: 27; }
-main#main > section#itemized                     { order: 28; }
-main#main > section#payment                      { order: 29; }
-main#main > section#emergency                    { order: 30; }
-main#main > section#rights                       { order: 31; }
+main#main > section#risks                        { order: 23; }
+main#main > section#travel                       { order: 24; }
+main#main > section#academic                     { order: 25; }
+main#main > section#comparison                   { order: 26; }
+main#main > section#itemized                     { order: 27; }
+main#main > section#payment                      { order: 28; }
+main#main > section#emergency                    { order: 29; }
+main#main > section#rights                       { order: 30; }
 
 /* 🌟 SOCIAL PROOF */
-main#main > section#case-studies                 { order: 32; }
-main#main > section#trust-media                  { order: 33; }
+main#main > section#case-studies                 { order: 31; }
+main#main > section#trust-media                  { order: 32; }
 
 /* 🏝️ LIFESTYLE */
-main#main > section#discover-egypt               { order: 34; }
+main#main > section#discover-egypt               { order: 33; }
 
 /* 📍 LOGISTICS */
-main#main > section#location                     { order: 35; }
-main#main > section#who-for                      { order: 36; }
-main#main > section#team                         { order: 37; }
+main#main > section#location                     { order: 34; }
+main#main > section#who-for                      { order: 35; }
+main#main > section#team                         { order: 36; }
 
 /* 🎯 FINAL CONVERSION */
-main#main > section#faq                          { order: 38; }
-main#main > section#consult                      { order: 39; }
+main#main > section#faq                          { order: 37; }
+main#main > section#consult                      { order: 38; }
 
 /* ═══════════ FLEX LAYOUT FIX ═══════════ */
 main#main{
@@ -1890,47 +1889,6 @@ main#main > section{
         <li class="flex items-start gap-4"><span class="text-nile-gold text-xl flex-shrink-0 mt-0.5">✓</span><span class="text-nile-blue font-medium">Every case clinically reviewed before written quote</span></li>
       </ul>
     </div>
-  </div>
-</section>
-<!-- ═══════════════════ CLINIC PREVIEW STRIP ═══════════════════ -->
-<section id="clinic-preview" class="section bg-nile-beige reveal" style="padding-top:3rem;padding-bottom:3rem">
-  <div class="container">
-    <div class="text-center max-w-2xl mx-auto mb-8">
-      <p class="eyebrow mb-3">Our Partner Clinic</p>
-      <h2 class="text-nile-blue" style="font-size:clamp(1.5rem,3.5vw,2.25rem)">Where Your Treatment Happens</h2>
-      <p class="text-nile-muted text-sm mt-3">JCI/ISO-accredited facility in Arkan Plaza Medical District — 25 minutes from the Giza Pyramids.</p>
-    </div>
-
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div class="relative overflow-hidden rounded-sm border border-nile-gold/20 shadow-md">
-        <img src="images/SHW-1.jpg" 
-             alt="Reception area at our Cairo partner clinic" 
-             loading="lazy"
-             class="w-full h-40 md:h-48 object-cover hover:scale-105 transition-transform duration-700">
-      </div>
-      <div class="relative overflow-hidden rounded-sm border border-nile-gold/20 shadow-md">
-        <img src="images/Shiny-White-23.jpg" 
-             alt="Dental treatment room" 
-             loading="lazy"
-             class="w-full h-40 md:h-48 object-cover hover:scale-105 transition-transform duration-700">
-      </div>
-      <div class="relative overflow-hidden rounded-sm border border-nile-gold/20 shadow-md">
-        <img src="images/photo_1_2026-09-27_00-36-40.jpg" 
-             alt="Modern dental equipment" 
-             loading="lazy"
-             class="w-full h-40 md:h-48 object-cover hover:scale-105 transition-transform duration-700">
-      </div>
-      <div class="relative overflow-hidden rounded-sm border border-nile-gold/20 shadow-md">
-        <img src="images/photo_2_2026-09-27_00-36-40.jpg" 
-             alt="Clinic interior" 
-             loading="lazy"
-             class="w-full h-40 md:h-48 object-cover hover:scale-105 transition-transform duration-700">
-      </div>
-    </div>
-
-    <p class="text-center mt-6">
-      <a href="#location" class="text-nile-gold text-xs uppercase tracking-widest border-b border-nile-gold/40 pb-1 hover:border-nile-gold transition">View Full Facility →</a>
-    </p>
   </div>
 </section>
 
