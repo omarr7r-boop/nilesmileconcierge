@@ -1322,76 +1322,79 @@ tailwind.config = {
   background:linear-gradient(135deg,#AE9164,#E8C88A);
   color:#1F2A36;transform:rotate(90deg);
 }
-/* ═══════════ NEW STRATEGIC ORDER ═══════════ */
-/* 1 — Attention & Trust */
+/* ═══════════ NEW STRATEGIC ORDER — V2 (IDs only) ═══════════ */
+
+/* 🎬 ATTENTION */
 main#main > section.hero                         { order: 1; }
 main#main > section#trust                        { order: 2; }
 
-/* 2 — Authority & Context */
+/* 🏛️ AUTHORITY */
 main#main > section#founder                      { order: 3; }
+main#main > section#clinic-preview               { order: 4; }
 
-/* 3 — VALUE FIRST: Pricing + Results + Offer */
-main#main > section#packages                     { order: 4; }
-main#main > section#results                      { order: 5; }
-main#main > section#reviews                      { order: 6; }
-main#main > section#fears                        { order: 6; }  /* ← بيظهر بعد #reviews في DOM */
+/* 💰 VALUE */
+main#main > section#packages                     { order: 5; }
+main#main > section#results                      { order: 6; }
+main#main > section#reviews                      { order: 7; }
 
+/* 😌 REASSURANCE */
+main#main > section#fears                        { order: 8; }
+main#main > section#guarantees                   { order: 9; }
 
-/* 4 — Reassurance: Guarantees + How it works */
-main#main > section#guarantees                   { order: 7; }
-main#main > section:nth-of-type(28)              { order: 8; } /* How It Works */
-main#main > section:nth-of-type(29)              { order: 9; } /* Patient Journey */
-main#main > section:nth-of-type(30)              { order: 10; } /* Treatment Timeline */
-main#main > section:nth-of-type(31)              { order: 11; } /* Recovery Timeline */
+/* 📖 PROCESS */
+main#main > section#how-it-works                 { order: 10; }
+main#main > section#journey                      { order: 11; }
+main#main > section#timeline                     { order: 12; }
+main#main > section#recovery                     { order: 13; }
 
-/* 5 — Destination & Global presence */
-main#main > section:nth-of-type(16)              { order: 12; } /* Why Egypt */
-main#main > section:nth-of-type(27)              { order: 13; } /* Global Map */
+/* 🌍 CONTEXT */
+main#main > section#why-egypt                    { order: 14; }
+main#main > section#global-map                   { order: 15; }
 
-/* 6 — Clinical depth (for those who want details) */
-main#main > section:nth-of-type(13)              { order: 14; } /* Clinical Outcomes */
-main#main > section#comfort                      { order: 15; } /* Anesthesia */
-main#main > section:nth-of-type(6)               { order: 16; } /* Tech Partners */
-main#main > section#science                      { order: 17; } /* Science */
-main#main > section:nth-of-type(8)               { order: 18; } /* Bone Graft */
-main#main > section:nth-of-type(9)               { order: 19; } /* Crown Materials */
-main#main > section:nth-of-type(10)              { order: 20; } /* Orthodontics */
-main#main > section:nth-of-type(11)              { order: 21; } /* Tech Stack */
+/* 🔬 CLINICAL DEPTH */
+main#main > section#outcomes                     { order: 16; }
+main#main > section#comfort                      { order: 17; }
+main#main > section#tech-partners                { order: 18; }
+main#main > section#science                      { order: 19; }
+main#main > section#bone-graft                   { order: 20; }
+main#main > section#crown-materials              { order: 21; }
+main#main > section#orthodontics                 { order: 22; }
+main#main > section#tech-stack                   { order: 23; }
 
-/* 7 — Full transparency: Risks & Legal */
-main#main > section:nth-of-type(12)              { order: 22; } /* Risks */
-main#main > section:nth-of-type(14)              { order: 23; } /* Travel */
-main#main > section:nth-of-type(15)              { order: 24; } /* Academic */
-main#main > section:nth-of-type(17)              { order: 25; } /* Comparison */
-main#main > section:nth-of-type(19)              { order: 26; } /* Itemized Pricing */
-main#main > section:nth-of-type(21)              { order: 27; } /* Payment Security */
-main#main > section:nth-of-type(22)              { order: 28; } /* Emergency Protocol */
-main#main > section:nth-of-type(23)              { order: 29; } /* Patient Rights */
+/* 📜 TRANSPARENCY */
+main#main > section#risks                        { order: 24; }
+main#main > section#travel                       { order: 25; }
+main#main > section#academic                     { order: 26; }
+main#main > section#comparison                   { order: 27; }
+main#main > section#itemized                     { order: 28; }
+main#main > section#payment                      { order: 29; }
+main#main > section#emergency                    { order: 30; }
+main#main > section#rights                       { order: 31; }
 
-/* 8 — Social proof & Media */
-main#main > section:nth-of-type(25)              { order: 30; } /* Case Studies */
-main#main > section:nth-of-type(26)              { order: 31; } /* Trust & Media */
+/* 🌟 SOCIAL PROOF */
+main#main > section#case-studies                 { order: 32; }
+main#main > section#trust-media                  { order: 33; }
 
-/* 9 — Destination as lifestyle */
-main#main > section#discover-egypt               { order: 32; }
+/* 🏝️ LIFESTYLE */
+main#main > section#discover-egypt               { order: 34; }
 
-/* 10 — Location & Audience */
-main#main > section:nth-of-type(33)              { order: 33; } /* Location / Maps */
-main#main > section:nth-of-type(34)              { order: 34; } /* Who Is This For */
-main#main > section#team                         { order: 35; } /* Team */
+/* 📍 LOGISTICS */
+main#main > section#location                     { order: 35; }
+main#main > section#who-for                      { order: 36; }
+main#main > section#team                         { order: 37; }
 
-/* 11 — Final conversion funnel */
-main#main > section#faq                          { order: 36; }
-main#main > section#consult                      { order: 37; }
+/* 🎯 FINAL CONVERSION */
+main#main > section#faq                          { order: 38; }
+main#main > section#consult                      { order: 39; }
 
-/* ═══════════ DISABLE CONTENT-VISIBILITY during reorder (fixes layout bugs) ═══════════ */
+/* ═══════════ FLEX LAYOUT FIX ═══════════ */
 main#main{
   display: flex;
   flex-direction: column;
 }
 main#main > section{
-  flex-shrink: 0;                    /* ← يمنع الانضغاط */
-  width: 100%;                       /* ← يمنع الـ flex من تصغير العرض */
+  flex-shrink: 0;
+  width: 100%;
   content-visibility: visible !important;
   contain-intrinsic-size: auto !important;
 }
@@ -1890,7 +1893,7 @@ main#main > section{
   </div>
 </section>
 <!-- ═══════════════════ CLINIC PREVIEW STRIP ═══════════════════ -->
-<section class="section bg-nile-beige reveal" style="padding-top:3rem;padding-bottom:3rem">
+<section id="clinic-preview" class="section bg-nile-beige reveal" style="padding-top:3rem;padding-bottom:3rem">
   <div class="container">
     <div class="text-center max-w-2xl mx-auto mb-8">
       <p class="eyebrow mb-3">Our Partner Clinic</p>
@@ -2100,7 +2103,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ TECHNOLOGY PARTNERS ═══════════════════ -->
-<section class="section bg-nile-beige reveal">
+<section id="tech-partners" class="section bg-nile-beige reveal">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-14">
       <p class="eyebrow mb-4">Our Technology Partners</p>
@@ -2260,7 +2263,7 @@ main#main > section{
 </style>
 
 <!-- ═══════════════════ BONE GRAFT MATERIALS TABLE ═══════════════════ -->
-<section class="section bg-nile-blue text-white reveal">
+<section id="bone-graft" class="section bg-nile-blue text-white reveal">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-12">
       <p class="eyebrow eyebrow-light mb-4">Materials Science</p>
@@ -2290,7 +2293,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ CROWN MATERIALS TABLE ═══════════════════ -->
-<section class="section bg-white reveal">
+<section id="crown-materials" class="section bg-white reveal">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-12">
       <p class="eyebrow mb-4">Prosthetic Materials</p>
@@ -2320,7 +2323,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ ORTHODONTICS ═══════════════════ -->
-<section class="section bg-nile-beige reveal">
+<section id="orthodontics" class="section bg-nile-beige reveal">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-12">
       <p class="eyebrow mb-4">Orthodontics</p>
@@ -2352,7 +2355,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ TECHNOLOGY STACK ═══════════════════ -->
-<section class="section bg-nile-blue text-white reveal">
+<section id="tech-stack" class="section bg-nile-blue text-white reveal">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-12">
       <p class="eyebrow eyebrow-light mb-4">Clinical Technology</p>
@@ -2395,7 +2398,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ RISKS & COMPLICATIONS ═══════════════════ -->
-<section class="section bg-white reveal">
+<section id="risks" class="section bg-white reveal">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-12">
       <p class="eyebrow mb-4">Transparency</p>
@@ -2430,7 +2433,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ CLINICAL OUTCOMES ═══════════════════ -->
-<section class="section bg-white reveal">
+<section id="outcomes" class="section bg-white reveal">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-14">
       <p class="eyebrow mb-4">Clinical Outcomes</p>
@@ -2461,7 +2464,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ TRAVEL & LOGISTICS ═══════════════════ -->
-<section class="section bg-white reveal">
+<section id="travel" class="section bg-white reveal">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-12">
       <p class="eyebrow mb-4">Seamless Travel</p>
@@ -2518,7 +2521,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ ACADEMIC PEDIGREE ═══════════════════ -->
-<section class="section bg-nile-blue text-white reveal">
+<section id="academic" class="section bg-nile-blue text-white reveal">
   <div class="container">
     <div class="text-center mb-12">
       <p class="eyebrow eyebrow-light mb-4">Academic Pedigree</p>
@@ -2546,7 +2549,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ WHY EGYPT ═══════════════════ -->
-<section class="section reveal">
+<section id="why-egypt" class="section reveal">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-12">
       <p class="eyebrow mb-4">The Destination</p>
@@ -2592,7 +2595,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ COMPARISON ═══════════════════ -->
-<section class="section reveal">
+<section id="comparison" class="section reveal">
   <div class="container">
     <div class="text-center mb-12">
       <p class="eyebrow mb-4">The Comparison</p>
@@ -2829,7 +2832,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ ITEMIZED PRICING ═══════════════════ -->
-<section class="section reveal">
+<section id="itemized" class="section reveal">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-12">
       <p class="eyebrow mb-4">Transparent Pricing</p>
@@ -2911,7 +2914,7 @@ main#main > section{
   </div>
 </section>
 <!-- ═══════════════════ PAYMENT SECURITY — Simplified ═══════════════════ -->
-<section class="section bg-nile-beige reveal">
+<section id="payment" class="section bg-nile-beige reveal">
   <div class="container-narrow">
     <div class="text-center mb-12">
       <p class="eyebrow mb-4">Payment Security</p>
@@ -2947,7 +2950,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ EMERGENCY PROTOCOL ═══════════════════ -->
-<section class="section bg-white reveal">
+<section id="emergency" class="section bg-white reveal">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-14">
       <p class="eyebrow mb-4">Safety Commitment</p>
@@ -2991,7 +2994,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ PATIENT RIGHTS ═══════════════════ -->
-<section class="section bg-nile-beige reveal">
+<section id="rights" class="section bg-nile-beige reveal">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-14">
       <p class="eyebrow mb-4">Your Rights</p>
@@ -3123,7 +3126,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ CASE STUDIES ═══════════════════ -->
-<section class="section bg-nile-beige reveal">
+<section id="case-studies" class="section bg-nile-beige reveal">
   <div class="container">
     <div class="text-center mb-12 max-w-3xl mx-auto">
       <p class="eyebrow mb-4">Clinical Portfolio</p>
@@ -3146,7 +3149,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ TRUST & MEDIA ═══════════════════ -->
-<section class="section bg-white reveal">
+<section id="trust-media" class="section bg-white reveal">
   <div class="container">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger">
       <div class="card p-7 text-center">
@@ -3175,7 +3178,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ GLOBAL PATIENT MAP ═══════════════════ -->
-<section class="section bg-nile-beige reveal">
+<section id="global-map" class="section bg-nile-beige reveal">
   <div class="container text-center">
     <p class="eyebrow mb-4">Global Presence</p>
     <h2 class="text-nile-blue mb-8" style="font-size:clamp(1.75rem,4vw,2.5rem)">Our International Patients</h2>
@@ -3192,7 +3195,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ HOW IT WORKS ═══════════════════ -->
-<section class="section bg-white reveal">
+<section id="how-it-works" class="section bg-white reveal">
   <div class="container">
     <div class="text-center mb-14">
       <h2 class="text-nile-blue mb-4" style="font-size:clamp(1.75rem,4vw,2.5rem)">How It Works</h2>
@@ -3224,7 +3227,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ PATIENT JOURNEY ═══════════════════ -->
-<section class="section bg-white reveal">
+<section id="journey" class="section bg-white reveal">
   <div class="container">
     <div class="text-center mb-12 max-w-3xl mx-auto">
       <p class="eyebrow mb-4">Your Complete Journey</p>
@@ -3373,7 +3376,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ TREATMENT TIMELINE ═══════════════════ -->
-<section class="section bg-nile-beige reveal">
+<section id="timeline" class="section bg-nile-beige reveal">
   <div class="container">
     <div class="text-center mb-12 max-w-3xl mx-auto">
       <p class="eyebrow mb-4">Your 10-Day Journey</p>
@@ -3475,7 +3478,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ RECOVERY TIMELINE ═══════════════════ -->
-<section class="section bg-white reveal">
+<section id="recovery" class="section bg-white reveal">
   <div class="container">
     <div class="text-center mb-12 max-w-3xl mx-auto">
       <p class="eyebrow mb-4">What to Expect</p>
@@ -3691,7 +3694,7 @@ main#main > section{
 </section>
 
 <!-- ═══════════════════ WHO IS THIS FOR ═══════════════════ -->
-<section class="section reveal">
+<section id="who-for" class="section reveal">
   <div class="container grid grid-cols-1 md:grid-cols-2 gap-8">
     <div class="card card-top-blue p-8">
       <h3 class="text-2xl md:text-3xl font-serif text-nile-blue mb-6">Who This Service Is For</h3>
