@@ -1787,9 +1787,10 @@ main#main > section{
       <span class="text-gray-300 text-xs">Same implant brands, same materials, same standards - different location.</span>
     </p>
 
-    <div class="flex flex-col sm:flex-row gap-3 justify-center" style="max-width:34rem;margin:0 auto">
+    <div class="flex flex-col sm:flex-row gap-3 justify-center" style="max-width:42rem;margin:0 auto">
       <a href="#consult" class="btn btn-gold shine-auto">Request Clinical Review</a>
       <a href="#packages" class="btn btn-outline">View Packages</a>
+      <button onclick="openModal('journeyModal')" class="btn btn-outline">See Your Journey</button>
     </div>
 
     <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-12 text-gray-300" style="font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500">
@@ -4194,6 +4195,212 @@ main#main > section{
       
       <p><strong class="text-nile-blue">Complaints:</strong> If you believe your data protection rights have been violated, you have the right to lodge a complaint with the relevant supervisory authority in your country of residence.</p>
     </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ JOURNEY MODAL ═══════════════════ -->
+<div id="journeyModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="journeyTitle">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('journeyModal')" aria-label="Close">×</button>
+
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <p class="eyebrow mb-3">Your Treatment Journey</p>
+      <h3 id="journeyTitle" class="font-serif text-nile-blue mb-4" style="font-size:clamp(1.5rem,4vw,2rem)">From Landing in Cairo<br>to <span class="italic gold-text">Your New Smile</span></h3>
+      <p class="text-nile-muted text-sm max-w-xl mx-auto">Here is exactly what happens — day by day. No surprises. No hidden steps.</p>
+    </div>
+
+    <!-- Timeline -->
+    <div class="space-y-3">
+
+      <!-- Day 0 -->
+      <div class="bg-white p-5 border-l-4 border-nile-gold">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 text-center" style="min-width:70px">
+            <div class="text-nile-gold font-serif text-xl">Day 0</div>
+            <div class="text-nile-muted text-[10px] uppercase tracking-widest mt-1">Before Travel</div>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-serif text-nile-blue text-base mb-2">Free Virtual Consultation</h4>
+            <ul class="text-nile-muted text-xs space-y-1">
+              <li>• Upload X-ray or CBCT scan to our secure portal</li>
+              <li>• Licensed dentist reviews within 24–72 hours</li>
+              <li>• Written treatment plan + itemized quote</li>
+              <li>• Free Zoom consultation with your dentist</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 1 -->
+      <div class="bg-white p-5 border-l-4 border-nile-gold">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 text-center" style="min-width:70px">
+            <div class="text-nile-gold font-serif text-xl">Day 1</div>
+            <div class="text-nile-muted text-[10px] uppercase tracking-widest mt-1">Arrival</div>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-serif text-nile-blue text-base mb-2">VIP Airport Pickup & Hotel Check-In</h4>
+            <ul class="text-nile-muted text-xs space-y-1">
+              <li>• Private chauffeur meets you at Cairo International Airport</li>
+              <li>• Fast-track through immigration</li>
+              <li>• Transfer to your 5-star hotel (Nile or Pyramids view)</li>
+              <li>• Welcome kit with itinerary + local SIM card</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 2 -->
+      <div class="bg-white p-5 border-l-4 border-nile-gold">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 text-center" style="min-width:70px">
+            <div class="text-nile-gold font-serif text-xl">Day 2</div>
+            <div class="text-nile-muted text-[10px] uppercase tracking-widest mt-1">Diagnostics</div>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-serif text-nile-blue text-base mb-2">Clinical Evaluation & Final Plan</h4>
+            <ul class="text-nile-muted text-xs space-y-1">
+              <li>• CBCT 3D scan + intraoral digital scan</li>
+              <li>• Face-to-face meeting with your treating dentist</li>
+              <li>• Final written treatment plan + informed consent</li>
+              <li>• Anesthesia consultation (Local / Oral / IV Sedation)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 3 -->
+      <div class="bg-nile-blue text-white p-5 border-l-4 border-nile-gold-bright">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 text-center" style="min-width:70px">
+            <div class="text-nile-gold-bright font-serif text-xl">Day 3</div>
+            <div class="text-gray-400 text-[10px] uppercase tracking-widest mt-1">Surgery</div>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-serif text-nile-beige text-base mb-2">Implant Placement / Procedure</h4>
+            <ul class="text-gray-300 text-xs space-y-1">
+              <li>• Guided surgery using 3D-printed templates</li>
+              <li>• All treatment completed under sterile protocols</li>
+              <li>• Immediate loading where clinically indicated</li>
+              <li>• Duration: 2–3 hours per arch</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 4-5 -->
+      <div class="bg-white p-5 border-l-4 border-nile-gold">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 text-center" style="min-width:70px">
+            <div class="text-nile-gold font-serif text-xl">Day 4–5</div>
+            <div class="text-nile-muted text-[10px] uppercase tracking-widest mt-1">Recovery</div>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-serif text-nile-blue text-base mb-2">Rest + Digital Impressions</h4>
+            <ul class="text-nile-muted text-xs space-y-1">
+              <li>• Post-op check + suture review</li>
+              <li>• Digital impressions for temporary prosthesis</li>
+              <li>• Rest at hotel with concierge support</li>
+              <li>• Optional low-impact tourism (Nile dinner cruise)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 6-7 -->
+      <div class="bg-white p-5 border-l-4 border-nile-gold">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 text-center" style="min-width:70px">
+            <div class="text-nile-gold font-serif text-xl">Day 6–7</div>
+            <div class="text-nile-muted text-[10px] uppercase tracking-widest mt-1">Fitting</div>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-serif text-nile-blue text-base mb-2">Fixed Temporary Bridge</h4>
+            <ul class="text-nile-muted text-xs space-y-1">
+              <li>• Precision fitting of fixed temporary prosthesis</li>
+              <li>• Bite adjustment + esthetic verification</li>
+              <li>• Speech and comfort assessment</li>
+              <li>• Hygiene education for post-op care</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 8-10 -->
+      <div class="bg-white p-5 border-l-4 border-nile-gold">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 text-center" style="min-width:70px">
+            <div class="text-nile-gold font-serif text-xl">Day 8–10</div>
+            <div class="text-nile-muted text-[10px] uppercase tracking-widest mt-1">Departure</div>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-serif text-nile-blue text-base mb-2">Final Review + Aftercare Handover</h4>
+            <ul class="text-nile-muted text-xs space-y-1">
+              <li>• Post-op healing assessment</li>
+              <li>• Written aftercare protocol in English</li>
+              <li>• 24/7 WhatsApp line with your coordinator</li>
+              <li>• Scheduled telehealth: 1 week / 1 month / 3 months</li>
+              <li>• VIP transfer to Cairo International Airport</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- After Return -->
+      <div class="bg-nile-beige p-5 border-l-4 border-nile-gold-bright">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 text-center" style="min-width:70px">
+            <div class="text-nile-gold font-serif text-xl">After</div>
+            <div class="text-nile-muted text-[10px] uppercase tracking-widest mt-1">Back Home</div>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-serif text-nile-blue text-base mb-2">Lifetime Follow-Up & Warranty</h4>
+            <ul class="text-nile-muted text-xs space-y-1">
+              <li>• Telehealth check-ins: 1 week / 1 month / 3 months</li>
+              <li>• We coordinate with a licensed dentist in your country</li>
+              <li>• Lifetime warranty on all implants (documented)</li>
+              <li>• 24/7 emergency line in your timezone</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Inclusions -->
+    <div class="mt-8 bg-nile-gold/10 border border-nile-gold/30 p-5">
+      <p class="eyebrow text-center mb-3">What's Included</p>
+      <div class="grid grid-cols-2 gap-2 text-xs text-nile-muted">
+        <div>✓ VIP airport transfers</div>
+        <div>✓ 5-star hotel accommodation</div>
+        <div>✓ Bilingual medical coordinator</div>
+        <div>✓ All clinical procedures</div>
+        <div>✓ Premium implant materials</div>
+        <div>✓ Written aftercare protocol</div>
+        <div>✓ Lifetime implant warranty</div>
+        <div>✓ 24/7 WhatsApp support</div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-8 text-center">
+      <p class="text-nile-muted text-sm mb-4">Ready to start your journey?</p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="https://wa.me/201503308333?text=Hi%20Nile%20Smile%2C%20I%27d%20like%20to%20get%20a%20full%20treatment%20guide%20PDF" 
+           target="_blank" rel="noopener" 
+           class="btn btn-gold shine-auto">
+          📄 Get Full Guide on WhatsApp
+        </a>
+        <a href="#consult" 
+           onclick="closeModal('journeyModal')"
+           class="btn btn-outline-dark">
+          Request Free Review
+        </a>
+      </div>
+      <p class="text-[10px] text-nile-muted italic mt-4">Response within 24–72 hours • No obligation • No pressure</p>
+    </div>
+
   </div>
 </div>
 
