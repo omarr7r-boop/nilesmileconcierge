@@ -1326,73 +1326,64 @@ tailwind.config = {
   background:linear-gradient(135deg,#AE9164,#E8C88A);
   color:#1F2A36;transform:rotate(90deg);
 }
-/* ═══════════ NEW STRATEGIC ORDER — V3 (Clean, no duplicates) ═══════════ */
+/* ═══════════ STRATEGIC ORDER — V4 (Conversion-Optimized) ═══════════ */
+/* Psychology: Attention → Authority → Desire → Price → Objections → Process → Depth → Close */
 
 /* 🎬 ATTENTION */
 main#main > section.hero                         { order: 1; }
-main#main > section#trust-stats                  { order: 1.5; }
-main#main > section#trust                        { order: 2; }
+main#main > section#trust-stats                  { order: 2; }
+main#main > section#trust                        { order: 3; }
 
 /* 🏛️ AUTHORITY */
-main#main > section#founder                      { order: 3; }
+main#main > section#founder                      { order: 4; }
+main#main > section#team                         { order: 5; }
+main#main > section#who-for                      { order: 6; }
 
-/* 💰 VALUE */
-main#main > section#packages                     { order: 4; }
-main#main > section#travel-addons                { order: 4.5; }
-main#main > section#estimator                    { order: 4.7; }
-main#main > section#results                      { order: 5; }
-main#main > section#reviews                      { order: 6; }
+/* 💎 DESIRE */
+main#main > section#results                      { order: 7; }
+main#main > section#reviews                      { order: 8; }
 
-/* 😌 REASSURANCE */
-main#main > section#fears                        { order: 7; }
-main#main > section#guarantees                   { order: 8; }
+/* 💰 PRICE */
+main#main > section#packages                     { order: 10; }
+main#main > section#estimator                    { order: 11; }
+main#main > section#itemized                     { order: 12; }
+main#main > section#travel-addons                { order: 13; }
+
+/* 😌 OBJECTIONS */
+main#main > section#fears                        { order: 14; }
+main#main > section#guarantees                   { order: 15; }
+main#main > section#risks                        { order: 16; }
+main#main > section#comparison                   { order: 17; }
 
 /* 📖 PROCESS */
-main#main > section#how-it-works                 { order: 9; }
-main#main > section#journey                      { order: 10; }
-main#main > section#timeline                     { order: 11; }
-main#main > section#recovery                     { order: 12; }
-
-/* 🌍 CONTEXT */
-main#main > section#why-egypt                    { order: 13; }
-main#main > section#global-map                   { order: 14; }
+main#main > section#how-it-works                 { order: 18; }
+main#main > section#journey                      { order: 19; }
+main#main > section#timeline                     { order: 20; }
+main#main > section#recovery                     { order: 21; }
 
 /* 🔬 CLINICAL DEPTH */
-main#main > section#outcomes                     { order: 15; }
-main#main > section#comfort                      { order: 16; }
-main#main > section#tech-partners                { order: 17; }
-main#main > section#science                      { order: 18; }
-main#main > section#bone-graft                   { order: 19; }
-main#main > section#crown-materials              { order: 20; }
-main#main > section#orthodontics                 { order: 21; }
-main#main > section#tech-stack                   { order: 22; }
+main#main > section#comfort                      { order: 22; }
+main#main > section#science                      { order: 23; }
+main#main > section#bone-graft                   { order: 26; }
+main#main > section#crown-materials              { order: 27; }
+main#main > section#orthodontics                 { order: 28; }
 
-/* 📜 TRANSPARENCY */
-main#main > section#risks                        { order: 23; }
-main#main > section#travel                       { order: 24; }
-main#main > section#academic                     { order: 25; }
-main#main > section#comparison                   { order: 26; }
-main#main > section#itemized                     { order: 27; }
-main#main > section#payment                      { order: 28; }
-main#main > section#emergency                    { order: 29; }
-main#main > section#rights                       { order: 30; }
+/* 🌍 CONTEXT */
+main#main > section#why-egypt                    { order: 29; }
+main#main > section#academic                     { order: 30; }
+main#main > section#global-map                   { order: 31; }
 
-/* 🌟 SOCIAL PROOF */
-main#main > section#case-studies                 { order: 31; }
-main#main > section#trust-media                  { order: 32; }
-
+/* 📜 LOGISTICS / ADMIN */
+main#main > section#travel                       { order: 32; }
+main#main > section#location                     { order: 33; }
+main#main > section#payment                      { order: 34; }
 /* 🏝️ LIFESTYLE */
-main#main > section#discover-egypt               { order: 33; }
-main#main > section#curated-tours                { order: 33.5; }
-
-/* 📍 LOGISTICS */
-main#main > section#location                     { order: 34; }
-main#main > section#who-for                      { order: 35; }
-main#main > section#team                         { order: 36; }
+main#main > section#discover-egypt               { order: 37; }
+main#main > section#curated-tours                { order: 38; }
 
 /* 🎯 FINAL CONVERSION */
-main#main > section#faq                          { order: 37; }
-main#main > section#consult                      { order: 38; }
+main#main > section#faq                          { order: 39; }
+main#main > section#consult                      { order: 40; }
 
 /* ═══════════ FLEX LAYOUT FIX ═══════════ */
 main#main{
@@ -2414,36 +2405,7 @@ details.science-accordion > summary:hover{
   </div>
 </section>
 
-<!-- ═══════════════════ TECHNOLOGY PARTNERS ═══════════════════ -->
-<section id="tech-partners" class="section bg-nile-beige reveal">
-  <div class="container">
-    <div class="text-center max-w-3xl mx-auto mb-14">
-      <p class="eyebrow mb-4">Our Technology Partners</p>
-      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">Premium Implant &amp; Material Systems</h2>
-      <p class="text-nile-muted">We work exclusively with internationally certified implant and material systems, sourced directly from their manufacturers or authorized distributors.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger">
-      <div class="card p-7 text-center">
-        <h3 class="font-serif text-nile-blue text-xl mb-2">Straumann</h3>
-        <p class="text-nile-gold text-xs uppercase tracking-widest mb-4">Switzerland</p>
-        <p class="text-nile-muted text-sm">The global leader in dental implantology. Straumann established the ITI (International Team for Implantology) in 1980 — the organization that set modern standards for implant dentistry. We use Straumann's Bone Level and Tissue Level systems.</p>
-      </div>
-      <div class="card p-7 text-center">
-        <h3 class="font-serif text-nile-blue text-xl mb-2">Nobel Biocare</h3>
-        <p class="text-nile-gold text-xs uppercase tracking-widest mb-4">Sweden / USA</p>
-        <p class="text-nile-muted text-sm">Pioneer of the Brånemark System — the world's first dental implant system. Nobel Biocare's TiUnite surface promotes rapid osseointegration. We use Nobel Biocare's NobelParallel and NobelActive systems.</p>
-      </div>
-      <div class="card p-7 text-center">
-        <h3 class="font-serif text-nile-blue text-xl mb-2">Zirconia &amp; E-max</h3>
-        <p class="text-nile-gold text-xs uppercase tracking-widest mb-4">Germany / USA</p>
-        <p class="text-nile-muted text-sm">We use monolithic zirconia (1,200+ MPa) for posterior restorations and lithium disilicate (E-max) for anterior teeth. Both materials are FDA/CE approved and sourced from certified dental laboratories.</p>
-      </div>
-    </div>
-    <p class="text-center mt-8 text-xs text-nile-muted italic max-w-3xl mx-auto">
-      All implant and material systems are used in accordance with their manufacturers' instructions and international clinical guidelines.
-    </p>
-  </div>
-</section>
+
 <!-- ═══════════════════ SCIENCE ═══════════════════ -->
 <section id="science" class="section bg-nile-blue text-white reveal">
   <div class="container">
@@ -2535,6 +2497,72 @@ details.science-accordion > summary:hover{
           </div>
         </div>
         <p class="text-gray-500 text-xs italic mt-6 text-center">Digital workflows reduce surgical time up to 40% and improve implant accuracy up to 3× (Journal of Oral Implantology, 2024).</p>
+      </div>
+    </details>
+
+    <!-- Accordion 4 — Material Partners (merged from #tech-partners) -->
+    <details class="science-accordion">
+      <summary>🏭 Material Partners: What We Use & Why</summary>
+      <div class="science-acc-body">
+        <p class="text-gray-300 mb-6 text-sm">We work exclusively with internationally certified implant and material systems, sourced directly from their manufacturers or authorized distributors.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div class="bg-white/5 border border-nile-gold/20 p-5">
+            <h4 class="font-serif text-nile-beige text-lg mb-1">Straumann</h4>
+            <p class="text-nile-gold-bright text-xs uppercase tracking-widest mb-3">Switzerland</p>
+            <p class="text-gray-400 text-xs leading-relaxed">Global leader in implantology. Founded the ITI (International Team for Implantology) — the organization that set modern standards for implant dentistry. Bone Level &amp; Tissue Level systems.</p>
+          </div>
+          <div class="bg-white/5 border border-nile-gold/20 p-5">
+            <h4 class="font-serif text-nile-beige text-lg mb-1">Nobel Biocare</h4>
+            <p class="text-nile-gold-bright text-xs uppercase tracking-widest mb-3">Sweden / USA</p>
+            <p class="text-gray-400 text-xs leading-relaxed">Pioneer of the Brånemark System — the world's first dental implant. TiUnite surface promotes rapid osseointegration. NobelParallel &amp; NobelActive systems.</p>
+          </div>
+          <div class="bg-white/5 border border-nile-gold/20 p-5">
+            <h4 class="font-serif text-nile-beige text-lg mb-1">Zirconia &amp; E-max</h4>
+            <p class="text-nile-gold-bright text-xs uppercase tracking-widest mb-3">Germany / USA</p>
+            <p class="text-gray-400 text-xs leading-relaxed">Monolithic zirconia (1,200+ MPa) for posterior restorations. Lithium disilicate (E-max) for anterior teeth. Both FDA/CE approved, certified dental labs.</p>
+          </div>
+        </div>
+        <p class="text-gray-500 text-xs italic mt-6 text-center">All implant and material systems are used in accordance with their manufacturers' instructions and international clinical guidelines.</p>
+      </div>
+    </details>
+
+    <!-- Accordion 5 — Clinical Tech Stack (merged from #tech-stack) -->
+    <details class="science-accordion">
+      <summary>⚙️ Clinical Tech Stack: Equipment &amp; Standards</summary>
+      <div class="science-acc-body">
+        <p class="text-gray-300 mb-6 text-sm">Every partner clinic is equipped with the same class of technology used in top-tier US and European surgical centers.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="bg-white/5 border border-nile-gold/20 p-5">
+            <h4 class="font-serif text-nile-beige mb-2 text-base">CBCT 3D Imaging</h4>
+            <p class="text-gray-400 text-xs mb-2">Planmeca ProMax 3D, Carestream CS 9600, Sirona Orthophos SL</p>
+            <p class="text-nile-gold-bright text-xs uppercase tracking-widest">Sub-0.1mm accuracy</p>
+          </div>
+          <div class="bg-white/5 border border-nile-gold/20 p-5">
+            <h4 class="font-serif text-nile-beige mb-2 text-base">CAD/CAM Milling</h4>
+            <p class="text-gray-400 text-xs mb-2">Sirona CEREC, 3Shape TRIOS, Roland DWX-52</p>
+            <p class="text-nile-gold-bright text-xs uppercase tracking-widest">Same-day prosthetics</p>
+          </div>
+          <div class="bg-white/5 border border-nile-gold/20 p-5">
+            <h4 class="font-serif text-nile-beige mb-2 text-base">3D Printing</h4>
+            <p class="text-gray-400 text-xs mb-2">Formlabs Form 3B, Stratasys J5 DentaJet</p>
+            <p class="text-nile-gold-bright text-xs uppercase tracking-widest">Surgical guides</p>
+          </div>
+          <div class="bg-white/5 border border-nile-gold/20 p-5">
+            <h4 class="font-serif text-nile-beige mb-2 text-base">Surgical Microscopes</h4>
+            <p class="text-gray-400 text-xs mb-2">Zeiss, Leica, Global</p>
+            <p class="text-nile-gold-bright text-xs uppercase tracking-widest">Magnification up to 25×</p>
+          </div>
+          <div class="bg-white/5 border border-nile-gold/20 p-5">
+            <h4 class="font-serif text-nile-beige mb-2 text-base">Laser Systems</h4>
+            <p class="text-gray-400 text-xs mb-2">Fotona, Biolase, Sirona</p>
+            <p class="text-nile-gold-bright text-xs uppercase tracking-widest">Gum contouring</p>
+          </div>
+          <div class="bg-white/5 border border-nile-gold/20 p-5">
+            <h4 class="font-serif text-nile-beige mb-2 text-base">Sterilization</h4>
+            <p class="text-gray-400 text-xs mb-2">Class B Autoclaves (Melag, W&amp;H), ISO/CDC-compliant</p>
+            <p class="text-nile-gold-bright text-xs uppercase tracking-widest">Per-cycle documentation</p>
+          </div>
+        </div>
       </div>
     </details>
 
@@ -2633,48 +2661,7 @@ details.science-accordion > summary:hover{
   </div>
 </section>
 
-<!-- ═══════════════════ TECHNOLOGY STACK ═══════════════════ -->
-<section id="tech-stack" class="section bg-nile-blue text-white reveal">
-  <div class="container">
-    <div class="text-center max-w-3xl mx-auto mb-12">
-      <p class="eyebrow eyebrow-light mb-4">Clinical Technology</p>
-      <h2 class="mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">Our Clinical Technology Stack</h2>
-      <p class="text-gray-300">Every partner clinic is equipped with the same class of technology used in top-tier US and European surgical centers.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger">
-      <div class="bg-white/5 border border-nile-gold/20 p-6">
-        <h4 class="font-serif text-nile-beige mb-2">CBCT 3D Imaging</h4>
-        <p class="text-gray-400 text-xs mb-3">Planmeca ProMax 3D, Carestream CS 9600, Sirona Orthophos SL</p>
-        <p class="text-nile-gold-bright text-xs uppercase tracking-widest">Sub-0.1mm accuracy</p>
-      </div>
-      <div class="bg-white/5 border border-nile-gold/20 p-6">
-        <h4 class="font-serif text-nile-beige mb-2">CAD/CAM Milling</h4>
-        <p class="text-gray-400 text-xs mb-3">Sirona CEREC, 3Shape TRIOS, Roland DWX-52</p>
-        <p class="text-nile-gold-bright text-xs uppercase tracking-widest">Same-day prosthetics</p>
-      </div>
-      <div class="bg-white/5 border border-nile-gold/20 p-6">
-        <h4 class="font-serif text-nile-beige mb-2">3D Printing</h4>
-        <p class="text-gray-400 text-xs mb-3">Formlabs Form 3B, Stratasys J5 DentaJet</p>
-        <p class="text-nile-gold-bright text-xs uppercase tracking-widest">Surgical guides</p>
-      </div>
-      <div class="bg-white/5 border border-nile-gold/20 p-6">
-        <h4 class="font-serif text-nile-beige mb-2">Surgical Microscopes</h4>
-        <p class="text-gray-400 text-xs mb-3">Zeiss, Leica, Global</p>
-        <p class="text-nile-gold-bright text-xs uppercase tracking-widest">Magnification up to 25×</p>
-      </div>
-      <div class="bg-white/5 border border-nile-gold/20 p-6">
-        <h4 class="font-serif text-nile-beige mb-2">Laser Systems</h4>
-        <p class="text-gray-400 text-xs mb-3">Fotona, Biolase, Sirona</p>
-        <p class="text-nile-gold-bright text-xs uppercase tracking-widest">Gum contouring</p>
-      </div>
-      <div class="bg-white/5 border border-nile-gold/20 p-6">
-        <h4 class="font-serif text-nile-beige mb-2">Sterilization</h4>
-        <p class="text-gray-400 text-xs mb-3">Class B Autoclaves (Melag, W&H), ISO/CDC-compliant</p>
-        <p class="text-nile-gold-bright text-xs uppercase tracking-widest">Per-cycle documentation</p>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <!-- ═══════════════════ RISKS & COMPLICATIONS ═══════════════════ -->
 <section id="risks" class="section bg-white reveal">
@@ -2711,36 +2698,6 @@ details.science-accordion > summary:hover{
   </div>
 </section>
 
-<!-- ═══════════════════ CLINICAL OUTCOMES ═══════════════════ -->
-<section id="outcomes" class="section bg-white reveal">
-  <div class="container">
-    <div class="text-center max-w-3xl mx-auto mb-14">
-      <p class="eyebrow mb-4">Clinical Outcomes</p>
-      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">Our Documented Results</h2>
-      <p class="text-nile-muted">We believe in data-driven transparency. Here are the clinical outcomes from our partner clinics, documented in accordance with international standards.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger">
-      <div class="card card-top-gold p-8 text-center">
-        <h3 class="font-serif text-nile-blue text-lg mb-3">Implant Success Rate</h3>
-        <p class="text-nile-muted text-sm mb-2"><strong class="text-nile-blue text-2xl">94.6%</strong></p>
-        <p class="text-xs text-nile-muted">Overall success rate across all implant systems, based on 5-year follow-up data from partner clinics.</p>
-      </div>
-      <div class="card card-top-gold p-8 text-center">
-        <h3 class="font-serif text-nile-blue text-lg mb-3">All-on-4 Survival</h3>
-        <p class="text-nile-muted text-sm mb-2"><strong class="text-nile-blue text-2xl">99.2%</strong></p>
-        <p class="text-xs text-nile-muted">Short-term survival rate for All-on-4 full-arch restorations. Long-term (5+ years): <strong>97.8%</strong>.</p>
-      </div>
-      <div class="card card-top-gold p-8 text-center">
-        <h3 class="font-serif text-nile-blue text-lg mb-3">Patient Satisfaction</h3>
-        <p class="text-nile-muted text-sm mb-2"><strong class="text-nile-blue text-2xl">4.9/5.0</strong></p>
-        <p class="text-xs text-nile-muted">Average patient satisfaction score across international patients, based on post-treatment surveys.</p>
-      </div>
-    </div>
-    <p class="text-center mt-8 text-xs text-nile-muted italic max-w-3xl mx-auto">
-      These outcomes are specific to our partner clinics and may differ from global averages. Individual results vary based on case complexity, patient compliance, and other factors.
-    </p>
-  </div>
-</section>
 
 <!-- ═══════════════════ TRAVEL & LOGISTICS ═══════════════════ -->
 <section id="travel" class="section bg-white reveal">
@@ -3493,6 +3450,78 @@ details.science-accordion > summary:hover{
       <p class="text-gray-300 text-sm mb-3">Our lifetime implant warranty covers <strong>clinical re-treatment and component replacement at our accredited partner centers in Cairo, Egypt</strong>. It does not cover third-party dental work performed outside our network.</p>
       <p class="text-gray-300 text-sm">For routine follow-ups in your home country, we help coordinate with a licensed local dentist and share your treatment records.</p>
     </div>
+
+    <!-- ═══ Emergency Protocol (merged from #emergency) ═══ -->
+    <div class="mt-16 pt-16 border-t border-nile-gold/20">
+      <div class="text-center mb-10">
+        <p class="eyebrow eyebrow-light mb-4">Safety Commitment</p>
+        <h3 class="font-serif text-nile-beige mb-4" style="font-size:clamp(1.5rem,3.5vw,2rem)">Emergency Protocol</h3>
+        <p class="text-gray-300 max-w-2xl mx-auto text-sm">Rare complications can happen. What matters is how they are handled. Here is our documented emergency response.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger">
+        <div class="bg-white/5 p-7 border border-nile-gold/20">
+          <div class="font-serif text-nile-gold-bright mb-3" style="font-size:1.75rem">01</div>
+          <h4 class="font-serif text-nile-beige text-lg mb-3">In-Egypt Emergencies</h4>
+          <p class="text-gray-400 text-sm mb-4">24/7 line staffed by a bilingual medical coordinator who can reach your treating dentist within 15 minutes.</p>
+          <ul class="text-sm text-gray-300 space-y-1.5">
+            <li>✓ Direct line to your surgeon</li>
+            <li>✓ VIP transfer to partner hospital</li>
+            <li>✓ Insurance documentation support</li>
+          </ul>
+        </div>
+        <div class="bg-white/5 p-7 border border-nile-gold/20">
+          <div class="font-serif text-nile-gold-bright mb-3" style="font-size:1.75rem">02</div>
+          <h4 class="font-serif text-nile-beige text-lg mb-3">Post-Return Care</h4>
+          <p class="text-gray-400 text-sm mb-4">If you experience pain, swelling, or implant instability after returning home — you contact us first. We coordinate, not abandon.</p>
+          <ul class="text-sm text-gray-300 space-y-1.5">
+            <li>✓ Remote consultation within 72 hours</li>
+            <li>✓ Direct coordination with local dentist</li>
+            <li>✓ Written treatment documentation</li>
+          </ul>
+        </div>
+        <div class="bg-white/5 p-7 border border-nile-gold/20">
+          <div class="font-serif text-nile-gold-bright mb-3" style="font-size:1.75rem">03</div>
+          <h4 class="font-serif text-nile-beige text-lg mb-3">Travel Emergencies</h4>
+          <p class="text-gray-400 text-sm mb-4">Flight cancellation, medical emergency, or visa issue before departure — we help reschedule without penalty.</p>
+          <ul class="text-sm text-gray-300 space-y-1.5">
+            <li>✓ Free date rescheduling</li>
+            <li>✓ Coordination with airlines</li>
+            <li>✓ Written doctor's note for insurers</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ Patient Rights (merged from #rights) ═══ -->
+    <details class="science-accordion mt-16">
+      <summary>⚖️ View Patient Rights &amp; Responsibilities</summary>
+      <div class="science-acc-body">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h4 class="font-serif text-nile-beige text-xl mb-6">Your Rights</h4>
+            <ul class="space-y-4 text-gray-300 text-sm">
+              <li class="flex items-start gap-3"><span class="text-nile-gold-bright text-lg flex-shrink-0">✓</span><span><strong class="text-nile-beige">Informed Consent:</strong> Complete information about diagnosis, treatment, risks, benefits, alternatives, and outcomes — in a language you understand.</span></li>
+              <li class="flex items-start gap-3"><span class="text-nile-gold-bright text-lg flex-shrink-0">✓</span><span><strong class="text-nile-beige">Second Opinion:</strong> The right to seek a second opinion from an independent dentist before committing.</span></li>
+              <li class="flex items-start gap-3"><span class="text-nile-gold-bright text-lg flex-shrink-0">✓</span><span><strong class="text-nile-beige">Medical Records:</strong> Copies of your complete records including imaging (CBCT, X-rays) and documentation.</span></li>
+              <li class="flex items-start gap-3"><span class="text-nile-gold-bright text-lg flex-shrink-0">✓</span><span><strong class="text-nile-beige">Privacy &amp; Confidentiality:</strong> Medical information kept strictly confidential, shared only with your treating dentist.</span></li>
+              <li class="flex items-start gap-3"><span class="text-nile-gold-bright text-lg flex-shrink-0">✓</span><span><strong class="text-nile-beige">Refuse Treatment:</strong> Refuse or withdraw from any treatment at any time, without coercion or penalty.</span></li>
+              <li class="flex items-start gap-3"><span class="text-nile-gold-bright text-lg flex-shrink-0">✓</span><span><strong class="text-nile-beige">File a Complaint:</strong> File a complaint or provide feedback at any stage of your care.</span></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-serif text-nile-beige text-xl mb-6">Your Responsibilities</h4>
+            <ul class="space-y-4 text-gray-400 text-sm">
+              <li class="flex items-start gap-3"><span class="text-nile-gold-bright/70 text-lg flex-shrink-0">—</span><span><strong class="text-gray-300">Full Disclosure:</strong> Complete and accurate medical history, medications, allergies, previous surgeries, conditions.</span></li>
+              <li class="flex items-start gap-3"><span class="text-nile-gold-bright/70 text-lg flex-shrink-0">—</span><span><strong class="text-gray-300">Provide Diagnostics:</strong> Recent X-rays or CBCT scans for clinical review before treatment planning.</span></li>
+              <li class="flex items-start gap-3"><span class="text-nile-gold-bright/70 text-lg flex-shrink-0">—</span><span><strong class="text-gray-300">Follow Instructions:</strong> Pre-operative and post-operative instructions from your treating dentist.</span></li>
+              <li class="flex items-start gap-3"><span class="text-nile-gold-bright/70 text-lg flex-shrink-0">—</span><span><strong class="text-gray-300">Attend Follow-ups:</strong> Scheduled appointments in Cairo and via telehealth after return.</span></li>
+              <li class="flex items-start gap-3"><span class="text-nile-gold-bright/70 text-lg flex-shrink-0">—</span><span><strong class="text-gray-300">Oral Hygiene:</strong> Maintain good hygiene and regular check-ups as recommended.</span></li>
+              <li class="flex items-start gap-3"><span class="text-nile-gold-bright/70 text-lg flex-shrink-0">—</span><span><strong class="text-gray-300">Warranty Conditions:</strong> Comply with all warranty conditions to keep your warranty valid.</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </details>
   </div>
 </section>
 <!-- ═══════════════════ PAYMENT SECURITY — Simplified ═══════════════════ -->
@@ -3531,95 +3560,39 @@ details.science-accordion > summary:hover{
   </div>
 </section>
 
-<!-- ═══════════════════ EMERGENCY PROTOCOL ═══════════════════ -->
-<section id="emergency" class="section bg-white reveal">
-  <div class="container">
-    <div class="text-center max-w-3xl mx-auto mb-14">
-      <p class="eyebrow mb-4">Safety Commitment</p>
-      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">Emergency Protocol</h2>
-      <p class="text-nile-muted" style="font-size:1.05rem">Rare complications can happen. What matters is how they are handled. Here is our documented emergency response — because you deserve to know before you travel.</p>
-    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 stagger">
-      <div class="card card-top-gold p-7">
-        <div class="font-serif text-nile-gold mb-3" style="font-size:1.75rem">01</div>
-        <h3 class="font-serif text-nile-blue text-lg mb-3">In-Egypt Emergencies</h3>
-        <p class="text-nile-muted text-sm mb-4">24/7 line staffed by a bilingual medical coordinator who can reach your treating dentist within 15 minutes.</p>
-        <ul class="text-sm text-nile-muted space-y-1.5">
-          <li>✓ Direct line to your surgeon</li>
-          <li>✓ VIP transfer to partner hospital</li>
-          <li>✓ Insurance documentation support</li>
-        </ul>
-      </div>
-      <div class="card card-top-gold p-7">
-        <div class="font-serif text-nile-gold mb-3" style="font-size:1.75rem">02</div>
-        <h3 class="font-serif text-nile-blue text-lg mb-3">Post-Return Care</h3>
-        <p class="text-nile-muted text-sm mb-4">If you experience pain, swelling, or implant instability after returning home — you contact us first. We coordinate, not abandon.</p>
-        <ul class="text-sm text-nile-muted space-y-1.5">
-          <li>✓ Remote consultation within 72 hours</li>
-          <li>✓ Direct coordination with local dentist</li>
-          <li>✓ Written treatment documentation</li>
-        </ul>
-      </div>
-      <div class="card card-top-gold p-7">
-        <div class="font-serif text-nile-gold mb-3" style="font-size:1.75rem">03</div>
-        <h3 class="font-serif text-nile-blue text-lg mb-3">Travel Emergencies</h3>
-        <p class="text-nile-muted text-sm mb-4">Flight cancellation, medical emergency, or visa issue before departure — we help reschedule without penalty.</p>
-        <ul class="text-sm text-nile-muted space-y-1.5">
-          <li>✓ Free date rescheduling</li>
-          <li>✓ Coordination with airlines</li>
-          <li>✓ Written doctor's note for insurers</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ═══════════════════ PATIENT RIGHTS ═══════════════════ -->
-<section id="rights" class="section bg-nile-beige reveal">
-  <div class="container">
-    <div class="text-center max-w-3xl mx-auto mb-14">
-      <p class="eyebrow mb-4">Your Rights</p>
-      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">Patient Rights &amp; Responsibilities</h2>
-      <p class="text-nile-muted" style="font-size:1.05rem">We are committed to full transparency and patient autonomy at every step of your journey.</p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="card card-top-blue p-8">
-        <h3 class="font-serif text-nile-blue text-xl mb-6">Your Rights</h3>
-        <ul class="space-y-4 text-nile-muted text-sm">
-          <li class="flex items-start gap-3"><span class="text-nile-blue text-lg flex-shrink-0">✓</span><span><strong class="text-nile-blue">Informed Consent:</strong> You have the right to receive complete information about your diagnosis, proposed treatment, risks, benefits, alternatives, and expected outcomes — in a language you understand.</span></li>
-          <li class="flex items-start gap-3"><span class="text-nile-blue text-lg flex-shrink-0">✓</span><span><strong class="text-nile-blue">Second Opinion:</strong> You have the right to seek a second opinion from an independent dentist before committing to any treatment.</span></li>
-          <li class="flex items-start gap-3"><span class="text-nile-blue text-lg flex-shrink-0">✓</span><span><strong class="text-nile-blue">Medical Records:</strong> You have the right to obtain copies of your complete medical and dental records, including imaging (CBCT, X-rays) and treatment documentation.</span></li>
-          <li class="flex items-start gap-3"><span class="text-nile-blue text-lg flex-shrink-0">✓</span><span><strong class="text-nile-blue">Privacy &amp; Confidentiality:</strong> Your medical information will be kept strictly confidential and shared only with your treating dentist.</span></li>
-          <li class="flex items-start gap-3"><span class="text-nile-blue text-lg flex-shrink-0">✓</span><span><strong class="text-nile-blue">Refuse Treatment:</strong> You have the right to refuse or withdraw from any treatment at any time, without coercion or penalty.</span></li>
-          <li class="flex items-start gap-3"><span class="text-nile-blue text-lg flex-shrink-0">✓</span><span><strong class="text-nile-blue">File a Complaint:</strong> You have the right to file a complaint or provide feedback at any stage of your care.</span></li>
-        </ul>
-      </div>
-
-      <div class="bg-gray-50 p-8 border-t-4 border-gray-300">
-        <h3 class="font-serif text-gray-500 text-xl mb-6">Your Responsibilities</h3>
-        <ul class="space-y-4 text-gray-500 text-sm">
-          <li class="flex items-start gap-3"><span class="text-gray-400 text-lg flex-shrink-0">✗</span><span><strong>Full Disclosure:</strong> You must provide complete and accurate medical history, including all medications, allergies, previous surgeries, and existing conditions.</span></li>
-          <li class="flex items-start gap-3"><span class="text-gray-400 text-lg flex-shrink-0">✗</span><span><strong>Provide Diagnostics:</strong> You must provide recent X-rays or CBCT scans for clinical review before treatment planning.</span></li>
-          <li class="flex items-start gap-3"><span class="text-gray-400 text-lg flex-shrink-0">✗</span><span><strong>Follow Instructions:</strong> You must follow pre-operative and post-operative instructions provided by your treating dentist.</span></li>
-          <li class="flex items-start gap-3"><span class="text-gray-400 text-lg flex-shrink-0">✗</span><span><strong>Attend Follow-ups:</strong> You must attend scheduled follow-up appointments, both in Cairo and via telehealth after returning home.</span></li>
-          <li class="flex items-start gap-3"><span class="text-gray-400 text-lg flex-shrink-0">✗</span><span><strong>Oral Hygiene:</strong> You must maintain good oral hygiene and attend regular dental check-ups as recommended.</span></li>
-          <li class="flex items-start gap-3"><span class="text-gray-400 text-lg flex-shrink-0">✗</span><span><strong>Warranty Conditions:</strong> You must comply with all warranty conditions to keep your warranty valid.</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════ RESULTS ═══════════════════ -->
+<!-- ═══════════════════ RESULTS (Merged: Stats + Photos) ═══════════════════ -->
 <section id="results" class="section reveal" style="background:linear-gradient(180deg,#FBFAF7 0%,#F6F3EE 50%,#EDE6DA 100%)">
   <div class="container">
-    <div class="text-center mb-16">
+    <div class="text-center mb-12">
       <p class="eyebrow mb-4">Real Results</p>
-      <h2 class="text-nile-blue mb-6" style="font-size:clamp(1.75rem,4vw,2.5rem)">Before &amp; After</h2>
-      <p class="text-nile-muted max-w-2xl mx-auto">Documented results from our partner clinics. All images shared with patient consent.</p>
+      <h2 class="text-nile-blue mb-6" style="font-size:clamp(1.75rem,4vw,2.5rem)">Documented Outcomes</h2>
+      <p class="text-nile-muted max-w-2xl mx-auto">Before/after photos shared with patient consent — paired with 5-year clinical data from our partner clinics.</p>
     </div>
+
+    <!-- ═══ Clinical Stats (merged from #outcomes) ═══ -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 stagger">
+      <div class="card card-top-gold p-8 text-center">
+        <h3 class="font-serif text-nile-blue text-lg mb-3">Implant Success Rate</h3>
+        <p class="text-nile-muted text-sm mb-2"><strong class="text-nile-blue text-2xl">94.6%</strong></p>
+        <p class="text-xs text-nile-muted">Overall success rate across all implant systems, based on 5-year follow-up data from partner clinics.</p>
+      </div>
+      <div class="card card-top-gold p-8 text-center">
+        <h3 class="font-serif text-nile-blue text-lg mb-3">All-on-4 Survival</h3>
+        <p class="text-nile-muted text-sm mb-2"><strong class="text-nile-blue text-2xl">99.2%</strong></p>
+        <p class="text-xs text-nile-muted">Short-term survival rate for All-on-4 full-arch restorations. Long-term (5+ years): <strong>97.8%</strong>.</p>
+      </div>
+      <div class="card card-top-gold p-8 text-center">
+        <h3 class="font-serif text-nile-blue text-lg mb-3">Patient Satisfaction</h3>
+        <p class="text-nile-muted text-sm mb-2"><strong class="text-nile-blue text-2xl">4.9/5.0</strong></p>
+        <p class="text-xs text-nile-muted">Average patient satisfaction score across international patients, based on post-treatment surveys.</p>
+      </div>
+    </div>
+
+    <p class="text-center mb-16 text-xs text-nile-muted italic max-w-3xl mx-auto">
+      These outcomes are specific to our partner clinics and may differ from global averages. Individual results vary based on case complexity, patient compliance, and other factors.
+    </p>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
       <!-- Case 1 -->
