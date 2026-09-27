@@ -1321,6 +1321,7 @@ main#main > section#founder                      { order: 3; }
 main#main > section#packages                     { order: 4; }
 main#main > section#results                      { order: 5; }
 main#main > section#reviews                      { order: 6; }
+main#main > section#fears                        { order: 6; }  /* ← بيظهر بعد #reviews في DOM */
 
 
 /* 4 — Reassurance: Guarantees + How it works */
@@ -1371,7 +1372,13 @@ main#main > section#faq                          { order: 36; }
 main#main > section#consult                      { order: 37; }
 
 /* ═══════════ DISABLE CONTENT-VISIBILITY during reorder (fixes layout bugs) ═══════════ */
+main#main{
+  display: flex;
+  flex-direction: column;
+}
 main#main > section{
+  flex-shrink: 0;                    /* ← يمنع الانضغاط */
+  width: 100%;                       /* ← يمنع الـ flex من تصغير العرض */
   content-visibility: visible !important;
   contain-intrinsic-size: auto !important;
 }
@@ -2086,9 +2093,12 @@ main#main > section{
     <div class="text-center max-w-3xl mx-auto mb-14">
       <p class="eyebrow eyebrow-light mb-4">Clinical Excellence</p>
       <h2 class="mb-5" style="font-size:clamp(1.75rem,4vw,2.75rem)">The Science Behind Your Smile</h2>
-      <p class="text-gray-300" style="font-size:1.05rem">Every decision is backed by peer-reviewed clinical evidence. Here is what the data shows about the technologies and materials we use.</p>
+      <p class="text-gray-300" style="font-size:1.05rem">Every decision is backed by peer-reviewed clinical evidence. Choose a topic below — or read all.</p>
     </div>
 
+    <details class="science-accordion">
+      <summary>🔬 Implant Systems: Data-Driven Comparison</summary>
+      <div class="science-acc-body">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-14">
       <div>
         <h3 class="font-serif text-nile-beige mb-6" style="font-size:1.5rem">Implant Systems: Data-Driven Comparison</h3>
@@ -2166,8 +2176,46 @@ main#main > section{
       </div>
       <p class="text-gray-500 text-xs italic mt-6 text-center">Digital workflows reduce surgical time up to 40% and improve implant accuracy up to 3× (Journal of Oral Implantology, 2024).</p>
     </div>
+    </div>
+    </details>
   </div>
 </section>
+
+<style>
+.science-tab{
+  padding:.6rem 1.25rem;
+  font-family:'Montserrat',sans-serif;
+  font-size:.68rem;
+  font-weight:600;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:#C9A96E;
+  background:transparent;
+  border:1px solid rgba(201,169,110,.35);
+  border-radius:100px;
+  cursor:pointer;
+  transition:all .35s cubic-bezier(.22,1,.36,1);
+}
+.science-panel{
+  display: none;
+  animation: scienceFadeIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.science-panel.active{
+  display: block;
+}
+@keyframes scienceFadeIn{
+  from{opacity: 0; transform: translateY(8px)}
+  to{opacity: 1; transform: translateY(0)}
+}
+.science-tab:hover{background:rgba(201,169,110,.1);border-color:#C9A96E}
+.science-tab.active{
+  background:linear-gradient(135deg,#AE9164,#E8C88A,#AE9164);
+  color:#1F2A36;
+  border-color:#E8C88A;
+  box-shadow:0 6px 20px rgba(174,145,100,.4);
+}
+</style>
+
 <!-- ═══════════════════ BONE GRAFT MATERIALS TABLE ═══════════════════ -->
 <section class="section bg-nile-blue text-white reveal">
   <div class="container">
@@ -4737,123 +4785,25 @@ for(let i=0;i<particleCount;i++){
     track.scrollBy({left: scrollAmount, behavior: 'smooth'});
   });
 
-  // ✅ Loop تلقائي كل 5 ثواني
   let autoPlay = setInterval(autoScroll, 5000);
 
   function autoScroll(){
     const maxScroll = track.scrollWidth - track.clientWidth;
     if(track.scrollLeft >= maxScroll - 10){
-      // رجع للبداية
       track.scrollTo({left: 0, behavior: 'smooth'});
     } else {
       track.scrollBy({left: scrollAmount, behavior: 'smooth'});
     }
   }
 
-  // وقف الأوتوبلاي عند اللمس/الهوفر
   track.addEventListener('mouseenter', () => clearInterval(autoPlay));
   track.addEventListener('touchstart', () => clearInterval(autoPlay), {passive:true});
 
-  // استئناف بعد شوية
   track.addEventListener('mouseleave', () => {
     clearInterval(autoPlay);
     autoPlay = setInterval(autoScroll, 5000);
   });
-    /* ═════════ 18. STRATEGIC SECTION REORDER ═════════ */
-  (function(){
-    const main = document.getElementById('main');
-    if(!main) return;
-
-    // ⚡ الترتيب الاستراتيجي — القيمة أولاً، ثم الطمأنة، ثم التفاصيل
-    const order = [
-      // 1. Attention & Trust
-      '.hero',
-      '#trust',
-
-      // 2. Authority
-      '#founder',
-
-      // 3. VALUE FIRST — أقوى 3 أقسام تحويلية
-      '#packages',
-      '#results',
-      '#reviews',
-
-      // 4. Reassurance
-      '#fears',
-      '#guarantees',
-
-      // 5. How it works + Timelines (متتالية منطقية)
-      // هنستخدم text match لأن مفيش IDs
-      '__text__:How It Works',
-      '__text__:Your Complete Journey',
-      '__text__:Your 10-Day Journey',
-      '__text__:What to Expect',
-
-      // 6. Destination & Global
-      '__text__:Why Egypt?',
-      '__text__:Our International Patients',
-
-      // 7. Clinical depth
-      '__text__:Our Documented Results',
-      '#comfort',
-      '__text__:Our Technology Partners',
-      '#science',
-      '__text__:Bone Graft Materials',
-      '__text__:Crown & Prosthesis Materials',
-      '__text__:Clear Aligners vs. Traditional Braces',
-      '__text__:Our Clinical Technology Stack',
-
-      // 8. Transparency
-      '__text__:Risks & Complications',
-      '__text__:Travel & Logistics',
-      '__text__:Trained at the World',
-      '__text__:Why Egypt Instead of Turkey',
-      '__text__:Itemized Clinical Fees',
-      '__text__:Your Money Protected',
-      '__text__:Emergency Protocol',
-      '__text__:Patient Rights',
-
-      // 9. Social proof
-      '__text__:Case Studies',
-      '__text__:Verified Reviews',
-
-      // 10. Lifestyle
-      '#discover-egypt',
-
-      // 11. Location & Audience
-      '__text__:Our Partner Clinic Location',
-      '__text__:Who This Service Is For',
-      '#team',
-
-      // 12. Final conversion
-      '#faq',
-      '#consult'
-    ];
-
-    // حرّك كل سكشن للآخر بنفس ترتيب الـ array = الترتيب الجديد
-    order.forEach(key => {
-      let el = null;
-      if(key.startsWith('__text__:')){
-        const text = key.replace('__text__:', '');
-        // ابحث عن section فيه h2 فيه النص المطلوب
-        const sections = main.querySelectorAll(':scope > section');
-        for(const s of sections){
-          const h2 = s.querySelector('h2, h1');
-          if(h2 && h2.textContent.includes(text)){
-            el = s;
-            break;
-          }
-        }
-      } else {
-        el = main.querySelector(':scope > ' + key);
-      }
-      if(el) main.appendChild(el);
-    });
-
-    // أي section مش موجودة في القائمة = سيبها في مكانها (مش هتتنقل)
-  })();
-})();
+})();   /* ← السطر الناقص */
 </script>
-
 </body>
 </html>
