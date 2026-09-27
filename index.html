@@ -1329,6 +1329,9 @@ tailwind.config = {
 /* ═══════════ STRATEGIC ORDER — V5 (Conversion-Optimized) ═══════════ */
 /* Psychology: Attention → Authority → Reassurance → Desire → Price → Objections → Process → Depth → Context → Close */
 
+/* ═══════════ STRATEGIC ORDER — V6 (Cohesion-Optimized) ═══════════ */
+/* Psychology: Attention → Authority → Desire → Price → Reassurance → Objections → Process → Depth → Context → Close */
+
 /* 🎬 ATTENTION */
 main#main > section.hero                         { order: 1; }
 main#main > section#trust-stats                  { order: 2; }
@@ -1338,21 +1341,21 @@ main#main > section#trust                        { order: 3; }
 main#main > section#founder                      { order: 4; }
 main#main > section#team                         { order: 5; }
 
-/* 🛡️ REASSURANCE (قبل الأسعار — يطمن العميل) */
-main#main > section#comfort                      { order: 6; }
-main#main > section#who-for                      { order: 7; }
+/* 💎 DESIRE (النتائج قبل الأسعار) */
+main#main > section#results                      { order: 6; }
+main#main > section#reviews                      { order: 7; }
 
-/* 💎 DESIRE */
-main#main > section#results                      { order: 8; }
-main#main > section#reviews                      { order: 9; }
+/* 💰 PRICE — كل حاجة عن السعر والدفع جنب بعض */
+main#main > section#packages                     { order: 8; }
+main#main > section#estimator                    { order: 9; }
+main#main > section#itemized                     { order: 10; }
+main#main > section#payment                      { order: 11; }
+main#main > section#comparison                   { order: 12; }
+main#main > section#travel-addons                { order: 13; }
 
-/* 💰 PRICE & TRANSPARENCY */
-main#main > section#packages                     { order: 10; }
-main#main > section#estimator                    { order: 11; }
-main#main > section#itemized                     { order: 12; }
-main#main > section#payment                      { order: 13; }
-main#main > section#comparison                   { order: 14; }
-main#main > section#travel-addons                { order: 15; }
+/* 🛡️ REASSURANCE (قبل الاعتراضات — يطمن العميل) */
+main#main > section#who-for                      { order: 14; }
+main#main > section#comfort                      { order: 15; }
 
 /* 😌 OBJECTIONS */
 main#main > section#fears                        { order: 16; }
@@ -1375,9 +1378,9 @@ main#main > section#orthodontics                 { order: 26; }
 main#main > section#why-egypt                    { order: 27; }
 main#main > section#academic                     { order: 28; }
 main#main > section#global-map                   { order: 29; }
-main#main > section#location                     { order: 30; }
 
-/* 📜 LOGISTICS */
+/* 📜 LOGISTICS (Location + Travel مع بعض) */
+main#main > section#location                     { order: 30; }
 main#main > section#travel                       { order: 31; }
 
 /* 🏝️ LIFESTYLE */
