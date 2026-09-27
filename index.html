@@ -313,7 +313,8 @@ img{
     padding-bottom:76px;
   }
   img,svg,iframe,video{max-width:100%;height:auto;display:block}
-  h1,h2,h3,h4{font-family:'Playfair Display',Georgia,serif;line-height:1.15;letter-spacing:-0.01em}
+  h1,h2,h3,h4{font-family:'Playfair Display',Georgia,serif;line-height:1.15;letter-spacing:-0.02em}
+  h1{letter-spacing:-0.025em}
   a{color:inherit;text-decoration:none}
   button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
   
@@ -397,7 +398,7 @@ tailwind.config = {
   "image":"https://images.unsplash.com/photo-1539650116574-8efeb43e2b45?auto=format&fit=crop&q=80&w=1200",
   "telephone":"+201503308333",
   "email":"contact@nilesmileconcierge.com",
-  "priceRange":"$2,800-$25,000",
+  "priceRange":"$3,900-$25,000",
   "currenciesAccepted":"USD, CAD, GBP, EUR, EGP",
   "paymentAccepted":"Cash, Credit Card, Bank Transfer, Wise",
   "areaServed":[
@@ -1160,6 +1161,9 @@ tailwind.config = {
   @media(min-width:768px){
     .float-wa{bottom:1.5rem;right:1.5rem;width:64px;height:64px}
   }
+  @media(max-width:767px){
+    .float-wa{display:none}
+  }
 
   /* ============ STICKY MOBILE BAR ============ */
   .sticky-mobile{position:fixed;bottom:0;left:0;right:0;z-index:48;background:#4F6070;border-top:1px solid rgba(174,145,100,.35);padding:.75rem;display:flex;gap:.6rem;box-shadow:0 -4px 24px rgba(0,0,0,.2)}
@@ -1326,6 +1330,7 @@ tailwind.config = {
 
 /* 🎬 ATTENTION */
 main#main > section.hero                         { order: 1; }
+main#main > section#trust-stats                  { order: 1.5; }
 main#main > section#trust                        { order: 2; }
 
 /* 🏛️ AUTHORITY */
@@ -1333,6 +1338,8 @@ main#main > section#founder                      { order: 3; }
 
 /* 💰 VALUE */
 main#main > section#packages                     { order: 4; }
+main#main > section#travel-addons                { order: 4.5; }
+main#main > section#estimator                    { order: 4.7; }
 main#main > section#results                      { order: 5; }
 main#main > section#reviews                      { order: 6; }
 
@@ -1376,6 +1383,7 @@ main#main > section#trust-media                  { order: 32; }
 
 /* 🏝️ LIFESTYLE */
 main#main > section#discover-egypt               { order: 33; }
+main#main > section#curated-tours                { order: 33.5; }
 
 /* 📍 LOGISTICS */
 main#main > section#location                     { order: 34; }
@@ -1400,101 +1408,214 @@ main#main > section{
 </style>
   
 <style>
-/* ═══════════ QUICK ACTION BAR — Premium Pills ═══════════ */
+/* ═══════════ QUICK ACTION BAR — Premium Redesign V2 ═══════════ */
 .quick-bar{
   position:fixed;
   top:0;left:0;right:0;
-  z-index:99;
-  background:rgba(246,243,238,0.98);
-  backdrop-filter:blur(20px) saturate(1.2);
-  -webkit-backdrop-filter:blur(20px) saturate(1.2);
-  border-bottom:1px solid rgba(174,145,100,0.18);
-  padding:.6rem .75rem;
-  display:none;
+  z-index:101;
+  padding:.65rem 1rem;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:.4rem;
   overflow-x:auto;
   overflow-y:hidden;
   -webkit-overflow-scrolling:touch;
   scrollbar-width:none;
-  justify-content:center;
-  align-items:center;
-  gap:.5rem;
-  transition:transform .4s cubic-bezier(.22,1,.36,1);
+  
+  /* Glass morphism + subtle gold radial accent */
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(232,200,138,.10) 0%, transparent 65%),
+    linear-gradient(180deg, rgba(251,250,247,.985) 0%, rgba(246,243,238,.96) 100%);
+  backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  
+  border-bottom:1px solid rgba(174,145,100,.20);
+  
+  /* Layered depth shadows */
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.85) inset,
+    0 2px 6px rgba(31,42,54,.04),
+    0 8px 24px rgba(31,42,54,.06),
+    0 20px 48px rgba(31,42,54,.05);
+  
+  /* Entrance animation */
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-100%);
+  transition:
+    transform .6s cubic-bezier(.16,1,.3,1),
+    opacity .4s cubic-bezier(.16,1,.3,1),
+    visibility 0s linear .6s;
 }
 .quick-bar::-webkit-scrollbar{display:none}
-.quick-bar.show{display:flex}
+.quick-bar.show{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+  transition:
+    transform .6s cubic-bezier(.16,1,.3,1),
+    opacity .4s cubic-bezier(.16,1,.3,1),
+    visibility 0s linear 0s;
+}
 @media(max-width:1023px){
-  .quick-bar.show{justify-content:flex-start}
+  .quick-bar.show{
+    justify-content:flex-start;
+    padding-left:1rem;
+    padding-right:1rem;
+  }
 }
 
-/* ─── Individual Pill ─── */
+/* ─── Individual Chip ─── */
 .quick-chip{
+  position:relative;
   flex-shrink:0;
   display:inline-flex;
   align-items:center;
-  gap:.45rem;
-  padding:.5rem 1rem;
+  gap:.5rem;
+  padding:.55rem 1.05rem;
   font-family:'Montserrat',sans-serif;
-  font-size:.7rem;
+  font-size:.68rem;
   font-weight:600;
-  letter-spacing:.1em;
+  letter-spacing:.09em;
   text-transform:uppercase;
-  color:#4F6070;
-  background:#FFFFFF;
-  border:1px solid rgba(79,96,112,.12);
+  color:#3A4855;
+  background:transparent;
+  border:1px solid transparent;
   border-radius:100px;
   white-space:nowrap;
   cursor:pointer;
-  transition:all .35s cubic-bezier(.22,1,.36,1);
-  box-shadow:0 1px 3px rgba(79,96,112,.05);
+  overflow:hidden;
+  isolation:isolate;
+  transition:all .4s cubic-bezier(.22,1,.36,1);
+}
+.quick-chip::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:linear-gradient(135deg, rgba(174,145,100,.10) 0%, rgba(232,200,138,.14) 100%);
+  opacity:0;
+  transform:scale(.85);
+  transition:
+    opacity .35s ease,
+    transform .45s cubic-bezier(.22,1,.36,1);
+  z-index:-1;
+}
+.quick-chip:hover::before,
+.quick-chip:focus-visible::before,
+.quick-chip:active::before{
+  opacity:1;
+  transform:scale(1);
 }
 .quick-chip svg{
-  width:14px;
-  height:14px;
+  width:15px;
+  height:15px;
   stroke:currentColor;
   stroke-width:1.8;
   fill:none;
   flex-shrink:0;
-  transition:transform .3s ease;
+  transition:
+    transform .45s cubic-bezier(.34,1.56,.64,1),
+    color .3s ease;
 }
-.quick-chip:hover,.quick-chip:active{
-  background:#4F6070;
-  color:#F6F3EE;
-  border-color:#4F6070;
-  transform:translateY(-2px);
-  box-shadow:0 6px 18px rgba(79,96,112,.28);
+.quick-chip:hover,
+.quick-chip:focus-visible{
+  color:#1F2A36;
+  border-color:rgba(174,145,100,.30);
+  transform:translateY(-1px);
 }
 .quick-chip:hover svg{
-  transform:scale(1.12);
+  transform:scale(1.14);
+  color:#AE9164;
+}
+.quick-chip:active{
+  transform:translateY(0) scale(.97);
+  transition-duration:.12s;
 }
 
-/* ─── Primary CTA ─── */
-.quick-chip.primary{
-  background:linear-gradient(135deg,#AE9164 0%,#C9A96E 50%,#AE9164 100%);
-  color:#FFFFFF;
-  border-color:#AE9164;
-  font-weight:700;
-  letter-spacing:.12em;
-  box-shadow:0 4px 14px rgba(174,145,100,.35);
-}
-.quick-chip.primary:hover{
-  background:linear-gradient(135deg,#C9A96E 0%,#E8C88A 50%,#C9A96E 100%);
+/* ─── Active section indicator ─── */
+.quick-chip.active{
   color:#1F2A36;
-  box-shadow:0 8px 24px rgba(174,145,100,.5);
-  transform:translateY(-2px);
+  border-color:rgba(174,145,100,.45);
 }
+.quick-chip.active::before{
+  opacity:1;
+  transform:scale(1);
+}
+.quick-chip.active svg{
+  color:#AE9164;
+}
+
+/* ─── Primary CTA (Free Review) ─── */
+.quick-chip.primary{
+  background:linear-gradient(
+    120deg,
+    #AE9164 0%,
+    #C9A96E 30%,
+    #E8C88A 50%,
+    #C9A96E 70%,
+    #AE9164 100%
+  );
+  background-size:250% auto;
+  color:#FFFFFF;
+  border-color:rgba(174,145,100,.55);
+  padding:.55rem 1.15rem .55rem 1rem;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.40) inset,
+    0 -1px 0 rgba(138,114,72,.30) inset,
+    0 4px 14px rgba(174,145,100,.35);
+  text-shadow:0 1px 0 rgba(31,42,54,.18);
+  animation:primaryShimmer 5s ease-in-out infinite;
+}
+.quick-chip.primary:hover,
+.quick-chip.primary:focus-visible{
+  color:#1F2A36;
+  border-color:#E8C88A;
+  transform:translateY(-1px) scale(1.02);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.50) inset,
+    0 -1px 0 rgba(138,114,72,.25) inset,
+    0 8px 24px rgba(174,145,100,.50),
+    0 0 0 3px rgba(174,145,100,.15);
+  text-shadow:none;
+}
+.quick-chip.primary:hover svg{
+  color:#1F2A36;
+}
+@keyframes primaryShimmer{
+  0%, 70%{background-position:0% center}
+  100%{background-position:200% center}
+}
+
+/* Live pulse dot */
 .quick-chip .live-dot{
-  width:6px;height:6px;
+  width:6px;
+  height:6px;
   background:#FFFFFF;
   border-radius:50%;
-  animation:quickDot 1.8s ease-in-out infinite;
+  flex-shrink:0;
+  box-shadow:0 0 0 0 rgba(255,255,255,.7);
+  animation:quickDot 2s ease-in-out infinite;
+}
+.quick-chip.primary:hover .live-dot{
+  background:#1F2A36;
 }
 @keyframes quickDot{
-  0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:.4;transform:scale(.7)}
+  0%,100%{
+    opacity:1;
+    transform:scale(1);
+    box-shadow:0 0 0 0 rgba(255,255,255,.7);
+  }
+  50%{
+    opacity:.55;
+    transform:scale(.82);
+    box-shadow:0 0 0 5px rgba(255,255,255,0);
+  }
 }
+
 @media(max-width:1023px){
-  .quick-bar.show{display:flex}
-  body.quickbar-active .site-header{top:44px}
+  body.quickbar-active .site-header{top:54px}
 }
 /* ═══════════ CLINIC PHOTOS — GRID on DESKTOP, CAROUSEL on MOBILE ═══════════ */
 .clinic-desktop-grid{
@@ -1662,27 +1783,226 @@ main#main > section{
 .clinic-prev{left:-8px}
 .clinic-next{right:-8px}
 @media(max-width:768px){.clinic-nav{display:none}}
+
+/* ═══════════ SECTION EXPANDER — Quick Win ═══════════ */
+.section-expander{
+  margin-top:2rem;
+  border:1px solid rgba(174,145,100,.2);
+  border-radius:4px;
+  background:#fff;
+  overflow:hidden;
+  box-shadow:0 4px 20px rgba(79,96,112,.06);
+}
+.section-expander > summary{
+  padding:1.5rem 2rem;
+  cursor:pointer;
+  list-style:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.75rem;
+  font-family:'Montserrat',sans-serif;
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#4F6070;
+  background:linear-gradient(135deg,rgba(246,243,238,.7),rgba(174,145,100,.06));
+  transition:all .35s cubic-bezier(.22,1,.36,1);
+  user-select:none;
+}
+.section-expander > summary::-webkit-details-marker{display:none}
+.section-expander > summary::marker{display:none}
+.section-expander > summary:hover{
+  background:linear-gradient(135deg,rgba(174,145,100,.12),rgba(232,200,138,.08));
+  color:#AE9164;
+}
+.section-expander > summary::after{
+  content:'▾';
+  font-size:1rem;
+  line-height:1;
+  transition:transform .4s cubic-bezier(.22,1,.36,1);
+  color:#AE9164;
+}
+.section-expander[open] > summary::after{
+  transform:rotate(180deg);
+}
+.section-expander[open] > summary{
+  border-bottom:1px solid rgba(174,145,100,.15);
+}
+.section-expander > .expander-content{
+  padding:2.5rem 1.5rem;
+  animation:expanderIn .5s cubic-bezier(.22,1,.36,1);
+}
+@keyframes expanderIn{
+  from{opacity:0;transform:translateY(-12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@media(max-width:640px){
+  .section-expander > .expander-content{padding:1.5rem 1rem}
+  .section-expander > summary{padding:1.25rem 1rem;font-size:.65rem}
+}
+/* ═══════════ SCIENCE ACCORDION — Dark Theme ═══════════ */
+details.science-accordion{
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(174,145,100,.35);
+  border-radius: 4px;
+  margin-top: 1rem;
+  overflow: hidden;
+  transition: all .4s cubic-bezier(.22,1,.36,1);
+}
+details.science-accordion[open]{
+  border-color: rgba(232,200,138,.6);
+  background: rgba(255,255,255,.06);
+  box-shadow: 0 12px 40px rgba(0,0,0,.25);
+}
+details.science-accordion > summary{
+  padding: 1.5rem 1.75rem;
+  color: #E8C88A;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  background: linear-gradient(135deg, rgba(174,145,100,.08), rgba(232,200,138,.04));
+  border-bottom: 1px solid transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  list-style: none;
+  transition: color .3s, background .3s;
+}
+details.science-accordion > summary::-webkit-details-marker{display:none}
+details.science-accordion > summary::after{
+  content:'+';
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(232,200,138,.4);
+  color: #E8C88A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  line-height: 1;
+  transition: all .4s cubic-bezier(.34,1.56,.64,1);
+}
+details.science-accordion[open] > summary{
+  border-bottom: 1px solid rgba(174,145,100,.25);
+  color: #FFFFFF;
+}
+details.science-accordion[open] > summary::after{
+  transform: rotate(45deg);
+  background: linear-gradient(135deg,#AE9164,#E8C88A);
+  color: #1F2A36;
+  border-color: #E8C88A;
+}
+details.science-accordion > summary:hover{
+  color: #FFFFFF;
+  background: linear-gradient(135deg, rgba(174,145,100,.15), rgba(232,200,138,.08));
+}
+.science-acc-body{
+  padding: 2.5rem 1.75rem;
+  animation: scienceAccIn .5s cubic-bezier(.22,1,.36,1);
+}
+@keyframes scienceAccIn{
+  from{opacity:0; transform: translateY(-10px)}
+  to{opacity:1; transform: translateY(0)}
+}
+@media(max-width:640px){
+  details.science-accordion > summary{padding:1.15rem 1.25rem; font-size:1rem}
+  .science-acc-body{padding:1.5rem 1.25rem}
+}
+
+/* ═══════════ STICKY TOC (Desktop only) ═══════════ */
+.sticky-toc{
+  position:fixed;
+  right:1rem;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:40;
+  display:none;
+  flex-direction:column;
+  gap:.35rem;
+  padding:.75rem .5rem;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(174,145,100,.2);
+  border-radius:100px;
+  box-shadow:0 8px 32px rgba(79,96,112,.08);
+  opacity:0;
+  transition:opacity .4s ease,transform .4s cubic-bezier(.22,1,.36,1);
+  pointer-events:none;
+}
+.sticky-toc.show{
+  opacity:1;
+  pointer-events:auto;
+}
+@media(min-width:1024px){
+  .sticky-toc{display:flex}
+}
+.toc-dot{
+  width:10px;height:10px;
+  border-radius:50%;
+  background:rgba(174,145,100,.3);
+  position:relative;
+  cursor:pointer;
+  transition:all .3s cubic-bezier(.34,1.56,.64,1);
+}
+.toc-dot:hover{
+  transform:scale(1.4);
+  background:#AE9164;
+}
+.toc-dot.active{
+  background:#AE9164;
+  transform:scale(1.3);
+  box-shadow:0 0 12px rgba(174,145,100,.6);
+}
+.toc-dot::after{
+  content:attr(data-label);
+  position:absolute;
+  right:20px;
+  top:50%;
+  transform:translateY(-50%) translateX(6px);
+  background:#1F2A36;
+  color:#fff;
+  font-family:'Montserrat',sans-serif;
+  font-size:.6rem;
+  font-weight:600;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:.35rem .75rem;
+  border-radius:4px;
+  white-space:nowrap;
+  opacity:0;
+  pointer-events:none;
+  transition:all .3s cubic-bezier(.22,1,.36,1);
+}
+.toc-dot:hover::after{
+  opacity:1;
+  transform:translateY(-50%) translateX(0);
+}
 </style>
+
 </head>
 <body>
 
 <!-- ═══════════════════ QUICK ACTION BAR ═══════════════════ -->
-<div class="quick-bar" id="quickBar">
-  <a href="#packages" class="quick-chip">
-    <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-    Prices
+<div class="quick-bar" id="quickBar" role="navigation" aria-label="Quick actions">
+  <a href="#packages" class="quick-chip" data-section="packages">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    <span>Prices</span>
   </a>
-  <a href="#founder" class="quick-chip">
-    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-    Doctor
+  <a href="#founder" class="quick-chip" data-section="founder">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span>Founder</span>
   </a>
-  <a href="#guarantees" class="quick-chip">
-    <svg viewBox="0 0 24 24"><path d="M12 2l9 4v6c0 5.5-3.8 10.7-9 12-5.2-1.3-9-6.5-9-12V6l9-4z"/><path d="M9 12l2 2 4-4"/></svg>
-    Warranty
+  <a href="#guarantees" class="quick-chip" data-section="guarantees">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 4v6c0 5.5-3.8 10.7-9 12-5.2-1.3-9-6.5-9-12V6l9-4z"/><path d="M9 12l2 2 4-4"/></svg>
+    <span>Warranty</span>
   </a>
-  <a href="#consult" class="quick-chip primary">
-    <span class="live-dot"></span>
-    Free Review
+  <a href="#consult" class="quick-chip primary" data-section="consult">
+    <span class="live-dot" aria-hidden="true"></span>
+    <span>Free Review</span>
   </a>
 </div>
 
@@ -1744,6 +2064,8 @@ main#main > section{
     <div class="max-w-7xl mx-auto px-5 py-6 flex flex-col gap-1">
       <!-- Top 4 — مهمة -->
       <a href="#packages" class="nav-link py-4 border-b border-nile-gold/10">Pricing &amp; Packages</a>
+      <a href="#travel-addons" class="nav-link py-4 border-b border-nile-gold/10">Travel Add-Ons</a>
+      <a href="#curated-tours" class="nav-link py-4 border-b border-nile-gold/10">Curated Tours</a>
       <a href="#results" class="nav-link py-4 border-b border-nile-gold/10">Before &amp; After</a>
       <a href="#founder" class="nav-link py-4 border-b border-nile-gold/10">Meet the Founder</a>
       <a href="#reviews" class="nav-link py-4 border-b border-nile-gold/10">Founding Patients</a>
@@ -1774,12 +2096,12 @@ main#main > section{
 
   <div class="hero-content">
     <p class="eyebrow eyebrow-light mb-5">Clinician-Reviewed Medical Tourism | Cairo, Egypt</p>
-    <h1 class="text-white mb-6" style="font-size:clamp(2rem,6vw,4.2rem)">
+    <h1 class="text-white mb-6" style="font-size:clamp(1.75rem,5vw,3.5rem);line-height:1.05;letter-spacing:-0.025em">
       World-Class Dental Restoration
       <span class="block gold-text italic font-normal" style="font-size:clamp(1.4rem,3.6vw,2.6rem);margin-top:1rem">Crafted in Egypt. Trusted Worldwide.</span>
     </h1>
     <p class="text-gray-200 mb-8 mx-auto" style="max-width:42rem;font-size:clamp(1rem,2vw,1.15rem);font-weight:300;line-height:1.8">
-      Premium All-on-4 implants, monolithic zirconia crowns, and full-mouth restoration at <strong class="text-white font-medium">up to 85% less</strong> than US, Canadian, and UK prices - with documented guarantees and lifetime implant warranty.
+      Premium All-on-4 implants, monolithic zirconia crowns, and full-mouth restoration at <strong class="text-white font-medium">up to 80% less</strong> than US, Canadian, and UK prices - with documented guarantees and lifetime implant warranty.
     </p>
     <p class="mb-10 text-nile-gold-bright font-medium" style="font-size:.95rem">
       Founded by a licensed dentist. Every treatment plan is clinically reviewed - <em class="italic">never sold</em>.
@@ -1787,10 +2109,11 @@ main#main > section{
       <span class="text-gray-300 text-xs">Same implant brands, same materials, same standards - different location.</span>
     </p>
 
-    <div class="flex flex-col sm:flex-row gap-3 justify-center" style="max-width:42rem;margin:0 auto">
+    <div class="flex flex-col sm:flex-row gap-3 justify-center flex-wrap" style="max-width:52rem;margin:0 auto">
       <a href="#consult" class="btn btn-gold shine-auto">Request Clinical Review</a>
       <a href="#packages" class="btn btn-outline">View Packages</a>
       <button onclick="openModal('journeyModal')" class="btn btn-outline">See Your Journey</button>
+      <a href="Nile-Smile-Guide-2026.pdf" download class="btn btn-outline">📄 Download Full Guide</a>
     </div>
 
     <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-12 text-gray-300" style="font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500">
@@ -1805,6 +2128,38 @@ main#main > section{
       <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
     </svg>
   </a>
+</section>
+
+<!-- ═══════════════════ TRUST STATS ═══════════════════ -->
+<section id="trust-stats" class="section bg-white reveal" style="padding:3.5rem 1.25rem">
+  <div class="container">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 stagger">
+      <div class="text-center">
+        <p class="font-serif text-nile-gold" style="font-size:clamp(2rem,5vw,3.5rem);line-height:1">
+          <span class="counter" data-target="8">0</span><span>+</span>
+        </p>
+        <p class="text-nile-blue text-xs md:text-sm uppercase tracking-widest font-semibold mt-3">Years Experience</p>
+      </div>
+      <div class="text-center">
+        <p class="font-serif text-nile-gold" style="font-size:clamp(2rem,5vw,3.5rem);line-height:1">
+          <span class="counter" data-target="500">0</span><span>+</span>
+        </p>
+        <p class="text-nile-blue text-xs md:text-sm uppercase tracking-widest font-semibold mt-3">Procedures Facilitated</p>
+      </div>
+      <div class="text-center">
+        <p class="font-serif text-nile-gold" style="font-size:clamp(2rem,5vw,3.5rem);line-height:1">
+          <span class="counter" data-target="99.2" data-decimals="1">0</span><span>%</span>
+        </p>
+        <p class="text-nile-blue text-xs md:text-sm uppercase tracking-widest font-semibold mt-3">Implant Success Rate</p>
+      </div>
+      <div class="text-center">
+        <p class="font-serif text-nile-gold" style="font-size:clamp(2rem,5vw,3.5rem);line-height:1">
+          <span class="counter" data-target="24">0</span><span>/7</span>
+        </p>
+        <p class="text-nile-blue text-xs md:text-sm uppercase tracking-widest font-semibold mt-3">Support Available</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ═══════════════════ TRUST BAR ═══════════════════ -->
@@ -1892,7 +2247,6 @@ main#main > section{
   </div>
 </section>
 
-<!-- ═══════════════════ TEAM ═══════════════════ -->
 <!-- ═══════════════════ TEAM ═══════════════════ -->
 <section id="team" class="section bg-white reveal">
   <div class="container">
@@ -2090,7 +2444,6 @@ main#main > section{
     </p>
   </div>
 </section>
-
 <!-- ═══════════════════ SCIENCE ═══════════════════ -->
 <section id="science" class="section bg-nile-blue text-white reveal">
   <div class="container">
@@ -2100,12 +2453,10 @@ main#main > section{
       <p class="text-gray-300" style="font-size:1.05rem">Every decision is backed by peer-reviewed clinical evidence. Choose a topic below — or read all.</p>
     </div>
 
+    <!-- Accordion 1 — Implant Systems -->
     <details class="science-accordion">
       <summary>🔬 Implant Systems: Data-Driven Comparison</summary>
       <div class="science-acc-body">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-14">
-      <div>
-        <h3 class="font-serif text-nile-beige mb-6" style="font-size:1.5rem">Implant Systems: Data-Driven Comparison</h3>
         <p class="text-gray-300 mb-6 text-sm">A 2026 prospective study in <em>Cureus</em> compared esthetic outcomes of leading implant systems in the maxillary anterior region.</p>
         <div class="space-y-3">
           <div class="bg-white/5 border border-nile-gold/30 p-5">
@@ -2132,9 +2483,12 @@ main#main > section{
         </div>
         <p class="text-gray-500 text-xs italic mt-4">Source: Cureus 2026 — Comparative Evaluation of Esthetic Outcomes (n=90 patients, 6-month follow-up).</p>
       </div>
+    </details>
 
-      <div>
-        <h3 class="font-serif text-nile-beige mb-6" style="font-size:1.5rem">Bone Grafting: Building the Foundation</h3>
+    <!-- Accordion 2 — Bone Grafting -->
+    <details class="science-accordion">
+      <summary>🦴 Bone Grafting: Building the Foundation</summary>
+      <div class="science-acc-body">
         <p class="text-gray-300 mb-6 text-sm">Adequate bone volume is the cornerstone of successful implant placement. Our partner surgical teams use the latest evidence-based techniques.</p>
         <div class="space-y-3">
           <div class="bg-white/5 border border-nile-gold/30 p-5">
@@ -2152,73 +2506,40 @@ main#main > section{
         </div>
         <p class="text-gray-500 text-xs italic mt-4">Source: IP Int J Periodontol Implantol 2025 — Advances in Bone Grafting Techniques.</p>
       </div>
-    </div>
-
-    <div class="bg-white/5 border border-nile-gold/20 p-8">
-      <h3 class="font-serif text-nile-beige text-center mb-8" style="font-size:1.5rem">Digital Dentistry: The Hi-Tech Standard</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 stagger">
-        <div class="bg-white/5 border border-nile-gold/20 p-5 text-center">
-          <div class="icon-circle mx-auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-          <h4 class="font-serif text-nile-beige mb-2">CBCT 3D Imaging</h4>
-          <p class="text-gray-400 text-xs leading-relaxed">3D visualization of bone, nerves, and sinuses — accurate to within 0.1mm.</p>
-        </div>
-        <div class="bg-white/5 border border-nile-gold/20 p-5 text-center">
-          <div class="icon-circle mx-auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M21.4 11l-9.2 9.2a2 2 0 01-2.8 0l-5.7-5.7a2 2 0 010-2.8l9.2-9.2a2 2 0 012.8 0l5.7 5.7a2 2 0 010 2.8z"/><path d="M14 7l3 3"/></svg></div>
-          <h4 class="font-serif text-nile-beige mb-2">CAD/CAM Design</h4>
-          <p class="text-gray-400 text-xs leading-relaxed">Prosthesis designed digitally, milled from solid Zirconia or E-max blocks.</p>
-        </div>
-        <div class="bg-white/5 border border-nile-gold/20 p-5 text-center">
-          <div class="icon-circle mx-auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-          <h4 class="font-serif text-nile-beige mb-2">Guided Surgery</h4>
-          <p class="text-gray-400 text-xs leading-relaxed">3D-printed surgical templates ensure each implant is placed exactly as planned.</p>
-        </div>
-        <div class="bg-white/5 border border-nile-gold/20 p-5 text-center">
-          <div class="icon-circle mx-auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-          <h4 class="font-serif text-nile-beige mb-2">Intraoral Scanning</h4>
-          <p class="text-gray-400 text-xs leading-relaxed">Digital impressions — no putty discomfort, instant 3D models.</p>
-        </div>
-      </div>
-      <p class="text-gray-500 text-xs italic mt-6 text-center">Digital workflows reduce surgical time up to 40% and improve implant accuracy up to 3× (Journal of Oral Implantology, 2024).</p>
-    </div>
-    </div>
     </details>
+
+    <!-- Accordion 3 — Digital Dentistry -->
+    <details class="science-accordion">
+      <summary>💻 Digital Dentistry: The Hi-Tech Standard</summary>
+      <div class="science-acc-body">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div class="bg-white/5 border border-nile-gold/20 p-5 text-center">
+            <div class="icon-circle mx-auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+            <h4 class="font-serif text-nile-beige mb-2">CBCT 3D Imaging</h4>
+            <p class="text-gray-400 text-xs leading-relaxed">3D visualization of bone, nerves, and sinuses — accurate to within 0.1mm.</p>
+          </div>
+          <div class="bg-white/5 border border-nile-gold/20 p-5 text-center">
+            <div class="icon-circle mx-auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M21.4 11l-9.2 9.2a2 2 0 01-2.8 0l-5.7-5.7a2 2 0 010-2.8l9.2-9.2a2 2 0 012.8 0l5.7 5.7a2 2 0 010 2.8z"/><path d="M14 7l3 3"/></svg></div>
+            <h4 class="font-serif text-nile-beige mb-2">CAD/CAM Design</h4>
+            <p class="text-gray-400 text-xs leading-relaxed">Prosthesis designed digitally, milled from solid Zirconia or E-max blocks.</p>
+          </div>
+          <div class="bg-white/5 border border-nile-gold/20 p-5 text-center">
+            <div class="icon-circle mx-auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+            <h4 class="font-serif text-nile-beige mb-2">Guided Surgery</h4>
+            <p class="text-gray-400 text-xs leading-relaxed">3D-printed surgical templates ensure each implant is placed exactly as planned.</p>
+          </div>
+          <div class="bg-white/5 border border-nile-gold/20 p-5 text-center">
+            <div class="icon-circle mx-auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+            <h4 class="font-serif text-nile-beige mb-2">Intraoral Scanning</h4>
+            <p class="text-gray-400 text-xs leading-relaxed">Digital impressions — no putty discomfort, instant 3D models.</p>
+          </div>
+        </div>
+        <p class="text-gray-500 text-xs italic mt-6 text-center">Digital workflows reduce surgical time up to 40% and improve implant accuracy up to 3× (Journal of Oral Implantology, 2024).</p>
+      </div>
+    </details>
+
   </div>
 </section>
-
-<style>
-.science-tab{
-  padding:.6rem 1.25rem;
-  font-family:'Montserrat',sans-serif;
-  font-size:.68rem;
-  font-weight:600;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  color:#C9A96E;
-  background:transparent;
-  border:1px solid rgba(201,169,110,.35);
-  border-radius:100px;
-  cursor:pointer;
-  transition:all .35s cubic-bezier(.22,1,.36,1);
-}
-.science-panel{
-  display: none;
-  animation: scienceFadeIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.science-panel.active{
-  display: block;
-}
-@keyframes scienceFadeIn{
-  from{opacity: 0; transform: translateY(8px)}
-  to{opacity: 1; transform: translateY(0)}
-}
-.science-tab:hover{background:rgba(201,169,110,.1);border-color:#C9A96E}
-.science-tab.active{
-  background:linear-gradient(135deg,#AE9164,#E8C88A,#AE9164);
-  color:#1F2A36;
-  border-color:#E8C88A;
-  box-shadow:0 6px 20px rgba(174,145,100,.4);
-}
-</style>
 
 <!-- ═══════════════════ BONE GRAFT MATERIALS TABLE ═══════════════════ -->
 <section id="bone-graft" class="section bg-nile-blue text-white reveal">
@@ -2570,7 +2891,7 @@ main#main > section{
           </tr>
         </thead>
         <tbody>
-          <tr><td class="td-label">All-on-4 Cost (USD)</td><td class="td-gold td-center">$3,500 – $4,800</td><td class="td-center">$4,500 – $6,000</td><td class="td-center">$6,000 – $9,000</td></tr>
+          <tr><td class="td-label">All-on-4 Cost (USD) — per arch</td><td class="td-gold td-center">$3,500 – $4,800</td><td class="td-center">$4,500 – $6,000</td><td class="td-center">$6,000 – $9,000</td></tr>
           <tr><td class="td-label">Premium Implants</td><td class="td-highlight">✓ Straumann, Nobel</td><td class="td-muted td-center">✓ Available</td><td class="td-muted td-center">✓ Available</td></tr>
           <tr><td class="td-label">Lifetime Warranty</td><td class="td-green td-center">✓ Offered</td><td class="td-muted td-center">Rare</td><td class="td-muted td-center">Rare</td></tr>
           <tr><td class="td-label">Tourism Experience</td><td class="td-highlight">Pyramids ◆ Nile ◆ Luxor</td><td class="td-muted td-center">Istanbul ◆ Cappadocia</td><td class="td-muted td-center">Cancún ◆ Beaches</td></tr>
@@ -2579,7 +2900,7 @@ main#main > section{
         </tbody>
       </table>
     </div>
-    <p class="text-xs text-nile-muted text-center mt-6">*Prices are averages per jaw and subject to individual treatment plans. Egypt offers the same premium brands at 20–40% less than Turkey or Mexico. Savings vs. US/Canada/UK prices may vary by procedure.</p>
+    <p class="text-xs text-nile-muted text-center mt-6 max-w-3xl mx-auto">*Prices above are for <strong>single-arch (one jaw)</strong> treatment. Full-mouth restoration covers both arches — see <a href="#packages" class="text-nile-gold underline">Treatment Packages</a> for both-arch pricing. All figures are averages subject to individual treatment plans.</p>
   </div>
 </section>
 <!-- ═══════════════════ PACKAGES ═══════════════════ -->
@@ -2589,7 +2910,16 @@ main#main > section{
       <p class="eyebrow mb-4">Transparent Pricing</p>
       <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.75rem)">Treatment Packages</h2>
       <p class="text-nile-muted" style="font-size:1.05rem">Each package includes a written treatment plan, premium materials, and a documented warranty. Final quotes are provided in writing after your free clinical review.</p>
-      <p class="text-nile-gold italic mt-3 text-sm">All prices in USD. CAD equivalents provided at consultation.</p>
+      <div class="bg-nile-gold/5 border border-nile-gold/25 p-4 max-w-2xl mx-auto mt-5 text-left">
+  <p class="text-xs text-nile-muted leading-relaxed mb-3">
+    <strong class="text-nile-blue">Important — Please Read:</strong>
+    All prices shown are <strong>indicative estimates in USD</strong>, based on typical cases. Final pricing depends on your clinical evaluation (CBCT scan, bone density, medical history) and is always confirmed in writing before you travel. <strong>CAD/EUR/GBP equivalents</strong> provided at consultation.
+  </p>
+  <p class="text-xs text-nile-muted leading-relaxed">
+    <strong class="text-nile-blue">Seasonal Pricing:</strong>
+    Hotel and travel add-on rates vary by season. <strong>Peak season (Nov–Mar):</strong> higher hotel availability demand. <strong>Low season (May–Sep):</strong> discounted rates available. Contact us for a personalized quote based on your preferred dates.
+  </p>
+</div>
     </div>
 
     <!-- Quick compare -->
@@ -2608,7 +2938,7 @@ main#main > section{
           <tr><td class="td-label">Prime Bite Full Restoration</td><td class="td-center">Partial tooth loss</td><td class="td-center">1 week + 3 months</td><td class="td-gold td-center">$8,500</td></tr>
           <tr><td class="td-label">Forever Young (Full-Arch)</td><td class="td-center">Complete tooth loss</td><td class="td-center">5–6 months</td><td class="td-gold td-center">$16,500</td></tr>
           <tr><td class="td-label">Implant Rescue Program</td><td class="td-center">Failed prior implants</td><td class="td-center">7–14 days</td><td class="td-gold td-center">$4,200</td></tr>
-          <tr><td class="td-label">Clear Aligner Program</td><td class="td-center">Crowding / gaps</td><td class="td-center">6–12 months</td><td class="td-gold td-center">$2,800</td></tr>
+          <tr><td class="td-label">Complete Smile Alignment</td><td class="td-center">Crowding / gaps</td><td class="td-center">6–12 months</td><td class="td-gold td-center">$3,900</td></tr>
         </tbody>
       </table>
     </div>
@@ -2735,27 +3065,29 @@ main#main > section{
       <div class="card card-top-gold overflow-hidden flex flex-col lg:col-span-2 lg:max-w-2xl lg:mx-auto w-full">
         <div class="bg-nile-blue text-white p-7 text-center">
           <p class="eyebrow eyebrow-light mb-2">Package 05</p>
-          <h3 class="font-serif mb-2" style="font-size:1.6rem">Clear Aligner Program</h3>
-          <p class="text-gray-300 text-sm italic">Discreet, removable clear aligners — no metal braces</p>
+          <h3 class="font-serif mb-2" style="font-size:1.6rem">Complete Smile Alignment</h3>
+          <p class="text-gray-300 text-sm italic">Full clear aligner treatment — from first scan to final retainer</p>
         </div>
         <div class="p-7">
           <div class="text-center pb-6 mb-6 border-b border-nile-gold/20">
-            <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Starting from</p>
-            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$2,800 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
+            <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Complete Package</p>
+            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$3,900 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
             <p class="text-xs text-nile-muted mt-2">vs. $5,000–$8,000 in Canada / $6,000–$9,000 in USA</p>
           </div>
-          <h4 class="font-serif text-nile-blue mb-3">What's Included</h4>
+          <h4 class="font-serif text-nile-blue mb-3">What's Included — Full Treatment</h4>
           <ul class="space-y-2 text-sm text-nile-muted mb-6">
-            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>3D digital scan and treatment simulation</li>
-            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Custom clear aligner sets (full treatment)</li>
-            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Virtual monitoring between visits</li>
-            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>2 in-person visits in Egypt (start + finish)</li>
-            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Retainers included</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span><strong>3D digital scan + AI treatment simulation</strong> (see your final result before starting)</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span><strong>All custom clear aligner sets</strong> — complete treatment to final result</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span><strong>Remote monitoring</strong> via photo uploads between visits</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span><strong>2 in-person visits in Egypt</strong> (start + final refinement)</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span><strong>Fixed + removable retainers</strong> at completion</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span><strong>Professional whitening session</strong> at final visit</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Orthodontic coordinator on WhatsApp 24/7</li>
           </ul>
           <div class="bg-nile-beige p-4 border border-nile-gold/20 mb-5 text-xs text-nile-muted">
-            <strong class="text-nile-blue">Timeline:</strong> 6–12 months. Remote monitoring between visits.
+            <strong class="text-nile-blue">Timeline:</strong> 6–12 months. Remote monitoring between visits. Final result guaranteed by treatment plan.
           </div>
-          <a href="https://wa.me/201503308333?text=Hi%20Nile%20Smile%2C%20I%27m%20interested%20in%20the%20Clear%20Aligner%20Program" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">Request This Package</a>
+          <a href="https://wa.me/201503308333?text=Hi%20Nile%20Smile%2C%20I%27m%20interested%20in%20the%20Complete%20Smile%20Alignment%20package" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">Request This Package</a>
         </div>
       </div>
 
@@ -2786,8 +3118,292 @@ main#main > section{
       <p class="text-xs text-nile-muted italic mt-6">Response within 24–72 hours • No obligation • No pressure</p>
     </div>
     <!-- ═══ /CTA ═══ -->
+
+    <!-- ═══ Reference to Travel Add-Ons ═══ -->
+    <p class="text-center mt-10 text-sm text-nile-muted">
+      <strong class="text-nile-blue">Note:</strong> All packages above are <strong>clinical-only</strong>.
+      For travel logistics (hotel, transfers, concierge), see
+      <a href="#travel-addons" class="text-nile-gold underline font-semibold">Travel Add-Ons →</a>
+    </p>
   </div>
 </section>
+<!-- ═══════════════════ TRAVEL ADD-ONS ═══════════════════ -->
+<section id="travel-addons" class="section bg-white reveal">
+  <div class="container">
+    <div class="text-center max-w-3xl mx-auto mb-14">
+      <p class="eyebrow mb-4">Travel Add-Ons</p>
+      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.75rem)">Build Your Complete Journey</h2>
+      <p class="text-nile-muted" style="font-size:1.05rem">
+        Your clinical package covers treatment only. Travel logistics — hotel, transfers, and concierge — are optional add-ons, quoted separately based on your stay length and preferences.
+      </p>
+      <p class="text-nile-gold italic mt-4 text-sm">
+        Prices below are indicative for a standard 10-day stay. Final quotes are provided in writing after your clinical review.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
+
+      <!-- Tier 1: Essential -->
+      <div class="card card-top-blue overflow-hidden flex flex-col">
+        <div class="bg-white p-7 text-center border-b border-nile-gold/20">
+          <p class="eyebrow mb-3" style="color:#4F6070">Tier 01</p>
+          <h3 class="font-serif text-nile-blue mb-2" style="font-size:1.5rem">Essential Comfort</h3>
+          <p class="text-nile-muted text-sm italic">Everything you need — nothing you don't.</p>
+        </div>
+        <div class="p-7 flex-1 flex flex-col">
+          <div class="text-center pb-6 mb-6 border-b border-nile-gold/20">
+            <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Add to any package</p>
+            <p class="font-serif font-bold text-nile-blue" style="font-size:2.2rem">+ $890 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
+            <p class="text-xs text-nile-muted mt-2">Per patient, 8–10 day stay</p>
+          </div>
+          <h4 class="font-serif text-nile-blue mb-3 text-base">What's Included</h4>
+          <ul class="space-y-2 text-sm text-nile-muted mb-6 flex-1">
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>4★ hotel — 8–10 nights (per treatment type)</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Airport pickup + drop-off (2 trips)</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Clinic transfers (up to 4 trips)</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Local SIM card with data</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>24/7 WhatsApp coordinator line</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>English-speaking driver</li>
+          </ul>
+          <div class="bg-nile-beige p-4 border border-nile-gold/20 mb-5 text-xs text-nile-muted">
+            <strong class="text-nile-blue">Best for:</strong> Independent travelers who want logistics sorted without extras.
+          </div>
+          <a href="https://wa.me/201503308333?text=Hi%20Nile%20Smile%2C%20I%27m%20interested%20in%20the%20Essential%20Comfort%20add-on" target="_blank" rel="noopener" class="btn btn-outline-dark w-full">Select Essential</a>
+        </div>
+      </div>
+
+      <!-- Tier 2: Premium (POPULAR) -->
+      <div class="card card-top-gold overflow-hidden flex flex-col relative">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-nile-gold via-nile-gold-light to-nile-gold text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full z-10 shadow-lg">
+          Most Chosen
+        </div>
+        <div class="bg-nile-blue text-white p-7 text-center">
+          <p class="eyebrow eyebrow-light mb-3">Tier 02</p>
+          <h3 class="font-serif mb-2" style="font-size:1.5rem">Premium Journey</h3>
+          <p class="text-gray-300 text-sm italic">The complete VIP experience.</p>
+        </div>
+        <div class="p-7 flex-1 flex flex-col">
+          <div class="text-center pb-6 mb-6 border-b border-nile-gold/20">
+            <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Add to any package</p>
+            <p class="font-serif font-bold text-nile-gold" style="font-size:2.2rem">+ $1,890 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
+            <p class="text-xs text-nile-muted mt-2">Per patient, 10-day stay</p>
+          </div>
+          <h4 class="font-serif text-nile-blue mb-3 text-base">Everything in Essential, plus:</h4>
+          <ul class="space-y-2 text-sm text-nile-muted mb-6 flex-1">
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>5★ hotel — Nile or Pyramids view</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Unlimited clinic transfers</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Bilingual medical coordinator on-call</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Welcome kit + curated recovery meals</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Nile dinner cruise (1 evening)</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Family-friendly accommodation option</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Post-op pharmacy delivery to hotel</li>
+          </ul>
+          <div class="bg-nile-beige p-4 border border-nile-gold/20 mb-5 text-xs text-nile-muted">
+            <strong class="text-nile-blue">Best for:</strong> Patients who want a relaxing, worry-free VIP experience.
+          </div>
+          <a href="https://wa.me/201503308333?text=Hi%20Nile%20Smile%2C%20I%27m%20interested%20in%20the%20Premium%20Journey%20add-on" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">Select Premium</a>
+        </div>
+      </div>
+
+      <!-- Tier 3: Signature -->
+      <div class="card card-top-gold overflow-hidden flex flex-col">
+        <div class="bg-white p-7 text-center border-b border-nile-gold/20">
+          <p class="eyebrow mb-3" style="color:#AE9164">Tier 03</p>
+          <h3 class="font-serif text-nile-blue mb-2" style="font-size:1.5rem">Signature VIP</h3>
+          <p class="text-nile-muted text-sm italic">The full concierge experience.</p>
+        </div>
+        <div class="p-7 flex-1 flex flex-col">
+          <div class="text-center pb-6 mb-6 border-b border-nile-gold/20">
+            <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Add to any package</p>
+            <p class="font-serif font-bold text-nile-gold" style="font-size:2.2rem">+ $3,490 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
+            <p class="text-xs text-nile-muted mt-2">Per patient, 10-day stay</p>
+          </div>
+          <h4 class="font-serif text-nile-blue mb-3 text-base">Everything in Premium, plus:</h4>
+          <ul class="space-y-2 text-sm text-nile-muted mb-6 flex-1">
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>5★ suite — panoramic Nile view</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Private chauffeur on standby</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Dedicated personal concierge</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Private Giza Pyramids guided tour</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Luxor day trip (post-recovery option)</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>In-room private chef (3 meals)</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Airport fast-track immigration</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Companion/spouse included in all activities</li>
+          </ul>
+          <div class="bg-nile-beige p-4 border border-nile-gold/20 mb-5 text-xs text-nile-muted">
+            <strong class="text-nile-blue">Best for:</strong> Patients who value privacy, exclusivity, and a truly curated VIP experience.
+          </div>
+          <a href="https://wa.me/201503308333?text=Hi%20Nile%20Smile%2C%20I%27m%20interested%20in%20the%20Signature%20VIP%20add-on" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">Select Signature</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- How to Choose -->
+    <div class="bg-nile-beige p-8 border-l-4 border-nile-gold max-w-4xl mx-auto mb-10">
+      <h3 class="font-serif text-nile-blue text-xl mb-4 text-center">How to Choose</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-nile-muted">
+        <div class="text-center">
+          <p class="font-semibold text-nile-blue mb-2">Essential</p>
+          <p>Prefer independence, already know Cairo, or travel with a companion who handles logistics.</p>
+        </div>
+        <div class="text-center">
+          <p class="font-semibold text-nile-blue mb-2">Premium</p>
+          <p>Want the classic VIP medical tourism experience — comfortable, curated, and stress-free.</p>
+        </div>
+        <div class="text-center">
+          <p class="font-semibold text-nile-blue mb-2">Signature</p>
+          <p>Value exclusivity, privacy, and want to combine your treatment with a genuine luxury vacation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hotel Selection Process -->
+    <div class="bg-nile-blue text-white p-8 md:p-10 max-w-4xl mx-auto mb-8">
+      <div class="text-center mb-6">
+        <p class="eyebrow eyebrow-light mb-2">Our Hotel Selection</p>
+        <h3 class="font-serif text-nile-beige text-xl md:text-2xl mb-3">Handpicked Partners in Cairo's Best Districts</h3>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-300">
+        <div class="text-center">
+          <div class="icon-circle mx-auto" style="background:rgba(201,169,110,.15)"><svg viewBox="0 0 24 24" fill="none" stroke="#E8C88A" stroke-width="1.4"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+          <p class="text-nile-gold-bright font-bold mb-2">4★ Tier</p>
+          <p>Modern hotels in Sheikh Zayed, Zamalek, or New Cairo — 15–25 minutes from partner clinics.</p>
+        </div>
+        <div class="text-center">
+          <div class="icon-circle mx-auto" style="background:rgba(201,169,110,.15)"><svg viewBox="0 0 24 24" fill="none" stroke="#E8C88A" stroke-width="1.4"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" transform="scale(.6) translate(8,8)"/></svg></div>
+          <p class="text-nile-gold-bright font-bold mb-2">5★ Tier</p>
+          <p>Premium hotels with Nile or Pyramids view — including major international chains and boutique properties.</p>
+        </div>
+        <div class="text-center">
+          <div class="icon-circle mx-auto" style="background:rgba(201,169,110,.15)"><svg viewBox="0 0 24 24" fill="none" stroke="#E8C88A" stroke-width="1.4"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+          <p class="text-nile-gold-bright font-bold mb-2">5★ Suite VIP</p>
+          <p>Luxury suites in Cairo's most prestigious addresses — with panoramic views and concierge services.</p>
+        </div>
+      </div>
+      <p class="text-center text-xs text-gray-400 italic mt-6 border-t border-nile-gold/20 pt-4">
+        <strong class="text-nile-gold-bright">Note:</strong> Specific hotel names, photos, and confirmed rates are shared with you in writing after your free clinical review — based on availability and your personal preferences. We do not publish specific hotel names because availability and rates vary by season.
+      </p>
+    </div>
+
+    <!-- Important Note -->
+    <div class="bg-nile-gold/5 border border-nile-gold/20 p-6 max-w-4xl mx-auto">
+      <p class="text-xs text-nile-muted italic text-center">
+        <strong class="text-nile-blue">Note:</strong> Travel add-ons are optional and quoted separately from your clinical package. All add-ons can be customized — extra nights, upgraded rooms, or additional family members. International flights, travel insurance, and visa fees remain the patient's responsibility. Final pricing is confirmed in writing after your clinical review.
+      </p>
+    </div>
+
+  </div>
+</section>
+<!-- ═══════════════════ PRICE ESTIMATOR ═══════════════════ -->
+<section id="estimator" class="section bg-nile-blue text-white reveal">
+  <div class="container-narrow">
+    <div class="text-center mb-10">
+      <p class="eyebrow eyebrow-light mb-4">Quick Estimate</p>
+      <h2 class="mb-4" style="font-size:clamp(1.75rem,4vw,2.5rem)">Get a Rough Idea in 30 Seconds</h2>
+      <p class="text-gray-300 text-sm max-w-2xl mx-auto">Select your treatment and add-ons — see an indicative price range instantly. Final quote is confirmed in writing after your free clinical review.</p>
+    </div>
+
+    <div class="bg-white/5 border border-nile-gold/30 p-6 md:p-10 max-w-2xl mx-auto">
+
+      <!-- Treatment -->
+      <div class="mb-7">
+        <label class="block text-nile-gold-bright text-xs uppercase tracking-widest font-semibold mb-3">1. Treatment</label>
+        <select id="estTreatment" class="w-full px-4 py-3 bg-white text-nile-ink border border-nile-gold/30 focus:outline-none focus:ring-2 focus:ring-nile-gold" style="border-radius:2px">
+          <option value="0">— Select treatment —</option>
+          <option value="3900|5">Signature Zirconia Smile (from $3,900)</option>
+          <option value="8500|5">Prime Bite Full Restoration (from $8,500)</option>
+          <option value="16500|7">Forever Young Full-Arch (from $16,500)</option>
+          <option value="4200|5">Implant Rescue Program (from $4,200)</option>
+          <option value="3900|4">Complete Smile Alignment (from $3,900)</option>
+        </select>
+      </div>
+
+      <!-- Add-Ons -->
+      <div class="mb-7">
+        <label class="block text-nile-gold-bright text-xs uppercase tracking-widest font-semibold mb-3">2. Travel Add-On</label>
+        <select id="estAddon" class="w-full px-4 py-3 bg-white text-nile-ink border border-nile-gold/30 focus:outline-none focus:ring-2 focus:ring-nile-gold" style="border-radius:2px">
+          <option value="0">— No add-on (clinical only) —</option>
+          <option value="890">Essential Comfort (+$890)</option>
+          <option value="1890">Premium Journey (+$1,890)</option>
+          <option value="3490">Signature VIP (+$3,490)</option>
+        </select>
+      </div>
+
+      <!-- Result -->
+      <div id="estResult" class="bg-nile-gold/10 border border-nile-gold/40 p-6 text-center" style="border-radius:2px">
+        <p class="text-nile-gold-bright text-xs uppercase tracking-widest mb-2">Your Indicative Estimate</p>
+        <p id="estPrice" class="font-serif text-nile-beige mb-2" style="font-size:2rem">—</p>
+        <p class="text-gray-400 text-xs italic">Indicative only. Final quote confirmed after clinical review.</p>
+      </div>
+
+      <div class="mt-6 text-center">
+        <a href="#consult" class="btn btn-gold shine-auto">Get Your Free Written Quote →</a>
+      </div>
+
+    </div>
+
+    <p class="text-center text-xs text-gray-500 italic mt-6 max-w-xl mx-auto">
+      This calculator provides a rough indication only. Final pricing depends on your clinical evaluation and the specific treatment plan recommended by your dentist.
+    </p>
+  </div>
+</section>
+
+<style>
+#estTreatment, #estAddon{
+  font-family:'Montserrat',sans-serif;
+  font-size:.9rem;
+  font-weight:500;
+  cursor:pointer;
+  appearance:none;
+  background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234F6070' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat:no-repeat;
+  background-position:right 1rem center;
+  background-size:16px;
+  padding-right:3rem !important;
+}
+#estPrice{
+  letter-spacing:-0.02em;
+  transition:all .4s cubic-bezier(.22,1,.36,1);
+}
+</style>
+
+<script>
+(function(){
+  const tr = document.getElementById('estTreatment');
+  const ad = document.getElementById('estAddon');
+  const out = document.getElementById('estPrice');
+  if(!tr || !ad || !out) return;
+
+  function update(){
+    const tVal = tr.value;
+    const aVal = ad.value;
+    const t = tVal === '0' ? 0 : parseFloat(tVal.split('|')[0]);
+    const a = parseFloat(aVal);
+
+    if(t === 0 && a === 0){
+      out.textContent = '—';
+      return;
+    }
+
+    // build range: +/- 15%
+    const base = t + a;
+    const low  = Math.round(base * 0.85);
+    const high = Math.round(base * 1.15);
+
+    if(t === 0){
+      // add-on only shouldn't happen, but handle gracefully
+      out.textContent = '+ $' + a.toLocaleString() + ' USD';
+      return;
+    }
+
+    out.textContent = '$' + low.toLocaleString() + ' – $' + high.toLocaleString() + ' USD';
+  }
+
+  tr.addEventListener('change', update);
+  ad.addEventListener('change', update);
+})();
+</script>
+<!-- ═══════════════════ /PRICE ESTIMATOR ═══════════════════ -->
 
 <!-- ═══════════════════ ITEMIZED PRICING ═══════════════════ -->
 <section id="itemized" class="section reveal">
@@ -2797,6 +3413,12 @@ main#main > section{
       <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">Itemized Clinical Fees</h2>
       <p class="text-nile-gold text-sm uppercase tracking-widest mb-4 font-medium">Clinical Treatment Only</p>
       <p class="text-nile-muted" style="font-size:1.05rem">Prices are estimates in USD. Final quotes depend on your clinical plan and are always provided in writing before you travel.</p>
+<div class="bg-nile-gold/5 border border-nile-gold/25 p-4 max-w-2xl mx-auto mt-5 text-left">
+  <p class="text-xs text-nile-muted leading-relaxed">
+    <strong class="text-nile-blue">Please note:</strong>
+    These are <strong>indicative ranges</strong>, not fixed prices. Final fees are determined after clinical review and depend on: bone density, need for bone grafting, number of implants, anesthesia type, and material choice. <strong>All quotes are confirmed in writing</strong> before treatment begins.
+  </p>
+</div>
     </div>
 
     <div class="table-wrap">
@@ -2823,8 +3445,10 @@ main#main > section{
       </table>
     </div>
 
+    <p class="text-xs text-nile-muted italic text-center mt-6 max-w-3xl mx-auto">* The savings percentage indicated (up to 90%) represents the <strong>maximum possible savings on individual procedures</strong>. Overall savings on complete treatment packages typically range between 75% and 80%, depending on the specific procedure mix and clinical complexity. All figures are indicative and subject to individual treatment plan.</p>
+
     <div class="mt-6 p-5 border-l-4 border-nile-gold bg-nile-gold/10">
-      <p class="text-nile-muted text-sm"><strong class="text-nile-blue">Important distinction:</strong> The table above shows <strong>clinical fees only</strong> (procedure, materials, lab work). It does <strong>NOT</strong> include accommodation, VIP transfers, or concierge services. For all-inclusive pricing including 5-star hotel and ground transportation, please refer to <a href="#packages" class="text-nile-gold underline font-semibold">Treatment Packages</a>. International flights, travel insurance, and visa fees remain the patient's responsibility.</p>
+      <p class="text-nile-muted text-sm"><strong class="text-nile-blue">Important distinction:</strong> The table above shows <strong>clinical fees only</strong> (procedure, materials, lab work). It does <strong>NOT</strong> include accommodation, VIP transfers, or concierge services. <a href="#packages" class="text-nile-gold underline font-semibold">Treatment Packages</a> are also clinical-only. Travel logistics are available as optional add-ons — see <a href="#travel-addons" class="text-nile-gold underline font-semibold">Travel Add-Ons</a>. International flights, travel insurance, and visa fees remain the patient's responsibility.</p>
     </div>
   </div>
 </section>
@@ -3083,57 +3707,7 @@ main#main > section{
   </div>
 </section>
 
-<!-- ═══════════════════ CASE STUDIES ═══════════════════ -->
-<section id="case-studies" class="section bg-nile-beige reveal">
-  <div class="container">
-    <div class="text-center mb-12 max-w-3xl mx-auto">
-      <p class="eyebrow mb-4">Clinical Portfolio</p>
-      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">Case Studies</h2>
-      <p class="text-nile-muted">Detailed case documentation — including patient history, treatment plan, materials used, and outcomes — will be published here with full patient consent.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 stagger">
-      <div class="card card-top-gold p-7">
-        <p class="text-nile-gold text-xs uppercase tracking-widest mb-2">Coming Q1 2026</p>
-        <h3 class="font-serif text-nile-blue text-xl mb-3">Case Study 01</h3>
-        <p class="text-nile-muted text-sm">Full-mouth All-on-4 restoration with immediate loading. Complete documentation, treatment timeline, and outcome — with patient video testimonial.</p>
-      </div>
-      <div class="card card-top-gold p-7">
-        <p class="text-nile-gold text-xs uppercase tracking-widest mb-2">Coming Q1 2026</p>
-        <h3 class="font-serif text-nile-blue text-xl mb-3">Case Study 02</h3>
-        <p class="text-nile-muted text-sm">Complex implant rescue case with bone grafting. Includes pre-op CBCT, surgical sequence, and 6-month post-op CBCT comparison.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ═══════════════════ TRUST & MEDIA ═══════════════════ -->
-<section id="trust-media" class="section bg-white reveal">
-  <div class="container">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger">
-      <div class="card p-7 text-center">
-        <p class="eyebrow mb-3">Verified Reviews</p>
-        <h4 class="font-serif text-nile-blue text-xl mb-3">Trustpilot Integration</h4>
-        <p class="text-nile-muted text-xs mb-4">Live Trustpilot reviews will be integrated as our first cohort completes treatment.</p>
-        <div class="flex justify-center gap-1 text-nile-gold text-2xl">★ ★ ★ ★ ★</div>
-      </div>
-      <div class="card p-7 text-center">
-        <p class="eyebrow mb-3">As Featured In</p>
-        <h4 class="font-serif text-nile-blue text-xl mb-3">Press & Media</h4>
-        <p class="text-nile-muted text-xs mb-4">Media coverage and industry recognition will be published as they become available.</p>
-        <div class="flex justify-center gap-3 opacity-40">
-          <span class="text-nile-blue font-serif text-sm">Toronto Star</span>
-          <span class="text-nile-blue font-serif text-sm">Global News</span>
-        </div>
-      </div>
-      <div class="card p-7 text-center">
-        <p class="eyebrow mb-3">Download</p>
-        <h4 class="font-serif text-nile-blue text-xl mb-3">Full Treatment Guide</h4>
-        <p class="text-nile-muted text-xs mb-4">Comprehensive PDF brochure covering treatment options, pricing, travel logistics, and warranties.</p>
-        <button class="text-nile-gold text-xs uppercase tracking-widest border-b border-nile-gold pb-1 hover:text-nile-blue transition">Coming Soon</button>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ═══════════════════ GLOBAL PATIENT MAP ═══════════════════ -->
 <section id="global-map" class="section bg-nile-beige reveal">
@@ -3192,6 +3766,9 @@ main#main > section{
       <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">From First Contact to Your New Smile</h2>
       <p class="text-nile-muted">Every step is planned, documented, and coordinated by your dedicated medical concierge.</p>
     </div>
+    <details class="section-expander">
+      <summary>Show Full Journey — 8 Steps</summary>
+      <div class="expander-content">
     <div class="space-y-4">
       <div class="bg-nile-beige p-6 md:p-8 border-l-4 border-nile-gold">
         <div class="flex flex-col md:flex-row md:items-start gap-4 md:gap-8">
@@ -3251,10 +3828,10 @@ main#main > section{
             <p class="text-xs text-nile-muted uppercase tracking-widest mt-1">Arrival</p>
           </div>
           <div class="flex-1">
-            <h3 class="font-serif text-nile-blue text-lg mb-2">VIP Airport Pickup & Hotel Check-In</h3>
+            <h3 class="font-serif text-nile-blue text-lg mb-2">Arrival & Check-In</h3>
             <ul class="text-sm text-nile-muted space-y-1">
-              <li>• Private chauffeur meets you at Cairo International Airport</li>
-              <li>• Transfer to your 5-star hotel (Nile view or Pyramids view)</li>
+              <li>• Coordinator meets you on arrival</li>
+              <li>• <strong>If you selected a Travel Add-On:</strong> private chauffeur + hotel check-in arranged</li>
               <li>• Bilingual medical coordinator available 24/7</li>
               <li>• Welcome kit with itinerary and clinic contact details</li>
             </ul>
@@ -3330,6 +3907,8 @@ main#main > section{
         </div>
       </div>
     </div>
+      </div><!-- close expander-content -->
+    </details>
   </div>
 </section>
 
@@ -3341,6 +3920,9 @@ main#main > section{
       <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">A Day-by-Day Clinical Timeline</h2>
       <p class="text-nile-muted">Here is exactly how a typical All-on-4 full-arch restoration unfolds — from landing in Cairo to flying home with your final prosthesis.</p>
     </div>
+    <details class="section-expander">
+      <summary>Show Day-by-Day Timeline — 10 Days</summary>
+      <div class="expander-content">
     <div class="space-y-4">
       <div class="card p-6 md:p-8 border-l-4 border-nile-gold">
         <div class="flex flex-col md:flex-row md:items-start gap-4 md:gap-8">
@@ -3351,7 +3933,7 @@ main#main > section{
           <div class="flex-1">
             <h3 class="font-serif text-nile-blue text-lg mb-2">Comprehensive Clinical Evaluation</h3>
             <ul class="text-sm text-nile-muted space-y-1">
-              <li>• VIP airport pickup and hotel transfer</li>
+              <li>• Arrival coordination <em class="text-nile-gold">(chauffeur & hotel if add-on selected)</em></li>
               <li>• CBCT 3D scan, panoramic X-ray, intraoral digital scan</li>
               <li>• Full medical history review and blood work (if indicated)</li>
               <li>• Face-to-face consultation with treating implantologist</li>
@@ -3432,6 +4014,8 @@ main#main > section{
       </div>
     </div>
     <p class="text-center mt-10 text-xs md:text-sm text-nile-muted italic max-w-3xl mx-auto">Timeline shown is for a standard All-on-4 case with immediate loading. Complex cases requiring bone grafting may need multiple visits, clearly documented in your written treatment plan.</p>
+      </div><!-- close expander-content -->
+    </details>
   </div>
 </section>
 
@@ -3443,6 +4027,9 @@ main#main > section{
       <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">Recovery: Week by Week</h2>
       <p class="text-nile-muted">Every patient heals differently. Here is what the clinical evidence shows about typical recovery timelines after All-on-4 implant placement.</p>
     </div>
+    <details class="section-expander">
+      <summary>Show Recovery Timeline — Week by Week</summary>
+      <div class="expander-content">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 stagger">
       <div class="card p-6">
         <div class="text-nile-gold font-serif text-2xl mb-3">Week 1</div>
@@ -3486,6 +4073,8 @@ main#main > section{
       </div>
     </div>
     <p class="text-center mt-10 text-sm text-nile-muted italic max-w-3xl mx-auto">Some patients with fully digital workflows and immediate loading receive their final prosthesis in as little as 5–7 days. Your clinical timeline is documented in your written treatment plan.</p>
+      </div><!-- close expander-content -->
+    </details>
   </div>
 </section>
 
@@ -3514,9 +4103,104 @@ main#main > section{
       <button class="gallery-nav gallery-next" id="galleryNext" aria-label="Next">›</button>
     </div>
 
-    <p class="text-center text-xs text-gray-500 mt-8">All tourism activities are optional add-ons, scheduled safely around your clinical treatment plan.</p>
+    <div class="text-center mt-8 max-w-3xl mx-auto">
+      <p class="text-xs text-gray-400 mb-4">All tourism activities are optional add-ons, scheduled safely around your clinical treatment plan.</p>
+      <a href="#curated-tours" class="btn btn-gold shine-auto">See Curated Tours & Pricing →</a>
+    </div>
   </div>
 </section>
+
+<!-- ═══════════════════ CURATED TOURS ═══════════════════ -->
+<section id="curated-tours" class="section bg-white reveal">
+  <div class="container">
+    <div class="text-center max-w-3xl mx-auto mb-14">
+      <p class="eyebrow mb-4">Optional Add-Ons</p>
+      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.75rem)">Curated Tours & Experiences</h2>
+      <p class="text-nile-muted mb-4" style="font-size:1.05rem">
+        Beyond your treatment, we can arrange private, medically-safe tours of Egypt's most iconic destinations. All tours are optional and quoted separately from your clinical package.
+      </p>
+      <p class="text-nile-gold italic text-sm">
+        Prices shown below are indicative estimates only. Final tour pricing is confirmed in writing after your clinical review — based on your dates, group size, and season.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+
+      <!-- Pyramids Tour -->
+      <div class="card card-top-gold p-7 flex flex-col">
+        <h3 class="font-serif text-nile-blue text-lg mb-2">Giza Pyramids & Sphinx</h3>
+        <p class="text-nile-gold text-xs uppercase tracking-widest mb-3">Half-Day • 4–5 hours</p>
+        <p class="text-nile-muted text-sm mb-4 flex-1">Private guided tour with Egyptologist, hotel pickup, and skip-the-line entry. Low-impact, fully seated transport.</p>
+        <p class="text-nile-blue font-bold text-sm mb-3">From <strong class="text-nile-gold">$120</strong> per person</p>
+        <p class="text-[10px] text-nile-muted italic border-t border-nile-gold/15 pt-3">✅ Included in Signature VIP</p>
+      </div>
+
+      <!-- Nile Cruise -->
+      <div class="card card-top-gold p-7 flex flex-col">
+        <h3 class="font-serif text-nile-blue text-lg mb-2">Nile Dinner Cruise</h3>
+        <p class="text-nile-gold text-xs uppercase tracking-widest mb-3">Evening • 2 hours</p>
+        <p class="text-nile-muted text-sm mb-4 flex-1">Private table on a 5-star floating restaurant, live entertainment, and buffet dinner. Soft-food menu available.</p>
+        <p class="text-nile-blue font-bold text-sm mb-3">From <strong class="text-nile-gold">$85</strong> per person</p>
+        <p class="text-[10px] text-nile-muted italic border-t border-nile-gold/15 pt-3">✅ Included in Premium & Signature</p>
+      </div>
+
+      <!-- Egyptian Museum -->
+      <div class="card card-top-gold p-7 flex flex-col">
+        <h3 class="font-serif text-nile-blue text-lg mb-2">Egyptian Museum (GEM)</h3>
+        <p class="text-nile-gold text-xs uppercase tracking-widest mb-3">Half-Day • 3–4 hours</p>
+        <p class="text-nile-muted text-sm mb-4 flex-1">Private tour of the Grand Egyptian Museum with King Tut treasures. Includes wheelchair access and rest stops.</p>
+        <p class="text-nile-blue font-bold text-sm mb-3">From <strong class="text-nile-gold">$95</strong> per person</p>
+        <p class="text-[10px] text-nile-muted italic border-t border-nile-gold/15 pt-3">Available for all patients</p>
+      </div>
+
+      <!-- Khan el-Khalili -->
+      <div class="card card-top-gold p-7 flex flex-col">
+        <h3 class="font-serif text-nile-blue text-lg mb-2">Khan el-Khalili Bazaar</h3>
+        <p class="text-nile-gold text-xs uppercase tracking-widest mb-3">Half-Day • 3 hours</p>
+        <p class="text-nile-muted text-sm mb-4 flex-1">Private guided walking tour of Cairo's oldest market. Personal shopper + translator included.</p>
+        <p class="text-nile-blue font-bold text-sm mb-3">From <strong class="text-nile-gold">$70</strong> per person</p>
+        <p class="text-[10px] text-nile-muted italic border-t border-nile-gold/15 pt-3">Available for all patients</p>
+      </div>
+
+      <!-- Luxor Day Trip -->
+      <div class="card card-top-gold p-7 flex flex-col">
+        <h3 class="font-serif text-nile-blue text-lg mb-2">Luxor Day Trip</h3>
+        <p class="text-nile-gold text-xs uppercase tracking-widest mb-3">Full-Day • Domestic flight</p>
+        <p class="text-nile-muted text-sm mb-4 flex-1">Valley of the Kings, Karnak Temple, and Hatshepsut Temple. Post-recovery only. All transfers + lunch included.</p>
+        <p class="text-nile-blue font-bold text-sm mb-3">From <strong class="text-nile-gold">$450</strong> per person</p>
+        <p class="text-[10px] text-nile-muted italic border-t border-nile-gold/15 pt-3">✅ Included in Signature VIP</p>
+      </div>
+
+      <!-- Red Sea Extension -->
+      <div class="card card-top-gold p-7 flex flex-col">
+        <h3 class="font-serif text-nile-blue text-lg mb-2">Red Sea Extension</h3>
+        <p class="text-nile-gold text-xs uppercase tracking-widest mb-3">2–5 Days • Hurghada / Sharm</p>
+        <p class="text-nile-muted text-sm mb-4 flex-1">Post-treatment recovery by the Red Sea. 5★ resort + domestic flight + transfers. Optional diving for the healed.</p>
+        <p class="text-nile-blue font-bold text-sm mb-3">From <strong class="text-nile-gold">$890</strong> / 3 days</p>
+        <p class="text-[10px] text-nile-muted italic border-t border-nile-gold/15 pt-3">Post-treatment only</p>
+      </div>
+
+    </div>
+
+    <!-- Important Note -->
+    <div class="bg-nile-gold/5 border border-nile-gold/20 p-6 max-w-4xl mx-auto mb-10">
+      <p class="text-xs text-nile-muted italic text-center">
+        <strong class="text-nile-blue">Medical Safety:</strong> All tours are scheduled around your clinical treatment plan and recovery timeline. Tours requiring long travel or physical activity are only offered <strong>after medical clearance</strong> from your treating dentist. Prices are indicative and confirmed in writing based on your specific dates, group size, and season.
+      </p>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center">
+      <a href="https://wa.me/201503308333?text=Hi%20Nile%20Smile%2C%20I%27d%20like%20to%20add%20a%20tour%20to%20my%20treatment%20package" 
+         target="_blank" rel="noopener" class="btn btn-gold shine-auto">
+        💬 Request a Custom Tour
+      </a>
+      <p class="text-xs text-nile-muted italic mt-4">Response within 24–72 hours • No obligation • No pressure</p>
+    </div>
+
+  </div>
+</section>
+<!-- ═══════════════════ /CURATED TOURS ═══════════════════ -->
 
 <!-- Lightbox Modal -->
 <div id="galleryLightbox" class="gallery-lightbox">
@@ -3829,10 +4513,6 @@ main#main > section{
       <div class="acc-body">You receive a written aftercare protocol, scheduled telehealth follow-ups (1 week, 1 month, 3 months), and a documented lifetime warranty on implants. We coordinate with a licensed local dentist in your country when needed.</div>
     </details>
 
-    <details>
-      <summary>What implant brands do you use?<span class="acc-icon">+</span></summary>
-      <div class="acc-body">We work exclusively with Straumann (Switzerland) and Nobel Biocare (Sweden/USA) — the two highest-ranked implant systems in clinical studies for esthetic outcomes and long-term success. Osstem (South Korea) is available as a cost-effective alternative for suitable cases.</div>
-    </details>
 
     <details>
       <summary>Can I combine treatment with a family vacation?<span class="acc-icon">+</span></summary>
@@ -3937,6 +4617,50 @@ main#main > section{
         <p class="mt-3">You'll also receive emergency contact information and 24/7 WhatsApp access to your clinical coordinator.</p>
       </div>
     </details>
+
+    <details>
+      <summary>Can I combine treatment with tourism in Egypt?<span class="acc-icon">+</span></summary>
+      <div class="acc-body">
+        <p class="mb-3">Yes — but with medical guidance. We offer optional curated tours of Egypt's major destinations, scheduled around your recovery timeline.</p>
+        <p class="mb-3"><strong>Safe during recovery (Week 1):</strong> Nile dinner cruise, Egyptian Museum, seated tours.</p>
+        <p class="mb-3"><strong>After medical clearance (Week 2+):</strong> Giza Pyramids, Khan el-Khalili, Luxor day trip.</p>
+        <p>All tours are optional, quoted separately, and only offered after your dentist confirms you're fit to travel. See <a href="#curated-tours" class="text-nile-gold underline">Curated Tours</a> for details.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Where will I stay during treatment?<span class="acc-icon">+</span></summary>
+      <div class="acc-body">
+        <p class="mb-3">We offer two tiers of accommodation, selected as optional Travel Add-Ons:</p>
+        <p class="mb-3"><strong>Essential (4★):</strong> Modern hotels in Sheikh Zayed, Zamalek, or New Cairo — 15–25 minutes from partner clinics.</p>
+        <p class="mb-3"><strong>Premium (5★):</strong> Nile or Pyramids view hotels, including major international chains.</p>
+        <p>Specific hotel names, photos, and confirmed rates are shared in writing after your free clinical review — based on availability and season. We do not publish specific hotel names because availability varies.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What happens if I have an emergency while in Egypt?<span class="acc-icon">+</span></summary>
+      <div class="acc-body">
+        <p class="mb-3">You have 24/7 access to our bilingual medical coordinator, who can reach your treating dentist within 15 minutes.</p>
+        <p class="mb-3"><strong>In case of emergency:</strong></p>
+        <p class="mb-2">• Direct line to your surgeon</p>
+        <p class="mb-2">• VIP transfer to a partner hospital (if needed)</p>
+        <p class="mb-2">• Insurance documentation support</p>
+        <p class="mt-3">All partner clinics have emergency protocols in place, and our team is trained to coordinate with your travel insurance provider.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What is your cancellation and refund policy?<span class="acc-icon">+</span></summary>
+      <div class="acc-body">
+        <p class="mb-3">We operate on a transparent, written refund policy:</p>
+        <p class="mb-2"><strong>100% refund:</strong> If your case cannot be safely treated after clinical review.</p>
+        <p class="mb-2"><strong>Partial refund (90%):</strong> Cancellations more than 30 days before arrival.</p>
+        <p class="mb-2"><strong>No refund:</strong> Cancellations less than 14 days before arrival, or once treatment has started.</p>
+        <p class="mt-3"><strong>Force majeure:</strong> Documented medical emergencies, natural disasters, or travel bans are handled case-by-case.</p>
+        <p class="mt-3">Full terms are provided in writing before any payment. See <button onclick="openModal('refundModal')" class="text-nile-gold underline">Refund Policy</button> for full details.</p>
+      </div>
+    </details>
   </div>
 </section>
 
@@ -3951,6 +4675,20 @@ main#main > section{
       <p class="text-nile-gold-bright text-xs uppercase tracking-widest mb-2">Free Clinical Review</p>
       <p class="text-nile-beige font-serif mb-3" style="font-size:1.15rem">Available for International Patients</p>
       <p class="text-gray-400 text-xs">We review cases within 24–72 hours. No obligation. No pressure.</p>
+    </div>
+
+    <!-- PDF Download -->
+    <div class="mb-10">
+      <a href="Nile-Smile-Guide-2026.pdf" download
+         class="inline-flex items-center gap-3 px-6 py-4 border-2 border-nile-gold-bright bg-nile-gold-bright/10 hover:bg-nile-gold-bright/20 transition rounded-sm text-nile-gold-bright font-medium tracking-wide">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Download the Complete Guide (PDF)
+      </a>
+      <p class="text-xs text-gray-400 mt-3">Everything you need to know — in one document.</p>
     </div>
 
     <form id="leadForm" class="max-w-xl mx-auto flex flex-col sm:flex-row gap-3">
@@ -3991,7 +4729,7 @@ main#main > section{
           <li><a href="#packages" class="hover:text-nile-gold-bright transition">All-on-4 Implants</a></li>
           <li><a href="#packages" class="hover:text-nile-gold-bright transition">Full Mouth Restoration</a></li>
           <li><a href="#packages" class="hover:text-nile-gold-bright transition">Zirconia Crowns</a></li>
-          <li><a href="#packages" class="hover:text-nile-gold-bright transition">Clear Aligners</a></li>
+          <li><a href="#packages" class="hover:text-nile-gold-bright transition">Complete Smile Alignment</a></li>
           <li><a href="#packages" class="hover:text-nile-gold-bright transition">Implant Rescue Program</a></li>
           <li><a href="#guarantees" class="hover:text-nile-gold-bright transition">Warranty & Guarantees</a></li>
         </ul>
@@ -4017,13 +4755,7 @@ main#main > section{
           <li class="leading-relaxed">Cairo, Egypt</li>
         </ul>
 
-        <!-- QR Code -->
-        <div class="mt-6">
-          <p class="text-xs text-nile-gold-bright/70 uppercase tracking-widest mb-3">Scan to Visit</p>
-          <div style="width:100px;height:100px;background:#FFFFFF;padding:5px;display:inline-block;">
-            <img src="images/qr-code.png" alt="Scan to visit nilesmileconcierge.com" style="width:90px;height:90px;display:block;">
-          </div>
-        </div>
+
       </div>
     </div>
 
@@ -4215,81 +4947,62 @@ main#main > section{
     <div class="text-center mb-8">
       <p class="eyebrow mb-3">Your Treatment Journey</p>
       <h3 id="journeyTitle" class="font-serif text-nile-blue mb-4" style="font-size:clamp(1.5rem,4vw,2rem)">From Landing in Cairo<br>to <span class="italic gold-text">Your New Smile</span></h3>
-      <p class="text-nile-muted text-sm max-w-xl mx-auto">Here is exactly what happens — day by day. No surprises. No hidden steps.</p>
+      <p class="text-nile-muted text-sm max-w-xl mx-auto">Here is exactly what happens — step by step. No surprises. No hidden steps.</p>
     </div>
 
-    <!-- Timeline -->
+    <!-- Timeline — 5 Essential Steps -->
     <div class="space-y-3">
 
-      <!-- Day 0 -->
+      <!-- Step 1: Before Travel -->
       <div class="bg-white p-5 border-l-4 border-nile-gold">
         <div class="flex items-start gap-4">
           <div class="flex-shrink-0 text-center" style="min-width:70px">
-            <div class="text-nile-gold font-serif text-xl">Day 0</div>
+            <div class="text-nile-gold font-serif text-xl">Step 1</div>
             <div class="text-nile-muted text-[10px] uppercase tracking-widest mt-1">Before Travel</div>
           </div>
           <div class="flex-1">
-            <h4 class="font-serif text-nile-blue text-base mb-2">Free Virtual Consultation</h4>
+            <h4 class="font-serif text-nile-blue text-base mb-2">Free Virtual Consultation & Written Plan</h4>
             <ul class="text-nile-muted text-xs space-y-1">
               <li>• Upload X-ray or CBCT scan to our secure portal</li>
               <li>• Licensed dentist reviews within 24–72 hours</li>
               <li>• Written treatment plan + itemized quote</li>
-              <li>• Free Zoom consultation with your dentist</li>
+              <li>• Free Zoom consultation with your treating dentist</li>
             </ul>
           </div>
         </div>
       </div>
 
-      <!-- Day 1 -->
+      <!-- Step 2: Arrival & Diagnostics -->
       <div class="bg-white p-5 border-l-4 border-nile-gold">
         <div class="flex items-start gap-4">
           <div class="flex-shrink-0 text-center" style="min-width:70px">
-            <div class="text-nile-gold font-serif text-xl">Day 1</div>
-            <div class="text-nile-muted text-[10px] uppercase tracking-widest mt-1">Arrival</div>
+            <div class="text-nile-gold font-serif text-xl">Step 2</div>
+            <div class="text-nile-muted text-[10px] uppercase tracking-widest mt-1">Day 1–2</div>
           </div>
           <div class="flex-1">
-            <h4 class="font-serif text-nile-blue text-base mb-2">VIP Airport Pickup & Hotel Check-In</h4>
+            <h4 class="font-serif text-nile-blue text-base mb-2">Arrival, Diagnostics & Final Plan</h4>
             <ul class="text-nile-muted text-xs space-y-1">
-              <li>• Private chauffeur meets you at Cairo International Airport</li>
-              <li>• Fast-track through immigration</li>
-              <li>• Transfer to your 5-star hotel (Nile or Pyramids view)</li>
-              <li>• Welcome kit with itinerary + local SIM card</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Day 2 -->
-      <div class="bg-white p-5 border-l-4 border-nile-gold">
-        <div class="flex items-start gap-4">
-          <div class="flex-shrink-0 text-center" style="min-width:70px">
-            <div class="text-nile-gold font-serif text-xl">Day 2</div>
-            <div class="text-nile-muted text-[10px] uppercase tracking-widest mt-1">Diagnostics</div>
-          </div>
-          <div class="flex-1">
-            <h4 class="font-serif text-nile-blue text-base mb-2">Clinical Evaluation & Final Plan</h4>
-            <ul class="text-nile-muted text-xs space-y-1">
+              <li>• Coordinator meets you on arrival</li>
+              <li>• <strong>If Travel Add-On selected:</strong> chauffeur + hotel check-in arranged</li>
               <li>• CBCT 3D scan + intraoral digital scan</li>
-              <li>• Face-to-face meeting with your treating dentist</li>
-              <li>• Final written treatment plan + informed consent</li>
-              <li>• Anesthesia consultation (Local / Oral / IV Sedation)</li>
+              <li>• Face-to-face with your treating dentist + final consent</li>
             </ul>
           </div>
         </div>
       </div>
 
-      <!-- Day 3 -->
+      <!-- Step 3: Surgery -->
       <div class="bg-nile-blue text-white p-5 border-l-4 border-nile-gold-bright">
         <div class="flex items-start gap-4">
           <div class="flex-shrink-0 text-center" style="min-width:70px">
-            <div class="text-nile-gold-bright font-serif text-xl">Day 3</div>
-            <div class="text-gray-400 text-[10px] uppercase tracking-widest mt-1">Surgery</div>
+            <div class="text-nile-gold-bright font-serif text-xl">Step 3</div>
+            <div class="text-gray-400 text-[10px] uppercase tracking-widest mt-1">Day 3</div>
           </div>
           <div class="flex-1">
-            <h4 class="font-serif text-nile-beige text-base mb-2">Implant Placement / Procedure</h4>
+            <h4 class="font-serif text-nile-beige text-base mb-2">Surgery Day</h4>
             <ul class="text-gray-300 text-xs space-y-1">
               <li>• Guided surgery using 3D-printed templates</li>
-              <li>• All treatment completed under sterile protocols</li>
+              <li>• Local anesthesia + optional IV sedation</li>
               <li>• Immediate loading where clinically indicated</li>
               <li>• Duration: 2–3 hours per arch</li>
             </ul>
@@ -4297,78 +5010,39 @@ main#main > section{
         </div>
       </div>
 
-      <!-- Day 4-5 -->
+      <!-- Step 4: Recovery & Fitting -->
       <div class="bg-white p-5 border-l-4 border-nile-gold">
         <div class="flex items-start gap-4">
           <div class="flex-shrink-0 text-center" style="min-width:70px">
-            <div class="text-nile-gold font-serif text-xl">Day 4–5</div>
-            <div class="text-nile-muted text-[10px] uppercase tracking-widest mt-1">Recovery</div>
+            <div class="text-nile-gold font-serif text-xl">Step 4</div>
+            <div class="text-nile-muted text-[10px] uppercase tracking-widest mt-1">Day 4–7</div>
           </div>
           <div class="flex-1">
-            <h4 class="font-serif text-nile-blue text-base mb-2">Rest + Digital Impressions</h4>
+            <h4 class="font-serif text-nile-blue text-base mb-2">Recovery, Impressions & Fitting</h4>
             <ul class="text-nile-muted text-xs space-y-1">
               <li>• Post-op check + suture review</li>
               <li>• Digital impressions for temporary prosthesis</li>
-              <li>• Rest at hotel with concierge support</li>
-              <li>• Optional low-impact tourism (Nile dinner cruise)</li>
+              <li>• Precision fitting of fixed temporary bridge</li>
+              <li>• Bite adjustment, speech & comfort assessment</li>
             </ul>
           </div>
         </div>
       </div>
 
-      <!-- Day 6-7 -->
-      <div class="bg-white p-5 border-l-4 border-nile-gold">
-        <div class="flex items-start gap-4">
-          <div class="flex-shrink-0 text-center" style="min-width:70px">
-            <div class="text-nile-gold font-serif text-xl">Day 6–7</div>
-            <div class="text-nile-muted text-[10px] uppercase tracking-widest mt-1">Fitting</div>
-          </div>
-          <div class="flex-1">
-            <h4 class="font-serif text-nile-blue text-base mb-2">Fixed Temporary Bridge</h4>
-            <ul class="text-nile-muted text-xs space-y-1">
-              <li>• Precision fitting of fixed temporary prosthesis</li>
-              <li>• Bite adjustment + esthetic verification</li>
-              <li>• Speech and comfort assessment</li>
-              <li>• Hygiene education for post-op care</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Day 8-10 -->
-      <div class="bg-white p-5 border-l-4 border-nile-gold">
-        <div class="flex items-start gap-4">
-          <div class="flex-shrink-0 text-center" style="min-width:70px">
-            <div class="text-nile-gold font-serif text-xl">Day 8–10</div>
-            <div class="text-nile-muted text-[10px] uppercase tracking-widest mt-1">Departure</div>
-          </div>
-          <div class="flex-1">
-            <h4 class="font-serif text-nile-blue text-base mb-2">Final Review + Aftercare Handover</h4>
-            <ul class="text-nile-muted text-xs space-y-1">
-              <li>• Post-op healing assessment</li>
-              <li>• Written aftercare protocol in English</li>
-              <li>• 24/7 WhatsApp line with your coordinator</li>
-              <li>• Scheduled telehealth: 1 week / 1 month / 3 months</li>
-              <li>• VIP transfer to Cairo International Airport</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- After Return -->
+      <!-- Step 5: Departure & Aftercare -->
       <div class="bg-nile-beige p-5 border-l-4 border-nile-gold-bright">
         <div class="flex items-start gap-4">
           <div class="flex-shrink-0 text-center" style="min-width:70px">
-            <div class="text-nile-gold font-serif text-xl">After</div>
-            <div class="text-nile-muted text-[10px] uppercase tracking-widest mt-1">Back Home</div>
+            <div class="text-nile-gold font-serif text-xl">Step 5</div>
+            <div class="text-nile-muted text-[10px] uppercase tracking-widest mt-1">Day 8–10+</div>
           </div>
           <div class="flex-1">
-            <h4 class="font-serif text-nile-blue text-base mb-2">Lifetime Follow-Up & Warranty</h4>
+            <h4 class="font-serif text-nile-blue text-base mb-2">Departure & Lifetime Aftercare</h4>
             <ul class="text-nile-muted text-xs space-y-1">
+              <li>• Post-op healing assessment before departure</li>
+              <li>• Written aftercare protocol in English</li>
               <li>• Telehealth check-ins: 1 week / 1 month / 3 months</li>
-              <li>• We coordinate with a licensed dentist in your country</li>
-              <li>• Lifetime warranty on all implants (documented)</li>
-              <li>• 24/7 emergency line in your timezone</li>
+              <li>• Lifetime implant warranty + 24/7 WhatsApp line</li>
             </ul>
           </div>
         </div>
@@ -4376,19 +5050,22 @@ main#main > section{
 
     </div>
 
+    <!-- Journey timeline is 5 steps above — old Day blocks removed -->
+
     <!-- Inclusions -->
     <div class="mt-8 bg-nile-gold/10 border border-nile-gold/30 p-5">
-      <p class="eyebrow text-center mb-3">What's Included</p>
-      <div class="grid grid-cols-2 gap-2 text-xs text-nile-muted">
-        <div>✓ VIP airport transfers</div>
-        <div>✓ 5-star hotel accommodation</div>
-        <div>✓ Bilingual medical coordinator</div>
+      <p class="eyebrow text-center mb-3">What's Included — Every Journey</p>
+      <div class="grid grid-cols-2 gap-2 text-xs text-nile-muted mb-4">
         <div>✓ All clinical procedures</div>
         <div>✓ Premium implant materials</div>
         <div>✓ Written aftercare protocol</div>
         <div>✓ Lifetime implant warranty</div>
         <div>✓ 24/7 WhatsApp support</div>
+        <div>✓ Bilingual medical coordinator</div>
       </div>
+      <p class="text-[10px] text-center text-nile-gold italic border-t border-nile-gold/20 pt-3">
+        Hotel, airport transfers, and concierge services are available as <strong>optional Travel Add-Ons</strong> — selected separately after your clinical review.
+      </p>
     </div>
 
     <!-- CTA -->
@@ -4675,8 +5352,15 @@ for(let i=0;i<particleCount;i++){
       const email = (leadForm.querySelector('input[type="email"]') || {}).value || '';
       const msg = encodeURIComponent(`Hi Nile Smile, I'd like a free X-ray review. My email: ${email}`);
       
-      // افتح WhatsApp
-      window.open('https://wa.me/201503308333?text=' + msg, '_blank', 'noopener');
+      // افتح WhatsApp — عبر anchor حقيقي لتجاوز adblockers
+      const wa = document.createElement('a');
+      wa.href = 'https://wa.me/201503308333?text=' + msg;
+      wa.target = '_blank';
+      wa.rel = 'noopener';
+      wa.style.display = 'none';
+      document.body.appendChild(wa);
+      wa.click();
+      setTimeout(() => document.body.removeChild(wa), 100);
       
       // غيّر الفورم لرسالة شكر
       const formWrapper = leadForm.parentElement;
@@ -4764,19 +5448,34 @@ for(let i=0;i<particleCount;i++){
     }, 2500);
   }
 
-  /* ═════════ 14. EXIT-INTENT POPUP ═════════ */
+  /* ═════════ 14. EXIT-INTENT POPUP (Desktop + Mobile) ═════════ */
   let exitShown = false;
-  document.addEventListener('mouseleave', (e) => {
-    if (e.clientY < 0 && !exitShown && !sessionStorage.getItem('exitShown')) {
-      const popup = document.getElementById('exitPopup');
-      if (popup) {
-        popup.classList.remove('hidden');
-        popup.classList.add('flex');
-        exitShown = true;
-        sessionStorage.setItem('exitShown', 'true');
-      }
+  function showExitPopup() {
+    if (exitShown || sessionStorage.getItem('exitShown')) return;
+    const popup = document.getElementById('exitPopup');
+    if (popup) {
+      popup.classList.remove('hidden');
+      popup.classList.add('flex');
+      exitShown = true;
+      sessionStorage.setItem('exitShown', 'true');
     }
+  }
+  // Desktop: mouse leaves top of viewport
+  document.addEventListener('mouseleave', (e) => {
+    if (e.clientY < 0) showExitPopup();
   });
+  // Mobile: fast scroll-up after scrolling down enough
+  let lastY = window.scrollY;
+  let lastT = Date.now();
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    const t = Date.now();
+    const dy = lastY - y;
+    const dt = t - lastT;
+    if (dy > 80 && dt < 400 && lastY > 800) showExitPopup();
+    lastY = y;
+    lastT = t;
+  }, { passive: true });
   window.closeExitPopup = function() {
     const popup = document.getElementById('exitPopup');
     if (popup) { popup.classList.add('hidden'); popup.classList.remove('flex'); }
@@ -4791,78 +5490,90 @@ for(let i=0;i<particleCount;i++){
       }, 180);
     });
   });
+    /* ═════════ 15. QUICK BAR — ACTIVE SECTION TRACKING ═════════ */
+  const quickChips = document.querySelectorAll('.quick-chip[data-section]');
+  if(quickChips.length){
+    const chipSections = Array.from(quickChips)
+      .map(chip => document.getElementById(chip.dataset.section))
+      .filter(Boolean);
+    
+    let chipTick = false;
+    function updateActiveChip(){
+      if(chipTick) return;
+      chipTick = true;
+      requestAnimationFrame(() => {
+        const probe = window.scrollY + window.innerHeight * 0.35;
+        let current = null;
+        chipSections.forEach(sec => {
+          if(sec.offsetTop <= probe) current = sec.id;
+        });
+        quickChips.forEach(chip => {
+          chip.classList.toggle('active', chip.dataset.section === current);
+        });
+        chipTick = false;
+      });
+    }
+    window.addEventListener('scroll', updateActiveChip, {passive:true});
+    updateActiveChip();
+  }
+
+  /* ═════════ 17. ANIMATED COUNTERS ═════════ */
+  const counters = document.querySelectorAll('.counter');
+  if (counters.length && 'IntersectionObserver' in window) {
+    const counterObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const target = parseFloat(el.dataset.target);
+        const decimals = parseInt(el.dataset.decimals || '0', 10);
+        const duration = 1800;
+        const start = performance.now();
+        const easeOut = t => 1 - Math.pow(1 - t, 3);
+        function step(now) {
+          const p = Math.min((now - start) / duration, 1);
+          const val = target * easeOut(p);
+          el.textContent = decimals > 0
+            ? val.toFixed(decimals)
+            : Math.floor(val);
+          if (p < 1) requestAnimationFrame(step);
+          else el.textContent = decimals > 0
+            ? target.toFixed(decimals)
+            : target;
+        }
+        requestAnimationFrame(step);
+        counterObs.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => counterObs.observe(c));
+  }
+
+  /* ═════════ 18. GA4 SCROLL DEPTH TRACKING ═════════ */
+  const depthMarks = [25, 50, 75, 90];
+  const depthFired = new Set();
+  let depthTick = false;
+  window.addEventListener('scroll', () => {
+    if (depthTick) return;
+    depthTick = true;
+    requestAnimationFrame(() => {
+      if (typeof gtag !== 'function') { depthTick = false; return; }
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+      depthMarks.forEach(mark => {
+        if (pct >= mark && !depthFired.has(mark)) {
+          depthFired.add(mark);
+          gtag('event', 'scroll_depth', {
+            depth: mark,
+            page_location: window.location.href,
+            page_title: document.title
+          });
+        }
+      });
+      depthTick = false;
+    });
+  }, { passive: true });
+
 })();
 </script>
-<style>
-/* ═══════════ STICKY TOC (Desktop only) ═══════════ */
-.sticky-toc{
-  position:fixed;
-  right:1rem;
-  top:50%;
-  transform:translateY(-50%);
-  z-index:40;
-  display:none;
-  flex-direction:column;
-  gap:.35rem;
-  padding:.75rem .5rem;
-  background:rgba(255,255,255,.95);
-  backdrop-filter:blur(12px);
-  border:1px solid rgba(174,145,100,.2);
-  border-radius:100px;
-  box-shadow:0 8px 32px rgba(79,96,112,.08);
-  opacity:0;
-  transition:opacity .4s ease,transform .4s cubic-bezier(.22,1,.36,1);
-  pointer-events:none;
-}
-.sticky-toc.show{
-  opacity:1;
-  pointer-events:auto;
-}
-@media(min-width:1280px){
-  .sticky-toc{display:flex}
-}
-.toc-dot{
-  width:10px;height:10px;
-  border-radius:50%;
-  background:rgba(174,145,100,.3);
-  position:relative;
-  cursor:pointer;
-  transition:all .3s cubic-bezier(.34,1.56,.64,1);
-}
-.toc-dot:hover{
-  transform:scale(1.4);
-  background:#AE9164;
-}
-.toc-dot.active{
-  background:#AE9164;
-  transform:scale(1.3);
-  box-shadow:0 0 12px rgba(174,145,100,.6);
-}
-.toc-dot::after{
-  content:attr(data-label);
-  position:absolute;
-  right:20px;
-  top:50%;
-  transform:translateY(-50%) translateX(6px);
-  background:#1F2A36;
-  color:#fff;
-  font-family:'Montserrat',sans-serif;
-  font-size:.6rem;
-  font-weight:600;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  padding:.35rem .75rem;
-  border-radius:4px;
-  white-space:nowrap;
-  opacity:0;
-  pointer-events:none;
-  transition:all .3s cubic-bezier(.22,1,.36,1);
-}
-.toc-dot:hover::after{
-  opacity:1;
-  transform:translateY(-50%) translateX(0);
-}
-</style>
 
 <!-- ═══════════════════ STICKY TOC ═══════════════════ -->
 <div class="sticky-toc" id="stickyToc">
