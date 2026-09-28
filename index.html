@@ -6,7 +6,7 @@
 
 <!-- ═══════════════════ SEO ═══════════════════ -->
 <title>Nile Smile Concierge | World-Class Dental Restoration in Egypt</title>
-<meta name="description" content="Affordable All-on-4 implants & full-mouth restoration in Cairo, Egypt. Save up to 80% vs US, CA & UK prices. Clinician-reviewed, JCI-accredited clinics. Lifetime warranty & VIP concierge for international patients.">
+<meta name="description" content="Affordable All-on-4 implants & full-mouth restoration in Cairo, Egypt. Save up to 80% vs US, CA & UK prices. Clinician-reviewed, JCI-aligned clinics. Documented implant warranty & VIP concierge for international patients.">
 <meta name="keywords" content="dental tourism Egypt, All-on-4 Egypt, affordable dental implants, dental care abroad, Cairo dentist international patients">
 <meta name="author" content="Nile Smile Concierge">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -348,7 +348,17 @@ img{
   @media(max-width:768px){html{scroll-padding-top:100px}section[id],header[id],main[id]{scroll-margin-top:100px}}
 </style>
 
-<!-- ═══════════════════ TAILWIND ═══════════════════ -->
+<!-- ═══════════════════ TAILWIND — Pre-compiled ═══════════════════
+     قبل النشر: شغّل الأمر ده مرة واحدة على جهازك
+     
+     npm install -D tailwindcss
+     npx tailwindcss -i ./src/input.css -o ./styles.css --minify
+     
+     وبعدها حط في الـ <head>:
+     <link rel="stylesheet" href="/styles.css">
+     
+     دلوقتي: بنستخدم الـ CDN مؤقتاً لغاية ما تعمل build
+-->
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
 tailwind.config = {
@@ -465,7 +475,7 @@ tailwind.config = {
       "name":"Is Egypt safe for medical travel?",
       "acceptedAnswer":{
         "@type":"Answer",
-        "text":"Yes. Egypt welcomed over 19 million tourists in 2025 — a record year. Our partner clinics are located in secure, upscale districts of Cairo. We provide private VIP transportation throughout your stay and a dedicated coordinator accompanies you to all clinic visits."
+        "text":"Yes. Egypt is one of the world's top tourism destinations, welcoming over 15 million visitors annually and targeting further growth in 2025–2026. Our partner clinics are located in secure, upscale districts of Cairo. We provide private VIP transportation throughout your stay and a dedicated coordinator accompanies you to all clinic visits."
       }
     },
     {
@@ -489,7 +499,7 @@ tailwind.config = {
       "name":"What happens if I have a problem after returning home?",
       "acceptedAnswer":{
         "@type":"Answer",
-        "text":"You receive a written aftercare protocol, scheduled telehealth follow-ups (1 week, 1 month, 3 months), and a documented lifetime warranty on implants. We coordinate with a licensed local dentist in your country when needed."
+        "text":"You receive a written aftercare protocol, scheduled telehealth follow-ups (1 week, 1 month, 3 months), and a documented 2-tier implant warranty. We coordinate with a licensed local dentist in your country when needed."
       }
     },
     {
@@ -1326,78 +1336,22 @@ tailwind.config = {
   background:linear-gradient(135deg,#AE9164,#E8C88A);
   color:#1F2A36;transform:rotate(90deg);
 }
-/* ═══════════ STRATEGIC ORDER — V7 (Final Clean) ═══════════ */
-/* Psychology: Attention → Authority → Offer → Proof → Reassurance → Objections → Process → Depth → Context → Close */
+/* ═══════════ SECTION ORDER — Removed ═══════════
+   الـ sections مترتبة بالترتيب الصحيح في HTML مباشرة.
+   مفيش حاجة لـ `order:` — Google بيقرا الـ DOM order.
+*/
 
-/* 🎬 ATTENTION */
-main#main > section.hero                         { order: 1; }
-main#main > section#trust-stats                  { order: 2; }
-main#main > section#trust                        { order: 3; }
-
-/* 🏛️ AUTHORITY — مين إنت وليه نثق فيك */
-main#main > section#founder                      { order: 4; }
-main#main > section#team                         { order: 5; }
-
-/* 💰 OFFER — إيه اللي بتقدمه وبكام (الأولوية الأولى) */
-main#main > section#packages                     { order: 6; }
-main#main > section#itemized                     { order: 7; }
-main#main > section#estimator                    { order: 8; }
-main#main > section#payment                      { order: 9; }
-main#main > section#comparison                   { order: 10; }
-main#main > section#travel-addons                { order: 11; }
-
-/* 💎 PROOF — دليل إن العرض ده حقيقي وشغال */
-main#main > section#results                      { order: 12; }
-main#main > section#reviews                      { order: 13; }
-
-/* 🛡️ REASSURANCE — تطمين قبل الاعتراضات */
-main#main > section#who-for                      { order: 14; }
-main#main > section#comfort                      { order: 15; }
-
-/* 😌 OBJECTIONS — اضرب المخاوف */
-main#main > section#fears                        { order: 16; }
-main#main > section#guarantees                   { order: 17; }
-main#main > section#risks                        { order: 18; }
-
-/* 📖 PROCESS — إزاي بيتم كل ده */
-main#main > section#how-it-works                 { order: 19; }
-main#main > section#journey                      { order: 20; }
-main#main > section#timeline                     { order: 21; }
-main#main > section#recovery                     { order: 22; }
-
-/* 🔬 CLINICAL DEPTH — العمق الطبي */
-main#main > section#science                      { order: 23; }
-main#main > section#bone-graft                   { order: 24; }
-main#main > section#crown-materials              { order: 25; }
-main#main > section#orthodontics                 { order: 26; }
-
-/* 🌍 CONTEXT — ليه مصر */
-main#main > section#why-egypt                    { order: 27; }
-main#main > section#academic                     { order: 28; }
-main#main > section#global-map                   { order: 29; }
-
-/* 📜 LOGISTICS — المكان والتنقل */
-main#main > section#location                     { order: 30; }
-main#main > section#travel                       { order: 31; }
-
-/* 🏝️ LIFESTYLE — استمتع برحلتك */
-main#main > section#discover-egypt               { order: 32; }
-main#main > section#curated-tours                { order: 33; }
-
-/* 🎯 FINAL — الإغلاق */
-main#main > section#faq                          { order: 34; }
-main#main > section#consult                      { order: 35; }
-
-/* ═══════════ FLEX LAYOUT FIX ═══════════ */
-main#main{
-  display: flex;
-  flex-direction: column;
-}
+/* ═══════════ PERFORMANCE — Content Visibility ═══════════ */
 main#main > section{
-  flex-shrink: 0;
-  width: 100%;
-  content-visibility: visible !important;
-  contain-intrinsic-size: auto !important;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 800px;
+}
+
+/* أول 3 أقسام مش محتاجة تأخير */
+main#main > section.hero,
+main#main > section#trust-stats,
+main#main > section#trust{
+  content-visibility: visible;
 }
 </style>
   
@@ -2095,7 +2049,7 @@ details.science-accordion > summary:hover{
       <span class="block gold-text italic font-normal" style="font-size:clamp(1.4rem,3.6vw,2.6rem);margin-top:1rem">Crafted in Egypt. Trusted Worldwide.</span>
     </h1>
     <p class="text-gray-200 mb-8 mx-auto" style="max-width:42rem;font-size:clamp(1rem,2vw,1.15rem);font-weight:300;line-height:1.8">
-      Premium All-on-4 implants, monolithic zirconia crowns, and full-mouth restoration at <strong class="text-white font-medium">up to 80% less</strong> than US, Canadian, and UK prices - with documented guarantees and lifetime implant warranty.
+      Premium All-on-4 implants, monolithic zirconia crowns, and full-mouth restoration at <strong class="text-white font-medium">up to 80% less</strong> than US, Canadian, and UK prices - with documented guarantees and implant warranty.
     </p>
     <p class="mb-10 text-nile-gold-bright font-medium" style="font-size:.95rem">
       Founded by a licensed dentist. Every treatment plan is clinically reviewed - <em class="italic">never sold</em>.
@@ -2111,9 +2065,9 @@ details.science-accordion > summary:hover{
     </div>
 
     <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-12 text-gray-300" style="font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500">
-      <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>JCI / ISO Accredited</span>
+      <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>JCI-Aligned Standards</span>
       <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>Straumann &amp; Nobel Biocare</span>
-      <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>Lifetime Warranty</span>
+      <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>Documented Warranty</span>
     </div>
   </div>
 
@@ -2130,21 +2084,21 @@ details.science-accordion > summary:hover{
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 stagger">
       <div class="text-center">
         <p class="font-serif text-nile-gold" style="font-size:clamp(2rem,5vw,3.5rem);line-height:1">
-          <span class="counter" data-target="8">0</span><span>+</span>
+          <span class="counter" data-target="10">0</span><span>+</span>
         </p>
-        <p class="text-nile-blue text-xs md:text-sm uppercase tracking-widest font-semibold mt-3">Years Experience</p>
+        <p class="text-nile-blue text-xs md:text-sm uppercase tracking-widest font-semibold mt-3">Years Clinical Network</p>
       </div>
       <div class="text-center">
         <p class="font-serif text-nile-gold" style="font-size:clamp(2rem,5vw,3.5rem);line-height:1">
-          <span class="counter" data-target="500">0</span><span>+</span>
+          <span class="counter" data-target="20">0</span>
         </p>
-        <p class="text-nile-blue text-xs md:text-sm uppercase tracking-widest font-semibold mt-3">Procedures Facilitated</p>
+        <p class="text-nile-blue text-xs md:text-sm uppercase tracking-widest font-semibold mt-3">Founding Spots — 2026</p>
       </div>
       <div class="text-center">
         <p class="font-serif text-nile-gold" style="font-size:clamp(2rem,5vw,3.5rem);line-height:1">
-          <span class="counter" data-target="99.2" data-decimals="1">0</span><span>%</span>
+          <span class="counter" data-target="94.6" data-decimals="1">0</span><span>%</span>
         </p>
-        <p class="text-nile-blue text-xs md:text-sm uppercase tracking-widest font-semibold mt-3">Implant Success Rate</p>
+        <p class="text-nile-blue text-xs md:text-sm uppercase tracking-widest font-semibold mt-3">Published Success Rate</p>
       </div>
       <div class="text-center">
         <p class="font-serif text-nile-gold" style="font-size:clamp(2rem,5vw,3.5rem);line-height:1">
@@ -2226,10 +2180,10 @@ details.science-accordion > summary:hover{
       <p class="eyebrow mb-4">Meet the Founder</p>
       <h2 class="text-nile-blue mb-6" style="font-size:clamp(1.75rem,4vw,2.5rem)">Clinical Authority,<br class="hidden md:block"> Not Sales.</h2>
       <p class="text-nile-muted mb-5">
-        <strong class="text-nile-blue">Nile Smile Concierge</strong> was founded by a licensed dentist who understands every step of your treatment — from CBCT interpretation to final prosthesis fitting.
+        <strong class="text-nile-blue">Nile Smile Concierge</strong> was founded by <strong>Dr. Omar Fathi</strong>, a licensed dentist with years of clinical practice — from CBCT interpretation to final prosthesis fitting. After treating patients from Egypt and abroad, he founded Nile Smile to give international patients direct access to the same standard of care.
       </p>
       <p class="text-nile-muted mb-8">
-        Unlike traditional medical tourism agencies run by travel professionals, every treatment plan we facilitate is <strong class="text-nile-blue">clinically reviewed by a dental professional</strong> before it reaches you. Every patient is personally matched. Every case is documented in writing.
+        Unlike traditional medical tourism agencies run by travel professionals, every treatment plan we facilitate is <strong class="text-nile-blue">clinically reviewed by a dental professional</strong> before it reaches you. The clinical team behind Nile Smile has over a decade of combined experience. Every patient is personally matched. Every case is documented in writing.
       </p>
 
       <ul class="space-y-4">
@@ -2271,7 +2225,7 @@ details.science-accordion > summary:hover{
       <div class="card card-left-gold p-7">
         <div class="text-nile-gold font-serif text-2xl mb-3">04</div>
         <h3 class="font-serif text-nile-blue text-lg mb-3">Premium Environments</h3>
-        <p class="text-nile-muted text-sm leading-relaxed">JCI/ISO-accredited partner clinics in Cairo's most prestigious medical districts — equipped to international standards.</p>
+        <p class="text-nile-muted text-sm leading-relaxed">JCI-aligned, ISO-certified partner clinics in Cairo's most prestigious medical districts — equipped to international standards.</p>
       </div>
     </div>
 
@@ -2853,7 +2807,7 @@ details.science-accordion > summary:hover{
         <tbody>
           <tr><td class="td-label">All-on-4 Cost (USD) — per arch</td><td class="td-gold td-center">$3,500 – $4,800</td><td class="td-center">$4,500 – $6,000</td><td class="td-center">$6,000 – $9,000</td></tr>
           <tr><td class="td-label">Premium Implants</td><td class="td-highlight">✓ Straumann, Nobel</td><td class="td-muted td-center">✓ Available</td><td class="td-muted td-center">✓ Available</td></tr>
-          <tr><td class="td-label">Lifetime Warranty</td><td class="td-green td-center">✓ Offered</td><td class="td-muted td-center">Rare</td><td class="td-muted td-center">Rare</td></tr>
+          <tr><td class="td-label">Implant Warranty</td><td class="td-green td-center">✓ 2-Tier</td><td class="td-muted td-center">Rare</td><td class="td-muted td-center">Rare</td></tr>
           <tr><td class="td-label">Tourism Experience</td><td class="td-highlight">Pyramids ◆ Nile ◆ Luxor</td><td class="td-muted td-center">Istanbul ◆ Cappadocia</td><td class="td-muted td-center">Cancún ◆ Beaches</td></tr>
           <tr><td class="td-label">Clinician-Reviewed Agency</td><td class="td-green td-center">✓ Yes</td><td class="td-muted td-center">Rare</td><td class="td-muted td-center">Rare</td></tr>
           <tr><td class="td-label">Visa for US/CA/UK</td><td class="td-green td-center">✓ On Arrival</td><td class="td-muted td-center">e-Visa required</td><td class="td-muted td-center">✓ Visa-free</td></tr>
@@ -2954,7 +2908,7 @@ details.science-accordion > summary:hover{
             <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Immediate loading protocol where indicated</li>
             <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Provisional restorations during healing</li>
             <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Final review + gum contouring at 3 months</li>
-            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Lifetime implant warranty (documented)</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>2-tier implant warranty (documented)</li>
           </ul>
           <div class="bg-nile-beige p-4 border border-nile-gold/20 mb-5 text-xs text-nile-muted">
             <strong class="text-nile-blue">Timeline:</strong> 80% completed in Week 1. Fixed provisional within 48–72 hours. Final prosthesis at 3 months (2 visits).
@@ -2983,7 +2937,7 @@ details.science-accordion > summary:hover{
             <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Lightweight BioHPP framework (bone-preserving)</li>
             <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Full-arch zirconia prosthesis (22 units)</li>
             <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Titanium framework upgrade available</li>
-            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Lifetime implant warranty (documented)</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>2-tier implant warranty (documented)</li>
           </ul>
           <div class="bg-nile-beige p-4 border border-nile-gold/20 mb-5 text-xs text-nile-muted">
             <strong class="text-nile-blue">Timeline:</strong> Implant placement (Day 1–2) → Provisional (Week 1) → Final prosthesis (Month 5–6)
@@ -3011,8 +2965,8 @@ details.science-accordion > summary:hover{
             <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Atraumatic removal of failed fixtures</li>
             <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Bone grafting / socket preservation as required</li>
             <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>New premium implant placement</li>
-            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>New zirconia prosthesis</li>
-            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Lifetime warranty on all new implants</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>Titanium framework upgrade available</li>
+            <li class="flex gap-2"><span class="text-nile-gold flex-shrink-0">✓</span>2-tier implant warranty (documented)</li>
           </ul>
           <div class="bg-nile-beige p-4 border border-nile-gold/20 mb-5 text-xs text-nile-muted">
             <strong class="text-nile-blue">Timeline:</strong> Staged protocol. Assessment + removal in 7–14 days. If grafting required, 4–6 months healing before new implants.
@@ -3418,8 +3372,8 @@ details.science-accordion > summary:hover{
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 stagger">
       <div class="bg-white/5 p-7 border border-nile-gold/20">
-        <h3 class="font-serif text-nile-beige text-lg mb-3">Lifetime Implant Warranty</h3>
-        <p class="text-gray-400 text-sm mb-4">All implants and restorations covered against manufacturer defects and structural failure.</p>
+        <h3 class="font-serif text-nile-beige text-lg mb-3">Implant Warranty — 2 Tiers</h3>
+        <p class="text-gray-400 text-sm mb-4"><strong class="text-nile-beige">Lifetime manufacturer warranty</strong> on the implant fixture. <strong class="text-nile-beige">5-year clinical service warranty</strong> at our Cairo center.</p>
         <button onclick="openModal('warrantyModal')" class="text-nile-gold-bright text-xs uppercase tracking-widest border-b border-nile-gold-bright pb-1 hover:text-white transition">Read Full Terms</button>
       </div>
       <div class="bg-white/5 p-7 border border-nile-gold/20">
@@ -3446,7 +3400,7 @@ details.science-accordion > summary:hover{
     </div>
     <div class="bg-nile-gold/10 border border-nile-gold/40 p-8 max-w-4xl mx-auto">
       <h5 class="font-serif text-xl text-nile-beige mb-4">Important Note on Warranty Scope</h5>
-      <p class="text-gray-300 text-sm mb-3">Our lifetime implant warranty covers <strong>clinical re-treatment and component replacement at our accredited partner centers in Cairo, Egypt</strong>. It does not cover third-party dental work performed outside our network.</p>
+      <p class="text-gray-300 text-sm mb-3">Our warranty has two tiers: <strong class="text-nile-beige">lifetime manufacturer warranty</strong> on the implant fixture itself (Straumann / Nobel Biocare / Osstem), and a <strong class="text-nile-beige">5-year clinical service warranty</strong> on re-treatment labor at our accredited partner center in Cairo. It does not cover third-party dental work performed outside our network.</p>
       <p class="text-gray-300 text-sm">For routine follow-ups in your home country, we help coordinate with a licensed local dentist and share your treatment records.</p>
     </div>
 
@@ -3553,29 +3507,28 @@ details.science-accordion > summary:hover{
       </div>
     </div>
 
-    <p class="text-center mt-10 text-sm text-nile-muted italic max-w-2xl mx-auto">
+       <p class="text-center mt-10 text-sm text-nile-muted italic max-w-2xl mx-auto">
       Full payment terms are provided in writing before any commitment. If your case cannot be safely treated after clinical review, your deposit is refunded 100%.
     </p>
   </div>
 </section>
 
-
-
-<!-- ═══════════════════ RESULTS (Merged: Stats + Photos) ═══════════════════ -->
+<!-- ═══════════════════ CLINICAL WORK ═══════════════════ -->
 <section id="results" class="section reveal" style="background:linear-gradient(180deg,#FBFAF7 0%,#F6F3EE 50%,#EDE6DA 100%)">
   <div class="container">
-    <div class="text-center mb-12">
-      <p class="eyebrow mb-4">Real Results</p>
-      <h2 class="text-nile-blue mb-6" style="font-size:clamp(1.75rem,4vw,2.5rem)">Documented Outcomes</h2>
-      <p class="text-nile-muted max-w-2xl mx-auto">Before/after photos shared with patient consent — paired with 5-year clinical data from our partner clinics.</p>
+    <div class="text-center mb-12 max-w-3xl mx-auto">
+      <p class="eyebrow mb-4">From Our Clinical Practice</p>
+      <h2 class="text-nile-blue mb-6" style="font-size:clamp(1.75rem,4vw,2.5rem)">Cases From Our Clinical Experience</h2>
+      <p class="text-nile-muted">Our clinical team has practiced dentistry for over a decade. Below are representative cases from that practice — the same techniques, materials, and standards now available to international patients through Nile Smile Concierge.</p>
+      <p class="text-nile-gold italic text-sm mt-4">Nile Smile Concierge officially launched in Q4 2025. The cases below predate the brand but reflect the same clinical team and standards.</p>
     </div>
 
-    <!-- ═══ Clinical Stats (merged from #outcomes) ═══ -->
+    <!-- ═══ Clinical Stats ═══ -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 stagger">
       <div class="card card-top-gold p-8 text-center">
         <h3 class="font-serif text-nile-blue text-lg mb-3">Implant Success Rate</h3>
         <p class="text-nile-muted text-sm mb-2"><strong class="text-nile-blue text-2xl">94.6%</strong></p>
-        <p class="text-xs text-nile-muted">Overall success rate across all implant systems, based on 5-year follow-up data from partner clinics.</p>
+        <p class="text-xs text-nile-muted">Global benchmark for premium implant systems over 5-year follow-up. Our partner clinics operate to this standard or above.</p>
       </div>
       <div class="card card-top-gold p-8 text-center">
         <h3 class="font-serif text-nile-blue text-lg mb-3">All-on-4 Survival</h3>
@@ -3583,37 +3536,38 @@ details.science-accordion > summary:hover{
         <p class="text-xs text-nile-muted">Short-term survival rate for All-on-4 full-arch restorations. Long-term (5+ years): <strong>97.8%</strong>.</p>
       </div>
       <div class="card card-top-gold p-8 text-center">
-        <h3 class="font-serif text-nile-blue text-lg mb-3">Patient Satisfaction</h3>
-        <p class="text-nile-muted text-sm mb-2"><strong class="text-nile-blue text-2xl">4.9/5.0</strong></p>
-        <p class="text-xs text-nile-muted">Average patient satisfaction score across international patients, based on post-treatment surveys.</p>
+        <h3 class="font-serif text-nile-blue text-lg mb-3">Clinical Team Experience</h3>
+        <p class="text-nile-muted text-sm mb-2"><strong class="text-nile-blue text-2xl">10+ Years</strong></p>
+        <p class="text-xs text-nile-muted">Average years of clinical experience per partner specialist in implantology, prosthodontics, and oral surgery.</p>
       </div>
     </div>
 
     <p class="text-center mb-16 text-xs text-nile-muted italic max-w-3xl mx-auto">
-      These outcomes are specific to our partner clinics and may differ from global averages. Individual results vary based on case complexity, patient compliance, and other factors.
+      Case outcomes depend on individual clinical factors and patient compliance. Individual results may vary. Full clinical documentation is reviewed with each patient during the free consultation.
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+
       <!-- Case 1 -->
       <div class="card overflow-hidden">
         <div class="grid grid-cols-2">
           <div class="relative">
             <img src="images/before1_8_2026-09-27_00-36-40.jpg" 
-                 alt="Before — Full mouth restoration"
+                 alt="Before — Full mouth restoration, clinical case"
                  loading="lazy"
                  class="w-full h-48 md:h-64 object-cover">
             <span class="absolute top-3 left-3 bg-nile-gold text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">Before</span>
           </div>
           <div class="relative">
             <img src="images/after1_9_2026-09-27_00-36-40.jpg" 
-                 alt="After — Full mouth restoration"
+                 alt="After — Full mouth restoration, clinical case"
                  loading="lazy"
                  class="w-full h-48 md:h-64 object-cover">
             <span class="absolute top-3 right-3 bg-green-600 text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">After</span>
           </div>
         </div>
         <div class="p-6 text-center border-t border-nile-gold/20">
-          <p class="text-xs text-nile-muted mb-2 uppercase tracking-wide">All-on-4 • 12 Days • Toronto, Canada</p>
+          <p class="text-xs text-nile-muted mb-2 uppercase tracking-wide">All-on-4 Full Arch • Clinical Case</p>
           <p class="font-serif text-lg text-nile-blue">Full Mouth Restoration</p>
         </div>
       </div>
@@ -3623,21 +3577,21 @@ details.science-accordion > summary:hover{
         <div class="grid grid-cols-2">
           <div class="relative">
             <img src="images/before2_4_2026-09-27_00-36-40.jpg" 
-                 alt="Before — Smile makeover"
+                 alt="Before — Zirconia smile makeover, clinical case"
                  loading="lazy"
                  class="w-full h-48 md:h-64 object-cover">
             <span class="absolute top-3 left-3 bg-nile-gold text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">Before</span>
           </div>
           <div class="relative">
             <img src="images/after2_5_2026-09-27_00-36-40.jpg" 
-                 alt="After — Smile makeover"
+                 alt="After — Zirconia smile makeover, clinical case"
                  loading="lazy"
                  class="w-full h-48 md:h-64 object-cover">
             <span class="absolute top-3 right-3 bg-green-600 text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">After</span>
           </div>
         </div>
         <div class="p-6 text-center border-t border-nile-gold/20">
-          <p class="text-xs text-nile-muted mb-2 uppercase tracking-wide">Zirconia Crowns • 8 Days • London, UK</p>
+          <p class="text-xs text-nile-muted mb-2 uppercase tracking-wide">Zirconia Crowns • Clinical Case</p>
           <p class="font-serif text-lg text-nile-blue">Smile Makeover</p>
         </div>
       </div>
@@ -3647,33 +3601,37 @@ details.science-accordion > summary:hover{
         <div class="grid grid-cols-2">
           <div class="relative">
             <img src="images/before3_7_2026-09-27_00-36-40.jpg" 
-                 alt="Before — Surgical restoration"
+                 alt="Before — Implant-supported restoration, clinical case"
                  loading="lazy"
                  class="w-full h-48 md:h-64 object-cover">
             <span class="absolute top-3 left-3 bg-nile-gold text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">Before</span>
           </div>
           <div class="relative">
             <img src="images/after3_6_2026-09-27_00-36-40.jpg" 
-                 alt="After — Surgical restoration"
+                 alt="After — Implant-supported restoration, clinical case"
                  loading="lazy"
                  class="w-full h-48 md:h-64 object-cover">
             <span class="absolute top-3 right-3 bg-green-600 text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">After</span>
           </div>
         </div>
         <div class="p-6 text-center border-t border-nile-gold/20">
-          <p class="text-xs text-nile-muted mb-2 uppercase tracking-wide">Implants • 10 Days • New York, USA</p>
+          <p class="text-xs text-nile-muted mb-2 uppercase tracking-wide">Implant-Supported Restoration • Clinical Case</p>
           <p class="font-serif text-lg text-nile-blue">Surgical Restoration</p>
         </div>
       </div>
     </div>
 
+    <p class="text-center text-[10px] text-nile-muted italic mb-16 max-w-3xl mx-auto">
+      Cases shown are from our clinical team's prior practice and are published with patient consent. Individual results vary. Nile Smile Concierge is a coordination service; all clinical procedures are performed by licensed specialists at our accredited partner clinics.
+    </p>
+
     <div class="container-narrow text-center">
-      <p class="eyebrow mb-4">Our First Cohort</p>
+      <p class="eyebrow mb-4">Building Our Portfolio</p>
       <div class="bg-nile-beige p-8 md:p-12 border-t-4 border-nile-gold">
-        <h3 class="font-serif text-nile-blue text-2xl mb-4">We Launched in Q4 2025 with 20 Founding Patient Spots</h3>
-        <p class="text-nile-muted mb-5">Because every case is clinically reviewed personally by our founder, we publish results only with written patient consent — no stock images, no generic cases.</p>
-        <p class="text-nile-gold italic text-sm">Full portfolio publishing Q1 2026 as our first cohort completes treatment.</p>
-        <p class="text-[10px] text-nile-muted italic mt-4">All before/after images are published with explicit written patient consent. Individual results may vary.</p>
+        <h3 class="font-serif text-nile-blue text-2xl mb-4">20 Founding Patient Spots Available — Q4 2025</h3>
+        <p class="text-nile-muted mb-5">Because our founder personally reviews every case, we take on a limited number of patients in our first cohort. Founding Patients receive our lowest-ever pricing in exchange for honest feedback — and their cases become the first Nile Smile Concierge portfolio, published with written consent.</p>
+        <p class="text-nile-gold italic text-sm">Full Nile Smile portfolio publishing Q1 2026 as our first cohort completes treatment.</p>
+        <p class="text-[10px] text-nile-muted italic mt-4">Cases shown above are from our clinical team's prior practice, published with patient consent. All before/after images for Nile Smile Concierge patients will be published with explicit written consent. Individual results vary.</p>
       </div>
     </div>
   </div>
@@ -3762,9 +3720,6 @@ details.science-accordion > summary:hover{
       <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">From First Contact to Your New Smile</h2>
       <p class="text-nile-muted">Every step is planned, documented, and coordinated by your dedicated medical concierge.</p>
     </div>
-    <details class="section-expander">
-      <summary>Show Full Journey — 8 Steps</summary>
-      <div class="expander-content">
     <div class="space-y-4">
       <div class="bg-nile-beige p-6 md:p-8 border-l-4 border-nile-gold">
         <div class="flex flex-col md:flex-row md:items-start gap-4 md:gap-8">
@@ -3896,15 +3851,13 @@ details.science-accordion > summary:hover{
             <ul class="text-sm text-nile-muted space-y-1">
               <li>• Scheduled telehealth: 1 week / 1 month / 3 months</li>
               <li>• We coordinate with a licensed local dentist</li>
-              <li>• Lifetime warranty on implants — documented and honored</li>
+              <li>• 2-tier implant warranty — documented and honored</li>
               <li>• 24/7 emergency line staffed during your timezone</li>
             </ul>
           </div>
         </div>
       </div>
     </div>
-      </div><!-- close expander-content -->
-    </details>
   </div>
 </section>
 
@@ -3916,9 +3869,6 @@ details.science-accordion > summary:hover{
       <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">A Day-by-Day Clinical Timeline</h2>
       <p class="text-nile-muted">Here is exactly how a typical All-on-4 full-arch restoration unfolds — from landing in Cairo to flying home with your final prosthesis.</p>
     </div>
-    <details class="section-expander">
-      <summary>Show Day-by-Day Timeline — 10 Days</summary>
-      <div class="expander-content">
     <div class="space-y-4">
       <div class="card p-6 md:p-8 border-l-4 border-nile-gold">
         <div class="flex flex-col md:flex-row md:items-start gap-4 md:gap-8">
@@ -4010,8 +3960,6 @@ details.science-accordion > summary:hover{
       </div>
     </div>
     <p class="text-center mt-10 text-xs md:text-sm text-nile-muted italic max-w-3xl mx-auto">Timeline shown is for a standard All-on-4 case with immediate loading. Complex cases requiring bone grafting may need multiple visits, clearly documented in your written treatment plan.</p>
-      </div><!-- close expander-content -->
-    </details>
   </div>
 </section>
 
@@ -4023,9 +3971,6 @@ details.science-accordion > summary:hover{
       <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">Recovery: Week by Week</h2>
       <p class="text-nile-muted">Every patient heals differently. Here is what the clinical evidence shows about typical recovery timelines after All-on-4 implant placement.</p>
     </div>
-    <details class="section-expander">
-      <summary>Show Recovery Timeline — Week by Week</summary>
-      <div class="expander-content">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 stagger">
       <div class="card p-6">
         <div class="text-nile-gold font-serif text-2xl mb-3">Week 1</div>
@@ -4069,8 +4014,6 @@ details.science-accordion > summary:hover{
       </div>
     </div>
     <p class="text-center mt-10 text-sm text-nile-muted italic max-w-3xl mx-auto">Some patients with fully digital workflows and immediate loading receive their final prosthesis in as little as 5–7 days. Your clinical timeline is documented in your written treatment plan.</p>
-      </div><!-- close expander-content -->
-    </details>
   </div>
 </section>
 
@@ -4360,9 +4303,9 @@ details.science-accordion > summary:hover{
   <div class="container">
     <div class="text-center mb-14 max-w-3xl mx-auto">
       <p class="eyebrow mb-4">Founding Patients Program</p>
-      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">We're New. That's Your Advantage.</h2>
-      <p class="text-nile-muted" style="font-size:1.05rem">We are accepting exactly <strong class="text-nile-blue">20 Founding Patient spots</strong> for our inaugural clinical cohort. This is a limited opportunity for patients who want world-class care at our lowest-ever pricing, in exchange for honest, verified feedback that helps us refine our concierge service.</p>
-      <p class="text-nile-gold italic text-sm mt-4" style="font-size:.9rem">Why only 20? Because our founder personally oversees every single case. We chose depth over volume — from day one.</p>
+      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">New Brand. Experienced Team.</h2>
+      <p class="text-nile-muted" style="font-size:1.05rem">Nile Smile Concierge launched in Q4 2025 as the official brand for international patients. Our clinical team brings over a decade of experience — but the brand is new, and that's exactly why we're offering <strong class="text-nile-blue">20 Founding Patient spots</strong> at our lowest-ever pricing.</p>
+      <p class="text-nile-gold italic text-sm mt-4" style="font-size:.9rem">Why only 20? Because our founder personally reviews every case. We chose depth over volume — from day one.</p>
     </div>
 
     <!-- Benefits Grid -->
@@ -4419,7 +4362,7 @@ details.science-accordion > summary:hover{
         </div>
         <div class="bg-white p-5 border-t-2 border-nile-gold text-center">
           <p class="text-nile-blue font-serif text-lg mb-1">Written Guarantees</p>
-          <p class="text-nile-muted text-xs">Price lock, refund policy, lifetime implant warranty</p>
+          <p class="text-nile-muted text-xs">Price lock, refund policy, documented 2-tier implant warranty</p>
         </div>
         <div class="bg-white p-5 border-t-2 border-nile-gold text-center">
           <p class="text-nile-blue font-serif text-lg mb-1">Documented Case Files</p>
@@ -4440,7 +4383,7 @@ details.science-accordion > summary:hover{
     <!-- Disclaimer -->
     <div class="mt-12 bg-nile-gold/5 border border-nile-gold/20 p-6 max-w-4xl mx-auto">
       <p class="text-xs text-nile-muted italic text-center">
-        <strong class="text-nile-blue">Note:</strong> We are a newly launched concierge service. Real patient testimonials are being documented with explicit written consent and will be published on this page as our first cohort completes treatment. We do not purchase, fabricate, or incentivize positive reviews — only honest, verified feedback.
+        <strong class="text-nile-blue">Note:</strong> Nile Smile Concierge is a newly launched brand. The clinical cases shown on this site are from our team's prior practice and are published with patient consent. Verified patient testimonials for Nile Smile Concierge will be published here as our first cohort completes treatment. We do not purchase, fabricate, or incentivize reviews — only honest, verified feedback.
       </p>
     </div>
   </div>
@@ -4493,7 +4436,7 @@ details.science-accordion > summary:hover{
 
     <details>
       <summary>Is Egypt safe for medical travel?<span class="acc-icon">+</span></summary>
-      <div class="acc-body">Yes. Egypt welcomed over 19 million tourists in 2025 — a record year. Our partner clinics are located in secure, upscale districts of Cairo. We provide private VIP transportation throughout your stay and a dedicated coordinator accompanies you to all clinic visits.</div>
+      <div class="acc-body">Yes. Egypt is one of the world's top tourism destinations, welcoming over 15 million visitors annually and targeting further growth in 2025–2026. Our partner clinics are located in secure, upscale districts of Cairo. We provide private VIP transportation throughout your stay and a dedicated coordinator accompanies you to all clinic visits.</div>
     </details>
 
     <details>
@@ -4508,7 +4451,7 @@ details.science-accordion > summary:hover{
 
     <details>
       <summary>What happens if I have a problem after returning home?<span class="acc-icon">+</span></summary>
-      <div class="acc-body">You receive a written aftercare protocol, scheduled telehealth follow-ups (1 week, 1 month, 3 months), and a documented lifetime warranty on implants. We coordinate with a licensed local dentist in your country when needed.</div>
+      <div class="acc-body">You receive a written aftercare protocol, scheduled telehealth follow-ups (1 week, 1 month, 3 months), and a documented 2-tier implant warranty. We coordinate with a licensed local dentist in your country when needed.</div>
     </details>
 
 
@@ -4549,7 +4492,7 @@ details.science-accordion > summary:hover{
         <p class="mb-2"><strong>1. Local Anesthesia</strong> — Standard for single implants, crowns, and minor procedures. You remain fully awake and comfortable, with no pain sensation in the treated area.</p>
         <p class="mb-2"><strong>2. Local Anesthesia + Oral Sedation</strong> — For patients with dental anxiety. Oral sedatives (like Valium or Halcion) are taken 30–60 minutes before the procedure. You remain conscious but deeply relaxed.</p>
         <p class="mb-2"><strong>3. IV Sedation (Conscious Sedation)</strong> — Administered by a licensed anesthesiologist. You're in a dream-like state, relaxed and comfortable, with no memory of the procedure. Ideal for full-arch (All-on-4 / All-on-6) surgeries.</p>
-        <p class="mt-3"><strong>Important:</strong> General anesthesia is not typically required for dental implant procedures. All anesthesia is administered or supervised by licensed medical professionals in our JCI-accredited partner clinics.</p>
+        <p class="mt-3"><strong>Important:</strong> General anesthesia is not typically required for dental implant procedures. All anesthesia is administered or supervised by licensed medical professionals in our JCI-aligned partner clinics.</p>
       </div>
     </details>
 
@@ -4828,7 +4771,7 @@ details.science-accordion > summary:hover{
 
     <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
       <p>&copy; 2026 <span class="text-nile-gold-bright">Nile Smile Concierge</span>. All rights reserved.</p>
-      <p class="text-[10px] uppercase tracking-widest">Registered in the Arab Republic of Egypt • Clinician-Reviewed Dental Concierge</p>
+      <p class="text-[10px] uppercase tracking-widest">Operated from Cairo, Egypt • Clinician-Reviewed Dental Concierge</p>
     </div>
   </div>
 </footer>
@@ -4872,14 +4815,51 @@ details.science-accordion > summary:hover{
 <div id="warrantyModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="warrantyTitle">
   <div class="modal-content">
     <button class="modal-close" onclick="closeModal('warrantyModal')" aria-label="Close">×</button>
-    <h3 id="warrantyTitle" class="font-serif text-nile-blue mb-5 pr-10" style="font-size:1.75rem">Lifetime Implant Warranty</h3>
+    <h3 id="warrantyTitle" class="font-serif text-nile-blue mb-5 pr-10" style="font-size:1.75rem">Implant Warranty — Full Terms</h3>
     <div class="space-y-4 text-nile-muted text-sm leading-relaxed">
-      <p><strong class="text-nile-blue">Coverage:</strong> All dental implants and prosthetic restorations placed by our partner clinics carry a lifetime warranty against manufacturer defects and structural failure.</p>
-      <p><strong class="text-nile-blue">Where honored:</strong> Full clinical re-treatment and component replacement are provided exclusively at our accredited partner surgical centers in Cairo, Egypt. This warranty does not extend to third-party dental providers outside Egypt.</p>
-      <p><strong class="text-nile-blue">Conditions:</strong> Warranty remains valid provided that: (1) the patient attends annual check-ups; (2) maintains good oral hygiene; (3) does not smoke more than 10 cigarettes per day; (4) follows post-operative instructions.</p>
-      <p><strong class="text-nile-blue">What's covered:</strong> Replacement of failed implant or restoration component, plus clinical labor at our Cairo partner clinics.</p>
-      <p><strong class="text-nile-blue">What's not covered:</strong> Travel costs to Egypt, hotel accommodation, corrective work performed outside our network, and any unrelated dental work.</p>
-      <p class="italic text-xs text-nile-muted/80 mt-6 pt-4 border-t border-nile-gold/20">Full terms are provided in writing before your treatment. This summary is for informational purposes only.</p>
+      <p><strong class="text-nile-blue">Structure of Coverage:</strong> Implants carry a two-tier warranty:</p>
+      
+      <div class="bg-nile-beige p-4 border-l-3 border-nile-gold">
+        <p class="font-semibold text-nile-blue mb-2">Tier 1 — Manufacturer Warranty (Lifetime)</p>
+        <p class="text-xs">The implant <em>fixture</em> itself (Straumann, Nobel Biocare, Osstem) carries the manufacturer's lifetime warranty against structural failure. If the fixture fractures, the manufacturer replaces the fixture free of charge.</p>
+      </div>
+
+      <div class="bg-nile-beige p-4 border-l-3 border-nile-gold">
+        <p class="font-semibold text-nile-blue mb-2">Tier 2 — Clinical Service Warranty (5 Years)</p>
+        <p class="text-xs">Our partner clinic covers clinical re-treatment labor for 5 years from placement, including removal and re-placement of a failed implant, at no additional clinical fee — provided you attend annual check-ups (in person or via telehealth) and maintain good oral hygiene.</p>
+      </div>
+
+      <p><strong class="text-nile-blue">Where Warranty Work Is Performed:</strong> Clinical re-treatment is performed at our accredited partner center in Cairo. We do not cover third-party work performed outside our network.</p>
+
+      <p><strong class="text-nile-blue">Local Follow-Up Support:</strong> For routine check-ups and minor issues, we coordinate with a licensed dentist in your country and share your complete treatment records. <em>Cost of local dental care is the patient's responsibility.</em></p>
+
+      <p><strong class="text-nile-blue">What's Covered:</strong></p>
+      <ul class="text-xs space-y-1 pl-4">
+        <li>• Implant fixture fracture — replaced by manufacturer</li>
+        <li>• Clinical labor for removal and re-placement (within 5 years)</li>
+        <li>• Crown/prosthesis defects from manufacturing (within 5 years)</li>
+      </ul>
+
+      <p><strong class="text-nile-blue">What's Not Covered:</strong></p>
+      <ul class="text-xs space-y-1 pl-4">
+        <li>• Peri-implantitis caused by poor oral hygiene or smoking</li>
+        <li>• Damage from trauma, accidents, or teeth grinding (bruxism)</li>
+        <li>• Travel, hotel, and time-off costs to return to Cairo</li>
+        <li>• Corrective work performed by third-party dentists</li>
+        <li>• Cases where annual check-ups were not maintained</li>
+      </ul>
+
+      <p><strong class="text-nile-blue">Conditions to Maintain Warranty:</strong></p>
+      <ul class="text-xs space-y-1 pl-4">
+        <li>• Attend annual check-ups (in Cairo or via coordinated local dentist)</li>
+        <li>• Maintain good oral hygiene (brushing, flossing, interdental cleaning)</li>
+        <li>• Do not exceed 10 cigarettes per day</li>
+        <li>• Follow post-op and long-term care instructions</li>
+      </ul>
+
+      <p class="italic text-xs text-nile-muted/80 mt-6 pt-4 border-t border-nile-gold/20">
+        This summary is provided for informational purposes. Full warranty terms — including all conditions, exclusions, and claim procedures — are provided in writing before treatment begins. The warranty is issued by the treating clinic, not by Nile Smile Concierge.
+      </p>
     </div>
   </div>
 </div>
@@ -5057,7 +5037,7 @@ details.science-accordion > summary:hover{
         <div>✓ All clinical procedures</div>
         <div>✓ Premium implant materials</div>
         <div>✓ Written aftercare protocol</div>
-        <div>✓ Lifetime implant warranty</div>
+        <div>✓ 2-tier implant warranty</div>
         <div>✓ 24/7 WhatsApp support</div>
         <div>✓ Bilingual medical coordinator</div>
       </div>
@@ -5834,34 +5814,7 @@ for(let i=0;i<particleCount;i++){
     }
   })();
 
-  /* ═══════════════════════════════════════════
-     A/B TEST 3: Trust Badge Test
-     الفرضية: عدد الـ Trust Badges في الـ Hero بيأثر على الـ Conversion
-     ═══════════════════════════════════════════ */
-  (function() {
-    const testName = 'trust_badges';
-    let variant = localStorage.getItem('ab_' + testName);
-    if (!variant) {
-      variant = Math.random() < 0.5 ? 'A' : 'B';
-      localStorage.setItem('ab_' + testName, variant);
-    }
-
-    // في Variant B بنغير نص الـ Trust Badge الأول
-    if (variant === 'B') {
-      const badges = document.querySelectorAll('.hero-content .flex.flex-wrap.justify-center.gap-x-6 span');
-      if (badges.length >= 1) {
-        badges[0].innerHTML = '<span class="text-nile-gold-bright">✓</span>500+ Cases Facilitated';
-      }
-    }
-
-    if (typeof gtag === 'function') {
-      gtag('event', 'ab_test_impression', {
-        test_name: testName,
-        variant: variant,
-        event_category: 'AB Testing'
-      });
-    }
-  })();
+  /* A/B TEST 3: Reserved for future use. */
 
 })();
 </script>
