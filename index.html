@@ -1192,11 +1192,7 @@ tailwind.config = {
   #curtain.no-js{animation:curtainFallback .4s ease 1.2s forwards}
   /* ═══════════ MOTION GRAPHICS — PREMIUM ═══════════ */
 
-  /* 7. Performance — Content Visibility */
-  section:not(:first-of-type) {
-    content-visibility: auto;
-    contain-intrinsic-size: 0 800px;
-  }
+
   
   /* 10. Reduced Motion — احترام تفضيلات المستخدم */
   @media (prefers-reduced-motion: reduce) {
@@ -1341,18 +1337,7 @@ tailwind.config = {
    مفيش حاجة لـ `order:` — Google بيقرا الـ DOM order.
 */
 
-/* ═══════════ PERFORMANCE — Content Visibility ═══════════ */
-main#main > section{
-  content-visibility: auto;
-  contain-intrinsic-size: 0 800px;
-}
 
-/* أول 3 أقسام مش محتاجة تأخير */
-main#main > section.hero,
-main#main > section#trust-stats,
-main#main > section#trust{
-  content-visibility: visible;
-}
 </style>
   
 <style>
@@ -2663,12 +2648,8 @@ details.science-accordion > summary:hover{
       <p class="eyebrow mb-4">Seamless Travel</p>
       <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">Travel & Logistics — Handled</h2>
       <p class="text-nile-muted mb-6">From the moment you land in Cairo, every logistical detail is coordinated by our concierge team.</p>
-      <button onclick="const c = this.nextElementSibling; c.classList.toggle('hidden'); this.querySelector('span').textContent = c.classList.contains('hidden') ? 'Show Details ▾' : 'Hide Details ▴';" 
-              class="btn btn-outline-dark inline-flex items-center gap-2" 
-              style="margin-bottom:1rem">
-        <span>Show Details ▾</span>
-      </button>
-      <div class="hidden">
+
+      <div>
       <p class="text-nile-muted mb-6">From the moment you land in Cairo, every logistical detail is coordinated by our concierge team. You focus on recovery — we handle everything else.</p>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10 stagger">
       <div class="card card-left-gold p-6">
@@ -3287,6 +3268,7 @@ details.science-accordion > summary:hover{
     </div>
 
   </div>
+</section>
 <!-- ═══════════════════ PRICE ESTIMATOR ═══════════════════ -->
 <section id="estimator" class="section bg-nile-blue text-white reveal">
   <div class="container-narrow">
