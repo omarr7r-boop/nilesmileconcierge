@@ -408,7 +408,7 @@ tailwind.config = {
   "image":"https://images.unsplash.com/photo-1539650116574-8efeb43e2b45?auto=format&fit=crop&q=80&w=1200",
   "telephone":"+201503308333",
   "email":"contact@nilesmileconcierge.com",
-  "priceRange":"$890-$25,000",
+  "priceRange":"$1,700-$25,000",
   "currenciesAccepted":"USD, CAD, GBP, EUR, EGP",
   "paymentAccepted":"Cash, Credit Card, Bank Transfer, Wise",
   "areaServed":[
@@ -419,11 +419,11 @@ tailwind.config = {
     {"@type":"Country","name":"Germany"}
   ],
   "availableService":[
-    {"@type":"MedicalProcedure","name":"All-on-4 Dental Implants"},
-    {"@type":"MedicalProcedure","name":"Full Mouth Restoration"},
-    {"@type":"MedicalProcedure","name":"Zirconia Crowns"},
-    {"@type":"MedicalProcedure","name":"Clear Aligner Orthodontics"},
-    {"@type":"MedicalProcedure","name":"Dental Implant Rescue"}
+    {"@type":"MedicalProcedure","name":"All-on-4 Dental Implants","offers":{"@type":"Offer","price":"9700","priceCurrency":"USD"}},
+    {"@type":"MedicalProcedure","name":"Full Mouth Restoration","offers":{"@type":"Offer","price":"18200","priceCurrency":"USD"}},
+    {"@type":"MedicalProcedure","name":"Zirconia Crowns","offers":{"@type":"Offer","price":"4400","priceCurrency":"USD"}},
+    {"@type":"MedicalProcedure","name":"Clear Aligner Orthodontics","offers":{"@type":"Offer","price":"4400","priceCurrency":"USD"}},
+    {"@type":"MedicalProcedure","name":"Dental Implant Rescue","offers":{"@type":"Offer","price":"4800","priceCurrency":"USD"}}
   ],
   "address":{
     "@type":"PostalAddress",
@@ -2805,12 +2805,14 @@ details.science-accordion > summary:hover{
           </tr>
         </thead>
         <tbody>
-          <tr><td class="td-label">All-on-4 Cost (USD) — per arch</td><td class="td-gold td-center">$3,500 – $4,800</td><td class="td-center">$4,500 – $6,000</td><td class="td-center">$6,000 – $9,000</td></tr>
+          <tr><td class="td-label">All-on-4 Cost (USD) — per arch</td><td class="td-gold td-center">$3,500 – $4,800</td><td class="td-center">$4,500 – $7,500</td><td class="td-center">$6,000 – $10,000</td></tr>
+          <tr><td class="td-label">Full-Mouth Restoration (both arches)</td><td class="td-gold td-center">$9,700 – $18,200</td><td class="td-center">$14,000 – $22,000</td><td class="td-center">$18,000 – $28,000</td></tr>
           <tr><td class="td-label">Premium Implants</td><td class="td-highlight">✓ Straumann, Nobel</td><td class="td-muted td-center">✓ Available</td><td class="td-muted td-center">✓ Available</td></tr>
           <tr><td class="td-label">Implant Warranty</td><td class="td-green td-center">✓ 2-Tier</td><td class="td-muted td-center">Rare</td><td class="td-muted td-center">Rare</td></tr>
           <tr><td class="td-label">Tourism Experience</td><td class="td-highlight">Pyramids ◆ Nile ◆ Luxor</td><td class="td-muted td-center">Istanbul ◆ Cappadocia</td><td class="td-muted td-center">Cancún ◆ Beaches</td></tr>
           <tr><td class="td-label">Clinician-Reviewed Agency</td><td class="td-green td-center">✓ Yes</td><td class="td-muted td-center">Rare</td><td class="td-muted td-center">Rare</td></tr>
           <tr><td class="td-label">Visa for US/CA/UK</td><td class="td-green td-center">✓ On Arrival</td><td class="td-muted td-center">e-Visa required</td><td class="td-muted td-center">✓ Visa-free</td></tr>
+          <tr><td class="td-label">Flight Time from US East Coast</td><td class="td-center">10–12 hrs</td><td class="td-center">10–12 hrs</td><td class="td-center">3–5 hrs</td></tr>
         </tbody>
       </table>
     </div>
@@ -2829,9 +2831,13 @@ details.science-accordion > summary:hover{
     <strong class="text-nile-blue">Important — Please Read:</strong>
     All prices shown are <strong>indicative estimates in USD</strong>, based on typical cases. Final pricing depends on your clinical evaluation (CBCT scan, bone density, medical history) and is always confirmed in writing before you travel. <strong>CAD/EUR/GBP equivalents</strong> provided at consultation.
   </p>
+  <p class="text-xs text-nile-muted leading-relaxed mb-3">
+    <strong class="text-nile-blue">Seasonal Pricing — Important:</strong>
+    Hotel and travel add-on rates <strong>increase by 30–50% during peak season (November–March)</strong> due to high demand. Low season (May–September) offers discounted rates. All travel add-on prices shown are indicative for a standard 10-day stay in regular season — final quotes are confirmed in writing based on your preferred dates and availability.
+  </p>
   <p class="text-xs text-nile-muted leading-relaxed">
-    <strong class="text-nile-blue">Seasonal Pricing:</strong>
-    Hotel and travel add-on rates vary by season. <strong>Peak season (Nov–Mar):</strong> higher hotel availability demand. <strong>Low season (May–Sep):</strong> discounted rates available. Contact us for a personalized quote based on your preferred dates.
+    <strong class="text-nile-blue">Multiple Visits:</strong>
+    Some treatments require <strong>two visits</strong> with a 3–6 month healing gap between them. See the <a href="#visit-schedule" class="text-nile-gold underline">Visit Schedule</a> section below for details.
   </p>
 </div>
     </div>
@@ -2848,11 +2854,11 @@ details.science-accordion > summary:hover{
           </tr>
         </thead>
         <tbody>
-          <tr><td class="td-label">Signature Zirconia Smile</td><td class="td-center">Full smile makeover</td><td class="td-center">7–8 days</td><td class="td-gold td-center">$3,900</td></tr>
-          <tr><td class="td-label">Prime Bite Full Restoration</td><td class="td-center">Partial tooth loss</td><td class="td-center">1 week + 3 months</td><td class="td-gold td-center">$8,500</td></tr>
-          <tr><td class="td-label">Forever Young (Full-Arch)</td><td class="td-center">Complete tooth loss</td><td class="td-center">5–6 months</td><td class="td-gold td-center">$16,500</td></tr>
-          <tr><td class="td-label">Implant Rescue Program</td><td class="td-center">Failed prior implants</td><td class="td-center">7–14 days</td><td class="td-gold td-center">$4,200</td></tr>
-          <tr><td class="td-label">Complete Smile Alignment</td><td class="td-center">Crowding / gaps</td><td class="td-center">6–12 months</td><td class="td-gold td-center">$3,900</td></tr>
+          <tr><td class="td-label">Signature Zirconia Smile</td><td class="td-center">Full smile makeover</td><td class="td-center">1 visit • 7–8 days</td><td class="td-gold td-center">$4,400</td></tr>
+          <tr><td class="td-label">Prime Bite Full Restoration</td><td class="td-center">Partial tooth loss</td><td class="td-center">2 visits • 5–7 months</td><td class="td-gold td-center">$9,700</td></tr>
+          <tr><td class="td-label">Forever Young (Full-Arch)</td><td class="td-center">Complete tooth loss</td><td class="td-center">2 visits • 5–7 months</td><td class="td-gold td-center">$18,200</td></tr>
+          <tr><td class="td-label">Implant Rescue Program</td><td class="td-center">Failed prior implants</td><td class="td-center">2–3 visits • 6–9 months</td><td class="td-gold td-center">$4,800</td></tr>
+          <tr><td class="td-label">Complete Smile Alignment</td><td class="td-center">Crowding / gaps</td><td class="td-center">2 visits • 6–12 months</td><td class="td-gold td-center">$4,400</td></tr>
         </tbody>
       </table>
     </div>
@@ -2869,7 +2875,7 @@ details.science-accordion > summary:hover{
         <div class="p-7 flex-1 flex flex-col">
           <div class="text-center pb-6 mb-6 border-b border-nile-gold/20">
             <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Starting from</p>
-            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$3,900 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
+            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$4,400 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
             <p class="text-xs text-nile-muted mt-2">vs. $12,000+ in Canada / $15,000+ in USA</p>
           </div>
           <h4 class="font-serif text-nile-blue mb-3">What's Included</h4>
@@ -2898,7 +2904,7 @@ details.science-accordion > summary:hover{
         <div class="p-7 flex-1 flex flex-col">
           <div class="text-center pb-6 mb-6 border-b border-nile-gold/20">
             <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Starting from</p>
-            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$8,500 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
+            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$9,700 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
             <p class="text-xs text-nile-muted mt-2">vs. $30,000+ per arch in USA / $35,000+ in Canada</p>
           </div>
           <h4 class="font-serif text-nile-blue mb-3">What's Included</h4>
@@ -2927,7 +2933,7 @@ details.science-accordion > summary:hover{
         <div class="p-7 flex-1 flex flex-col">
           <div class="text-center pb-6 mb-6 border-b border-nile-gold/20">
             <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Starting from</p>
-            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$16,500 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
+            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$18,200 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
             <p class="text-xs text-nile-muted mt-2">vs. $50,000–$70,000 in USA / $60,000+ in Canada</p>
           </div>
           <h4 class="font-serif text-nile-blue mb-3">What's Included</h4>
@@ -2956,7 +2962,7 @@ details.science-accordion > summary:hover{
         <div class="p-7 flex-1 flex flex-col">
           <div class="text-center pb-6 mb-6 border-b border-nile-gold/20">
             <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Starting from</p>
-            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$4,200 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
+            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$4,800 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
             <p class="text-xs text-nile-muted mt-2">vs. $20,000–$30,000+ for corrective work in USA/Canada</p>
           </div>
           <h4 class="font-serif text-nile-blue mb-3">What's Included</h4>
@@ -2985,7 +2991,7 @@ details.science-accordion > summary:hover{
         <div class="p-7">
           <div class="text-center pb-6 mb-6 border-b border-nile-gold/20">
             <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Complete Package</p>
-            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$3,900 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
+            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$4,400 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
             <p class="text-xs text-nile-muted mt-2">vs. $5,000–$8,000 in Canada / $6,000–$9,000 in USA</p>
           </div>
           <h4 class="font-serif text-nile-blue mb-3">What's Included — Full Treatment</h4>
@@ -3037,6 +3043,84 @@ details.science-accordion > summary:hover{
     </p>
   </div>
 </section>
+<!-- ═══════════════════ VISIT SCHEDULE ═══════════════════ -->
+<section id="visit-schedule" class="section bg-white reveal">
+  <div class="container">
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <p class="eyebrow mb-4">Treatment Timeline</p>
+      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">How Many Visits Do You Need?</h2>
+      <p class="text-nile-muted" style="font-size:1.05rem">
+        Every treatment has a different timeline. Some can be completed in a single trip — others require two visits with a healing gap between them. Here is exactly what to expect.
+      </p>
+    </div>
+
+    <div class="table-wrap mb-10">
+      <table>
+        <thead>
+          <tr>
+            <th>Treatment Package</th>
+            <th class="center">Visits Required</th>
+            <th class="center">First Visit</th>
+            <th class="center">Healing Gap</th>
+            <th class="center">Second Visit</th>
+            <th class="center gold">Total Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-label">Signature Zirconia Smile</td>
+            <td class="td-green td-center">1 visit</td>
+            <td class="td-center">7–8 days</td>
+            <td class="td-muted td-center">—</td>
+            <td class="td-muted td-center">—</td>
+            <td class="td-gold td-center">7–8 days</td>
+          </tr>
+          <tr>
+            <td class="td-label">Prime Bite Full Restoration</td>
+            <td class="td-center">2 visits</td>
+            <td class="td-center">7–8 days</td>
+            <td class="td-center">3–6 months</td>
+            <td class="td-center">5–7 days</td>
+            <td class="td-gold td-center">5–7 months</td>
+          </tr>
+          <tr>
+            <td class="td-label">Forever Young Full-Arch</td>
+            <td class="td-center">2 visits</td>
+            <td class="td-center">7–10 days</td>
+            <td class="td-center">3–6 months</td>
+            <td class="td-center">5–7 days</td>
+            <td class="td-gold td-center">5–7 months</td>
+          </tr>
+          <tr>
+            <td class="td-label">Implant Rescue Program</td>
+            <td class="td-center">2–3 visits</td>
+            <td class="td-center">7–14 days</td>
+            <td class="td-center">4–6 months</td>
+            <td class="td-center">5–7 days</td>
+            <td class="td-gold td-center">6–9 months</td>
+          </tr>
+          <tr>
+            <td class="td-label">Complete Smile Alignment</td>
+            <td class="td-center">2 visits</td>
+            <td class="td-center">3–5 days</td>
+            <td class="td-center">6–12 months (remote)</td>
+            <td class="td-center">3–5 days</td>
+            <td class="td-gold td-center">6–12 months</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bg-nile-gold/5 border border-nile-gold/25 p-6 max-w-4xl mx-auto">
+      <p class="text-sm text-nile-muted leading-relaxed mb-3">
+        <strong class="text-nile-blue">Why two visits?</strong> Dental implants require a biological healing phase called <em>osseointegration</em> — the implant fuses with your jawbone over 3–6 months. The final prosthesis cannot be placed until this healing is complete. This is not optional; it is how implant dentistry works worldwide.
+      </p>
+      <p class="text-xs text-nile-muted italic">
+        <strong>Important:</strong> The healing gap is <strong>not time spent in Egypt</strong> — you return home during this period and come back for the second visit. Final visit dates are confirmed in your written treatment plan.
+      </p>
+    </div>
+  </div>
+</section>
 <!-- ═══════════════════ TRAVEL ADD-ONS ═══════════════════ -->
 <section id="travel-addons" class="section bg-white reveal">
   <div class="container">
@@ -3063,8 +3147,8 @@ details.science-accordion > summary:hover{
         <div class="p-7 flex-1 flex flex-col">
           <div class="text-center pb-6 mb-6 border-b border-nile-gold/20">
             <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Add to any package</p>
-            <p class="font-serif font-bold text-nile-blue" style="font-size:2.2rem">+ $890 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
-            <p class="text-xs text-nile-muted mt-2">Per patient, 8–10 day stay</p>
+            <p class="font-serif font-bold text-nile-blue" style="font-size:2.2rem">+ $1,700 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
+            <p class="text-xs text-nile-muted mt-2">Per patient, 10-day stay • Peak season +30–50%</p>
           </div>
           <h4 class="font-serif text-nile-blue mb-3 text-base">What's Included</h4>
           <ul class="space-y-2 text-sm text-nile-muted mb-6 flex-1">
@@ -3095,8 +3179,8 @@ details.science-accordion > summary:hover{
         <div class="p-7 flex-1 flex flex-col">
           <div class="text-center pb-6 mb-6 border-b border-nile-gold/20">
             <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Add to any package</p>
-            <p class="font-serif font-bold text-nile-gold" id="premiumPrice" style="font-size:2.2rem">+ $1,890 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
-            <p class="text-xs text-nile-muted mt-2">Per patient, 10-day stay</p>
+            <p class="font-serif font-bold text-nile-gold" id="premiumPrice" style="font-size:2.2rem">+ $3,600 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
+            <p class="text-xs text-nile-muted mt-2">Per patient, 10-day stay • Peak season +30–50%</p>
           </div>
           <h4 class="font-serif text-nile-blue mb-3 text-base">Everything in Essential, plus:</h4>
           <ul class="space-y-2 text-sm text-nile-muted mb-6 flex-1">
@@ -3125,8 +3209,8 @@ details.science-accordion > summary:hover{
         <div class="p-7 flex-1 flex flex-col">
           <div class="text-center pb-6 mb-6 border-b border-nile-gold/20">
             <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Add to any package</p>
-            <p class="font-serif font-bold text-nile-gold" style="font-size:2.2rem">+ $3,490 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
-            <p class="text-xs text-nile-muted mt-2">Per patient, 10-day stay</p>
+            <p class="font-serif font-bold text-nile-gold" style="font-size:2.2rem">+ $6,650 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
+            <p class="text-xs text-nile-muted mt-2">Per patient, 10-day stay • Peak season +30–50%</p>
           </div>
           <h4 class="font-serif text-nile-blue mb-3 text-base">Everything in Premium, plus:</h4>
           <ul class="space-y-2 text-sm text-nile-muted mb-6 flex-1">
@@ -3203,47 +3287,57 @@ details.science-accordion > summary:hover{
     </div>
 
   </div>
-</section>
 <!-- ═══════════════════ PRICE ESTIMATOR ═══════════════════ -->
 <section id="estimator" class="section bg-nile-blue text-white reveal">
   <div class="container-narrow">
     <div class="text-center mb-10">
       <p class="eyebrow eyebrow-light mb-4">Quick Estimate</p>
       <h2 class="mb-4" style="font-size:clamp(1.75rem,4vw,2.5rem)">Get a Rough Idea in 30 Seconds</h2>
-      <p class="text-gray-300 text-sm max-w-2xl mx-auto">Select your treatment and add-ons — see an indicative price range instantly. Final quote is confirmed in writing after your free clinical review.</p>
+      <p class="text-gray-300 text-sm max-w-2xl mx-auto">Select your country, treatment, and add-ons — see an indicative total including flights, hotel, and treatment.</p>
     </div>
 
     <div class="bg-white/5 border border-nile-gold/30 p-6 md:p-10 max-w-2xl mx-auto">
 
-      <!-- Treatment -->
-      <div class="mb-7">
-        <label class="block text-nile-gold-bright text-xs uppercase tracking-widest font-semibold mb-3">1. Treatment</label>
-        <select id="estTreatment" class="w-full px-4 py-3 bg-white text-nile-ink border border-nile-gold/30 focus:outline-none focus:ring-2 focus:ring-nile-gold" style="border-radius:2px">
-          <option value="0">— Select treatment —</option>
-          <option value="3900|5">Signature Zirconia Smile (from $3,900)</option>
-          <option value="8500|5">Prime Bite Full Restoration (from $8,500)</option>
-          <option value="16500|7">Forever Young Full-Arch (from $16,500)</option>
-          <option value="4200|5">Implant Rescue Program (from $4,200)</option>
-          <option value="3900|4">Complete Smile Alignment (from $3,900)</option>
+      <div class="mb-6">
+        <label class="block text-nile-gold-bright text-xs uppercase tracking-widest font-semibold mb-3">1. Departure Country</label>
+        <select id="estCountry" class="w-full px-4 py-3 bg-white text-nile-ink border border-nile-gold/30 focus:outline-none focus:ring-2 focus:ring-nile-gold" style="border-radius:2px">
+          <option value="0">— Select country —</option>
+          <option value="900">USA — round trip (from $900)</option>
+          <option value="750">Canada — round trip (from $750)</option>
+          <option value="380">UK — round trip (from $380)</option>
+          <option value="280">Gulf (KSA / UAE / Kuwait) — (from $280)</option>
+          <option value="480">Europe — round trip (from $480)</option>
+          <option value="950">Australia — round trip (from $950)</option>
         </select>
       </div>
 
-      <!-- Add-Ons -->
-      <div class="mb-7">
-        <label class="block text-nile-gold-bright text-xs uppercase tracking-widest font-semibold mb-3">2. Travel Add-On</label>
+      <div class="mb-6">
+        <label class="block text-nile-gold-bright text-xs uppercase tracking-widest font-semibold mb-3">2. Treatment</label>
+        <select id="estTreatment" class="w-full px-4 py-3 bg-white text-nile-ink border border-nile-gold/30 focus:outline-none focus:ring-2 focus:ring-nile-gold" style="border-radius:2px">
+          <option value="0|0">— Select treatment —</option>
+          <option value="4400|1">Signature Zirconia Smile (from $4,400)</option>
+          <option value="9700|2">Prime Bite Full Restoration (from $9,700)</option>
+          <option value="18200|2">Forever Young Full-Arch (from $18,200)</option>
+          <option value="4800|2">Implant Rescue Program (from $4,800)</option>
+          <option value="4400|2">Complete Smile Alignment (from $4,400)</option>
+        </select>
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-nile-gold-bright text-xs uppercase tracking-widest font-semibold mb-3">3. Travel Add-On (Optional)</label>
         <select id="estAddon" class="w-full px-4 py-3 bg-white text-nile-ink border border-nile-gold/30 focus:outline-none focus:ring-2 focus:ring-nile-gold" style="border-radius:2px">
           <option value="0">— No add-on (clinical only) —</option>
-          <option value="890">Essential Comfort (+$890)</option>
-          <option value="1890">Premium Journey (+$1,890)</option>
-          <option value="3490">Signature VIP (+$3,490)</option>
+          <option value="1700">Essential Comfort (+$1,700)</option>
+          <option value="3600">Premium Journey (+$3,600)</option>
+          <option value="6650">Signature VIP (+$6,650)</option>
         </select>
       </div>
 
-      <!-- Result -->
       <div id="estResult" class="bg-nile-gold/10 border border-nile-gold/40 p-6 text-center" style="border-radius:2px">
-        <p class="text-nile-gold-bright text-xs uppercase tracking-widest mb-2">Your Indicative Estimate</p>
+        <p class="text-nile-gold-bright text-xs uppercase tracking-widest mb-3">Your Indicative Total</p>
         <p id="estPrice" class="font-serif text-nile-beige mb-2" style="font-size:2rem">—</p>
-        <p class="text-gray-400 text-xs italic">Indicative only. Final quote confirmed after clinical review.</p>
+        <div id="estBreakdown" class="text-xs text-gray-300 mt-3 space-y-1"></div>
+        <p class="text-gray-400 text-xs italic mt-4">Indicative only. Peak season (Nov–Mar) may add 30–50% to hotel rates. Final quote confirmed after clinical review.</p>
       </div>
 
       <div class="mt-6 text-center">
@@ -3253,13 +3347,13 @@ details.science-accordion > summary:hover{
     </div>
 
     <p class="text-center text-xs text-gray-500 italic mt-6 max-w-xl mx-auto">
-      This calculator provides a rough indication only. Final pricing depends on your clinical evaluation and the specific treatment plan recommended by your dentist.
+      This calculator provides a rough indication only. Final pricing depends on your clinical evaluation. Flight estimates are based on average economy fares; actual prices vary by season and airline.
     </p>
   </div>
 </section>
 
 <style>
-#estTreatment, #estAddon{
+#estTreatment, #estAddon, #estCountry{
   font-family:'Montserrat',sans-serif;
   font-size:.9rem;
   font-weight:500;
@@ -3279,42 +3373,50 @@ details.science-accordion > summary:hover{
 
 <script>
 (function(){
+  const co = document.getElementById('estCountry');
   const tr = document.getElementById('estTreatment');
   const ad = document.getElementById('estAddon');
   const out = document.getElementById('estPrice');
-  if(!tr || !ad || !out) return;
+  const brk = document.getElementById('estBreakdown');
+  if(!co || !tr || !ad || !out) return;
+
+  function fmt(n){ return '$' + Math.round(n).toLocaleString(); }
 
   function update(){
-    const tVal = tr.value;
-    const aVal = ad.value;
-    const t = tVal === '0' ? 0 : parseFloat(tVal.split('|')[0]);
-    const a = parseFloat(aVal);
+    const c = parseFloat(co.value) || 0;
+    const tRaw = tr.value;
+    const a = parseFloat(ad.value) || 0;
 
-    if(t === 0 && a === 0){
-      out.textContent = '—';
-      return;
-    }
-
-    // build range: +/- 15%
-    const base = t + a;
-    const low  = Math.round(base * 0.85);
-    const high = Math.round(base * 1.15);
+    const parts = tRaw === '0|0' ? [0,0] : tRaw.split('|').map(Number);
+    const t = parts[0];
+    const visits = parts[1] || 0;
 
     if(t === 0){
-      // add-on only shouldn't happen, but handle gracefully
-      out.textContent = '+ $' + a.toLocaleString() + ' USD';
+      out.textContent = '—';
+      brk.innerHTML = '';
       return;
     }
 
-    out.textContent = '$' + low.toLocaleString() + ' – $' + high.toLocaleString() + ' USD';
+    const flightCost = c * (visits || 1);
+    const base = t + a + flightCost;
+    const low  = Math.round(base * 0.9);
+    const high = Math.round(base * 1.15);
+
+    out.textContent = fmt(low) + ' – ' + fmt(high);
+
+    let b = '';
+    b += '<div>✈️ Flights: ' + fmt(flightCost) + ' (' + (visits||1) + ' visit' + (visits>1?'s':'') + ')</div>';
+    b += '<div>🦷 Treatment: ' + fmt(t) + '</div>';
+    if(a > 0) b += '<div>🏨 Travel add-on: ' + fmt(a) + '</div>';
+    brk.innerHTML = b;
   }
 
+  co.addEventListener('change', update);
   tr.addEventListener('change', update);
   ad.addEventListener('change', update);
 })();
 </script>
 <!-- ═══════════════════ /PRICE ESTIMATOR ═══════════════════ -->
-
 <!-- ═══════════════════ ITEMIZED PRICING ═══════════════════ -->
 <section id="itemized" class="section reveal">
   <div class="container">
@@ -4441,7 +4543,14 @@ details.science-accordion > summary:hover{
 
     <details>
       <summary>Do I need a visa to enter Egypt?<span class="acc-icon">+</span></summary>
-      <div class="acc-body">US, Canadian, UK, EU, Australian, and New Zealand passport holders can obtain a visa on arrival at Egyptian airports for $25 USD (valid 30 days). We provide full documentation to support your entry, including an invitation letter and treatment confirmation.</div>
+      <div class="acc-body">
+  <p class="mb-3">US, Canadian, UK, EU, Australian, and New Zealand passport holders can obtain a visa on arrival at Egyptian airports for <strong>$25 USD</strong> (valid 30 days). We provide full documentation to support your entry, including an invitation letter and treatment confirmation.</p>
+  <p class="mb-3">You can also apply for an <strong>e-Visa in advance</strong> through the official Egyptian government portal:</p>
+  <p class="mb-3">
+    <a href="https://visa2egypt.gov.eg" target="_blank" rel="noopener" class="text-nile-gold underline font-semibold">→ Official Egypt e-Visa Portal (visa2egypt.gov.eg)</a>
+  </p>
+  <p class="text-xs italic text-nile-muted">Note: Only use the official government portal. Third-party visa sites charge additional fees. We provide full documentation support regardless of which method you choose.</p>
+</div>
     </details>
 
     <details>
@@ -4462,7 +4571,18 @@ details.science-accordion > summary:hover{
 
     <details>
       <summary>Does my insurance cover treatment in Egypt?<span class="acc-icon">+</span></summary>
-      <div class="acc-body">In most cases, US, Canadian, and UK dental insurance does not cover treatment abroad. Treat all pricing as self-pay unless you have written confirmation from your insurer. We provide itemized invoices for you to submit.</div>
+      <div class="acc-body">
+  <p class="mb-3"><strong>Short answer:</strong> In the vast majority of cases, <strong>US, Canadian, and UK dental insurance does not cover treatment performed in Egypt</strong>. Treat all pricing as self-pay unless you have written confirmation from your insurer stating otherwise.</p>
+  <p class="mb-3"><strong>Why?</strong> Most dental insurance plans operate within a limited geographic network. Treatment abroad is typically classified as out-of-network or excluded entirely. Some PPO plans may reimburse a small portion, but this is rare and requires pre-authorization.</p>
+  <p class="mb-3"><strong>How we help:</strong> We provide you with:</p>
+  <ul class="list-disc pl-5 space-y-1 mb-3">
+    <li>Itemized invoices with ADA-compatible procedure codes</li>
+    <li>Detailed treatment records and imaging</li>
+    <li>Letters of medical necessity where applicable</li>
+  </ul>
+  <p class="mb-3">You can submit these to your insurer for possible partial reimbursement. We do not guarantee coverage.</p>
+  <p class="text-xs italic text-nile-muted"><strong>Recommendation:</strong> Consider a standalone <strong>medical travel insurance policy</strong> that specifically covers dental treatment abroad. This is different from standard travel insurance and typically costs $50–$150 for the trip.</p>
+</div>
     </details>
 
     <details>
@@ -4471,8 +4591,55 @@ details.science-accordion > summary:hover{
     </details>
 
     <details>
-      <summary>What if I need a second visit?<span class="acc-icon">+</span></summary>
-      <div class="acc-body">Complex cases — such as those requiring extensive bone grafting or sinus lifts — may require a healing phase of 4–6 months before final implant placement. If multiple visits are necessary, this is clearly outlined and priced in your initial written treatment plan.</div>
+      <summary>How many visits will I need?<span class="acc-icon">+</span></summary>
+      <div class="acc-body">
+        <p class="mb-3">It depends on the treatment:</p>
+        <div class="space-y-2 mb-4">
+          <p><strong>1 visit (7–8 days):</strong> Signature Zirconia Smile — crowns only, no implants.</p>
+          <p><strong>2 visits (5–7 months total):</strong> Prime Bite, Forever Young, Complete Smile Alignment.</p>
+          <p><strong>2–3 visits (6–9 months total):</strong> Implant Rescue Program — complex cases with bone grafting.</p>
+        </div>
+        <p>See the full <a href="#visit-schedule" class="text-nile-gold underline">Visit Schedule table</a> for details.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What is the total time from first contact to final smile?<span class="acc-icon">+</span></summary>
+      <div class="acc-body">
+        <p class="mb-3">A typical full journey looks like this:</p>
+        <ul class="list-disc pl-5 space-y-1 mb-3">
+          <li><strong>Week 0:</strong> Free virtual consultation + written treatment plan</li>
+          <li><strong>Weeks 1–4:</strong> Booking, flights, and travel logistics</li>
+          <li><strong>Visit 1:</strong> Surgery + temporary prosthesis (7–10 days in Egypt)</li>
+          <li><strong>Months 1–6:</strong> Healing at home + remote follow-ups</li>
+          <li><strong>Visit 2:</strong> Final prosthesis fitting (5–7 days in Egypt)</li>
+        </ul>
+        <p><strong>Total: 5–7 months</strong> from first contact to final result. Only 12–17 days of that is spent in Egypt.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Can I complete everything in one visit?<span class="acc-icon">+</span></summary>
+      <div class="acc-body">
+        <p class="mb-3"><strong>For crowns and veneers only: Yes.</strong> Signature Zirconia Smile can be completed in a single 7–8 day visit because there are no implants — just precision crowns on existing teeth.</p>
+        <p class="mb-3"><strong>For implants: No — and this is true worldwide.</strong> Dental implants require a biological healing phase (osseointegration) of 3–6 months before the final prosthesis can be placed. No ethical dentist — in Egypt, the US, or anywhere — will place a permanent implant-supported prosthesis on the same day as surgery.</p>
+        <p class="text-xs italic text-nile-muted">If a clinic offers "implants in one visit," ask exactly what they mean. Some use same-day temporary bridges, which is legitimate — but the <em>final</em> permanent restoration still requires a second visit after healing.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What happens if I need a second visit?<span class="acc-icon">+</span></summary>
+      <div class="acc-body">
+        <p class="mb-3">If your treatment requires two visits, here is what happens:</p>
+        <ul class="list-disc pl-5 space-y-2 mb-3">
+          <li><strong>You return home</strong> after the first visit with a fixed temporary prosthesis and a complete aftercare protocol.</li>
+          <li><strong>Remote follow-ups</strong> continue via WhatsApp and telehealth at 1 week, 1 month, and 3 months.</li>
+          <li><strong>Your second visit is scheduled</strong> in advance — typically 4–6 months after the first — and confirmed in writing in your original treatment plan.</li>
+          <li><strong>Pricing for the second visit is included</strong> in your original quote. You do not pay twice for the same treatment.</li>
+          <li><strong>Travel add-on costs apply per visit</strong> — meaning if you choose an add-on package, it applies to each trip separately. We give you a bundled estimate at the start.</li>
+        </ul>
+        <p class="text-xs italic text-nile-muted">Important: The second visit is <strong>not optional</strong> — it is required to place the final permanent prosthesis after healing. Final results cannot be achieved in a single visit for implant cases.</p>
+      </div>
     </details>
 
     <details>
@@ -5786,7 +5953,7 @@ for(let i=0;i<particleCount;i++){
     if (!priceEl) return;
 
     if (variant === 'B') {
-      priceEl.innerHTML = '<span style="text-decoration:line-through;color:#8FA1B2;font-size:1.2rem;font-family:sans-serif;font-weight:400;margin-right:8px;">$2,500</span> + $1,890 <span class="text-base font-sans font-normal text-nile-muted">USD</span>';
+      priceEl.innerHTML = '<span style="text-decoration:line-through;color:#8FA1B2;font-size:1.2rem;font-family:sans-serif;font-weight:400;margin-right:8px;">$4,500</span> + $3,600 <span class="text-base font-sans font-normal text-nile-muted">USD</span>';
     }
 
     if (typeof gtag === 'function') {
