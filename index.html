@@ -2038,6 +2038,190 @@ section#visit-schedule {
   background: linear-gradient(90deg, #1F2A36 0%, #3A4855 100%) !important;
 }
 </style>
+<!-- ═══════════════════ MASTER CSS OVERRIDE — يحل كل التعارضات ═══════════════════ -->
+<style id="masterOverride">
+/* ═══════════ 1. HERO — تعريف واحد نهائي ═══════════ */
+section.hero {
+  background: linear-gradient(135deg, #1F2A36 0%, #3A4855 40%, #4F6070 100%) !important;
+}
+
+/* ═══════════ 2. CARDS — تعريف واحد نهائي ═══════════ */
+.card {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FBFAF7 100%) !important;
+  border: 1px solid rgba(174,145,100,.15);
+  border-radius: 4px;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease !important;
+  will-change: transform;
+}
+.card:hover {
+  transform: translateY(-8px) rotateX(1.2deg) rotateY(-1.2deg) scale(1.015) !important;
+  box-shadow: 0 30px 60px rgba(79, 96, 112, 0.18),
+              0 0 0 1px rgba(174, 145, 100, 0.2) inset !important;
+  border-color: rgba(174,145,100,.4) !important;
+}
+.card-top-gold  { border-top: 3px solid #AE9164 !important; }
+.card-left-gold { border-left: 3px solid #AE9164 !important; }
+.card-top-blue  { border-top: 3px solid #4F6070 !important; }
+
+/* ═══════════ 3. SCIENCE — تعريف واحد نهائي ═══════════ */
+section#science {
+  background: linear-gradient(135deg, #4F6070 0%, #3A4855 100%) !important;
+  color: #FFFFFF !important;
+}
+
+/* ═══════════ 4. DARK NAVY SECTIONS — تعريف موحّد ═══════════ */
+section#guarantees,
+section#discover-egypt,
+section.bg-nile-blue-dark {
+  background: linear-gradient(160deg, #0A0D10 0%, #1F2A36 50%, #2A3744 100%) !important;
+  color: #FFFFFF !important;
+}
+footer,
+footer.bg-nile-blue-dark {
+  background: linear-gradient(180deg, #0A0D10 0%, #1F2A36 100%) !important;
+}
+
+/* ═══════════ 5. BTN-GOLD — تعريف واحد نهائي ═══════════ */
+.btn-gold {
+  background: linear-gradient(135deg, #AE9164 0%, #E8C88A 40%, #C9A96E 60%, #AE9164 100%) !important;
+  background-size: 250% auto !important;
+  color: #1a1a1a;
+  border: 1px solid rgba(174,145,100,.5);
+  box-shadow: 0 4px 15px rgba(174,145,100,.2);
+}
+.btn-gold:hover {
+  background-position: right center !important;
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 12px 32px rgba(174,145,100,.5), 0 0 0 4px rgba(174,145,100,.1) !important;
+}
+
+/* ═══════════ 6. LOGO-SCRIPT — تعريف واحد نهائي ═══════════ */
+.logo-script {
+  font-family: 'Italianno', cursive !important;
+  font-size: 3.6rem !important;
+  line-height: 0.85 !important;
+  color: #4F6070 !important;
+  padding-right: 6px !important;
+  display: block;
+}
+@media(max-width: 640px) {
+  .logo-script { font-size: 2.8rem !important; }
+}
+
+/* ═══════════ 7. TOP-BAR — تعريف واحد نهائي ═══════════ */
+.top-bar {
+  background: linear-gradient(90deg, #1F2A36 0%, #3A4855 50%, #1F2A36 100%) !important;
+}
+
+/* ═══════════ 8. TABLES thead — تعريف واحد نهائي ═══════════ */
+thead tr,
+section#guarantees table thead tr,
+section.bg-nile-blue-dark table thead tr,
+section#bone-graft table thead tr {
+  background: linear-gradient(135deg, #2A3744 0%, #4F6070 100%) !important;
+}
+thead th {
+  color: #FFFFFF !important;
+}
+thead th.gold {
+  color: #E8C88A !important;
+}
+section#bone-graft table tbody tr td,
+section.bg-nile-blue table tbody tr td {
+  color: #E5E7EB !important;
+  border-bottom: 1px solid rgba(174,145,100,.15) !important;
+}
+
+/* ═══════════ 9. SCIENCE ACCORDION — يعمل في #science و #guarantees ═══════════ */
+details.science-accordion {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(174, 145, 100, 0.35) !important;
+  border-radius: 4px;
+  margin-top: 1rem;
+  overflow: hidden;
+}
+details.science-accordion[open] {
+  border-color: rgba(232, 200, 138, 0.6) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25) !important;
+}
+details.science-accordion > summary {
+  padding: 1.5rem 1.75rem;
+  color: #E8C88A !important;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  background: linear-gradient(135deg, rgba(174,145,100,.10), rgba(232,200,138,.04)) !important;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+details.science-accordion > summary::-webkit-details-marker { display: none; }
+details.science-accordion > summary::after {
+  content: '+';
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(232, 200, 138, .4);
+  color: #E8C88A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  line-height: 1;
+  transition: all 0.4s cubic-bezier(.34,1.56,.64,1);
+}
+details.science-accordion[open] > summary {
+  border-bottom: 1px solid rgba(174,145,100,.25) !important;
+  color: #FFFFFF !important;
+}
+details.science-accordion[open] > summary::after {
+  transform: rotate(45deg);
+  background: linear-gradient(135deg, #AE9164, #E8C88A);
+  color: #1F2A36;
+  border-color: #E8C88A;
+}
+
+/* ═══════════ 10. TEXT INSIDE DARK SECTIONS ═══════════ */
+section#guarantees h2,
+section#guarantees h3,
+section#guarantees h4,
+section#discover-egypt h2 {
+  color: #E8C88A !important;
+}
+section#guarantees p,
+section#discover-egypt p {
+  color: #D1D5DB !important;
+}
+section#guarantees .bg-white\/5 h3 {
+  color: #F5E9D0 !important;
+}
+section#guarantees .bg-white\/5 {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(174, 145, 100, 0.25) !important;
+}
+
+/* ═══════════ 11. STICKY MOBILE — تعريف واحد نهائي ═══════════ */
+.sticky-mobile {
+  background: linear-gradient(90deg, #1F2A36 0%, #3A4855 100%) !important;
+}
+
+/* ═══════════ 12. MODAL CONTENT — تعريف واحد نهائي ═══════════ */
+.modal-content {
+  background: linear-gradient(180deg, #FBFAF7 0%, #F6F3EE 100%) !important;
+}
+
+/* ═══════════ 13. BEIGE SECTIONS ═══════════ */
+section.bg-nile-beige {
+  background: linear-gradient(180deg, #FBFAF7 0%, #F6F3EE 50%, #EDE6DA 100%) !important;
+}
+</style>
 </head>
 <body>
 
@@ -2149,35 +2333,32 @@ section#visit-schedule {
     <div class="hero-overlay"></div>
   </div>
 
-  <div class="hero-content">
-    <p class="eyebrow eyebrow-light mb-5">Clinician-Reviewed Medical Tourism | Cairo, Egypt</p>
-    <h1 class="text-white mb-6" style="font-size:clamp(1.75rem,5vw,3.5rem);line-height:1.05;letter-spacing:-0.025em">
-      World-Class Dental Restoration
-      <span class="block gold-text italic font-normal" style="font-size:clamp(1.4rem,3.6vw,2.6rem);margin-top:1rem">Crafted in Egypt. Trusted Worldwide.</span>
-    </h1>
-    <p class="text-gray-200 mb-8 mx-auto" style="max-width:42rem;font-size:clamp(1rem,2vw,1.15rem);font-weight:300;line-height:1.8">
-      Premium All-on-4 implants, monolithic zirconia crowns, and full-mouth restoration at <strong class="text-white font-medium">up to 80% less</strong> than US, Canadian, and UK prices - with documented guarantees and implant warranty.
-    </p>
-    <p class="mb-10 text-nile-gold-bright font-medium" style="font-size:.95rem">
-      Founded by a licensed dentist. Every treatment plan is clinically reviewed - <em class="italic">never sold</em>.
-      <br>
-      <span class="text-gray-300 text-xs">Same implant brands, same materials, same standards - different location.</span>
-    </p>
+<div class="hero-content">
+  <p class="eyebrow eyebrow-light mb-6">Clinician-Reviewed Dental Concierge • Cairo, Egypt</p>
 
-    <div class="flex flex-col sm:flex-row gap-3 justify-center flex-wrap" style="max-width:52rem;margin:0 auto">
-      <a href="#consult" id="heroMainCta" class="btn btn-gold shine-auto">Request Clinical Review</a>
-      <a href="#packages" class="btn btn-outline">View Packages</a>
-      <button onclick="openModal('journeyModal')" class="btn btn-outline">See Your Journey</button>
-      <a href="Nile-Smile-Guide-2026.pdf" download class="btn btn-outline flex items-center justify-center gap-2"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download Full Guide</a>
-    </div>
+  <h1 class="text-white mb-6" style="font-size:clamp(2rem,5.5vw,3.75rem);line-height:1.05;letter-spacing:-0.025em">
+    World-Class Dental Restoration
+    <span class="block gold-text italic font-normal" style="font-size:clamp(1.5rem,3.8vw,2.75rem);margin-top:.75rem">
+      Crafted in Egypt.
+    </span>
+  </h1>
 
-    <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-12 text-gray-300" style="font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500">
-      <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>JCI-Aligned Standards</span>
-      <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>Straumann &amp; Nobel Biocare</span>
-      <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>Documented Warranty</span>
-    </div>
+  <p class="text-gray-200 mb-10 mx-auto" style="max-width:38rem;font-size:clamp(1rem,2vw,1.15rem);font-weight:300;line-height:1.75">
+    Save up to <strong class="text-white font-medium">80%</strong> on premium All-on-4 implants and full-mouth restoration — with documented warranty.
+  </p>
+
+  <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
+    <a href="#consult" id="heroMainCta" class="btn btn-gold shine-auto">Request Clinical Review</a>
+    <a href="#packages" class="btn btn-outline">View Packages</a>
   </div>
 
+  <div class="flex flex-wrap justify-center gap-x-7 gap-y-3 mt-10 text-gray-300"
+       style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500">
+    <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>JCI-Aligned</span>
+    <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>Straumann &amp; Nobel</span>
+    <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>Documented Warranty</span>
+  </div>
+</div>
   <a href="#trust" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-nile-gold-bright opacity-80 hover:opacity-100 transition" aria-label="Scroll down">
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="animation:bounce 2s infinite">
       <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
@@ -2924,7 +3105,7 @@ section#visit-schedule {
   </div>
 </section>
 <!-- ═══════════════════ PACKAGES ═══════════════════ -->
-<section id="packages" class="section reveal" style="background:linear-gradient(180deg,#FBFAF7 0%,#F6F3EE 50%,#EDE6DA 100%);">
+<div class="bg-nile-beige p-4 border-l-4 border-nile-gold">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-14">
       <p class="eyebrow mb-4">Transparent Pricing</p>
@@ -5091,12 +5272,12 @@ section#visit-schedule {
     <div class="space-y-4 text-nile-muted text-sm leading-relaxed">
       <p><strong class="text-nile-blue">Structure of Coverage:</strong> Implants carry a two-tier warranty:</p>
       
-      <div class="bg-nile-beige p-4 border-l-3 border-nile-gold">
+      <div class="bg-nile-beige p-4 border-l-4 border-nile-gold">
         <p class="font-semibold text-nile-blue mb-2">Tier 1 — Manufacturer Warranty (Lifetime)</p>
         <p class="text-xs">The implant <em>fixture</em> itself (Straumann, Nobel Biocare, Osstem) carries the manufacturer's lifetime warranty against structural failure. If the fixture fractures, the manufacturer replaces the fixture free of charge.</p>
       </div>
 
-      <div class="bg-nile-beige p-4 border-l-3 border-nile-gold">
+      <div class="bg-nile-beige p-4 border-l-4 border-nile-gold">
         <p class="font-semibold text-nile-blue mb-2">Tier 2 — Clinical Service Warranty (5 Years)</p>
         <p class="text-xs">Our partner clinic covers clinical re-treatment labor for 5 years from placement, including removal and re-placement of a failed implant, at no additional clinical fee — provided you attend annual check-ups (in person or via telehealth) and maintain good oral hygiene.</p>
       </div>
@@ -5168,30 +5349,17 @@ section#visit-schedule {
     <h3 id="privacyTitle" class="font-serif text-nile-blue mb-5 pr-10" style="font-size:1.75rem">Privacy Policy</h3>
     <div class="space-y-4 text-nile-muted text-sm leading-relaxed">
       <p><strong class="text-nile-blue">Data Controller:</strong> Nile Smile Concierge, Cairo, Egypt. Contact: contact@nilesmileconcierge.com</p>
-      
       <p><strong class="text-nile-blue">What We Collect:</strong> We collect only the information necessary to coordinate your treatment: contact details, medical records (X-rays, CBCT), medical history, and travel preferences.</p>
-      
       <p><strong class="text-nile-blue">Legal Basis for Processing:</strong> We process your data based on (1) your explicit consent, (2) performance of a contract (coordinating your treatment), and (3) compliance with legal obligations.</p>
-      
       <p><strong class="text-nile-blue">Health Data (Special Category):</strong> Your medical records are treated as special category data under applicable data protection laws. We apply enhanced security measures and share your data only with your treating dentist and no one else.</p>
-      
       <p><strong class="text-nile-blue">How Long We Keep Your Data:</strong> We retain your data for a period of 7 years after your last treatment, in compliance with Egyptian medical records regulations. After this period, your data is securely deleted.</p>
-      
       <p><strong class="text-nile-blue">Your Rights:</strong> You have the right to access, correct, delete, restrict processing of, or port your personal data. You also have the right to withdraw consent at any time. To exercise any of these rights, email contact@nilesmileconcierge.com.</p>
-      
       <p><strong class="text-nile-blue">Cookies:</strong> We use cookies to improve your experience and measure campaign effectiveness. You can manage cookie preferences through your browser settings.</p>
-      
       <p><strong class="text-nile-blue">Data Transfers:</strong> Your data may be transferred to our partner clinics in Egypt for the purpose of coordinating your treatment. All transfers are conducted under strict confidentiality agreements.</p>
-      
       <p><strong class="text-nile-blue">Complaints:</strong> If you believe your data protection rights have been violated, you have the right to lodge a complaint with the relevant supervisory authority in your country of residence.</p>
     </div>
   </div>
-</div>
-
-<!-- ═══════════════════ JOURNEY MODAL ═══════════════════ -->
-<div id="journeyModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="journeyTitle">
-  <div class="modal-content">
-    <button class="modal-close" onclick="closeModal('journeyModal')" aria-label="Close">×</button>
+</div>    <button class="modal-close" onclick="closeModal('journeyModal')" aria-label="Close">×</button>
 
     <!-- Header -->
     <div class="text-center mb-8">
