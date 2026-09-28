@@ -22,7 +22,9 @@
 
 <!-- Theme -->
 <meta name="theme-color" content="#4F6070">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 
 <!-- ═══════════════════ FAVICON ═══════════════════ -->
 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -1915,7 +1917,127 @@ details.science-accordion > summary:hover{
   transform:translateY(-50%) translateX(0);
 }
 </style>
+<!-- ═══════════════════ FINAL BACKGROUND FIX — DO NOT REMOVE ═══════════════════ -->
+<style id="finalBgFix">
+/* ═══════════ 1. DARK NAVY SECTIONS (warranty + discovery + footer) ═══════════ */
+section#guarantees,
+section#discover-egypt,
+section.bg-nile-blue-dark,
+footer.bg-nile-blue-dark {
+  background: linear-gradient(160deg, #0A0D10 0%, #1F2A36 50%, #2A3744 100%) !important;
+  background-color: #1F2A36 !important;
+  color: #FFFFFF !important;
+}
 
+footer {
+  background: linear-gradient(180deg, #0A0D10 0%, #1F2A36 100%) !important;
+  background-color: #1F2A36 !important;
+}
+
+/* ═══════════ 2. SLATE BLUE SECTIONS ═══════════ */
+section#science,
+section#bone-graft,
+section#academic,
+section#estimator,
+section#consult,
+section.bg-nile-blue {
+  background: linear-gradient(135deg, #4F6070 0%, #3A4855 100%) !important;
+  background-color: #4F6070 !important;
+}
+
+/* ═══════════ 3. BEIGE / CREAM SECTIONS ═══════════ */
+section.bg-nile-beige {
+  background: linear-gradient(180deg, #FBFAF7 0%, #F6F3EE 50%, #EDE6DA 100%) !important;
+  background-color: #F6F3EE !important;
+}
+
+section.bg-white {
+  background-color: #FFFFFF !important;
+}
+
+/* ═══════════ 4. HERO ═══════════ */
+section.hero {
+  background: linear-gradient(135deg, #1F2A36 0%, #3A4855 40%, #4F6070 100%) !important;
+}
+
+/* ═══════════ 5. TEXT INSIDE DARK SECTIONS ═══════════ */
+section#guarantees h2,
+section#guarantees h3,
+section#guarantees h4,
+section#guarantees h5,
+section#guarantees h6,
+section.bg-nile-blue-dark h2,
+section.bg-nile-blue-dark h3,
+section#discover-egypt h2 {
+  color: #E8C88A !important;
+}
+
+section#guarantees p,
+section.bg-nile-blue-dark p,
+section#discover-egypt p {
+  color: #D1D5DB !important;
+}
+
+/* الكروت الداخلية في ضمانات - نصوص ذهبية */
+section#guarantees .bg-white\/5 h3 {
+  color: #F5E9D0 !important;
+}
+
+/* ═══════════ 6. SCIENCE ACCORDION — inside dark section ═══════════ */
+section#science details.science-accordion,
+section.bg-nile-blue details.science-accordion {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(174, 145, 100, 0.35) !important;
+}
+
+section#science details.science-accordion summary,
+section.bg-nile-blue details.science-accordion summary {
+  color: #E8C88A !important;
+  background: linear-gradient(135deg, rgba(174,145,100,.10), rgba(232,200,138,.05)) !important;
+}
+
+/* ═══════════ 7. TABLES INSIDE DARK SECTIONS ═══════════ */
+section#guarantees table thead tr,
+section.bg-nile-blue-dark table thead tr,
+section#bone-graft table thead tr {
+  background: linear-gradient(135deg, #2A3744 0%, #4F6070 100%) !important;
+  color: #E8C88A !important;
+}
+
+section#bone-graft table tbody tr td,
+section.bg-nile-blue table tbody tr td {
+  color: #E5E7EB !important;
+  border-bottom: 1px solid rgba(174,145,100,.15) !important;
+}
+
+/* ═══════════ 8. GUARANTEE CARDS INSIDE DARK ═══════════ */
+section#guarantees .bg-white\/5 {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(174, 145, 100, 0.25) !important;
+}
+
+/* ═══════════ 9. FAQ + FEARS (white bg) — تأكيد ═══════════ */
+section#faq,
+section#fears,
+section#how-it-works,
+section#journey,
+section#recovery,
+section#curated-tours,
+section#location,
+section#travel,
+section#travel-addons,
+section#packages,
+section#payment,
+section#visit-schedule {
+  /* ensure nothing is overriding */
+  isolation: isolate;
+}
+
+/* ═══════════ 10. STICKY MOBILE + FOOTER BUTTONS ═══════════ */
+.sticky-mobile {
+  background: linear-gradient(90deg, #1F2A36 0%, #3A4855 100%) !important;
+}
+</style>
 </head>
 <body>
 
@@ -2019,7 +2141,7 @@ details.science-accordion > summary:hover{
 
 <!-- ═══════════════════ HERO ═══════════════════ -->
 <main id="main">
-<section class="hero">
+<section class="hero" style="background:linear-gradient(135deg,#1F2A36 0%,#3A4855 40%,#4F6070 100%);">
   <div class="hero-bg">
     <img src="images/spencer-davis-ONVA6s03hg8-unsplash.jpg"
          sizes="100vw" fetchpriority="high" loading="eager" decoding="async"
@@ -2349,7 +2471,7 @@ details.science-accordion > summary:hover{
 
 
 <!-- ═══════════════════ SCIENCE ═══════════════════ -->
-<section id="science" class="section bg-nile-blue text-white reveal">
+<section id="science" class="section text-white reveal" style="background:linear-gradient(135deg,#4F6070 0%,#3A4855 100%);">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-14">
       <p class="eyebrow eyebrow-light mb-4">Clinical Excellence</p>
@@ -2512,7 +2634,7 @@ details.science-accordion > summary:hover{
 </section>
 
 <!-- ═══════════════════ BONE GRAFT MATERIALS TABLE ═══════════════════ -->
-<section id="bone-graft" class="section bg-nile-blue text-white reveal">
+<section id="bone-graft" class="section text-white reveal" style="background:linear-gradient(135deg,#4F6070 0%,#3A4855 100%);">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-12">
       <p class="eyebrow eyebrow-light mb-4">Materials Science</p>
@@ -2689,13 +2811,14 @@ details.science-accordion > summary:hover{
         <div class="flex gap-3"><span class="text-nile-gold-bright font-bold flex-shrink-0">07</span><p>Laptop/tablet for telehealth follow-ups</p></div>
         <div class="flex gap-3"><span class="text-nile-gold-bright font-bold flex-shrink-0">08</span><p>Power adapter (Egypt uses Type C/F, 220V)</p></div>
       </div>
+      </div><!-- close bg-nile-blue -->
       </div><!-- close collapsible -->
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════ ACADEMIC PEDIGREE ═══════════════════ -->
-<section id="academic" class="section bg-nile-blue text-white reveal">
+<section id="academic" class="section text-white reveal" style="background:linear-gradient(135deg,#4F6070 0%,#3A4855 100%);">
   <div class="container">
     <div class="text-center mb-12">
       <p class="eyebrow eyebrow-light mb-4">Academic Pedigree</p>
@@ -2801,7 +2924,7 @@ details.science-accordion > summary:hover{
   </div>
 </section>
 <!-- ═══════════════════ PACKAGES ═══════════════════ -->
-<section id="packages" class="section bg-nile-beige reveal">
+<section id="packages" class="section reveal" style="background:linear-gradient(180deg,#FBFAF7 0%,#F6F3EE 50%,#EDE6DA 100%);">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-14">
       <p class="eyebrow mb-4">Transparent Pricing</p>
@@ -3270,7 +3393,7 @@ details.science-accordion > summary:hover{
   </div>
 </section>
 <!-- ═══════════════════ PRICE ESTIMATOR ═══════════════════ -->
-<section id="estimator" class="section bg-nile-blue text-white reveal">
+<section id="estimator" class="section text-white reveal" style="background:linear-gradient(135deg,#4F6070 0%,#3A4855 100%);">
   <div class="container-narrow">
     <div class="text-center mb-10">
       <p class="eyebrow eyebrow-light mb-4">Quick Estimate</p>
@@ -3447,7 +3570,7 @@ details.science-accordion > summary:hover{
   </div>
 </section>
 <!-- ═══════════════════ FULL GUARANTEES ═══════════════════ -->
-<section id="guarantees" class="section bg-nile-blue-dark text-white reveal">
+<section id="guarantees" class="section text-white reveal" style="background:linear-gradient(160deg,#0A0D10 0%,#1F2A36 50%,#2A3744 100%);">
   <div class="container">
     <div class="text-center mb-12">
       <p class="eyebrow eyebrow-light mb-4">Your Protection</p>
@@ -4102,7 +4225,7 @@ details.science-accordion > summary:hover{
 </section>
 
 <!-- ═══════════════════ DISCOVER EGYPT ═══════════════════ -->
-<section id="discover-egypt" class="section bg-nile-blue-dark text-white reveal">
+<section id="discover-egypt" class="section text-white reveal" style="background:linear-gradient(160deg,#0A0D10 0%,#1F2A36 50%,#2A3744 100%);">
   <div class="container">
     <div class="text-center mb-10 max-w-3xl mx-auto">
       <p class="eyebrow eyebrow-light mb-4">Beyond Treatment</p>
@@ -4755,7 +4878,7 @@ details.science-accordion > summary:hover{
 </section>
 
 <!-- ═══════════════════ CONSULTATION / LEAD ═══════════════════ -->
-<section id="consult" class="section bg-nile-blue text-white reveal">
+<section id="consult" class="section text-white reveal" style="background:linear-gradient(135deg,#4F6070 0%,#3A4855 100%);">
   <div class="container-narrow text-center">
     <p class="eyebrow eyebrow-light mb-4">Free Clinical Review</p>
     <h2 class="mb-4" style="font-size:clamp(1.75rem,4vw,2.5rem)">Not Ready to Book?<br><span class="italic font-normal gold-text">Get a Free Review of Your X-ray.</span></h2>
@@ -4794,7 +4917,7 @@ details.science-accordion > summary:hover{
 </main>
 
 <!-- ═══════════════════ FOOTER ═══════════════════ -->
-<footer class="bg-nile-blue-dark text-white pt-20 pb-8 border-t border-nile-gold/30">
+<footer class="text-white pt-20 pb-8 border-t border-nile-gold/30" style="background:linear-gradient(180deg,#0A0D10 0%,#1F2A36 100%);">
   <div class="container px-5">
     <div class="text-center mb-14 pb-14 border-b border-white/10">
       <h2 class="font-serif text-white mb-8" style="font-size:clamp(1.75rem,4vw,2.75rem)">Ready to <span class="italic gold-text">Reclaim Your Smile?</span></h2>
