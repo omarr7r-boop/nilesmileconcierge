@@ -1992,6 +1992,49 @@ details.science-accordion > summary:hover{
 </style>
 
 </head>
+<!-- ═══════════ FINAL FIX — لحل اختفاء العناوين ═══════════ -->
+<style id="finalFix">
+  /* 1. fallback color — بيظهر لو background-clip فشل */
+  .section-heading { color: #4F6070; }
+  .gold-grad, .gold-text { color: #AE9164; }
+  .section-heading-light { color: #FFFFFF; }
+
+  /* 2. استثناءات للأقسام الداكنة (gold فاتح أوضح) */
+  footer .gold-grad,
+  footer .section-heading,
+  section.bg-nile-blue .gold-grad,
+  section.bg-nile-blue-dark .gold-grad,
+  section#science .gold-grad,
+  section#consult .gold-grad,
+  section#academic .gold-grad,
+  section#bone-graft .gold-grad,
+  section#guarantees .gold-grad,
+  section#discover-egypt .gold-grad,
+  section#estimator .gold-grad {
+    color: #E8C88A;
+  }
+
+  /* 3. لو المتصفح مش داعم background-clip:text — شيل الـ transparent fill */
+  @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+    .section-heading,
+    .gold-grad,
+    .gold-text,
+    .section-heading-light {
+      -webkit-text-fill-color: currentColor !important;
+      background: none !important;
+    }
+  }
+
+  /* 4. Safety net — لو بعد 4 ثواني لسه في h2 شفاف، رجّع اللون */
+  @keyframes safeTextRescue {
+    to { -webkit-text-fill-color: currentColor !important; }
+  }
+  h2.section-heading:not([data-fixed]),
+  h2.gold-grad:not([data-fixed]) {
+    animation: safeTextRescue 0.01s 4s forwards;
+  }
+</style>
+<!-- ═══════════ END FINAL FIX ═══════════ -->
 <body>
 
 <!-- ═══════════════════ QUICK ACTION BAR ═══════════════════ -->
