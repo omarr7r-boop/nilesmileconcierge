@@ -9,14 +9,18 @@
 <meta name="description" content="Affordable All-on-4 implants & full-mouth restoration in Cairo, Egypt. Save up to 80% vs US, CA, UK & AU prices. Clinician-reviewed, JCI-aligned clinics. Documented implant warranty & VIP concierge for international patients.">
 <meta name="keywords" content="dental tourism Egypt, All-on-4 Egypt, affordable dental implants, dental care abroad, Cairo dentist international patients, dental implants Australia, cheap dental implants Sydney, dental tourism Egypt Australia">
 <meta name="author" content="Nile Smile Concierge">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="format-detection" content="telephone=no">
 <link rel="canonical" href="https://nilesmileconcierge.com/">
 
 <!-- Open Graph -->
 <meta property="og:title" content="Nile Smile Concierge | World-Class Dental Restoration in Egypt">
 <meta property="og:description" content="Clinician-reviewed dental concierge. Save up to 80% on premium implants and full-mouth restoration.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://images.unsplash.com/photo-1539650116574-8efeb43e2b45?auto=format&fit=crop&q=80&w=1200">
+<meta property="og:image" content="https://nilesmileconcierge.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Nile Smile Concierge — World-Class Dental Restoration in Egypt">
 <meta property="og:url" content="https://nilesmileconcierge.com/">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -39,7 +43,7 @@
 <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
 
 <!-- Fonts: minimal weights -->
-<link href="https://fonts.googleapis.com/css2?family=Italianno&family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Italianno&family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
 <!-- ═══════════════════ ANALYTICS ═══════════════════ -->
 <!-- Google Analytics 4 -->
@@ -232,7 +236,6 @@ details[open] summary .acc-icon{transform:rotate(135deg)}
 #trust .font-serif:nth-child(3){animation-delay:.8s}
 #trust .font-serif:nth-child(4){animation-delay:1.2s}
 #trust .font-serif:nth-child(5){animation-delay:1.6s}
-#trust .font-serif:nth-child(6){animation-delay:2s}
 @keyframes waPulse{
   0%,100%{box-shadow:0 8px 32px rgba(37,211,102,.42),0 0 0 0 rgba(37,211,102,.5)}
   70%{box-shadow:0 8px 32px rgba(37,211,102,.42),0 0 0 18px rgba(37,211,102,0)}
@@ -652,7 +655,6 @@ tailwind.config = {
   @media(max-width:640px){
     .logo-script{font-size:2.8rem}
     .logo-sans{font-size:.6rem;letter-spacing:.28em}
-    .logo-slogan{font-size:.42rem;letter-spacing:.16em}
   }
   .logo-shimmer{
     position:absolute;top:0;left:-150%;width:100%;height:100%;
@@ -1243,8 +1245,10 @@ tailwind.config = {
   top:0;left:0;right:0;
   z-index:101;
   padding:.65rem 1rem;
+  padding-left:max(1rem, env(safe-area-inset-left));
+  padding-right:max(1rem, env(safe-area-inset-right));
   display:flex;
-  justify-content:center;
+  justify-content:flex-start;
   align-items:center;
   gap:.4rem;
   overflow-x:auto;
@@ -1296,6 +1300,9 @@ tailwind.config = {
 }
 @media(min-width:1024px){
   .quick-bar{display:none !important}
+}
+@media(min-width:768px) and (max-width:1023px){
+  .quick-bar{justify-content:center}
 }
 
 /* ─── Individual Chip ─── */
@@ -1825,7 +1832,7 @@ details.science-accordion > summary:hover{
   </style>
 </noscript>
 <style>
-#estTreatment, #estAddon{
+#estCountry, #estTreatment, #estAddon{
   font-family:'Montserrat',sans-serif;
   font-size:.9rem;
   font-weight:500;
@@ -1847,6 +1854,18 @@ details.science-accordion > summary:hover{
 <style id="finalFix">
   /* 1. fallback color — بيظهر لو background-clip فشل */
   .section-heading { color: #4F6070; }
+
+  /* 4. Cookie banner + sticky mobile body padding */
+  body.has-cookie-banner { padding-bottom: 160px !important; }
+  body.has-sticky-mobile { padding-bottom: 76px; }
+  @media(min-width:768px){
+    body.has-cookie-banner { padding-bottom: 96px !important; }
+    body.has-sticky-mobile { padding-bottom: 0; }
+  }
+  /* ارفع الـ sticky bar فوق الكوكي بانر على الموبايل */
+  @media(max-width:767px){
+    body.has-cookie-banner .sticky-mobile { bottom: 90px; }
+  }
   .gold-grad, .gold-text { color: #AE9164; }
   .section-heading-light { color: #FFFFFF; }
 
@@ -1862,6 +1881,12 @@ details.science-accordion > summary:hover{
   section#discover-egypt .gold-grad,
   section#estimator .gold-grad {
     color: #E8C88A;
+  }
+
+  /* 5. Bounce keyframe (للـ production build بدون Tailwind CDN) */
+  @keyframes bounce{
+    0%,100%{transform:translateY(-25%);animation-timing-function:cubic-bezier(.8,0,1,1)}
+    50%{transform:none;animation-timing-function:cubic-bezier(0,0,.2,1)}
   }
 
   /* 3. لو المتصفح مش داعم background-clip:text — شيل الـ transparent fill */
@@ -1926,8 +1951,8 @@ details.science-accordion > summary:hover{
 
   /* Hero — قلل الحشو */
   .hero{
-    padding: 5rem 1rem 3rem !important;
-    min-height: auto !important;
+    padding: 8rem 1rem 4rem !important;
+    min-height: 90svh !important;
   }
   .hero-content .eyebrow{
     margin-bottom: .75rem !important;
@@ -2141,7 +2166,7 @@ details.science-accordion > summary:hover{
   </div>
 
   <nav class="max-w-7xl mx-auto px-5 lg:px-8 py-3 flex items-center justify-between" aria-label="Main">
-    <a href="#" class="logo-wrap" aria-label="Nile Smile Concierge">
+    <a href="#main" class="logo-wrap" aria-label="Nile Smile Concierge — Back to top">
       <span class="logo-inner">
         <span class="logo-script">Nile Smile</span>
         <span class="logo-sans">Concierge</span>
@@ -2215,7 +2240,7 @@ details.science-accordion > summary:hover{
       <span class="block gold-text italic font-normal" style="font-size:clamp(1.4rem,3.6vw,2.4rem);margin-top:.8rem">Without the Western Price Tag.</span>
     </h1>
     <p class="text-gray-200 mb-10 mx-auto" style="max-width:38rem;font-size:clamp(1rem,2vw,1.1rem);font-weight:300;line-height:1.7">
-      Premium All-on-4 implants and full-mouth restoration — <strong class="text-white font-medium">70–80% less</strong> than US, UK, Canadian & Australian prices. Same brands. Same standards. Documented warranty.
+      Premium implants, <strong class="text-white font-medium">70–80% less</strong> than US, UK, Canadian & Australian prices.
     </p>
 
     <div class="flex flex-col sm:flex-row gap-3 justify-center" style="max-width:32rem;margin:0 auto">
@@ -2223,11 +2248,10 @@ details.science-accordion > summary:hover{
       <a href="#packages" class="btn btn-outline">View Packages</a>
     </div>
 
-    <div class="flex flex-wrap justify-center gap-x-8 gap-y-3 mt-10 text-gray-300" style="font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500">
+    <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-8 text-gray-300" style="font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500">
       <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>JCI-Aligned</span>
       <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>Straumann &amp; Nobel</span>
       <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>2-Tier Warranty</span>
-      <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>Serving AU, US, CA &amp; UK</span>
     </div>
   </div>
 
@@ -2350,6 +2374,29 @@ details.science-accordion > summary:hover{
         <li class="flex items-start gap-4"><span class="text-nile-gold text-xl flex-shrink-0 mt-0.5">✓</span><span class="text-nile-blue font-medium">Licensed dentist (BDS)</span></li>
         <li class="flex items-start gap-4"><span class="text-nile-gold text-xl flex-shrink-0 mt-0.5">✓</span><span class="text-nile-blue font-medium">Direct access to Egypt's top implantologists &amp; prosthodontists</span></li>
         <li class="flex items-start gap-4"><span class="text-nile-gold text-xl flex-shrink-0 mt-0.5">✓</span><span class="text-nile-blue font-medium">Every case clinically reviewed before written quote</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ WHO IS THIS FOR ═══════════════════ -->
+<section id="who-for" class="section reveal">
+  <div class="container grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="card card-top-blue p-8">
+      <h3 class="text-2xl md:text-3xl font-serif text-nile-blue mb-6">Who This Service Is For</h3>
+      <ul class="space-y-4 text-nile-muted text-sm">
+        <li class="flex items-start gap-3"><span class="text-nile-blue text-xl flex-shrink-0">✓</span>Adults in Australia, the US, Canada, or the UK facing $20,000+ quotes for All-on-4 or full-mouth restoration.</li>
+        <li class="flex items-start gap-3"><span class="text-nile-blue text-xl flex-shrink-0">✓</span>Patients medically cleared for dental surgery and international travel.</li>
+        <li class="flex items-start gap-3"><span class="text-nile-blue text-xl flex-shrink-0">✓</span>Patients willing to complete proper diagnostics and follow a treatment plan.</li>
+        <li class="flex items-start gap-3"><span class="text-nile-blue text-xl flex-shrink-0">✓</span>Patients seeking a documented, transparent, elite medical process.</li>
+      </ul>
+    </div>
+    <div class="bg-gray-50 p-8 border-t-4 border-gray-300">
+      <h3 class="text-2xl md:text-3xl font-serif text-gray-500 mb-6">Who This Is Not For</h3>
+      <ul class="space-y-4 text-gray-500 text-sm">
+        <li class="flex items-start gap-3"><span class="text-gray-400 text-xl flex-shrink-0">✗</span>Patients seeking treatment without providing proper diagnostics in advance.</li>
+        <li class="flex items-start gap-3"><span class="text-gray-400 text-xl flex-shrink-0">✗</span>Cases requiring complex multi-stage bone grafting that cannot be completed within the travel window.</li>
+        <li class="flex items-start gap-3"><span class="text-gray-400 text-xl flex-shrink-0">✗</span>Patients expecting national health insurance to cover treatment abroad without prior confirmation.</li>
       </ul>
     </div>
   </div>
@@ -2789,44 +2836,6 @@ details.science-accordion > summary:hover{
     <p class="text-xs text-nile-muted italic text-center mt-4">Source: Medicine (Baltimore) 2026 RCT; Nature 2026 Meta-Analysis.</p>
   </div>
 </section>
-
-
-
-<!-- ═══════════════════ RISKS & COMPLICATIONS ═══════════════════ -->
-<section id="risks" class="section bg-white reveal">
-  <div class="container">
-    <div class="text-center max-w-3xl mx-auto mb-12">
-      <p class="eyebrow mb-4">Transparency</p>
-      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">Risks & Complications: What You Should Know</h2>
-      <p class="text-nile-muted">We believe in radical transparency. Here is what the evidence says about implant complications — and how our protocols minimize them.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 stagger">
-      <div class="card card-top-gold p-7 text-center">
-        <h3 class="font-serif text-nile-blue text-lg mb-3">Implant Success Rate</h3>
-        <p class="text-nile-muted text-sm"><strong class="text-nile-blue">94.6%</strong> overall success across systematic reviews. All-on-4 short-term survival: <strong class="text-nile-blue">99.2%</strong>. Long-term (5+ years): <strong class="text-nile-blue">97.8%</strong>.</p>
-      </div>
-      <div class="card card-top-gold p-7 text-center">
-        <h3 class="font-serif text-nile-blue text-lg mb-3">Peri-Implantitis</h3>
-        <p class="text-nile-muted text-sm">Affects approximately <strong class="text-nile-blue">9.6%</strong> of implants. Risk is significantly reduced with 6-month maintenance intervals and premium surfaces.</p>
-      </div>
-      <div class="card card-top-gold p-7 text-center">
-        <h3 class="font-serif text-nile-blue text-lg mb-3">Our Prevention Protocol</h3>
-        <p class="text-nile-muted text-sm">CBCT-guided planning, premium implant systems, strict sterilization (ISO/CDC), and structured 6-month recall programs.</p>
-      </div>
-    </div>
-    <div class="bg-nile-blue text-white p-8 md:p-12">
-      <h3 class="font-serif text-nile-beige text-center mb-8" style="font-size:1.5rem">How We Manage Potential Complications</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-        <div class="flex gap-3"><span class="text-nile-gold-bright font-bold flex-shrink-0">I.</span><p><strong>Prevention First:</strong> Comprehensive CBCT imaging, bone quality assessment, and medical history screening before any procedure.</p></div>
-        <div class="flex gap-3"><span class="text-nile-gold-bright font-bold flex-shrink-0">II.</span><p><strong>Early Detection:</strong> Scheduled follow-ups at 1 week, 1 month, 3 months, and 6 months post-placement.</p></div>
-        <div class="flex gap-3"><span class="text-nile-gold-bright font-bold flex-shrink-0">III.</span><p><strong>Immediate Response:</strong> 24/7 emergency line. Remote consultation within 72 hours if issues arise.</p></div>
-        <div class="flex gap-3"><span class="text-nile-gold-bright font-bold flex-shrink-0">IV.</span><p><strong>Documented Protocols:</strong> Written aftercare instructions, medication schedules, and warning signs provided before departure.</p></div>
-      </div>
-    </div>
-    <p class="text-center mt-8 text-nile-gold italic">We are not the cheapest. We are the most accountable.</p>
-  </div>
-</section>
-
 
 <!-- ═══════════════════ TRAVEL & LOGISTICS ═══════════════════ -->
 <section id="travel" class="section bg-white reveal">
@@ -3671,6 +3680,7 @@ details.science-accordion > summary:hover{
     </details>
   </div>
 </section>
+
 <!-- ═══════════════════ FULL GUARANTEES ═══════════════════ -->
 <section id="guarantees" class="section bg-nile-blue-dark text-white reveal">
   <div class="container">
@@ -3680,10 +3690,10 @@ details.science-accordion > summary:hover{
       <p class="text-gray-300 max-w-2xl mx-auto">Every guarantee below is documented in writing before you travel. No exceptions, no fine print.</p>
     </div>
     <!-- Guarantees Tabs Navigation -->
-    <div class="flex flex-wrap justify-center gap-2 mb-8">
-      <button class="tab-guarantees active" data-tab="warranties">Warranties & Pricing</button>
-      <button class="tab-guarantees" data-tab="emergency">Emergency Protocol</button>
-      <button class="tab-guarantees" data-tab="rights">Patient Rights</button>
+    <div class="flex flex-wrap justify-center gap-2 mb-8" role="tablist" aria-label="Guarantees sections">
+      <button class="tab-guarantees active" data-tab="warranties" role="tab" aria-selected="true" aria-controls="tab-warranties" id="tab-btn-warranties">Warranties & Pricing</button>
+      <button class="tab-guarantees" data-tab="emergency" role="tab" aria-selected="false" aria-controls="tab-emergency" id="tab-btn-emergency">Emergency Protocol</button>
+      <button class="tab-guarantees" data-tab="rights" role="tab" aria-selected="false" aria-controls="tab-rights" id="tab-btn-rights">Patient Rights</button>
     </div>
 
     <div id="tab-warranties" class="tab-content-guarantees">
@@ -3800,6 +3810,41 @@ details.science-accordion > summary:hover{
   </div>
 </section>
 
+<!-- ═══════════════════ RISKS & COMPLICATIONS ═══════════════════ -->
+<section id="risks" class="section bg-white reveal">
+  <div class="container">
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <p class="eyebrow mb-4">Transparency</p>
+      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">Risks & Complications: What You Should Know</h2>
+      <p class="text-nile-muted">We believe in radical transparency. Here is what the evidence says about implant complications — and how our protocols minimize them.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 stagger">
+      <div class="card card-top-gold p-7 text-center">
+        <h3 class="font-serif text-nile-blue text-lg mb-3">Implant Success Rate</h3>
+        <p class="text-nile-muted text-sm"><strong class="text-nile-blue">94.6%</strong> overall success across systematic reviews. All-on-4 short-term survival: <strong class="text-nile-blue">99.2%</strong>. Long-term (5+ years): <strong class="text-nile-blue">97.8%</strong>.</p>
+      </div>
+      <div class="card card-top-gold p-7 text-center">
+        <h3 class="font-serif text-nile-blue text-lg mb-3">Peri-Implantitis</h3>
+        <p class="text-nile-muted text-sm">Affects approximately <strong class="text-nile-blue">9.6%</strong> of implants. Risk is significantly reduced with 6-month maintenance intervals and premium surfaces.</p>
+      </div>
+      <div class="card card-top-gold p-7 text-center">
+        <h3 class="font-serif text-nile-blue text-lg mb-3">Our Prevention Protocol</h3>
+        <p class="text-nile-muted text-sm">CBCT-guided planning, premium implant systems, strict sterilization (ISO/CDC), and structured 6-month recall programs.</p>
+      </div>
+    </div>
+    <div class="bg-nile-blue text-white p-8 md:p-12">
+      <h3 class="font-serif text-nile-beige text-center mb-8" style="font-size:1.5rem">How We Manage Potential Complications</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+        <div class="flex gap-3"><span class="text-nile-gold-bright font-bold flex-shrink-0">I.</span><p><strong>Prevention First:</strong> Comprehensive CBCT imaging, bone quality assessment, and medical history screening before any procedure.</p></div>
+        <div class="flex gap-3"><span class="text-nile-gold-bright font-bold flex-shrink-0">II.</span><p><strong>Early Detection:</strong> Scheduled follow-ups at 1 week, 1 month, 3 months, and 6 months post-placement.</p></div>
+        <div class="flex gap-3"><span class="text-nile-gold-bright font-bold flex-shrink-0">III.</span><p><strong>Immediate Response:</strong> 24/7 emergency line. Remote consultation within 72 hours if issues arise.</p></div>
+        <div class="flex gap-3"><span class="text-nile-gold-bright font-bold flex-shrink-0">IV.</span><p><strong>Documented Protocols:</strong> Written aftercare instructions, medication schedules, and warning signs provided before departure.</p></div>
+      </div>
+    </div>
+    <p class="text-center mt-8 text-nile-gold italic">We are not the cheapest. We are the most accountable.</p>
+  </div>
+</section>
+
 <!-- ═══ Guarantees Tabs Styles + Script ═══ -->
 <style>
 .tab-guarantees{
@@ -3828,15 +3873,34 @@ details.science-accordion > summary:hover{
 }
 </style>
 <script>
-document.querySelectorAll('.tab-guarantees').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.tab-guarantees').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll('.tab-content-guarantees').forEach(c=>c.classList.add('hidden'));
-    btn.classList.add('active');
-    const target = document.getElementById('tab-' + btn.dataset.tab);
-    if(target) target.classList.remove('hidden');
+(function(){
+  const tabs = document.querySelectorAll('.tab-guarantees');
+  const contents = document.querySelectorAll('.tab-content-guarantees');
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      contents.forEach(c => c.classList.add('hidden'));
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      const target = document.getElementById('tab-' + btn.dataset.tab);
+      if(target) target.classList.remove('hidden');
+    });
+    // كيبورد
+    btn.addEventListener('keydown', (e) => {
+      if(e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
+        const arr = Array.from(tabs);
+        const i = arr.indexOf(btn);
+        const next = e.key === 'ArrowRight' 
+          ? arr[(i + 1) % arr.length] 
+          : arr[(i - 1 + arr.length) % arr.length];
+        next.focus();
+      }
+    });
   });
-});
+})();
 </script>
 <section id="payment" class="section bg-nile-beige reveal">
   <div class="container-narrow">
@@ -3915,6 +3979,8 @@ document.querySelectorAll('.tab-guarantees').forEach(btn=>{
             <img src="images/before1_8_2026-09-27_00-36-40.jpg" 
                  alt="Before — Full mouth restoration, clinical case"
                  loading="lazy"
+                 decoding="async"
+                 width="400" height="400"
                  class="w-full h-48 md:h-64 object-cover">
             <span class="absolute top-3 left-3 bg-nile-gold text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">Before</span>
           </div>
@@ -3922,6 +3988,8 @@ document.querySelectorAll('.tab-guarantees').forEach(btn=>{
             <img src="images/after1_9_2026-09-27_00-36-40.jpg" 
                  alt="After — Full mouth restoration, clinical case"
                  loading="lazy"
+                 decoding="async"
+                 width="400" height="400"
                  class="w-full h-48 md:h-64 object-cover">
             <span class="absolute top-3 right-3 bg-green-600 text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">After</span>
           </div>
@@ -3939,6 +4007,8 @@ document.querySelectorAll('.tab-guarantees').forEach(btn=>{
             <img src="images/before2_4_2026-09-27_00-36-40.jpg" 
                  alt="Before — Zirconia smile makeover, clinical case"
                  loading="lazy"
+                 decoding="async"
+                 width="400" height="400"
                  class="w-full h-48 md:h-64 object-cover">
             <span class="absolute top-3 left-3 bg-nile-gold text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">Before</span>
           </div>
@@ -3946,6 +4016,8 @@ document.querySelectorAll('.tab-guarantees').forEach(btn=>{
             <img src="images/after2_5_2026-09-27_00-36-40.jpg" 
                  alt="After — Zirconia smile makeover, clinical case"
                  loading="lazy"
+                 decoding="async"
+                 width="400" height="400"
                  class="w-full h-48 md:h-64 object-cover">
             <span class="absolute top-3 right-3 bg-green-600 text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">After</span>
           </div>
@@ -3963,6 +4035,8 @@ document.querySelectorAll('.tab-guarantees').forEach(btn=>{
             <img src="images/before3_7_2026-09-27_00-36-40.jpg" 
                  alt="Before — Implant-supported restoration, clinical case"
                  loading="lazy"
+                 decoding="async"
+                 width="400" height="400"
                  class="w-full h-48 md:h-64 object-cover">
             <span class="absolute top-3 left-3 bg-nile-gold text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">Before</span>
           </div>
@@ -3970,6 +4044,8 @@ document.querySelectorAll('.tab-guarantees').forEach(btn=>{
             <img src="images/after3_6_2026-09-27_00-36-40.jpg" 
                  alt="After — Implant-supported restoration, clinical case"
                  loading="lazy"
+                 decoding="async"
+                 width="400" height="400"
                  class="w-full h-48 md:h-64 object-cover">
             <span class="absolute top-3 right-3 bg-green-600 text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">After</span>
           </div>
@@ -4061,10 +4137,16 @@ document.querySelectorAll('.tab-guarantees').forEach(btn=>{
       <p class="eyebrow mb-4">Your Complete Journey</p>
       <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">From First Contact to Your New Smile</h2>
       <p class="text-nile-muted mb-6">Every step is planned, documented, and coordinated by your dedicated medical concierge.</p>
-      <button onclick="const c=document.getElementById('journeyDetails');c.classList.toggle('hidden');this.querySelector('span').textContent=c.classList.contains('hidden')?'Show 8-Step Journey ▾':'Hide ▴';"
-              class="btn btn-outline-dark inline-flex items-center gap-2">
-        <span>Show 8-Step Journey ▾</span>
-      </button>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <button onclick="const c=document.getElementById('journeyDetails');c.classList.toggle('hidden');this.querySelector('span').textContent=c.classList.contains('hidden')?'Show 8-Step Journey ▾':'Hide ▴';"
+                class="btn btn-outline-dark inline-flex items-center gap-2">
+          <span>Show 8-Step Journey ▾</span>
+        </button>
+        <button onclick="openModal('journeyModal')" class="btn btn-gold shine-auto inline-flex items-center gap-2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          Quick 5-Step Overview
+        </button>
+      </div>
     </div>
     <div id="journeyDetails" class="hidden">
     <div class="space-y-4">
@@ -4492,7 +4574,7 @@ document.querySelectorAll('.tab-guarantees').forEach(btn=>{
 <!-- ═══════════════════ /CURATED TOURS ═══════════════════ -->
 
 <!-- Lightbox Modal -->
-<div id="galleryLightbox" class="gallery-lightbox">
+<div id="galleryLightbox" class="gallery-lightbox" aria-hidden="true">
   <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
   <img id="lightboxImg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Gallery preview">
   <div class="lightbox-caption">
@@ -4621,29 +4703,6 @@ document.querySelectorAll('.tab-guarantees').forEach(btn=>{
         </div>
         <a href="https://maps.google.com/?q=Arkan+Plaza+Sheikh+Zayed+Egypt" target="_blank" rel="noopener" class="mt-6 btn btn-gold shine-auto text-center">Open in Google Maps</a>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════ WHO IS THIS FOR ═══════════════════ -->
-<section id="who-for" class="section reveal">
-  <div class="container grid grid-cols-1 md:grid-cols-2 gap-8">
-    <div class="card card-top-blue p-8">
-      <h3 class="text-2xl md:text-3xl font-serif text-nile-blue mb-6">Who This Service Is For</h3>
-      <ul class="space-y-4 text-nile-muted text-sm">
-        <li class="flex items-start gap-3"><span class="text-nile-blue text-xl flex-shrink-0">✓</span>Adults in Australia, the US, Canada, or the UK facing $20,000+ quotes for All-on-4 or full-mouth restoration.</li>
-        <li class="flex items-start gap-3"><span class="text-nile-blue text-xl flex-shrink-0">✓</span>Patients medically cleared for dental surgery and international travel.</li>
-        <li class="flex items-start gap-3"><span class="text-nile-blue text-xl flex-shrink-0">✓</span>Patients willing to complete proper diagnostics and follow a treatment plan.</li>
-        <li class="flex items-start gap-3"><span class="text-nile-blue text-xl flex-shrink-0">✓</span>Patients seeking a documented, transparent, elite medical process.</li>
-      </ul>
-    </div>
-    <div class="bg-gray-50 p-8 border-t-4 border-gray-300">
-      <h3 class="text-2xl md:text-3xl font-serif text-gray-500 mb-6">Who This Is Not For</h3>
-      <ul class="space-y-4 text-gray-500 text-sm">
-        <li class="flex items-start gap-3"><span class="text-gray-400 text-xl flex-shrink-0">✗</span>Patients seeking treatment without providing proper diagnostics in advance.</li>
-        <li class="flex items-start gap-3"><span class="text-gray-400 text-xl flex-shrink-0">✗</span>Cases requiring complex multi-stage bone grafting that cannot be completed within the travel window.</li>
-        <li class="flex items-start gap-3"><span class="text-gray-400 text-xl flex-shrink-0">✗</span>Patients expecting national health insurance to cover treatment abroad without prior confirmation.</li>
-      </ul>
     </div>
   </div>
 </section>
@@ -5266,8 +5325,8 @@ document.querySelectorAll('.tab-guarantees').forEach(btn=>{
   <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
     <p>We use cookies to improve your experience. By continuing, you agree to our <button onclick="openModal('privacyModal')" class="text-nile-gold-bright underline hover:text-white transition">Privacy Policy</button>.</p>
     <div class="flex gap-2 flex-shrink-0">
-  <button onclick="document.getElementById('cookieBanner').classList.add('hidden'); if (window.innerWidth < 768) document.body.style.paddingBottom = '76px'; localStorage.setItem('cookiesAccepted','rejected');" class="btn btn-outline-dark whitespace-nowrap" style="background:transparent;color:#F6F3EE;border-color:rgba(246,243,238,.3)">Reject</button>
-  <button onclick="document.getElementById('cookieBanner').classList.add('hidden'); if (window.innerWidth < 768) document.body.style.paddingBottom = '76px'; localStorage.setItem('cookiesAccepted','true');" class="btn btn-gold shine-auto whitespace-nowrap">Accept</button>
+  <button onclick="document.getElementById('cookieBanner').classList.add('hidden'); document.body.classList.remove('has-cookie-banner'); localStorage.setItem('cookiesAccepted','rejected');" class="btn btn-outline-dark whitespace-nowrap" style="background:transparent;color:#F6F3EE;border-color:rgba(246,243,238,.3)">Reject</button>
+  <button onclick="document.getElementById('cookieBanner').classList.add('hidden'); document.body.classList.remove('has-cookie-banner'); localStorage.setItem('cookiesAccepted','true');" class="btn btn-gold shine-auto whitespace-nowrap">Accept</button>
 </div>
   </div>
 </div>
@@ -5619,15 +5678,14 @@ document.querySelectorAll('.tab-guarantees').forEach(btn=>{
     if(!curtain || curtainGone) return;
     curtainGone = true;
     curtain.classList.add('hidden');
-    setTimeout(()=>curtain.style.display='none',420);
+    setTimeout(()=>{ curtain.style.display='none'; }, 420);
   }
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', ()=>setTimeout(hideCurtain, 350));
+  if(document.readyState === 'complete'){
+    setTimeout(hideCurtain, 200);
   } else {
-    setTimeout(hideCurtain, 350);
+    window.addEventListener('load', ()=>setTimeout(hideCurtain, 200));
   }
-  window.addEventListener('load', ()=>setTimeout(hideCurtain, 150));
-  setTimeout(hideCurtain, 1600); // absolute fallback
+  setTimeout(hideCurtain, 2500); // absolute fallback فقط
 
   /* ═════════ 2. SCROLL PROGRESS ═════════ */
   const progress = document.getElementById('progress');
@@ -5682,13 +5740,12 @@ document.querySelectorAll('.tab-guarantees').forEach(btn=>{
   /* ═════════ 4. REVEAL ON SCROLL — PREMIUM SHADE ═════════ */
   const revealEls = document.querySelectorAll('.reveal, .stagger');
   const io = 'IntersectionObserver' in window
-    ? new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{
-          if(e.isIntersecting){ 
-            // تأخير بسيط لكل قسم → إحساس staggered
-            requestAnimationFrame(()=>{
-              e.target.classList.add('visible'); 
-              io.unobserve(e.target);
+    ? new IntersectionObserver(function(entries, observer){
+        entries.forEach(function(e){
+          if(e.isIntersecting){
+            requestAnimationFrame(function(){
+              e.target.classList.add('visible');
+              observer.unobserve(e.target);
             });
           }
         });
@@ -5718,7 +5775,11 @@ document.querySelectorAll('.tab-guarantees').forEach(btn=>{
     });
   }
   window.addEventListener('scroll', revealManualFallback, {passive:true});
-  window.addEventListener('resize', revealManualFallback, {passive:true});
+  let resizeTimer;
+  window.addEventListener('resize', ()=>{
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(revealManualFallback, 150);
+  }, {passive:true});
   revealManualFallback();
 
   /* ✅ Fallback 2: ضمان نهائي — يشتغل بس لو IO مش مدعوم */
@@ -5918,11 +5979,21 @@ for(let i=0;i<particleCount;i++){
       wa.click();
       setTimeout(() => document.body.removeChild(wa), 100);
       
-      // ✅ Fallback: if WhatsApp doesn't open in 2s, offer email
-      setTimeout(() => {
-        const fallback = document.getElementById('whatsappFallback');
-        if (fallback) fallback.classList.remove('hidden');
-      }, 2000);
+      // ✅ Fallback أقوى: email + نسخة محلية
+      try {
+        const body = encodeURIComponent(`Free X-Ray Review Request\n\nEmail: ${email}\nSource: Website Consult Form\nDate: ${new Date().toISOString()}`);
+        // اجعل fallback جاهز بعد 3 ثواني
+        setTimeout(() => {
+          const fallback = document.getElementById('whatsappFallback');
+          if (fallback) {
+            fallback.classList.remove('hidden');
+            const mailLink = fallback.querySelector('a');
+            if (mailLink) {
+              mailLink.href = `mailto:contact@nilesmileconcierge.com?subject=Free%20X-Ray%20Review%20Request&body=${body}`;
+            }
+          }
+        }, 3000);
+      } catch(err) { /* silent */ }
       
       // غيّر الفورم لرسالة شكر
       const formWrapper = leadForm.parentElement;
@@ -6004,11 +6075,16 @@ for(let i=0;i<particleCount;i++){
       const banner = document.getElementById('cookieBanner');
       if (banner) {
         banner.classList.remove('hidden');
-        // ارفع الـbody فوق عشان الـcookie banner ميغطيش الـsticky bar
-        if (window.innerWidth < 768) document.body.style.paddingBottom = '160px';
+        document.body.classList.add('has-cookie-banner');
       }
     }, 2500);
   }
+  // إضافة class للـ sticky-mobile (يتحدّث مع الـ resize)
+  function syncStickyMobileClass(){
+    document.body.classList.toggle('has-sticky-mobile', window.innerWidth < 768);
+  }
+  syncStickyMobileClass();
+  window.addEventListener('resize', syncStickyMobileClass, {passive:true});
 
   /* ═════════ 14. EXIT-INTENT POPUP (Desktop + Mobile) ═════════ */
   let exitShown = false;
@@ -6203,7 +6279,7 @@ for(let i=0;i<particleCount;i++){
     const items = category === 'all' ? galleryData : galleryData.filter(i => i.cat === category);
     track.innerHTML = items.map(item => `
       <div class="gallery-card">
-        <img src="${item.src}" loading="lazy" alt="${item.title}" onerror="this.parentElement.style.display='none'">
+        <img src="${item.src}" loading="lazy" alt="${item.title}">
         <div class="gallery-card-overlay"></div>
         <div class="gallery-card-text">
           <h3>${item.title}</h3>
@@ -6212,6 +6288,13 @@ for(let i=0;i<particleCount;i++){
       </div>
     `).join('');
     track.scrollLeft = 0;
+
+    // اربط onerror كـ listener (بدون inline)
+    track.querySelectorAll('.gallery-card img').forEach(img => {
+      img.addEventListener('error', function(){
+        this.parentElement.style.display = 'none';
+      }, { once: true });
+    });
   }
 
   tabs.forEach(tab => {
@@ -6227,15 +6310,20 @@ for(let i=0;i<particleCount;i++){
     if(!card) return;
     const img = card.querySelector('img');
     if(!img || !img.src) return;
+    const title = card.querySelector('h3').textContent;
+    const desc = card.querySelector('p').textContent;
     lightboxImg.src = img.src;
-    lightboxTitle.textContent = card.querySelector('h3').textContent;
-    lightboxDesc.textContent = card.querySelector('p').textContent;
+    lightboxImg.alt = title + ' — ' + desc;
+    lightboxTitle.textContent = title;
+    lightboxDesc.textContent = desc;
     lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
   });
 
   function closeLightbox(){
     lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
   document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
@@ -6293,7 +6381,8 @@ for(let i=0;i<particleCount;i++){
     track.scrollBy({left: scrollAmount, behavior: 'smooth'});
   });
 
-  let autoPlay = setInterval(autoScroll, 5000);
+  let autoPlay = null;
+  let isVisible = false;
 
   function autoScroll(){
     const maxScroll = track.scrollWidth - track.clientWidth;
@@ -6304,13 +6393,31 @@ for(let i=0;i<particleCount;i++){
     }
   }
 
-  track.addEventListener('mouseenter', () => clearInterval(autoPlay));
-  track.addEventListener('touchstart', () => clearInterval(autoPlay), {passive:true});
-
-  track.addEventListener('mouseleave', () => {
-    clearInterval(autoPlay);
+  function startAutoPlay(){
+    if(autoPlay) return;
     autoPlay = setInterval(autoScroll, 5000);
-  });
+  }
+  function stopAutoPlay(){
+    if(autoPlay){ clearInterval(autoPlay); autoPlay = null; }
+  }
+
+  // شغّل بس لما الجاليري يبان
+  if('IntersectionObserver' in window){
+    const carouselObs = new IntersectionObserver((entries)=>{
+      entries.forEach(e => {
+        isVisible = e.isIntersecting;
+        if(isVisible) startAutoPlay();
+        else stopAutoPlay();
+      });
+    }, { threshold: 0.3 });
+    carouselObs.observe(track);
+  } else {
+    startAutoPlay();
+  }
+
+  track.addEventListener('mouseenter', stopAutoPlay);
+  track.addEventListener('touchstart', stopAutoPlay, {passive:true});
+  track.addEventListener('mouseleave', ()=>{ if(isVisible) startAutoPlay(); });
 })();   /* ← السطر الناقص */
 </script>
 
