@@ -22,17 +22,15 @@
 
 <!-- Theme -->
 <meta name="theme-color" content="#4F6070">
-<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
 
 <!-- ═══════════════════ FAVICON ═══════════════════ -->
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="shortcut icon" href="/favicon.ico">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<meta name="apple-mobile-web-app-title" content="Nile Smile">
-<link rel="manifest" href="/site.webmanifest">
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Nile Smile" />
+<link rel="manifest" href="/site.webmanifest" />
 
 <!-- ═══════════════════ PERFORMANCE ═══════════════════ -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -350,15 +348,15 @@ img{
   @media(max-width:768px){html{scroll-padding-top:100px}section[id],header[id],main[id]{scroll-margin-top:100px}}
 </style>
 
-<!-- ============ TAILWIND — Pre-compiled ============
+<!-- ═══════════════════ TAILWIND — Pre-compiled ═══════════════════
      قبل النشر: شغّل الأمر ده مرة واحدة على جهازك
-
+     
      npm install -D tailwindcss
-     npx tailwindcss -i ./src/input.css -o ./styles.css minify
-
-     وبعدها حط في الـ head:
-     link rel=stylesheet href=/styles.css
-
+     npx tailwindcss -i ./src/input.css -o ./styles.css --minify
+     
+     وبعدها حط في الـ <head>:
+     <link rel="stylesheet" href="/styles.css">
+     
      دلوقتي: بنستخدم الـ CDN مؤقتاً لغاية ما تعمل build
 -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -410,7 +408,7 @@ tailwind.config = {
   "image":"https://images.unsplash.com/photo-1539650116574-8efeb43e2b45?auto=format&fit=crop&q=80&w=1200",
   "telephone":"+201503308333",
   "email":"contact@nilesmileconcierge.com",
-  "priceRange":"$1,700-$25,000",
+  "priceRange":"$890-$25,000",
   "currenciesAccepted":"USD, CAD, GBP, EUR, EGP",
   "paymentAccepted":"Cash, Credit Card, Bank Transfer, Wise",
   "areaServed":[
@@ -421,11 +419,11 @@ tailwind.config = {
     {"@type":"Country","name":"Germany"}
   ],
   "availableService":[
-    {"@type":"MedicalProcedure","name":"All-on-4 Dental Implants","offers":{"@type":"Offer","price":"9700","priceCurrency":"USD"}},
-    {"@type":"MedicalProcedure","name":"Full Mouth Restoration","offers":{"@type":"Offer","price":"18200","priceCurrency":"USD"}},
-    {"@type":"MedicalProcedure","name":"Zirconia Crowns","offers":{"@type":"Offer","price":"4400","priceCurrency":"USD"}},
-    {"@type":"MedicalProcedure","name":"Clear Aligner Orthodontics","offers":{"@type":"Offer","price":"4400","priceCurrency":"USD"}},
-    {"@type":"MedicalProcedure","name":"Dental Implant Rescue","offers":{"@type":"Offer","price":"4800","priceCurrency":"USD"}}
+    {"@type":"MedicalProcedure","name":"All-on-4 Dental Implants"},
+    {"@type":"MedicalProcedure","name":"Full Mouth Restoration"},
+    {"@type":"MedicalProcedure","name":"Zirconia Crowns"},
+    {"@type":"MedicalProcedure","name":"Clear Aligner Orthodontics"},
+    {"@type":"MedicalProcedure","name":"Dental Implant Rescue"}
   ],
   "address":{
     "@type":"PostalAddress",
@@ -1011,7 +1009,31 @@ tailwind.config = {
   .gold-text{background:linear-gradient(135deg,#AE9164 0%,#E8C88A 45%,#AE9164 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;background-size:200% auto;animation:goldFlow 5s ease-in-out infinite}
   @keyframes goldFlow{0%,100%{background-position:0% center}50%{background-position:100% center}}
 
+  /* ============ REVEAL — SILK SMOOTH (V2) ============ */
+  .reveal{
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.visible{
+    opacity: 1;
+    transform: translateY(0);
+  }
 
+  /* Stagger — كل ابن بيظهر بـ delay مختلف */
+  .stagger > *{
+    opacity: 0;
+    transform: translateY(45px) scale(0.98);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  .stagger.visible > *{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
   .stagger.visible > *:nth-child(1){ transition-delay: 0.08s; }
   .stagger.visible > *:nth-child(2){ transition-delay: 0.18s; }
   .stagger.visible > *:nth-child(3){ transition-delay: 0.28s; }
@@ -1170,7 +1192,11 @@ tailwind.config = {
   #curtain.no-js{animation:curtainFallback .4s ease 1.2s forwards}
   /* ═══════════ MOTION GRAPHICS — PREMIUM ═══════════ */
 
-
+  /* 7. Performance — Content Visibility */
+  section:not(:first-of-type) {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 800px;
+  }
   
   /* 10. Reduced Motion — احترام تفضيلات المستخدم */
   @media (prefers-reduced-motion: reduce) {
@@ -1315,7 +1341,18 @@ tailwind.config = {
    مفيش حاجة لـ `order:` — Google بيقرا الـ DOM order.
 */
 
+/* ═══════════ PERFORMANCE — Content Visibility ═══════════ */
+main#main > section{
+  content-visibility: auto;
+  contain-intrinsic-size: 0 800px;
+}
 
+/* أول 3 أقسام مش محتاجة تأخير */
+main#main > section.hero,
+main#main > section#trust-stats,
+main#main > section#trust{
+  content-visibility: visible;
+}
 </style>
   
 <style>
@@ -1893,335 +1930,8 @@ details.science-accordion > summary:hover{
   transform:translateY(-50%) translateX(0);
 }
 </style>
-<!-- ═══════════════════ FINAL BACKGROUND FIX — DO NOT REMOVE ═══════════════════ -->
-<style id="finalBgFix">
-/* ═══════════ 1. DARK NAVY SECTIONS (warranty + discovery + footer) ═══════════ */
-section#guarantees,
-section#discover-egypt,
-section.bg-nile-blue-dark,
-footer.bg-nile-blue-dark {
-  background: linear-gradient(160deg, #0A0D10 0%, #1F2A36 50%, #2A3744 100%) !important;
-  background-color: #1F2A36 !important;
-  color: #FFFFFF !important;
-}
 
-footer {
-  background: linear-gradient(180deg, #0A0D10 0%, #1F2A36 100%) !important;
-  background-color: #1F2A36 !important;
-}
-
-/* ═══════════ 2. SLATE BLUE SECTIONS ═══════════ */
-section#science,
-section#bone-graft,
-section#academic,
-section#estimator,
-section#consult,
-section.bg-nile-blue {
-  background: linear-gradient(135deg, #4F6070 0%, #3A4855 100%) !important;
-  background-color: #4F6070 !important;
-}
-
-/* ═══════════ 3. BEIGE / CREAM SECTIONS ═══════════ */
-section.bg-nile-beige {
-  background: linear-gradient(180deg, #FBFAF7 0%, #F6F3EE 50%, #EDE6DA 100%) !important;
-  background-color: #F6F3EE !important;
-}
-
-section.bg-white {
-  background-color: #FFFFFF !important;
-}
-
-/* ═══════════ 4. HERO ═══════════ */
-section.hero {
-  background: linear-gradient(135deg, #1F2A36 0%, #3A4855 40%, #4F6070 100%) !important;
-}
-
-/* ═══════════ 5. TEXT INSIDE DARK SECTIONS ═══════════ */
-section#guarantees h2,
-section#guarantees h3,
-section#guarantees h4,
-section#guarantees h5,
-section#guarantees h6,
-section.bg-nile-blue-dark h2,
-section.bg-nile-blue-dark h3,
-section#discover-egypt h2 {
-  color: #E8C88A !important;
-}
-
-section#guarantees p,
-section.bg-nile-blue-dark p,
-section#discover-egypt p {
-  color: #D1D5DB !important;
-}
-
-/* الكروت الداخلية في ضمانات - نصوص ذهبية */
-section#guarantees .bg-white\/5 h3 {
-  color: #F5E9D0 !important;
-}
-
-/* ═══════════ 6. SCIENCE ACCORDION — inside dark section ═══════════ */
-section#science details.science-accordion,
-section.bg-nile-blue details.science-accordion {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border: 1px solid rgba(174, 145, 100, 0.35) !important;
-}
-
-section#science details.science-accordion summary,
-section.bg-nile-blue details.science-accordion summary {
-  color: #E8C88A !important;
-  background: linear-gradient(135deg, rgba(174,145,100,.10), rgba(232,200,138,.05)) !important;
-}
-
-/* ═══════════ 7. TABLES INSIDE DARK SECTIONS ═══════════ */
-section#guarantees table thead tr,
-section.bg-nile-blue-dark table thead tr,
-section#bone-graft table thead tr {
-  background: linear-gradient(135deg, #2A3744 0%, #4F6070 100%) !important;
-  color: #E8C88A !important;
-}
-
-section#bone-graft table tbody tr td,
-section.bg-nile-blue table tbody tr td {
-  color: #E5E7EB !important;
-  border-bottom: 1px solid rgba(174,145,100,.15) !important;
-}
-
-/* ═══════════ 8. GUARANTEE CARDS INSIDE DARK ═══════════ */
-section#guarantees .bg-white\/5 {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border-color: rgba(174, 145, 100, 0.25) !important;
-}
-
-/* ═══════════ 9. FAQ + FEARS (white bg) — تأكيد ═══════════ */
-section#faq,
-section#fears,
-section#how-it-works,
-section#journey,
-section#recovery,
-section#curated-tours,
-section#location,
-section#travel,
-section#travel-addons,
-section#packages,
-section#payment,
-section#visit-schedule {
-  /* ensure nothing is overriding */
-  isolation: isolate;
-}
-
-/* ═══════════ 10. STICKY MOBILE + FOOTER BUTTONS ═══════════ */
-.sticky-mobile {
-  background: linear-gradient(90deg, #1F2A36 0%, #3A4855 100%) !important;
-}
-</style>
-<!-- ═══════════════════ MASTER CSS OVERRIDE — يحل كل التعارضات ═══════════════════ -->
-<style id="masterOverride">
-/* ═══════════ 1. HERO — تعريف واحد نهائي ═══════════ */
-section.hero {
-  background: linear-gradient(135deg, #1F2A36 0%, #3A4855 40%, #4F6070 100%) !important;
-}
-
-/* ═══════════ 2. CARDS — تعريف واحد نهائي ═══════════ */
-.card {
-  background: linear-gradient(180deg, #FFFFFF 0%, #FBFAF7 100%) !important;
-  border: 1px solid rgba(174,145,100,.15);
-  border-radius: 4px;
-  transform-style: preserve-3d;
-  perspective: 1000px;
-  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.3s ease !important;
-  will-change: transform;
-}
-.card:hover {
-  transform: translateY(-8px) rotateX(1.2deg) rotateY(-1.2deg) scale(1.015) !important;
-  box-shadow: 0 30px 60px rgba(79, 96, 112, 0.18),
-              0 0 0 1px rgba(174, 145, 100, 0.2) inset !important;
-  border-color: rgba(174,145,100,.4) !important;
-}
-.card-top-gold  { border-top: 3px solid #AE9164 !important; }
-.card-left-gold { border-left: 3px solid #AE9164 !important; }
-.card-top-blue  { border-top: 3px solid #4F6070 !important; }
-
-/* ═══════════ 3. SCIENCE — تعريف واحد نهائي ═══════════ */
-section#science {
-  background: linear-gradient(135deg, #4F6070 0%, #3A4855 100%) !important;
-  color: #FFFFFF !important;
-}
-
-/* ═══════════ 4. DARK NAVY SECTIONS — تعريف موحّد ═══════════ */
-section#guarantees,
-section#discover-egypt,
-section.bg-nile-blue-dark {
-  background: linear-gradient(160deg, #0A0D10 0%, #1F2A36 50%, #2A3744 100%) !important;
-  color: #FFFFFF !important;
-}
-footer,
-footer.bg-nile-blue-dark {
-  background: linear-gradient(180deg, #0A0D10 0%, #1F2A36 100%) !important;
-}
-
-/* ═══════════ 5. BTN-GOLD — تعريف واحد نهائي ═══════════ */
-.btn-gold {
-  background: linear-gradient(135deg, #AE9164 0%, #E8C88A 40%, #C9A96E 60%, #AE9164 100%) !important;
-  background-size: 250% auto !important;
-  color: #1a1a1a;
-  border: 1px solid rgba(174,145,100,.5);
-  box-shadow: 0 4px 15px rgba(174,145,100,.2);
-}
-.btn-gold:hover {
-  background-position: right center !important;
-  transform: translateY(-3px) scale(1.02) !important;
-  box-shadow: 0 12px 32px rgba(174,145,100,.5), 0 0 0 4px rgba(174,145,100,.1) !important;
-}
-
-/* ═══════════ 6. LOGO-SCRIPT — تعريف واحد نهائي ═══════════ */
-.logo-script {
-  font-family: 'Italianno', cursive !important;
-  font-size: 3.6rem !important;
-  line-height: 0.85 !important;
-  color: #4F6070 !important;
-  padding-right: 6px !important;
-  display: block;
-}
-@media(max-width: 640px) {
-  .logo-script { font-size: 2.8rem !important; }
-}
-
-/* ═══════════ 7. TOP-BAR — تعريف واحد نهائي ═══════════ */
-.top-bar {
-  background: linear-gradient(90deg, #1F2A36 0%, #3A4855 50%, #1F2A36 100%) !important;
-}
-
-/* ═══════════ 8. TABLES thead — تعريف واحد نهائي ═══════════ */
-thead tr,
-section#guarantees table thead tr,
-section.bg-nile-blue-dark table thead tr,
-section#bone-graft table thead tr {
-  background: linear-gradient(135deg, #2A3744 0%, #4F6070 100%) !important;
-}
-thead th {
-  color: #FFFFFF !important;
-}
-thead th.gold {
-  color: #E8C88A !important;
-}
-section#bone-graft table tbody tr td,
-section.bg-nile-blue table tbody tr td {
-  color: #E5E7EB !important;
-  border-bottom: 1px solid rgba(174,145,100,.15) !important;
-}
-
-/* ═══════════ 9. SCIENCE ACCORDION — يعمل في #science و #guarantees ═══════════ */
-details.science-accordion {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border: 1px solid rgba(174, 145, 100, 0.35) !important;
-  border-radius: 4px;
-  margin-top: 1rem;
-  overflow: hidden;
-}
-details.science-accordion[open] {
-  border-color: rgba(232, 200, 138, 0.6) !important;
-  background: rgba(255, 255, 255, 0.06) !important;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25) !important;
-}
-details.science-accordion > summary {
-  padding: 1.5rem 1.75rem;
-  color: #E8C88A !important;
-  font-family: 'Playfair Display', serif;
-  font-size: 1.15rem;
-  font-weight: 500;
-  background: linear-gradient(135deg, rgba(174,145,100,.10), rgba(232,200,138,.04)) !important;
-  cursor: pointer;
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-details.science-accordion > summary::-webkit-details-marker { display: none; }
-details.science-accordion > summary::after {
-  content: '+';
-  flex-shrink: 0;
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(232, 200, 138, .4);
-  color: #E8C88A;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  line-height: 1;
-  transition: all 0.4s cubic-bezier(.34,1.56,.64,1);
-}
-details.science-accordion[open] > summary {
-  border-bottom: 1px solid rgba(174,145,100,.25) !important;
-  color: #FFFFFF !important;
-}
-details.science-accordion[open] > summary::after {
-  transform: rotate(45deg);
-  background: linear-gradient(135deg, #AE9164, #E8C88A);
-  color: #1F2A36;
-  border-color: #E8C88A;
-}
-
-/* ═══════════ 10. TEXT INSIDE DARK SECTIONS ═══════════ */
-section#guarantees h2,
-section#guarantees h3,
-section#guarantees h4,
-section#discover-egypt h2 {
-  color: #E8C88A !important;
-}
-section#guarantees p,
-section#discover-egypt p {
-  color: #D1D5DB !important;
-}
-section#guarantees .bg-white\/5 h3 {
-  color: #F5E9D0 !important;
-}
-section#guarantees .bg-white\/5 {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border-color: rgba(174, 145, 100, 0.25) !important;
-}
-
-/* ═══════════ 11. STICKY MOBILE — تعريف واحد نهائي ═══════════ */
-.sticky-mobile {
-  background: linear-gradient(90deg, #1F2A36 0%, #3A4855 100%) !important;
-}
-
-/* ═══════════ 12. MODAL CONTENT — تعريف واحد نهائي ═══════════ */
-.modal-content {
-  background: linear-gradient(180deg, #FBFAF7 0%, #F6F3EE 100%) !important;
-}
-
-/* ═══════════ 13. BEIGE SECTIONS ═══════════ */
-section.bg-nile-beige {
-  background: linear-gradient(180deg, #FBFAF7 0%, #F6F3EE 50%, #EDE6DA 100%) !important;
-}
-</style>
-<!-- ═══════════════════ PRICE ESTIMATOR STYLES ═══════════════════ -->
-
-
-<!-- ═══════════════════ PRICE ESTIMATOR STYLES ═══════════════════ -->
-<style>
-#estTreatment, #estAddon, #estCountry{
-  font-family:'Montserrat',sans-serif;
-  font-size:.9rem;
-  font-weight:500;
-  cursor:pointer;
-  appearance:none;
-  background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234F6070' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-  background-repeat:no-repeat;
-  background-position:right 1rem center;
-  background-size:16px;
-  padding-right:3rem !important;
-}
-#estPrice{
-  letter-spacing:-0.02em;
-  transition:all .4s cubic-bezier(.22,1,.36,1);
-}
-</style>
 </head>
-
 <body>
 
 <!-- ═══════════════════ QUICK ACTION BAR ═══════════════════ -->
@@ -2324,40 +2034,43 @@ section.bg-nile-beige {
 
 <!-- ═══════════════════ HERO ═══════════════════ -->
 <main id="main">
-<section class="hero" style="background:linear-gradient(135deg,#1F2A36 0%,#3A4855 40%,#4F6070 100%);">
+<section class="hero">
   <div class="hero-bg">
     <img src="images/spencer-davis-ONVA6s03hg8-unsplash.jpg"
-         fetchpriority="high" loading="eager" decoding="async"
+         sizes="100vw" fetchpriority="high" loading="eager" decoding="async"
          alt="Giza Pyramids at golden hour" id="heroImg">
     <div class="hero-overlay"></div>
   </div>
 
-<div class="hero-content">
-  <p class="eyebrow eyebrow-light mb-6">Clinician-Reviewed Dental Concierge • Cairo, Egypt</p>
+  <div class="hero-content">
+    <p class="eyebrow eyebrow-light mb-5">Clinician-Reviewed Medical Tourism | Cairo, Egypt</p>
+    <h1 class="text-white mb-6" style="font-size:clamp(1.75rem,5vw,3.5rem);line-height:1.05;letter-spacing:-0.025em">
+      World-Class Dental Restoration
+      <span class="block gold-text italic font-normal" style="font-size:clamp(1.4rem,3.6vw,2.6rem);margin-top:1rem">Crafted in Egypt. Trusted Worldwide.</span>
+    </h1>
+    <p class="text-gray-200 mb-8 mx-auto" style="max-width:42rem;font-size:clamp(1rem,2vw,1.15rem);font-weight:300;line-height:1.8">
+      Premium All-on-4 implants, monolithic zirconia crowns, and full-mouth restoration at <strong class="text-white font-medium">up to 80% less</strong> than US, Canadian, and UK prices - with documented guarantees and implant warranty.
+    </p>
+    <p class="mb-10 text-nile-gold-bright font-medium" style="font-size:.95rem">
+      Founded by a licensed dentist. Every treatment plan is clinically reviewed - <em class="italic">never sold</em>.
+      <br>
+      <span class="text-gray-300 text-xs">Same implant brands, same materials, same standards - different location.</span>
+    </p>
 
-  <h1 class="text-white mb-6" style="font-size:clamp(2rem,5.5vw,3.75rem);line-height:1.05;letter-spacing:-0.025em">
-    World-Class Dental Restoration
-    <span class="block gold-text italic font-normal" style="font-size:clamp(1.5rem,3.8vw,2.75rem);margin-top:.75rem">
-      Crafted in Egypt.
-    </span>
-  </h1>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center flex-wrap" style="max-width:52rem;margin:0 auto">
+      <a href="#consult" id="heroMainCta" class="btn btn-gold shine-auto">Request Clinical Review</a>
+      <a href="#packages" class="btn btn-outline">View Packages</a>
+      <button onclick="openModal('journeyModal')" class="btn btn-outline">See Your Journey</button>
+      <a href="Nile-Smile-Guide-2026.pdf" download class="btn btn-outline flex items-center justify-center gap-2"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download Full Guide</a>
+    </div>
 
-  <p class="text-gray-200 mb-10 mx-auto" style="max-width:38rem;font-size:clamp(1rem,2vw,1.15rem);font-weight:300;line-height:1.75">
-    Save up to <strong class="text-white font-medium">80%</strong> on premium All-on-4 implants and full-mouth restoration — with documented warranty.
-  </p>
-
-  <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
-    <a href="#consult" id="heroMainCta" class="btn btn-gold shine-auto">Request Clinical Review</a>
-    <a href="#packages" class="btn btn-outline">View Packages</a>
+    <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-12 text-gray-300" style="font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500">
+      <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>JCI-Aligned Standards</span>
+      <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>Straumann &amp; Nobel Biocare</span>
+      <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>Documented Warranty</span>
+    </div>
   </div>
 
-  <div class="flex flex-wrap justify-center gap-x-7 gap-y-3 mt-10 text-gray-300"
-       style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500">
-    <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>JCI-Aligned</span>
-    <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>Straumann &amp; Nobel</span>
-    <span class="flex items-center gap-2"><span class="text-nile-gold-bright">✓</span>Documented Warranty</span>
-  </div>
-</div>
   <a href="#trust" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-nile-gold-bright opacity-80 hover:opacity-100 transition" aria-label="Scroll down">
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="animation:bounce 2s infinite">
       <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
@@ -2367,7 +2080,6 @@ section.bg-nile-beige {
 
 <!-- ═══════════════════ TRUST STATS ═══════════════════ -->
 <section id="trust-stats" class="section bg-white reveal" style="padding:3.5rem 1.25rem">
-  <h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Our Track Record</h2>
   <div class="container">
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 stagger">
       <div class="text-center">
@@ -2400,7 +2112,6 @@ section.bg-nile-beige {
 
 <!-- ═══════════════════ TRUST BAR ═══════════════════ -->
 <section id="trust" class="bg-white border-y border-nile-gold/15 py-8">
-  <h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Our Accredited Partners</h2>
   <div class="container px-5">
     <p class="eyebrow text-center mb-6">Our Partner Clinics Are Accredited By</p>
     <div class="flex flex-wrap justify-center items-center gap-x-10 gap-y-6 md:gap-x-14 opacity-70">
@@ -2449,7 +2160,7 @@ section.bg-nile-beige {
         <div class="w-16 h-px bg-nile-gold/40 my-6"></div>
         
         <!-- Name & Title -->
-        <h2 class="font-serif text-nile-beige text-xl md:text-2xl mb-2">Dr. Omar Fathi</h2>
+        <h3 class="font-serif text-nile-beige text-xl md:text-2xl mb-2">Dr. Omar Fathi</h3>
         <p class="text-nile-gold text-[10px] uppercase tracking-[0.25em] font-bold mb-6">Founder & Clinical Coordinator</p>
         
         <!-- Credentials -->
@@ -2653,7 +2364,7 @@ section.bg-nile-beige {
 
 
 <!-- ═══════════════════ SCIENCE ═══════════════════ -->
-<section id="science" class="section text-white reveal" style="background:linear-gradient(135deg,#4F6070 0%,#3A4855 100%);">
+<section id="science" class="section bg-nile-blue text-white reveal">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-14">
       <p class="eyebrow eyebrow-light mb-4">Clinical Excellence</p>
@@ -2700,7 +2411,7 @@ section.bg-nile-beige {
         <p class="text-gray-300 mb-6 text-sm">Adequate bone volume is the cornerstone of successful implant placement. Our partner surgical teams use the latest evidence-based techniques.</p>
         <div class="space-y-3">
           <div class="bg-white/5 border border-nile-gold/30 p-5">
-            <h3 class="font-serif text-nile-beige mb-2">Guided Bone Regeneration (GBR)</h3>
+            <h4 class="font-serif text-nile-beige mb-2">Guided Bone Regeneration (GBR)</h4>
             <p class="text-gray-400 text-xs leading-relaxed">Barrier membranes guide new bone growth in areas of deficiency. Predictable results even in compromised ridges.</p>
           </div>
           <div class="bg-white/5 border border-nile-gold/30 p-5">
@@ -2816,7 +2527,7 @@ section.bg-nile-beige {
 </section>
 
 <!-- ═══════════════════ BONE GRAFT MATERIALS TABLE ═══════════════════ -->
-<section id="bone-graft" class="section text-white reveal" style="background:linear-gradient(135deg,#4F6070 0%,#3A4855 100%);">
+<section id="bone-graft" class="section bg-nile-blue text-white reveal">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-12">
       <p class="eyebrow eyebrow-light mb-4">Materials Science</p>
@@ -2952,8 +2663,12 @@ section.bg-nile-beige {
       <p class="eyebrow mb-4">Seamless Travel</p>
       <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">Travel & Logistics — Handled</h2>
       <p class="text-nile-muted mb-6">From the moment you land in Cairo, every logistical detail is coordinated by our concierge team.</p>
-
-      <div>
+      <button onclick="const c = this.nextElementSibling; c.classList.toggle('hidden'); this.querySelector('span').textContent = c.classList.contains('hidden') ? 'Show Details ▾' : 'Hide Details ▴';" 
+              class="btn btn-outline-dark inline-flex items-center gap-2" 
+              style="margin-bottom:1rem">
+        <span>Show Details ▾</span>
+      </button>
+      <div class="hidden">
       <p class="text-nile-muted mb-6">From the moment you land in Cairo, every logistical detail is coordinated by our concierge team. You focus on recovery — we handle everything else.</p>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10 stagger">
       <div class="card card-left-gold p-6">
@@ -2993,14 +2708,13 @@ section.bg-nile-beige {
         <div class="flex gap-3"><span class="text-nile-gold-bright font-bold flex-shrink-0">07</span><p>Laptop/tablet for telehealth follow-ups</p></div>
         <div class="flex gap-3"><span class="text-nile-gold-bright font-bold flex-shrink-0">08</span><p>Power adapter (Egypt uses Type C/F, 220V)</p></div>
       </div>
-      </div><!-- close bg-nile-blue -->
       </div><!-- close collapsible -->
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════ ACADEMIC PEDIGREE ═══════════════════ -->
-<section id="academic" class="section text-white reveal" style="background:linear-gradient(135deg,#4F6070 0%,#3A4855 100%);">
+<section id="academic" class="section bg-nile-blue text-white reveal">
   <div class="container">
     <div class="text-center mb-12">
       <p class="eyebrow eyebrow-light mb-4">Academic Pedigree</p>
@@ -3091,14 +2805,12 @@ section.bg-nile-beige {
           </tr>
         </thead>
         <tbody>
-          <tr><td class="td-label">All-on-4 Cost (USD) — per arch</td><td class="td-gold td-center">$3,500 – $4,800</td><td class="td-center">$4,500 – $7,500</td><td class="td-center">$6,000 – $10,000</td></tr>
-          <tr><td class="td-label">Full-Mouth Restoration (both arches)</td><td class="td-gold td-center">$9,700 – $18,200</td><td class="td-center">$14,000 – $22,000</td><td class="td-center">$18,000 – $28,000</td></tr>
+          <tr><td class="td-label">All-on-4 Cost (USD) — per arch</td><td class="td-gold td-center">$3,500 – $4,800</td><td class="td-center">$4,500 – $6,000</td><td class="td-center">$6,000 – $9,000</td></tr>
           <tr><td class="td-label">Premium Implants</td><td class="td-highlight">✓ Straumann, Nobel</td><td class="td-muted td-center">✓ Available</td><td class="td-muted td-center">✓ Available</td></tr>
           <tr><td class="td-label">Implant Warranty</td><td class="td-green td-center">✓ 2-Tier</td><td class="td-muted td-center">Rare</td><td class="td-muted td-center">Rare</td></tr>
           <tr><td class="td-label">Tourism Experience</td><td class="td-highlight">Pyramids ◆ Nile ◆ Luxor</td><td class="td-muted td-center">Istanbul ◆ Cappadocia</td><td class="td-muted td-center">Cancún ◆ Beaches</td></tr>
           <tr><td class="td-label">Clinician-Reviewed Agency</td><td class="td-green td-center">✓ Yes</td><td class="td-muted td-center">Rare</td><td class="td-muted td-center">Rare</td></tr>
           <tr><td class="td-label">Visa for US/CA/UK</td><td class="td-green td-center">✓ On Arrival</td><td class="td-muted td-center">e-Visa required</td><td class="td-muted td-center">✓ Visa-free</td></tr>
-          <tr><td class="td-label">Flight Time from US East Coast</td><td class="td-center">10–12 hrs</td><td class="td-center">10–12 hrs</td><td class="td-center">3–5 hrs</td></tr>
         </tbody>
       </table>
     </div>
@@ -3106,7 +2818,7 @@ section.bg-nile-beige {
   </div>
 </section>
 <!-- ═══════════════════ PACKAGES ═══════════════════ -->
-<section id="packages" class="section reveal" style="background:linear-gradient(180deg,#FBFAF7 0%,#F6F3EE 50%,#EDE6DA 100%);">
+<section id="packages" class="section bg-nile-beige reveal">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-14">
       <p class="eyebrow mb-4">Transparent Pricing</p>
@@ -3117,13 +2829,9 @@ section.bg-nile-beige {
     <strong class="text-nile-blue">Important — Please Read:</strong>
     All prices shown are <strong>indicative estimates in USD</strong>, based on typical cases. Final pricing depends on your clinical evaluation (CBCT scan, bone density, medical history) and is always confirmed in writing before you travel. <strong>CAD/EUR/GBP equivalents</strong> provided at consultation.
   </p>
-  <p class="text-xs text-nile-muted leading-relaxed mb-3">
-    <strong class="text-nile-blue">Seasonal Pricing — Important:</strong>
-    Hotel and travel add-on rates <strong>increase by 30–50% during peak season (November–March)</strong> due to high demand. Low season (May–September) offers discounted rates. All travel add-on prices shown are indicative for a standard 10-day stay in regular season — final quotes are confirmed in writing based on your preferred dates and availability.
-  </p>
   <p class="text-xs text-nile-muted leading-relaxed">
-    <strong class="text-nile-blue">Multiple Visits:</strong>
-    Some treatments require <strong>two visits</strong> with a 3–6 month healing gap between them. See the <a href="#visit-schedule" class="text-nile-gold underline">Visit Schedule</a> section below for details.
+    <strong class="text-nile-blue">Seasonal Pricing:</strong>
+    Hotel and travel add-on rates vary by season. <strong>Peak season (Nov–Mar):</strong> higher hotel availability demand. <strong>Low season (May–Sep):</strong> discounted rates available. Contact us for a personalized quote based on your preferred dates.
   </p>
 </div>
     </div>
@@ -3140,11 +2848,11 @@ section.bg-nile-beige {
           </tr>
         </thead>
         <tbody>
-          <tr><td class="td-label">Signature Zirconia Smile</td><td class="td-center">Full smile makeover</td><td class="td-center">1 visit • 7–8 days</td><td class="td-gold td-center">$4,400</td></tr>
-          <tr><td class="td-label">Prime Bite Full Restoration</td><td class="td-center">Partial tooth loss</td><td class="td-center">2 visits • 5–7 months</td><td class="td-gold td-center">$9,700</td></tr>
-          <tr><td class="td-label">Forever Young (Full-Arch)</td><td class="td-center">Complete tooth loss</td><td class="td-center">2 visits • 5–7 months</td><td class="td-gold td-center">$18,200</td></tr>
-          <tr><td class="td-label">Implant Rescue Program</td><td class="td-center">Failed prior implants</td><td class="td-center">2–3 visits • 6–9 months</td><td class="td-gold td-center">$4,800</td></tr>
-          <tr><td class="td-label">Complete Smile Alignment</td><td class="td-center">Crowding / gaps</td><td class="td-center">2 visits • 6–12 months</td><td class="td-gold td-center">$4,400</td></tr>
+          <tr><td class="td-label">Signature Zirconia Smile</td><td class="td-center">Full smile makeover</td><td class="td-center">7–8 days</td><td class="td-gold td-center">$3,900</td></tr>
+          <tr><td class="td-label">Prime Bite Full Restoration</td><td class="td-center">Partial tooth loss</td><td class="td-center">1 week + 3 months</td><td class="td-gold td-center">$8,500</td></tr>
+          <tr><td class="td-label">Forever Young (Full-Arch)</td><td class="td-center">Complete tooth loss</td><td class="td-center">5–6 months</td><td class="td-gold td-center">$16,500</td></tr>
+          <tr><td class="td-label">Implant Rescue Program</td><td class="td-center">Failed prior implants</td><td class="td-center">7–14 days</td><td class="td-gold td-center">$4,200</td></tr>
+          <tr><td class="td-label">Complete Smile Alignment</td><td class="td-center">Crowding / gaps</td><td class="td-center">6–12 months</td><td class="td-gold td-center">$3,900</td></tr>
         </tbody>
       </table>
     </div>
@@ -3161,7 +2869,7 @@ section.bg-nile-beige {
         <div class="p-7 flex-1 flex flex-col">
           <div class="text-center pb-6 mb-6 border-b border-nile-gold/20">
             <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Starting from</p>
-            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$4,400 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
+            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$3,900 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
             <p class="text-xs text-nile-muted mt-2">vs. $12,000+ in Canada / $15,000+ in USA</p>
           </div>
           <h4 class="font-serif text-nile-blue mb-3">What's Included</h4>
@@ -3190,7 +2898,7 @@ section.bg-nile-beige {
         <div class="p-7 flex-1 flex flex-col">
           <div class="text-center pb-6 mb-6 border-b border-nile-gold/20">
             <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Starting from</p>
-            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$9,700 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
+            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$8,500 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
             <p class="text-xs text-nile-muted mt-2">vs. $30,000+ per arch in USA / $35,000+ in Canada</p>
           </div>
           <h4 class="font-serif text-nile-blue mb-3">What's Included</h4>
@@ -3219,7 +2927,7 @@ section.bg-nile-beige {
         <div class="p-7 flex-1 flex flex-col">
           <div class="text-center pb-6 mb-6 border-b border-nile-gold/20">
             <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Starting from</p>
-            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$18,200 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
+            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$16,500 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
             <p class="text-xs text-nile-muted mt-2">vs. $50,000–$70,000 in USA / $60,000+ in Canada</p>
           </div>
           <h4 class="font-serif text-nile-blue mb-3">What's Included</h4>
@@ -3248,7 +2956,7 @@ section.bg-nile-beige {
         <div class="p-7 flex-1 flex flex-col">
           <div class="text-center pb-6 mb-6 border-b border-nile-gold/20">
             <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Starting from</p>
-            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$4,800 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
+            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$4,200 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
             <p class="text-xs text-nile-muted mt-2">vs. $20,000–$30,000+ for corrective work in USA/Canada</p>
           </div>
           <h4 class="font-serif text-nile-blue mb-3">What's Included</h4>
@@ -3277,7 +2985,7 @@ section.bg-nile-beige {
         <div class="p-7">
           <div class="text-center pb-6 mb-6 border-b border-nile-gold/20">
             <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Complete Package</p>
-            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$4,400 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
+            <p class="font-serif font-bold text-nile-gold" style="font-size:2.4rem">$3,900 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
             <p class="text-xs text-nile-muted mt-2">vs. $5,000–$8,000 in Canada / $6,000–$9,000 in USA</p>
           </div>
           <h4 class="font-serif text-nile-blue mb-3">What's Included — Full Treatment</h4>
@@ -3329,84 +3037,6 @@ section.bg-nile-beige {
     </p>
   </div>
 </section>
-<!-- ═══════════════════ VISIT SCHEDULE ═══════════════════ -->
-<section id="visit-schedule" class="section bg-white reveal">
-  <div class="container">
-    <div class="text-center max-w-3xl mx-auto mb-12">
-      <p class="eyebrow mb-4">Treatment Timeline</p>
-      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">How Many Visits Do You Need?</h2>
-      <p class="text-nile-muted" style="font-size:1.05rem">
-        Every treatment has a different timeline. Some can be completed in a single trip — others require two visits with a healing gap between them. Here is exactly what to expect.
-      </p>
-    </div>
-
-    <div class="table-wrap mb-10">
-      <table>
-        <thead>
-          <tr>
-            <th>Treatment Package</th>
-            <th class="center">Visits Required</th>
-            <th class="center">First Visit</th>
-            <th class="center">Healing Gap</th>
-            <th class="center">Second Visit</th>
-            <th class="center gold">Total Duration</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="td-label">Signature Zirconia Smile</td>
-            <td class="td-green td-center">1 visit</td>
-            <td class="td-center">7–8 days</td>
-            <td class="td-muted td-center">—</td>
-            <td class="td-muted td-center">—</td>
-            <td class="td-gold td-center">7–8 days</td>
-          </tr>
-          <tr>
-            <td class="td-label">Prime Bite Full Restoration</td>
-            <td class="td-center">2 visits</td>
-            <td class="td-center">7–8 days</td>
-            <td class="td-center">3–6 months</td>
-            <td class="td-center">5–7 days</td>
-            <td class="td-gold td-center">5–7 months</td>
-          </tr>
-          <tr>
-            <td class="td-label">Forever Young Full-Arch</td>
-            <td class="td-center">2 visits</td>
-            <td class="td-center">7–10 days</td>
-            <td class="td-center">3–6 months</td>
-            <td class="td-center">5–7 days</td>
-            <td class="td-gold td-center">5–7 months</td>
-          </tr>
-          <tr>
-            <td class="td-label">Implant Rescue Program</td>
-            <td class="td-center">2–3 visits</td>
-            <td class="td-center">7–14 days</td>
-            <td class="td-center">4–6 months</td>
-            <td class="td-center">5–7 days</td>
-            <td class="td-gold td-center">6–9 months</td>
-          </tr>
-          <tr>
-            <td class="td-label">Complete Smile Alignment</td>
-            <td class="td-center">2 visits</td>
-            <td class="td-center">3–5 days</td>
-            <td class="td-center">6–12 months (remote)</td>
-            <td class="td-center">3–5 days</td>
-            <td class="td-gold td-center">6–12 months</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="bg-nile-gold/5 border border-nile-gold/25 p-6 max-w-4xl mx-auto">
-      <p class="text-sm text-nile-muted leading-relaxed mb-3">
-        <strong class="text-nile-blue">Why two visits?</strong> Dental implants require a biological healing phase called <em>osseointegration</em> — the implant fuses with your jawbone over 3–6 months. The final prosthesis cannot be placed until this healing is complete. This is not optional; it is how implant dentistry works worldwide.
-      </p>
-      <p class="text-xs text-nile-muted italic">
-        <strong>Important:</strong> The healing gap is <strong>not time spent in Egypt</strong> — you return home during this period and come back for the second visit. Final visit dates are confirmed in your written treatment plan.
-      </p>
-    </div>
-  </div>
-</section>
 <!-- ═══════════════════ TRAVEL ADD-ONS ═══════════════════ -->
 <section id="travel-addons" class="section bg-white reveal">
   <div class="container">
@@ -3433,8 +3063,8 @@ section.bg-nile-beige {
         <div class="p-7 flex-1 flex flex-col">
           <div class="text-center pb-6 mb-6 border-b border-nile-gold/20">
             <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Add to any package</p>
-            <p class="font-serif font-bold text-nile-blue" style="font-size:2.2rem">+ $1,700 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
-            <p class="text-xs text-nile-muted mt-2">Per patient, 10-day stay • Peak season +30–50%</p>
+            <p class="font-serif font-bold text-nile-blue" style="font-size:2.2rem">+ $890 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
+            <p class="text-xs text-nile-muted mt-2">Per patient, 8–10 day stay</p>
           </div>
           <h4 class="font-serif text-nile-blue mb-3 text-base">What's Included</h4>
           <ul class="space-y-2 text-sm text-nile-muted mb-6 flex-1">
@@ -3465,8 +3095,8 @@ section.bg-nile-beige {
         <div class="p-7 flex-1 flex flex-col">
           <div class="text-center pb-6 mb-6 border-b border-nile-gold/20">
             <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Add to any package</p>
-            <p class="font-serif font-bold text-nile-gold" id="premiumPrice" style="font-size:2.2rem">+ $3,600 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
-            <p class="text-xs text-nile-muted mt-2">Per patient, 10-day stay • Peak season +30–50%</p>
+            <p class="font-serif font-bold text-nile-gold" id="premiumPrice" style="font-size:2.2rem">+ $1,890 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
+            <p class="text-xs text-nile-muted mt-2">Per patient, 10-day stay</p>
           </div>
           <h4 class="font-serif text-nile-blue mb-3 text-base">Everything in Essential, plus:</h4>
           <ul class="space-y-2 text-sm text-nile-muted mb-6 flex-1">
@@ -3495,8 +3125,8 @@ section.bg-nile-beige {
         <div class="p-7 flex-1 flex flex-col">
           <div class="text-center pb-6 mb-6 border-b border-nile-gold/20">
             <p class="text-nile-muted text-xs uppercase tracking-widest mb-2">Add to any package</p>
-            <p class="font-serif font-bold text-nile-gold" style="font-size:2.2rem">+ $6,650 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
-            <p class="text-xs text-nile-muted mt-2">Per patient, 10-day stay • Peak season +30–50%</p>
+            <p class="font-serif font-bold text-nile-gold" style="font-size:2.2rem">+ $3,490 <span class="text-base font-sans font-normal text-nile-muted">USD</span></p>
+            <p class="text-xs text-nile-muted mt-2">Per patient, 10-day stay</p>
           </div>
           <h4 class="font-serif text-nile-blue mb-3 text-base">Everything in Premium, plus:</h4>
           <ul class="space-y-2 text-sm text-nile-muted mb-6 flex-1">
@@ -3575,56 +3205,45 @@ section.bg-nile-beige {
   </div>
 </section>
 <!-- ═══════════════════ PRICE ESTIMATOR ═══════════════════ -->
-<section id="estimator" class="section text-white reveal" style="background:linear-gradient(135deg,#4F6070 0%,#3A4855 100%);">
+<section id="estimator" class="section bg-nile-blue text-white reveal">
   <div class="container-narrow">
     <div class="text-center mb-10">
       <p class="eyebrow eyebrow-light mb-4">Quick Estimate</p>
       <h2 class="mb-4" style="font-size:clamp(1.75rem,4vw,2.5rem)">Get a Rough Idea in 30 Seconds</h2>
-      <p class="text-gray-300 text-sm max-w-2xl mx-auto">Select your country, treatment, and add-ons — see an indicative total including flights, hotel, and treatment.</p>
+      <p class="text-gray-300 text-sm max-w-2xl mx-auto">Select your treatment and add-ons — see an indicative price range instantly. Final quote is confirmed in writing after your free clinical review.</p>
     </div>
 
     <div class="bg-white/5 border border-nile-gold/30 p-6 md:p-10 max-w-2xl mx-auto">
 
-      <div class="mb-6">
-        <label class="block text-nile-gold-bright text-xs uppercase tracking-widest font-semibold mb-3">1. Departure Country</label>
-        <select id="estCountry" class="w-full px-4 py-3 bg-white text-nile-ink border border-nile-gold/30 focus:outline-none focus:ring-2 focus:ring-nile-gold" style="border-radius:2px">
-          <option value="0">— Select country —</option>
-          <option value="900">USA — round trip (from $900)</option>
-          <option value="750">Canada — round trip (from $750)</option>
-          <option value="380">UK — round trip (from $380)</option>
-          <option value="280">Gulf (KSA / UAE / Kuwait) — (from $280)</option>
-          <option value="480">Europe — round trip (from $480)</option>
-          <option value="950">Australia — round trip (from $950)</option>
-        </select>
-      </div>
-
-      <div class="mb-6">
-        <label class="block text-nile-gold-bright text-xs uppercase tracking-widest font-semibold mb-3">2. Treatment</label>
+      <!-- Treatment -->
+      <div class="mb-7">
+        <label class="block text-nile-gold-bright text-xs uppercase tracking-widest font-semibold mb-3">1. Treatment</label>
         <select id="estTreatment" class="w-full px-4 py-3 bg-white text-nile-ink border border-nile-gold/30 focus:outline-none focus:ring-2 focus:ring-nile-gold" style="border-radius:2px">
-          <option value="0|0">— Select treatment —</option>
-          <option value="4400|1">Signature Zirconia Smile (from $4,400)</option>
-          <option value="9700|2">Prime Bite Full Restoration (from $9,700)</option>
-          <option value="18200|2">Forever Young Full-Arch (from $18,200)</option>
-          <option value="4800|2">Implant Rescue Program (from $4,800)</option>
-          <option value="4400|2">Complete Smile Alignment (from $4,400)</option>
+          <option value="0">— Select treatment —</option>
+          <option value="3900|5">Signature Zirconia Smile (from $3,900)</option>
+          <option value="8500|5">Prime Bite Full Restoration (from $8,500)</option>
+          <option value="16500|7">Forever Young Full-Arch (from $16,500)</option>
+          <option value="4200|5">Implant Rescue Program (from $4,200)</option>
+          <option value="3900|4">Complete Smile Alignment (from $3,900)</option>
         </select>
       </div>
 
-      <div class="mb-6">
-        <label class="block text-nile-gold-bright text-xs uppercase tracking-widest font-semibold mb-3">3. Travel Add-On (Optional)</label>
+      <!-- Add-Ons -->
+      <div class="mb-7">
+        <label class="block text-nile-gold-bright text-xs uppercase tracking-widest font-semibold mb-3">2. Travel Add-On</label>
         <select id="estAddon" class="w-full px-4 py-3 bg-white text-nile-ink border border-nile-gold/30 focus:outline-none focus:ring-2 focus:ring-nile-gold" style="border-radius:2px">
           <option value="0">— No add-on (clinical only) —</option>
-          <option value="1700">Essential Comfort (+$1,700)</option>
-          <option value="3600">Premium Journey (+$3,600)</option>
-          <option value="6650">Signature VIP (+$6,650)</option>
+          <option value="890">Essential Comfort (+$890)</option>
+          <option value="1890">Premium Journey (+$1,890)</option>
+          <option value="3490">Signature VIP (+$3,490)</option>
         </select>
       </div>
 
+      <!-- Result -->
       <div id="estResult" class="bg-nile-gold/10 border border-nile-gold/40 p-6 text-center" style="border-radius:2px">
-        <p class="text-nile-gold-bright text-xs uppercase tracking-widest mb-3">Your Indicative Total</p>
+        <p class="text-nile-gold-bright text-xs uppercase tracking-widest mb-2">Your Indicative Estimate</p>
         <p id="estPrice" class="font-serif text-nile-beige mb-2" style="font-size:2rem">—</p>
-        <div id="estBreakdown" class="text-xs text-gray-300 mt-3 space-y-1"></div>
-        <p class="text-gray-400 text-xs italic mt-4">Indicative only. Peak season (Nov–Mar) may add 30–50% to hotel rates. Final quote confirmed after clinical review.</p>
+        <p class="text-gray-400 text-xs italic">Indicative only. Final quote confirmed after clinical review.</p>
       </div>
 
       <div class="mt-6 text-center">
@@ -3634,59 +3253,68 @@ section.bg-nile-beige {
     </div>
 
     <p class="text-center text-xs text-gray-500 italic mt-6 max-w-xl mx-auto">
-      This calculator provides a rough indication only. Final pricing depends on your clinical evaluation. Flight estimates are based on average economy fares; actual prices vary by season and airline.
+      This calculator provides a rough indication only. Final pricing depends on your clinical evaluation and the specific treatment plan recommended by your dentist.
     </p>
   </div>
 </section>
 
-<!-- ═══════════════════ /PRICE ESTIMATOR ═══════════════════ -->
+<style>
+#estTreatment, #estAddon{
+  font-family:'Montserrat',sans-serif;
+  font-size:.9rem;
+  font-weight:500;
+  cursor:pointer;
+  appearance:none;
+  background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234F6070' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat:no-repeat;
+  background-position:right 1rem center;
+  background-size:16px;
+  padding-right:3rem !important;
+}
+#estPrice{
+  letter-spacing:-0.02em;
+  transition:all .4s cubic-bezier(.22,1,.36,1);
+}
+</style>
 
 <script>
 (function(){
-  const co = document.getElementById('estCountry');
   const tr = document.getElementById('estTreatment');
   const ad = document.getElementById('estAddon');
   const out = document.getElementById('estPrice');
-  const brk = document.getElementById('estBreakdown');
-  if(!co || !tr || !ad || !out) return;
-
-  function fmt(n){ return '$' + Math.round(n).toLocaleString(); }
+  if(!tr || !ad || !out) return;
 
   function update(){
-    const c = parseFloat(co.value) || 0;
-    const tRaw = tr.value;
-    const a = parseFloat(ad.value) || 0;
+    const tVal = tr.value;
+    const aVal = ad.value;
+    const t = tVal === '0' ? 0 : parseFloat(tVal.split('|')[0]);
+    const a = parseFloat(aVal);
 
-    const parts = tRaw === '0|0' ? [0,0] : tRaw.split('|').map(Number);
-    const t = parts[0];
-    const visits = parts[1] || 0;
-
-    if(t === 0){
+    if(t === 0 && a === 0){
       out.textContent = '—';
-      brk.innerHTML = '';
       return;
     }
 
-    const flightCost = c * (visits || 1);
-    const base = t + a + flightCost;
-    const low  = Math.round(base * 0.9);
+    // build range: +/- 15%
+    const base = t + a;
+    const low  = Math.round(base * 0.85);
     const high = Math.round(base * 1.15);
 
-    out.textContent = fmt(low) + ' – ' + fmt(high);
+    if(t === 0){
+      // add-on only shouldn't happen, but handle gracefully
+      out.textContent = '+ $' + a.toLocaleString() + ' USD';
+      return;
+    }
 
-    let b = '';
-    b += '<div>✈️ Flights: ' + fmt(flightCost) + ' (' + (visits||1) + ' visit' + (visits>1?'s':'') + ')</div>';
-    b += '<div>🦷 Treatment: ' + fmt(t) + '</div>';
-    if(a > 0) b += '<div>🏨 Travel add-on: ' + fmt(a) + '</div>';
-    brk.innerHTML = b;
+    out.textContent = '$' + low.toLocaleString() + ' – $' + high.toLocaleString() + ' USD';
   }
 
-  co.addEventListener('change', update);
   tr.addEventListener('change', update);
   ad.addEventListener('change', update);
 })();
 </script>
 <!-- ═══════════════════ /PRICE ESTIMATOR ═══════════════════ -->
+
 <!-- ═══════════════════ ITEMIZED PRICING ═══════════════════ -->
 <section id="itemized" class="section reveal">
   <div class="container">
@@ -3735,7 +3363,7 @@ section.bg-nile-beige {
   </div>
 </section>
 <!-- ═══════════════════ FULL GUARANTEES ═══════════════════ -->
-<section id="guarantees" class="section text-white reveal" style="background:linear-gradient(160deg,#0A0D10 0%,#1F2A36 50%,#2A3744 100%);">
+<section id="guarantees" class="section bg-nile-blue-dark text-white reveal">
   <div class="container">
     <div class="text-center mb-12">
       <p class="eyebrow eyebrow-light mb-4">Your Protection</p>
@@ -3771,7 +3399,7 @@ section.bg-nile-beige {
       </div>
     </div>
     <div class="bg-nile-gold/10 border border-nile-gold/40 p-8 max-w-4xl mx-auto">
-      <h4 class="font-serif text-xl text-nile-beige mb-4">Important Note on Warranty Scope</h4>
+      <h5 class="font-serif text-xl text-nile-beige mb-4">Important Note on Warranty Scope</h5>
       <p class="text-gray-300 text-sm mb-3">Our warranty has two tiers: <strong class="text-nile-beige">lifetime manufacturer warranty</strong> on the implant fixture itself (Straumann / Nobel Biocare / Osstem), and a <strong class="text-nile-beige">5-year clinical service warranty</strong> on re-treatment labor at our accredited partner center in Cairo. It does not cover third-party dental work performed outside our network.</p>
       <p class="text-gray-300 text-sm">For routine follow-ups in your home country, we help coordinate with a licensed local dentist and share your treatment records.</p>
     </div>
@@ -4062,7 +3690,7 @@ section.bg-nile-beige {
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 stagger">
       <div class="relative pt-6 border-t-2 border-nile-gold">
         <div class="text-nile-gold font-serif text-3xl mb-2">01</div>
-        <h3 class="font-serif text-nile-blue text-lg mb-3">Submit Records</h3>
+        <h4 class="font-serif text-nile-blue text-lg mb-3">Submit Records</h4>
         <p class="text-nile-muted text-sm">Upload a recent panoramic X-ray or CBCT scan and brief medical history via our secure portal.</p>
       </div>
       <div class="relative pt-6 border-t-2 border-nile-gold">
@@ -4346,7 +3974,7 @@ section.bg-nile-beige {
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 stagger">
       <div class="card p-6">
         <div class="text-nile-gold font-serif text-2xl mb-3">Week 1</div>
-        <h3 class="font-serif text-nile-blue text-lg mb-3">Initial Healing</h3>
+        <h4 class="font-serif text-nile-blue text-lg mb-3">Initial Healing</h4>
         <ul class="text-xs text-nile-muted space-y-2">
           <li>• Mild swelling and bruising — normal</li>
           <li>• Soft-food diet recommended</li>
@@ -4390,7 +4018,7 @@ section.bg-nile-beige {
 </section>
 
 <!-- ═══════════════════ DISCOVER EGYPT ═══════════════════ -->
-<section id="discover-egypt" class="section text-white reveal" style="background:linear-gradient(160deg,#0A0D10 0%,#1F2A36 50%,#2A3744 100%);">
+<section id="discover-egypt" class="section bg-nile-blue-dark text-white reveal">
   <div class="container">
     <div class="text-center mb-10 max-w-3xl mx-auto">
       <p class="eyebrow eyebrow-light mb-4">Beyond Treatment</p>
@@ -4518,9 +4146,9 @@ section.bg-nile-beige {
 <!-- Lightbox Modal -->
 <div id="galleryLightbox" class="gallery-lightbox">
   <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
-  <img id="lightboxImg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+  <img id="lightboxImg" src="" alt="">
   <div class="lightbox-caption">
-    <h4 id="lightboxTitle">Image Gallery</h4>
+    <h4 id="lightboxTitle"></h4>
     <p id="lightboxDesc"></p>
   </div>
 </div>
@@ -4630,7 +4258,7 @@ section.bg-nile-beige {
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <div class="lg:col-span-2 bg-white border border-nile-gold/20 overflow-hidden shadow-xl">
-        <iframe src="https://maps.google.com/maps?q=30.01998,31.00504&z=15&output=embed" height="400" style="border:0;width:100%" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Arkan Plaza, Sheikh Zayed, Giza, Egypt"></iframe>
+        <iframe src="https://maps.google.com/maps?q=30.01998,31.00504&z=15&output=embed" width="100%" height="400" style="border:0" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Arkan Plaza, Sheikh Zayed, Giza, Egypt"></iframe>
       </div>
       <div class="bg-nile-blue text-white p-8 flex flex-col justify-between">
         <div>
@@ -4813,14 +4441,7 @@ section.bg-nile-beige {
 
     <details>
       <summary>Do I need a visa to enter Egypt?<span class="acc-icon">+</span></summary>
-      <div class="acc-body">
-  <p class="mb-3">US, Canadian, UK, EU, Australian, and New Zealand passport holders can obtain a visa on arrival at Egyptian airports for <strong>$25 USD</strong> (valid 30 days). We provide full documentation to support your entry, including an invitation letter and treatment confirmation.</p>
-  <p class="mb-3">You can also apply for an <strong>e-Visa in advance</strong> through the official Egyptian government portal:</p>
-  <p class="mb-3">
-    <a href="https://visa2egypt.gov.eg" target="_blank" rel="noopener" class="text-nile-gold underline font-semibold">→ Official Egypt e-Visa Portal (visa2egypt.gov.eg)</a>
-  </p>
-  <p class="text-xs italic text-nile-muted">Note: Only use the official government portal. Third-party visa sites charge additional fees. We provide full documentation support regardless of which method you choose.</p>
-</div>
+      <div class="acc-body">US, Canadian, UK, EU, Australian, and New Zealand passport holders can obtain a visa on arrival at Egyptian airports for $25 USD (valid 30 days). We provide full documentation to support your entry, including an invitation letter and treatment confirmation.</div>
     </details>
 
     <details>
@@ -4841,18 +4462,7 @@ section.bg-nile-beige {
 
     <details>
       <summary>Does my insurance cover treatment in Egypt?<span class="acc-icon">+</span></summary>
-      <div class="acc-body">
-  <p class="mb-3"><strong>Short answer:</strong> In the vast majority of cases, <strong>US, Canadian, and UK dental insurance does not cover treatment performed in Egypt</strong>. Treat all pricing as self-pay unless you have written confirmation from your insurer stating otherwise.</p>
-  <p class="mb-3"><strong>Why?</strong> Most dental insurance plans operate within a limited geographic network. Treatment abroad is typically classified as out-of-network or excluded entirely. Some PPO plans may reimburse a small portion, but this is rare and requires pre-authorization.</p>
-  <p class="mb-3"><strong>How we help:</strong> We provide you with:</p>
-  <ul class="list-disc pl-5 space-y-1 mb-3">
-    <li>Itemized invoices with ADA-compatible procedure codes</li>
-    <li>Detailed treatment records and imaging</li>
-    <li>Letters of medical necessity where applicable</li>
-  </ul>
-  <p class="mb-3">You can submit these to your insurer for possible partial reimbursement. We do not guarantee coverage.</p>
-  <p class="text-xs italic text-nile-muted"><strong>Recommendation:</strong> Consider a standalone <strong>medical travel insurance policy</strong> that specifically covers dental treatment abroad. This is different from standard travel insurance and typically costs $50–$150 for the trip.</p>
-</div>
+      <div class="acc-body">In most cases, US, Canadian, and UK dental insurance does not cover treatment abroad. Treat all pricing as self-pay unless you have written confirmation from your insurer. We provide itemized invoices for you to submit.</div>
     </details>
 
     <details>
@@ -4861,55 +4471,8 @@ section.bg-nile-beige {
     </details>
 
     <details>
-      <summary>How many visits will I need?<span class="acc-icon">+</span></summary>
-      <div class="acc-body">
-        <p class="mb-3">It depends on the treatment:</p>
-        <div class="space-y-2 mb-4">
-          <p><strong>1 visit (7–8 days):</strong> Signature Zirconia Smile — crowns only, no implants.</p>
-          <p><strong>2 visits (5–7 months total):</strong> Prime Bite, Forever Young, Complete Smile Alignment.</p>
-          <p><strong>2–3 visits (6–9 months total):</strong> Implant Rescue Program — complex cases with bone grafting.</p>
-        </div>
-        <p>See the full <a href="#visit-schedule" class="text-nile-gold underline">Visit Schedule table</a> for details.</p>
-      </div>
-    </details>
-
-    <details>
-      <summary>What is the total time from first contact to final smile?<span class="acc-icon">+</span></summary>
-      <div class="acc-body">
-        <p class="mb-3">A typical full journey looks like this:</p>
-        <ul class="list-disc pl-5 space-y-1 mb-3">
-          <li><strong>Week 0:</strong> Free virtual consultation + written treatment plan</li>
-          <li><strong>Weeks 1–4:</strong> Booking, flights, and travel logistics</li>
-          <li><strong>Visit 1:</strong> Surgery + temporary prosthesis (7–10 days in Egypt)</li>
-          <li><strong>Months 1–6:</strong> Healing at home + remote follow-ups</li>
-          <li><strong>Visit 2:</strong> Final prosthesis fitting (5–7 days in Egypt)</li>
-        </ul>
-        <p><strong>Total: 5–7 months</strong> from first contact to final result. Only 12–17 days of that is spent in Egypt.</p>
-      </div>
-    </details>
-
-    <details>
-      <summary>Can I complete everything in one visit?<span class="acc-icon">+</span></summary>
-      <div class="acc-body">
-        <p class="mb-3"><strong>For crowns and veneers only: Yes.</strong> Signature Zirconia Smile can be completed in a single 7–8 day visit because there are no implants — just precision crowns on existing teeth.</p>
-        <p class="mb-3"><strong>For implants: No — and this is true worldwide.</strong> Dental implants require a biological healing phase (osseointegration) of 3–6 months before the final prosthesis can be placed. No ethical dentist — in Egypt, the US, or anywhere — will place a permanent implant-supported prosthesis on the same day as surgery.</p>
-        <p class="text-xs italic text-nile-muted">If a clinic offers "implants in one visit," ask exactly what they mean. Some use same-day temporary bridges, which is legitimate — but the <em>final</em> permanent restoration still requires a second visit after healing.</p>
-      </div>
-    </details>
-
-    <details>
-      <summary>What happens if I need a second visit?<span class="acc-icon">+</span></summary>
-      <div class="acc-body">
-        <p class="mb-3">If your treatment requires two visits, here is what happens:</p>
-        <ul class="list-disc pl-5 space-y-2 mb-3">
-          <li><strong>You return home</strong> after the first visit with a fixed temporary prosthesis and a complete aftercare protocol.</li>
-          <li><strong>Remote follow-ups</strong> continue via WhatsApp and telehealth at 1 week, 1 month, and 3 months.</li>
-          <li><strong>Your second visit is scheduled</strong> in advance — typically 4–6 months after the first — and confirmed in writing in your original treatment plan.</li>
-          <li><strong>Pricing for the second visit is included</strong> in your original quote. You do not pay twice for the same treatment.</li>
-          <li><strong>Travel add-on costs apply per visit</strong> — meaning if you choose an add-on package, it applies to each trip separately. We give you a bundled estimate at the start.</li>
-        </ul>
-        <p class="text-xs italic text-nile-muted">Important: The second visit is <strong>not optional</strong> — it is required to place the final permanent prosthesis after healing. Final results cannot be achieved in a single visit for implant cases.</p>
-      </div>
+      <summary>What if I need a second visit?<span class="acc-icon">+</span></summary>
+      <div class="acc-body">Complex cases — such as those requiring extensive bone grafting or sinus lifts — may require a healing phase of 4–6 months before final implant placement. If multiple visits are necessary, this is clearly outlined and priced in your initial written treatment plan.</div>
     </details>
 
     <details>
@@ -5043,7 +4606,7 @@ section.bg-nile-beige {
 </section>
 
 <!-- ═══════════════════ CONSULTATION / LEAD ═══════════════════ -->
-<section id="consult" class="section text-white reveal" style="background:linear-gradient(135deg,#4F6070 0%,#3A4855 100%);">
+<section id="consult" class="section bg-nile-blue text-white reveal">
   <div class="container-narrow text-center">
     <p class="eyebrow eyebrow-light mb-4">Free Clinical Review</p>
     <h2 class="mb-4" style="font-size:clamp(1.75rem,4vw,2.5rem)">Not Ready to Book?<br><span class="italic font-normal gold-text">Get a Free Review of Your X-ray.</span></h2>
@@ -5082,7 +4645,7 @@ section.bg-nile-beige {
 </main>
 
 <!-- ═══════════════════ FOOTER ═══════════════════ -->
-<footer class="text-white pt-20 pb-8 border-t border-nile-gold/30" style="background:linear-gradient(180deg,#0A0D10 0%,#1F2A36 100%);">
+<footer class="bg-nile-blue-dark text-white pt-20 pb-8 border-t border-nile-gold/30">
   <div class="container px-5">
     <div class="text-center mb-14 pb-14 border-b border-white/10">
       <h2 class="font-serif text-white mb-8" style="font-size:clamp(1.75rem,4vw,2.75rem)">Ready to <span class="italic gold-text">Reclaim Your Smile?</span></h2>
@@ -5102,7 +4665,7 @@ section.bg-nile-beige {
       </div>
 
       <div>
-        <h3 class="font-serif text-nile-beige text-lg mb-5">Services</h3>
+        <h4 class="font-serif text-nile-beige text-lg mb-5">Services</h4>
         <ul class="space-y-3 text-sm text-gray-400">
           <li><a href="#packages" class="hover:text-nile-gold-bright transition">All-on-4 Implants</a></li>
           <li><a href="#packages" class="hover:text-nile-gold-bright transition">Full Mouth Restoration</a></li>
@@ -5154,7 +4717,7 @@ section.bg-nile-beige {
 
     <!-- ═══════════════════ MEDICAL DISCLAIMER ═══════════════════ -->
     <div class="bg-white/5 p-6 mb-8 border border-nile-gold/30 text-xs text-gray-400 leading-relaxed">
-      <h4 class="text-nile-beige font-serif text-base mb-3">Medical Disclaimer</h4>
+      <h5 class="text-nile-beige font-serif text-base mb-3">Medical Disclaimer</h5>
       <p class="mb-3">
         The information provided on this website is intended solely for general informational and educational purposes. It does not constitute dental, medical, or professional advice, diagnosis, or treatment. Users are advised to consult a licensed dental professional for any medical concerns or treatment decisions.
       </p>
@@ -5167,7 +4730,7 @@ section.bg-nile-beige {
     </div>
 
     <div class="bg-white/5 p-6 mb-8 border border-white/10 text-xs text-gray-400 leading-relaxed">
-      <h4 class="text-nile-beige font-serif text-base mb-3">Important Medical &amp; Legal Notice</h4>
+      <h5 class="text-nile-beige font-serif text-base mb-3">Important Medical &amp; Legal Notice</h5>
       <p class="mb-3">Nile Smile Concierge is a <strong>dental concierge service</strong> founded by a licensed dentist. We connect international patients with accredited partner clinics in Cairo — and every treatment plan is clinically reviewed by the treating specialist before it reaches the patient.</p>
       <p class="mb-3">Clinical procedures — including diagnosis, treatment, and surgery — are performed at our accredited partner facilities by licensed specialists registered with the Egyptian Dental Syndicate.</p>
       <p>Final treatment eligibility, timeline, and pricing are subject to clinical evaluation and may vary based on individual medical conditions. Statistics and study data referenced are sourced from peer-reviewed publications and provided for informational purposes.</p>
@@ -5256,12 +4819,12 @@ section.bg-nile-beige {
     <div class="space-y-4 text-nile-muted text-sm leading-relaxed">
       <p><strong class="text-nile-blue">Structure of Coverage:</strong> Implants carry a two-tier warranty:</p>
       
-      <div class="bg-nile-beige p-4 border-l-4 border-nile-gold">
+      <div class="bg-nile-beige p-4 border-l-3 border-nile-gold">
         <p class="font-semibold text-nile-blue mb-2">Tier 1 — Manufacturer Warranty (Lifetime)</p>
         <p class="text-xs">The implant <em>fixture</em> itself (Straumann, Nobel Biocare, Osstem) carries the manufacturer's lifetime warranty against structural failure. If the fixture fractures, the manufacturer replaces the fixture free of charge.</p>
       </div>
 
-      <div class="bg-nile-beige p-4 border-l-4 border-nile-gold">
+      <div class="bg-nile-beige p-4 border-l-3 border-nile-gold">
         <p class="font-semibold text-nile-blue mb-2">Tier 2 — Clinical Service Warranty (5 Years)</p>
         <p class="text-xs">Our partner clinic covers clinical re-treatment labor for 5 years from placement, including removal and re-placement of a failed implant, at no additional clinical fee — provided you attend annual check-ups (in person or via telehealth) and maintain good oral hygiene.</p>
       </div>
@@ -5333,13 +4896,21 @@ section.bg-nile-beige {
     <h3 id="privacyTitle" class="font-serif text-nile-blue mb-5 pr-10" style="font-size:1.75rem">Privacy Policy</h3>
     <div class="space-y-4 text-nile-muted text-sm leading-relaxed">
       <p><strong class="text-nile-blue">Data Controller:</strong> Nile Smile Concierge, Cairo, Egypt. Contact: contact@nilesmileconcierge.com</p>
+      
       <p><strong class="text-nile-blue">What We Collect:</strong> We collect only the information necessary to coordinate your treatment: contact details, medical records (X-rays, CBCT), medical history, and travel preferences.</p>
+      
       <p><strong class="text-nile-blue">Legal Basis for Processing:</strong> We process your data based on (1) your explicit consent, (2) performance of a contract (coordinating your treatment), and (3) compliance with legal obligations.</p>
+      
       <p><strong class="text-nile-blue">Health Data (Special Category):</strong> Your medical records are treated as special category data under applicable data protection laws. We apply enhanced security measures and share your data only with your treating dentist and no one else.</p>
+      
       <p><strong class="text-nile-blue">How Long We Keep Your Data:</strong> We retain your data for a period of 7 years after your last treatment, in compliance with Egyptian medical records regulations. After this period, your data is securely deleted.</p>
+      
       <p><strong class="text-nile-blue">Your Rights:</strong> You have the right to access, correct, delete, restrict processing of, or port your personal data. You also have the right to withdraw consent at any time. To exercise any of these rights, email contact@nilesmileconcierge.com.</p>
+      
       <p><strong class="text-nile-blue">Cookies:</strong> We use cookies to improve your experience and measure campaign effectiveness. You can manage cookie preferences through your browser settings.</p>
+      
       <p><strong class="text-nile-blue">Data Transfers:</strong> Your data may be transferred to our partner clinics in Egypt for the purpose of coordinating your treatment. All transfers are conducted under strict confidentiality agreements.</p>
+      
       <p><strong class="text-nile-blue">Complaints:</strong> If you believe your data protection rights have been violated, you have the right to lodge a complaint with the relevant supervisory authority in your country of residence.</p>
     </div>
   </div>
@@ -5566,19 +5137,20 @@ section.bg-nile-beige {
   }
   window.addEventListener('scroll', updateQuickBar, {passive:true});
 
-  /* ═════════ 4. REVEAL ON SCROLL — ROBUST ═════════ */
+  /* ═════════ 4. REVEAL ON SCROLL — PREMIUM SHADE ═════════ */
   const revealEls = document.querySelectorAll('.reveal, .stagger');
   const io = 'IntersectionObserver' in window
     ? new IntersectionObserver((entries)=>{
         entries.forEach(e=>{
-          if(e.isIntersecting){
+          if(e.isIntersecting){ 
+            // تأخير بسيط لكل قسم → إحساس staggered
             requestAnimationFrame(()=>{
-              e.target.classList.add('visible');
+              e.target.classList.add('visible'); 
               io.unobserve(e.target);
             });
           }
         });
-      }, {rootMargin:'0px 0px -40px 0px', threshold:0})
+      }, {rootMargin:'0px 0px -60px 0px', threshold:0.1})
     : null;
 
   if(io){
@@ -5586,32 +5158,6 @@ section.bg-nile-beige {
   } else {
     revealEls.forEach(el=>el.classList.add('visible'));
   }
-
-  // Fallback: افتح أي قسم في الشاشة
-  let revealTick = false;
-  function revealFallback(){
-    if(revealTick) return;
-    revealTick = true;
-    requestAnimationFrame(()=>{
-      const vh = window.innerHeight;
-      document.querySelectorAll('.reveal:not(.visible), .stagger:not(.visible)').forEach(el=>{
-        const rect = el.getBoundingClientRect();
-        if(rect.top < vh - 40 && rect.bottom > 0){
-          el.classList.add('visible');
-        }
-      });
-      revealTick = false;
-    });
-  }
-  window.addEventListener('scroll', revealFallback, {passive:true});
-  window.addEventListener('resize', revealFallback, {passive:true});
-  revealFallback();
-
-  // ضمان نهائي بعد 2.5 ثانية
-  setTimeout(()=>{
-    document.querySelectorAll('.reveal:not(.visible), .stagger:not(.visible)')
-      .forEach(el=>el.classList.add('visible'));
-  }, 2500);
 
   /* ═════════ 5. MOBILE MENU ═════════ */
   const menuBtn = document.getElementById('menuBtn');
@@ -6240,7 +5786,7 @@ for(let i=0;i<particleCount;i++){
     if (!priceEl) return;
 
     if (variant === 'B') {
-      priceEl.innerHTML = '<span style="text-decoration:line-through;color:#8FA1B2;font-size:1.2rem;font-family:sans-serif;font-weight:400;margin-right:8px;">$4,500</span> + $3,600 <span class="text-base font-sans font-normal text-nile-muted">USD</span>';
+      priceEl.innerHTML = '<span style="text-decoration:line-through;color:#8FA1B2;font-size:1.2rem;font-family:sans-serif;font-weight:400;margin-right:8px;">$2,500</span> + $1,890 <span class="text-base font-sans font-normal text-nile-muted">USD</span>';
     }
 
     if (typeof gtag === 'function') {
