@@ -5923,5 +5923,15 @@ for(let i=0;i<particleCount;i++){
 
 })();
 </script>
+<script>
+setTimeout(function(){
+  document.querySelectorAll('.reveal,.stagger,.stagger>*').forEach(function(el){
+    el.style.setProperty('opacity','1','important');
+    el.style.setProperty('transform','none','important');
+    el.style.setProperty('visibility','visible','important');
+    el.classList.add('visible');
+  });
+}, 200);
+</script>
 </body>
 </html>
