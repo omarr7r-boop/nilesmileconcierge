@@ -1024,8 +1024,8 @@ tailwind.config = {
 
   /* ============ REVEAL — SILK SMOOTH (V2) ============ */
   .reveal{
-    opacity: 0;
-    transform: translateY(60px);
+    opacity: 1;
+    transform: translateY(0);
     transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
     /* ✅ will-change اتشال لتوفير الذاكرة */
@@ -1037,8 +1037,8 @@ tailwind.config = {
 
   /* Stagger — كل ابن بيظهر بـ delay مختلف */
   .stagger > *{
-    opacity: 0;
-    transform: translateY(45px) scale(0.98);
+    opacity: 1;
+    transform: translateY(0) scale(1);
     transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 1s cubic-bezier(0.16, 1, 0.3, 1);
   }
