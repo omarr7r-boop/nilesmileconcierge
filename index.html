@@ -1011,31 +1011,7 @@ tailwind.config = {
   .gold-text{background:linear-gradient(135deg,#AE9164 0%,#E8C88A 45%,#AE9164 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;background-size:200% auto;animation:goldFlow 5s ease-in-out infinite}
   @keyframes goldFlow{0%,100%{background-position:0% center}50%{background-position:100% center}}
 
-  /* ============ REVEAL — SILK SMOOTH (V2) ============ */
-  .reveal{
-    opacity: 0;
-    transform: translateY(60px);
-    transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform;
-  }
-  .reveal.visible{
-    opacity: 1;
-    transform: translateY(0);
-  }
 
-  /* Stagger — كل ابن بيظهر بـ delay مختلف */
-  .stagger > *{
-    opacity: 0;
-    transform: translateY(45px) scale(0.98);
-    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform;
-  }
-  .stagger.visible > *{
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
   .stagger.visible > *:nth-child(1){ transition-delay: 0.08s; }
   .stagger.visible > *:nth-child(2){ transition-delay: 0.18s; }
   .stagger.visible > *:nth-child(3){ transition-delay: 0.28s; }
@@ -5590,20 +5566,19 @@ section.bg-nile-beige {
   }
   window.addEventListener('scroll', updateQuickBar, {passive:true});
 
-  /* ═════════ 4. REVEAL ON SCROLL — PREMIUM SHADE ═════════ */
+  /* ═════════ 4. REVEAL ON SCROLL — ROBUST ═════════ */
   const revealEls = document.querySelectorAll('.reveal, .stagger');
   const io = 'IntersectionObserver' in window
     ? new IntersectionObserver((entries)=>{
         entries.forEach(e=>{
-          if(e.isIntersecting){ 
-            // تأخير بسيط لكل قسم → إحساس staggered
+          if(e.isIntersecting){
             requestAnimationFrame(()=>{
-              e.target.classList.add('visible'); 
+              e.target.classList.add('visible');
               io.unobserve(e.target);
             });
           }
         });
-      }, {rootMargin:'0px 0px -60px 0px', threshold:0.1})
+      }, {rootMargin:'0px 0px -40px 0px', threshold:0})
     : null;
 
   if(io){
@@ -5611,6 +5586,32 @@ section.bg-nile-beige {
   } else {
     revealEls.forEach(el=>el.classList.add('visible'));
   }
+
+  // Fallback: افتح أي قسم في الشاشة
+  let revealTick = false;
+  function revealFallback(){
+    if(revealTick) return;
+    revealTick = true;
+    requestAnimationFrame(()=>{
+      const vh = window.innerHeight;
+      document.querySelectorAll('.reveal:not(.visible), .stagger:not(.visible)').forEach(el=>{
+        const rect = el.getBoundingClientRect();
+        if(rect.top < vh - 40 && rect.bottom > 0){
+          el.classList.add('visible');
+        }
+      });
+      revealTick = false;
+    });
+  }
+  window.addEventListener('scroll', revealFallback, {passive:true});
+  window.addEventListener('resize', revealFallback, {passive:true});
+  revealFallback();
+
+  // ضمان نهائي بعد 2.5 ثانية
+  setTimeout(()=>{
+    document.querySelectorAll('.reveal:not(.visible), .stagger:not(.visible)')
+      .forEach(el=>el.classList.add('visible'));
+  }, 2500);
 
   /* ═════════ 5. MOBILE MENU ═════════ */
   const menuBtn = document.getElementById('menuBtn');
