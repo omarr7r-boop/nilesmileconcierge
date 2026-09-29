@@ -27,12 +27,12 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
 <!-- ═══════════════════ FAVICON ═══════════════════ -->
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="Nile Smile" />
-<link rel="manifest" href="/site.webmanifest" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="Nile Smile">
+<link rel="manifest" href="/site.webmanifest">
 
 <!-- ═══════════════════ PERFORMANCE ═══════════════════ -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -350,15 +350,15 @@ img{
   @media(max-width:768px){html{scroll-padding-top:100px}section[id],header[id],main[id]{scroll-margin-top:100px}}
 </style>
 
-<!-- ═══════════════════ TAILWIND — Pre-compiled ═══════════════════
+<!-- ============ TAILWIND — Pre-compiled ============
      قبل النشر: شغّل الأمر ده مرة واحدة على جهازك
-     
+
      npm install -D tailwindcss
-     npx tailwindcss -i ./src/input.css -o ./styles.css --minify
-     
-     وبعدها حط في الـ <head>:
-     <link rel="stylesheet" href="/styles.css">
-     
+     npx tailwindcss -i ./src/input.css -o ./styles.css minify
+
+     وبعدها حط في الـ head:
+     link rel=stylesheet href=/styles.css
+
      دلوقتي: بنستخدم الـ CDN مؤقتاً لغاية ما تعمل build
 -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -2225,7 +2225,6 @@ section.bg-nile-beige {
 <!-- ═══════════════════ PRICE ESTIMATOR STYLES ═══════════════════ -->
 
 
-</head>
 <!-- ═══════════════════ PRICE ESTIMATOR STYLES ═══════════════════ -->
 <style>
 #estTreatment, #estAddon, #estCountry{
@@ -2245,8 +2244,8 @@ section.bg-nile-beige {
   transition:all .4s cubic-bezier(.22,1,.36,1);
 }
 </style>
+</head>
 
-<body>
 <body>
 
 <!-- ═══════════════════ QUICK ACTION BAR ═══════════════════ -->
@@ -2352,7 +2351,7 @@ section.bg-nile-beige {
 <section class="hero" style="background:linear-gradient(135deg,#1F2A36 0%,#3A4855 40%,#4F6070 100%);">
   <div class="hero-bg">
     <img src="images/spencer-davis-ONVA6s03hg8-unsplash.jpg"
-         sizes="100vw" fetchpriority="high" loading="eager" decoding="async"
+         fetchpriority="high" loading="eager" decoding="async"
          alt="Giza Pyramids at golden hour" id="heroImg">
     <div class="hero-overlay"></div>
   </div>
@@ -2392,6 +2391,7 @@ section.bg-nile-beige {
 
 <!-- ═══════════════════ TRUST STATS ═══════════════════ -->
 <section id="trust-stats" class="section bg-white reveal" style="padding:3.5rem 1.25rem">
+  <h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Our Track Record</h2>
   <div class="container">
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 stagger">
       <div class="text-center">
@@ -2424,6 +2424,7 @@ section.bg-nile-beige {
 
 <!-- ═══════════════════ TRUST BAR ═══════════════════ -->
 <section id="trust" class="bg-white border-y border-nile-gold/15 py-8">
+  <h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Our Accredited Partners</h2>
   <div class="container px-5">
     <p class="eyebrow text-center mb-6">Our Partner Clinics Are Accredited By</p>
     <div class="flex flex-wrap justify-center items-center gap-x-10 gap-y-6 md:gap-x-14 opacity-70">
@@ -2472,7 +2473,7 @@ section.bg-nile-beige {
         <div class="w-16 h-px bg-nile-gold/40 my-6"></div>
         
         <!-- Name & Title -->
-        <h3 class="font-serif text-nile-beige text-xl md:text-2xl mb-2">Dr. Omar Fathi</h3>
+        <h2 class="font-serif text-nile-beige text-xl md:text-2xl mb-2">Dr. Omar Fathi</h2>
         <p class="text-nile-gold text-[10px] uppercase tracking-[0.25em] font-bold mb-6">Founder & Clinical Coordinator</p>
         
         <!-- Credentials -->
@@ -2723,7 +2724,7 @@ section.bg-nile-beige {
         <p class="text-gray-300 mb-6 text-sm">Adequate bone volume is the cornerstone of successful implant placement. Our partner surgical teams use the latest evidence-based techniques.</p>
         <div class="space-y-3">
           <div class="bg-white/5 border border-nile-gold/30 p-5">
-            <h4 class="font-serif text-nile-beige mb-2">Guided Bone Regeneration (GBR)</h4>
+            <h3 class="font-serif text-nile-beige mb-2">Guided Bone Regeneration (GBR)</h3>
             <p class="text-gray-400 text-xs leading-relaxed">Barrier membranes guide new bone growth in areas of deficiency. Predictable results even in compromised ridges.</p>
           </div>
           <div class="bg-white/5 border border-nile-gold/30 p-5">
@@ -3794,7 +3795,7 @@ section.bg-nile-beige {
       </div>
     </div>
     <div class="bg-nile-gold/10 border border-nile-gold/40 p-8 max-w-4xl mx-auto">
-      <h5 class="font-serif text-xl text-nile-beige mb-4">Important Note on Warranty Scope</h5>
+      <h4 class="font-serif text-xl text-nile-beige mb-4">Important Note on Warranty Scope</h4>
       <p class="text-gray-300 text-sm mb-3">Our warranty has two tiers: <strong class="text-nile-beige">lifetime manufacturer warranty</strong> on the implant fixture itself (Straumann / Nobel Biocare / Osstem), and a <strong class="text-nile-beige">5-year clinical service warranty</strong> on re-treatment labor at our accredited partner center in Cairo. It does not cover third-party dental work performed outside our network.</p>
       <p class="text-gray-300 text-sm">For routine follow-ups in your home country, we help coordinate with a licensed local dentist and share your treatment records.</p>
     </div>
@@ -4085,7 +4086,7 @@ section.bg-nile-beige {
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 stagger">
       <div class="relative pt-6 border-t-2 border-nile-gold">
         <div class="text-nile-gold font-serif text-3xl mb-2">01</div>
-        <h4 class="font-serif text-nile-blue text-lg mb-3">Submit Records</h4>
+        <h3 class="font-serif text-nile-blue text-lg mb-3">Submit Records</h3>
         <p class="text-nile-muted text-sm">Upload a recent panoramic X-ray or CBCT scan and brief medical history via our secure portal.</p>
       </div>
       <div class="relative pt-6 border-t-2 border-nile-gold">
@@ -4369,7 +4370,7 @@ section.bg-nile-beige {
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 stagger">
       <div class="card p-6">
         <div class="text-nile-gold font-serif text-2xl mb-3">Week 1</div>
-        <h4 class="font-serif text-nile-blue text-lg mb-3">Initial Healing</h4>
+        <h3 class="font-serif text-nile-blue text-lg mb-3">Initial Healing</h3>
         <ul class="text-xs text-nile-muted space-y-2">
           <li>• Mild swelling and bruising — normal</li>
           <li>• Soft-food diet recommended</li>
@@ -4541,9 +4542,9 @@ section.bg-nile-beige {
 <!-- Lightbox Modal -->
 <div id="galleryLightbox" class="gallery-lightbox">
   <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
-  <img id="lightboxImg" src="" alt="">
+  <img id="lightboxImg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
   <div class="lightbox-caption">
-    <h4 id="lightboxTitle"></h4>
+    <h4 id="lightboxTitle">Image Gallery</h4>
     <p id="lightboxDesc"></p>
   </div>
 </div>
@@ -4653,7 +4654,7 @@ section.bg-nile-beige {
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <div class="lg:col-span-2 bg-white border border-nile-gold/20 overflow-hidden shadow-xl">
-        <iframe src="https://maps.google.com/maps?q=30.01998,31.00504&z=15&output=embed" width="100%" height="400" style="border:0" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Arkan Plaza, Sheikh Zayed, Giza, Egypt"></iframe>
+        <iframe src="https://maps.google.com/maps?q=30.01998,31.00504&z=15&output=embed" height="400" style="border:0;width:100%" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Arkan Plaza, Sheikh Zayed, Giza, Egypt"></iframe>
       </div>
       <div class="bg-nile-blue text-white p-8 flex flex-col justify-between">
         <div>
@@ -5125,7 +5126,7 @@ section.bg-nile-beige {
       </div>
 
       <div>
-        <h4 class="font-serif text-nile-beige text-lg mb-5">Services</h4>
+        <h3 class="font-serif text-nile-beige text-lg mb-5">Services</h3>
         <ul class="space-y-3 text-sm text-gray-400">
           <li><a href="#packages" class="hover:text-nile-gold-bright transition">All-on-4 Implants</a></li>
           <li><a href="#packages" class="hover:text-nile-gold-bright transition">Full Mouth Restoration</a></li>
@@ -5177,7 +5178,7 @@ section.bg-nile-beige {
 
     <!-- ═══════════════════ MEDICAL DISCLAIMER ═══════════════════ -->
     <div class="bg-white/5 p-6 mb-8 border border-nile-gold/30 text-xs text-gray-400 leading-relaxed">
-      <h5 class="text-nile-beige font-serif text-base mb-3">Medical Disclaimer</h5>
+      <h4 class="text-nile-beige font-serif text-base mb-3">Medical Disclaimer</h4>
       <p class="mb-3">
         The information provided on this website is intended solely for general informational and educational purposes. It does not constitute dental, medical, or professional advice, diagnosis, or treatment. Users are advised to consult a licensed dental professional for any medical concerns or treatment decisions.
       </p>
@@ -5190,7 +5191,7 @@ section.bg-nile-beige {
     </div>
 
     <div class="bg-white/5 p-6 mb-8 border border-white/10 text-xs text-gray-400 leading-relaxed">
-      <h5 class="text-nile-beige font-serif text-base mb-3">Important Medical &amp; Legal Notice</h5>
+      <h4 class="text-nile-beige font-serif text-base mb-3">Important Medical &amp; Legal Notice</h4>
       <p class="mb-3">Nile Smile Concierge is a <strong>dental concierge service</strong> founded by a licensed dentist. We connect international patients with accredited partner clinics in Cairo — and every treatment plan is clinically reviewed by the treating specialist before it reaches the patient.</p>
       <p class="mb-3">Clinical procedures — including diagnosis, treatment, and surgery — are performed at our accredited partner facilities by licensed specialists registered with the Egyptian Dental Syndicate.</p>
       <p>Final treatment eligibility, timeline, and pricing are subject to clinical evaluation and may vary based on individual medical conditions. Statistics and study data referenced are sourced from peer-reviewed publications and provided for informational purposes.</p>
