@@ -1917,26 +1917,30 @@ details.science-accordion > summary:hover{
      SAFE REVEAL FIX — يمنع الصفحة البيضاء ويضمن ظهور المحتوى فوراً
      ═══════════════════════════════════════════════════════════ -->
 <style id="safeRevealFix">
-  /* 1. القاعدة الأساسية: اجعل كل العناصر مرئية بشكل طبيعي. */
-  .reveal,
-  .stagger,
-  .stagger > * {
-    opacity: 1;
-    transform: none;
-    visibility: visible;
-    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  /* ═══════════════════════════════════════════════════════════
+     BULLETPROOF FIX — Forces visibility with maximum priority
+     ═══════════════════════════════════════════════════════════ */
+
+  /* 1. القاعدة الحاسمة: !important مع html body لزيادة الـ specificity */
+  html body .reveal,
+  html body .stagger,
+  html body .stagger > *,
+  html body .stagger > * > * {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
   }
 
-  /* 2. الأنيميشن الفعلي: يطبَّق فقط عند إضافة كلاس .visible بواسطة الـ JS. */
+  /* 2. تأكيد إضافي */
   .reveal.visible,
   .stagger.visible,
   .stagger.visible > * {
-    opacity: 1;
-    transform: none;
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
   }
 
-  /* 3. حل احتياطي قوي: إذا فشل الـ JavaScript تماماً. */
+  /* 3. حل احتياطي: لو JS فشل تماماً */
   .no-js .reveal,
   .no-js .stagger,
   .no-js .stagger > * {
@@ -1945,14 +1949,14 @@ details.science-accordion > summary:hover{
     visibility: visible !important;
   }
 
-  /* 4. ضمان إضافي: أي عنصر لم يضف له كلاس .visible خلال 2.5 ثانية،
-        اجعله مرئياً قسراً لضمان عدم بقاء أي جزء من الصفحة مخفياً. */
-  @keyframes forceReveal {
-    to { opacity: 1; transform: none; }
+  /* 4. ضمان أخير — لو لسه فيه عنصر مخفي لأي سبب */
+  *[class*="reveal"]:not(.visible),
+  *[class*="stagger"]:not(.visible) > * {
+    animation: forceReveal 0.3s ease 1.5s forwards !important;
   }
-  .reveal:not(.visible),
-  .stagger:not(.visible) {
-    animation: forceReveal 0.5s ease 2.5s forwards;
+  @keyframes forceReveal {
+    0% { opacity: 0; }
+    100% { opacity: 1 !important; transform: none !important; }
   }
 </style>
 
