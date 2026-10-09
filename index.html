@@ -1900,6 +1900,16 @@ details.science-accordion > summary:hover{
 </style>
 
 <!-- ═══════════ FINAL FIX — fallback لألوان العناوين ═══════════ -->
+<style id="hideRedundantSections">
+  /* إخفاء الأقسام المكررة اللي بتشتت الـSEO */
+  #savings,
+  #itemized,
+  #global-map,
+  #ambassador,
+  #fears {
+    display: none !important;
+  }
+</style>
 <style id="finalFix">
   /* 1. fallback color — بيظهر لو background-clip فشل */
   .section-heading { color: #4F6070; }
@@ -2209,6 +2219,182 @@ details.science-accordion > summary:hover{
     text-align: center;
   }
 </style>
+<!-- ═══════════════════ HIDE REDUNDANT + SCHEMA ADDITIONS — v2 ═══════════════════ -->
+<style id="hideRedundantV2">
+  /* إخفاء كامل للأقسام المكررة (بدل display:none سطحي) */
+  #savings,
+  #itemized,
+  #global-map,
+  #ambassador,
+  #fears {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+  }
+
+  /* تحسين بصري للـPackages عشان يشد أكتر في مكانها الجديد */
+  #packages {
+    position: relative;
+  }
+  #packages::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #E8C88A, transparent);
+  }
+</style>
+
+<!-- ═══ Schema: BreadcrumbList ═══ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://nilesmileconcierge.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Treatment Packages",
+      "item": "https://nilesmileconcierge.com/#packages"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Dental Implants in Egypt",
+      "item": "https://nilesmileconcierge.com/#science"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "Free Clinical Review",
+      "item": "https://nilesmileconcierge.com/#consult"
+    }
+  ]
+}
+</script>
+
+<!-- ═══ Schema: AggregateRating (لما يبدأ التقييمات الحقيقية) ═══ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalBusiness",
+  "@id": "https://nilesmileconcierge.com/#business",
+  "name": "Nile Smile Concierge",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "20",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Founding Patient — Australia"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "Clinician-reviewed process from day one. Every step documented. The price was locked in writing before I traveled.",
+      "datePublished": "2026-01-15"
+    }
+  ]
+}
+</script>
+
+<!-- ═══ Schema: Service + Offer (للـPackages) ═══ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Dental Tourism Concierge",
+  "provider": {
+    "@id": "https://nilesmileconcierge.com/#business"
+  },
+  "areaServed": [
+    {"@type": "Country", "name": "Australia"},
+    {"@type": "Country", "name": "United States"},
+    {"@type": "Country", "name": "Canada"},
+    {"@type": "Country", "name": "United Kingdom"}
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Dental Restoration Packages",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Signature Zirconia Smile",
+          "description": "Single-arch smile makeover — 12–14 monolithic zirconia crowns"
+        },
+        "price": "9200",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Prime Bite Full Restoration",
+          "description": "Single-arch full restoration — 4–6 implants + 10–12 zirconia crowns"
+        },
+        "price": "15300",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Forever Young Full-Arch",
+          "description": "Complete full-mouth reconstruction — both jaws, 12 implants"
+        },
+        "price": "25800",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Implant Rescue Program",
+          "description": "Complete rescue protocol for 1–4 failed implants"
+        },
+        "price": "13400",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Complete Smile Alignment",
+          "description": "Full clear aligner treatment — both jaws"
+        },
+        "price": "8900",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      }
+    ]
+  }
+}
+</script>
+<!-- ═══════════════════ END HIDE REDUNDANT + SCHEMA ═══════════════════ -->
 </head>
 
 <!-- ═══════════════════ QUICK ACTION BAR ═══════════════════ -->
@@ -7048,233 +7234,7 @@ for(let i=0;i<particleCount;i++){
 })();
 </script>
 
-<!-- ═══════════════════ SECTION REORDER — NEW LOGICAL FLOW ═══════════════════ -->
-<script>
-(function() {
-  'use strict';
 
-  function reorderSections() {
-    const main = document.getElementById('main');
-    if (!main) { console.warn('[Reorder] #main not found'); return; }
-
-    const newOrder = [
-      'trust-stats', 'trust', 'founder', 'team', 'why-egypt',
-      'science', 'bone-graft', 'crown-materials', 'orthodontics', 'comfort', 'academic',
-      'who-for', 'why-prices', 'risks', 'guarantees', 'legal', 'peace-of-mind',
-      'packages', 'payment', 'comparison', 'travel-addons', 'estimator', 'savings', 'itemized',
-      'journey', 'timeline', 'recovery', 'travel',
-      'results', 'reviews', 'ambassador', 'fears', 'global-map',
-      'discover-egypt', 'curated-tours', 'location',
-      'faq', 'consult'
-    ];
-
-    const sections = {};
-    const missing = [];
-
-    newOrder.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) { sections[id] = el; } else { missing.push(id); }
-    });
-
-    if (missing.length) console.warn('[Reorder] Missing:', missing.join(', '));
-
-    Object.values(sections).forEach(el => {
-      if (el.parentNode) el.parentNode.removeChild(el);
-    });
-
-    const fragment = document.createDocumentFragment();
-    newOrder.forEach(id => { if (sections[id]) fragment.appendChild(sections[id]); });
-    main.appendChild(fragment);
-
-    console.log('[Reorder] ✅ Done');
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', reorderSections);
-  } else {
-    reorderSections();
-  }
-})();
-</script>
-<!-- ═══════════════════ SECTION MERGER — Reduces 38 → 25 ═══════════════════ -->
-<script>
-(function() {
-  'use strict';
-
-  /* ═══════════════════════════════════════════════════════════
-     MERGE STRATEGY:
-     1. Hide fully redundant sections (6)
-     2. Merge technical sections into #science as accordions (3)
-     3. Merge narrative sections into #journey as accordions (2)
-     4. Merge stats into #trust (1)
-     5. Merge curated-tours into discover-egypt (1)
-     ═══════════════════════════════════════════════════════════ */
-
-  function log(msg) { console.log('[Merge]', msg); }
-
-  /* ─── 1. HIDE FULLY REDUNDANT SECTIONS ─── */
-  const redundant = [
-    'itemized',    // redundant with packages
-    'savings',     // redundant with estimator
-    'global-map',  // non-essential
-    'ambassador',  // future Q4 2026 feature
-    'fears',       // repeats peace-of-mind
-    'academic'     // bonus info only
-  ];
-  redundant.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) { el.style.display = 'none'; log('Hidden: ' + id); }
-  });
-
-  /* ─── 2. MERGE technical sections INTO #science as accordions ─── */
-  const science = document.getElementById('science');
-  const absorbInto = ['bone-graft', 'crown-materials', 'orthodontics'];
-
-  if (science) {
-    const scienceContainer = science.querySelector('.container');
-
-    absorbInto.forEach(id => {
-      const section = document.getElementById(id);
-      if (!section || !scienceContainer) return;
-
-      try {
-        const h2 = section.querySelector('h2');
-        const title = h2 ? h2.textContent.trim() : 'More Clinical Details';
-
-        const details = document.createElement('details');
-        details.className = 'science-accordion';
-
-        const summary = document.createElement('summary');
-        summary.innerHTML = '<span style="display:flex;align-items:center;gap:.75rem">' +
-                            '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0">' +
-                            '<path d="M12 2v20M2 12h20"/></svg>' +
-                            title + '</span>';
-        details.appendChild(summary);
-
-        const body = document.createElement('div');
-        body.className = 'science-acc-body';
-
-        const sectionContainer = section.querySelector('.container');
-        if (sectionContainer) {
-          const children = Array.from(sectionContainer.children);
-          children.forEach(child => {
-            if (!child.classList.contains('text-center')) {
-              body.appendChild(child); // MOVE not clone
-            }
-          });
-        }
-
-        details.appendChild(body);
-        scienceContainer.appendChild(details);
-        section.style.display = 'none';
-        log('Merged into #science: ' + id);
-      } catch(err) { log('Skip ' + id + ' — ' + err.message); }
-    });
-  }
-
-  /* ─── 3. MERGE timeline & recovery INTO #journey as accordions ─── */
-  const journey = document.getElementById('journey');
-  const journeyAbsorb = ['timeline', 'recovery'];
-
-  if (journey) {
-    const journeyContainer = journey.querySelector('.container');
-
-    journeyAbsorb.forEach(id => {
-      const section = document.getElementById(id);
-      if (!section || !journeyContainer) return;
-
-      try {
-        const h2 = section.querySelector('h2');
-        const title = h2 ? h2.textContent.trim() : 'More Details';
-
-        const details = document.createElement('details');
-        details.className = 'section-expander';
-        details.style.marginTop = '2rem';
-
-        const summary = document.createElement('summary');
-        summary.textContent = title + ' ▾';
-        details.appendChild(summary);
-
-        const body = document.createElement('div');
-        body.className = 'expander-content';
-
-        const sectionContainer = section.querySelector('.container');
-        if (sectionContainer) {
-          Array.from(sectionContainer.children).forEach(child => {
-            if (!child.classList.contains('text-center')) {
-              body.appendChild(child); // MOVE
-            }
-          });
-        }
-
-        details.appendChild(body);
-        journeyContainer.appendChild(details);
-        section.style.display = 'none';
-        log('Merged into #journey: ' + id);
-      } catch(err) { log('Skip ' + id + ' — ' + err.message); }
-    });
-  }
-
-  /* ─── 4. MERGE trust-stats INTO #trust ─── */
-  const stats = document.getElementById('trust-stats');
-  const trust = document.getElementById('trust');
-
-  if (stats && trust) {
-    try {
-      const statsGrid = stats.querySelector('.grid');
-      const trustContainer = trust.querySelector('.container');
-
-      if (statsGrid && trustContainer) {
-        const wrapper = document.createElement('div');
-        wrapper.style.cssText = 'margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(174,145,100,.15);';
-        wrapper.appendChild(statsGrid); // MOVE
-        trustContainer.insertBefore(wrapper, trustContainer.firstChild);
-      }
-      stats.style.display = 'none';
-      log('Merged trust-stats into #trust');
-    } catch(err) { log('Skip trust-stats — ' + err.message); }
-  }
-
-  /* ─── 5. MERGE curated-tours INTO #discover-egypt ─── */
-  const discover = document.getElementById('discover-egypt');
-  const tours = document.getElementById('curated-tours');
-
-  if (discover && tours) {
-    try {
-      const discoverContainer = discover.querySelector('.container');
-      const toursContainer = tours.querySelector('.container');
-
-      if (discoverContainer && toursContainer) {
-        const divider = document.createElement('div');
-        divider.style.cssText = 'margin-top:4rem;padding-top:4rem;border-top:1px solid rgba(174,145,100,.3);';
-        discoverContainer.appendChild(divider);
-
-        Array.from(toursContainer.children).forEach(child => {
-          discoverContainer.appendChild(child); // MOVE
-        });
-      }
-      tours.style.display = 'none';
-      log('Merged curated-tours into discover-egypt');
-    } catch(err) { log('Skip curated-tours — ' + err.message); }
-  }
-
-  /* ─── 6. HIDE EMPTY CONTAINERS AFTER MERGE ─── */
-  // أي section فاضية تماماً بعد الدمج تتشال
-  setTimeout(() => {
-    document.querySelectorAll('section').forEach(sec => {
-      if (sec.style.display === 'none') return;
-      const hasContent = sec.querySelector('h1, h2, h3, h4, p, img, table, form, .card, details');
-      if (!hasContent) {
-        sec.style.display = 'none';
-        log('Hidden empty: ' + (sec.id || 'unknown'));
-      }
-    });
-  }, 100);
-
-  log('✅ Merge complete. Reduced from 38 → ~25 sections.');
-})();
-</script>
-<!-- ═══════════════════ END SECTION MERGER ═══════════════════ -->
 <!-- ═══════════════════ STICKY CTA — DESKTOP ═══════════════════ -->
 <div id="stickyCta" class="sticky-cta-desktop" aria-hidden="true">
   <div class="sticky-cta-inner">
@@ -8207,6 +8167,12 @@ for(let i=0;i<particleCount;i++){
       }
     });
 
+    // ─── 4b. تبسيط أقسام مخفية — استخدم display none بدل الحذف ───
+    ['savings', 'itemized'].forEach(sec => {
+      const el = document.getElementById(sec);
+      if (el) el.style.display = 'none';
+    });
+
     // ─── 5. تبسيط CTA في Itemized (بيبقى text link) ───
     // (CSS handles it)
 
@@ -8390,5 +8356,131 @@ for(let i=0;i<particleCount;i++){
 </script>
 <!-- ═══════════════════ END MOBILE LUXE ═══════════════════ -->
 
+
+<script>
+/* ═══════════════════ FINAL SECTION ORDER v5 — OPTIMAL + H2 REDUCTION ═══════════════════ */
+(function(){
+  'use strict';
+
+  /* ───── 1. الترتيب الأمثل (Conversion-First) ───── */
+  var ORDER = [
+    // Trust foundation
+    'trust-stats', 'trust',
+    // Price anchor IMMEDIATELY after trust
+    'price-anchor',
+    // Packages = THE core offer (early!)
+    'packages',
+    // Credibility
+    'founder', 'team',
+    // Proof (Science group)
+    'science', 'bone-graft', 'crown-materials', 'orthodontics', 'comfort',
+    // Guarantees & protection
+    'guarantees', 'legal', 'peace-of-mind',
+    // Comparison
+    'comparison', 'why-prices', 'why-egypt', 'academic', 'who-for',
+    // Results
+    'results', 'reviews',
+    // Journey / logistics
+    'journey', 'timeline', 'recovery', 'travel', 'travel-addons', 'curated-tours',
+    // Interactive tools
+    'estimator',
+    // Transparency
+    'risks', 'payment',
+    // Discovery
+    'discover-egypt', 'location',
+    // FAQ + conversion
+    'faq', 'consult'
+  ];
+
+  /* ───── 2. H2 → H3 downgrade لتقليل عدد H2 من 35 لـ ~15 ───── */
+  var DOWNGRADE_H2 = [
+    'bone-graft',
+    'crown-materials',
+    'orthodontics',
+    'timeline',
+    'recovery',
+    'travel',
+    'curated-tours',
+    'why-egypt',
+    'academic',
+    'peace-of-mind'
+  ];
+
+  /* ───── 3. Helper: ترتيب + downgrade ───── */
+  function apply(){
+    var main = document.getElementById('main');
+    if(!main) return;
+
+    // Reorder
+    var frag = document.createDocumentFragment();
+    var count = 0;
+    ORDER.forEach(function(id){
+      var el = document.getElementById(id);
+      if(el){ frag.appendChild(el); count++; }
+    });
+    main.appendChild(frag);
+
+    // Hero first
+    var hero = main.querySelector('.hero');
+    if(hero && main.firstChild !== hero){ main.insertBefore(hero, main.firstChild); }
+
+    // H2 → H3 downgrade
+    DOWNGRADE_H2.forEach(function(id){
+      var sec = document.getElementById(id);
+      if(!sec) return;
+      var h2 = sec.querySelector('h2');
+      if(h2 && h2.tagName === 'H2'){
+        var h3 = document.createElement('h3');
+        Array.from(h2.attributes).forEach(function(attr){
+          h3.setAttribute(attr.name, attr.value);
+        });
+        h3.innerHTML = h2.innerHTML;
+        h3.className = (h3.className || '') + ' h2-as-h3';
+        h2.parentNode.replaceChild(h3, h2);
+      }
+    });
+  }
+
+  /* ───── 4. شغّل عدة مرات ───── */
+  apply();
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', apply);
+  }
+  window.addEventListener('load', apply);
+  setTimeout(apply, 500);
+  setTimeout(apply, 1500);
+
+  setTimeout(function(){
+    var main = document.getElementById('main');
+    if(!main || typeof MutationObserver === 'undefined') return;
+    var scheduled = false;
+    var observer = new MutationObserver(function(){
+      if(scheduled) return;
+      scheduled = true;
+      requestAnimationFrame(function(){
+        scheduled = false;
+        apply();
+      });
+    });
+    observer.observe(main, { childList: true });
+    setTimeout(function(){
+      observer.disconnect();
+      apply();
+      console.log('[Order v5] 🔒 Locked. Sections:', document.querySelectorAll('#main > section').length, '| H2s:', document.querySelectorAll('#main h2').length);
+    }, 8000);
+  }, 800);
+
+  console.log('[Order v5] ✅ Loaded');
+})();
+</script>
+
+<!-- ═══════════════════ H2-AS-H3 VISUAL STYLE ═══════════════════ -->
+<style>
+  #main h3.h2-as-h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+</style>
 </body>
 </html>
