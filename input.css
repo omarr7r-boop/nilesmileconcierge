@@ -1,3 +1,25 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@source "./index.html";
+
+@theme {
+  --color-nile-blue: #4F6070;
+  --color-nile-blue-dark: #3A4855;
+  --color-nile-blue-light: #6B7D8E;
+  --color-nile-gold: #AE9164;
+  --color-nile-gold-light: #C9A96E;
+  --color-nile-gold-bright: #E8C88A;
+  --color-nile-beige: #F6F3EE;
+  --color-nile-beige-warm: #EDE6DA;
+  --color-nile-cream: #FBFAF7;
+  --color-nile-ink: #1a202c;
+  --color-nile-muted: #5A6875;
+
+  --font-script: "Italianno", cursive;
+  --font-sans: "Montserrat", system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+
+  --shadow-soft: 0 4px 24px rgba(79,96,112,.08);
+  --shadow-medium: 0 8px 40px rgba(79,96,112,.12);
+  --shadow-gold: 0 8px 32px rgba(174,145,100,.28);
+  --shadow-gold-lg: 0 16px 48px rgba(174,145,100,.38);
+}
