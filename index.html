@@ -8358,73 +8358,76 @@ for(let i=0;i<particleCount;i++){
 
 
 <script>
-/* ═══════════════════ FINAL SECTION ORDER v5 — OPTIMAL + H2 REDUCTION ═══════════════════ */
+/* ═══════════════════ FINAL SECTION ORDER v7 — CLUSTER-OPTIMIZED ═══════════════════ */
 (function(){
   'use strict';
 
-  /* ───── 1. الترتيب الأمثل (Conversion-First) ───── */
+  /* ───── CLUSTER-BASED ORDER — 14 logical groups ───── */
   var ORDER = [
-    // Trust foundation
+    // ── Cluster 1: TRUST ──
     'trust-stats', 'trust',
-    // Price anchor IMMEDIATELY after trust
-    'price-anchor',
-    // Packages = THE core offer (early!)
-    'packages',
-    // Credibility
-    'founder', 'team',
-    // Proof (Science group)
-    'science', 'bone-graft', 'crown-materials', 'orthodontics', 'comfort',
-    // Guarantees & protection
-    'guarantees', 'legal', 'peace-of-mind',
-    // Comparison
-    'comparison', 'why-prices', 'why-egypt', 'academic', 'who-for',
-    // Results
+
+    // ── Cluster 2: OFFER (Price + Packages) ──
+    'price-anchor', 'packages',
+
+    // ── Cluster 3: PROOF (Results + Reviews) ──
     'results', 'reviews',
-    // Journey / logistics
-    'journey', 'timeline', 'recovery', 'travel', 'travel-addons', 'curated-tours',
-    // Interactive tools
-    'estimator',
-    // Transparency
-    'risks', 'payment',
-    // Discovery
+
+    // ── Cluster 4: CREDIBILITY (Founder + Team + Academic) ──
+    'founder', 'team', 'academic',
+
+    // ── Cluster 5: SCIENCE + COMFORT ──
+    'science', 'comfort',
+
+    // ── Cluster 6: PROTECTION (Guarantees + Peace + Risks) ──
+    'guarantees', 'peace-of-mind', 'risks',
+
+    // ── Cluster 7: COMPARISON + CALCULATOR ──
+    'comparison', 'estimator', 'why-prices', 'why-egypt', 'who-for',
+
+    // ── Cluster 8: TECHNICAL DEEP-DIVE ──
+    'bone-graft', 'crown-materials', 'orthodontics',
+
+    // ── Cluster 9: JOURNEY (3 steps) ──
+    'journey', 'timeline', 'recovery',
+
+    // ── Cluster 10: TRAVEL (3 steps) ──
+    'travel', 'travel-addons', 'curated-tours',
+
+    // ── Cluster 11: PAYMENT ──
+    'payment',
+
+    // ── Cluster 12: LEGAL (heavy, late) ──
+    'legal',
+
+    // ── Cluster 13: DISCOVERY ──
     'discover-egypt', 'location',
-    // FAQ + conversion
+
+    // ── Cluster 14: CONVERSION ──
     'faq', 'consult'
   ];
 
-  /* ───── 2. H2 → H3 downgrade لتقليل عدد H2 من 35 لـ ~15 ───── */
+  /* ───── H2 → H3 downgrade (لتقليل H2 من 35 لـ ~15) ───── */
   var DOWNGRADE_H2 = [
-    'bone-graft',
-    'crown-materials',
-    'orthodontics',
-    'timeline',
-    'recovery',
-    'travel',
-    'curated-tours',
-    'why-egypt',
-    'academic',
-    'peace-of-mind'
+    'bone-graft', 'crown-materials', 'orthodontics',
+    'timeline', 'recovery', 'travel',
+    'curated-tours', 'why-egypt', 'academic', 'peace-of-mind'
   ];
 
-  /* ───── 3. Helper: ترتيب + downgrade ───── */
   function apply(){
     var main = document.getElementById('main');
     if(!main) return;
 
-    // Reorder
     var frag = document.createDocumentFragment();
-    var count = 0;
     ORDER.forEach(function(id){
       var el = document.getElementById(id);
-      if(el){ frag.appendChild(el); count++; }
+      if(el) frag.appendChild(el);
     });
     main.appendChild(frag);
 
-    // Hero first
     var hero = main.querySelector('.hero');
     if(hero && main.firstChild !== hero){ main.insertBefore(hero, main.firstChild); }
 
-    // H2 → H3 downgrade
     DOWNGRADE_H2.forEach(function(id){
       var sec = document.getElementById(id);
       if(!sec) return;
@@ -8441,7 +8444,6 @@ for(let i=0;i<particleCount;i++){
     });
   }
 
-  /* ───── 4. شغّل عدة مرات ───── */
   apply();
   if(document.readyState === 'loading'){
     document.addEventListener('DOMContentLoaded', apply);
@@ -8457,20 +8459,17 @@ for(let i=0;i<particleCount;i++){
     var observer = new MutationObserver(function(){
       if(scheduled) return;
       scheduled = true;
-      requestAnimationFrame(function(){
-        scheduled = false;
-        apply();
-      });
+      requestAnimationFrame(function(){ scheduled = false; apply(); });
     });
     observer.observe(main, { childList: true });
     setTimeout(function(){
       observer.disconnect();
       apply();
-      console.log('[Order v5] 🔒 Locked. Sections:', document.querySelectorAll('#main > section').length, '| H2s:', document.querySelectorAll('#main h2').length);
+      console.log('[Order v7] 🔒 Locked. Sections:', document.querySelectorAll('#main > section').length, '| H2s:', document.querySelectorAll('#main h2').length);
     }, 8000);
   }, 800);
 
-  console.log('[Order v5] ✅ Loaded');
+  console.log('[Order v7] ✅ Loaded');
 })();
 </script>
 
