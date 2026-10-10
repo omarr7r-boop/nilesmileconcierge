@@ -775,8 +775,21 @@ tailwind.config = {
   .nav-link:hover::after{width:100%}
 
   /* ============ MOBILE MENU ============ */
-  #mobileMenu{transition:max-height .4s ease,opacity .3s ease,visibility .3s ease;max-height:0;overflow:hidden;opacity:0;visibility:hidden}
-  #mobileMenu.open{max-height:600px;opacity:1;visibility:visible}
+  #mobileMenu{
+    transition:max-height .4s ease,opacity .3s ease,visibility .3s ease;
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    visibility:hidden;
+  }
+  #mobileMenu.open{
+    max-height:calc(100vh - 140px);
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior:contain;
+    opacity:1;
+    visibility:visible;
+  }
   .hamburger{width:32px;height:24px;display:flex;flex-direction:column;justify-content:space-between;padding:0;position:relative;z-index:101}
   .hamburger span{width:100%;height:2px;background:#4F6070;border-radius:2px;transition:all .4s cubic-bezier(.34,1.56,.64,1);transform-origin:center}
   .hamburger.open span:nth-child(1){transform:translateY(11px) rotate(45deg)}
@@ -2534,10 +2547,46 @@ details.science-accordion > summary:hover{
     body.quickbar-active .site-header{top:0 !important}
   }
 </style>
+<style id="fixesBundle">
+  /* ═══ 1. إخفاء Quick Bar نهائياً — تأكيد ثلاثي ═══ */
+  .quick-bar,
+  .quick-bar.show {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* ═══ 2. إخفاء أيقونة واتساب العائمة على الموبايل (نمسك بس الشريط السفلي) ═══ */
+  @media(max-width:767px){
+    .float-wa { display: none !important; }
+  }
+
+  /* ═══ 3. Mobile Menu — scrollable ═══ */
+  #mobileMenu.open {
+    max-height: calc(100vh - 140px) !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  /* ═══ 4. تقليل أزرار قسم Packages ═══ */
+  #packages > .container > .mt-16.text-center .btn-gold {
+    background: transparent !important;
+    border: 1px solid rgba(174,145,100,.4) !important;
+    color: #AE9164 !important;
+    box-shadow: none !important;
+    font-size: .68rem !important;
+    padding: .9rem 1.5rem !important;
+  }
+  #packages > .container > .mt-16.text-center .btn-gold::before,
+  #packages > .container > .mt-16.text-center .btn-gold::after {
+    display: none !important;
+  }
+</style>
 </head>
 
-<!-- ═══════════════════ QUICK ACTION BAR ═══════════════════ -->
-<div class="quick-bar" id="quickBar" role="navigation" aria-label="Quick actions">
+
   <a href="#packages" class="quick-chip" data-section="packages">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
     <span>Prices</span>
@@ -3845,9 +3894,8 @@ details.science-accordion > summary:hover{
     <div class="bg-white p-7 border border-nile-gold/25 text-center">
       <p class="text-nile-muted mb-3"><strong class="text-nile-blue">Not sure which package is right for you?</strong> Upload your X-ray or CBCT scan for a free clinical review — our licensed dentists will recommend the optimal treatment plan with no obligation.</p>
       <p class="text-xs text-nile-muted italic mb-4">All prices are indicative and quoted in USD. Written quotes are valid for 30 days from issue date. Prices may vary based on clinical complexity, material selection, and seasonal availability. Final pricing is confirmed in writing before any payment.</p>
-      <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-lg mx-auto">
+      <div class="flex justify-center max-w-lg mx-auto">
         <a href="#consult" class="btn btn-gold shine-auto">Get Your Free Treatment Plan</a>
-        <a href="https://wa.me/201503308333?text=Hi%20Nile%20Smile%2C%20I%27d%20like%20to%20discuss%20which%20package%20fits%20me" target="_blank" rel="noopener" class="btn btn-outline-dark">Ask a Question</a>
       </div>
     </div>
 
@@ -4625,7 +4673,7 @@ details.science-accordion > summary:hover{
       <p class="eyebrow mb-4">From Our Clinical Practice</p>
       <h2 class="text-nile-blue mb-6" style="font-size:clamp(1.75rem,4vw,2.5rem)">Cases From Our Clinical Experience</h2>
       <p class="text-nile-muted">Our clinical team has practiced dentistry for over a decade. Below are representative cases from that practice — the same techniques, materials, and standards now available to international patients through Nile Smile Concierge.</p>
-      <p class="text-nile-gold italic text-sm mt-4">Nile Smile Concierge officially launched in 2026. The cases below predate the brand but reflect the same clinical team and standards.</p>
+      <p class="text-nile-gold italic text-sm mt-4">Cases below reflect the same clinical team and standards now available through Nile Smile Concierge.</p>
     </div>
 
     <!-- ═══ Clinical Stats ═══ -->
@@ -4745,10 +4793,11 @@ details.science-accordion > summary:hover{
     <div class="container-narrow text-center">
       <p class="eyebrow mb-4">Building Our Portfolio</p>
       <div class="bg-nile-beige p-8 md:p-12 border-t-4 border-nile-gold">
-        <h3 class="font-serif text-nile-blue text-2xl mb-4">20 Founding Patient Spots Available — 2026 Cohort</h3>
-        <p class="text-nile-muted mb-5">Because our founder personally reviews every case, we take on a limited number of patients in our first cohort. Founding Patients receive our lowest-ever pricing in exchange for honest feedback — and their cases become the first Nile Smile Concierge portfolio, published with written consent.</p>
-        <p class="text-nile-gold italic text-sm">Full Nile Smile portfolio publishing Q4 2026 as our first cohort completes treatment.</p>
-        
+        <h3 class="font-serif text-nile-blue text-2xl mb-4">These Cases Are Just the Beginning</h3>
+        <p class="text-nile-muted mb-5">The clinical team behind Nile Smile Concierge has practiced dentistry for over a decade. Our first published portfolio starts with the 2026 founding cohort — and their cases will be documented with written consent.</p>
+        <a href="#reviews" class="inline-flex items-center gap-2 text-nile-gold text-sm font-semibold border-b border-nile-gold hover:text-nile-blue hover:border-nile-blue transition pb-1">
+          Learn About the Founding Patients Program →
+        </a>
       </div>
     </div>
   </div>
@@ -5326,8 +5375,7 @@ details.science-accordion > summary:hover{
             <div><p class="text-nile-gold-bright font-bold mb-1">Response Time</p><p class="text-gray-300">24–72 hours for clinical reviews</p></div>
             <div><p class="text-nile-gold-bright font-bold mb-1">24/7 Support</p><p class="text-gray-300">WhatsApp & Emergency Line</p></div>
           </div>
-        </div>
-        <a href="https://maps.google.com/?q=Arkan+Plaza+Sheikh+Zayed+Egypt" target="_blank" rel="noopener" class="mt-6 btn btn-gold shine-auto text-center">Open in Google Maps</a>
+        </div>        <a href="https://maps.google.com/?q=Arkan+Plaza+Sheikh+Zayed+Egypt" target="_blank" rel="noopener" class="mt-6 btn btn-gold shine-auto text-center">Open in Google Maps</a>
       </div>
     </div>
   </div>
@@ -5337,9 +5385,9 @@ details.science-accordion > summary:hover{
   <div class="container">
     <div class="text-center mb-14 max-w-3xl mx-auto">
       <p class="eyebrow mb-4">Founding Patients Program</p>
-      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">New Brand. Experienced Team.</h2>
-      <p class="text-nile-muted" style="font-size:1.05rem">Nile Smile Concierge launched in 2026 as the official brand for international patients. Our clinical team brings over a decade of experience — but the brand is new, and that's exactly why we're offering <strong class="text-nile-blue">20 Founding Patient spots</strong> at our lowest-ever pricing.</p>
-      <p class="text-nile-gold italic text-sm mt-4" style="font-size:.9rem">Why only 20? Because our founder personally reviews every case. We chose depth over volume — from day one.</p>
+      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">20 Founding Patient Spots — <span class="gold-text italic">2026 Only</span></h2>
+      <p class="text-nile-muted" style="font-size:1.05rem">Our clinical team brings over a decade of practice. To launch our 2026 international cohort, we're offering <strong class="text-nile-blue">20 spots at locked-in founding pricing</strong> — in exchange for honest feedback and the right to publish their cases.</p>
+      <p class="text-nile-gold italic text-sm mt-4" style="font-size:.9rem">Why only 20? Because our founder reviews every case personally. We chose depth over volume — from day one.</p>
     </div>
 
     <!-- Benefits Grid -->
@@ -5438,7 +5486,7 @@ details.science-accordion > summary:hover{
     <!-- Disclaimer -->
     <div class="mt-12 bg-nile-gold/5 border border-nile-gold/20 p-6 max-w-4xl mx-auto">
       <p class="text-xs text-nile-muted italic text-center">
-        <strong class="text-nile-blue">Note:</strong> Nile Smile Concierge is a newly launched brand. The clinical cases shown on this site are from our team's prior practice and are published with patient consent. Verified patient testimonials for Nile Smile Concierge will be published here as our first cohort completes treatment. We do not purchase, fabricate, or incentivize reviews — only honest, verified feedback.
+        <strong class="text-nile-blue">Note:</strong> Clinical cases shown are from our team's prior practice, published with patient consent. Verified patient testimonials will appear here as our first cohort completes treatment in Q4 2026. We do not purchase, fabricate, or incentivize reviews — only honest, verified feedback.
       </p>
     </div>
   </div>
@@ -5803,6 +5851,15 @@ details.science-accordion > summary:hover{
   <summary>Can I speak to a past patient before booking?<span class="acc-icon">+</span></summary>
   <div class="acc-body">Yes — once our Founding Patients complete treatment (Q4 2026), we'll connect you directly with someone from your country via WhatsApp video or Zoom. The call is private, patient-to-patient, with no coordinator present. They're never paid and can say whatever they want — including not recommending us. To join the waitlist for a patient call, message us on WhatsApp.</div>
 </details>
+
+<div class="text-center mt-12 pt-8 border-t border-nile-gold/20">
+  <p class="text-nile-muted mb-4">Still have a question that's not answered here?</p>
+  <a href="https://wa.me/201503308333?text=Hi%20Nile%20Smile%2C%20I%20have%20a%20question%20about%20treatment" 
+     target="_blank" rel="noopener" 
+     class="btn btn-gold shine-auto inline-flex items-center gap-2">
+    Ask Us on WhatsApp
+  </a>
+</div>
   </div>
 </section>
 
@@ -8218,14 +8275,9 @@ for(let i=0;i<particleCount;i++){
     transition-duration:.12s !important;
   }
 
-  /* أيقونة WhatsApp عائمة ترجع على الموبايل */
+  /* أيقونة WhatsApp العائمة — معطّلة على الموبايل (نستخدم الشريط السفلي فقط) */
   .float-wa{
-    display:flex !important;
-    bottom:5rem !important;
-    right:1rem !important;
-    width:54px !important;
-    height:54px !important;
-    z-index:49 !important;
+    display:none !important;
   }
 
   /* Progress bar — أعمق */
@@ -8300,47 +8352,48 @@ for(let i=0;i<particleCount;i++){
 
   /* ───── CLUSTER-BASED ORDER — 14 logical groups ───── */
   var ORDER = [
-    // ── Cluster 1: TRUST ──
+    // ── Cluster 1: HOOK ──
     'trust-stats', 'trust',
-
-    // ── Cluster 2: OFFER (Price + Packages) ──
     'price-anchor', 'packages',
 
-    // ── Cluster 3: PROOF (Results + Reviews) ──
+    // ── Cluster 2: PROOF ──
     'results', 'reviews',
 
-    // ── Cluster 4: CREDIBILITY (Founder + Team + Academic) ──
-    'founder', 'team', 'academic',
+    // ── Cluster 3: COMPARISON (قبل ما يسأل "ليه غالي؟") ──
+    'comparison',
 
-    // ── Cluster 5: SCIENCE + COMFORT ──
+    // ── Cluster 4: WHO WE ARE ──
+    'founder', 'team',
+
+    // ── Cluster 5: WHY IT WORKS ──
     'science', 'comfort',
 
-    // ── Cluster 6: PROTECTION (Guarantees + Peace + Risks) ──
-    'guarantees', 'peace-of-mind', 'risks',
+    // ── Cluster 6: PROTECTION ──
+    'guarantees', 'risks',
 
-    // ── Cluster 7: COMPARISON + CALCULATOR ──
-    'comparison', 'estimator', 'savings', 'why-prices', 'why-egypt', 'who-for',
+    // ── Cluster 7: PRICING DEEP-DIVE ──
+    'why-prices', 'why-egypt',
 
-    // ── Cluster 8: TECHNICAL DEEP-DIVE ──
-    'bone-graft', 'crown-materials', 'orthodontics',
+    // ── Cluster 8: JOURNEY ──
+    'journey', 'timeline',
 
-    // ── Cluster 9: JOURNEY (3 steps) ──
-    'journey', 'timeline', 'recovery',
-
-    // ── Cluster 10: TRAVEL (3 steps) ──
+    // ── Cluster 9: TRAVEL ──
     'travel', 'travel-addons', 'curated-tours',
 
-    // ── Cluster 11: PAYMENT ──
-    'payment',
+    // ── Cluster 10: PAYMENT & CALCULATOR ──
+    'payment', 'estimator',
 
-    // ── Cluster 12: LEGAL (heavy, late) ──
-    'legal',
+    // ── Cluster 11: WHO IS IT FOR ──
+    'who-for',
 
-    // ── Cluster 13: DISCOVERY ──
+    // ── Cluster 12: DISCOVERY ──
     'discover-egypt', 'location',
 
-    // ── Cluster 14: CONVERSION ──
-    'faq', 'consult'
+    // ── Cluster 13: OBJECTIONS ──
+    'faq', 'legal',
+
+    // ── Cluster 14: ACTION ──
+    'consult'
   ];
 
   /* ───── H2 → H3 downgrade (لتقليل H2 من 35 لـ ~15) ───── */
@@ -8387,6 +8440,22 @@ for(let i=0;i<particleCount;i++){
     if(hero && main.firstElementChild !== hero){ 
       main.insertBefore(hero, main.firstChild); 
     }
+
+    /* ═══ مسح الأقسام اللي مش في ORDER نهائياً ═══ */
+    var orderSet = {};
+    ORDER.forEach(function(id){ orderSet[id] = true; });
+    
+    main.querySelectorAll(':scope > section').forEach(function(sec){
+      // استثناء الـ hero (مش في ORDER بس محتاجينه)
+      if(sec.classList.contains('hero')) return;
+      // استثناء أي قسم مش عنده id (زي الأقسام اللي ممكن تكون static)
+      if(!sec.id) return;
+      // لو القسم مش في الـORDER → امسحه
+      if(!orderSet[sec.id]){
+        sec.remove();
+        console.log('[Order v7] 🗑️ Removed orphan section: #' + sec.id);
+      }
+    });
 
     DOWNGRADE_H2.forEach(function(id){
       var sec = document.getElementById(id);
