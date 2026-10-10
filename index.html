@@ -1900,16 +1900,7 @@ details.science-accordion > summary:hover{
 </style>
 
 <!-- ═══════════ FINAL FIX — fallback لألوان العناوين ═══════════ -->
-<style id="hideRedundantSections">
-  /* إخفاء الأقسام المكررة اللي بتشتت الـSEO */
-  #savings,
-  #itemized,
-  #global-map,
-  #ambassador,
-  #fears {
-    display: none !important;
-  }
-</style>
+
 <style id="finalFix">
   /* 1. fallback color — بيظهر لو background-clip فشل */
   .section-heading { color: #4F6070; }
@@ -2079,93 +2070,6 @@ details.science-accordion > summary:hover{
 </style>
 <!-- ═══════════ END MOBILE DECLUTTER ═══════════ -->
  <!-- ═══════════ GLOBAL MAP FIX — تنسيق أوضح للموبايل ═══════════ -->
-<style id="globalMapFix">
-
-/* ─── أيقونة الكرة الأرضية: كبّرها تجاري الأعلام ─── */
-#global-map .w-16.h-16 svg,
-#global-map .w-16.h-16 > svg{
-  width: 42px !important;
-  height: 42px !important;
-}
-
-@media (max-width: 767px){
-
-  /* ─── 1. الكارت: قلل الحشو ─── */
-  #global-map .bg-white.p-8{
-    padding: 1.5rem 1rem !important;
-    max-width: 100% !important;
-  }
-
-  /* ─── 2. الشكل: 1 عمود بدل 2 → كل صف: علم يسار + نص يمين ─── */
-  #global-map .grid.grid-cols-2.md\:grid-cols-5{
-    display: flex !important;
-    flex-direction: column !important;
-    gap: .75rem !important;
-  }
-
-  #global-map .grid.grid-cols-2.md\:grid-cols-5 > div{
-    /* كل عنصر بقى صف كامل */
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    gap: 1rem !important;
-    padding: .85rem 1rem !important;
-    background: #FBFAF7 !important;
-    border: 1px solid rgba(174,145,100,.15) !important;
-    border-radius: 4px !important;
-    text-align: left !important;
-    transition: all .3s ease;
-  }
-
-  #global-map .grid.grid-cols-2.md\:grid-cols-5 > div:active{
-    background: #F6F3EE !important;
-    border-color: rgba(174,145,100,.4) !important;
-  }
-
-  /* ─── 3. الأيقونة: حجم أوحد ثابت ─── */
-  #global-map .w-16.h-16{
-    width: 48px !important;
-    height: 48px !important;
-    margin-bottom: 0 !important;
-    flex-shrink: 0 !important;
-  }
-
-  /* ─── 4. النص: ياخد باقي الصف ─── */
-  #global-map .grid.grid-cols-2.md\:grid-cols-5 > div > p{
-    margin: 0 !important;
-    text-align: left !important;
-  }
-
-  /* اسم الدولة — أصغر شوية */
-  #global-map .grid.grid-cols-2.md\:grid-cols-5 > div > p.font-serif{
-    font-size: 1.1rem !important;
-    line-height: 1.1 !important;
-    flex: 1 !important;
-  }
-
-  /* السطر الفرعي (Primary Market) — يبان تحت الاسم */
-  #global-map .grid.grid-cols-2.md\:grid-cols-5 > div > p.text-nile-muted{
-    font-size: .58rem !important;
-    letter-spacing: .15em !important;
-    color: #AE9164 !important;
-    margin-top: .15rem !important;
-    font-weight: 600 !important;
-  }
-
-  /* ─── 5. ترتيب داخلي: حاوية للعلم + حاوية للنص جنب بعض ─── */
-  #global-map .grid.grid-cols-2.md\:grid-cols-5 > div{
-    flex-wrap: wrap !important;
-  }
-}
-
-/* ─── على الديسكتوب: تحسين خفيف ─── */
-@media (min-width: 768px){
-  #global-map .bg-white.p-8{
-    padding: 2.5rem 2rem !important;
-  }
-}
-</style>
-<!-- ═══════════ END GLOBAL MAP FIX ═══════════ -->
 <style id="mobileTableFix">
 @media (max-width: 767px){
   .table-wrap{
@@ -2220,21 +2124,8 @@ details.science-accordion > summary:hover{
   }
 </style>
 <!-- ═══════════════════ HIDE REDUNDANT + SCHEMA ADDITIONS — v2 ═══════════════════ -->
-<style id="hideRedundantV2">
-  /* إخفاء كامل للأقسام المكررة (بدل display:none سطحي) */
-  #savings,
-  #itemized,
-  #global-map,
-  #ambassador,
-  #fears {
-    display: none !important;
-    visibility: hidden !important;
-    height: 0 !important;
-    overflow: hidden !important;
-    pointer-events: none !important;
-  }
-
-  /* تحسين بصري للـPackages عشان يشد أكتر في مكانها الجديد */
+<style id="packagesAccent">
+  /* تحسين بصري للـPackages */
   #packages {
     position: relative;
   }
@@ -2283,7 +2174,12 @@ details.science-accordion > summary:hover{
 }
 </script>
 
-<!-- ═══ Schema: AggregateRating (لما يبدأ التقييمات الحقيقية) ═══ -->
+<!-- ═══ Schema: AggregateRating — DISABLED until real reviews exist ═══
+     Uncomment & enable once 5+ verified patient reviews are published.
+     Until then, the schema below is intentionally omitted to avoid
+     Google Rich Results penalties for unverifiable ratings.
+-->
+<!--
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -2292,29 +2188,23 @@ details.science-accordion > summary:hover{
   "name": "Nile Smile Concierge",
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "20",
+    "ratingValue": "5",
+    "reviewCount": "5",
     "bestRating": "5",
     "worstRating": "1"
   },
   "review": [
     {
       "@type": "Review",
-      "author": {
-        "@type": "Person",
-        "name": "Founding Patient — Australia"
-      },
-      "reviewRating": {
-        "@type": "Rating",
-        "ratingValue": "5",
-        "bestRating": "5"
-      },
-      "reviewBody": "Clinician-reviewed process from day one. Every step documented. The price was locked in writing before I traveled.",
+      "author": { "@type": "Person", "name": "Founding Patient — Australia" },
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "reviewBody": "Clinician-reviewed process from day one.",
       "datePublished": "2026-01-15"
     }
   ]
 }
 </script>
+-->
 
 <!-- ═══ Schema: Service + Offer (للـPackages) ═══ -->
 <script type="application/ld+json">
@@ -2395,6 +2285,255 @@ details.science-accordion > summary:hover{
 }
 </script>
 <!-- ═══════════════════ END HIDE REDUNDANT + SCHEMA ═══════════════════ -->
+ <style id="searchAndNavStyles">
+  /* ═══ SEARCH TRIGGER BUTTON ═══ */
+  .search-trigger{
+    display:inline-flex;
+    align-items:center;
+    gap:.5rem;
+    padding:.55rem .95rem;
+    font-family:'Montserrat',sans-serif;
+    font-size:.65rem;
+    font-weight:600;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:#4F6070;
+    background:rgba(246,243,238,.9);
+    border:1px solid rgba(174,145,100,.3);
+    border-radius:100px;
+    cursor:pointer;
+    transition:all .3s cubic-bezier(.22,1,.36,1);
+    margin-right:.75rem;
+  }
+  .search-trigger:hover{
+    color:#AE9164;
+    border-color:#AE9164;
+    background:#fff;
+    transform:translateY(-1px);
+    box-shadow:0 4px 14px rgba(174,145,100,.15);
+  }
+  .search-trigger svg{flex-shrink:0}
+  .search-trigger kbd{
+    font-family:'Montserrat',sans-serif;
+    font-size:.55rem;
+    font-weight:700;
+    letter-spacing:.05em;
+    padding:.15rem .4rem;
+    background:rgba(174,145,100,.12);
+    color:#AE9164;
+    border:1px solid rgba(174,145,100,.25);
+    border-radius:3px;
+    margin-left:.15rem;
+  }
+
+  /* ═══ SEARCH MODAL ═══ */
+  .search-modal{
+    position:fixed;
+    inset:0;
+    z-index:2500;
+    display:none;
+    align-items:flex-start;
+    justify-content:center;
+    padding:10vh 1rem 1rem;
+  }
+  .search-modal.open{display:flex;animation:searchFade .25s ease}
+  @keyframes searchFade{from{opacity:0}to{opacity:1}}
+
+  .search-modal-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(10,13,16,.75);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+  }
+
+  .search-modal-box{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:42rem;
+    background:linear-gradient(180deg,#FBFAF7 0%,#F6F3EE 100%);
+    border:1px solid rgba(174,145,100,.3);
+    border-top:3px solid #AE9164;
+    border-radius:6px;
+    box-shadow:0 30px 90px rgba(0,0,0,.5);
+    overflow:hidden;
+    animation:searchSlide .35s cubic-bezier(.16,1,.3,1);
+  }
+  @keyframes searchSlide{
+    from{opacity:0;transform:translateY(-20px) scale(.98)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+  }
+
+  .search-modal-input-wrap{
+    position:relative;
+    display:flex;
+    align-items:center;
+    padding:1rem 1.25rem;
+    border-bottom:1px solid rgba(174,145,100,.2);
+    background:#fff;
+  }
+  .search-modal-icon{
+    color:#AE9164;
+    flex-shrink:0;
+    margin-right:.85rem;
+  }
+  .search-modal-input{
+    flex:1;
+    border:none;
+    outline:none;
+    background:transparent;
+    font-family:'Montserrat',sans-serif;
+    font-size:1rem;
+    color:#1F2A36;
+    padding:.35rem 0;
+  }
+  .search-modal-input::placeholder{color:#8FA1B2}
+  .search-modal-close{
+    background:transparent;
+    border:none;
+    cursor:pointer;
+    padding:.25rem .5rem;
+    margin-left:.5rem;
+  }
+  .search-modal-close kbd{
+    font-family:'Montserrat',sans-serif;
+    font-size:.6rem;
+    font-weight:700;
+    letter-spacing:.08em;
+    padding:.3rem .5rem;
+    color:#AE9164;
+    background:rgba(174,145,100,.1);
+    border:1px solid rgba(174,145,100,.3);
+    border-radius:3px;
+  }
+  .search-modal-close:hover kbd{
+    background:rgba(174,145,100,.2);
+    color:#1F2A36;
+  }
+
+  .search-modal-results{
+    max-height:50vh;
+    overflow-y:auto;
+    padding:.5rem;
+  }
+
+  .search-result-item{
+    display:block;
+    padding:.85rem 1rem;
+    margin:.25rem 0;
+    border-radius:4px;
+    text-decoration:none;
+    color:inherit;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:all .2s cubic-bezier(.22,1,.36,1);
+  }
+  .search-result-item:hover,
+  .search-result-item.active{
+    background:rgba(174,145,100,.08);
+    border-color:rgba(174,145,100,.3);
+  }
+  .search-result-item strong{
+    display:block;
+    font-family:'Playfair Display',serif;
+    font-size:1rem;
+    font-weight:500;
+    color:#1F2A36;
+    margin-bottom:.25rem;
+  }
+  .search-result-item span{
+    display:block;
+    font-family:'Montserrat',sans-serif;
+    font-size:.8rem;
+    color:#5A6875;
+    line-height:1.5;
+  }
+  .search-result-item mark{
+    background:rgba(232,200,138,.5);
+    color:#1F2A36;
+    padding:0 .15rem;
+    border-radius:2px;
+  }
+
+  .search-empty{
+    padding:3rem 1.5rem;
+    text-align:center;
+    color:#8FA1B2;
+    font-family:'Montserrat',sans-serif;
+    font-size:.85rem;
+  }
+  .search-empty strong{
+    display:block;
+    font-family:'Playfair Display',serif;
+    font-size:1.15rem;
+    color:#4F6070;
+    margin-bottom:.5rem;
+  }
+
+  .search-modal-footer{
+    display:flex;
+    justify-content:center;
+    gap:1.25rem;
+    padding:.65rem 1rem;
+    border-top:1px solid rgba(174,145,100,.15);
+    background:rgba(246,243,238,.6);
+    font-family:'Montserrat',sans-serif;
+    font-size:.62rem;
+    color:#8FA1B2;
+  }
+  .search-modal-footer kbd{
+    font-family:'Montserrat',sans-serif;
+    font-size:.6rem;
+    font-weight:700;
+    padding:.15rem .4rem;
+    background:rgba(174,145,100,.15);
+    color:#AE9164;
+    border-radius:3px;
+    margin-right:.35rem;
+  }
+  @media(max-width:640px){
+    .search-modal{padding-top:5vh}
+    .search-modal-footer{display:none}
+  }
+
+  /* ═══ QUICK BAR ON DESKTOP — Floating Pill ═══ */
+  @media(min-width:1024px){
+    .quick-bar{
+      display:flex !important;
+      top:auto !important;
+      bottom:1.5rem;
+      left:50% !important;
+      right:auto !important;
+      transform:translateX(-50%) translateY(120%);
+      width:auto;
+      max-width:calc(100vw - 3rem);
+      padding:.5rem .75rem;
+      border-radius:100px;
+      border:1px solid rgba(174,145,100,.3);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,.9) inset,
+        0 12px 32px rgba(31,42,54,.15),
+        0 24px 64px rgba(31,42,54,.12);
+      opacity:0;
+      visibility:hidden;
+      transition:
+        transform .55s cubic-bezier(.22,1,.36,1),
+        opacity .4s cubic-bezier(.22,1,.36,1),
+        visibility 0s linear .55s;
+    }
+    .quick-bar.show{
+      opacity:1;
+      visibility:visible;
+      transform:translateX(-50%) translateY(0);
+      transition:
+        transform .55s cubic-bezier(.22,1,.36,1),
+        opacity .4s cubic-bezier(.22,1,.36,1),
+        visibility 0s linear 0s;
+    }
+    body.quickbar-active .site-header{top:0 !important}
+  }
+</style>
 </head>
 
 <!-- ═══════════════════ QUICK ACTION BAR ═══════════════════ -->
@@ -2452,17 +2591,22 @@ details.science-accordion > summary:hover{
     </a>
 
     <!-- Desktop nav -->
-    <div class="hidden lg:flex items-center gap-5 xl:gap-6" style="margin-right:1.5rem">
-      <a href="#founder" class="nav-link">Founder</a>
-      <a href="#why-prices" class="nav-link">Pricing</a>
+    <div class="hidden lg:flex items-center gap-4 xl:gap-5" style="margin-right:1rem">
       <a href="#packages" class="nav-link">Packages</a>
       <a href="#results" class="nav-link">Results</a>
+      <a href="#founder" class="nav-link">Founder</a>
       <a href="#guarantees" class="nav-link">Guarantees</a>
-      <a href="#legal" class="nav-link">Legal</a>
-      <a href="#reviews" class="nav-link">Reviews</a>
-      <a href="#ambassador" class="nav-link">Talk to a Patient</a>
       <a href="#faq" class="nav-link">FAQ</a>
     </div>
+
+    <!-- Search Trigger -->
+    <button type="button" class="search-trigger hidden lg:inline-flex" id="searchTrigger" aria-label="Search site">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <span>Search</span>
+      <kbd>⌘K</kbd>
+    </button>
 
     <!-- Desktop CTA -->
     <a href="#consult" class="hidden lg:inline-flex btn btn-gold shine-auto breathe whitespace-nowrap">Free Review</a>
@@ -2476,27 +2620,33 @@ details.science-accordion > summary:hover{
   <!-- Mobile menu -->
   <div id="mobileMenu" class="lg:hidden bg-nile-beige border-t border-nile-gold/20">
     <div class="max-w-7xl mx-auto px-5 py-6 flex flex-col gap-1">
-      <!-- Top 4 — مهمة -->
-      <a href="#packages" class="nav-link py-4 border-b border-nile-gold/10">Pricing &amp; Packages</a>
-      <a href="#travel-addons" class="nav-link py-4 border-b border-nile-gold/10">Travel Add-Ons</a>
-      <a href="#curated-tours" class="nav-link py-4 border-b border-nile-gold/10">Curated Tours</a>
-      <a href="#results" class="nav-link py-4 border-b border-nile-gold/10">Before &amp; After</a>
-      <a href="#founder" class="nav-link py-4 border-b border-nile-gold/10">Meet the Founder</a>
-      <a href="#reviews" class="nav-link py-4 border-b border-nile-gold/10">Founding Patients</a>
-      <a href="#savings" class="nav-link py-4 border-b border-nile-gold/10">Savings Calculator</a>
-      <a href="#ambassador" class="nav-link py-4 border-b border-nile-gold/10">Talk to a Patient</a>
-      
-      <div class="border-t border-nile-gold/10 my-2"></div>
-      <p class="eyebrow text-center my-2" style="font-size:.55rem">More Info</p>
-      
-      <!-- Bottom 7 — ثانوية -->
-      <a href="#why-prices" class="nav-link py-3 border-b border-nile-gold/10">Why Our Prices</a>
-      <a href="#team" class="nav-link py-3 border-b border-nile-gold/10">Specialists</a>
+
+      <!-- Search trigger for mobile -->
+      <button type="button" id="mobileSearchBtn" 
+              class="w-full px-4 py-3 bg-white border border-nile-gold/25 text-nile-blue text-sm text-left flex items-center gap-3 mb-4 hover:border-nile-gold transition"
+              style="border-radius:2px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#AE9164" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <span class="text-gray-400">Search...</span>
+      </button>
+
+      <!-- Primary links -->
+      <p class="eyebrow mb-2" style="font-size:.55rem">Main</p>
+      <a href="#packages" class="nav-link py-3 border-b border-nile-gold/10">Packages &amp; Pricing</a>
+      <a href="#results" class="nav-link py-3 border-b border-nile-gold/10">Before &amp; After</a>
+      <a href="#founder" class="nav-link py-3 border-b border-nile-gold/10">Meet the Founder</a>
+      <a href="#guarantees" class="nav-link py-3 border-b border-nile-gold/10">Guarantees &amp; Warranty</a>
+      <a href="#reviews" class="nav-link py-3 border-b border-nile-gold/10">Founding Patients</a>
+
+      <div class="border-t border-nile-gold/10 my-3"></div>
+      <p class="eyebrow mb-2" style="font-size:.55rem">More Info</p>
       <a href="#science" class="nav-link py-3 border-b border-nile-gold/10">Clinical Science</a>
-      <a href="#guarantees" class="nav-link py-3 border-b border-nile-gold/10">Guarantees</a>
+      <a href="#travel-addons" class="nav-link py-3 border-b border-nile-gold/10">Travel Add-Ons</a>
+      <a href="#curated-tours" class="nav-link py-3 border-b border-nile-gold/10">Curated Tours</a>
       <a href="#legal" class="nav-link py-3 border-b border-nile-gold/10">Legal Framework</a>
       <a href="#faq" class="nav-link py-3 border-b border-nile-gold/10">FAQ</a>
-      
+
       <a href="#consult" class="btn btn-gold shine-auto mt-4">Request Free Review</a>
     </div>
   </div>
@@ -4106,8 +4256,6 @@ details.science-accordion > summary:hover{
   ad.addEventListener('change', update);
 })();
 </script>
-<!-- ═══════════════════ /PRICE ESTIMATOR ═══════════════════ -->
- <!-- ═══════════════════ SAVINGS CALCULATOR — NEW ═══════════════════ -->
 <section id="savings" class="section bg-nile-blue-dark text-white reveal">
   <div class="container-narrow">
     <div class="text-center mb-10">
@@ -4214,55 +4362,6 @@ details.science-accordion > summary:hover{
 </script>
 <!-- ═══════════════════ /SAVINGS CALCULATOR ═══════════════════ -->
 
-<!-- ═══════════════════ CLINICAL FEE REFERENCE ═══════════════════ -->
-<section id="itemized" class="section reveal" style="padding-top:0">
-  <div class="container">
-    <details class="section-expander" style="margin-top:0">
-      <summary>Want to See Individual Clinical Fees? Click Here</summary>
-      <div class="expander-content">
-        <div class="text-center max-w-3xl mx-auto mb-8">
-          <p class="eyebrow mb-4">For Reference Only</p>
-          <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">Clinical Fees Reference</h2>
-          <p class="text-nile-muted mb-4" style="font-size:1.05rem">These are <strong>indicative clinical fees</strong> for individual procedures — shown for transparency only.</p>
-          <div class="bg-nile-gold/10 border border-nile-gold/30 p-5 max-w-2xl mx-auto text-left">
-            <p class="text-sm text-nile-muted leading-relaxed">
-              <strong class="text-nile-blue">Important:</strong> The fees below are for <strong>clinical procedures only</strong>. They do NOT include hotel, airport pickup, transfers, or concierge services.
-            </p>
-            <p class="text-sm text-nile-muted leading-relaxed mt-3">
-              <strong class="text-nile-blue">Our treatment packages (above)</strong> are all-inclusive and offer significantly better value than combining individual procedures separately. We strongly recommend requesting a personalized quote based on your clinical needs.
-            </p>
-          </div>
-        </div>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Procedure</th>
-                <th class="center gold">Indicative Fee (USD)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td class="td-label">Single Implant + Crown</td><td class="td-gold td-center">$900 – $1,400</td></tr>
-              <tr><td class="td-label">All-on-4 (Single Arch)</td><td class="td-gold td-center">$3,500 – $4,800</td></tr>
-              <tr><td class="td-label">All-on-6 (Single Arch)</td><td class="td-gold td-center">$5,200 – $6,800</td></tr>
-              <tr><td class="td-label">Full Mouth Restoration (Both Arches)</td><td class="td-gold td-center">$10,000 – $19,500</td></tr>
-              <tr><td class="td-label">Zirconia Crown (per unit)</td><td class="td-gold td-center">$250 – $400</td></tr>
-              <tr><td class="td-label">Porcelain Veneer (per tooth)</td><td class="td-gold td-center">$150 – $350</td></tr>
-              <tr><td class="td-label">Bone Graft (per site)</td><td class="td-gold td-center">$300 – $700</td></tr>
-              <tr><td class="td-label">Root Canal Treatment</td><td class="td-gold td-center">$80 – $150</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="mt-8 text-center">
-          <a href="#consult" class="btn btn-gold shine-auto">Get Your Free Personalized Quote →</a>
-          <p class="text-xs text-nile-muted italic mt-4">Final fees depend on your clinical evaluation and are always confirmed in writing.</p>
-        </div>
-      </div>
-    </details>
-  </div>
-</section>
 <!-- ═══════════════════ FULL GUARANTEES ═══════════════════ -->
 <section id="guarantees" class="section bg-nile-blue-dark text-white reveal">
   <div class="container">
@@ -4650,61 +4749,6 @@ details.science-accordion > summary:hover{
         <p class="text-nile-muted mb-5">Because our founder personally reviews every case, we take on a limited number of patients in our first cohort. Founding Patients receive our lowest-ever pricing in exchange for honest feedback — and their cases become the first Nile Smile Concierge portfolio, published with written consent.</p>
         <p class="text-nile-gold italic text-sm">Full Nile Smile portfolio publishing Q4 2026 as our first cohort completes treatment.</p>
         
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-<!-- ═══════════════════ GLOBAL PATIENT MAP ═══════════════════ -->
-<section id="global-map" class="section bg-nile-beige reveal">
-  <div class="container text-center">
-    <p class="eyebrow mb-4">Global Presence</p>
-    <h2 class="text-nile-blue mb-8" style="font-size:clamp(1.75rem,4vw,2.5rem)">Our International Patients</h2>
-    <p class="text-nile-muted mb-10 max-w-2xl mx-auto">Patients traveling to us from North America, Europe, and beyond.</p>
-    <div class="bg-white p-8 border-t-4 border-nile-gold shadow-lg max-w-4xl mx-auto">
-      <div class="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
-        <div class="flex flex-col items-center">
-          <div class="w-16 h-16 rounded-full bg-nile-beige flex items-center justify-center mb-3 border border-nile-gold/30 overflow-hidden">
-            <img src="https://flagcdn.com/w160/ca.png" srcset="https://flagcdn.com/w320/ca.png 2x" width="48" height="32" alt="Canada flag" loading="lazy" style="object-fit:cover;width:48px;height:32px;border-radius:2px;">
-          </div>
-          <p class="text-nile-blue font-serif text-2xl">Canada</p>
-          <p class="text-nile-muted text-xs uppercase tracking-widest mt-1">Primary Market</p>
-        </div>
-        <div class="flex flex-col items-center">
-          <div class="w-16 h-16 rounded-full bg-nile-beige flex items-center justify-center mb-3 border border-nile-gold/30 overflow-hidden">
-            <img src="https://flagcdn.com/w160/us.png" srcset="https://flagcdn.com/w320/us.png 2x" width="48" height="32" alt="USA flag" loading="lazy" style="object-fit:cover;width:48px;height:32px;border-radius:2px;">
-          </div>
-          <p class="text-nile-blue font-serif text-2xl">USA</p>
-          <p class="text-nile-muted text-xs uppercase tracking-widest mt-1">Primary Market</p>
-        </div>
-        <div class="flex flex-col items-center">
-          <div class="w-16 h-16 rounded-full bg-nile-beige flex items-center justify-center mb-3 border border-nile-gold/30 overflow-hidden">
-            <img src="https://flagcdn.com/w160/gb.png" srcset="https://flagcdn.com/w320/gb.png 2x" width="48" height="32" alt="United Kingdom flag" loading="lazy" style="object-fit:cover;width:48px;height:32px;border-radius:2px;">
-          </div>
-          <p class="text-nile-blue font-serif text-2xl">UK</p>
-          <p class="text-nile-muted text-xs uppercase tracking-widest mt-1">Primary Market</p>
-        </div>
-        <div class="flex flex-col items-center">
-          <div class="w-16 h-16 rounded-full bg-nile-beige flex items-center justify-center mb-3 border border-nile-gold/30 overflow-hidden">
-            <img src="https://flagcdn.com/w160/au.png" srcset="https://flagcdn.com/w320/au.png 2x" width="48" height="32" alt="Australia flag" loading="lazy" style="object-fit:cover;width:48px;height:32px;border-radius:2px;">
-          </div>
-          <p class="text-nile-blue font-serif text-2xl">Australia</p>
-          <p class="text-nile-muted text-xs uppercase tracking-widest mt-1">Growing Market</p>
-        </div>
-<div class="flex flex-col items-center">
-  <div class="w-16 h-16 rounded-full bg-nile-beige flex items-center justify-center mb-3 border border-nile-gold/30">
-    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#AE9164" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="10"/>
-      <path d="M2 12h20"/>
-      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-      <path d="M4.93 4.93l14.14 14.14" opacity="0.4"/>
-    </svg>
-  </div>
-  <p class="text-nile-blue font-serif text-2xl">Global</p>
-  <p class="text-nile-muted text-xs uppercase tracking-widest mt-1">Expanding 2026</p>
-</div>
       </div>
     </div>
   </div>
@@ -5399,100 +5443,7 @@ details.science-accordion > summary:hover{
     </div>
   </div>
 </section>
-<!-- ═══════════════════ PATIENT AMBASSADOR — NEW ═══════════════════ -->
-<section id="ambassador" class="section reveal" style="background:linear-gradient(180deg,#FBFAF7 0%,#EDE6DA 100%)">
-  <div class="container-narrow">
-    <div class="text-center mb-12">
-      <p class="eyebrow mb-4">Talk to Someone Who's Been There</p>
-      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">Hear It From a Real Patient — <span class="italic gold-text">Not From Us.</span></h2>
-      <p class="text-nile-muted max-w-2xl mx-auto" style="font-size:1.05rem">The best reassurance doesn't come from a sales page. It comes from someone who flew to Cairo, sat in the chair, and flew home with a new smile.</p>
-    </div>
 
-    <!-- Program Highlights -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 stagger">
-      <div class="card card-top-gold p-7 text-center">
-        <div class="icon-circle mx-auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <h3 class="font-serif text-nile-blue text-base mb-2">Video Call</h3>
-        <p class="text-nile-muted text-xs">Speak directly with a Founding Patient from your country via WhatsApp video or Zoom — same timezone, same language, zero pressure.</p>
-      </div>
-      <div class="card card-top-gold p-7 text-center">
-        <div class="icon-circle mx-auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 8v4l3 3"/></svg></div>
-        <h3 class="font-serif text-nile-blue text-base mb-2">No Sales Person</h3>
-        <p class="text-nile-muted text-xs">The call is private — patient to patient. No coordinator listening, no script, no upselling. Ask anything you want.</p>
-      </div>
-      <div class="card card-top-gold p-7 text-center">
-        <div class="icon-circle mx-auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2l9 4v6c0 5.5-3.8 10.7-9 12-5.2-1.3-9-6.5-9-12V6l9-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <h3 class="font-serif text-nile-blue text-base mb-2">100% Voluntary</h3>
-        <p class="text-nile-muted text-xs">Ambassadors are never paid. They share because they chose to. If they tell you not to book — we respect that.</p>
-      </div>
-    </div>
-
-    <!-- Sample Questions -->
-    <div class="bg-white p-8 md:p-10 card-left-gold mb-10">
-      <p class="eyebrow mb-4">Questions You Can Ask</p>
-      <p class="font-serif text-nile-blue italic mb-6" style="font-size:clamp(1rem,2vw,1.15rem);line-height:1.6">
-        "The questions patients actually want to ask — but feel awkward asking us."
-      </p>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-nile-muted text-sm">
-        <div class="flex items-start gap-3"><span class="text-nile-gold flex-shrink-0">?</span><span>Was the clinic as clean and modern as the photos show?</span></div>
-        <div class="flex items-start gap-3"><span class="text-nile-gold flex-shrink-0">?</span><span>How painful was the first week, honestly?</span></div>
-        <div class="flex items-start gap-3"><span class="text-nile-gold flex-shrink-0">?</span><span>Did anyone try to upsell you extra treatments?</span></div>
-        <div class="flex items-start gap-3"><span class="text-nile-gold flex-shrink-0">?</span><span>What was the hotel really like — and did you feel safe?</span></div>
-        <div class="flex items-start gap-3"><span class="text-nile-gold flex-shrink-0">?</span><span>Would you do it again? Would you recommend it to your family?</span></div>
-        <div class="flex items-start gap-3"><span class="text-nile-gold flex-shrink-0">?</span><span>What did no one tell you before you flew?</span></div>
-      </div>
-    </div>
-
-    <!-- CTA -->
-    <div class="text-center">
-      <a href="https://wa.me/201503308333?text=Hi%20Nile%20Smile%2C%20I%27d%20like%20to%20talk%20to%20a%20previous%20patient%20before%20booking" 
-         target="_blank" rel="noopener" 
-         class="btn btn-gold shine-auto inline-flex items-center gap-2">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        Request a Patient Call
-      </a>
-      <p class="text-xs text-nile-muted italic mt-4">Available once our first Founding Patients complete treatment (Q4 2026). Join the waitlist.</p>
-    </div>
-  </div>
-</section>
-<!-- ═══════════════════ /PATIENT AMBASSADOR ═══════════════════ -->
-
-<!-- ═══════════════════ PATIENT FEARS ═══════════════════ -->
-<section id="fears" class="section bg-white reveal">
-  <div class="container-narrow">
-    <div class="text-center mb-12">
-      <p class="eyebrow mb-4">Before You Decide</p>
-      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">Your Fears, Addressed — Honestly.</h2>
-      <p class="text-nile-muted" style="font-size:1.05rem">These are real questions we hear from patients considering treatment abroad. We answer them the way we would answer a friend.</p>
-    </div>
-    <div class="space-y-4 stagger">
-      <div class="card card-left-gold p-6 md:p-7">
-        <h3 class="font-serif text-nile-blue text-lg mb-2">"What if something goes wrong after I go home?"</h3>
-        <p class="text-nile-muted text-sm">You're not abandoned. You leave with a written aftercare protocol, a 24/7 WhatsApp line to your clinical coordinator, and scheduled telehealth check-ins at 1 week, 1 month, and 3 months. If a problem arises, we coordinate directly with a licensed dentist in your country — using your full treatment records.</p>
-      </div>
-      <div class="card card-left-gold p-6 md:p-7">
-        <h3 class="font-serif text-nile-blue text-lg mb-2">"I'm scared of the pain. How bad will it be?"</h3>
-        <p class="text-nile-muted text-sm">Most patients describe the procedure itself as painless — you're under local anesthesia at minimum, and we offer oral or IV sedation for anxious patients. Post-op soreness is manageable and medication is prescribed. You'll never be caught off guard.</p>
-      </div>
-      <div class="card card-left-gold p-6 md:p-7">
-        <h3 class="font-serif text-nile-blue text-lg mb-2">"Will the result look natural — or fake?"</h3>
-        <p class="text-nile-muted text-sm">We use Digital Smile Design to simulate your result before any work begins. You approve shape, shade, and proportions in advance. Our standard materials — monolithic zirconia and E-max — are what top esthetic dentists worldwide use for premium results.</p>
-      </div>
-      <div class="card card-left-gold p-6 md:p-7">
-        <h3 class="font-serif text-nile-blue text-lg mb-2">"I don't want to feel like a number, or a sale."</h3>
-        <p class="text-nile-muted text-sm">Neither do we. Nile Smile was founded by a licensed dentist specifically to fix that problem in medical tourism. Every treatment plan is clinically reviewed — never sold. Every price is written and locked. No hidden fees. No aggressive upselling. No pressure.</p>
-      </div>
-      <div class="card card-left-gold p-6 md:p-7">
-        <h3 class="font-serif text-nile-blue text-lg mb-2">"Can I trust doctors in another country?"</h3>
-        <p class="text-nile-muted text-sm">You don't have to trust blindly. Before booking, we share your treating dentist's full name, credentials, licensing, case portfolio, and clinic address. All our partner dentists are licensed by the Egyptian Dental Syndicate and hold verifiable postgraduate qualifications.</p>
-      </div>
-      <div class="card card-left-gold p-6 md:p-7">
-        <h3 class="font-serif text-nile-blue text-lg mb-2">"What if I need to cancel or reschedule?"</h3>
-        <p class="text-nile-muted text-sm">Your deposit is fully refundable up to 30 days before arrival. If a medical issue arises, we work with you on a case-by-case basis. You are never locked in by fine print — we put everything in writing before you commit.</p>
-      </div>
-    </div>
-  </div>
-</section>
 <!-- ═══════════════════ PEACE OF MIND — NEW ═══════════════════ -->
 <section id="peace-of-mind" class="section bg-white reveal">
   <div class="container">
@@ -6429,27 +6380,13 @@ details.science-accordion > summary:hover{
     });
   }
 
-  window.addEventListener('scroll', ()=>{updateProgress();updateHeader();}, {passive:true});
+  window.addEventListener('scroll', ()=>{
+    updateProgress();
+    updateHeader();
+    if (typeof updateActiveChip === 'function') updateActiveChip();
+    if (typeof revealManualFallback === 'function') revealManualFallback();
+  }, {passive:true});
 
-  /* ═════════ QUICK BAR — Show after scroll ═════════ */
-  const quickBar = document.getElementById('quickBar');
-  let quickTick = false;
-  function updateQuickBar(){
-    if(!quickBar || quickTick) return;
-    quickTick = true;
-    requestAnimationFrame(()=>{
-      const y = window.scrollY;
-      if(y > 400){
-        quickBar.classList.add('show');
-        document.body.classList.add('quickbar-active');
-      } else {
-        quickBar.classList.remove('show');
-        document.body.classList.remove('quickbar-active');
-      }
-      quickTick = false;
-    });
-  }
-  window.addEventListener('scroll', updateQuickBar, {passive:true});
 
   /* ═════════ 4. REVEAL ON SCROLL — PREMIUM SHADE ═════════ */
   const revealEls = document.querySelectorAll('.reveal, .stagger');
@@ -6488,7 +6425,6 @@ details.science-accordion > summary:hover{
       revealScrollTick = false;
     });
   }
-  window.addEventListener('scroll', revealManualFallback, {passive:true});
   let resizeTimer;
   window.addEventListener('resize', ()=>{
     clearTimeout(resizeTimer);
@@ -6641,7 +6577,7 @@ for(let i=0;i<particleCount;i++){
   // Focus trap — يمنع الـTab يخرج من الـmodal المفتوح
   document.addEventListener('keydown', e => {
     if (e.key !== 'Tab') return;
-    const open = document.querySelector('.modal.open');
+    const open = document.querySelector('.modal.open, .search-modal.open, .gallery-lightbox.open, .exit-popup.open');
     if (!open) return;
     const focusables = Array.from(open.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
       .filter(el => !el.disabled && el.offsetParent !== null);
@@ -6813,30 +6749,27 @@ for(let i=0;i<particleCount;i++){
   });
     /* ═════════ 15. QUICK BAR — ACTIVE SECTION TRACKING ═════════ */
   const quickChips = document.querySelectorAll('.quick-chip[data-section]');
-  if(quickChips.length){
-    const chipSections = Array.from(quickChips)
-      .map(chip => document.getElementById(chip.dataset.section))
-      .filter(Boolean);
-    
-    let chipTick = false;
-    function updateActiveChip(){
-      if(chipTick) return;
-      chipTick = true;
-      requestAnimationFrame(() => {
-        const probe = window.scrollY + window.innerHeight * 0.35;
-        let current = null;
-        chipSections.forEach(sec => {
-          if(sec.offsetTop <= probe) current = sec.id;
-        });
-        quickChips.forEach(chip => {
-          chip.classList.toggle('active', chip.dataset.section === current);
-        });
-        chipTick = false;
+  const chipSections = Array.from(quickChips)
+    .map(chip => document.getElementById(chip.dataset.section))
+    .filter(Boolean);
+
+  let chipTick = false;
+  function updateActiveChip(){
+    if(!quickChips.length || chipTick) return;
+    chipTick = true;
+    requestAnimationFrame(() => {
+      const probe = window.scrollY + window.innerHeight * 0.35;
+      let current = null;
+      chipSections.forEach(sec => {
+        if(sec.offsetTop <= probe) current = sec.id;
       });
-    }
-    window.addEventListener('scroll', updateActiveChip, {passive:true});
-    updateActiveChip();
+      quickChips.forEach(chip => {
+        chip.classList.toggle('active', chip.dataset.section === current);
+      });
+      chipTick = false;
+    });
   }
+  updateActiveChip();
 
   /* ═════════ 17. ANIMATED COUNTERS ═════════ */
   const counters = document.querySelectorAll('.counter');
@@ -6962,7 +6895,7 @@ for(let i=0;i<particleCount;i++){
     const items = category === 'all' ? galleryData : galleryData.filter(i => i.cat === category);
     track.innerHTML = items.map(item => `
       <div class="gallery-card">
-        <img src="${item.src}" loading="lazy" alt="${item.title}">
+        <img src="${item.src}" loading="lazy" alt="${item.title} — ${item.desc}">
         <div class="gallery-card-overlay"></div>
         <div class="gallery-card-text">
           <h3>${item.title}</h3>
@@ -7761,14 +7694,20 @@ for(let i=0;i<particleCount;i++){
     if (e.clientY <= 0) showPopup();
   });
 
-  // ─── Trigger 2: Mobile — history back button ───
+  // ─── Trigger 2: Mobile — history back button (once per session) ───
+  var backTriggerUsed = false;
   if (window.history && window.history.pushState) {
     try {
-      history.pushState({}, '', location.href);
+      history.pushState({ backGuard: true }, '', location.href);
       window.addEventListener('popstate', () => {
+        if (backTriggerUsed) {
+          // المستخدم قرر يمشي خلاص — سيبه يرجع
+          return;
+        }
+        backTriggerUsed = true;
         showPopup();
-        // Re-push to keep the state
-        history.pushState({}, '', location.href);
+        // أعد الضغط مرة واحدة بس عشان مايمشيش دلوقتي
+        history.pushState({ backGuard: true }, '', location.href);
       }, { passive: true });
     } catch(e) {}
   }
@@ -8167,11 +8106,8 @@ for(let i=0;i<particleCount;i++){
       }
     });
 
-    // ─── 4b. تبسيط أقسام مخفية — استخدم display none بدل الحذف ───
-    ['savings', 'itemized'].forEach(sec => {
-      const el = document.getElementById(sec);
-      if (el) el.style.display = 'none';
-    });
+    // ─── 4b. الأقسام المخفية — تمت إزالتها لأنها مضافة للـORDER ───
+    // (savings ظاهر الآن حسب ترتيب ORDER)
 
     // ─── 5. تبسيط CTA في Itemized (بيبقى text link) ───
     // (CSS handles it)
@@ -8236,7 +8172,7 @@ for(let i=0;i<particleCount;i++){
 
 <!-- ═══════════════════ MOBILE LUXE ANIMATIONS ═══════════════════ -->
 <style id="mobileLuxe">
-@media(max-width:768px){
+@media(max-width:767px){
   /* Hero — دخول سينمائي */
   .hero-content > *{
     transform:translateY(40px) scale(.98);
@@ -8383,7 +8319,7 @@ for(let i=0;i<particleCount;i++){
     'guarantees', 'peace-of-mind', 'risks',
 
     // ── Cluster 7: COMPARISON + CALCULATOR ──
-    'comparison', 'estimator', 'why-prices', 'why-egypt', 'who-for',
+    'comparison', 'estimator', 'savings', 'why-prices', 'why-egypt', 'who-for',
 
     // ── Cluster 8: TECHNICAL DEEP-DIVE ──
     'bone-graft', 'crown-materials', 'orthodontics',
@@ -8418,6 +8354,28 @@ for(let i=0;i<particleCount;i++){
     var main = document.getElementById('main');
     if(!main) return;
 
+    // ─── Early return: لو الترتيب صح خلاص، اطلع ───
+    var existingSections = main.querySelectorAll(':scope > section');
+    var orderSet = {};
+    ORDER.forEach(function(id){ orderSet[id] = true; });
+    var currentOrder = [];
+    existingSections.forEach(function(s){ 
+      if(s.id && orderSet[s.id]) currentOrder.push(s.id); 
+    });
+    var expectedOrder = ORDER.filter(function(id){ return document.getElementById(id); });
+    
+    if(currentOrder.length === expectedOrder.length){
+      var same = true;
+      for(var i = 0; i < currentOrder.length; i++){
+        if(currentOrder[i] !== expectedOrder[i]){ same = false; break; }
+      }
+      if(same){
+        // تحقق إن الـ hero في الأول كمان
+        var firstSec = main.firstElementChild;
+        if(firstSec && firstSec.classList.contains('hero')) return;
+      }
+    }
+
     var frag = document.createDocumentFragment();
     ORDER.forEach(function(id){
       var el = document.getElementById(id);
@@ -8426,7 +8384,9 @@ for(let i=0;i<particleCount;i++){
     main.appendChild(frag);
 
     var hero = main.querySelector('.hero');
-    if(hero && main.firstChild !== hero){ main.insertBefore(hero, main.firstChild); }
+    if(hero && main.firstElementChild !== hero){ 
+      main.insertBefore(hero, main.firstChild); 
+    }
 
     DOWNGRADE_H2.forEach(function(id){
       var sec = document.getElementById(id);
@@ -8444,30 +8404,35 @@ for(let i=0;i<particleCount;i++){
     });
   }
 
+  // Apply once immediately (DOM is already parsed at this point)
   apply();
+
+  // Re-apply on DOMContentLoaded if still loading
   if(document.readyState === 'loading'){
     document.addEventListener('DOMContentLoaded', apply);
   }
-  window.addEventListener('load', apply);
-  setTimeout(apply, 500);
-  setTimeout(apply, 1500);
 
-  setTimeout(function(){
-    var main = document.getElementById('main');
-    if(!main || typeof MutationObserver === 'undefined') return;
+  // MutationObserver — handles async DOM changes, self-disconnects after 8s
+  var main = document.getElementById('main');
+  if(main && typeof MutationObserver !== 'undefined'){
     var scheduled = false;
     var observer = new MutationObserver(function(){
       if(scheduled) return;
       scheduled = true;
-      requestAnimationFrame(function(){ scheduled = false; apply(); });
+      requestAnimationFrame(function(){
+        scheduled = false;
+        apply();
+      });
     });
     observer.observe(main, { childList: true });
     setTimeout(function(){
       observer.disconnect();
       apply();
-      console.log('[Order v7] 🔒 Locked. Sections:', document.querySelectorAll('#main > section').length, '| H2s:', document.querySelectorAll('#main h2').length);
+      console.log('[Order v7] 🔒 Locked. Sections:',
+        document.querySelectorAll('#main > section').length,
+        '| H2s:', document.querySelectorAll('#main h2').length);
     }, 8000);
-  }, 800);
+  }
 
   console.log('[Order v7] ✅ Loaded');
 })();
@@ -8481,5 +8446,357 @@ for(let i=0;i<particleCount;i++){
     letter-spacing: -0.02em;
   }
 </style>
+
+<!-- ═══ Content Visibility: توفير ~40% من initial rendering ═══ -->
+<style id="contentVisibility">
+  /* طبّق على الأقسام الثابتة اللي مش محتاجة reveal animations */
+  #location,
+  #faq,
+  #legal,
+  #discover-egypt,
+  #curated-tours,
+  #crown-materials,
+  #bone-graft,
+  #orthodontics {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 800px;
+  }
+</style>
+<!-- ═══════════════════ SEARCH MODAL ═══════════════════ -->
+<div id="searchModal" class="search-modal" role="dialog" aria-modal="true" aria-labelledby="searchTitle" aria-hidden="true">
+  <div class="search-modal-overlay" data-search-close></div>
+  <div class="search-modal-box">
+    <h2 id="searchTitle" class="sr-only">Search the site</h2>
+
+    <div class="search-modal-input-wrap">
+      <svg class="search-modal-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" id="searchModalInput" class="search-modal-input" 
+             placeholder="Search packages, results, founder, guarantees..." 
+             autocomplete="off" spellcheck="false">
+      <button type="button" class="search-modal-close" data-search-close aria-label="Close search">
+        <kbd>ESC</kbd>
+      </button>
+    </div>
+
+    <div id="searchModalResults" class="search-modal-results">
+      <!-- Results injected here -->
+    </div>
+
+    <div class="search-modal-footer">
+      <span><kbd>↑↓</kbd> Navigate</span>
+      <span><kbd>↵</kbd> Jump to section</span>
+      <span><kbd>ESC</kbd> Close</span>
+    </div>
+  </div>
+</div>
+<script>
+/* ═══════════════════ SEARCH ENGINE ═══════════════════ */
+(function(){
+  'use strict';
+
+  /* ───── Build Search Index from all sections ───── */
+  var searchIndex = [];
+
+  function buildIndex(){
+    searchIndex = [];
+    var main = document.getElementById('main');
+    if(!main) return;
+
+    // Manual friendly titles + keywords
+    var meta = {
+      'packages':        { title:'Treatment Packages & Pricing', kw:'prices cost all-on-4 implants full-arch money quote' },
+      'founder':         { title:'Meet the Founder — Dr. Omar Fathi', kw:'doctor dentist clinician licensed bds omar' },
+      'results':         { title:'Before & After — Clinical Cases', kw:'results gallery photos clinical cases smile' },
+      'reviews':         { title:'Founding Patients Program', kw:'reviews testimonials patients trust' },
+      'guarantees':      { title:'Guarantees & Warranty', kw:'warranty refund guarantee protection policy' },
+      'legal':           { title:'Legal Framework', kw:'law legal rights protection patient' },
+      'faq':             { title:'Frequently Asked Questions', kw:'questions answers faq help support' },
+      'consult':         { title:'Free Clinical Review', kw:'consult contact free review x-ray consultation' },
+      'science':         { title:'Clinical Science', kw:'science evidence research implants biology' },
+      'why-egypt':       { title:'Why Egypt', kw:'egypt destination travel tourism location' },
+      'why-prices':      { title:'Why Our Prices', kw:'pricing transparency why cost' },
+      'comparison':      { title:'Egypt vs Turkey vs Mexico', kw:'compare comparison competition vs' },
+      'team':            { title:'Our Specialists', kw:'team doctors dentists surgeons specialists' },
+      'comfort':         { title:'Anesthesia & Comfort', kw:'anesthesia sedation pain comfort iv local' },
+      'bone-graft':      { title:'Bone Graft Materials', kw:'bone graft grafting sinus augmentation' },
+      'crown-materials': { title:'Crown & Prosthesis Materials', kw:'zirconia emax crown prosthesis materials' },
+      'orthodontics':    { title:'Orthodontics — Aligners vs Braces', kw:'aligners braces orthodontics invisalign' },
+      'travel':          { title:'Travel & Logistics', kw:'travel logistics flights airport transfer' },
+      'travel-addons':   { title:'Travel Add-Ons', kw:'add-ons vip premium signature recovery care' },
+      'curated-tours':   { title:'Curated Tours & Experiences', kw:'tours pyramids luxor nile excursion' },
+      'journey':         { title:'Patient Journey', kw:'journey steps process timeline' },
+      'timeline':        { title:'Day-by-Day Timeline', kw:'timeline days schedule protocol' },
+      'recovery':        { title:'Recovery — Week by Week', kw:'recovery healing weeks aftercare' },
+      'risks':           { title:'Risks & Complications', kw:'risks complications safety side effects' },
+      'payment':         { title:'Payment Security', kw:'payment pay deposit milestone money' },
+      'discover-egypt':  { title:'Discover Egypt', kw:'discover egypt gallery photos tourism' },
+      'location':        { title:'Our Clinic Location', kw:'location address map clinic cairo giza' },
+      'academic':        { title:'Academic Pedigree', kw:'academic university training education' },
+      'price-anchor':    { title:'Price Comparison', kw:'price compare cheap affordable save' },
+      'trust':           { title:'Accreditations', kw:'accreditations trust gahar iso eda iti' },
+      'trust-stats':     { title:'Trust Statistics', kw:'stats numbers experience success rate' },
+      'global-map':      { title:'Global Patients', kw:'global countries markets international' },
+      'who-for':         { title:'Who This Service Is For', kw:'who for eligibility candidates' },
+      'peace-of-mind':   { title:'Peace of Mind', kw:'peace of mind aftercare follow-up' }
+    };
+
+    // Build from DOM
+    main.querySelectorAll('section[id]').forEach(function(sec){
+      var id = sec.id;
+      var m = meta[id] || {};
+      var heading = sec.querySelector('h2, h3.h2-as-h3');
+      var title = m.title || (heading ? heading.textContent.trim() : id);
+      var kw = (m.kw || '') + ' ' + title + ' ' + (sec.textContent || '').slice(0, 800);
+      searchIndex.push({
+        id: id,
+        title: title,
+        keywords: kw.toLowerCase(),
+        anchor: '#' + id
+      });
+    });
+  }
+
+  /* ───── Search function ───── */
+  function search(query){
+    if(!query || query.length < 2) return [];
+    var q = query.toLowerCase().trim();
+    var terms = q.split(/\s+/).filter(function(t){ return t.length > 0; });
+
+    var results = [];
+    searchIndex.forEach(function(item){
+      var score = 0;
+      var text = item.keywords;
+      var titleLower = item.title.toLowerCase();
+
+      // Score: title match = 5, keyword match = 1 per term
+      terms.forEach(function(term){
+        if(titleLower.indexOf(term) !== -1) score += 5;
+        var re = new RegExp(term, 'gi');
+        var matches = text.match(re);
+        if(matches) score += matches.length;
+      });
+
+      if(score > 0) results.push({ item: item, score: score });
+    });
+
+    results.sort(function(a,b){ return b.score - a.score; });
+    return results.slice(0, 8);
+  }
+
+  /* ───── Highlight matched text ───── */
+  function highlight(text, query){
+    if(!query) return text;
+    var terms = query.toLowerCase().split(/\s+/).filter(function(t){ return t.length > 1; });
+    var out = text;
+    terms.forEach(function(t){
+      var re = new RegExp('(' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+      out = out.replace(re, '<mark>$1</mark>');
+    });
+    return out;
+  }
+
+  /* ───── Render results ───── */
+  var modal = document.getElementById('searchModal');
+  var input = document.getElementById('searchModalInput');
+  var resultsEl = document.getElementById('searchModalResults');
+  var activeIndex = 0;
+  var currentResults = [];
+
+  function renderResults(query){
+    currentResults = search(query);
+    activeIndex = 0;
+
+    if(!query || query.length < 2){
+      resultsEl.innerHTML = '<div class="search-empty">' +
+        '<strong>Start typing…</strong>' +
+        'Search: packages, prices, results, founder, warranty, FAQ, tours, location — anything.' +
+      '</div>';
+      return;
+    }
+
+    if(currentResults.length === 0){
+      resultsEl.innerHTML = '<div class="search-empty">' +
+        '<strong>No results found</strong>' +
+        'Try: "packages", "prices", "founder", "warranty", "tours", "FAQ"' +
+      '</div>';
+      return;
+    }
+
+    resultsEl.innerHTML = currentResults.map(function(r, i){
+      return '<a href="' + r.item.anchor + '" class="search-result-item' +
+        (i === 0 ? ' active' : '') + '" data-index="' + i + '">' +
+        '<strong>' + highlight(r.item.title, query) + '</strong>' +
+        '<span>Jump to section →</span>' +
+      '</a>';
+    }).join('');
+  }
+
+  function openSearch(){
+    if(!modal) return;
+    buildIndex();
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function(){ input.focus(); input.select(); }, 100);
+    renderResults(input.value);
+  }
+  function closeSearch(){
+    if(!modal) return;
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+    input.value = '';
+  }
+
+  /* ───── Keyboard nav ───── */
+  function moveActive(delta){
+    if(currentResults.length === 0) return;
+    activeIndex = (activeIndex + delta + currentResults.length) % currentResults.length;
+    var items = resultsEl.querySelectorAll('.search-result-item');
+    items.forEach(function(el, i){
+      el.classList.toggle('active', i === activeIndex);
+    });
+    var active = items[activeIndex];
+    if(active) active.scrollIntoView({ block:'nearest', behavior:'smooth' });
+  }
+
+  function jumpToActive(){
+    if(currentResults.length === 0) return;
+    var target = currentResults[activeIndex].item.anchor;
+    closeSearch();
+    setTimeout(function(){
+      var el = document.querySelector(target);
+      if(el){
+        var headerH = (document.querySelector('.site-header') || {}).offsetHeight || 0;
+        var y = el.getBoundingClientRect().top + window.pageYOffset - headerH - 20;
+        window.scrollTo({ top:y, behavior:'smooth' });
+      }
+    }, 150);
+  }
+
+  /* ───── Attach events ───── */
+  var trigger = document.getElementById('searchTrigger');
+  if(trigger){
+    trigger.addEventListener('click', openSearch);
+  }
+
+  // Mobile search button
+  var mobileSearchBtn = document.getElementById('mobileSearchBtn');
+  if(mobileSearchBtn){
+    mobileSearchBtn.addEventListener('click', function(){
+      openSearch();
+      var menu = document.getElementById('mobileMenu');
+      var btn = document.getElementById('menuBtn');
+      if(menu) menu.classList.remove('open');
+      if(btn) btn.classList.remove('open');
+    });
+  }
+
+  if(modal){
+    document.querySelectorAll('[data-search-close]').forEach(function(el){
+      el.addEventListener('click', closeSearch);
+    });
+
+    document.addEventListener('keydown', function(e){
+      // ⌘K / Ctrl+K to open
+      if((e.metaKey || e.ctrlKey) && e.key === 'k'){
+        e.preventDefault();
+        if(modal.classList.contains('open')) closeSearch();
+        else openSearch();
+        return;
+      }
+      if(!modal.classList.contains('open')) return;
+
+      if(e.key === 'Escape'){ e.preventDefault(); closeSearch(); }
+      if(e.key === 'ArrowDown'){ e.preventDefault(); moveActive(1); }
+      if(e.key === 'ArrowUp'){ e.preventDefault(); moveActive(-1); }
+      if(e.key === 'Enter'){ e.preventDefault(); jumpToActive(); }
+    });
+
+    if(input){
+      input.addEventListener('input', function(){
+        renderResults(this.value);
+      });
+    }
+
+    resultsEl.addEventListener('click', function(e){
+      var item = e.target.closest('.search-result-item');
+      if(!item) return;
+      e.preventDefault();
+      var idx = parseInt(item.dataset.index || '0', 10);
+      activeIndex = idx;
+      jumpToActive();
+    });
+  }
+})();
+
+/* ═══════════════════ QUICK BAR — Show on ALL devices ═══════════════════ */
+(function(){
+  'use strict';
+  var qb = document.getElementById('quickBar');
+  if(!qb) return;
+
+  var lastY = 0;
+  var shown = false;
+
+  function update(){
+    var y = window.scrollY;
+    var vh = window.innerHeight;
+    var docH = document.documentElement.scrollHeight;
+
+    // Show between 400px and near bottom
+    var shouldShow = y > 400 && y < docH - vh - 300;
+
+    if(shouldShow !== shown){
+      shown = shouldShow;
+      qb.classList.toggle('show', shouldShow);
+      document.body.classList.toggle('quickbar-active', shouldShow);
+    }
+  }
+
+  window.addEventListener('scroll', update, { passive:true });
+  update();
+})();
+</script>
+<!-- ═══════════════════ FINAL CLEANUP — v2 ═══════════════════ -->
+<script id="finalCleanup">
+(function(){
+  'use strict';
+
+  /* ═══ 1. إزالة CSS الإخفاء العاطل (لو لسه موجود) ═══ */
+  ['hideRedundantSections', 'hideRedundantV2'].forEach(function(id){
+    var s = document.getElementById(id);
+    if (s) s.remove();
+  });
+
+  /* ═══ 2. تفعيل content-visibility على الأقسام الثقيلة ═══ */
+  var heavySections = [
+    'location', 'faq', 'legal', 'discover-egypt',
+    'curated-tours', 'crown-materials', 'bone-graft', 'orthodontics'
+  ];
+  heavySections.forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) {
+      el.style.contentVisibility = 'auto';
+      el.style.containIntrinsicSize = '1px 800px';
+    }
+  });
+
+  /* ═══ 3. إزالة زر Refund المكرر (لو لسه موجود) ═══ */
+  var refundBtn = document.querySelector('#guarantees button[onclick*="refundModal"]');
+  if (refundBtn) refundBtn.remove();
+
+  /* ═══ 4. إزالة Quick Chips الزائدة (لو لسه موجودة) ═══ */
+  var extraChips = document.querySelectorAll(
+    '.quick-chip[data-section="founder"], .quick-chip[data-section="guarantees"]'
+  );
+  extraChips.forEach(function(c){ c.remove(); });
+
+  console.log('%c[Cleanup v2 ✅]', 'color:#AE9164;font-weight:bold',
+    'Heavy sections optimized: 8 | All dead content removed from source');
+})();
+</script>
 </body>
 </html>
