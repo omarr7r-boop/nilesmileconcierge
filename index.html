@@ -24,23 +24,7 @@
   from { opacity: 0; transform: scale(1.02); }
 }
   </style>
-  <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '2856593904741515');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=2856593904741515&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+  <!-- Meta Pixel — loaded ONLY after explicit consent (GDPR-compliant) -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -63,6 +47,9 @@ src="https://www.facebook.com/tr?id=2856593904741515&ev=PageView&noscript=1"
 <meta property="og:image:alt" content="Nile Smile Concierge — Dental restoration in Cairo with Straumann and Nobel implants">
 <meta property="og:url" content="https://nilesmileconcierge.com/">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nile Smile Concierge | The Same Implants. A Different Address.">
+<meta name="twitter:description" content="Clinician-reviewed dental concierge. Save 60–75% on premium implants. Founding cohort — 20 patients only.">
+<meta name="twitter:image" content="https://nilesmileconcierge.com/og-image.jpg">
 
 <!-- Theme -->
 <meta name="theme-color" content="#4F6070">
@@ -86,7 +73,7 @@ src="https://www.facebook.com/tr?id=2856593904741515&ev=PageView&noscript=1"
 <link rel="preload" href="styles.css" as="style">
 
 <!-- Fonts: minimal weights -->
-<link href="https://fonts.googleapis.com/css2?family=Italianno&family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Italianno&text=NileSml&family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
 <!-- Hero image preload — First Contentful Paint faster -->
 <link rel="preload" as="image" href="images/spencer-davis-ONVA6s03hg8-unsplash.jpg" fetchpriority="high">
@@ -110,10 +97,18 @@ src="https://www.facebook.com/tr?id=2856593904741515&ev=PageView&noscript=1"
     gtag('js', new Date());
     gtag('config', 'G-P1DMJ7E22B', { send_page_view: true });
 
-    const cs = document.createElement('script');
-    cs.async = true;
-    cs.src = 'https://t.contentsquare.net/uxa/ecfefe224f5fa.js';
-    document.head.appendChild(cs);
+    // Meta Pixel — consent-gated
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2856593904741515');
+    fbq('track', 'PageView');
+    // To re-enable, add a dedicated opt-in toggle in the cookie banner.
   };
 
   // Load on return visit if already accepted
@@ -313,7 +308,7 @@ thead tr{
   animation:sectionFlow 6s ease-in-out infinite;
 }
 @keyframes goldFlowSection{0%,100%{background-position:0% center}50%{background-position:100% center}}
-.hero{background:linear-gradient(135deg,#3A4855 0%,#4F6070 100%)}
+/* .hero background handled by professional gradient above — duplicate removed */
 section[id="science"],section.bg-nile-blue{
   background:linear-gradient(135deg,#4F6070 0%,#3A4855 100%)!important;
 }
@@ -452,6 +447,7 @@ img{
 {
   "@context":"https://schema.org",
   "@type":"MedicalBusiness",
+  "@id":"https://nilesmileconcierge.com/#business",
   "name":"Nile Smile Concierge",
   "alternateName":"Nile Smile Dental Concierge",
   "description":"Dental concierge service connecting international patients with accredited dental specialists in Cairo, Egypt. Premium All-on-4, All-on-6, zygomatic implants, zirconia crowns, overdentures, and full-mouth restoration — with named implant brands, 2-tier written warranty, and Implant Passport with lot traceability.",
@@ -544,7 +540,8 @@ img{
     {"@type":"Question","name":"What does the aftercare protocol include?","acceptedAnswer":{"@type":"Answer","text":"You receive a complete written aftercare protocol before departure: Day 1-3 (rest, ice packs, soft cold foods, no smoking), Day 4-7 (warm salt rinses, start antibiotics), Week 2-4 (gradual return to normal activities), and long-term instructions for hygiene and 6-month check-ups. Includes 24/7 WhatsApp access to your clinical coordinator."}},
     {"@type":"Question","name":"Will I get permanent teeth on the same day as surgery?","acceptedAnswer":{"@type":"Answer","text":"No. 'Same-day teeth' refers to a temporary fixed bridge delivered within 48-72 hours. The permanent prosthesis is placed only after osseointegration (3-6 months later) — a biological requirement, not a policy choice. No ethical clinic can promise permanent teeth in a single visit."}},
     {"@type":"Question","name":"Will my bite change after surgery?","acceptedAnswer":{"@type":"Answer","text":"Yes, and it is normal. During healing, swelling subsides, jaw muscles adapt, and the implant-bone interface stabilizes. Expect 1-2 occlusal adjustment visits in the first 4-6 weeks. These are routine treatment steps, not complications."}},
-    {"@type":"Question","name":"Are bone grafts and sinus lifts included in the package price?","acceptedAnswer":{"@type":"Answer","text":"Not automatically. Bone grafting (typically $600-$1,800 per site) and sinus lift (typically $1,200-$2,500 per side) depend on CBCT findings and are quoted separately in writing after your free clinical review, before any payment is made."}}
+    {"@type":"Question","name":"Are bone grafts and sinus lifts included in the package price?","acceptedAnswer":{"@type":"Answer","text":"Not automatically. Bone grafting (typically $600-$1,800 per site) and sinus lift (typically $1,200-$2,500 per side) depend on CBCT findings and are quoted separately in writing after your free clinical review, before any payment is made."}},
+    {"@type":"Question","name":"Can I speak to a past patient before booking?","acceptedAnswer":{"@type":"Answer","text":"Yes. Once our Founding Patients complete treatment (Q4 2026), we connect you directly with someone from your country via WhatsApp video or Zoom. The call is private, patient-to-patient, with no coordinator present. They are never paid and can say whatever they want — including not recommending us."}}
   ]
 }
 </script>
@@ -1861,19 +1858,31 @@ details.science-accordion > summary:hover{
 }
 .toc-dot{
   width:10px;height:10px;
+  padding:17px;
+  box-sizing:content-box;
   border-radius:50%;
-  background:rgba(174,145,100,.3);
+  background:transparent;
   position:relative;
   cursor:pointer;
   transition:all .3s cubic-bezier(.34,1.56,.64,1);
 }
-.toc-dot:hover{
-  transform:scale(1.4);
+.toc-dot::before{
+  content:'';
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:10px;height:10px;
+  border-radius:50%;
+  background:rgba(174,145,100,.3);
+  transition:all .3s cubic-bezier(.34,1.56,.64,1);
+}
+.toc-dot:hover::before{
+  transform:translate(-50%,-50%) scale(1.4);
   background:#AE9164;
 }
-.toc-dot.active{
+.toc-dot.active::before{
   background:#AE9164;
-  transform:scale(1.3);
+  transform:translate(-50%,-50%) scale(1.3);
   box-shadow:0 0 12px rgba(174,145,100,.6);
 }
 .toc-dot::after{
@@ -2876,39 +2885,175 @@ html.dark-mode .search-result-item span { color:#B8C5D1; }
 }
 </style>
 <style id="logoIntroStyles">
-#logoIntro{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0A0D10 0%,#1F2A36 50%,#2A3744 100%);overflow:hidden;transition:opacity 0.35s ease;will-change:opacity}
+/* ═══════════ LOGO INTRO — BLOOM & FOCUS (2026) ═══════════ */
+#logoIntro{
+  position:fixed;inset:0;z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse at center,#14181D 0%,#0A0D10 100%);
+  overflow:hidden;
+  transition:opacity 0.5s cubic-bezier(0.65,0,0.35,1);
+  will-change:opacity;
+}
 #logoIntro.removing{opacity:0;pointer-events:none}
-.logo-intro-inner{display:flex;flex-direction:column;align-items:center;position:relative;transform-origin:center center;will-change:transform}
-#logoIntro.flipping .logo-intro-inner{transition:transform 1.2s cubic-bezier(0.65,0,0.35,1)}
-.logo-intro-script{font-family:'Italianno',cursive;font-size:clamp(4.5rem,11vw,8.5rem);line-height:0.85;color:#E8C88A;padding-right:6px;filter:drop-shadow(0 0 30px rgba(232,200,138,0.4));clip-path:inset(0 100% 0 0);animation:scriptReveal 1.1s cubic-bezier(0.4,0,0.2,1) 0.15s forwards}
-@keyframes scriptReveal{from{clip-path:inset(-15% 100% -15% 0)}to{clip-path:inset(-15% 0 -15% 0)}}
-.logo-intro-sans{font-family:'Montserrat',sans-serif;font-weight:600;font-size:clamp(0.85rem,1.5vw,1.5rem);letter-spacing:0.32em;color:#AE9164;text-transform:uppercase;margin-top:0.6rem;display:inline-flex;padding-left:0.32em}
-.li-letter-sans{display:inline-block;opacity:0;transform:translateY(-12px);animation:sansLetterIn 0.4s cubic-bezier(0.22,1,0.36,1) forwards}
-@keyframes sansLetterIn{to{opacity:1;transform:translateY(0)}}
-.logo-intro-line{height:1px;width:0;margin-top:1.2rem;background:linear-gradient(90deg,transparent,#AE9164 30%,#E8C88A 50%,#AE9164 70%,transparent);animation:lineDraw 0.6s cubic-bezier(0.22,1,0.36,1) 1.3s forwards}
-@keyframes lineDraw{to{width:240px}}
-.logo-intro-inner::after{content:'';position:absolute;top:-20%;left:-180%;width:100%;height:140%;background:linear-gradient(115deg,transparent 35%,rgba(255,235,180,0.75) 50%,transparent 65%);animation:shimmerSweep 0.8s ease-in-out 1.7s forwards;pointer-events:none;mix-blend-mode:overlay}
-@keyframes shimmerSweep{to{left:180%}}
+
+/* Ambient subtle grid — luxury tech feel */
+.logo-intro-ambient{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(174,145,100,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(174,145,100,0.04) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse at center,black 0%,transparent 70%);
+  -webkit-mask-image:radial-gradient(ellipse at center,black 0%,transparent 70%);
+  opacity:0;
+  animation:ambientIn 1.2s cubic-bezier(0.16,1,0.3,1) 0.05s forwards;
+}
+@keyframes ambientIn{to{opacity:1}}
+
+/* Inner wrapper */
+.logo-intro-inner{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  transform-origin:center center;
+  will-change:transform;
+}
+#logoIntro.flipping .logo-intro-inner{
+  transition:transform 0.75s cubic-bezier(0.65,0,0.35,1);
+}
+
+/* Radial gold bloom — expands behind logo */
+.logo-intro-glow{
+  position:absolute;
+  top:50%;left:50%;
+  width:520px;height:520px;
+  margin:-260px 0 0 -260px;
+  background:radial-gradient(
+    circle,
+    rgba(232,200,138,0.28) 0%,
+    rgba(174,145,100,0.12) 25%,
+    transparent 60%
+  );
+  border-radius:50%;
+  pointer-events:none;
+  filter:blur(20px);
+  opacity:0;
+  transform:scale(0.4);
+  animation:bloomIn 1.4s cubic-bezier(0.16,1,0.3,1) 0.1s forwards;
+  z-index:-1;
+}
+@keyframes bloomIn{
+  0%   { opacity:0; transform:scale(0.4); }
+  40%  { opacity:1; }
+  100% { opacity:0.65; transform:scale(1.15); }
+}
+
+/* Script wordmark — Apple-style blur focus */
+.logo-intro-script{
+  font-family:'Italianno',cursive;
+  font-size:clamp(4.5rem,11vw,8.5rem);
+  line-height:0.88;
+  color:#E8C88A;
+  padding-right:0.06em;
+  filter:blur(18px) drop-shadow(0 0 24px rgba(232,200,138,0.15));
+  opacity:0;
+  transform:scale(0.88);
+  animation:scriptFocus 0.95s cubic-bezier(0.16,1,0.3,1) 0.05s forwards;
+  will-change:filter,transform,opacity;
+}
+@keyframes scriptFocus{
+  0%   { filter:blur(18px);       opacity:0; transform:scale(0.88); }
+  45%  { filter:blur(3px);        opacity:1; }
+  100% { filter:blur(0) drop-shadow(0 0 30px rgba(232,200,138,0.35)); opacity:1; transform:scale(1); }
+}
+
+/* Subtitle — luxury letter-spacing expansion (NO letter-by-letter) */
+.logo-intro-sans{
+  font-family:'Montserrat',sans-serif;
+  font-weight:600;
+  font-size:clamp(0.65rem,1.1vw,1rem);
+  color:#C9A96E;
+  text-transform:uppercase;
+  margin-top:0.9rem;
+  padding-left:0.05em;
+  opacity:0;
+  letter-spacing:0.08em;
+  transform:translateY(8px);
+  animation:sansExpand 0.85s cubic-bezier(0.16,1,0.3,1) 0.45s forwards;
+  will-change:letter-spacing,opacity,transform;
+}
+@keyframes sansExpand{
+  0%   { opacity:0; letter-spacing:0.08em; transform:translateY(8px); }
+  100% { opacity:1; letter-spacing:0.5em;  transform:translateY(0); }
+}
+
+/* Gold accent line — draws from center */
+.logo-intro-line{
+  height:1px;
+  width:0;
+  margin-top:1.3rem;
+  background:linear-gradient(
+    90deg,
+    transparent 0%,
+    #AE9164 25%,
+    #E8C88A 50%,
+    #AE9164 75%,
+    transparent 100%
+  );
+  animation:lineExpand 0.7s cubic-bezier(0.16,1,0.3,1) 0.85s forwards;
+  will-change:width;
+}
+@keyframes lineExpand{
+  to { width:200px; }
+}
+
+/* Body lock while intro active */
 body.intro-active{overflow:hidden}
 body.intro-active .site-header .logo-inner{opacity:0}
+
+/* Reduced motion — instant, respectful */
 @media (prefers-reduced-motion: reduce){
-  #logoIntro{display:none !important}
+  #logoIntro{
+    display:none !important;
+  }
   body.intro-active{overflow:auto !important}
   body.intro-active .site-header .logo-inner{opacity:1 !important}
 }
 </style>
+<style>
+  /* Fallback: لو JS اتعطل، شيل intro-active بعد 3 ثواني */
+  @keyframes introTimeoutFallback {
+    to { opacity: 0; visibility: hidden; pointer-events: none; }
+  }
+  body.intro-active #logoIntro {
+    animation: introTimeoutFallback 0.01s linear 3s forwards;
+  }
+  body.intro-active {
+    animation: bodyScrollUnlock 0.01s linear 3s forwards;
+  }
+  @keyframes bodyScrollUnlock {
+    to { overflow: auto; }
+  }
+</style>
+<noscript>
+  <style>
+    body.intro-active { overflow: auto !important; }
+    #logoIntro { display: none !important; }
+  </style>
+</noscript>
 </head>
 <body class="intro-active">
 
 <!-- Quick bar disabled — handled by fixesBundle CSS -->
-<!-- ═══════════════════ LOGO INTRO — CINEMATIC ═══════════════════ -->
+<!-- ═══════════════════ LOGO INTRO — BLOOM & FOCUS (2026) ═══════════════════ -->
 <div id="logoIntro" role="status" aria-label="Nile Smile Concierge loading">
+  <div class="logo-intro-ambient" aria-hidden="true"></div>
   <div class="logo-intro-inner">
+    <div class="logo-intro-glow" aria-hidden="true"></div>
     <div class="logo-intro-script" aria-hidden="true">Nile Smile</div>
-    <div class="logo-intro-sans" aria-hidden="true">
-      <span class="li-letter-sans" style="animation-delay:0.80s">C</span><span class="li-letter-sans" style="animation-delay:0.84s">O</span><span class="li-letter-sans" style="animation-delay:0.88s">N</span><span class="li-letter-sans" style="animation-delay:0.92s">C</span><span class="li-letter-sans" style="animation-delay:0.96s">I</span><span class="li-letter-sans" style="animation-delay:1.00s">E</span><span class="li-letter-sans" style="animation-delay:1.04s">R</span><span class="li-letter-sans" style="animation-delay:1.08s">G</span><span class="li-letter-sans" style="animation-delay:1.12s">E</span>
-    </div>
-    <div class="logo-intro-line"></div>
+    <div class="logo-intro-sans" aria-hidden="true">Concierge</div>
+    <div class="logo-intro-line" aria-hidden="true"></div>
   </div>
 </div>
 
@@ -3026,17 +3171,13 @@ body.intro-active .site-header .logo-inner{opacity:0}
 <section class="hero">
   <div class="hero-bg">
 <img src="images/spencer-davis-ONVA6s03hg8-unsplash.jpg"
+     width="1920" height="1080"
      fetchpriority="high" loading="eager" decoding="async"
      alt="Giza Pyramids at golden hour" id="heroImg">    <div class="hero-overlay"></div>
   </div>
 
   <div class="hero-content" style="background: rgba(10, 13, 16, 0.60); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 2rem 1.5rem; border-radius: 12px; border: 1px solid rgba(232, 200, 138, 0.3); box-shadow: 0 30px 60px rgba(0,0,0,0.4); width: 100%; max-width: 100%;">
     <p class="eyebrow eyebrow-light mb-5">Clinician-Reviewed • Cairo, Egypt</p>
-    <p class="text-white mb-3" style="font-size:clamp(.9rem,1.8vw,1.05rem);opacity:.95;font-weight:300">
-      <strong style="font-weight:600;color:#E8C88A">Dr. Omar Fathi, BDS</strong>
-      <span style="opacity:.8"> · </span>
-      Licensed Dentist · Egyptian Dental Syndicate
-    </p>
     <h1 class="text-white mb-6" style="font-size:clamp(2rem,5.5vw,4rem);line-height:1.05;letter-spacing:-0.03em">
       The Same Implants.
       <span class="block gold-text italic font-normal" style="font-size:clamp(1.4rem,3.6vw,2.4rem);margin-top:.8rem">A Different Address.</span>
@@ -3055,6 +3196,7 @@ body.intro-active .site-header .logo-inner{opacity:0}
     <p class="text-center mt-4" style="font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:#E8C88A;font-weight:600">
       Save up to 45% vs Standard Pricing — 2026 Founding Cohort Only
     </p>
+    <!-- Name removed — review line hidden -->
 
 
 
@@ -3257,102 +3399,346 @@ body.intro-active .site-header .logo-inner{opacity:0}
     </div>
 
     <div class="world-map-wrap">
-      <svg class="world-map-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map showing Nile Smile Concierge serving patients globally">
-        <defs>
-          <pattern id="mapGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#AE9164" stroke-width="0.5" opacity="0.1"/>
-          </pattern>
-          <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#E8C88A" stop-opacity="0.8"/>
-            <stop offset="100%" stop-color="#E8C88A" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-        <rect width="1000" height="500" fill="url(#mapGrid)"/>
+<style id="worldMapStyles">
+/* ═══════════ WORLD MAP — PREMIUM DOTTED STYLE ═══════════ */
+.world-map-wrap{
+  position:relative;
+  max-width:960px;
+  margin:0 auto 3rem;
+  padding:1.5rem;
+  background:linear-gradient(135deg,#FBFAF7 0%,#F6F3EE 60%,#EDE6DA 100%);
+  border:1px solid rgba(174,145,100,.25);
+  border-radius:10px;
+  box-shadow:
+    0 20px 60px rgba(79,96,112,.12),
+    0 0 0 1px rgba(174,145,100,.08) inset,
+    0 1px 0 rgba(255,255,255,.8) inset;
+  overflow:hidden;
+}
 
-        <!-- Real World Map SVG Path -->
-        <g class="map-continents" fill="#E0D5C0" stroke="#AE9164" stroke-width="1" stroke-linejoin="round" opacity="0.6">
-          <path d="M150,120 L200,100 L250,110 L280,150 L290,200 L250,220 L200,200 L180,160 Z M120,180 L160,190 L180,230 L140,250 L110,220 Z" />
-          <path d="M230,220 L280,230 L300,280 L280,350 L250,420 L220,400 L210,330 L220,260 Z" />
-          <path d="M450,80 L500,70 L550,90 L580,130 L550,170 L500,180 L460,140 Z" />
-          <path d="M480,180 L530,180 L560,250 L540,350 L500,420 L470,380 L460,280 L470,200 Z" />
-          <path d="M580,80 L650,60 L800,70 L850,120 L820,180 L750,170 L680,160 L600,140 L560,120 Z" />
-          <path d="M600,180 L640,180 L650,220 L620,250 L590,220 Z" />
-          <path d="M650,300 L720,280 L800,300 L810,350 L750,380 L680,370 L640,330 Z" />
-          <path d="M850,380 L880,390 L890,420 L860,430 Z" />
-          <path d="M560,220 L590,220 L600,250 L570,260 Z" />
+.world-map-wrap::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,transparent,#E8C88A 30%,#C9A96E 70%,transparent);
+  z-index:2;
+}
+
+.world-map-wrap::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:10px;
+  box-shadow:inset 0 0 80px rgba(174,145,100,.04);
+  pointer-events:none;
+}
+
+.world-map-svg{
+  width:100%;
+  height:auto;
+  display:block;
+  min-height:280px;
+  position:relative;
+  z-index:1;
+}
+
+/* ─── PINS ─── */
+.map-pin .pin-pulse{
+  animation:mapPinPulse 2.8s ease-out infinite;
+  transform-origin:center;
+  transform-box:fill-box;
+}
+@keyframes mapPinPulse{
+  0%   { transform:scale(.8); opacity:.6; }
+  100% { transform:scale(2.4); opacity:0; }
+}
+
+/* ─── HUB RINGS ─── */
+.map-pin-hub .hub-ring{
+  animation:hubPulse 3s ease-out infinite;
+  transform-origin:center;
+  transform-box:fill-box;
+}
+.map-pin-hub .hub-ring-2{
+  animation-delay:1.5s;
+}
+@keyframes hubPulse{
+  0%   { transform:scale(1); opacity:.5; }
+  100% { transform:scale(2.2); opacity:0; }
+}
+
+/* ─── ROUTES DASH ─── */
+.map-routes path{
+  animation:routeDash 8s linear infinite;
+}
+.map-routes path:nth-child(2){ animation-delay:-1s; }
+.map-routes path:nth-child(3){ animation-delay:-2s; }
+.map-routes path:nth-child(4){ animation-delay:-3s; }
+.map-routes path:nth-child(5){ animation-delay:-4s; }
+.map-routes path:nth-child(6){ animation-delay:-5s; }
+.map-routes path:nth-child(7){ animation-delay:-6s; }
+@keyframes routeDash{
+  to{ stroke-dashoffset:-100; }
+}
+
+/* ─── SVG TEXT ─── */
+.map-pins text{
+  pointer-events:none;
+  user-select:none;
+}
+
+/* ─── STAT CARDS ─── */
+.map-stats-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:1rem;
+  max-width:920px;
+  margin:0 auto;
+}
+.map-stat{
+  background:#fff;
+  border:1px solid rgba(174,145,100,.25);
+  border-radius:6px;
+  padding:1.25rem 1rem;
+  text-align:center;
+  transition:transform .4s cubic-bezier(.22,1,.36,1),
+             box-shadow .4s ease,
+             border-color .3s ease;
+  position:relative;
+  overflow:hidden;
+}
+.map-stat::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg,transparent,#E8C88A,transparent);
+  opacity:0;
+  transition:opacity .3s ease;
+}
+.map-stat:hover{
+  transform:translateY(-4px);
+  box-shadow:0 14px 36px rgba(79,96,112,.15);
+  border-color:rgba(174,145,100,.55);
+}
+.map-stat:hover::before{ opacity:1; }
+.map-stat-flag{display:block;font-size:1.75rem;margin-bottom:.5rem;line-height:1}
+.map-stat-name{
+  display:block;
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:1.05rem;
+  color:#1F2A36;
+  font-weight:500;
+  margin-bottom:.35rem;
+  line-height:1.2;
+}
+.map-stat-detail{
+  display:block;
+  font-family:'Montserrat',sans-serif;
+  font-size:.7rem;
+  color:#5A6875;
+  letter-spacing:.02em;
+  line-height:1.5;
+}
+
+/* ─── MOBILE — horizontal scroll for map ─── */
+@media(max-width:767px){
+  .world-map-wrap{
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    padding:1rem 0;
+  }
+  .world-map-wrap::-webkit-scrollbar{ height:4px; }
+  .world-map-wrap::-webkit-scrollbar-track{ background:rgba(174,145,100,.1); border-radius:2px; }
+  .world-map-wrap::-webkit-scrollbar-thumb{ background:rgba(174,145,100,.4); border-radius:2px; }
+  .world-map-svg{
+    min-width:720px;
+    height:auto;
+  }
+  .map-stats-grid{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    padding-bottom:1rem;
+    margin-left:-1rem;
+    margin-right:-1rem;
+    padding-left:1rem;
+    padding-right:1rem;
+  }
+  .map-stats-grid::-webkit-scrollbar{ display:none; }
+  .map-stat{
+    flex:0 0 75%;
+    scroll-snap-align:center;
+  }
+  .map-stat-detail{font-size:.65rem}
+}
+
+/* ─── REDUCED MOTION ─── */
+@media(prefers-reduced-motion:reduce){
+  .map-pin .pin-pulse,
+  .map-pin-hub .hub-ring,
+  .map-routes path{
+    animation:none;
+  }
+}
+</style>
+
+
+
+  <svg class="world-map-svg" viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map showing Nile Smile Concierge serving patients globally">
+    <defs>
+      <pattern id="mapGrid" width="50" height="50" patternUnits="userSpaceOnUse">
+        <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#AE9164" stroke-width="0.3" opacity="0.08"/>
+      </pattern>
+
+      <pattern id="dotPattern" width="7" height="7" patternUnits="userSpaceOnUse">
+        <circle cx="3.5" cy="3.5" r="1" fill="#AE9164" opacity="0.7"/>
+      </pattern>
+
+      <mask id="landMask">
+        <rect width="1000" height="520" fill="black"/>
+        <g fill="white">
+          <path d="M165,118 C175,92 200,78 232,75 L278,75 C300,78 315,92 320,115 C325,140 318,165 305,185 L292,205 C280,220 265,228 248,228 L232,220 L218,205 L205,188 C192,168 178,145 170,128 Z"/>
+          <path d="M260,240 C280,235 300,242 312,262 C322,282 320,308 312,335 C302,362 288,388 275,410 L265,422 C254,415 250,398 250,378 C250,352 255,325 258,300 C261,278 260,258 260,240 Z"/>
+          <path d="M462,100 C475,92 495,88 515,92 L540,98 C552,104 558,118 555,132 C551,146 542,156 530,162 L515,166 C500,165 488,158 478,148 C468,135 462,118 462,100 Z"/>
+          <path d="M470,168 C490,163 515,165 538,175 L558,190 C570,205 575,228 570,255 C563,282 548,312 535,342 L520,368 C510,385 495,392 480,385 L468,368 C458,348 453,322 453,295 C453,268 458,240 463,218 C467,198 468,180 470,168 Z"/>
+          <path d="M560,172 L595,168 L620,182 L622,208 L605,228 L582,232 L565,220 Z"/>
+          <path d="M565,88 L620,75 L695,68 L770,72 L825,85 L855,108 C865,130 862,158 850,180 L832,200 L810,215 L785,220 L760,215 L735,205 L710,198 L680,200 C655,205 630,210 610,205 L590,195 C578,182 570,165 565,145 Z"/>
+          <path d="M645,200 L670,195 L680,215 L672,240 L658,258 L645,238 L640,215 Z"/>
+          <path d="M710,215 L735,222 L748,242 L742,262 L725,268 L710,255 L705,235 Z"/>
+          <path d="M718,312 L770,305 L818,312 L845,332 C855,350 850,370 835,382 L808,392 L778,388 C755,383 738,372 728,355 C720,338 715,325 718,312 Z"/>
+          <path d="M868,392 L876,402 L873,418 L865,412 Z"/>
+          <path d="M458,105 L466,100 L471,110 L464,118 Z"/>
         </g>
+      </mask>
 
-        <!-- Animated Routes (Updated Coordinates) -->
-        <g class="map-routes" fill="none" stroke="#AE9164" stroke-width="2" stroke-dasharray="6 6" opacity="0.6">
-          <path d="M550,230 Q400,120 200,130" class="route route-usa"/>
-          <path d="M550,230 Q380,80 250,100" class="route route-ca"/>
-          <path d="M550,230 Q480,160 480,130" class="route route-uk"/>
-          <path d="M550,230 Q500,180 510,140" class="route route-eu"/>
-          <path d="M550,230 Q590,230 620,220" class="route route-gulf"/>
-          <path d="M550,230 Q700,300 750,340" class="route route-au"/>
-          <path d="M550,230 Q750,350 870,400" class="route route-nz"/>
-        </g>
+      <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#E8C88A" stop-opacity="0.9"/>
+        <stop offset="40%" stop-color="#AE9164" stop-opacity="0.35"/>
+        <stop offset="100%" stop-color="#AE9164" stop-opacity="0"/>
+      </radialGradient>
 
-        <!-- Hub glow behind Egypt -->
-        <circle cx="550" cy="230" r="70" fill="url(#hubGlow)"/>
+      <linearGradient id="routeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#AE9164" stop-opacity="0.15"/>
+        <stop offset="50%" stop-color="#E8C88A" stop-opacity="0.7"/>
+        <stop offset="100%" stop-color="#AE9164" stop-opacity="0.15"/>
+      </linearGradient>
 
-        <!-- Pins with Real Flag Images & Timezones -->
-        <g class="map-pins">
-          <!-- Egypt hub -->
-          <g class="map-pin map-pin-hub" transform="translate(550, 230)">
-            <circle r="28" fill="#AE9164" opacity="0.2" class="pin-pulse"/>
-            <circle r="28" fill="#AE9164" opacity="0.2" class="pin-pulse pin-pulse-2"/>
-            <image href="https://flagcdn.com/w40/eg.png" x="-18" y="-22" width="36" height="24" preserveAspectRatio="xMidYMid slice" style="border-radius:4px;"/>
-            <text y="24" font-size="9" font-weight="bold" fill="#1F2A36" text-anchor="middle" font-family="Montserrat">EET</text>
-          </g>
-          <!-- USA -->
-          <g class="map-pin" transform="translate(200, 130)">
-            <circle r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
-            <image href="https://flagcdn.com/w40/us.png" x="-14" y="-16" width="28" height="20" preserveAspectRatio="xMidYMid slice" style="border-radius:2px;"/>
-            <text y="22" font-size="8" font-weight="bold" fill="#4F6070" text-anchor="middle" font-family="Montserrat">EST / PST</text>
-          </g>
-          <!-- Canada -->
-          <g class="map-pin" transform="translate(250, 100)">
-            <circle r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
-            <image href="https://flagcdn.com/w40/ca.png" x="-14" y="-16" width="28" height="20" preserveAspectRatio="xMidYMid slice" style="border-radius:2px;"/>
-            <text y="22" font-size="8" font-weight="bold" fill="#4F6070" text-anchor="middle" font-family="Montserrat">EST / PST</text>
-          </g>
-          <!-- UK -->
-          <g class="map-pin" transform="translate(480, 130)">
-            <circle r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
-            <image href="https://flagcdn.com/w40/gb.png" x="-14" y="-16" width="28" height="20" preserveAspectRatio="xMidYMid slice" style="border-radius:2px;"/>
-            <text y="22" font-size="8" font-weight="bold" fill="#4F6070" text-anchor="middle" font-family="Montserrat">GMT</text>
-          </g>
-          <!-- Germany -->
-          <g class="map-pin" transform="translate(510, 140)">
-            <circle r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
-            <image href="https://flagcdn.com/w40/de.png" x="-14" y="-16" width="28" height="20" preserveAspectRatio="xMidYMid slice" style="border-radius:2px;"/>
-            <text y="22" font-size="8" font-weight="bold" fill="#4F6070" text-anchor="middle" font-family="Montserrat">CET</text>
-          </g>
-          <!-- UAE -->
-          <g class="map-pin" transform="translate(620, 220)">
-            <circle r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
-            <image href="https://flagcdn.com/w40/ae.png" x="-14" y="-16" width="28" height="20" preserveAspectRatio="xMidYMid slice" style="border-radius:2px;"/>
-            <text y="22" font-size="8" font-weight="bold" fill="#4F6070" text-anchor="middle" font-family="Montserrat">GST</text>
-          </g>
-          <!-- Australia -->
-          <g class="map-pin" transform="translate(750, 340)">
-            <circle r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
-            <image href="https://flagcdn.com/w40/au.png" x="-14" y="-16" width="28" height="20" preserveAspectRatio="xMidYMid slice" style="border-radius:2px;"/>
-            <text y="22" font-size="8" font-weight="bold" fill="#4F6070" text-anchor="middle" font-family="Montserrat">AEST</text>
-          </g>
-          <!-- NZ -->
-          <g class="map-pin" transform="translate(870, 400)">
-            <circle r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
-            <image href="https://flagcdn.com/w40/nz.png" x="-14" y="-16" width="28" height="20" preserveAspectRatio="xMidYMid slice" style="border-radius:2px;"/>
-            <text y="22" font-size="8" font-weight="bold" fill="#4F6070" text-anchor="middle" font-family="Montserrat">NZST</text>
-          </g>
-        </g>
+      <clipPath id="flagUS"><circle cx="200" cy="130" r="11"/></clipPath>
+      <clipPath id="flagCA"><circle cx="250" cy="100" r="11"/></clipPath>
+      <clipPath id="flagGB"><circle cx="480" cy="130" r="11"/></clipPath>
+      <clipPath id="flagDE"><circle cx="510" cy="145" r="11"/></clipPath>
+      <clipPath id="flagAE"><circle cx="620" cy="220" r="11"/></clipPath>
+      <clipPath id="flagAU"><circle cx="750" cy="340" r="11"/></clipPath>
+      <clipPath id="flagNZ"><circle cx="870" cy="400" r="11"/></clipPath>
+      <clipPath id="flagEG"><circle cx="550" cy="230" r="18"/></clipPath>
+    </defs>
 
-        <!-- Egypt label -->
-        <text x="550" y="275" class="map-hub-label" text-anchor="middle" style="font-family:Montserrat,sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;fill:#1F2A36;opacity:.8">EGYPT · CAIRO</text>
-      </svg>
-    </div>
+    <rect width="1000" height="520" fill="url(#mapGrid)"/>
+    <rect width="1000" height="520" fill="url(#dotPattern)" mask="url(#landMask)"/>
+
+    <g class="map-routes" fill="none" stroke="url(#routeGrad)" stroke-width="1.2" stroke-dasharray="5 5">
+      <path d="M550,230 Q400,140 200,130"/>
+      <path d="M550,230 Q400,105 250,100"/>
+      <path d="M550,230 Q500,175 480,130"/>
+      <path d="M550,230 Q530,175 510,145"/>
+      <path d="M550,230 Q590,225 620,220"/>
+      <path d="M550,230 Q680,290 750,340"/>
+      <path d="M550,230 Q730,340 870,400"/>
+    </g>
+
+    <g>
+      <circle r="2.5" fill="#E8C88A" opacity="0.9">
+        <animateMotion dur="5s" repeatCount="indefinite" path="M550,230 Q400,140 200,130"/>
+      </circle>
+      <circle r="2.5" fill="#E8C88A" opacity="0.9">
+        <animateMotion dur="5s" repeatCount="indefinite" begin="0.7s" path="M550,230 Q500,175 480,130"/>
+      </circle>
+      <circle r="2.5" fill="#E8C88A" opacity="0.9">
+        <animateMotion dur="5s" repeatCount="indefinite" begin="1.4s" path="M550,230 Q680,290 750,340"/>
+      </circle>
+      <circle r="2.5" fill="#E8C88A" opacity="0.9">
+        <animateMotion dur="5s" repeatCount="indefinite" begin="2.1s" path="M550,230 Q730,340 870,400"/>
+      </circle>
+      <circle r="2" fill="#C9A96E" opacity="0.7">
+        <animateMotion dur="5s" repeatCount="indefinite" begin="3s" path="M550,230 Q590,225 620,220"/>
+      </circle>
+    </g>
+
+    <circle cx="550" cy="230" r="75" fill="url(#hubGlow)"/>
+    <circle cx="550" cy="230" r="35" fill="none" stroke="#AE9164" stroke-width="0.7" opacity="0.35"/>
+
+    <g class="map-pins">
+      <g class="map-pin">
+        <circle cx="200" cy="130" r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
+        <circle cx="200" cy="130" r="11" fill="#1F2A36"/>
+        <image href="https://flagcdn.com/w40/us.png" x="189" y="119" width="22" height="22" clip-path="url(#flagUS)" preserveAspectRatio="xMidYMid slice"/>
+        <circle cx="200" cy="130" r="11" fill="none" stroke="#E8C88A" stroke-width="1.5"/>
+        <text x="200" y="152" text-anchor="middle" font-size="8" font-weight="600" fill="#4F6070" font-family="Montserrat" letter-spacing="0.5">USA</text>
+      </g>
+
+      <g class="map-pin">
+        <circle cx="250" cy="100" r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
+        <circle cx="250" cy="100" r="11" fill="#1F2A36"/>
+        <image href="https://flagcdn.com/w40/ca.png" x="239" y="89" width="22" height="22" clip-path="url(#flagCA)" preserveAspectRatio="xMidYMid slice"/>
+        <circle cx="250" cy="100" r="11" fill="none" stroke="#E8C88A" stroke-width="1.5"/>
+        <text x="250" y="122" text-anchor="middle" font-size="8" font-weight="600" fill="#4F6070" font-family="Montserrat" letter-spacing="0.5">CANADA</text>
+      </g>
+
+      <g class="map-pin">
+        <circle cx="480" cy="130" r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
+        <circle cx="480" cy="130" r="11" fill="#1F2A36"/>
+        <image href="https://flagcdn.com/w40/gb.png" x="469" y="119" width="22" height="22" clip-path="url(#flagGB)" preserveAspectRatio="xMidYMid slice"/>
+        <circle cx="480" cy="130" r="11" fill="none" stroke="#E8C88A" stroke-width="1.5"/>
+        <text x="480" y="152" text-anchor="middle" font-size="8" font-weight="600" fill="#4F6070" font-family="Montserrat" letter-spacing="0.5">UK</text>
+      </g>
+
+      <g class="map-pin">
+        <circle cx="510" cy="145" r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
+        <circle cx="510" cy="145" r="11" fill="#1F2A36"/>
+        <image href="https://flagcdn.com/w40/de.png" x="499" y="134" width="22" height="22" clip-path="url(#flagDE)" preserveAspectRatio="xMidYMid slice"/>
+        <circle cx="510" cy="145" r="11" fill="none" stroke="#E8C88A" stroke-width="1.5"/>
+        <text x="510" y="167" text-anchor="middle" font-size="8" font-weight="600" fill="#4F6070" font-family="Montserrat" letter-spacing="0.5">GERMANY</text>
+      </g>
+
+      <g class="map-pin">
+        <circle cx="620" cy="220" r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
+        <circle cx="620" cy="220" r="11" fill="#1F2A36"/>
+        <image href="https://flagcdn.com/w40/ae.png" x="609" y="209" width="22" height="22" clip-path="url(#flagAE)" preserveAspectRatio="xMidYMid slice"/>
+        <circle cx="620" cy="220" r="11" fill="none" stroke="#E8C88A" stroke-width="1.5"/>
+        <text x="620" y="242" text-anchor="middle" font-size="8" font-weight="600" fill="#4F6070" font-family="Montserrat" letter-spacing="0.5">UAE</text>
+      </g>
+
+      <g class="map-pin">
+        <circle cx="750" cy="340" r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
+        <circle cx="750" cy="340" r="11" fill="#1F2A36"/>
+        <image href="https://flagcdn.com/w40/au.png" x="739" y="329" width="22" height="22" clip-path="url(#flagAU)" preserveAspectRatio="xMidYMid slice"/>
+        <circle cx="750" cy="340" r="11" fill="none" stroke="#E8C88A" stroke-width="1.5"/>
+        <text x="750" y="362" text-anchor="middle" font-size="8" font-weight="600" fill="#4F6070" font-family="Montserrat" letter-spacing="0.5">AUSTRALIA</text>
+      </g>
+
+      <g class="map-pin">
+        <circle cx="870" cy="400" r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
+        <circle cx="870" cy="400" r="11" fill="#1F2A36"/>
+        <image href="https://flagcdn.com/w40/nz.png" x="859" y="389" width="22" height="22" clip-path="url(#flagNZ)" preserveAspectRatio="xMidYMid slice"/>
+        <circle cx="870" cy="400" r="11" fill="none" stroke="#E8C88A" stroke-width="1.5"/>
+        <text x="870" y="422" text-anchor="middle" font-size="8" font-weight="600" fill="#4F6070" font-family="Montserrat" letter-spacing="0.5">NEW ZEALAND</text>
+      </g>
+
+      <g class="map-pin-hub">
+        <circle cx="550" cy="230" r="26" fill="none" stroke="#AE9164" stroke-width="1" opacity="0.4" class="hub-ring"/>
+        <circle cx="550" cy="230" r="30" fill="none" stroke="#AE9164" stroke-width="0.6" opacity="0.25" class="hub-ring hub-ring-2"/>
+        <circle cx="550" cy="230" r="18" fill="#1F2A36"/>
+        <image href="https://flagcdn.com/w40/eg.png" x="535" y="215" width="30" height="30" clip-path="url(#flagEG)" preserveAspectRatio="xMidYMid slice"/>
+        <circle cx="550" cy="230" r="18" fill="none" stroke="#E8C88A" stroke-width="2"/>
+        <text x="550" y="262" text-anchor="middle" font-size="9" font-weight="700" fill="#1F2A36" font-family="Montserrat" letter-spacing="2">EGYPT · CAIRO</text>
+      </g>
+    </g>
+  </svg>
+</div>   <!-- ← قفل world-map-wrap الصح هنا -->
 
     <!-- Country stat cards -->
     <div class="map-stats-grid">
@@ -3369,136 +3755,6 @@ body.intro-active .site-header .logo-inner{opacity:0}
   </div>
 </section>
 
-<style id="worldMapStyles">
-.world-map-wrap{
-  position:relative;
-  max-width:920px;
-  margin:0 auto 3rem;
-  padding:1.5rem;
-  background:linear-gradient(135deg,#FBFAF7 0%,#F6F3EE 100%);
-  border:1px solid rgba(174,145,100,.2);
-  border-radius:6px;
-  box-shadow:0 12px 40px rgba(79,96,112,.08);
-}
-.world-map-svg{width:100%;height:auto;display:block;min-height:250px;object-fit:contain}
-@media(max-width:767px){
-  .world-map-svg { min-height: 200px; }
-}
-
-/* Pins */
-.map-pin .pin-pulse{
-  animation:mapPinPulse 2.6s ease-out infinite;
-  transform-origin:center;
-  transform-box:fill-box;
-}
-.map-pin .pin-pulse-2{animation-delay:1.3s}
-.map-pin-hub .pin-pulse{animation-duration:3.4s}
-@keyframes mapPinPulse{
-  0%   {transform:scale(.4);opacity:.55}
-  100% {transform:scale(2.6);opacity:0}
-}
-
-/* Routes */
-.map-routes .route{
-  animation:routeDash 24s linear infinite;
-}
-.map-routes .route-ca{animation-delay:-2s}
-.map-routes .route-uk{animation-delay:-4s}
-.map-routes .route-eu{animation-delay:-3s}
-.map-routes .route-gulf{animation-delay:-5s}
-.map-routes .route-au{animation-delay:-6s}
-.map-routes .route-nz{animation-delay:-8s}
-@keyframes routeDash{
-  to{stroke-dashoffset:-200}
-}
-
-/* Egypt label */
-.map-pins text {
-  pointer-events: none;
-  user-select: none;
-}
-.map-hub-label{
-  font-family:'Montserrat',sans-serif;
-  font-size:9px;
-  font-weight:700;
-  letter-spacing:.22em;
-  fill:#1F2A36;
-  opacity:.8;
-}
-
-/* Stat cards */
-.map-stats-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:1rem;
-  max-width:920px;
-  margin:0 auto;
-}
-
-/* Fix for Mobile - Swipeable Carousel */
-@media(max-width: 767px){
-  .map-stats-grid {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 1rem;
-    margin-left: -1rem;
-    margin-right: -1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  .map-stats-grid::-webkit-scrollbar {
-    display: none;
-  }
-  .map-stat {
-    flex: 0 0 75%;
-    scroll-snap-align: center;
-  }
-}
-.map-stat{
-  background:#fff;
-  border:1px solid rgba(174,145,100,.22);
-  border-radius:4px;
-  padding:1.25rem 1rem;
-  text-align:center;
-  transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s,border-color .3s;
-}
-.map-stat:hover{
-  transform:translateY(-4px);
-  box-shadow:0 14px 36px rgba(79,96,112,.14);
-  border-color:rgba(174,145,100,.55);
-}
-.map-stat-flag{display:block;font-size:1.75rem;margin-bottom:.5rem;line-height:1}
-.map-stat-name{
-  display:block;
-  font-family:'Playfair Display',Georgia,serif;
-  font-size:1.05rem;
-  color:#1F2A36;
-  font-weight:500;
-  margin-bottom:.35rem;
-  line-height:1.2;
-}
-.map-stat-detail{
-  display:block;
-  font-family:'Montserrat',sans-serif;
-  font-size:.68rem;
-  color:#5A6875;
-  letter-spacing:.02em;
-  line-height:1.5;
-}
-
-@media(max-width:640px){
-  .world-map-wrap{padding:1rem}
-  .map-hub-label{font-size:7px;letter-spacing:.15em}
-  .map-stat-detail{font-size:.62rem}
-}
-
-@media(prefers-reduced-motion:reduce){
-  .map-pin .pin-pulse,.map-routes .route{animation:none}
-}
-</style>
-
 <!-- ═══════════════════ FOUNDER ═══════════════════ -->
 <section id="founder" class="section reveal">
   <div class="container grid grid-cols-1 md:grid-cols-5 gap-12 lg:gap-16 items-center">
@@ -3513,7 +3769,7 @@ body.intro-active .site-header .logo-inner{opacity:0}
         
         <!-- Founder Photo -->
         <div style="position:relative;width:120px;height:120px;border-radius:50%;overflow:hidden;border:2px solid rgba(174,145,100,.5);box-shadow:0 0 0 4px rgba(174,145,100,.12),inset 0 0 24px rgba(174,145,100,.08);margin-bottom:6px;">
-          <img src="images/dr-omar.png" alt="Dr. Omar Fathi, BDS — Founder and Clinical Coordinator at Nile Smile Concierge, Cairo" style="width:100%;height:100%;object-fit:cover;display:block;">
+          <img src="images/dr-omar.png" width="400" height="400" alt="Dr. Omar Fathi, BDS — Founder and Clinical Coordinator at Nile Smile Concierge, Cairo" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         
         <!-- Divider -->
@@ -3569,7 +3825,9 @@ body.intro-active .site-header .logo-inner{opacity:0}
       <p class="text-nile-muted" style="font-size:1.05rem">
         Every patient is matched with a specialist whose experience matches their specific clinical needs.
       </p>
-      <button onclick="const c=document.getElementById('teamDetails');c.classList.toggle('hidden');this.querySelector('span').textContent=c.classList.contains('hidden')?'Show Specialists ▾':'Hide ▴';"
+      <button onclick="const c=document.getElementById('teamDetails');c.classList.toggle('hidden');this.querySelector('span').textContent=c.classList.contains('hidden')?'Show Specialists ▾':'Hide ▴';this.setAttribute('aria-expanded', !c.classList.contains('hidden'));"
+              aria-expanded="false"
+              aria-controls="teamDetails"
               class="btn btn-outline-dark inline-flex items-center gap-2 mt-6">
         <span>Show Specialists ▾</span>
       </button>
@@ -4018,14 +4276,29 @@ body.intro-active .site-header .logo-inner{opacity:0}
     }
     </script>
     <script type="module">
-    import * as THREE from 'three';
-    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-    import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-
-    (function(){
+    (async function(){
       var container = document.getElementById('implant3d');
       if(!container) return;
       var loading = document.getElementById('implant3dLoading');
+
+      // ⚡ Lazy-load Three.js — فقط عند التمرير لقسم الـ 3D
+      await new Promise((resolve) => {
+        if (!('IntersectionObserver' in window)) return resolve();
+        var obs = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) { obs.disconnect(); resolve(); }
+        }, { rootMargin: '300px' });
+        obs.observe(container);
+      });
+
+      let THREE, OrbitControls, RoomEnvironment;
+      try {
+        THREE = await import('three');
+        ({ OrbitControls } = await import('three/addons/controls/OrbitControls.js'));
+        ({ RoomEnvironment } = await import('three/addons/environments/RoomEnvironment.js'));
+      } catch(e) {
+        if (loading) loading.textContent = '3D viewer unavailable — try another browser';
+        return;
+      }
 
       // 1. Scene & Renderer
       var scene = new THREE.Scene();
@@ -5344,7 +5617,10 @@ body.intro-active .site-header .logo-inner{opacity:0}
             <p class="tier-sub">Premium implants · 5★ suites · VIP concierge · extended warranty · exclusive experiences</p>
           </div>
         </div>
-        <span class="tier-toggle">▾</span>
+        <span class="tier-toggle">
+          <span class="toggle-text">View Plans</span>
+          <svg class="toggle-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </span>
       </summary>
       <div class="tier-content">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -7080,7 +7356,7 @@ body.intro-active .site-header .logo-inner{opacity:0}
     <!-- ═══ Clinic Photos — Desktop Grid ═══ -->
     <div class="clinic-desktop-grid">
       <div class="clinic-grid-item">
-        <img src="images/SHW-1.jpg" alt="Reception area" loading="lazy">
+        <img src="images/SHW-1.jpg" width="600" height="400" alt="Reception area" loading="lazy">
         <div class="clinic-grid-caption">
           <p>Reception & Waiting Area</p>
           <span>Cairo Clinic</span>
@@ -7775,7 +8051,7 @@ body.intro-active .site-header .logo-inner{opacity:0}
 
       <!-- Step 1 -->
       <div class="form-step" data-step="1" style="display:block">
-        <label class="block text-nile-gold-bright text-xs uppercase tracking-widest font-semibold mb-3">1. Where are you from?</label>
+        <label for="formCountry" class="block text-nile-gold-bright text-xs uppercase tracking-widest font-semibold mb-3">1. Where are you from?</label>
         <select id="formCountry" required class="w-full px-5 py-4 text-nile-ink bg-white focus:outline-none focus:ring-2 focus:ring-nile-gold mb-3" style="border-radius:2px">
           <option value="">— Select your country —</option>
           <option value="AU">Australia</option>
@@ -7785,7 +8061,7 @@ body.intro-active .site-header .logo-inner{opacity:0}
           <option value="NZ">New Zealand</option>
           <option value="Other">Other</option>
         </select>
-        <label class="block text-nile-gold-bright text-xs uppercase tracking-widest font-semibold mb-3">2. What treatment do you need?</label>
+        <label for="formTreatment" class="block text-nile-gold-bright text-xs uppercase tracking-widest font-semibold mb-3">2. What treatment do you need?</label>
         <select id="formTreatment" required class="w-full px-5 py-4 text-nile-ink bg-white focus:outline-none focus:ring-2 focus:ring-nile-gold mb-4" style="border-radius:2px">
           <option value="">— Select treatment —</option>
           <optgroup label="Essential Tier">
@@ -7816,8 +8092,11 @@ body.intro-active .site-header .logo-inner{opacity:0}
       <!-- Step 2 -->
       <div class="form-step" data-step="2" style="display:none">
         <p class="text-nile-gold-bright text-xs uppercase tracking-widest font-semibold mb-3">3. Your contact details</p>
+        <label for="formName" class="sr-only">Full name</label>
         <input type="text" id="formName" placeholder="Full name" required class="w-full px-5 py-4 text-nile-ink bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-nile-gold mb-3" style="border-radius:2px">
+        <label for="formEmail" class="sr-only">Email address</label>
         <input type="email" id="formEmail" placeholder="Email address" required class="w-full px-5 py-4 text-nile-ink bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-nile-gold mb-3" style="border-radius:2px">
+        <label for="formPhone" class="sr-only">Phone number with country code</label>
         <input type="tel" id="formPhone" placeholder="Phone (with country code)" required class="w-full px-5 py-4 text-nile-ink bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-nile-gold mb-4" style="border-radius:2px">
         <div style="display:flex;gap:.5rem">
           <button type="button" class="form-prev btn btn-outline-dark" style="flex:1">← Back</button>
@@ -7828,11 +8107,11 @@ body.intro-active .site-header .logo-inner{opacity:0}
       <!-- Step 3 -->
       <div class="form-step" data-step="3" style="display:none">
         <p class="text-nile-gold-bright text-xs uppercase tracking-widest font-semibold mb-3">4. Upload your X-ray / CBCT (optional)</p>
-        <label for="formXray" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;border:2px dashed rgba(174,145,100,.4);border-radius:4px;cursor:pointer;background:rgba(255,255,255,.04);transition:all .3s" id="dropZone">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#AE9164" stroke-width="1.5" style="margin-bottom:.75rem"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          <span style="color:#E8C88A;font-size:.85rem;font-weight:600" id="dropZoneText">Click to upload — or drag & drop</span>
-          <span style="color:#8FA1B2;font-size:.75rem;margin-top:.35rem">JPG, PNG, PDF — max 10 MB</span>
-        </label>
+        <div style="padding:1.5rem;border:2px dashed rgba(174,145,100,.4);border-radius:4px;background:rgba(255,255,255,.04);text-align:center">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#AE9164" stroke-width="1.5" style="margin:0 auto .75rem"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <p style="color:#E8C88A;font-size:.9rem;font-weight:600;margin-bottom:.5rem">Send your X-ray on WhatsApp</p>
+          <p style="color:#8FA1B2;font-size:.8rem;line-height:1.6">After submitting the form, we'll open WhatsApp where you can attach your X-ray, CBCT scan, or any photos directly.</p>
+        </div>
         <input type="file" id="formXray" accept="image/*,.pdf" style="display:none">
         <div style="display:flex;gap:.5rem;margin-top:1rem">
           <button type="button" class="form-prev btn btn-outline-dark" style="flex:1">← Back</button>
@@ -7890,32 +8169,9 @@ body.intro-active .site-header .logo-inner{opacity:0}
     });
   });
 
-  // File upload
-  var fileInput = document.getElementById('formXray');
-  var dropZone = document.getElementById('dropZone');
-  var dropZoneText = document.getElementById('dropZoneText');
-  if(fileInput && dropZone){
-    fileInput.addEventListener('change', function(){
-      if(this.files && this.files[0]){
-        uploadedFile = this.files[0];
-        dropZoneText.textContent = '✓ ' + uploadedFile.name + ' (' + (uploadedFile.size/1024/1024).toFixed(1) + ' MB)';
-        dropZone.style.borderColor = '#2F855A';
-        dropZone.style.background = 'rgba(47,133,90,.06)';
-      }
-    });
-    ['dragover','dragenter'].forEach(function(ev){
-      dropZone.addEventListener(ev, function(e){ e.preventDefault(); dropZone.classList.add('dragover'); });
-    });
-    ['dragleave','drop'].forEach(function(ev){
-      dropZone.addEventListener(ev, function(e){ e.preventDefault(); dropZone.classList.remove('dragover'); });
-    });
-    dropZone.addEventListener('drop', function(e){
-      if(e.dataTransfer.files && e.dataTransfer.files[0]){
-        fileInput.files = e.dataTransfer.files;
-        fileInput.dispatchEvent(new Event('change'));
-      }
-    });
-  }
+  // File upload — REMOVED (fake upload was misleading; patient sends via WhatsApp)
+  // To re-enable real upload: connect to Formspree/Basin/Cloudflare Worker endpoint
+  var uploadedFile = null;
 
   // Submit
   form.addEventListener('submit', function(e){
@@ -7941,6 +8197,9 @@ body.intro-active .site-header .logo-inner{opacity:0}
 
     try {
       var leads = JSON.parse(localStorage.getItem('nile_leads') || '[]');
+      // إزالة كل lead أقدم من 30 يوم (GDPR retention)
+      var THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
+      leads = leads.filter(function(l){ return Date.now() - l.timestamp < THIRTY_DAYS; });
       leads.push({ name:name, email:email, phone:phone, country:country, treatment:treatment, hasXray: !!uploadedFile, timestamp: Date.now(), source:'consult_form_v2' });
       localStorage.setItem('nile_leads', JSON.stringify(leads));
     } catch(err) {}
@@ -8464,6 +8723,14 @@ body.intro-active .site-header .logo-inner{opacity:0}
       document.body.classList.remove('intro-active');
       return;
     }
+    // ✨ يعرض مرة واحدة بس في الجلسة
+    try {
+      if (sessionStorage.getItem('logoIntroSeen') === 'true') {
+        logoIntro.remove();
+        document.body.classList.remove('intro-active');
+        return;
+      }
+    } catch(e) {}
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       logoIntro.remove();
       document.body.classList.remove('intro-active');
@@ -8499,7 +8766,8 @@ body.intro-active .site-header .logo-inner{opacity:0}
       introInner.style.transform = 'translate(' + tx + 'px, ' + ty + 'px) scale(' + scale + ')';
       logoIntro.classList.add('flipping');
 
-      setTimeout(finishIntro, 1200);
+      // ⚡ 0.75s — متناسق مع CSS transition
+      setTimeout(finishIntro, 750);
     }
 
     function finishIntro() {
@@ -8514,10 +8782,11 @@ body.intro-active .site-header .logo-inner{opacity:0}
       }, 400);
     }
 
-    const flipTimer = setTimeout(flipToHeader, 2500);
+    // ⚡ 1.3s — المدة المثالية (بدل 2.5s القديمة)
+    const flipTimer = setTimeout(flipToHeader, 1300);
     setTimeout(function(){
       if (!finished) { clearTimeout(flipTimer); finishIntro(); }
-    }, 6000);
+    }, 4000);
 
     let skipped = false;
     function skip() {
@@ -8914,29 +9183,9 @@ document.querySelectorAll('a[href^="#"]').forEach(link=>{
       }, 180);
     });
   });
-    /* ═════════ 15. QUICK BAR — ACTIVE SECTION TRACKING ═════════ */
-  const quickChips = document.querySelectorAll('.quick-chip[data-section]');
-  const chipSections = Array.from(quickChips)
-    .map(chip => document.getElementById(chip.dataset.section))
-    .filter(Boolean);
-
-  let chipTick = false;
-  function updateActiveChip(){
-    if(!quickChips.length || chipTick) return;
-    chipTick = true;
-    requestAnimationFrame(() => {
-      const probe = window.scrollY + window.innerHeight * 0.35;
-      let current = null;
-      chipSections.forEach(sec => {
-        if(sec.offsetTop <= probe) current = sec.id;
-      });
-      quickChips.forEach(chip => {
-        chip.classList.toggle('active', chip.dataset.section === current);
-      });
-      chipTick = false;
-    });
-  }
-  updateActiveChip();
+    /* ═════════ 15. QUICK BAR — DISABLED (no .quick-chip elements exist) ═════════ */
+  // Quick bar HTML was removed. To re-enable, add .quick-chip elements
+  // with data-section attributes inside a .quick-bar container.
 
   /* ═════════ 17. ANIMATED COUNTERS — MOVED TO CSS ═════════
      Counters now use @property + animation-timeline: view() (pure CSS).
@@ -8971,16 +9220,16 @@ document.querySelectorAll('a[href^="#"]').forEach(link=>{
 </script>
 
 <!-- ═══════════════════ STICKY TOC ═══════════════════ -->
-<div class="sticky-toc" id="stickyToc">
-  <a href="#founder" class="toc-dot" data-label="Founder"></a>
-  <a href="#science" class="toc-dot" data-label="Science"></a>
-  <a href="#why-prices" class="toc-dot" data-label="Why Our Prices"></a>
-  <a href="#packages" class="toc-dot" data-label="Packages"></a>
-  <a href="#guarantees" class="toc-dot" data-label="Warranty"></a>
-  <a href="#legal" class="toc-dot" data-label="Legal"></a>
-  <a href="#reviews" class="toc-dot" data-label="Founding Patients"></a>
-  <a href="#faq" class="toc-dot" data-label="FAQ"></a>
-  <a href="#consult" class="toc-dot" data-label="Free Review"></a>
+<div class="sticky-toc" id="stickyToc" aria-label="Section navigation">
+  <a href="#founder" class="toc-dot" data-label="Founder" aria-label="Go to Founder section"></a>
+  <a href="#science" class="toc-dot" data-label="Science" aria-label="Go to Clinical Science section"></a>
+  <a href="#why-prices" class="toc-dot" data-label="Why Our Prices" aria-label="Go to Why Our Prices section"></a>
+  <a href="#packages" class="toc-dot" data-label="Packages" aria-label="Go to Treatment Packages"></a>
+  <a href="#guarantees" class="toc-dot" data-label="Warranty" aria-label="Go to Guarantees and Warranty"></a>
+  <a href="#legal" class="toc-dot" data-label="Legal" aria-label="Go to Legal Framework"></a>
+  <a href="#reviews" class="toc-dot" data-label="Founding Patients" aria-label="Go to Founding Patients Program"></a>
+  <a href="#faq" class="toc-dot" data-label="FAQ" aria-label="Go to FAQ"></a>
+  <a href="#consult" class="toc-dot" data-label="Free Review" aria-label="Go to Free Clinical Review"></a>
 </div>
 <script>
 /* ═══════════ DISCOVER EGYPT — Dynamic Gallery ═══════════ */
@@ -10462,12 +10711,8 @@ document.querySelectorAll('a[href^="#"]').forEach(link=>{
     'who-for', 'faq', 'legal', 'consult'
   ];
 
-  /* ───── H2 → H3 downgrade (لتقليل H2 من 35 لـ ~15) ───── */
-  var DOWNGRADE_H2 = [
-    'bone-graft', 'crown-materials', 'orthodontics',
-    'timeline', 'recovery', 'travel',
-    'curated-tours', 'why-egypt', 'academic', 'peace-of-mind'
-  ];
+  /* ───── H2 → H3 downgrade — DISABLED (breaks SEO hierarchy) ───── */
+  var DOWNGRADE_H2 = []; // disabled — all sections keep real H2
 
   function apply(){
     var main = document.getElementById('main');
@@ -10576,32 +10821,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link=>{
   }
 </style>
 
-<!-- ═══ Content Visibility: توفير ~40% من initial rendering ═══ -->
-<style id="contentVisibility">
-  /* طبّق على الأقسام الثابتة اللي مش محتاجة reveal animations */
-  #location,
-  #faq,
-  #legal,
-  #discover-egypt,
-  #curated-tours,
-  #crown-materials,
-  #bone-graft,
-  #orthodontics,
-  #implant-systems,
-  #brutal-truth,
-  #surface-material,
-  #technology-stack,
-  #clinical-protocol,
-  #cost-of-cheap,
-  #warranty-truth,
-  #implant-passport,
-  #verify-us,
-  #doctor-credentials,
-  #destination-deep-dive {
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 800px;
-  }
-</style>
+<!-- content-visibility removed — conflicts with .reveal IntersectionObserver (hidden sections never revealed) -->
 <!-- ═══════════════════ SEARCH MODAL ═══════════════════ -->
 <div id="searchModal" class="search-modal" role="dialog" aria-modal="true" aria-labelledby="searchTitle" aria-hidden="true">
   <div class="search-modal-overlay" data-search-close></div>
@@ -10614,6 +10834,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link=>{
       </svg>
       <input type="text" id="searchModalInput" class="search-modal-input" 
              placeholder="Search packages, results, founder, guarantees..." 
+             aria-label="Search the site"
              autocomplete="off" spellcheck="false">
       <button type="button" class="search-modal-close" data-search-close aria-label="Close search">
         <kbd>ESC</kbd>
