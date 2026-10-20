@@ -73,7 +73,7 @@
 <link rel="preload" href="styles.css" as="style">
 
 <!-- Fonts: minimal weights -->
-<link href="https://fonts.googleapis.com/css2?family=Italianno&text=NileSml&family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Italianno&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
 <!-- Hero image preload — First Contentful Paint faster -->
 <link rel="preload" as="image" href="images/spencer-davis-ONVA6s03hg8-unsplash.jpg" fetchpriority="high">
@@ -3406,6 +3406,7 @@ body.intro-active .site-header .logo-inner{opacity:0}
   max-width:960px;
   margin:0 auto 3rem;
   padding:1.5rem;
+  direction:ltr;
   background:linear-gradient(135deg,#FBFAF7 0%,#F6F3EE 60%,#EDE6DA 100%);
   border:1px solid rgba(174,145,100,.25);
   border-radius:10px;
@@ -3588,7 +3589,7 @@ body.intro-active .site-header .logo-inner{opacity:0}
 
 
 
-  <svg class="world-map-svg" viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map showing Nile Smile Concierge serving patients globally">
+  <svg class="world-map-svg" viewBox="50 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map showing Nile Smile Concierge serving patients globally">
     <defs>
       <pattern id="mapGrid" width="50" height="50" patternUnits="userSpaceOnUse">
         <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#AE9164" stroke-width="0.3" opacity="0.08"/>
@@ -3599,7 +3600,7 @@ body.intro-active .site-header .logo-inner{opacity:0}
       </pattern>
 
       <mask id="landMask">
-        <rect width="1000" height="520" fill="black"/>
+        <rect width="1100" height="520" fill="black"/>
         <g fill="white">
           <path d="M165,118 C175,92 200,78 232,75 L278,75 C300,78 315,92 320,115 C325,140 318,165 305,185 L292,205 C280,220 265,228 248,228 L232,220 L218,205 L205,188 C192,168 178,145 170,128 Z"/>
           <path d="M260,240 C280,235 300,242 312,262 C322,282 320,308 312,335 C302,362 288,388 275,410 L265,422 C254,415 250,398 250,378 C250,352 255,325 258,300 C261,278 260,258 260,240 Z"/>
@@ -3637,8 +3638,8 @@ body.intro-active .site-header .logo-inner{opacity:0}
       <clipPath id="flagEG"><circle cx="550" cy="230" r="18"/></clipPath>
     </defs>
 
-    <rect width="1000" height="520" fill="url(#mapGrid)"/>
-    <rect width="1000" height="520" fill="url(#dotPattern)" mask="url(#landMask)"/>
+    <rect width="1100" height="520" fill="url(#mapGrid)"/>
+    <rect width="1100" height="520" fill="url(#dotPattern)" mask="url(#landMask)"/>
 
     <g class="map-routes" fill="none" stroke="url(#routeGrad)" stroke-width="1.2" stroke-dasharray="5 5">
       <path d="M550,230 Q400,140 200,130"/>
@@ -11390,5 +11391,34 @@ summary:focus-visible {
     margin-bottom: 0.5rem !important;
   }
 </style>
+<!-- ═══════════════════ MAP CENTERING — Mobile Fix ═══════════════════ -->
+<script>
+(function(){
+  'use strict';
+  function centerMapOnMobile(){
+    if (window.innerWidth > 767) return;
+    var wrap = document.querySelector('.world-map-wrap');
+    if (!wrap) return;
+    // Center on Egypt (hub at 55% of SVG)
+    var maxScroll = wrap.scrollWidth - wrap.clientWidth;
+    if (maxScroll <= 0) return;
+    // Egypt is at ~50% of SVG width after viewBox change
+    var targetScroll = maxScroll * 0.5;
+    wrap.scrollLeft = targetScroll;
+  }
+  // Center on load (after layout settles)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(centerMapOnMobile, 100); });
+  } else {
+    setTimeout(centerMapOnMobile, 100);
+  }
+  // Re-center on resize (debounced)
+  var resizeTimer;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(centerMapOnMobile, 200);
+  }, { passive: true });
+})();
+</script>
 </body>
 </html>
