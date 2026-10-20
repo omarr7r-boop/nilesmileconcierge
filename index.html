@@ -2934,7 +2934,13 @@ body.intro-active .site-header .logo-inner{opacity:0}
     </button>
 
     <!-- Desktop CTA -->
-    <a href="#consult" class="hidden lg:inline-flex btn btn-gold shine-auto breathe whitespace-nowrap">Free Review</a>
+    <a href="#consult" class="hidden lg:inline-flex btn btn-gold shine-auto breathe whitespace-nowrap" style="margin-left: auto; margin-right: 1rem;">Free Review</a>
+    
+    <style>
+      @media(max-width: 1023px) {
+        header .btn-gold { display: none !important; }
+      }
+    </style>
 
     <!-- Mobile menu button -->
     <button class="hamburger lg:hidden" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobileMenu">
@@ -2987,7 +2993,7 @@ body.intro-active .site-header .logo-inner{opacity:0}
      alt="Giza Pyramids at golden hour" id="heroImg">    <div class="hero-overlay"></div>
   </div>
 
-  <div class="hero-content">
+  <div class="hero-content" style="background: rgba(10, 13, 16, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); padding: 2rem 1.5rem; border-radius: 12px; border: 1px solid rgba(232, 200, 138, 0.3); box-shadow: 0 30px 60px rgba(0,0,0,0.6); width: 100%; max-width: 100%;">
     <p class="eyebrow eyebrow-light mb-5">Clinician-Reviewed • Cairo, Egypt</p>
     <p class="text-white mb-3" style="font-size:clamp(.9rem,1.8vw,1.05rem);opacity:.95;font-weight:300">
       <strong style="font-weight:600;color:#E8C88A">Dr. Omar Fathi, BDS</strong>
@@ -4613,10 +4619,13 @@ body.intro-active .site-header .logo-inner{opacity:0}
   </div>
 </section>
 
+<!-- ═══════════════════ PREMIUM VALUE ═══════════════════ -->
+<section id="why-prices" class="section bg-white reveal">
+  <div class="container">
+    <div class="text-center max-w-3xl mx-auto mb-14">
       <p class="eyebrow mb-4">Premium Value</p>
       <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">What Makes Our Service Different?</h2>
       <p class="text-nile-muted max-w-2xl mx-auto">We don't cut corners. Here is exactly what your all-inclusive investment covers — and why it guarantees a safer, higher-quality experience from start to finish.</p>
-      <p class="text-nile-muted max-w-2xl mx-auto">We believe in complete transparency. Here is exactly what your investment covers — and why it costs more than a direct walk-in clinic.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
@@ -10956,5 +10965,22 @@ summary:focus-visible {
   });
 })();
 </script>
+<style>
+  /* إصلاح تداخل النصوص والأزرار في الـ Hero */
+  .hero-content > * {
+    animation: none !important; /* إيقاف الأنيميشن اللي بيلخبط الأزرار */
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hero-content .flex-col {
+    flex-direction: column !important;
+    gap: 1rem !important;
+    width: 100% !important;
+  }
+  .hero-content .btn {
+    width: 100% !important;
+    margin-bottom: 0.5rem !important;
+  }
+</style>
 </body>
 </html>
