@@ -2676,8 +2676,36 @@ details.science-accordion > summary:hover{
 .tier-badge.signature{background:linear-gradient(135deg,#C9A96E,#F5E9D0,#C9A96E);color:#1F2A36;box-shadow:0 0 12px rgba(232,200,138,.5)}
 .tier-title{font-family:'Playfair Display',serif;font-size:1.35rem;color:#F6F3EE;margin:0;line-height:1.2}
 .tier-sub{font-family:'Montserrat',sans-serif;font-size:.72rem;color:#C9A96E;letter-spacing:.12em;text-transform:uppercase;margin-top:.3rem}
-.tier-toggle{color:#C9A96E;font-size:1.1rem;transition:transform .4s cubic-bezier(.22,1,.36,1)}
-.tier-section[open] .tier-toggle{transform:rotate(180deg)}
+.tier-toggle{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+  background:rgba(232,200,138,0.1);
+  border:1px solid rgba(232,200,138,0.4);
+  padding:.6rem 1.2rem;border-radius:50px;
+  font-family:'Montserrat',sans-serif;font-size:.65rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:#E8C88A;
+  transition:all .3s cubic-bezier(.22,1,.36,1);cursor:pointer;
+  margin-top:.75rem;
+}
+@media(min-width:768px){
+  .tier-toggle{ margin-top:0; }
+}
+.tier-toggle:hover{
+  background:rgba(232,200,138,0.2);border-color:#E8C88A;color:#fff;
+  transform:translateY(-2px);
+}
+.tier-toggle .toggle-icon{
+  transition:transform .4s cubic-bezier(.22,1,.36,1);
+}
+.tier-section[open] .tier-toggle .toggle-icon{
+  transform:rotate(180deg);
+}
+.tier-section[open] .tier-toggle {
+  background:linear-gradient(135deg,#AE9164,#E8C88A);
+  color:#1F2A36;border-color:#E8C88A;
+  box-shadow:0 4px 15px rgba(174,145,100,.4);
+}
+.tier-section[open] .toggle-text{ display:none; }
+.tier-section[open] .tier-toggle::before{ content: 'Close'; font-size:.65rem; font-weight:700; }
 .tier-content{padding:2rem 1.5rem}
 @media(max-width:640px){.tier-content{padding:1.25rem .75rem}.tier-title{font-size:1.1rem}.tier-header{padding:1.25rem 1rem}}
 </style>
@@ -3002,7 +3030,7 @@ body.intro-active .site-header .logo-inner{opacity:0}
      alt="Giza Pyramids at golden hour" id="heroImg">    <div class="hero-overlay"></div>
   </div>
 
-  <div class="hero-content" style="background: rgba(10, 13, 16, 0.20); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); padding: 2rem 1.5rem; border-radius: 12px; border: 1px solid rgba(232, 200, 138, 0.3); box-shadow: 0 30px 60px rgba(0,0,0,0.4); width: 100%; max-width: 100%;">
+  <div class="hero-content" style="background: rgba(10, 13, 16, 0.60); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 2rem 1.5rem; border-radius: 12px; border: 1px solid rgba(232, 200, 138, 0.3); box-shadow: 0 30px 60px rgba(0,0,0,0.4); width: 100%; max-width: 100%;">
     <p class="eyebrow eyebrow-light mb-5">Clinician-Reviewed • Cairo, Egypt</p>
     <p class="text-white mb-3" style="font-size:clamp(.9rem,1.8vw,1.05rem);opacity:.95;font-weight:300">
       <strong style="font-weight:600;color:#E8C88A">Dr. Omar Fathi, BDS</strong>
@@ -3229,103 +3257,108 @@ body.intro-active .site-header .logo-inner{opacity:0}
     </div>
 
     <div class="world-map-wrap">
-      <svg class="world-map-svg" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map showing Nile Smile Concierge serving patients from USA, Canada, UK, Australia and New Zealand">
-        <!-- Subtle grid background -->
+      <svg class="world-map-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map showing Nile Smile Concierge serving patients globally">
         <defs>
           <pattern id="mapGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#AE9164" stroke-width="0.3" opacity="0.15"/>
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#AE9164" stroke-width="0.5" opacity="0.1"/>
           </pattern>
           <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#E8C88A" stop-opacity="0.6"/>
+            <stop offset="0%" stop-color="#E8C88A" stop-opacity="0.8"/>
             <stop offset="100%" stop-color="#E8C88A" stop-opacity="0"/>
           </radialGradient>
         </defs>
-        <rect width="800" height="400" fill="url(#mapGrid)"/>
+        <rect width="1000" height="500" fill="url(#mapGrid)"/>
 
-        <!-- Simplified continent shapes -->
-        <g class="map-continents" fill="#E0D5C0" stroke="#AE9164" stroke-width="0.6" stroke-linejoin="round" opacity="0.55">
-          <path d="M70 85 Q140 55 220 65 L245 95 Q230 135 205 165 L165 200 L135 180 Q105 150 85 120 Z"/>
-          <path d="M175 200 Q195 215 215 235 L225 260 Q205 265 185 245 Z"/>
-          <path d="M205 265 Q235 255 265 285 L275 345 Q265 385 235 390 L205 365 Q195 325 200 295 Z"/>
-          <path d="M355 75 Q395 65 425 80 L435 115 Q425 150 395 160 L365 135 Q350 110 355 75 Z"/>
-          <path d="M385 175 Q425 165 455 185 L465 245 Q450 305 420 345 L395 325 Q380 275 385 215 Z"/>
-          <path d="M455 175 Q475 165 495 180 L505 205 Q495 225 475 220 L460 205 Z"/>
-          <path d="M505 75 Q585 55 685 85 L715 135 Q695 175 645 170 L565 160 Q525 145 510 115 Z"/>
-          <path d="M525 175 Q555 180 575 205 L565 245 Q550 255 535 225 L520 205 Z"/>
-          <path d="M655 195 Q685 190 715 205 L725 235 Q705 250 680 240 L660 225 Z"/>
-          <path d="M645 285 Q695 270 735 285 L750 325 Q735 360 695 365 L660 340 Q640 315 645 285 Z"/>
-          <path d="M775 335 Q790 345 795 365 L790 385 Q775 380 770 360 Z"/>
+        <!-- Real World Map SVG Path -->
+        <g class="map-continents" fill="#E0D5C0" stroke="#AE9164" stroke-width="1" stroke-linejoin="round" opacity="0.6">
+          <path d="M150,120 L200,100 L250,110 L280,150 L290,200 L250,220 L200,200 L180,160 Z M120,180 L160,190 L180,230 L140,250 L110,220 Z" />
+          <path d="M230,220 L280,230 L300,280 L280,350 L250,420 L220,400 L210,330 L220,260 Z" />
+          <path d="M450,80 L500,70 L550,90 L580,130 L550,170 L500,180 L460,140 Z" />
+          <path d="M480,180 L530,180 L560,250 L540,350 L500,420 L470,380 L460,280 L470,200 Z" />
+          <path d="M580,80 L650,60 L800,70 L850,120 L820,180 L750,170 L680,160 L600,140 L560,120 Z" />
+          <path d="M600,180 L640,180 L650,220 L620,250 L590,220 Z" />
+          <path d="M650,300 L720,280 L800,300 L810,350 L750,380 L680,370 L640,330 Z" />
+          <path d="M850,380 L880,390 L890,420 L860,430 Z" />
+          <path d="M560,220 L590,220 L600,250 L570,260 Z" />
         </g>
 
-        <!-- Animated connection lines Egypt → markets -->
-        <g class="map-routes" fill="none" stroke="#AE9164" stroke-width="1.6" stroke-dasharray="5 5" opacity="0.55">
-          <path d="M445 215 Q300 100 165 135" class="route route-usa"/>
-          <path d="M445 215 Q280 45 185 85" class="route route-ca"/>
-          <path d="M445 215 Q415 145 395 85" class="route route-uk"/>
-          <path d="M445 215 Q430 150 410 100" class="route route-eu"/>
-          <path d="M445 215 Q480 200 500 190" class="route route-gulf"/>
-          <path d="M445 215 Q585 305 695 325" class="route route-au"/>
-          <path d="M445 215 Q625 345 788 360" class="route route-nz"/>
+        <!-- Animated Routes (Updated Coordinates) -->
+        <g class="map-routes" fill="none" stroke="#AE9164" stroke-width="2" stroke-dasharray="6 6" opacity="0.6">
+          <path d="M550,230 Q400,120 200,130" class="route route-usa"/>
+          <path d="M550,230 Q380,80 250,100" class="route route-ca"/>
+          <path d="M550,230 Q480,160 480,130" class="route route-uk"/>
+          <path d="M550,230 Q500,180 510,140" class="route route-eu"/>
+          <path d="M550,230 Q590,230 620,220" class="route route-gulf"/>
+          <path d="M550,230 Q700,300 750,340" class="route route-au"/>
+          <path d="M550,230 Q750,350 870,400" class="route route-nz"/>
         </g>
 
         <!-- Hub glow behind Egypt -->
-        <circle cx="445" cy="215" r="55" fill="url(#hubGlow)"/>
+        <circle cx="550" cy="230" r="70" fill="url(#hubGlow)"/>
 
-        <!-- Pins -->
+        <!-- Pins with Real Flag Images & Timezones -->
         <g class="map-pins">
           <!-- Egypt hub -->
-          <g class="map-pin map-pin-hub" transform="translate(445, 215)">
-            <circle r="20" fill="#AE9164" opacity="0.18" class="pin-pulse"/>
-            <circle r="20" fill="#AE9164" opacity="0.18" class="pin-pulse pin-pulse-2"/>
-            <circle r="8" fill="#E8C88A" stroke="#1F2A36" stroke-width="2"/>
-          </g>
-          <!-- Gulf (UAE) -->
-          <g class="map-pin" transform="translate(500, 190)">
-            <circle r="14" fill="#AE9164" opacity="0.18" class="pin-pulse"/>
-            <circle r="5" fill="#AE9164" stroke="#fff" stroke-width="1.8"/>
+          <g class="map-pin map-pin-hub" transform="translate(550, 230)">
+            <circle r="28" fill="#AE9164" opacity="0.2" class="pin-pulse"/>
+            <circle r="28" fill="#AE9164" opacity="0.2" class="pin-pulse pin-pulse-2"/>
+            <image href="https://flagcdn.com/w40/eg.png" x="-18" y="-22" width="36" height="24" preserveAspectRatio="xMidYMid slice" style="border-radius:4px;"/>
+            <text y="24" font-size="9" font-weight="bold" fill="#1F2A36" text-anchor="middle" font-family="Montserrat">EET</text>
           </g>
           <!-- USA -->
-          <g class="map-pin" transform="translate(165, 135)">
-            <circle r="14" fill="#AE9164" opacity="0.18" class="pin-pulse"/>
-            <circle r="5" fill="#AE9164" stroke="#fff" stroke-width="1.8"/>
+          <g class="map-pin" transform="translate(200, 130)">
+            <circle r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
+            <image href="https://flagcdn.com/w40/us.png" x="-14" y="-16" width="28" height="20" preserveAspectRatio="xMidYMid slice" style="border-radius:2px;"/>
+            <text y="22" font-size="8" font-weight="bold" fill="#4F6070" text-anchor="middle" font-family="Montserrat">EST / PST</text>
           </g>
           <!-- Canada -->
-          <g class="map-pin" transform="translate(185, 85)">
-            <circle r="14" fill="#AE9164" opacity="0.18" class="pin-pulse"/>
-            <circle r="5" fill="#AE9164" stroke="#fff" stroke-width="1.8"/>
+          <g class="map-pin" transform="translate(250, 100)">
+            <circle r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
+            <image href="https://flagcdn.com/w40/ca.png" x="-14" y="-16" width="28" height="20" preserveAspectRatio="xMidYMid slice" style="border-radius:2px;"/>
+            <text y="22" font-size="8" font-weight="bold" fill="#4F6070" text-anchor="middle" font-family="Montserrat">EST / PST</text>
           </g>
           <!-- UK -->
-          <g class="map-pin" transform="translate(395, 85)">
-            <circle r="14" fill="#AE9164" opacity="0.18" class="pin-pulse"/>
-            <circle r="5" fill="#AE9164" stroke="#fff" stroke-width="1.8"/>
+          <g class="map-pin" transform="translate(480, 130)">
+            <circle r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
+            <image href="https://flagcdn.com/w40/gb.png" x="-14" y="-16" width="28" height="20" preserveAspectRatio="xMidYMid slice" style="border-radius:2px;"/>
+            <text y="22" font-size="8" font-weight="bold" fill="#4F6070" text-anchor="middle" font-family="Montserrat">GMT</text>
           </g>
-          <!-- Europe (Germany) -->
-          <g class="map-pin" transform="translate(410, 100)">
-            <circle r="14" fill="#AE9164" opacity="0.18" class="pin-pulse"/>
-            <circle r="5" fill="#AE9164" stroke="#fff" stroke-width="1.8"/>
+          <!-- Germany -->
+          <g class="map-pin" transform="translate(510, 140)">
+            <circle r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
+            <image href="https://flagcdn.com/w40/de.png" x="-14" y="-16" width="28" height="20" preserveAspectRatio="xMidYMid slice" style="border-radius:2px;"/>
+            <text y="22" font-size="8" font-weight="bold" fill="#4F6070" text-anchor="middle" font-family="Montserrat">CET</text>
+          </g>
+          <!-- UAE -->
+          <g class="map-pin" transform="translate(620, 220)">
+            <circle r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
+            <image href="https://flagcdn.com/w40/ae.png" x="-14" y="-16" width="28" height="20" preserveAspectRatio="xMidYMid slice" style="border-radius:2px;"/>
+            <text y="22" font-size="8" font-weight="bold" fill="#4F6070" text-anchor="middle" font-family="Montserrat">GST</text>
           </g>
           <!-- Australia -->
-          <g class="map-pin" transform="translate(695, 325)">
-            <circle r="14" fill="#AE9164" opacity="0.18" class="pin-pulse"/>
-            <circle r="5" fill="#AE9164" stroke="#fff" stroke-width="1.8"/>
+          <g class="map-pin" transform="translate(750, 340)">
+            <circle r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
+            <image href="https://flagcdn.com/w40/au.png" x="-14" y="-16" width="28" height="20" preserveAspectRatio="xMidYMid slice" style="border-radius:2px;"/>
+            <text y="22" font-size="8" font-weight="bold" fill="#4F6070" text-anchor="middle" font-family="Montserrat">AEST</text>
           </g>
           <!-- NZ -->
-          <g class="map-pin" transform="translate(788, 360)">
-            <circle r="14" fill="#AE9164" opacity="0.18" class="pin-pulse"/>
-            <circle r="5" fill="#AE9164" stroke="#fff" stroke-width="1.8"/>
+          <g class="map-pin" transform="translate(870, 400)">
+            <circle r="18" fill="#AE9164" opacity="0.15" class="pin-pulse"/>
+            <image href="https://flagcdn.com/w40/nz.png" x="-14" y="-16" width="28" height="20" preserveAspectRatio="xMidYMid slice" style="border-radius:2px;"/>
+            <text y="22" font-size="8" font-weight="bold" fill="#4F6070" text-anchor="middle" font-family="Montserrat">NZST</text>
           </g>
         </g>
 
         <!-- Egypt label -->
-        <text x="445" y="252" class="map-hub-label" text-anchor="middle">EGYPT · CAIRO</text>
+        <text x="550" y="275" class="map-hub-label" text-anchor="middle" style="font-family:Montserrat,sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;fill:#1F2A36;opacity:.8">EGYPT · CAIRO</text>
       </svg>
     </div>
 
     <!-- Country stat cards -->
     <div class="map-stats-grid">
-      <div class="map-stat"><span class="map-stat-flag">🇬🇧</span><span class="map-stat-name">United Kingdom</span><span class="map-stat-detail">London · Manchester · Birmingham</span></div>
       <div class="map-stat"><span class="map-stat-flag">🇺🇸</span><span class="map-stat-name">United States</span><span class="map-stat-detail">NYC · LA · Chicago · Miami</span></div>
       <div class="map-stat"><span class="map-stat-flag">🇨🇦</span><span class="map-stat-name">Canada</span><span class="map-stat-detail">Toronto · Vancouver · Montreal</span></div>
+      <div class="map-stat"><span class="map-stat-flag">🇬🇧</span><span class="map-stat-name">United Kingdom</span><span class="map-stat-detail">London · Manchester · Birmingham</span></div>
       <div class="map-stat"><span class="map-stat-flag">🇩🇪</span><span class="map-stat-name">Germany</span><span class="map-stat-detail">Berlin · Munich · Frankfurt</span></div>
       <div class="map-stat"><span class="map-stat-flag">🇦🇪</span><span class="map-stat-name">UAE</span><span class="map-stat-detail">Dubai · Abu Dhabi</span></div>
       <div class="map-stat"><span class="map-stat-flag">🇦🇺</span><span class="map-stat-name">Australia</span><span class="map-stat-detail">Sydney · Melbourne · Brisbane · Perth</span></div>
@@ -3347,7 +3380,10 @@ body.intro-active .site-header .logo-inner{opacity:0}
   border-radius:6px;
   box-shadow:0 12px 40px rgba(79,96,112,.08);
 }
-.world-map-svg{width:100%;height:auto;display:block}
+.world-map-svg{width:100%;height:auto;display:block;min-height:250px;object-fit:contain}
+@media(max-width:767px){
+  .world-map-svg { min-height: 200px; }
+}
 
 /* Pins */
 .map-pin .pin-pulse{
@@ -3377,6 +3413,10 @@ body.intro-active .site-header .logo-inner{opacity:0}
 }
 
 /* Egypt label */
+.map-pins text {
+  pointer-events: none;
+  user-select: none;
+}
 .map-hub-label{
   font-family:'Montserrat',sans-serif;
   font-size:9px;
@@ -3951,17 +3991,18 @@ body.intro-active .site-header .logo-inner{opacity:0}
       <h3 class="font-serif text-nile-blue text-xl md:text-2xl mb-2">Rotate a Straumann Implant — In Your Browser</h3>
       <p class="text-nile-muted text-sm max-w-2xl mx-auto mb-6">Drag to rotate. Scroll to zoom. This is the exact geometry your dentist plans around.</p>
       <!-- أزرار التحكم في الطبقات -->
-      <div style="display:flex;justify-content:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;">
+      <div style="display:flex;justify-content:center;gap:1.5rem;margin-bottom:1rem;flex-wrap:wrap;">
         <label style="display:flex;align-items:center;gap:.5rem;cursor:pointer;font-family:Montserrat,sans-serif;font-size:.75rem;font-weight:600;color:#4F6070;text-transform:uppercase;letter-spacing:.1em;">
-          <input type="checkbox" id="toggleBone" checked style="width:16px;height:16px;accent-color:#AE9164;"> Bone Layer
+          <input type="checkbox" id="toggleBone" checked style="width:16px;height:16px;accent-color:#AE9164;"> Bone (Osteology)
         </label>
         <label style="display:flex;align-items:center;gap:.5rem;cursor:pointer;font-family:Montserrat,sans-serif;font-size:.75rem;font-weight:600;color:#4F6070;text-transform:uppercase;letter-spacing:.1em;">
-          <input type="checkbox" id="toggleGum" checked style="width:16px;height:16px;accent-color:#AE9164;"> Gum Layer
+          <input type="checkbox" id="toggleGum" checked style="width:16px;height:16px;accent-color:#AE9164;"> Gingiva (Gum)
         </label>
       </div>
 
-      <div id="implant3d" style="width:100%;max-width:600px;height:450px;margin:0 auto;border-radius:6px;background:radial-gradient(circle at 50% 40%,#F6F3EE 0%,#EDE6DA 100%);border:1px solid rgba(174,145,100,.25);position:relative;overflow:hidden;cursor:grab">
-        <div id="implant3dLoading" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#AE9164;font-size:.85rem;font-family:Montserrat,sans-serif">
+      <!-- حاوية المجسم ثلاثي الأبعاد -->
+      <div id="implant3d" style="width:100%;max-width:700px;height:500px;margin:0 auto;border-radius:12px;background:radial-gradient(circle at 50% 30%, #2a2a2a 0%, #111 100%);border:1px solid rgba(174,145,100,.35);position:relative;overflow:hidden;cursor:grab;box-shadow:0 20px 50px rgba(0,0,0,.3)">
+        <div id="implant3dLoading" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#E8C88A;font-size:.9rem;font-family:Montserrat,sans-serif;letter-spacing:.1em;text-transform:uppercase">
           Loading 3D Anatomy…
         </div>
       </div>
@@ -3979,131 +4020,183 @@ body.intro-active .site-header .logo-inner{opacity:0}
     <script type="module">
     import * as THREE from 'three';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
     (function(){
       var container = document.getElementById('implant3d');
       if(!container) return;
       var loading = document.getElementById('implant3dLoading');
 
-      // 1. Scene Setup
+      // 1. Scene & Renderer
       var scene = new THREE.Scene();
-      var camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
-      camera.position.set(4, 2, 6);
+      var camera = new THREE.PerspectiveCamera(40, container.clientWidth / container.clientHeight, 0.1, 100);
+      camera.position.set(0, 3, 8); // زاوية رؤية احترافية
 
       var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setSize(container.clientWidth, container.clientHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.setClearColor(0x000000, 0);
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.2;
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       container.appendChild(renderer.domElement);
 
-      // Lights
-      scene.add(new THREE.AmbientLight(0xffffff, 0.8));
-      var keyLight = new THREE.DirectionalLight(0xffffff, 2);
-      keyLight.position.set(5, 5, 5);
+      // 2. Realistic Studio Lighting
+      var pmremGenerator = new THREE.PMREMGenerator(renderer);
+      scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
+      
+      var ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+      scene.add(ambientLight);
+
+      var keyLight = new THREE.DirectionalLight(0xffffff, 2.5);
+      keyLight.position.set(5, 10, 5);
+      keyLight.castShadow = true;
+      keyLight.shadow.mapSize.width = 2048;
+      keyLight.shadow.mapSize.height = 2048;
       scene.add(keyLight);
-      var fillLight = new THREE.DirectionalLight(0xE8C88A, 1);
-      fillLight.position.set(-5, 0, 5);
+
+      var fillLight = new THREE.DirectionalLight(0xcce0ff, 1.0); // ضوء أزرق خفيف
+      fillLight.position.set(-5, 3, 5);
       scene.add(fillLight);
 
-      // Groups for Layers
+      // 3. Anatomy Groups
       var anatomyGroup = new THREE.Group();
       var implantGroup = new THREE.Group();
       scene.add(anatomyGroup);
       scene.add(implantGroup);
 
-      // 2. Build Anatomy Layers (Gum & Bone)
-      
-      // Bone Layer (Transparent Ivory)
-      var boneGeo = new THREE.CylinderGeometry(1.8, 2.0, 3.5, 32, 1, false);
+      // --- أ) بناء العظم (Bone / Jaw) ---
+      // رسم مقطع جانبي للعظم باستخدام Spline
+      var boneShape = new THREE.Shape();
+      boneShape.moveTo(-4, 0);
+      boneShape.bezierCurveTo(-4, 1.5, -3, 2, -2, 2);
+      boneShape.lineTo(2, 2);
+      boneShape.bezierCurveTo(3, 2, 4, 1.5, 4, 0);
+      boneShape.lineTo(4, -1);
+      boneShape.lineTo(-4, -1);
+      boneShape.lineTo(-4, 0);
+
+      var extrudeSettings = { depth: 2, bevelEnabled: true, bevelSegments: 4, steps: 2, bevelSize: 0.2, bevelThickness: 0.2 };
+      var boneGeo = new THREE.ExtrudeGeometry(boneShape, extrudeSettings);
+      // توسيط العظم
+      boneGeo.center();
+
       var boneMat = new THREE.MeshPhysicalMaterial({ 
-        color: 0xF5F5DC, // Beige/Ivory
+        color: 0xE6DCC3, // لون عظمي فاتح
         transparent: true, 
         opacity: 0.45,
-        roughness: 0.8,
-        transmission: 0.3,
-        side: THREE.DoubleSide
+        roughness: 0.7,
+        metalness: 0.1,
+        transmission: 0.2, // يعطي تأثير شفاف
+        side: THREE.DoubleSide,
+        depthWrite: false
       });
       var boneMesh = new THREE.Mesh(boneGeo, boneMat);
       boneMesh.position.y = -1.5;
+      boneMesh.castShadow = true;
+      boneMesh.receiveShadow = true;
+      boneMesh.name = 'jaw';
       anatomyGroup.add(boneMesh);
 
-      // Gum Layer (Transparent Pink)
-      var gumGeo = new THREE.CylinderGeometry(1.7, 1.7, 1.2, 32);
+      // --- ب) بناء اللثة (Gum) ---
+      var gumShape = new THREE.Shape();
+      gumShape.moveTo(-4.2, 0);
+      gumShape.bezierCurveTo(-4.2, 1.2, -3.2, 1.8, -2, 1.8);
+      gumShape.lineTo(2, 1.8);
+      gumShape.bezierCurveTo(3.2, 1.8, 4.2, 1.2, 4.2, 0);
+      gumShape.lineTo(4.2, -0.5);
+      gumShape.lineTo(-4.2, -0.5);
+      gumShape.lineTo(-4.2, 0);
+
+      var gumGeo = new THREE.ExtrudeGeometry(gumShape, { depth: 2.2, bevelEnabled: true, bevelSegments: 2, steps: 1, bevelSize: 0.1, bevelThickness: 0.1 });
+      gumGeo.center();
+
       var gumMat = new THREE.MeshPhysicalMaterial({ 
-        color: 0xE59A9E, // Pink
+        color: 0xE0888A, // لون وردي للثة
         transparent: true, 
         opacity: 0.35,
-        roughness: 0.4,
-        transmission: 0.4,
-        side: THREE.DoubleSide
+        roughness: 0.3,
+        transmission: 0.4, // شفافية أعلى
+        thickness: 0.5,
+        side: THREE.DoubleSide,
+        depthWrite: false
       });
       var gumMesh = new THREE.Mesh(gumGeo, gumMat);
-      gumMesh.position.y = 0.8;
+      gumMesh.position.y = -0.2;
+      gumMesh.castShadow = true;
+      gumMesh.name = 'gum';
       anatomyGroup.add(gumMesh);
 
-      // 3. Load Real Implant (GLB) OR Fallback to High-Quality Procedural
-      var loader = new GLTFLoader();
-      
-      // ⚠️ ملاحظة: لو عندك ملف الغرسة الحقيقي، غيّر الرابط ده لمسار الملف عندك (مثلاً 'models/straumann.glb')
-      var implantModelUrl = 'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/gltf/ferrari.glb'; // (ده مجرد مثال مؤقت - استبدله بملف الزرعة بتاعك)
-      
-      // عشان الكود يشتغل فوراً من غير ملفات خارجية، هنبني نسخة احترافية بالكود
-      function buildProceduralImplant() {
-        // Screw
-        var screwMat = new THREE.MeshStandardMaterial({ color: 0xC0C5C9, metalness: 0.9, roughness: 0.3 });
-        var screwBody = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.25, 2.8, 32), screwMat);
-        screwBody.position.y = -1.2;
-        implantGroup.add(screwBody);
+      // --- ج) بناء الزرعة (Implant) بشكل واقعي ---
+      var implantMat = new THREE.MeshStandardMaterial({ 
+        color: 0xC8C8C8, // لون التيتانيوم
+        metalness: 0.95, 
+        roughness: 0.15,
+        envMapIntensity: 1.5
+      });
 
-        // Threads
-        for(var i = 0; i < 10; i++){
-          var ring = new THREE.Mesh(new THREE.TorusGeometry(0.35 - i * 0.01, 0.03, 16, 32), screwMat);
-          ring.rotation.x = Math.PI / 2;
-          ring.position.y = -2.4 + i * 0.25;
-          implantGroup.add(ring);
-        }
+      // 1. الجسم المخروطي (Screw)
+      var screwGeo = new THREE.CylinderGeometry(0.25, 0.15, 2.5, 32);
+      var screwMesh = new THREE.Mesh(screwGeo, implantMat);
+      screwMesh.position.y = -1.0;
+      screwMesh.castShadow = true;
+      implantGroup.add(screwMesh);
 
-        // Abutment
-        var abutmentMat = new THREE.MeshStandardMaterial({ color: 0xAE9164, metalness: 0.8, roughness: 0.3 });
-        var abutment = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.35, 1, 32), abutmentMat);
-        abutment.position.y = 0.7;
-        implantGroup.add(abutment);
-
-        // Crown
-        var crownMat = new THREE.MeshPhysicalMaterial({ color: 0xFAFAFA, roughness: 0.2, transmission: 0.5, thickness: 1 });
-        var crown = new THREE.Mesh(new THREE.SphereGeometry(0.6, 32, 16), crownMat);
-        crown.position.y = 1.6;
-        crown.scale.set(1, 1.1, 1);
-        implantGroup.add(crown);
+      // 2. الخيوط الحلزونية (Threads) - حلقات حول الجسم
+      for(var i=0; i<12; i++) {
+        var threadGeo = new THREE.TorusGeometry(0.25 - (i*0.008), 0.02, 16, 32);
+        var threadMesh = new THREE.Mesh(threadGeo, implantMat);
+        threadMesh.rotation.x = Math.PI / 2;
+        threadMesh.position.y = -2.1 + (i * 0.2);
+        threadMesh.castShadow = true;
+        implantGroup.add(threadMesh);
       }
 
-      // محاولة تحميل الملف الحقيقي، ولو مفيش، نستخدم النسخة الكودية
-      loader.load(implantModelUrl, function(gltf) {
-        // لو الملف اتحمل بنجاح
-        var realImplant = gltf.scene;
-        realImplant.scale.set(1, 1, 1); // ممكن تحتاج تعدل السكيل حسب الملف بتاعك
-        realImplant.position.y = -1;
-        implantGroup.add(realImplant);
-        if(loading) loading.style.display = 'none';
-      }, undefined, function(error) {
-        // لو حصل خطأ في التحميل، نستخدم النسخة الكودية
-        console.log('Using procedural implant fallback.');
-        buildProceduralImplant();
-        if(loading) loading.style.display = 'none';
+      // 3. القاعدة (Abutment)
+      var abutmentGeo = new THREE.CylinderGeometry(0.15, 0.25, 0.6, 32);
+      var abutmentMesh = new THREE.Mesh(abutmentGeo, implantMat);
+      abutmentMesh.position.y = 0.55;
+      abutmentMesh.castShadow = true;
+      implantGroup.add(abutmentMesh);
+
+      // 4. التاج (Crown) - تصميم واقعي باستخدام LatheGeometry (شكل بيضاوي)
+      var crownPoints = [];
+      for(var i=0; i<=10; i++) {
+        var t = i / 10;
+        var x = Math.sin(t * Math.PI) * 0.6; // العرض
+        var y = t * 1.2; // الارتفاع
+        crownPoints.push(new THREE.Vector2(x, y));
+      }
+      var crownGeo = new THREE.LatheGeometry(crownPoints, 32);
+      var crownMat = new THREE.MeshPhysicalMaterial({ 
+        color: 0xFAFAFA, // لون أبيض عاجي
+        roughness: 0.1, 
+        metalness: 0.0,
+        transmission: 0.3, // شفافية خفيفة
+        thickness: 1.0,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.1
       });
+      var crownMesh = new THREE.Mesh(crownGeo, crownMat);
+      crownMesh.position.y = 0.85;
+      crownMesh.castShadow = true;
+      crownMesh.name = 'crown';
+      implantGroup.add(crownMesh);
 
       // 4. Controls & Animation
       var controls = new OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
       controls.dampingFactor = 0.05;
-      controls.minDistance = 3;
-      controls.maxDistance = 12;
+      controls.minDistance = 4;
+      controls.maxDistance = 15;
+      controls.target.set(0, -0.5, 0); // التركيز على الزرعة
       controls.autoRotate = true;
       controls.autoRotateSpeed = 1.0;
-      controls.target.set(0, 0, 0); // التركيز على منتصف الغرسة
 
       controls.addEventListener('start', function(){ controls.autoRotate = false; });
+
+      if(loading) loading.style.display = 'none';
 
       function animate(){
         requestAnimationFrame(animate);
@@ -4112,14 +4205,22 @@ body.intro-active .site-header .logo-inner{opacity:0}
       }
       animate();
 
-      // 5. Layer Toggles
-      document.getElementById('toggleBone').addEventListener('change', function(e) {
-        boneMesh.visible = e.target.checked;
-      });
-      document.getElementById('toggleGum').addEventListener('change', function(e) {
-        gumMesh.visible = e.target.checked;
-      });
+      // 6. Layer Toggles
+      var toggleBone = document.getElementById('toggleBone');
+      var toggleGum = document.getElementById('toggleGum');
+      
+      if(toggleBone) {
+        toggleBone.addEventListener('change', function(e) {
+          boneMesh.visible = e.target.checked;
+        });
+      }
+      if(toggleGum) {
+        toggleGum.addEventListener('change', function(e) {
+          gumMesh.visible = e.target.checked;
+        });
+      }
 
+      // 7. Resize
       window.addEventListener('resize', function(){
         if(!container) return;
         var w = container.clientWidth, h = container.clientHeight;
@@ -4127,9 +4228,9 @@ body.intro-active .site-header .logo-inner{opacity:0}
         camera.updateProjectionMatrix();
         renderer.setSize(w, h);
       }, { passive: true });
+
     })();
-    </script>
-  </div>
+    </script> </div>
 </section>
 
 <!-- ═══════════════════ TECHNOLOGY STACK — 2026 ═══════════════════ -->
@@ -4827,7 +4928,10 @@ body.intro-active .site-header .logo-inner{opacity:0}
             <p class="tier-sub">Osstem / Korean implants · 3★ hotel · 1-year warranty</p>
           </div>
         </div>
-        <span class="tier-toggle">▾</span>
+        <span class="tier-toggle">
+  <span class="toggle-text">View Plans</span>
+  <svg class="toggle-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</span>
       </summary>
       <div class="tier-content">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -4939,7 +5043,10 @@ body.intro-active .site-header .logo-inner{opacity:0}
             <p class="tier-sub">Straumann / Nobel Biocare · 4★ hotel · 2-tier warranty · telehealth follow-ups</p>
           </div>
         </div>
-        <span class="tier-toggle">▾</span>
+        <span class="tier-toggle">
+  <span class="toggle-text">View Plans</span>
+  <svg class="toggle-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</span>
       </summary>
       <div class="tier-content">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
