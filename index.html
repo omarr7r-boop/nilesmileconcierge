@@ -963,7 +963,7 @@ img{
   }
   .hero-bg{position:absolute;inset:0;z-index:0}
   .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center;will-change:transform}
-  .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,20,.72) 0%,rgba(20,20,20,.55) 40%,rgba(20,20,20,.85) 100%)}
+  .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,20,.25) 0%,rgba(20,20,20,.05) 40%,rgba(20,20,20,.6) 100%)}
   .hero-content{
   position:relative;z-index:1;max-width:60rem;text-align:center;color:#fff;
 }
@@ -2922,6 +2922,7 @@ body.intro-active .site-header .logo-inner{opacity:0}
     <!-- Dark Mode Toggle -->
     <button type="button" id="darkModeToggle" class="search-trigger hidden lg:inline-flex" aria-label="Toggle dark mode" style="margin-right:.5rem">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <span>Dark Mode</span>
     </button>
 
     <!-- Search Trigger -->
@@ -2954,12 +2955,20 @@ body.intro-active .site-header .logo-inner{opacity:0}
 
       <!-- Search trigger for mobile -->
       <button type="button" id="mobileSearchBtn" 
-              class="w-full px-4 py-3 bg-white border border-nile-gold/25 text-nile-blue text-sm text-left flex items-center gap-3 mb-4 hover:border-nile-gold transition"
+              class="w-full px-4 py-3 bg-white border border-nile-gold/25 text-nile-blue text-sm text-left flex items-center gap-3 mb-3 hover:border-nile-gold transition"
               style="border-radius:2px">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#AE9164" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0">
           <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
         <span class="text-gray-400">Search...</span>
+      </button>
+
+      <!-- Dark Mode Toggle for Mobile -->
+      <button type="button" id="mobileDarkModeToggle" 
+              class="w-full px-4 py-3 bg-white border border-nile-gold/25 text-nile-blue text-sm text-left flex items-center gap-3 mb-4 hover:border-nile-gold transition"
+              style="border-radius:2px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#AE9164" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <span class="text-gray-400">Toggle Dark Mode</span>
       </button>
 
       <!-- Primary links -->
@@ -2993,7 +3002,7 @@ body.intro-active .site-header .logo-inner{opacity:0}
      alt="Giza Pyramids at golden hour" id="heroImg">    <div class="hero-overlay"></div>
   </div>
 
-  <div class="hero-content" style="background: rgba(10, 13, 16, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); padding: 2rem 1.5rem; border-radius: 12px; border: 1px solid rgba(232, 200, 138, 0.3); box-shadow: 0 30px 60px rgba(0,0,0,0.6); width: 100%; max-width: 100%;">
+  <div class="hero-content" style="background: rgba(10, 13, 16, 0.20); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); padding: 2rem 1.5rem; border-radius: 12px; border: 1px solid rgba(232, 200, 138, 0.3); box-shadow: 0 30px 60px rgba(0,0,0,0.4); width: 100%; max-width: 100%;">
     <p class="eyebrow eyebrow-light mb-5">Clinician-Reviewed • Cairo, Egypt</p>
     <p class="text-white mb-3" style="font-size:clamp(.9rem,1.8vw,1.05rem);opacity:.95;font-weight:300">
       <strong style="font-weight:600;color:#E8C88A">Dr. Omar Fathi, BDS</strong>
@@ -3253,6 +3262,8 @@ body.intro-active .site-header .logo-inner{opacity:0}
           <path d="M445 215 Q300 100 165 135" class="route route-usa"/>
           <path d="M445 215 Q280 45 185 85" class="route route-ca"/>
           <path d="M445 215 Q415 145 395 85" class="route route-uk"/>
+          <path d="M445 215 Q430 150 410 100" class="route route-eu"/>
+          <path d="M445 215 Q480 200 500 190" class="route route-gulf"/>
           <path d="M445 215 Q585 305 695 325" class="route route-au"/>
           <path d="M445 215 Q625 345 788 360" class="route route-nz"/>
         </g>
@@ -3268,6 +3279,11 @@ body.intro-active .site-header .logo-inner{opacity:0}
             <circle r="20" fill="#AE9164" opacity="0.18" class="pin-pulse pin-pulse-2"/>
             <circle r="8" fill="#E8C88A" stroke="#1F2A36" stroke-width="2"/>
           </g>
+          <!-- Gulf (UAE) -->
+          <g class="map-pin" transform="translate(500, 190)">
+            <circle r="14" fill="#AE9164" opacity="0.18" class="pin-pulse"/>
+            <circle r="5" fill="#AE9164" stroke="#fff" stroke-width="1.8"/>
+          </g>
           <!-- USA -->
           <g class="map-pin" transform="translate(165, 135)">
             <circle r="14" fill="#AE9164" opacity="0.18" class="pin-pulse"/>
@@ -3280,6 +3296,11 @@ body.intro-active .site-header .logo-inner{opacity:0}
           </g>
           <!-- UK -->
           <g class="map-pin" transform="translate(395, 85)">
+            <circle r="14" fill="#AE9164" opacity="0.18" class="pin-pulse"/>
+            <circle r="5" fill="#AE9164" stroke="#fff" stroke-width="1.8"/>
+          </g>
+          <!-- Europe (Germany) -->
+          <g class="map-pin" transform="translate(410, 100)">
             <circle r="14" fill="#AE9164" opacity="0.18" class="pin-pulse"/>
             <circle r="5" fill="#AE9164" stroke="#fff" stroke-width="1.8"/>
           </g>
@@ -3305,6 +3326,8 @@ body.intro-active .site-header .logo-inner{opacity:0}
       <div class="map-stat"><span class="map-stat-flag">🇬🇧</span><span class="map-stat-name">United Kingdom</span><span class="map-stat-detail">London · Manchester · Birmingham</span></div>
       <div class="map-stat"><span class="map-stat-flag">🇺🇸</span><span class="map-stat-name">United States</span><span class="map-stat-detail">NYC · LA · Chicago · Miami</span></div>
       <div class="map-stat"><span class="map-stat-flag">🇨🇦</span><span class="map-stat-name">Canada</span><span class="map-stat-detail">Toronto · Vancouver · Montreal</span></div>
+      <div class="map-stat"><span class="map-stat-flag">🇩🇪</span><span class="map-stat-name">Germany</span><span class="map-stat-detail">Berlin · Munich · Frankfurt</span></div>
+      <div class="map-stat"><span class="map-stat-flag">🇦🇪</span><span class="map-stat-name">UAE</span><span class="map-stat-detail">Dubai · Abu Dhabi</span></div>
       <div class="map-stat"><span class="map-stat-flag">🇦🇺</span><span class="map-stat-name">Australia</span><span class="map-stat-detail">Sydney · Melbourne · Brisbane · Perth</span></div>
       <div class="map-stat"><span class="map-stat-flag">🇳🇿</span><span class="map-stat-name">New Zealand</span><span class="map-stat-detail">Auckland · Wellington · Christchurch</span></div>
     </div>
@@ -3345,6 +3368,8 @@ body.intro-active .site-header .logo-inner{opacity:0}
 }
 .map-routes .route-ca{animation-delay:-2s}
 .map-routes .route-uk{animation-delay:-4s}
+.map-routes .route-eu{animation-delay:-3s}
+.map-routes .route-gulf{animation-delay:-5s}
 .map-routes .route-au{animation-delay:-6s}
 .map-routes .route-nz{animation-delay:-8s}
 @keyframes routeDash{
@@ -3925,9 +3950,19 @@ body.intro-active .site-header .logo-inner{opacity:0}
       <p class="eyebrow mb-4">Interactive 3D</p>
       <h3 class="font-serif text-nile-blue text-xl md:text-2xl mb-2">Rotate a Straumann Implant — In Your Browser</h3>
       <p class="text-nile-muted text-sm max-w-2xl mx-auto mb-6">Drag to rotate. Scroll to zoom. This is the exact geometry your dentist plans around.</p>
-      <div id="implant3d" style="width:100%;max-width:600px;height:420px;margin:0 auto;border-radius:6px;background:radial-gradient(circle at 50% 40%,#F6F3EE 0%,#EDE6DA 100%);border:1px solid rgba(174,145,100,.25);position:relative;overflow:hidden;cursor:grab">
+      <!-- أزرار التحكم في الطبقات -->
+      <div style="display:flex;justify-content:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;">
+        <label style="display:flex;align-items:center;gap:.5rem;cursor:pointer;font-family:Montserrat,sans-serif;font-size:.75rem;font-weight:600;color:#4F6070;text-transform:uppercase;letter-spacing:.1em;">
+          <input type="checkbox" id="toggleBone" checked style="width:16px;height:16px;accent-color:#AE9164;"> Bone Layer
+        </label>
+        <label style="display:flex;align-items:center;gap:.5rem;cursor:pointer;font-family:Montserrat,sans-serif;font-size:.75rem;font-weight:600;color:#4F6070;text-transform:uppercase;letter-spacing:.1em;">
+          <input type="checkbox" id="toggleGum" checked style="width:16px;height:16px;accent-color:#AE9164;"> Gum Layer
+        </label>
+      </div>
+
+      <div id="implant3d" style="width:100%;max-width:600px;height:450px;margin:0 auto;border-radius:6px;background:radial-gradient(circle at 50% 40%,#F6F3EE 0%,#EDE6DA 100%);border:1px solid rgba(174,145,100,.25);position:relative;overflow:hidden;cursor:grab">
         <div id="implant3dLoading" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#AE9164;font-size:.85rem;font-family:Montserrat,sans-serif">
-          Loading 3D model…
+          Loading 3D Anatomy…
         </div>
       </div>
       <p class="text-xs text-nile-muted italic mt-3">Illustrative model — not a clinical simulation. Your actual treatment plan uses CBCT data.</p>
@@ -3944,15 +3979,17 @@ body.intro-active .site-header .logo-inner{opacity:0}
     <script type="module">
     import * as THREE from 'three';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
     (function(){
       var container = document.getElementById('implant3d');
       if(!container) return;
       var loading = document.getElementById('implant3dLoading');
 
+      // 1. Scene Setup
       var scene = new THREE.Scene();
       var camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
-      camera.position.set(3, 1.5, 4);
+      camera.position.set(4, 2, 6);
 
       var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setSize(container.clientWidth, container.clientHeight);
@@ -3961,79 +3998,112 @@ body.intro-active .site-header .logo-inner{opacity:0}
       container.appendChild(renderer.domElement);
 
       // Lights
-      var key = new THREE.DirectionalLight(0xffffff, 2.5);
-      key.position.set(5, 5, 5);
-      scene.add(key);
-      var fill = new THREE.DirectionalLight(0xE8C88A, 1.2);
-      fill.position.set(-4, 2, 3);
-      scene.add(fill);
-      scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+      scene.add(new THREE.AmbientLight(0xffffff, 0.8));
+      var keyLight = new THREE.DirectionalLight(0xffffff, 2);
+      keyLight.position.set(5, 5, 5);
+      scene.add(keyLight);
+      var fillLight = new THREE.DirectionalLight(0xE8C88A, 1);
+      fillLight.position.set(-5, 0, 5);
+      scene.add(fillLight);
 
-      // Build a stylized implant (screw + abutment + crown) with primitives
-      var implant = new THREE.Group();
+      // Groups for Layers
+      var anatomyGroup = new THREE.Group();
+      var implantGroup = new THREE.Group();
+      scene.add(anatomyGroup);
+      scene.add(implantGroup);
 
-      // Screw body (cylinder with grooves)
-      var screwMat = new THREE.MeshStandardMaterial({ color: 0xB8C5D1, metalness: 0.9, roughness: 0.25 });
-      var screwBody = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.45, 0.35, 2.4, 24, 1),
-        screwMat
-      );
-      screwBody.position.y = -0.2;
-      implant.add(screwBody);
+      // 2. Build Anatomy Layers (Gum & Bone)
+      
+      // Bone Layer (Transparent Ivory)
+      var boneGeo = new THREE.CylinderGeometry(1.8, 2.0, 3.5, 32, 1, false);
+      var boneMat = new THREE.MeshPhysicalMaterial({ 
+        color: 0xF5F5DC, // Beige/Ivory
+        transparent: true, 
+        opacity: 0.45,
+        roughness: 0.8,
+        transmission: 0.3,
+        side: THREE.DoubleSide
+      });
+      var boneMesh = new THREE.Mesh(boneGeo, boneMat);
+      boneMesh.position.y = -1.5;
+      anatomyGroup.add(boneMesh);
 
-      // Threads (torus rings)
-      for(var i = 0; i < 9; i++){
-        var ring = new THREE.Mesh(
-          new THREE.TorusGeometry(0.42 - i * 0.008, 0.04, 8, 24),
-          screwMat
-        );
-        ring.rotation.x = Math.PI / 2;
-        ring.position.y = -1.3 + i * 0.28;
-        implant.add(ring);
+      // Gum Layer (Transparent Pink)
+      var gumGeo = new THREE.CylinderGeometry(1.7, 1.7, 1.2, 32);
+      var gumMat = new THREE.MeshPhysicalMaterial({ 
+        color: 0xE59A9E, // Pink
+        transparent: true, 
+        opacity: 0.35,
+        roughness: 0.4,
+        transmission: 0.4,
+        side: THREE.DoubleSide
+      });
+      var gumMesh = new THREE.Mesh(gumGeo, gumMat);
+      gumMesh.position.y = 0.8;
+      anatomyGroup.add(gumMesh);
+
+      // 3. Load Real Implant (GLB) OR Fallback to High-Quality Procedural
+      var loader = new GLTFLoader();
+      
+      // ⚠️ ملاحظة: لو عندك ملف الغرسة الحقيقي، غيّر الرابط ده لمسار الملف عندك (مثلاً 'models/straumann.glb')
+      var implantModelUrl = 'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/gltf/ferrari.glb'; // (ده مجرد مثال مؤقت - استبدله بملف الزرعة بتاعك)
+      
+      // عشان الكود يشتغل فوراً من غير ملفات خارجية، هنبني نسخة احترافية بالكود
+      function buildProceduralImplant() {
+        // Screw
+        var screwMat = new THREE.MeshStandardMaterial({ color: 0xC0C5C9, metalness: 0.9, roughness: 0.3 });
+        var screwBody = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.25, 2.8, 32), screwMat);
+        screwBody.position.y = -1.2;
+        implantGroup.add(screwBody);
+
+        // Threads
+        for(var i = 0; i < 10; i++){
+          var ring = new THREE.Mesh(new THREE.TorusGeometry(0.35 - i * 0.01, 0.03, 16, 32), screwMat);
+          ring.rotation.x = Math.PI / 2;
+          ring.position.y = -2.4 + i * 0.25;
+          implantGroup.add(ring);
+        }
+
+        // Abutment
+        var abutmentMat = new THREE.MeshStandardMaterial({ color: 0xAE9164, metalness: 0.8, roughness: 0.3 });
+        var abutment = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.35, 1, 32), abutmentMat);
+        abutment.position.y = 0.7;
+        implantGroup.add(abutment);
+
+        // Crown
+        var crownMat = new THREE.MeshPhysicalMaterial({ color: 0xFAFAFA, roughness: 0.2, transmission: 0.5, thickness: 1 });
+        var crown = new THREE.Mesh(new THREE.SphereGeometry(0.6, 32, 16), crownMat);
+        crown.position.y = 1.6;
+        crown.scale.set(1, 1.1, 1);
+        implantGroup.add(crown);
       }
 
-      // Abutment (gold)
-      var abutmentMat = new THREE.MeshStandardMaterial({ color: 0xAE9164, metalness: 0.85, roughness: 0.3 });
-      var abutment = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.3, 0.42, 0.7, 20),
-        abutmentMat
-      );
-      abutment.position.y = 1.35;
-      implant.add(abutment);
+      // محاولة تحميل الملف الحقيقي، ولو مفيش، نستخدم النسخة الكودية
+      loader.load(implantModelUrl, function(gltf) {
+        // لو الملف اتحمل بنجاح
+        var realImplant = gltf.scene;
+        realImplant.scale.set(1, 1, 1); // ممكن تحتاج تعدل السكيل حسب الملف بتاعك
+        realImplant.position.y = -1;
+        implantGroup.add(realImplant);
+        if(loading) loading.style.display = 'none';
+      }, undefined, function(error) {
+        // لو حصل خطأ في التحميل، نستخدم النسخة الكودية
+        console.log('Using procedural implant fallback.');
+        buildProceduralImplant();
+        if(loading) loading.style.display = 'none';
+      });
 
-      // Crown (white zirconia look)
-      var crownMat = new THREE.MeshStandardMaterial({ color: 0xF5E9D0, metalness: 0.05, roughness: 0.35 });
-      var crown = new THREE.Mesh(
-        new THREE.SphereGeometry(0.65, 32, 16, 0, Math.PI * 2, 0, Math.PI / 1.6),
-        crownMat
-      );
-      crown.position.y = 2.1;
-      crown.scale.set(1, 0.85, 1);
-      implant.add(crown);
-
-      implant.rotation.z = 0;
-      scene.add(implant);
-
-      // Ground shadow
-      var planeGeo = new THREE.PlaneGeometry(6, 6);
-      var planeMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.05 });
-      var plane = new THREE.Mesh(planeGeo, planeMat);
-      plane.rotation.x = -Math.PI / 2;
-      plane.position.y = -2;
-      scene.add(plane);
-
+      // 4. Controls & Animation
       var controls = new OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
-      controls.dampingFactor = 0.08;
-      controls.minDistance = 2.5;
-      controls.maxDistance = 8;
+      controls.dampingFactor = 0.05;
+      controls.minDistance = 3;
+      controls.maxDistance = 12;
       controls.autoRotate = true;
-      controls.autoRotateSpeed = 0.8;
+      controls.autoRotateSpeed = 1.0;
+      controls.target.set(0, 0, 0); // التركيز على منتصف الغرسة
 
-      // Stop auto-rotate on user interaction
       controls.addEventListener('start', function(){ controls.autoRotate = false; });
-
-      if(loading) loading.style.display = 'none';
 
       function animate(){
         requestAnimationFrame(animate);
@@ -4041,6 +4111,14 @@ body.intro-active .site-header .logo-inner{opacity:0}
         renderer.render(scene, camera);
       }
       animate();
+
+      // 5. Layer Toggles
+      document.getElementById('toggleBone').addEventListener('change', function(e) {
+        boneMesh.visible = e.target.checked;
+      });
+      document.getElementById('toggleGum').addEventListener('change', function(e) {
+        gumMesh.visible = e.target.checked;
+      });
 
       window.addEventListener('resize', function(){
         if(!container) return;
@@ -10955,13 +11033,15 @@ summary:focus-visible {
 <!-- ═══ DARK MODE SCRIPT ═══ -->
 <script id="darkModeScript">
 (function(){
-  var toggle = document.getElementById('darkModeToggle');
-  if(!toggle) return;
+  var toggles = document.querySelectorAll('#darkModeToggle, #mobileDarkModeToggle');
+  if(toggles.length === 0) return;
   var isDark = localStorage.getItem('nileDarkMode') === 'true';
   if(isDark) document.documentElement.classList.add('dark-mode');
-  toggle.addEventListener('click', function(){
-    var dark = document.documentElement.classList.toggle('dark-mode');
-    localStorage.setItem('nileDarkMode', dark ? 'true' : 'false');
+  toggles.forEach(function(btn) {
+    btn.addEventListener('click', function(){
+      var dark = document.documentElement.classList.toggle('dark-mode');
+      localStorage.setItem('nileDarkMode', dark ? 'true' : 'false');
+    });
   });
 })();
 </script>
