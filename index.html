@@ -20756,5 +20756,406 @@ input:focus-visible, select:focus-visible, textarea:focus-visible,
 
 })();
 </script>
+<style id="heroContrastFix">
+  /* ═══════════════════════════════════════════════════════════
+     1. تقليل الشفافية (زيادة كثافة المربع) عشان النص يبان
+     ═══════════════════════════════════════════════════════════ */
+  .hero-content {
+    background: rgba(10, 13, 16, 0.88) !important; /* كان 0.65 - بقى أغمق */
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(232, 200, 138, 0.45) !important;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7) !important; /* ظل أقوى */
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     2. إجبار كل النصوص في الهيرو تبقى أبيض ناصع
+     ═══════════════════════════════════════════════════════════ */
+  .hero-content h1,
+  .hero-content h1 span:not(.gold-text),
+  .hero-content h2,
+  .hero-content h3,
+  .hero-content strong {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+  }
+
+  /* النصوص العادية والفقرات */
+  .hero-content p,
+  .hero-content span:not(.gold-text):not(.text-nile-gold-bright),
+  .hero-content div:not(.text-nile-gold-bright) {
+    color: #F6F3EE !important; /* أبيض مائل للكريمي مريح للعين */
+    -webkit-text-fill-color: #F6F3EE !important;
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     3. إصلاح لون الذهبي ($4,490) عشان يبان
+     ═══════════════════════════════════════════════════════════ */
+  .hero-content .gold-text {
+    color: #E8C88A !important;
+    -webkit-text-fill-color: #E8C88A !important;
+    background: none !important;
+    animation: none !important;
+  }
+
+  /* الـ Eyebrow (Clinician-Reviewed...) */
+  .hero-content .eyebrow {
+    color: #E8C88A !important;
+    -webkit-text-fill-color: #E8C88A !important;
+  }
+
+  /* علامات الصح (Checkmarks) */
+  .hero-content .text-nile-gold-bright {
+    color: #E8C88A !important;
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     4. إصلاح أزرار الهيرو
+     ═══════════════════════════════════════════════════════════ */
+  .hero-content .btn-gold,
+  .hero-content .btn-gold span {
+    color: #1A1A1A !important; /* نص غامق على الزر الذهبي */
+    -webkit-text-fill-color: #1A1A1A !important;
+  }
+  
+  .hero-content .btn-outline {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    border-color: rgba(232, 200, 138, 0.7) !important;
+  }
+</style>
+<!-- ═══════════════════════════════════════════════════════════════
+     NILE SMILE — GOLD & PERFORMANCE LOCK v1.0
+     Paste LAST, right before </body>. Self-contained.
+     - Kills teal flashes from all previous patches
+     - Kills rogue MutationObservers + setIntervals
+     - Locks header, form, and menu into stable gold
+     - Cleans up dead code
+     ═══════════════════════════════════════════════════════════════ -->
+
+<style id="nileGoldLock">
+  /* ═══ 1. FORCE GOLD VARIABLES (defeat modernize2026) ═══ */
+  :root {
+    --ns-accent: #AE9164 !important;
+    --ns-accent-bright: #E8C88A !important;
+    --ns-primary: #4F6070 !important;
+    --ns-primary-light: #6B7D8E !important;
+    --ns-coral: #AE9164 !important;
+    --ns-coral-soft: #C9A96E !important;
+    --ns-canvas: #F6F3EE !important;
+    --ns-text: #1F2A36 !important;
+    --ns-text-muted: #4A5568 !important;
+  }
+
+  /* ═══ 2. SECTIONS — warm beige + navy ═══ */
+  html, body { background: #F6F3EE !important; color: #1a202c !important; }
+
+  section.bg-nile-beige, #packages, #travel-addons, #reviews {
+    background: linear-gradient(180deg, #FBFAF7 0%, #F6F3EE 50%, #EDE6DA 100%) !important;
+  }
+  section.bg-white { background: #FFFFFF !important; }
+  section.bg-nile-blue, section.bg-nile-blue-dark,
+  #price-anchor, #top-tier, #consult, #guarantees, #legal {
+    background: linear-gradient(160deg, #0A0D10 0%, #1F2A36 50%, #2A3744 100%) !important;
+  }
+
+  /* ═══ 3. HEADER — clean white glass ═══ */
+  #liquidGlassHeader:not(.on-dark) {
+    background: rgba(255, 255, 255, 0.55) !important;
+    border: none !important;
+    box-shadow: 0 8px 32px rgba(31, 42, 54, 0.08),
+                0 2px 8px rgba(31, 42, 54, 0.04) !important;
+    backdrop-filter: blur(26px) saturate(170%) !important;
+    -webkit-backdrop-filter: blur(26px) saturate(170%) !important;
+  }
+  #liquidGlassHeader:not(.on-dark).is-scrolled {
+    background: rgba(255, 255, 255, 0.88) !important;
+  }
+  #liquidGlassHeader.on-dark {
+    background: rgba(10, 13, 16, 0.85) !important;
+    border: 1px solid rgba(232, 200, 138, 0.32) !important;
+  }
+  #liquidGlassHeader {
+    transform: translateX(-50%) translateY(0) !important;
+    opacity: 1 !important;
+  }
+
+  /* ═══ 4. LOGO + LINKS — gold identity ═══ */
+  #liquidGlassHeader .lgh-logo-script { color: #4F6070 !important; }
+  #liquidGlassHeader .lgh-logo-text   { color: #AE9164 !important; }
+  #liquidGlassHeader .lgh-logo-sub    { color: #8FA1B2 !important; display: block !important; }
+  #liquidGlassHeader.on-dark .lgh-logo-script { color: #F6F3EE !important; }
+  #liquidGlassHeader.on-dark .lgh-logo-text   { color: #E8C88A !important; }
+  #liquidGlassHeader.on-dark .lgh-logo-sub    { color: #C9A96E !important; }
+
+  .lgh-link { color: #4F6070 !important; }
+  .lgh-link:hover { color: #AE9164 !important; background: rgba(174,145,100,0.10) !important; }
+  #liquidGlassHeader.on-dark .lgh-link { color: #E8E4DC !important; }
+  #liquidGlassHeader.on-dark .lgh-link:hover {
+    color: #E8C88A !important; background: rgba(232,200,138,0.10) !important;
+  }
+  .lgh-active-pill { background: linear-gradient(90deg, #AE9164, #E8C88A) !important; }
+
+  /* ═══ 5. BUTTONS — gold ═══ */
+  .lgh-cta, .btn-gold {
+    background: linear-gradient(135deg, #AE9164 0%, #C9A96E 50%, #AE9164 100%) !important;
+    color: #1a1a1a !important;
+    border: 1px solid rgba(174,145,100,0.5) !important;
+  }
+  .btn-gold:hover {
+    box-shadow: 0 12px 32px rgba(174,145,100,0.50),
+                0 0 0 4px rgba(174,145,100,0.10) !important;
+  }
+  .lgh-hamburger:hover  { background: rgba(174,145,100,0.12) !important; }
+  .lgh-mobile-cta {
+    background: linear-gradient(135deg, #AE9164, #C9A96E) !important;
+    color: #1a1a1a !important;
+  }
+  .lgh-mobile-link { color: #1F2A36 !important; }
+  #liquidGlassHeader.on-dark .lgh-mobile-link { color: #F6F3EE !important; }
+  .lgh-mobile-link:hover, .lgh-mobile-link:active {
+    background: rgba(174,145,100,0.14) !important;
+    color: #AE9164 !important;
+  }
+
+  /* ═══ 6. KILL HEADLINE FLICKER (gradient animation) ═══ */
+  .gold-text, .gold-grad, .section-heading, .section-heading-light {
+    background: none !important;
+    background-clip: border-box !important;
+    -webkit-background-clip: border-box !important;
+    -webkit-text-fill-color: currentColor !important;
+    animation: none !important;
+  }
+  section.bg-white .gold-text, section.bg-white .section-heading,
+  section.bg-nile-beige .gold-text, section.bg-nile-beige .section-heading {
+    color: #8A7248 !important;
+  }
+  .bg-nile-blue .gold-text, .bg-nile-blue .section-heading,
+  .bg-nile-blue-dark .gold-text, .bg-nile-blue-dark .section-heading {
+    color: #E8C88A !important;
+  }
+  section.bg-white .text-nile-gold,
+  section.bg-nile-beige .text-nile-gold {
+    color: #8A7248 !important;
+  }
+
+  /* ═══ 7. FIX BLANK SECTIONS (content-visibility conflict) ═══ */
+  section { content-visibility: visible !important; contain-intrinsic-size: auto !important; }
+
+  /* ═══ 8. FIX FORM STEPS (protect from .hidden !important) ═══ */
+  #leadForm .form-step[style*="display: block"],
+  #leadForm .form-step[style*="display:block"] {
+    display: block !important;
+  }
+
+  /* ═══ 9. KILL TEAL FILTER HACKS ═══ */
+  [style*="#00a6a6" i], [style*="#2dd4bf" i],
+  [style*="#0b3b4a" i], [style*="#14657d" i],
+  [style*="#ff6b5b" i], [style*="#ff8a7a" i] { filter: none !important; }
+
+  /* ═══ 10. FIX COOKIE BANNER PADDING (was 160px) ═══ */
+  body.has-cookie-banner { padding-bottom: 90px !important; }
+  @media (min-width: 768px) { body.has-cookie-banner { padding-bottom: 84px !important; } }
+  @media (max-width: 767px) {
+    body.has-cookie-banner .sticky-mobile { bottom: 82px !important; }
+  }
+</style>
+
+<script id="nileGoldLockJS">
+(function () {
+  'use strict';
+
+  /* ═══ A. TEAL NEUTRALIZER ═══ */
+  var TEAL_MAP = {
+    '#00a6a6': '#AE9164', '#2dd4bf': '#E8C88A',
+    '#0b3b4a': '#4F6070', '#14657d': '#6B7D8E',
+    '#ff6b5b': '#C9A96E', '#ff8a7a': '#E8C88A',
+    '#071a22': '#0A0D10', '#0f3b4d': '#2A3744',
+    '#f4f6f9': '#F6F3EE', '#eef1f6': '#FBFAF7',
+    '#0f1a24': '#1F2A36'
+  };
+
+  function hasTeal(s) {
+    if (!s || typeof s !== 'string') return false;
+    return /#00a6a6|#2dd4bf|#0b3b4a|#14657d|#ff6b5b|#ff8a7a|#071a22|#0f3b4d|#f4f6f9|#eef1f6|#0f1a24/i.test(s);
+  }
+
+  function goldify(s) {
+    if (!hasTeal(s)) return s;
+    for (var k in TEAL_MAP) {
+      s = s.replace(new RegExp(k, 'gi'), TEAL_MAP[k]);
+    }
+    return s;
+  }
+
+  /* Block future teal via setAttribute */
+  var _setAttr = Element.prototype.setAttribute;
+  Element.prototype.setAttribute = function (name, value) {
+    if (name === 'style') value = goldify(value);
+    return _setAttr.call(this, name, value);
+  };
+
+  /* Block future teal via style.color / style.backgroundColor */
+  ['color', 'backgroundColor', 'borderColor', 'boxShadow'].forEach(function (prop) {
+    var desc = Object.getOwnPropertyDescriptor(CSSStyleDeclaration.prototype, prop);
+    if (!desc || !desc.set) return;
+    Object.defineProperty(CSSStyleDeclaration.prototype, prop, {
+      get: desc.get,
+      set: function (v) { desc.set.call(this, goldify(v)); },
+      configurable: true
+    });
+  });
+
+  /* ═══ B. KILL ROGUE OBSERVERS ═══ */
+  var RealMO = window.MutationObserver;
+  var SAFE_IDS = ['leadForm', 'lghMobileMenu', 'liquidGlassHeader', 'teeth-map', 'searchModal', 'galleryLightbox'];
+
+  window.MutationObserver = function (cb) {
+    return new RealMO(function (muts) {
+      for (var i = 0; i < muts.length; i++) {
+        var t = muts[i].target;
+        if (!t || t.nodeType !== 1) continue;
+        if (t.id && SAFE_IDS.indexOf(t.id) !== -1) return cb(muts);
+        if (t.closest && t.closest('#leadForm, #lghMobileMenu, #liquidGlassHeader, #teeth-map, #searchModal, #galleryLightbox')) {
+          return cb(muts);
+        }
+      }
+    });
+  };
+  window.MutationObserver.prototype = RealMO.prototype;
+
+  /* ═══ C. KILL RUNAWAY INTERVALS AFTER 20s ═══ */
+  var _si = window.setInterval;
+  var trackIntervals = [];
+  window.setInterval = function (fn, ms) {
+    var id = _si(fn, ms);
+    trackIntervals.push(id);
+    return id;
+  };
+  setTimeout(function () {
+    for (var i = 0; i < trackIntervals.length; i++) {
+      try { clearInterval(trackIntervals[i]); } catch (e) {}
+    }
+    trackIntervals = [];
+  }, 20000);
+
+  /* ═══ D. INITIAL SWEEP (fix what already broke) ═══ */
+  function sweepTeal() {
+    document.querySelectorAll('[style]').forEach(function (el) {
+      var s = el.getAttribute('style');
+      if (hasTeal(s)) el.setAttribute('style', goldify(s));
+    });
+  }
+  sweepTeal();
+  setTimeout(sweepTeal, 400);
+  setTimeout(sweepTeal, 1500);
+  setTimeout(sweepTeal, 4000);
+
+  /* ═══ E. HEADER ALWAYS VISIBLE ═══ */
+  function ensureHeader() {
+    var h = document.getElementById('liquidGlassHeader');
+    if (!h) return;
+    h.classList.add('is-visible');
+    h.style.opacity = '1';
+    h.style.transform = 'translateX(-50%) translateY(0)';
+  }
+  ensureHeader();
+  setTimeout(ensureHeader, 1000);
+  setTimeout(ensureHeader, 3000);
+
+  /* ═══ F. TEETH MAP POSITION (results → reviews) ═══ */
+  function positionTeethMap() {
+    var teeth = document.getElementById('teeth-map');
+    var main  = document.getElementById('main');
+    var ref   = document.getElementById('results');
+    if (!teeth || !main || !ref || ref.parentNode !== main) return;
+    if (teeth.previousElementSibling === ref) return;
+    ref.parentNode.insertBefore(teeth, ref.nextSibling);
+  }
+  positionTeethMap();
+  setTimeout(positionTeethMap, 2000);
+  setTimeout(positionTeethMap, 5000);
+
+  /* ═══ G. FORM: single submit + re-bind validation ═══ */
+  function setupForm() {
+    var form = document.getElementById('leadForm');
+    if (!form || form.dataset.goldLock) return;
+    form.dataset.goldLock = '1';
+
+    /* Submit guard */
+    form.addEventListener('submit', function (e) {
+      if (window.__formSubmitting) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        return false;
+      }
+      window.__formSubmitting = true;
+      setTimeout(function () { window.__formSubmitting = false; }, 4000);
+    }, true);
+
+    /* Inline validation */
+    var email = form.querySelector('#formEmail');
+    var phone = form.querySelector('#formPhone');
+    var name  = form.querySelector('#formName');
+
+    if (email) email.addEventListener('blur', function () {
+      var v = this.value.trim();
+      if (!v) return;
+      var ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+      this.style.borderColor = ok ? '' : '#C85A5A';
+      this.setAttribute('aria-invalid', ok ? 'false' : 'true');
+    });
+    if (phone) phone.addEventListener('blur', function () {
+      var v = this.value.replace(/[\s\-()]/g, '');
+      if (!v) return;
+      this.style.borderColor = v.length < 8 ? '#C85A5A' : '';
+    });
+    if (name) name.addEventListener('blur', function () {
+      var v = this.value.trim();
+      if (!v) return;
+      this.style.borderColor = v.length < 2 ? '#C85A5A' : '';
+    });
+
+    /* Draft save */
+    var dt;
+    form.addEventListener('input', function () {
+      clearTimeout(dt);
+      dt = setTimeout(function () {
+        var data = {};
+        form.querySelectorAll('input, select').forEach(function (el) {
+          if (el.id && el.type !== 'file') data[el.id] = el.value;
+        });
+        try { localStorage.setItem('nileFormDraft_v2', JSON.stringify(data)); } catch (e) {}
+      }, 800);
+    });
+
+    /* Restore draft */
+    try {
+      var draft = JSON.parse(localStorage.getItem('nileFormDraft_v2') || '{}');
+      Object.keys(draft).forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el && !el.value) el.value = draft[id];
+      });
+    } catch (e) {}
+  }
+  setupForm();
+  setTimeout(setupForm, 1500);
+  setTimeout(setupForm, 3000);
+
+  /* ═══ H. DEAD CODE CLEANUP ═══ */
+  setTimeout(function () {
+    var qb = document.querySelector('.quick-bar');
+    if (qb) qb.remove();
+    ['hideRedundantSections', 'hideRedundantV2'].forEach(function (id) {
+      var s = document.getElementById(id);
+      if (s) s.remove();
+    });
+  }, 200);
+
+})();
+</script>
+<!-- ═══════════════════════════════════════════════════════════════
+     END NILE SMILE — GOLD & PERFORMANCE LOCK
+     ═══════════════════════════════════════════════════════════════ -->
 </body>
 </html>
