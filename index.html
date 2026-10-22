@@ -13195,5 +13195,1247 @@ textarea:focus-visible,
 <!-- ═══════════════════════════════════════════════════════════════
      END 2026 DESIGN SCIENCE UPGRADE
      ═══════════════════════════════════════════════════════════════ -->
+     <!-- ═══════════════════════════════════════════════════════════════
+     NILE SMILE — LIQUID GLASS HEADER + INTERACTIVE TEETH
+     2026 Advanced UX Layer — Paste BEFORE </body>
+     ═══════════════════════════════════════════════════════════════ -->
+
+<style id="liquidGlassHeaderStyles">
+/* ═══════════════════════════════════════════════════════════════
+   1. FLOATING GLASS PILL HEADER
+   — يتكيف لونه تلقائيًا حسب الخلفية (فاتح/غامق)
+   — يطفو ويصغر عند التمرير
+   — يختفي عند أعلى الصفحة ويظهر بعد 80px
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --glass-bg-light: rgba(255, 255, 255, 0.72);
+  --glass-bg-dark:  rgba(10, 13, 16, 0.72);
+  --glass-border-light: rgba(255, 255, 255, 0.55);
+  --glass-border-dark:  rgba(232, 200, 138, 0.22);
+  --glass-shadow-light: 0 8px 32px rgba(31, 42, 54, 0.10), 0 2px 8px rgba(31, 42, 54, 0.06);
+  --glass-shadow-dark:  0 8px 32px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --glass-text-light: #1F2A36;
+  --glass-text-dark:  #F6F3EE;
+  --glass-gold: #C9A96E;
+}
+
+/* Hide the old full-width header completely — we replace it */
+.site-header {
+  display: none !important;
+}
+
+/* The new floating pill */
+#liquidGlassHeader {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-120%);
+  z-index: 999;
+  width: calc(100% - 24px);
+  max-width: 680px;
+  padding: 0;
+  border-radius: 100px;
+  background: var(--glass-bg-light);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border: 1px solid var(--glass-border-light);
+  box-shadow: var(--glass-shadow-light);
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    padding 0.35s ease,
+    top 0.35s ease;
+  will-change: transform, background, box-shadow;
+  pointer-events: auto;
+}
+
+/* Visible state */
+#liquidGlassHeader.is-visible {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Scrolled state — slightly smaller, tighter, and firmer */
+#liquidGlassHeader.is-scrolled {
+  top: 8px;
+  padding: 0;
+  box-shadow: 0 12px 40px rgba(31, 42, 54, 0.18), 0 2px 10px rgba(31, 42, 54, 0.08);
+}
+
+/* Dark background state — when user is over a dark section */
+#liquidGlassHeader.on-dark {
+  background: var(--glass-bg-dark);
+  border-color: var(--glass-border-dark);
+  box-shadow: var(--glass-shadow-dark);
+}
+
+#liquidGlassHeader.on-dark .lgh-logo-text,
+#liquidGlassHeader.on-dark .lgh-link {
+  color: var(--glass-text-dark);
+}
+
+#liquidGlassHeader.on-dark .lgh-link:hover {
+  color: var(--glass-gold);
+}
+
+#liquidGlassHeader.on-dark .lgh-hamburger span {
+  background: var(--glass-text-dark);
+}
+
+/* Inner layout */
+.lgh-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0.85rem 0.55rem 1.1rem;
+  min-height: 56px;
+}
+
+/* Logo — compact, script + wordmark stacked horizontally */
+.lgh-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.lgh-logo-script {
+  font-family: 'Italianno', cursive;
+  font-size: 1.65rem;
+  line-height: 0.8;
+  color: var(--glass-text-light);
+  transition: color 0.4s ease;
+  display: inline-block;
+  transform: translateY(2px);
+}
+
+.lgh-logo-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--glass-text-light);
+  transition: color 0.4s ease;
+  display: block;
+  line-height: 1.1;
+}
+
+.lgh-logo-sub {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.42rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--glass-gold);
+  display: block;
+  margin-top: 1px;
+}
+
+/* Desktop links */
+.lgh-links {
+  display: none;
+  align-items: center;
+  gap: 0.2rem;
+  flex: 1;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .lgh-links {
+    display: flex;
+  }
+}
+
+.lgh-link {
+  position: relative;
+  padding: 0.45rem 0.85rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--glass-text-light);
+  text-decoration: none;
+  border-radius: 100px;
+  transition: color 0.25s ease, background 0.25s ease;
+  white-space: nowrap;
+}
+
+.lgh-link:hover {
+  color: var(--glass-gold);
+  background: rgba(201, 169, 110, 0.10);
+}
+
+/* Sliding active indicator */
+.lgh-active-pill {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  height: 3px;
+  width: 0;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #AE9164, #E8C88A);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.lgh-active-pill.is-visible {
+  opacity: 1;
+}
+
+/* CTA button inside the pill */
+.lgh-cta {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #1F2A36;
+  background: linear-gradient(135deg, #AE9164, #E8C88A);
+  border-radius: 100px;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(174, 145, 100, 0.35);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  flex-shrink: 0;
+}
+
+@media (min-width: 1024px) {
+  .lgh-cta {
+    display: inline-flex;
+  }
+}
+
+.lgh-cta:hover {
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 8px 22px rgba(174, 145, 100, 0.55);
+}
+
+/* Mobile: hamburger + compact CTA */
+.lgh-mobile-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (min-width: 1024px) {
+  .lgh-mobile-actions {
+    display: none;
+  }
+}
+
+.lgh-hamburger {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease;
+}
+
+.lgh-hamburger:hover {
+  background: rgba(201, 169, 110, 0.12);
+}
+
+.lgh-hamburger span {
+  display: block;
+  width: 18px;
+  height: 1.8px;
+  background: var(--glass-text-light);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease, background 0.4s ease;
+  transform-origin: center;
+}
+
+.lgh-hamburger.is-open span:nth-child(1) {
+  transform: translateY(5.8px) rotate(45deg);
+}
+.lgh-hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.lgh-hamburger.is-open span:nth-child(3) {
+  transform: translateY(-5.8px) rotate(-45deg);
+}
+
+/* Mobile dropdown — slides down from the pill */
+.lgh-mobile-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: var(--glass-bg-light);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border: 1px solid var(--glass-border-light);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(31, 42, 54, 0.18);
+  padding: 0.75rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.3s;
+  max-height: 70vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#liquidGlassHeader.menu-open .lgh-mobile-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#liquidGlassHeader.on-dark .lgh-mobile-menu {
+  background: var(--glass-bg-dark);
+  border-color: var(--glass-border-dark);
+}
+
+.lgh-mobile-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--glass-text-light);
+  text-decoration: none;
+  border-radius: 12px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+#liquidGlassHeader.on-dark .lgh-mobile-link {
+  color: var(--glass-text-dark);
+}
+
+.lgh-mobile-link:hover,
+.lgh-mobile-link:active {
+  background: rgba(201, 169, 110, 0.14);
+  color: var(--glass-gold);
+}
+
+.lgh-mobile-link svg {
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.lgh-mobile-divider {
+  height: 1px;
+  background: rgba(174, 145, 100, 0.18);
+  margin: 0.4rem 0.5rem;
+}
+
+.lgh-mobile-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.9rem 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #1F2A36;
+  background: linear-gradient(135deg, #AE9164, #E8C88A);
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(174, 145, 100, 0.3);
+}
+
+/* Small screens: reduce pill padding */
+@media (max-width: 480px) {
+  .lgh-inner {
+    padding: 0.45rem 0.55rem 0.45rem 0.85rem;
+    min-height: 52px;
+    gap: 0.5rem;
+  }
+  .lgh-logo-script {
+    font-size: 1.45rem;
+  }
+  .lgh-logo-text {
+    font-size: 0.5rem;
+    letter-spacing: 0.22em;
+  }
+  .lgh-logo-sub {
+    display: none;
+  }
+  #liquidGlassHeader {
+    top: 8px;
+    width: calc(100% - 16px);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   2. INTERACTIVE TEETH MAP
+   — SVG مخصص لكل سن
+   — Hover/Touch يضيء السن ويظهر حالته
+   — يعمل على الموبايل بلمسة واحدة
+   ═══════════════════════════════════════════════════════════════ */
+
+.teeth-map-section {
+  position: relative;
+  background: linear-gradient(160deg, #0A0D10 0%, #1F2A36 50%, #2A3744 100%);
+  padding: 4rem 1.25rem 4.5rem;
+  overflow: hidden;
+}
+
+.teeth-map-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #E8C88A 30%, #C9A96E 70%, transparent);
+}
+
+.teeth-map-header {
+  text-align: center;
+  max-width: 48rem;
+  margin: 0 auto 2.5rem;
+}
+
+.teeth-map-header .eyebrow {
+  color: #E8C88A;
+}
+
+.teeth-map-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: #F6F3EE;
+  line-height: 1.2;
+  margin: 0.5rem 0 0.75rem;
+}
+
+.teeth-map-header h2 .gold-text {
+  color: #E8C88A;
+}
+
+.teeth-map-header p {
+  color: #8FA1B2;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+/* The interactive SVG container */
+.teeth-map-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  position: relative;
+  padding: 1rem;
+}
+
+@media (max-width: 640px) {
+  .teeth-map-wrap {
+    padding: 0.5rem 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .teeth-map-svg {
+    min-width: 520px;
+  }
+}
+
+.teeth-map-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* Tooth base styles */
+.tooth {
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease;
+  transform-origin: center;
+}
+
+.tooth .tooth-shape {
+  fill: #E8DCC8;
+  stroke: rgba(174, 145, 100, 0.35);
+  stroke-width: 1;
+  transition: fill 0.25s ease, stroke 0.25s ease, filter 0.25s ease;
+}
+
+.tooth .tooth-root {
+  fill: #D4C4A8;
+  opacity: 0.55;
+  transition: fill 0.25s ease, opacity 0.25s ease;
+}
+
+/* Hover / Active state — glow */
+.tooth:hover .tooth-shape,
+.tooth.is-active .tooth-shape {
+  fill: #F5E9D0;
+  stroke: #E8C88A;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 8px rgba(232, 200, 138, 0.8));
+}
+
+.tooth:hover .tooth-root,
+.tooth.is-active .tooth-root {
+  fill: #C9A96E;
+  opacity: 0.8;
+}
+
+.tooth:hover {
+  transform: scale(1.08);
+}
+
+/* Tooth number label — hidden by default, shown on hover */
+.tooth-number {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  fill: #6B7D8E;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  text-anchor: middle;
+}
+
+.tooth:hover + .tooth-number,
+.tooth.is-active + .tooth-number {
+  opacity: 1;
+  fill: #E8C88A;
+}
+
+/* Info panel — shows selected tooth details */
+.tooth-info-panel {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: rgba(10, 13, 16, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(232, 200, 138, 0.35);
+  border-radius: 12px;
+  padding: 0.75rem 1.25rem;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.3s;
+  pointer-events: none;
+  min-width: 180px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.tooth-info-panel.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.tooth-info-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  color: #E8C88A;
+  font-weight: 500;
+  margin-bottom: 0.15rem;
+}
+
+.tooth-info-status {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8FA1B2;
+}
+
+.tooth-info-status.treated {
+  color: #2F855A;
+}
+
+/* Legend */
+.teeth-legend {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.teeth-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8FA1B2;
+}
+
+.teeth-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.teeth-legend-dot.healthy {
+  background: #E8DCC8;
+  border: 1px solid rgba(174, 145, 100, 0.4);
+}
+
+.teeth-legend-dot.treated {
+  background: #2F855A;
+  box-shadow: 0 0 6px rgba(47, 133, 90, 0.5);
+}
+
+.teeth-legend-dot.implant {
+  background: #C9A96E;
+  box-shadow: 0 0 6px rgba(201, 169, 110, 0.5);
+}
+
+.teeth-legend-dot.selected {
+  background: #E8C88A;
+  border: 1px solid #AE9164;
+  box-shadow: 0 0 8px rgba(232, 200, 138, 0.7);
+}
+
+/* Ensure mobile tap targets */
+@media (max-width: 767px) {
+  .tooth {
+    transform: scale(1);
+  }
+  .tooth:active {
+    transform: scale(1.12);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .tooth,
+  .tooth-shape,
+  .tooth-root,
+  .lgh-link,
+  #liquidGlassHeader,
+  .tooth-info-panel {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+</style>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     LIQUID GLASS HEADER — HTML
+     ═══════════════════════════════════════════════════════════════ -->
+<header id="liquidGlassHeader" role="banner" aria-label="Main navigation">
+  <div class="lgh-inner">
+    <!-- Logo -->
+    <a href="#main" class="lgh-logo" aria-label="Nile Smile — Back to top">
+      <span class="lgh-logo-script">Nile Smile</span>
+      <span>
+        <span class="lgh-logo-text">Concierge</span>
+        <span class="lgh-logo-sub">World-Class Smile</span>
+      </span>
+    </a>
+
+    <!-- Desktop links -->
+    <nav class="lgh-links" aria-label="Primary">
+      <a href="#packages" class="lgh-link">Packages</a>
+      <a href="#teeth-map" class="lgh-link">Smile Map</a>
+      <a href="#results" class="lgh-link">Results</a>
+      <a href="#guarantees" class="lgh-link">Guarantees</a>
+      <a href="#faq" class="lgh-link">FAQ</a>
+      <span class="lgh-active-pill" aria-hidden="true"></span>
+    </nav>
+
+    <!-- Desktop CTA -->
+    <a href="#consult" class="lgh-cta">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 4v6c0 5.5-3.8 10.7-9 12-5.2-1.3-9-6.5-9-12V6l9-4z"/><path d="M9 12l2 2 4-4"/></svg>
+      Free Review
+    </a>
+
+    <!-- Mobile actions -->
+    <div class="lgh-mobile-actions">
+      <a href="#consult" class="lgh-cta" style="display:inline-flex;padding:0.5rem 0.85rem;font-size:0.55rem;">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 4v6c0 5.5-3.8 10.7-9 12-5.2-1.3-9-6.5-9-12V6l9-4z"/></svg>
+        Free Review
+      </a>
+      <button type="button" class="lgh-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="lghMobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile dropdown menu -->
+  <div class="lgh-mobile-menu" id="lghMobileMenu" role="menu">
+    <a href="#packages" class="lgh-mobile-link" role="menuitem">
+      Packages <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+    <a href="#teeth-map" class="lgh-mobile-link" role="menuitem">
+      Smile Map <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+    <a href="#results" class="lgh-mobile-link" role="menuitem">
+      Results <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+    <a href="#guarantees" class="lgh-mobile-link" role="menuitem">
+      Guarantees <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+    <a href="#faq" class="lgh-mobile-link" role="menuitem">
+      FAQ <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+    <div class="lgh-mobile-divider"></div>
+    <a href="#consult" class="lgh-mobile-cta">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 4v6c0 5.5-3.8 10.7-9 12-5.2-1.3-9-6.5-9-12V6l9-4z"/><path d="M9 12l2 2 4-4"/></svg>
+      Request Free Review
+    </a>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     INTERACTIVE TEETH MAP — HTML
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="teeth-map" class="teeth-map-section" aria-labelledby="teeth-map-title">
+  <div class="teeth-map-header">
+    <p class="eyebrow">Interactive Smile Map</p>
+    <h2 id="teeth-map-title">Touch a Tooth. <span class="gold-text">See Its Story.</span></h2>
+    <p>Every tooth tells a story. Tap or hover to explore — see which teeth are healthy, treated, or replaced with premium implants.</p>
+  </div>
+
+  <div class="teeth-map-wrap">
+    <svg class="teeth-map-svg" viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Interactive dental map">
+      <defs>
+        <linearGradient id="toothGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#F0E6D2"/>
+          <stop offset="100%" stop-color="#D4C4A8"/>
+        </linearGradient>
+        <filter id="toothGlow">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- Upper arch -->
+      <g id="upper-arch">
+        <!-- Tooth 18 -->
+        <g class="tooth" data-tooth="18" data-name="Upper Right Molar" data-status="healthy" tabindex="0" role="button" aria-label="Upper right molar — healthy">
+          <path class="tooth-shape" d="M80,95 C80,75 90,62 102,62 C114,62 124,75 124,95 L124,125 C124,140 112,150 102,150 C92,150 80,140 80,125 Z"/>
+          <path class="tooth-root" d="M90,150 L88,185 Q90,195 95,185 L98,150 M106,150 L108,185 Q110,195 115,185 L112,150"/>
+        </g>
+        <text class="tooth-number" x="102" y="210">18</text>
+
+        <!-- Tooth 17 -->
+        <g class="tooth" data-tooth="17" data-name="Upper Right Second Molar" data-status="healthy" tabindex="0" role="button" aria-label="Upper right second molar — healthy">
+          <path class="tooth-shape" d="M135,90 C135,68 146,55 158,55 C170,55 181,68 181,90 L181,125 C181,142 170,152 158,152 C146,152 135,142 135,125 Z"/>
+          <path class="tooth-root" d="M145,152 L143,188 Q145,198 150,188 L153,152 M163,152 L165,188 Q167,198 172,188 L170,152"/>
+        </g>
+        <text class="tooth-number" x="158" y="212">17</text>
+
+        <!-- Tooth 16 — Treated (implant) -->
+        <g class="tooth" data-tooth="16" data-name="Upper Right First Molar" data-status="implant" tabindex="0" role="button" aria-label="Upper right first molar — implant">
+          <path class="tooth-shape" d="M192,88 C192,66 204,53 216,53 C228,53 240,66 240,88 L240,125 C240,142 228,152 216,152 C204,152 192,142 192,125 Z" fill="#C9A96E"/>
+          <path class="tooth-root" d="M203,152 L201,190 Q203,200 208,190 L211,152 M221,152 L223,190 Q225,200 230,190 L228,152" fill="#AE9164"/>
+          <circle cx="216" cy="60" r="3" fill="#2F855A" opacity="0.9"/>
+        </g>
+        <text class="tooth-number" x="216" y="214">16</text>
+
+        <!-- Tooth 15 -->
+        <g class="tooth" data-tooth="15" data-name="Upper Right Second Premolar" data-status="healthy" tabindex="0" role="button" aria-label="Upper right second premolar — healthy">
+          <path class="tooth-shape" d="M252,85 C252,65 262,52 274,52 C286,52 296,65 296,85 L296,120 C296,136 286,146 274,146 C262,146 252,136 252,120 Z"/>
+          <path class="tooth-root" d="M263,146 L261,182 Q263,192 268,182 L271,146 M279,146 L281,182 Q283,192 288,182 L285,146"/>
+        </g>
+        <text class="tooth-number" x="274" y="208">15</text>
+
+        <!-- Tooth 14 -->
+        <g class="tooth" data-tooth="14" data-name="Upper Right First Premolar" data-status="healthy" tabindex="0" role="button" aria-label="Upper right first premolar — healthy">
+          <path class="tooth-shape" d="M308,82 C308,62 318,48 330,48 C342,48 352,62 352,82 L352,118 C352,134 342,144 330,144 C318,144 308,134 308,118 Z"/>
+          <path class="tooth-root" d="M319,144 L317,180 Q319,190 324,180 L327,144 M335,144 L337,180 Q339,190 344,180 L341,144"/>
+        </g>
+        <text class="tooth-number" x="330" y="206">14</text>
+
+        <!-- Tooth 13 — Canine -->
+        <g class="tooth" data-tooth="13" data-name="Upper Right Canine" data-status="healthy" tabindex="0" role="button" aria-label="Upper right canine — healthy">
+          <path class="tooth-shape" d="M365,80 L368,55 C370,42 380,38 388,42 C396,46 400,56 398,70 L395,115 C395,132 385,142 375,142 C365,142 358,132 358,118 Z"/>
+          <path class="tooth-root" d="M372,142 L370,178 Q372,188 377,178 L380,142"/>
+        </g>
+        <text class="tooth-number" x="378" y="204">13</text>
+
+        <!-- Tooth 12 -->
+        <g class="tooth" data-tooth="12" data-name="Upper Right Lateral Incisor" data-status="healthy" tabindex="0" role="button" aria-label="Upper right lateral incisor — healthy">
+          <path class="tooth-shape" d="M408,78 C408,58 416,46 426,46 C436,46 444,58 444,78 L444,112 C444,128 436,138 426,138 C416,138 408,128 408,112 Z"/>
+          <path class="tooth-root" d="M418,138 L416,172 Q418,182 423,172 L426,138 M432,138 L434,172 Q436,182 441,172 L438,138"/>
+        </g>
+        <text class="tooth-number" x="426" y="200">12</text>
+
+        <!-- Tooth 11 — Central Incisor -->
+        <g class="tooth" data-tooth="11" data-name="Upper Right Central Incisor" data-status="healthy" tabindex="0" role="button" aria-label="Upper right central incisor — healthy">
+          <path class="tooth-shape" d="M454,75 C454,55 462,42 474,42 C486,42 494,55 494,75 L494,110 C494,126 486,136 474,136 C462,136 454,126 454,110 Z"/>
+          <path class="tooth-root" d="M464,136 L462,170 Q464,180 469,170 L472,136 M480,136 L482,170 Q484,180 489,170 L486,136"/>
+        </g>
+        <text class="tooth-number" x="474" y="198">11</text>
+
+        <!-- Tooth 21 — Central Incisor -->
+        <g class="tooth" data-tooth="21" data-name="Upper Left Central Incisor" data-status="healthy" tabindex="0" role="button" aria-label="Upper left central incisor — healthy">
+          <path class="tooth-shape" d="M506,75 C506,55 514,42 526,42 C538,42 546,55 546,75 L546,110 C546,126 538,136 526,136 C514,136 506,126 506,110 Z"/>
+          <path class="tooth-root" d="M516,136 L514,170 Q516,180 521,170 L524,136 M532,136 L534,170 Q536,180 541,170 L538,136"/>
+        </g>
+        <text class="tooth-number" x="526" y="198">21</text>
+
+        <!-- Tooth 22 -->
+        <g class="tooth" data-tooth="22" data-name="Upper Left Lateral Incisor" data-status="healthy" tabindex="0" role="button" aria-label="Upper left lateral incisor — healthy">
+          <path class="tooth-shape" d="M556,78 C556,58 564,46 574,46 C584,46 592,58 592,78 L592,112 C592,128 584,138 574,138 C564,138 556,128 556,112 Z"/>
+          <path class="tooth-root" d="M566,138 L564,172 Q566,182 571,172 L574,138 M580,138 L582,172 Q584,182 589,172 L586,138"/>
+        </g>
+        <text class="tooth-number" x="574" y="200">22</text>
+
+        <!-- Tooth 23 — Canine -->
+        <g class="tooth" data-tooth="23" data-name="Upper Left Canine" data-status="healthy" tabindex="0" role="button" aria-label="Upper left canine — healthy">
+          <path class="tooth-shape" d="M602,80 L605,55 C607,42 617,38 625,42 C633,46 637,56 635,70 L632,115 C632,132 622,142 612,142 C602,142 595,132 595,118 Z"/>
+          <path class="tooth-root" d="M609,142 L607,178 Q609,188 614,178 L617,142"/>
+        </g>
+        <text class="tooth-number" x="615" y="204">23</text>
+
+        <!-- Tooth 24 -->
+        <g class="tooth" data-tooth="24" data-name="Upper Left First Premolar" data-status="healthy" tabindex="0" role="button" aria-label="Upper left first premolar — healthy">
+          <path class="tooth-shape" d="M648,82 C648,62 658,48 670,48 C682,48 692,62 692,82 L692,118 C692,134 682,144 670,144 C658,144 648,134 648,118 Z"/>
+          <path class="tooth-root" d="M659,144 L657,180 Q659,190 664,180 L667,144 M675,144 L677,180 Q679,190 684,180 L681,144"/>
+        </g>
+        <text class="tooth-number" x="670" y="206">24</text>
+
+        <!-- Tooth 25 -->
+        <g class="tooth" data-tooth="25" data-name="Upper Left Second Premolar" data-status="healthy" tabindex="0" role="button" aria-label="Upper left second premolar — healthy">
+          <path class="tooth-shape" d="M704,85 C704,65 714,52 726,52 C738,52 748,65 748,85 L748,120 C748,136 738,146 726,146 C714,146 704,136 704,120 Z"/>
+          <path class="tooth-root" d="M715,146 L713,182 Q715,192 720,182 L723,146 M731,146 L733,182 Q735,192 740,182 L737,146"/>
+        </g>
+        <text class="tooth-number" x="726" y="208">25</text>
+
+        <!-- Tooth 26 — Treated -->
+        <g class="tooth" data-tooth="26" data-name="Upper Left First Molar" data-status="treated" tabindex="0" role="button" aria-label="Upper left first molar — treated">
+          <path class="tooth-shape" d="M760,88 C760,66 772,53 784,53 C796,53 808,66 808,88 L808,125 C808,142 796,152 784,152 C772,152 760,142 760,125 Z" fill="#D4E8D0"/>
+          <path class="tooth-root" d="M771,152 L769,190 Q771,200 776,190 L779,152 M789,152 L791,190 Q793,200 798,190 L796,152" fill="#A8C4A0"/>
+          <circle cx="784" cy="60" r="3" fill="#2F855A" opacity="0.9"/>
+        </g>
+        <text class="tooth-number" x="784" y="214">26</text>
+
+        <!-- Tooth 27 -->
+        <g class="tooth" data-tooth="27" data-name="Upper Left Second Molar" data-status="healthy" tabindex="0" role="button" aria-label="Upper left second molar — healthy">
+          <path class="tooth-shape" d="M820,90 C820,68 831,55 843,55 C855,55 866,68 866,90 L866,125 C866,142 855,152 843,152 C831,152 820,142 820,125 Z"/>
+          <path class="tooth-root" d="M830,152 L828,188 Q830,198 835,188 L838,152 M848,152 L850,188 Q852,198 857,188 L855,152"/>
+        </g>
+        <text class="tooth-number" x="843" y="212">27</text>
+
+        <!-- Tooth 28 -->
+        <g class="tooth" data-tooth="28" data-name="Upper Left Third Molar" data-status="healthy" tabindex="0" role="button" aria-label="Upper left third molar — healthy">
+          <path class="tooth-shape" d="M878,95 C878,75 888,62 900,62 C912,62 922,75 922,95 L922,125 C922,140 910,150 900,150 C890,150 878,140 878,125 Z"/>
+          <path class="tooth-root" d="M888,150 L886,185 Q888,195 893,185 L896,150 M904,150 L906,185 Q908,195 913,185 L910,150"/>
+        </g>
+        <text class="tooth-number" x="900" y="210">28</text>
+      </g>
+
+      <!-- Lower arch -->
+      <g id="lower-arch" transform="translate(0, 70)">
+        <!-- Tooth 48 -->
+        <g class="tooth" data-tooth="48" data-name="Lower Right Third Molar" data-status="healthy" tabindex="0" role="button" aria-label="Lower right third molar — healthy">
+          <path class="tooth-shape" d="M878,135 C878,115 888,102 900,102 C912,102 922,115 922,135 L922,165 C922,180 910,190 900,190 C890,190 878,180 878,165 Z"/>
+          <path class="tooth-root" d="M888,190 L886,225 Q888,235 893,225 L896,190 M904,190 L906,225 Q908,235 913,225 L910,190"/>
+        </g>
+        <text class="tooth-number" x="900" y="250">48</text>
+
+        <!-- Tooth 47 -->
+        <g class="tooth" data-tooth="47" data-name="Lower Right Second Molar" data-status="healthy" tabindex="0" role="button" aria-label="Lower right second molar — healthy">
+          <path class="tooth-shape" d="M820,130 C820,108 831,95 843,95 C855,95 866,108 866,130 L866,165 C866,182 855,192 843,192 C831,192 820,182 820,165 Z"/>
+          <path class="tooth-root" d="M830,192 L828,228 Q830,238 835,228 L838,192 M848,192 L850,228 Q852,238 857,228 L855,192"/>
+        </g>
+        <text class="tooth-number" x="843" y="252">47</text>
+
+        <!-- Tooth 46 — Treated (implant) -->
+        <g class="tooth" data-tooth="46" data-name="Lower Right First Molar" data-status="implant" tabindex="0" role="button" aria-label="Lower right first molar — implant">
+          <path class="tooth-shape" d="M760,128 C760,106 772,93 784,93 C796,93 808,106 808,128 L808,165 C808,182 796,192 784,192 C772,192 760,182 760,165 Z" fill="#C9A96E"/>
+          <path class="tooth-root" d="M771,192 L769,230 Q771,240 776,230 L779,192 M789,192 L791,230 Q793,240 798,230 L796,192" fill="#AE9164"/>
+          <circle cx="784" cy="100" r="3" fill="#2F855A" opacity="0.9"/>
+        </g>
+        <text class="tooth-number" x="784" y="254">46</text>
+
+        <!-- Tooth 45 -->
+        <g class="tooth" data-tooth="45" data-name="Lower Right Second Premolar" data-status="healthy" tabindex="0" role="button" aria-label="Lower right second premolar — healthy">
+          <path class="tooth-shape" d="M704,125 C704,105 714,92 726,92 C738,92 748,105 748,125 L748,160 C748,176 738,186 726,186 C714,186 704,176 704,160 Z"/>
+          <path class="tooth-root" d="M715,186 L713,222 Q715,232 720,222 L723,186 M731,186 L733,222 Q735,232 740,222 L737,186"/>
+        </g>
+        <text class="tooth-number" x="726" y="248">45</text>
+
+        <!-- Tooth 44 -->
+        <g class="tooth" data-tooth="44" data-name="Lower Right First Premolar" data-status="healthy" tabindex="0" role="button" aria-label="Lower right first premolar — healthy">
+          <path class="tooth-shape" d="M648,122 C648,102 658,88 670,88 C682,88 692,102 692,122 L692,158 C692,174 682,184 670,184 C658,184 648,174 648,158 Z"/>
+          <path class="tooth-root" d="M659,184 L657,220 Q659,230 664,220 L667,184 M675,184 L677,220 Q679,230 684,220 L681,184"/>
+        </g>
+        <text class="tooth-number" x="670" y="246">44</text>
+
+        <!-- Tooth 43 — Canine -->
+        <g class="tooth" data-tooth="43" data-name="Lower Right Canine" data-status="healthy" tabindex="0" role="button" aria-label="Lower right canine — healthy">
+          <path class="tooth-shape" d="M602,120 L605,95 C607,82 617,78 625,82 C633,86 637,96 635,110 L632,155 C632,172 622,182 612,182 C602,182 595,172 595,158 Z"/>
+          <path class="tooth-root" d="M609,182 L607,218 Q609,228 614,218 L617,182"/>
+        </g>
+        <text class="tooth-number" x="615" y="244">43</text>
+
+        <!-- Tooth 42 -->
+        <g class="tooth" data-tooth="42" data-name="Lower Right Lateral Incisor" data-status="healthy" tabindex="0" role="button" aria-label="Lower right lateral incisor — healthy">
+          <path class="tooth-shape" d="M556,118 C556,98 564,86 574,86 C584,86 592,98 592,118 L592,152 C592,168 584,178 574,178 C564,178 556,168 556,152 Z"/>
+          <path class="tooth-root" d="M566,178 L564,212 Q566,222 571,212 L574,178 M580,178 L582,212 Q584,222 589,212 L586,178"/>
+        </g>
+        <text class="tooth-number" x="574" y="240">42</text>
+
+        <!-- Tooth 41 — Central Incisor -->
+        <g class="tooth" data-tooth="41" data-name="Lower Right Central Incisor" data-status="healthy" tabindex="0" role="button" aria-label="Lower right central incisor — healthy">
+          <path class="tooth-shape" d="M506,115 C506,95 514,82 526,82 C538,82 546,95 546,115 L546,150 C546,166 538,176 526,176 C514,176 506,166 506,150 Z"/>
+          <path class="tooth-root" d="M516,176 L514,210 Q516,220 521,210 L524,176 M532,176 L534,210 Q536,220 541,210 L538,176"/>
+        </g>
+        <text class="tooth-number" x="526" y="238">41</text>
+
+        <!-- Tooth 31 — Central Incisor -->
+        <g class="tooth" data-tooth="31" data-name="Lower Left Central Incisor" data-status="healthy" tabindex="0" role="button" aria-label="Lower left central incisor — healthy">
+          <path class="tooth-shape" d="M454,115 C454,95 462,82 474,82 C486,82 494,95 494,115 L494,150 C494,166 486,176 474,176 C462,176 454,166 454,150 Z"/>
+          <path class="tooth-root" d="M464,176 L462,210 Q464,220 469,210 L472,176 M480,176 L482,210 Q484,220 489,210 L486,176"/>
+        </g>
+        <text class="tooth-number" x="474" y="238">31</text>
+
+        <!-- Tooth 32 -->
+        <g class="tooth" data-tooth="32" data-name="Lower Left Lateral Incisor" data-status="healthy" tabindex="0" role="button" aria-label="Lower left lateral incisor — healthy">
+          <path class="tooth-shape" d="M408,118 C408,98 416,86 426,86 C436,86 444,98 444,118 L444,152 C444,168 436,178 426,178 C416,178 408,168 408,152 Z"/>
+          <path class="tooth-root" d="M418,178 L416,212 Q418,222 423,212 L426,178 M432,178 L434,212 Q436,222 441,212 L438,178"/>
+        </g>
+        <text class="tooth-number" x="426" y="240">32</text>
+
+        <!-- Tooth 33 — Canine -->
+        <g class="tooth" data-tooth="33" data-name="Lower Left Canine" data-status="healthy" tabindex="0" role="button" aria-label="Lower left canine — healthy">
+          <path class="tooth-shape" d="M365,120 L368,95 C370,82 380,78 388,82 C396,86 400,96 398,110 L395,155 C395,172 385,182 375,182 C365,182 358,172 358,158 Z"/>
+          <path class="tooth-root" d="M372,182 L370,218 Q372,228 377,218 L380,182"/>
+        </g>
+        <text class="tooth-number" x="378" y="244">33</text>
+
+        <!-- Tooth 34 -->
+        <g class="tooth" data-tooth="34" data-name="Lower Left First Premolar" data-status="healthy" tabindex="0" role="button" aria-label="Lower left first premolar — healthy">
+          <path class="tooth-shape" d="M308,122 C308,102 318,88 330,88 C342,88 352,102 352,122 L352,158 C352,174 342,184 330,184 C318,184 308,174 308,158 Z"/>
+          <path class="tooth-root" d="M319,184 L317,220 Q319,230 324,220 L327,184 M335,184 L337,220 Q339,230 344,220 L341,184"/>
+        </g>
+        <text class="tooth-number" x="330" y="246">34</text>
+
+        <!-- Tooth 35 -->
+        <g class="tooth" data-tooth="35" data-name="Lower Left Second Premolar" data-status="healthy" tabindex="0" role="button" aria-label="Lower left second premolar — healthy">
+          <path class="tooth-shape" d="M252,125 C252,105 262,92 274,92 C286,92 296,105 296,125 L296,160 C296,176 286,186 274,186 C262,186 252,176 252,160 Z"/>
+          <path class="tooth-root" d="M263,186 L261,222 Q263,232 268,222 L271,186 M279,186 L281,222 Q283,232 288,222 L285,186"/>
+        </g>
+        <text class="tooth-number" x="274" y="248">35</text>
+
+        <!-- Tooth 36 — Treated -->
+        <g class="tooth" data-tooth="36" data-name="Lower Left First Molar" data-status="treated" tabindex="0" role="button" aria-label="Lower left first molar — treated">
+          <path class="tooth-shape" d="M192,128 C192,106 204,93 216,93 C228,93 240,106 240,128 L240,165 C240,182 228,192 216,192 C204,192 192,182 192,165 Z" fill="#D4E8D0"/>
+          <path class="tooth-root" d="M203,192 L201,230 Q203,240 208,230 L211,192 M221,192 L223,230 Q225,240 230,230 L228,192" fill="#A8C4A0"/>
+          <circle cx="216" cy="100" r="3" fill="#2F855A" opacity="0.9"/>
+        </g>
+        <text class="tooth-number" x="216" y="254">36</text>
+
+        <!-- Tooth 37 -->
+        <g class="tooth" data-tooth="37" data-name="Lower Left Second Molar" data-status="healthy" tabindex="0" role="button" aria-label="Lower left second molar — healthy">
+          <path class="tooth-shape" d="M135,130 C135,108 146,95 158,95 C170,95 181,108 181,130 L181,165 C181,182 170,192 158,192 C146,192 135,182 135,165 Z"/>
+          <path class="tooth-root" d="M145,192 L143,228 Q145,238 150,228 L153,192 M163,192 L165,228 Q167,238 172,228 L170,192"/>
+        </g>
+        <text class="tooth-number" x="158" y="252">37</text>
+
+        <!-- Tooth 38 -->
+        <g class="tooth" data-tooth="38" data-name="Lower Left Third Molar" data-status="healthy" tabindex="0" role="button" aria-label="Lower left third molar — healthy">
+          <path class="tooth-shape" d="M80,135 C80,115 90,102 102,102 C114,102 124,115 124,135 L124,165 C124,180 112,190 102,190 C92,190 80,180 80,165 Z"/>
+          <path class="tooth-root" d="M90,190 L88,225 Q90,235 95,225 L98,190 M106,190 L108,225 Q110,235 115,225 L112,190"/>
+        </g>
+        <text class="tooth-number" x="102" y="250">38</text>
+      </g>
+    </svg>
+
+    <!-- Info panel -->
+    <div class="tooth-info-panel" id="toothInfoPanel" role="status" aria-live="polite">
+      <p class="tooth-info-name" id="toothInfoName">Tap a tooth</p>
+      <p class="tooth-info-status" id="toothInfoStatus">to see its status</p>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="teeth-legend">
+    <div class="teeth-legend-item">
+      <span class="teeth-legend-dot healthy"></span> Healthy
+    </div>
+    <div class="teeth-legend-item">
+      <span class="teeth-legend-dot treated"></span> Treated
+    </div>
+    <div class="teeth-legend-item">
+      <span class="teeth-legend-dot implant"></span> Premium Implant
+    </div>
+    <div class="teeth-legend-item">
+      <span class="teeth-legend-dot selected"></span> Selected
+    </div>
+  </div>
+</section>
+<!-- ═══════════════════════════════════════════════════════════════
+     END INTERACTIVE TEETH MAP HTML
+     ═══════════════════════════════════════════════════════════════ -->
+
+<script id="liquidGlassHeaderJS">
+(function(){
+  'use strict';
+
+  /* ═══════════════════════════════════════════════════════
+     HEADER: Show after scroll + adaptive color detection
+     ═══════════════════════════════════════════════════════ */
+  var header = document.getElementById('liquidGlassHeader');
+  if (!header) return;
+
+  var lastScrollY = 0;
+  var ticking = false;
+
+  /* All sections that need to trigger dark mode */
+  var darkSections = [
+    'price-anchor', 'top-tier', 'science', 'turkey-rescue',
+    'guarantees', 'bone-graft', 'consult', 'teeth-map',
+    'discover-egypt', 'legal', 'implant-systems'
+  ];
+
+  function isOverDarkSection() {
+    var headerRect = header.getBoundingClientRect();
+    var headerMid = headerRect.top + headerRect.height / 2;
+
+    /* Check if any dark section covers the header's midpoint */
+    for (var i = 0; i < darkSections.length; i++) {
+      var el = document.getElementById(darkSections[i]);
+      if (!el) continue;
+      var rect = el.getBoundingClientRect();
+      if (rect.top <= headerMid && rect.bottom >= headerMid) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function updateHeader() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      var y = window.scrollY;
+
+      /* Visibility: hide at very top, show after 80px */
+      if (y > 80) {
+        header.classList.add('is-visible');
+      } else {
+        header.classList.remove('is-visible');
+      }
+
+      /* Scrolled state */
+      if (y > 200) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
+
+      /* Adaptive color — dark or light background */
+      if (isOverDarkSection()) {
+        header.classList.add('on-dark');
+      } else {
+        header.classList.remove('on-dark');
+      }
+
+      lastScrollY = y;
+      ticking = false;
+    });
+  }
+
+  window.addEventListener('scroll', updateHeader, { passive: true });
+  window.addEventListener('resize', updateHeader, { passive: true });
+  updateHeader();
+
+  /* ═══════════════════════════════════════════════════════
+     MOBILE MENU
+     ═══════════════════════════════════════════════════════ */
+  var hamburger = header.querySelector('.lgh-hamburger');
+  var mobileMenu = document.getElementById('lghMobileMenu');
+
+  function closeMenu() {
+    header.classList.remove('menu-open');
+    hamburger.classList.remove('is-open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var isOpen = header.classList.toggle('menu-open');
+      hamburger.classList.toggle('is-open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    /* Close on link click */
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', closeMenu);
+    });
+
+    /* Close on outside click */
+    document.addEventListener('click', function(e) {
+      if (header.classList.contains('menu-open') &&
+          !mobileMenu.contains(e.target) &&
+          !hamburger.contains(e.target)) {
+        closeMenu();
+      }
+    });
+
+    /* Close on Escape */
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && header.classList.contains('menu-open')) {
+        closeMenu();
+      }
+    });
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     SLIDING ACTIVE INDICATOR (desktop)
+     ═══════════════════════════════════════════════════════ */
+  var links = header.querySelectorAll('.lgh-link');
+  var activePill = header.querySelector('.lgh-active-pill');
+  var linksContainer = header.querySelector('.lgh-links');
+
+  if (activePill && linksContainer) {
+    links.forEach(function(link) {
+      link.addEventListener('mouseenter', function() {
+        var containerRect = linksContainer.getBoundingClientRect();
+        var linkRect = link.getBoundingClientRect();
+        var left = linkRect.left - containerRect.left + linkRect.width / 2 - 12;
+        activePill.style.transform = 'translateX(' + left + 'px)';
+        activePill.style.width = '24px';
+        activePill.classList.add('is-visible');
+      });
+    });
+
+    linksContainer.addEventListener('mouseleave', function() {
+      activePill.classList.remove('is-visible');
+    });
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     INTERACTIVE TEETH MAP
+     ═══════════════════════════════════════════════════════ */
+  var teeth = document.querySelectorAll('.tooth');
+  var infoPanel = document.getElementById('toothInfoPanel');
+  var infoName = document.getElementById('toothInfoName');
+  var infoStatus = document.getElementById('toothInfoStatus');
+
+  var statusLabels = {
+    'healthy': 'Healthy — no treatment needed',
+    'treated': 'Treated — restored to full function',
+    'implant': 'Premium Implant — Straumann / Nobel'
+  };
+
+  function showToothInfo(tooth) {
+    if (!infoPanel || !infoName || !infoStatus) return;
+
+    var name = tooth.getAttribute('data-name');
+    var status = tooth.getAttribute('data-status');
+    var number = tooth.getAttribute('data-tooth');
+
+    infoName.textContent = 'Tooth #' + number + ' — ' + name;
+    infoStatus.textContent = statusLabels[status] || 'Status unknown';
+    infoStatus.className = 'tooth-info-status' + (status === 'treated' || status === 'implant' ? ' treated' : '');
+
+    infoPanel.classList.add('is-visible');
+
+    /* Mark all other teeth as inactive */
+    teeth.forEach(function(t) { t.classList.remove('is-active'); });
+    tooth.classList.add('is-active');
+  }
+
+  function hideToothInfo() {
+    if (infoPanel) infoPanel.classList.remove('is-visible');
+    teeth.forEach(function(t) { t.classList.remove('is-active'); });
+  }
+
+  teeth.forEach(function(tooth) {
+    /* Desktop: hover */
+    tooth.addEventListener('mouseenter', function() { showToothInfo(tooth); });
+    tooth.addEventListener('mouseleave', function() {
+      /* Small delay so moving between teeth is smooth */
+      setTimeout(function() {
+        if (!document.querySelector('.tooth:hover')) hideToothInfo();
+      }, 100);
+    });
+
+    /* Mobile: tap */
+    tooth.addEventListener('click', function(e) {
+      e.preventDefault();
+      showToothInfo(tooth);
+    });
+
+    /* Keyboard */
+    tooth.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        showToothInfo(tooth);
+      }
+    });
+  });
+
+  /* Hide info when tapping outside the map (mobile) */
+  document.addEventListener('click', function(e) {
+    var mapSection = document.getElementById('teeth-map');
+    if (mapSection && !mapSection.contains(e.target)) {
+      hideToothInfo();
+    }
+  });
+
+  /* ═══════════════════════════════════════════════════════
+     SMOOTH SCROLL for new header links
+     ═══════════════════════════════════════════════════════ */
+  header.querySelectorAll('a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var targetId = this.getAttribute('href');
+      if (!targetId || targetId === '#') return;
+
+      var target = document.querySelector(targetId);
+      if (!target) return;
+
+      e.preventDefault();
+      closeMenu();
+
+      var headerHeight = 80;
+      var targetY = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+
+      window.scrollTo({ top: targetY, behavior: 'smooth' });
+
+      /* Update URL without jump */
+      if (history.pushState) history.pushState(null, '', targetId);
+    });
+  });
+
+})();
+</script>
+<!-- ═══════════════════════════════════════════════════════════════
+     END LIQUID GLASS HEADER + INTERACTIVE TEETH
+     ═══════════════════════════════════════════════════════════════ -->
 </body>
 </html>
