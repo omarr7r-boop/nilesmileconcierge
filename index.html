@@ -19461,5 +19461,695 @@ input:focus-visible, select:focus-visible, textarea:focus-visible,
 })();
 </script>
 <!-- ═══ END TEETH MAP POSITION FIX ═══ -->
+ <!-- ═══════════════════════════════════════════════════════════════
+     NILE SMILE — EVERYTHING FIX v2.0
+     Paste BEFORE </body>. Fixes all 4 critical issues.
+     ═══════════════════════════════════════════════════════════════ -->
+
+<style id="nileEverythingCss">
+  /* 1. Header always visible */
+  #liquidGlassHeader {
+    transform: translateX(-50%) translateY(0) !important;
+    opacity: 1 !important;
+  }
+
+  /* 2. Kill hue-rotate hacks (real fix via JS observer) */
+  [style*="#00a6a6" i], [style*="#2dd4bf" i],
+  [style*="#0b3b4a" i], [style*="#14657d" i],
+  [style*="#ff6b5b" i], [style*="#ff8a7a" i],
+  [style*="#071a22" i], [style*="#0f3b4d" i] {
+    filter: none !important;
+  }
+
+  /* 3. Form steps visible (protects multi-step logic) */
+  #leadForm .form-step[style*="display: block"],
+  #leadForm .form-step[style*="display:block"] {
+    display: block !important;
+  }
+
+  /* 4. Gold in dark sections */
+  .bg-nile-blue span[class*="text-nile-gold-bright"],
+  .bg-nile-blue-dark span[class*="text-nile-gold-bright"],
+  #turkey-rescue span[class*="text-nile-gold-bright"],
+  #top-tier span[class*="text-nile-gold-bright"],
+  #guarantees span[class*="text-nile-gold-bright"],
+  #price-anchor span[class*="text-nile-gold-bright"],
+  #consult span[class*="text-nile-gold-bright"] {
+    color: #E8C88A !important;
+  }
+
+  /* 5. content-visibility safety */
+  section {
+    content-visibility: visible !important;
+    contain-intrinsic-size: auto !important;
+  }
+</style>
+
+<script id="nileEverythingJS">
+(function () {
+  'use strict';
+
+  /* ═══════════════════════════════════════════════════════
+     FIX 1 — TEETH-MAP: position between #results & #reviews
+     ═══════════════════════════════════════════════════════ */
+  function positionTeethMap() {
+    var teeth = document.getElementById('teeth-map');
+    var main = document.getElementById('main');
+    var results = document.getElementById('results');
+    if (!teeth || !main || !results) return;
+    if (results.parentNode !== main) return;
+    if (teeth.previousElementSibling === results) return;
+    results.parentNode.insertBefore(teeth, results.nextSibling);
+  }
+  positionTeethMap();
+  [200, 500, 1000, 2000, 3500, 5000, 7000, 8500, 9500, 11000, 13000, 15000, 20000, 25000, 30000].forEach(function (t) {
+    setTimeout(positionTeethMap, t);
+  });
+  (function () {
+    var main = document.getElementById('main');
+    if (!main || !('MutationObserver' in window)) return;
+    var busy = false;
+    var mo = new MutationObserver(function () {
+      if (busy) return;
+      busy = true;
+      requestAnimationFrame(function () {
+        positionTeethMap();
+        setTimeout(function () { busy = false; }, 150);
+      });
+    });
+    mo.observe(main, { childList: true });
+    setTimeout(function () { mo.disconnect(); }, 16000);
+  })();
+
+  /* ═══════════════════════════════════════════════════════
+     FIX 2 — DOUBLE SUBMIT: capture-phase guard
+     ═══════════════════════════════════════════════════════ */
+  function installSubmitGuard() {
+    var form = document.getElementById('leadForm');
+    if (!form || form.dataset.nileGuard === '1') return;
+    form.dataset.nileGuard = '1';
+    form.addEventListener('submit', function (e) {
+      if (window.__nileSubmitting) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        return false;
+      }
+      window.__nileSubmitting = true;
+      setTimeout(function () { window.__nileSubmitting = false; }, 4000);
+    }, true);
+  }
+  installSubmitGuard();
+  setTimeout(installSubmitGuard, 300);
+  setTimeout(installSubmitGuard, 1200);
+  setTimeout(installSubmitGuard, 3000);
+
+  /* ═══════════════════════════════════════════════════════
+     FIX 3 — TEAL→GOLD: style attribute observer
+     ═══════════════════════════════════════════════════════ */
+  var tealMap = {
+    '#00a6a6': '#AE9164', '#2dd4bf': '#E8C88A',
+    '#0b3b4a': '#4F6070', '#14657d': '#6B7D8E',
+    '#ff6b5b': '#C9A96E', '#ff8a7a': '#E8C88A',
+    '#071a22': '#0A0D10', '#0f3b4d': '#2A3744',
+    '#f4f6f9': '#F6F3EE', '#eef1f6': '#FBFAF7',
+    '#0f1a24': '#1F2A36'
+  };
+  function goldify(el) {
+    if (!el || !el.getAttribute) return;
+    var s = el.getAttribute('style');
+    if (!s) return;
+    var o = s;
+    Object.keys(tealMap).forEach(function (k) {
+      s = s.replace(new RegExp(k, 'gi'), tealMap[k]);
+    });
+    if (s !== o) el.setAttribute('style', s);
+  }
+  document.querySelectorAll('[style]').forEach(goldify);
+  (function () {
+    if (!('MutationObserver' in window)) return;
+    var mo = new MutationObserver(function (muts) {
+      for (var i = 0; i < muts.length; i++) {
+        if (muts[i].type === 'attributes' && muts[i].attributeName === 'style') {
+          goldify(muts[i].target);
+        }
+      }
+    });
+    mo.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['style'],
+      subtree: true
+    });
+  })();
+
+  /* ═══════════════════════════════════════════════════════
+     FIX 4 — HEADER: force always visible
+     ═══════════════════════════════════════════════════════ */
+  (function () {
+    var h = document.getElementById('liquidGlassHeader');
+    if (!h) return;
+    h.classList.add('is-visible');
+    h.style.opacity = '1';
+    h.style.transform = 'translateX(-50%) translateY(0)';
+    var t = setInterval(function () {
+      if (!h.classList.contains('is-visible')) h.classList.add('is-visible');
+      if (h.style.opacity !== '1') h.style.opacity = '1';
+    }, 800);
+    setTimeout(function () { clearInterval(t); }, 15000);
+  })();
+
+  /* ═══════════════════════════════════════════════════════
+     FIX 5 — FORM: re-bind inline validation + draft save
+     ═══════════════════════════════════════════════════════ */
+  function bindForm() {
+    var form = document.getElementById('leadForm');
+    if (!form || form.dataset.nileFormBound === '1') return;
+    form.dataset.nileFormBound = '1';
+
+    function showErr(input, msg) {
+      input.classList.add('form-field-error');
+      input.setAttribute('aria-invalid', 'true');
+      var ex = input.parentNode.querySelector('.form-error-message');
+      if (ex) ex.remove();
+      var err = document.createElement('p');
+      err.className = 'form-error-message';
+      err.textContent = '⚠ ' + msg;
+      input.parentNode.insertBefore(err, input.nextSibling);
+    }
+    function clearErr(input) {
+      input.classList.remove('form-field-error');
+      input.classList.add('form-field-success');
+      input.setAttribute('aria-invalid', 'false');
+      var ex = input.parentNode.querySelector('.form-error-message');
+      if (ex) ex.remove();
+    }
+
+    var email = form.querySelector('#formEmail');
+    var phone = form.querySelector('#formPhone');
+    var name  = form.querySelector('#formName');
+
+    if (email) email.addEventListener('blur', function () {
+      var v = this.value.trim();
+      if (!v) return;
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) showErr(this, 'Please enter a valid email');
+      else clearErr(this);
+    });
+    if (phone) phone.addEventListener('blur', function () {
+      var v = this.value.replace(/[\s\-()]/g, '');
+      if (!v) return;
+      if (v.length < 8) showErr(this, 'Enter a valid phone with country code');
+      else clearErr(this);
+    });
+    if (name) name.addEventListener('blur', function () {
+      var v = this.value.trim();
+      if (!v) return;
+      if (v.length < 2) showErr(this, 'Please enter your full name');
+      else clearErr(this);
+    });
+
+    var dt;
+    form.addEventListener('input', function () {
+      clearTimeout(dt);
+      dt = setTimeout(function () {
+        var data = {};
+        form.querySelectorAll('input, select').forEach(function (el) {
+          if (el.id && el.type !== 'file') data[el.id] = el.value;
+        });
+        try { localStorage.setItem('nileFormDraft_v2', JSON.stringify(data)); } catch (e) {}
+      }, 800);
+    });
+
+    try {
+      var draft = JSON.parse(localStorage.getItem('nileFormDraft_v2') || '{}');
+      Object.keys(draft).forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el && !el.value) el.value = draft[id];
+      });
+    } catch (e) {}
+  }
+  bindForm();
+  setTimeout(bindForm, 500);
+  setTimeout(bindForm, 2000);
+  setTimeout(bindForm, 4000);
+
+  /* ═══════════════════════════════════════════════════════
+     FIX 6 — GOLD re-assert in dark sections
+     ═══════════════════════════════════════════════════════ */
+  function ensureGold() {
+    var sel = '.bg-nile-blue span[class*="text-nile-gold"],' +
+              '.bg-nile-blue-dark span[class*="text-nile-gold"],' +
+              '#turkey-rescue span[class*="text-nile-gold"],' +
+              '#top-tier span[class*="text-nile-gold"],' +
+              '#guarantees span[class*="text-nile-gold"],' +
+              '#price-anchor span[class*="text-nile-gold"],' +
+              '#consult span[class*="text-nile-gold"]';
+    document.querySelectorAll(sel).forEach(function (el) {
+      el.style.setProperty('color', '#E8C88A', 'important');
+    });
+  }
+  ensureGold();
+  setTimeout(ensureGold, 1500);
+  setTimeout(ensureGold, 5000);
+
+})();
+</script>
+<!-- ═══ END EVERYTHING FIX ═══ -->
+ <!-- ═══════════════════════════════════════════════════════════════
+     NILE SMILE — UX POLISH v1.0
+     Header glass · Mobile bottom sheet · Hero cleanup · Travel bundles
+     ═══════════════════════════════════════════════════════════════ -->
+
+<style id="nileUxPolishCss">
+  /* ═══ 1. HEADER — glass نظيف، بدون إطار أبيض ولا اصفرار ═══ */
+  #liquidGlassHeader:not(.on-dark) {
+    background: rgba(255, 255, 255, 0.55) !important;
+    border: none !important;
+    box-shadow:
+      0 8px 32px rgba(31, 42, 54, 0.08),
+      0 2px 8px rgba(31, 42, 54, 0.04) !important;
+    backdrop-filter: blur(26px) saturate(170%) !important;
+    -webkit-backdrop-filter: blur(26px) saturate(170%) !important;
+  }
+  #liquidGlassHeader:not(.on-dark).is-scrolled {
+    background: rgba(255, 255, 255, 0.88) !important;
+  }
+  /* الوضع الداكن — سيب شكله زي ما هو (عاجبك) */
+
+  /* ═══ 2. MOBILE MENU — Bottom Sheet (2026 standard) ═══ */
+  @media (max-width: 1023px) {
+
+    /* Backdrop */
+    .lgh-mobile-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 13, 16, 0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s cubic-bezier(0.32, 0.72, 0, 1),
+                  visibility 0.4s;
+      z-index: 1040;
+      pointer-events: none;
+    }
+    body.lgh-menu-open .lgh-mobile-backdrop {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    /* Bottom sheet */
+    .lgh-mobile-menu {
+      position: fixed !important;
+      top: auto !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      border-radius: 28px 28px 0 0 !important;
+      max-height: 82vh !important;
+      padding: 0 !important;
+      transform: translateY(110%) !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1) !important;
+      z-index: 1050 !important;
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(30px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+      border: none !important;
+      box-shadow: 0 -20px 60px rgba(10, 13, 16, 0.25) !important;
+      overflow-y: auto !important;
+      overscroll-behavior: contain !important;
+      -webkit-overflow-scrolling: touch !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    #liquidGlassHeader.menu-open .lgh-mobile-menu {
+      transform: translateY(0) !important;
+    }
+
+    /* Drag handle */
+    .lgh-mobile-menu::before {
+      content: '' !important;
+      display: block !important;
+      width: 44px !important;
+      height: 4px !important;
+      background: rgba(174, 145, 100, 0.4) !important;
+      border-radius: 2px !important;
+      margin: 12px auto 16px !important;
+      flex-shrink: 0 !important;
+    }
+
+    /* Links */
+    .lgh-mobile-link {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      padding: 1rem 1.5rem !important;
+      min-height: 56px !important;
+      font-size: 0.95rem !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.02em !important;
+      text-transform: none !important;
+      color: #1F2A36 !important;
+      border-radius: 0 !important;
+      border: none !important;
+      border-bottom: 1px solid rgba(174, 145, 100, 0.1) !important;
+      background: transparent !important;
+      transition: background 0.2s ease,
+                  padding-left 0.25s cubic-bezier(0.32, 0.72, 0, 1) !important;
+      font-family: 'Montserrat', sans-serif !important;
+    }
+    .lgh-mobile-link:active,
+    .lgh-mobile-link:focus-visible {
+      background: rgba(174, 145, 100, 0.08) !important;
+      padding-left: 1.75rem !important;
+      outline: none !important;
+    }
+    .lgh-mobile-link svg {
+      width: 18px !important;
+      height: 18px !important;
+      opacity: 0.35 !important;
+      flex-shrink: 0 !important;
+    }
+    .lgh-mobile-divider { display: none !important; }
+    .lgh-mobile-cta {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      margin: 1.5rem !important;
+      padding: 1rem 1.5rem !important;
+      font-size: 0.75rem !important;
+      letter-spacing: 0.14em !important;
+      border-radius: 100px !important;
+      background: linear-gradient(135deg, #AE9164, #C9A96E, #AE9164) !important;
+      color: #1a1a1a !important;
+      box-shadow: 0 6px 20px rgba(174, 145, 100, 0.35) !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      min-height: 52px !important;
+    }
+    body.lgh-menu-open { overflow: hidden !important; }
+  }
+  @media (min-width: 1024px) {
+    .lgh-mobile-backdrop,
+    .lgh-mobile-menu { display: none !important; }
+  }
+</style>
+
+<script id="nileUxPolishJs">
+(function () {
+  'use strict';
+
+  /* ═══════════════════════════════════════════════════════════
+     MOBILE MENU — bottom sheet + backdrop + swipe-to-close
+     ═══════════════════════════════════════════════════════════ */
+  function initMobileMenu() {
+    var header = document.getElementById('liquidGlassHeader');
+    if (!header) return;
+
+    // Add backdrop once
+    if (!document.querySelector('.lgh-mobile-backdrop')) {
+      var bd = document.createElement('div');
+      bd.className = 'lgh-mobile-backdrop';
+      document.body.appendChild(bd);
+      bd.addEventListener('click', closeMenu);
+    }
+
+    function closeMenu() {
+      header.classList.remove('menu-open');
+      document.body.classList.remove('lgh-menu-open');
+      var ham = header.querySelector('.lgh-hamburger');
+      if (ham) {
+        ham.classList.remove('is-open');
+        ham.setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    // Sync body class + intercept hamburger
+    var ham = header.querySelector('.lgh-hamburger');
+    if (ham && !ham.dataset.polishBound) {
+      ham.dataset.polishBound = '1';
+      ham.addEventListener('click', function () {
+        setTimeout(function () {
+          if (header.classList.contains('menu-open')) {
+            document.body.classList.add('lgh-menu-open');
+          } else {
+            document.body.classList.remove('lgh-menu-open');
+          }
+        }, 10);
+      });
+    }
+
+    var menu = header.querySelector('.lgh-mobile-menu');
+    if (!menu) return;
+
+    // Close on link click
+    menu.querySelectorAll('a').forEach(function (a) {
+      if (a.dataset.polishBound) return;
+      a.dataset.polishBound = '1';
+      a.addEventListener('click', closeMenu);
+    });
+
+    // Swipe-to-close from drag handle
+    if (!menu.dataset.swipeBound) {
+      menu.dataset.swipeBound = '1';
+      var startY = 0, curY = 0, dragging = false;
+      menu.addEventListener('touchstart', function (e) {
+        var rect = menu.getBoundingClientRect();
+        var t = e.touches[0];
+        if (t.clientY - rect.top < 100) {
+          dragging = true;
+          startY = t.clientY;
+          curY = startY;
+        }
+      }, { passive: true });
+      menu.addEventListener('touchmove', function (e) {
+        if (!dragging) return;
+        curY = e.touches[0].clientY;
+        var delta = Math.max(0, curY - startY);
+        menu.style.transform = 'translateY(' + delta + 'px)';
+        menu.style.transition = 'none';
+      }, { passive: true });
+      menu.addEventListener('touchend', function () {
+        if (!dragging) return;
+        var delta = curY - startY;
+        menu.style.transform = '';
+        menu.style.transition = '';
+        if (delta > 80) closeMenu();
+        dragging = false;
+      });
+    }
+  }
+  initMobileMenu();
+  setTimeout(initMobileMenu, 500);
+  setTimeout(initMobileMenu, 1500);
+
+  // ESC closes menu
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    var header = document.getElementById('liquidGlassHeader');
+    if (header && header.classList.contains('menu-open')) {
+      header.classList.remove('menu-open');
+      document.body.classList.remove('lgh-menu-open');
+      var ham = header.querySelector('.lgh-hamburger');
+      if (ham) {
+        ham.classList.remove('is-open');
+        ham.setAttribute('aria-expanded', 'false');
+      }
+    }
+  });
+
+  /* ═══════════════════════════════════════════════════════════
+     HERO CLEANUP — إزالة التكرار
+     ═══════════════════════════════════════════════════════════ */
+  function cleanHero() {
+    // Remove "3 tiers · 3 brands..." + brand list from paragraph
+    document.querySelectorAll('.hero-content p').forEach(function (p) {
+      var html = p.innerHTML;
+      if (html.indexOf('3 tiers · 3 brands') !== -1) {
+        html = html.replace(/<strong[^>]*>3 tiers[^<]*<\/strong>\s*/gi, '');
+        html = html.replace(/Straumann Swiss · Nobel Biocare · Bego German\.?\s*/gi, '');
+        html = html.replace(/^\s+/, '');
+        p.innerHTML = html;
+      }
+    });
+
+    // Hide duplicate trust badges (already stated in P or subtitle)
+    var badgeContainers = document.querySelectorAll(
+      '.hero-content .flex.flex-wrap.justify-center.gap-x-6,' +
+      '.hero-content .flex.flex-wrap.justify-center.gap-x-8'
+    );
+    badgeContainers.forEach(function (container) {
+      container.querySelectorAll(':scope > span').forEach(function (span) {
+        var text = (span.textContent || '').trim();
+        if (text.indexOf('Straumann') !== -1 ||
+            text.indexOf('Implant Passport') !== -1 ||
+            text.indexOf('2-Tier') !== -1 ||
+            text.indexOf('2-tier') !== -1) {
+          span.style.display = 'none';
+        }
+      });
+    });
+  }
+  cleanHero();
+  setTimeout(cleanHero, 800);
+
+  /* ═══════════════════════════════════════════════════════════
+     TRAVEL ADD-ONS — merge hotel + concierge → 3 clear bundles
+     ═══════════════════════════════════════════════════════════ */
+  function mergeTravelPackages() {
+    var section = document.getElementById('travel-addons');
+    if (!section) return;
+    if (document.getElementById('combined-travel-bundles')) return;
+
+    var container = section.querySelector('.container');
+    if (!container) return;
+
+    // Hide Step 1 & Step 2 headers
+    container.querySelectorAll('.text-center').forEach(function (el) {
+      var badge = el.querySelector('.limited-badge');
+      if (!badge) return;
+      var t = badge.textContent || '';
+      if (t.indexOf('Step 1') !== -1 || t.indexOf('Step 2') !== -1) {
+        el.style.display = 'none';
+      }
+    });
+
+    // Hide hotel grid + concierge grid
+    container.querySelectorAll('.grid').forEach(function (grid) {
+      var text = grid.textContent || '';
+      // Hotel grid signature: "10 nights · $"
+      if (/10\s*nights\s*·\s*\$/.test(text)) {
+        grid.style.display = 'none';
+        return;
+      }
+      // Concierge grid signature: "+$1,700" AND "+$3,000"
+      if (text.indexOf('+$1,700') !== -1 && text.indexOf('+$3,000') !== -1) {
+        grid.style.display = 'none';
+      }
+    });
+
+    // Hide "How to Combine" box
+    container.querySelectorAll('.bg-nile-beige').forEach(function (el) {
+      if ((el.textContent || '').indexOf('How to Combine') !== -1) {
+        el.style.display = 'none';
+      }
+    });
+
+    // Insert combined bundles after the section header
+    var header = container.querySelector('.text-center.mb-14') || container.firstElementChild;
+    if (!header) return;
+
+    var html = ''
+      + '<div id="combined-travel-bundles" style="margin-bottom:3rem">'
+      +   '<div class="text-center mb-10">'
+      +     '<p class="eyebrow mb-3">Travel Packages</p>'
+      +     '<h3 class="font-serif text-nile-blue mb-3" style="font-size:clamp(1.5rem,3vw,2rem)">Pick Your Travel Experience</h3>'
+      +     '<p class="text-nile-muted max-w-2xl mx-auto">All-inclusive bundles — hotel, transfers, and concierge in one clear price. Need to customize? Expand individual options below.</p>'
+      +   '</div>'
+      +   '<div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">'
+
+      // Essential — Comfort
+      +     '<div class="card card-top-blue p-7 flex flex-col">'
+      +       '<p class="eyebrow mb-2" style="color:#4F6070">Essential</p>'
+      +       '<h4 class="font-serif text-nile-blue text-lg mb-1">Comfort</h4>'
+      +       '<p class="text-nile-muted text-xs mb-4">3★ Hotel · Bilingual coordinator</p>'
+      +       '<p class="font-serif text-nile-gold mb-4" style="font-size:2.25rem;line-height:1">$700</p>'
+      +       '<ul class="text-xs text-nile-muted space-y-2 mb-6 flex-1">'
+      +         '<li>✓ 10 nights · 3★ Hotel</li>'
+      +         '<li>✓ Breakfast included</li>'
+      +         '<li>✓ Round-trip airport transfers</li>'
+      +         '<li>✓ Bilingual coordinator on call</li>'
+      +         '<li class="italic pt-2 border-t border-nile-gold/15" style="font-size:.7rem">Add concierge later if needed</li>'
+      +       '</ul>'
+      +       '<a href="#consult" class="btn btn-outline-dark w-full" style="font-size:.65rem;letter-spacing:.12em">Select Comfort</a>'
+      +     '</div>'
+
+      // Premium — Balanced (Most Chosen)
+      +     '<div class="card card-top-gold p-7 flex flex-col relative" style="overflow:visible">'
+      +       '<div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#AE9164,#E8C88A);color:#1F2A36;font-size:.55rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.4rem 1rem;border-radius:100px;white-space:nowrap;box-shadow:0 6px 20px rgba(174,145,100,.4);z-index:20">Most Chosen</div>'
+      +       '<p class="eyebrow mb-2" style="color:#AE9164">Premium</p>'
+      +       '<h4 class="font-serif text-nile-blue text-lg mb-1">Balanced</h4>'
+      +       '<p class="text-nile-muted text-xs mb-4">4★ Hotel + Premium Concierge</p>'
+      +       '<p class="font-serif text-nile-gold mb-4" style="font-size:2.25rem;line-height:1">$2,900</p>'
+      +       '<ul class="text-xs text-nile-muted space-y-2 mb-6 flex-1">'
+      +         '<li>✓ 10 nights · 4★ Hotel</li>'
+      +         '<li>✓ Dedicated bilingual coordinator</li>'
+      +         '<li>✓ Unlimited clinic transfers</li>'
+      +         '<li>✓ Round-trip airport transfers</li>'
+      +         '<li>✓ Priority clinic scheduling</li>'
+      +         '<li>✓ Nile dinner cruise (1 evening)</li>'
+      +         '<li>✓ Welcome kit + curated meals</li>'
+      +       '</ul>'
+      +       '<a href="#consult" class="btn btn-gold shine-auto w-full" style="font-size:.65rem;letter-spacing:.12em">Select Balanced</a>'
+      +     '</div>'
+
+      // Signature — VIP
+      +     '<div class="card card-top-gold p-7 flex flex-col">'
+      +       '<p class="eyebrow mb-2" style="color:#AE9164">Signature</p>'
+      +       '<h4 class="font-serif text-nile-blue text-lg mb-1">VIP</h4>'
+      +       '<p class="text-nile-muted text-xs mb-4">5★ Suite + Signature VIP Concierge</p>'
+      +       '<p class="font-serif text-nile-gold mb-4" style="font-size:2.25rem;line-height:1">$7,500</p>'
+      +       '<ul class="text-xs text-nile-muted space-y-2 mb-6 flex-1">'
+      +         '<li>✓ 10 nights · 5★ Suite</li>'
+      +         '<li>✓ Private chauffeur (not shared)</li>'
+      +         '<li>✓ Airport fast-track + meet & greet</li>'
+      +         '<li>✓ In-room private chef (3 meals)</li>'
+      +         '<li>✓ Private Giza Pyramids tour</li>'
+      +         '<li>✓ Luxor day trip (post-recovery)</li>'
+      +         '<li>✓ Private Nile yacht dinner</li>'
+      +         '<li>✓ Personal shopper (1 day)</li>'
+      +       '</ul>'
+      +       '<a href="#consult" class="btn btn-outline-dark w-full" style="font-size:.65rem;letter-spacing:.12em">Select VIP</a>'
+      +     '</div>'
+
+      +   '</div>'
+      +   '<div class="text-center mt-8">'
+      +     '<p class="text-nile-muted text-sm mb-3">Want to mix and match?</p>'
+      +     '<button type="button" id="showCustomTravel" class="btn btn-outline-dark" style="font-size:.7rem;letter-spacing:.14em">Customize My Travel ↓</button>'
+      +   '</div>'
+      + '</div>';
+
+    header.insertAdjacentHTML('afterend', html);
+
+    // Wire "Customize" to reveal individual sections
+    setTimeout(function () {
+      var btn = document.getElementById('showCustomTravel');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        container.querySelectorAll('.text-center').forEach(function (el) {
+          if (el.querySelector('.limited-badge')) {
+            var t = el.querySelector('.limited-badge').textContent || '';
+            if (t.indexOf('Step 1') !== -1 || t.indexOf('Step 2') !== -1) {
+              el.style.display = '';
+            }
+          }
+        });
+        container.querySelectorAll('.grid').forEach(function (grid) {
+          if (grid.style.display === 'none') {
+            var text = grid.textContent || '';
+            if (/10\s*nights\s*·\s*\$/.test(text) ||
+                (text.indexOf('+$1,700') !== -1 && text.indexOf('+$3,000') !== -1)) {
+              grid.style.display = '';
+            }
+          }
+        });
+        btn.style.display = 'none';
+        var firstStep = container.querySelector('.limited-badge');
+        if (firstStep) firstStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }, 100);
+  }
+
+  mergeTravelPackages();
+  setTimeout(mergeTravelPackages, 500);
+  setTimeout(mergeTravelPackages, 1500);
+  setTimeout(mergeTravelPackages, 3000);
+
+})();
+</script>
+<!-- ═══ END UX POLISH ═══ -->
 </body>
 </html>
