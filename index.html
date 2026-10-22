@@ -20438,5 +20438,30 @@ input:focus-visible, select:focus-visible, textarea:focus-visible,
 })();
 </script>
 <!-- ═══ END NILE SMILE FINAL FIX v3.0 ═══ -->
+ <style id="fixMobileMenuVisibility">
+  @media (max-width: 1023px) {
+    /* إلغاء transform على الـ header عشان position:fixed جواه يشتغل صح */
+    #liquidGlassHeader,
+    #liquidGlassHeader.is-visible,
+    #liquidGlassHeader.is-scrolled {
+      transform: none !important;
+      left: 10px !important;
+      right: 10px !important;
+      width: auto !important;
+      max-width: calc(100vw - 20px) !important;
+      margin-left: 0 !important;
+    }
+
+    /* دلوقتي translateY(110%) هيشتغل صح = برّه الشاشة */
+    .lgh-mobile-menu {
+      transform: translateY(110%) !important;
+    }
+
+    #liquidGlassHeader.menu-open .lgh-mobile-menu,
+    body.lgh-menu-open .lgh-mobile-menu {
+      transform: translateY(0) !important;
+    }
+  }
+</style>
 </body>
 </html>
