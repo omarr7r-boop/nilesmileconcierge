@@ -15752,6 +15752,698 @@ p, li {
 <!-- ═══════════════════════════════════════════════════════════════
      END NILE SMILE — 2026 MODERNIZATION
      ═══════════════════════════════════════════════════════════════ -->
+     <!-- ═══════════════════════════════════════════════════════════════
+     NILE SMILE — GOLD IDENTITY RESTORATION
+     Paste RIGHT BEFORE </body> (after ALL existing scripts)
      
+     Purpose:
+     ✓ Restore original gold / cream / slate color system
+     ✓ Restore original brand identity (#AE9164 gold)
+     ✓ Fix "Concierge" back to gold color
+     ✓ Fix slogan back to visible (slate light)
+     ✓ Change glass tint from teal → gold
+     ✓ Keep: rounded corners, motion, visible header, spring easing
+     ✓ Remove: teal #00A6A6, coral #FF6B5B, cool-gray canvas
+     ═══════════════════════════════════════════════════════════════ -->
+
+<style id="goldRestoration">
+/* ═══════════════════════════════════════════════════════════════
+   1. RESTORE ORIGINAL COLOR SYSTEM
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── ORIGINAL GOLD PALETTE (restored) ── */
+  --gold-900: #8A7248;
+  --gold-700: #AE9164;
+  --gold-500: #C9A96E;
+  --gold-300: #E8C88A;
+  --gold-100: #F5E9D0;
+  
+  /* ── ORIGINAL CREAM / BEIGE (restored) ── */
+  --cream-50: #FBFAF7;
+  --cream-100: #F6F3EE;
+  --cream-200: #EDE6DA;
+  --cream-300: #E0D5C0;
+  
+  /* ── ORIGINAL SLATE (restored) ── */
+  --slate-900: #1F2A36;
+  --slate-800: #2A3744;
+  --slate-700: #3A4855;
+  --slate-600: #4F6070;
+  --slate-500: #6B7D8E;
+  --slate-400: #8FA1B2;
+  
+  /* ── ORIGINAL BLACKS (restored) ── */
+  --black-900: #0A0D10;
+  --black-800: #14181D;
+  
+  /* ── OVERRIDE MY MISTAKEN "MODERN" VARS → point back to gold ── */
+  --ns-canvas: #F6F3EE;
+  --ns-surface: #FFFFFF;
+  --ns-surface-alt: #FBFAF7;
+  --ns-primary: #4F6070;
+  --ns-primary-light: #6B7D8E;
+  --ns-accent: #AE9164;         /* was teal — now gold */
+  --ns-accent-bright: #E8C88A;  /* was teal — now gold light */
+  --ns-coral: #AE9164;           /* disabled — mapped to gold */
+  --ns-coral-soft: #C9A96E;      /* disabled — mapped to gold */
+  --ns-text: #1F2A36;
+  --ns-text-muted: #4A5568;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   2. RESTORE BODY BACKGROUND (cream, not cool gray)
+   ═══════════════════════════════════════════════════════════════ */
+
+body {
+  background: #F6F3EE !important;
+  color: #1a202c !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   3. RESTORE SECTION BACKGROUNDS (beige, dark navy — not cool)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Beige sections — original warm gradient */
+section.bg-nile-beige,
+#packages,
+#travel-addons,
+#reviews {
+  background: linear-gradient(180deg, #FBFAF7 0%, #F6F3EE 50%, #EDE6DA 100%) !important;
+}
+
+/* White sections — pure white */
+section.bg-white {
+  background: #FFFFFF !important;
+}
+
+/* Dark sections — original near-black gradient */
+section.bg-nile-blue,
+section.bg-nile-blue-dark,
+#price-anchor,
+#top-tier,
+#consult,
+#guarantees,
+#legal {
+  background: 
+    radial-gradient(ellipse at 80% 20%, rgba(174, 145, 100, 0.06) 0%, transparent 50%),
+    linear-gradient(160deg, #0A0D10 0%, #1F2A36 50%, #2A3744 100%) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   4. RESTORE GOLD GRADIENT HEADINGS
+   ═══════════════════════════════════════════════════════════════ */
+
+.gold-text,
+.gold-grad,
+.section-heading,
+.section-heading-light {
+  background: linear-gradient(135deg, #AE9164 0%, #E8C88A 45%, #AE9164 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-size: 200% auto !important;
+  animation: goldFlowSection 5s ease-in-out infinite !important;
+}
+
+/* On dark sections — keep light gold */
+footer .gold-grad,
+footer .section-heading,
+section.bg-nile-blue .gold-grad,
+section.bg-nile-blue-dark .gold-grad,
+section#consult .gold-grad,
+section#guarantees .gold-grad {
+  background: linear-gradient(135deg, #E8C88A 0%, #F5E9D0 45%, #E8C88A 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   5. RESTORE GOLD BORDERS (not teal)
+   ═══════════════════════════════════════════════════════════════ */
+
+.card,
+details,
+.table-wrap,
+.tier-section,
+.limited-badge {
+  border-color: rgba(174, 145, 100, 0.18) !important;
+}
+
+.card-top-gold,
+.card-left-gold {
+  border-top-color: #AE9164 !important;
+  border-left-color: #AE9164 !important;
+}
+
+.card-top-blue {
+  border-top-color: #4F6070 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   6. RESTORE GOLD BUTTONS (not teal)
+   ═══════════════════════════════════════════════════════════════ */
+
+.btn-gold {
+  background: linear-gradient(135deg, #AE9164 0%, #C9A96E 50%, #AE9164 100%) !important;
+  color: #1a1a1a !important;
+  border: 1px solid rgba(174, 145, 100, 0.5) !important;
+  border-radius: 100px !important;
+  box-shadow: 0 4px 15px rgba(174, 145, 100, 0.2) !important;
+  font-weight: 600 !important;
+}
+
+.btn-gold:hover {
+  background-position: right center !important;
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 12px 32px rgba(174, 145, 100, 0.5),
+              0 0 0 4px rgba(174, 145, 100, 0.1) !important;
+}
+
+.btn-gold::after {
+  background: radial-gradient(circle, rgba(232, 200, 138, 0.5) 0%, transparent 70%) !important;
+}
+
+/* Restore secondary CTAs (were coral — now gold outline) */
+#turkey-rescue .btn-gold,
+#travel-addons .card a[href*="wa.me"] {
+  background: linear-gradient(135deg, #AE9164 0%, #C9A96E 50%, #AE9164 100%) !important;
+  box-shadow: 0 4px 15px rgba(174, 145, 100, 0.2) !important;
+  color: #1a1a1a !important;
+}
+
+.btn-outline {
+  border: 1px solid rgba(174, 145, 100, 0.55) !important;
+  color: #F6F3EE !important;
+  border-radius: 100px !important;
+  background: transparent !important;
+}
+
+.btn-outline:hover {
+  background: rgba(201, 169, 110, 0.15) !important;
+  border-color: #C9A96E !important;
+}
+
+.btn-outline-dark {
+  border: 1px solid rgba(79, 96, 112, 0.3) !important;
+  color: #4F6070 !important;
+  border-radius: 100px !important;
+  background: transparent !important;
+}
+
+.btn-outline-dark:hover {
+  background: rgba(79, 96, 112, 0.08) !important;
+  border-color: #4F6070 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   7. GOLD-TINTED GLASS HEADER (was teal — now gold)
+   ═══════════════════════════════════════════════════════════════ */
+
+#liquidGlassHeader {
+  top: 16px !important;
+  max-width: 860px !important;
+  border-radius: 100px !important;
+  /* GOLD-TINTED glass — warm, matches brand */
+  background: rgba(255, 249, 235, 0.72) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid rgba(174, 145, 100, 0.25) !important;
+  box-shadow: 
+    0 8px 32px rgba(31, 42, 54, 0.10),
+    0 2px 8px rgba(31, 42, 54, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+  transform: translateX(-50%) translateY(0) !important;
+  opacity: 1 !important;
+  transition: 
+    background 0.4s cubic-bezier(0.32, 0.72, 0, 1),
+    box-shadow 0.4s cubic-bezier(0.32, 0.72, 0, 1),
+    top 0.35s cubic-bezier(0.32, 0.72, 0, 1) !important;
+}
+
+/* Over dark sections — dark glass with warm gold rim */
+#liquidGlassHeader.on-dark {
+  background: rgba(10, 13, 16, 0.72) !important;
+  border-color: rgba(232, 200, 138, 0.28) !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(232, 200, 138, 0.15) !important;
+}
+
+/* Scrolled state — firmer, tighter */
+#liquidGlassHeader.is-scrolled {
+  top: 10px !important;
+  background: rgba(255, 249, 235, 0.85) !important;
+  box-shadow: 
+    0 12px 40px rgba(31, 42, 54, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+#liquidGlassHeader.on-dark.is-scrolled {
+  background: rgba(10, 13, 16, 0.90) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   8. FIX LOGO COLORS — restore original identity
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Script "Nile Smile" — back to slate #4F6070 */
+#liquidGlassHeader .lgh-logo-script {
+  color: #4F6070 !important;
+  font-size: 1.8rem !important;
+}
+
+#liquidGlassHeader.on-dark .lgh-logo-script {
+  color: #F6F3EE !important;
+}
+
+/* "Concierge" — back to GOLD #AE9164 (was wrongly black) */
+#liquidGlassHeader .lgh-logo-text {
+  color: #AE9164 !important;
+  font-weight: 700 !important;
+}
+
+#liquidGlassHeader.on-dark .lgh-logo-text {
+  color: #E8C88A !important;
+}
+
+/* Slogan "World-Class Smile" — back to slate-light #8FA1B2, visible */
+#liquidGlassHeader .lgh-logo-sub {
+  display: block !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 0.42rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: #8FA1B2 !important;  /* original slate-light */
+  margin-top: 2px !important;
+  line-height: 1.2 !important;
+  opacity: 0.95 !important;
+}
+
+#liquidGlassHeader.on-dark .lgh-logo-sub {
+  color: #C9A96E !important;  /* gold light on dark */
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   9. NAV LINKS + CTA — back to gold identity
+   ═══════════════════════════════════════════════════════════════ */
+
+.lgh-link {
+  color: #4F6070 !important;
+  font-weight: 600 !important;
+}
+
+.lgh-link:hover {
+  color: #AE9164 !important;
+  background: rgba(174, 145, 100, 0.08) !important;
+}
+
+#liquidGlassHeader.on-dark .lgh-link {
+  color: #E8E4DC !important;
+}
+
+#liquidGlassHeader.on-dark .lgh-link:hover {
+  color: #E8C88A !important;
+}
+
+/* Active pill — gold gradient */
+.lgh-active-pill {
+  background: linear-gradient(90deg, #AE9164, #E8C88A) !important;
+}
+
+/* CTA button in header — gold */
+.lgh-cta {
+  background: linear-gradient(135deg, #AE9164 0%, #C9A96E 50%, #AE9164 100%) !important;
+  color: #1a1a1a !important;
+  border-radius: 100px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 16px rgba(174, 145, 100, 0.35) !important;
+}
+
+.lgh-cta:hover {
+  box-shadow: 0 8px 24px rgba(174, 145, 100, 0.55) !important;
+  transform: translateY(-1px) scale(1.03) !important;
+}
+
+/* Mobile menu — warm gold-tinted glass */
+.lgh-mobile-menu {
+  background: rgba(255, 249, 235, 0.92) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-radius: 28px !important;
+  border: 1px solid rgba(174, 145, 100, 0.25) !important;
+  box-shadow: 0 20px 50px rgba(31, 42, 54, 0.15) !important;
+}
+
+#liquidGlassHeader.on-dark .lgh-mobile-menu {
+  background: rgba(10, 13, 16, 0.92) !important;
+  border-color: rgba(232, 200, 138, 0.25) !important;
+}
+
+.lgh-mobile-link {
+  color: #1F2A36 !important;
+}
+
+#liquidGlassHeader.on-dark .lgh-mobile-link {
+  color: #F6F3EE !important;
+}
+
+.lgh-mobile-link:hover,
+.lgh-mobile-link:active {
+  background: rgba(174, 145, 100, 0.14) !important;
+  color: #AE9164 !important;
+}
+
+.lgh-mobile-divider {
+  background: rgba(174, 145, 100, 0.18) !important;
+}
+
+.lgh-mobile-cta {
+  background: linear-gradient(135deg, #AE9164 0%, #C9A96E 50%, #AE9164 100%) !important;
+  color: #1a1a1a !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   10. EYEBROWS — back to gold
+   ═══════════════════════════════════════════════════════════════ */
+
+.eyebrow {
+  color: #AE9164 !important;
+}
+
+.eyebrow-light {
+  color: #C9A96E !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   11. FORM — gold focus ring (was teal)
+   ═══════════════════════════════════════════════════════════════ */
+
+#leadForm input,
+#leadForm select,
+#leadForm textarea {
+  border: 1px solid rgba(79, 96, 112, 0.15) !important;
+  border-radius: 16px !important;
+  background: #FFFFFF !important;
+  color: #1a202c !important;
+  padding: 0.9rem 1.1rem !important;
+}
+
+#leadForm input:focus,
+#leadForm select:focus,
+#leadForm textarea:focus {
+  border-color: #AE9164 !important;
+  box-shadow: 0 0 0 4px rgba(174, 145, 100, 0.15) !important;
+  outline: none !important;
+}
+
+#leadForm input[aria-invalid="true"] {
+  border-color: #C85A5A !important;
+  background-color: rgba(200, 90, 90, 0.03) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   12. FOCUS STATES — back to gold (was teal #C9A96E was ok, keep)
+   ═══════════════════════════════════════════════════════════════ */
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible {
+  outline: 3px solid #AE9164 !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 6px rgba(174, 145, 100, 0.18) !important;
+  border-radius: 4px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   13. TEXT COLORS — restore warm neutrals (not cool gray)
+   ═══════════════════════════════════════════════════════════════ */
+
+body,
+p,
+li {
+  color: #2d3748 !important;
+}
+
+.text-nile-muted {
+  color: #4A5568 !important;
+}
+
+.bg-nile-blue p,
+.bg-nile-blue-dark p,
+#consult p,
+#guarantees p {
+  color: #B8C5D1 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   14. HERO — restore warm glass (was cool teal, now warm gold)
+   ═══════════════════════════════════════════════════════════════ */
+
+.hero-content {
+  background: rgba(10, 13, 16, 0.55) !important;
+  backdrop-filter: blur(20px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+  border: 1px solid rgba(232, 200, 138, 0.22) !important;
+  border-radius: 32px !important;
+  box-shadow: 
+    0 24px 64px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+.hero-content .flex.flex-wrap.justify-center.gap-x-6 span {
+  color: #E8E4DC !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   15. KEEP ROUNDED CORNERS (already applied, reassert)
+   ═══════════════════════════════════════════════════════════════ */
+
+.card { border-radius: 28px !important; overflow: hidden !important; }
+.btn { border-radius: 100px !important; }
+input, select, textarea { border-radius: 16px !important; }
+.table-wrap { border-radius: 24px !important; overflow: hidden !important; }
+details { border-radius: 20px !important; }
+.modal-content { border-radius: 32px !important; }
+.sticky-mobile { border-radius: 24px 24px 0 0 !important; }
+.limited-badge, .top-badge, .tier-badge, .implant-badge { border-radius: 100px !important; }
+.card img { border-radius: 20px !important; }
+
+/* ═══════════════════════════════════════════════════════════════
+   16. KEEP SPRING MOTION (already applied, reassert)
+   ═══════════════════════════════════════════════════════════════ */
+
+a, button, .card, .btn, details, summary, input, select, textarea {
+  transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   17. MOBILE — compact header, gold glass
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 767px) {
+  #liquidGlassHeader {
+    top: 10px !important;
+    width: calc(100% - 20px) !important;
+    max-width: 100% !important;
+    border-radius: 28px !important;
+    background: rgba(255, 249, 235, 0.85) !important;
+  }
+  
+  #liquidGlassHeader.on-dark {
+    background: rgba(10, 13, 16, 0.85) !important;
+  }
+  
+  #liquidGlassHeader .lgh-logo-script {
+    font-size: 1.5rem !important;
+  }
+  
+  #liquidGlassHeader .lgh-logo-text {
+    font-size: 0.5rem !important;
+    letter-spacing: 0.22em !important;
+  }
+  
+  #liquidGlassHeader .lgh-logo-sub {
+    display: block !important;
+    font-size: 0.38rem !important;
+    letter-spacing: 0.12em !important;
+  }
+  
+  .lgh-inner {
+    padding: 0.5rem 0.6rem 0.5rem 0.9rem !important;
+    min-height: 54px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   18. WORLD MAP — restore gold accents
+   ═══════════════════════════════════════════════════════════════ */
+
+.world-map-wrap {
+  border-color: rgba(174, 145, 100, 0.25) !important;
+}
+
+.world-map-wrap::before {
+  background: linear-gradient(90deg, transparent, #E8C88A 30%, #C9A96E 70%, transparent) !important;
+}
+
+.map-stat:hover {
+  border-color: rgba(174, 145, 100, 0.55) !important;
+}
+</style>
+
+<script id="goldRestorationJS">
+(function() {
+  'use strict';
+
+  var DEBUG = false;
+  function log() { if (DEBUG) console.log.apply(console, ['[Gold]'].concat([].slice.call(arguments))); }
+
+  /* ═══════════════════════════════════════════════════════
+     FIX 1: Remove any leftover teal inline styles
+     ═══════════════════════════════════════════════════════ */
+  function cleanTealInlineStyles() {
+    var tealColors = {
+      '#00A6A6': '#AE9164',
+      '#2DD4BF': '#E8C88A',
+      '#0B3B4A': '#4F6070',
+      '#14657D': '#6B7D8E',
+      '#FF6B5B': '#C9A96E',
+      '#FF8A7A': '#E8C88A',
+      '#071A22': '#0A0D10',
+      '#0F3B4D': '#2A3744',
+      '#F4F6F9': '#F6F3EE',
+      '#EEF1F6': '#FBFAF7',
+      '#0F1A24': '#1F2A36'
+    };
+
+    var changed = 0;
+    document.querySelectorAll('[style]').forEach(function(el) {
+      var style = el.getAttribute('style');
+      if (!style) return;
+      var original = style;
+      Object.keys(tealColors).forEach(function(teal) {
+        var re = new RegExp(teal, 'gi');
+        style = style.replace(re, tealColors[teal]);
+      });
+      if (style !== original) {
+        el.setAttribute('style', style);
+        changed++;
+      }
+    });
+
+    if (changed > 0) log('Cleaned ' + changed + ' inline styles');
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     FIX 2: Ensure header visible + gold logo colors
+     ═══════════════════════════════════════════════════════ */
+  function ensureGoldHeader() {
+    var header = document.getElementById('liquidGlassHeader');
+    if (!header) return;
+
+    /* Force visible */
+    header.classList.add('is-visible');
+    header.style.transform = 'translateX(-50%) translateY(0)';
+    header.style.opacity = '1';
+
+    /* Concierge — gold */
+    var concierge = header.querySelector('.lgh-logo-text');
+    if (concierge) concierge.style.color = '#AE9164';
+
+    /* Slogan — slate-light, visible */
+    var slogan = header.querySelector('.lgh-logo-sub');
+    if (slogan) {
+      slogan.style.display = 'block';
+      slogan.style.color = '#8FA1B2';
+    }
+
+    /* Script — slate */
+    var script = header.querySelector('.lgh-logo-script');
+    if (script) script.style.color = '#4F6070';
+
+    log('Gold header restored');
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     FIX 3: Re-assert header visibility on scroll
+     (keep the dynamic behavior — never hide)
+     ═══════════════════════════════════════════════════════ */
+  function initHeaderBehavior() {
+    var header = document.getElementById('liquidGlassHeader');
+    if (!header) return;
+
+    var ticking = false;
+
+    function update() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function() {
+        var y = window.scrollY;
+        header.classList.add('is-visible');
+
+        if (y > 120) {
+          header.classList.add('is-scrolled');
+        } else {
+          header.classList.remove('is-scrolled');
+        }
+
+        /* Tint switch over dark sections */
+        var darkSections = [
+          'price-anchor', 'top-tier', 'science', 'turkey-rescue',
+          'guarantees', 'bone-graft', 'consult', 'teeth-map',
+          'discover-egypt', 'legal', 'implant-systems'
+        ];
+        var rect = header.getBoundingClientRect();
+        var mid = rect.top + rect.height / 2;
+        var overDark = false;
+        for (var i = 0; i < darkSections.length; i++) {
+          var el = document.getElementById(darkSections[i]);
+          if (!el) continue;
+          var r = el.getBoundingClientRect();
+          if (r.top <= mid && r.bottom >= mid) {
+            overDark = true;
+            break;
+          }
+        }
+        if (overDark) header.classList.add('on-dark');
+        else header.classList.remove('on-dark');
+
+        ticking = false;
+      });
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+    log('Header behavior — always visible, gold tint');
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     RUNNER
+     ═══════════════════════════════════════════════════════ */
+  function runAll() {
+    try { cleanTealInlineStyles(); }  catch (e) { console.warn(e); }
+    try { ensureGoldHeader(); }       catch (e) { console.warn(e); }
+    try { initHeaderBehavior(); }     catch (e) { console.warn(e); }
+    log('✔ Gold identity fully restored');
+  }
+
+  if (document.readyState === 'complete') {
+    setTimeout(runAll, 200);
+  } else {
+    window.addEventListener('load', function() { setTimeout(runAll, 200); });
+  }
+
+})();
+</script>
+<!-- ═══════════════════════════════════════════════════════════════
+     END GOLD IDENTITY RESTORATION
+     ═══════════════════════════════════════════════════════════════ -->
 </body>
 </html>
