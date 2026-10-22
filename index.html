@@ -20716,5 +20716,45 @@ input:focus-visible, select:focus-visible, textarea:focus-visible,
     color: #E8938C !important;
   }
 </style>
+<script>
+(function() {
+  'use strict';
+  // ═══ 1. أوقف كل MutationObserver ═══
+  var RealMO = MutationObserver;
+  window.MutationObserver = function(cb) {
+    return new RealMO(function(muts) {
+      // اسمح بالـ observers اللي بتشتغل على forms/menus فقط
+      var target = muts[0] && muts[0].target;
+      if (target && target.id === 'leadForm') return cb(muts);
+      if (target && target.id === 'lghMobileMenu') return cb(muts);
+      // تجاهل الباقي (اللي بيحاول يصلح الألوان)
+    });
+  };
+
+  // ═══ 2. أوقف setInterval بعد 15 ثانية ═══
+  var _si = window.setInterval;
+  var started = Date.now();
+  window.setInterval = function(fn, ms) {
+    var id = _si(fn, ms);
+    if (Date.now() - started > 15000) { clearInterval(id); return 0; }
+    return id;
+  };
+
+  // ═══ 3. امنع تغيير أي `style` بعد أول ثانية ═══
+  var freeze = false;
+  setTimeout(function() { freeze = true; }, 1000);
+
+  new RealMO(function(muts) {
+    if (!freeze) return;
+    muts.forEach(function(m) {
+      if (m.type === 'attributes' && m.attributeName === 'style' && m.target.nodeType === 1) {
+        // استرجع الـ style الأصلي لو اتغير
+        m.target.removeAttribute('style');
+      }
+    });
+  }).observe(document.body, { attributes: true, attributeFilter: ['style'], subtree: true });
+
+})();
+</script>
 </body>
 </html>
