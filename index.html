@@ -21157,198 +21157,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible,
 <!-- ═══════════════════════════════════════════════════════════════
      END NILE SMILE — GOLD & PERFORMANCE LOCK
      ═══════════════════════════════════════════════════════════════ -->
-     <style id="compactDesignScience">
-  /* ═══════════════════════════════════════════════════════════
-     1. تقليل المسافات العالمية لجعل الموقع أكثر إحكاماً
-     ═══════════════════════════════════════════════════════════ */
-  .section {
-    padding: 3rem 1rem !important; /* كان 7rem - وفرنا مسافات ضخمة */
-  }
-  @media(min-width: 768px) {
-    .section {
-      padding: 4.5rem 2rem !important;
-    }
-  }
-
-  /* تقليل المسافات بين العناوين والفقرات */
-  h2, h3 { margin-bottom: 1rem !important; }
-  .eyebrow { margin-bottom: 0.5rem !important; }
-
-  /* ═══════════════════════════════════════════════════════════
-     2. تصميم نظام الطي (The "Read More" Expander)
-     ═══════════════════════════════════════════════════════════ */
-  
-  /* الحالة الافتراضية: مضغوط */
-  .is-compact {
-    position: relative !important;
-    max-height: 550px !important; /* الارتفاع المسموح به */
-    overflow: hidden !important;
-    transition: max-height 0.7s cubic-bezier(0.22, 1, 0.36, 1) !important;
-    padding-bottom: 60px !important; /* مساحة للزرار */
-  }
-
-  @media(max-width: 767px) {
-    .is-compact {
-      max-height: 400px !important; /* أقصر على الموبايل */
-    }
-  }
-
-  /* الحالة المفتوحة: تمدد كامل */
-  .is-compact.is-expanded {
-    max-height: 10000px !important; 
-    padding-bottom: 0 !important;
-  }
-
-  /* حاوية زرار "اقرأ المزيد" */
-  .read-more-wrapper {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 160px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-bottom: 20px;
-    pointer-events: none; /* عشان الكلام اللي ورا يبقى قابل للتحديد */
-    z-index: 10;
-    transition: all 0.4s ease;
-  }
-
-  /* تأثير التلاشي (Fade) */
-  .read-more-wrapper::before {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 160px;
-    z-index: 1;
-  }
-
-  /* ألوان التلاشي الذكية حسب لون القسم */
-  section.bg-white .read-more-wrapper::before { background: linear-gradient(to bottom, transparent, #FFFFFF); }
-  section.bg-nile-beige .read-more-wrapper::before { background: linear-gradient(to bottom, transparent, #F6F3EE); }
-  section.bg-nile-blue .read-more-wrapper::before,
-  section#science .read-more-wrapper::before,
-  section#top-tier .read-more-wrapper::before { background: linear-gradient(to bottom, transparent, #1F2A36); }
-  section.bg-nile-blue-dark .read-more-wrapper::before,
-  section#legal .read-more-wrapper::before,
-  section#turkey-rescue .read-more-wrapper::before { background: linear-gradient(to bottom, transparent, #0A0D10); }
-
-  /* تصميم الزرار نفسه */
-  .read-more-btn {
-    pointer-events: auto;
-    position: relative;
-    z-index: 2;
-    background: linear-gradient(135deg, #AE9164, #E8C88A) !important;
-    color: #1A1A1A !important;
-    border: none;
-    padding: 12px 28px;
-    border-radius: 50px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(174, 145, 100, 0.4);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  .read-more-btn:hover {
-    background: linear-gradient(135deg, #C9A96E, #F5E9D0) !important;
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(174, 145, 100, 0.6);
-  }
-
-  /* الحالة المفتوحة */
-  .is-expanded .read-more-wrapper {
-    position: relative;
-    height: auto;
-    padding-top: 40px;
-    padding-bottom: 0;
-  }
-  .is-expanded .read-more-wrapper::before {
-    display: none;
-  }
-</style>
-
-<script id="compactDesignScienceJS">
-(function () {
-  'use strict';
-
-  /* 
-   * الأقسام الطويلة جداً (اللي فيها نصوص كتير أو جداول) 
-   * تم استثناء الأقسام اللي أصلاً فيها <details> زي الباقات والأسئلة الشائعة
-   */
-  const targetSections = [
-    'science', 'brutal-truth', 'clinical-protocol',
-    'cost-of-cheap', 'warranty-truth', 'legal',
-    'comparison', 'destination-deep-dive', 'risks',
-    'expectations', 'implant-systems', 'crown-materials',
-    'bone-graft', 'orthodontics', 'who-for',
-    'turkey-rescue', 'global-patients', 'reviews'
-  ];
-
-  function applyCompactor() {
-    targetSections.forEach(id => {
-      const section = document.getElementById(id);
-      if (!section) return;
-
-      const container = section.querySelector('.container') || section;
-      
-      // لو القسم ده اتظبط قبل كده، متعملش حاجة
-      if (container.dataset.compacted) return;
-
-      // لو القسم قصير أصلاً (أقل من 650 بكسل) سيبه زي ما هو
-      if (container.offsetHeight < 650) return;
-
-      container.dataset.compacted = 'true';
-      container.classList.add('is-compact');
-
-      // إنشاء الزرار والخلفية المتلاشية
-      const wrapper = document.createElement('div');
-      wrapper.className = 'read-more-wrapper';
-
-      const btn = document.createElement('button');
-      btn.className = 'read-more-btn';
-      btn.innerHTML = 'Read Full Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>';
-
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const isExpanded = container.classList.toggle('is-expanded');
-        container.classList.toggle('is-compact', !isExpanded);
-        
-        // تغيير النص والأيقونة
-        btn.innerHTML = isExpanded 
-          ? 'Show Less <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>' 
-          : 'Read Full Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>';
-
-        // لو المستخدم قفل القسم، رجّعه لفوق عشان ميتوهش
-        if (!isExpanded) {
-          setTimeout(() => {
-            const headerOffset = 100;
-            const elementPosition = section.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-          }, 50);
-        }
-      });
-
-      wrapper.appendChild(btn);
-      container.appendChild(wrapper);
-    });
-  }
-
-  // تشغيل السكريبت بعد ما كل السكريبتات القديمة تخلص ترتيب الصفحة
-  setTimeout(applyCompactor, 2500);
-  setTimeout(applyCompactor, 5000);
-  setTimeout(applyCompactor, 8000);
-
-})();
-</script>
+     
 <style id="premiumAppleDockStyles">
   /* ═══════════════════════════════════════════════════════════
      1. إعدادات الانتقال السينمائي (View Transitions)
@@ -21652,5 +21461,587 @@ input:focus-visible, select:focus-visible, textarea:focus-visible,
 
 })();
 </script>
+<!-- ═══════════════════════════════════════════════════════════════
+     NILE SMILE — PREMIUM REDESIGN v1.0
+     Paste RIGHT BEFORE </body>
+     ═══════════════════════════════════════════════════════════════ -->
+
+<style id="premiumRedesignFinal">
+
+  /* ═══ 1. SCROLL — حل نهائي لمشكلة السكرول ═══ */
+  html {
+    scroll-behavior: smooth !important;
+    scroll-padding-top: 100px !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  section[id], main[id], header[id] {
+    scroll-margin-top: 100px !important;
+  }
+  @media (max-width: 767px) {
+    html { scroll-padding-top: 80px !important; }
+    section[id], main[id], header[id] { scroll-margin-top: 80px !important; }
+  }
+
+  /* منع content-visibility (سبب رئيسي في التقطيع) */
+  section, section * {
+    content-visibility: visible !important;
+    contain-intrinsic-size: auto !important;
+  }
+
+  /* ═══ 2. HERO — إعادة تصميم فخم، نظيف، متنفس ═══ */
+  .hero {
+    min-height: 92vh !important;
+    padding: 7rem 1rem 4rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  @media (max-width: 767px) {
+    .hero { min-height: 88vh !important; padding: 6rem 1rem 4rem !important; }
+  }
+
+  .hero-bg img {
+    object-position: center 40% !important;
+    filter: brightness(.92) saturate(1.05);
+  }
+  .hero-overlay {
+    background:
+      linear-gradient(180deg,
+        rgba(10, 13, 16, 0.55) 0%,
+        rgba(10, 13, 16, 0.30) 35%,
+        rgba(10, 13, 16, 0.65) 70%,
+        rgba(10, 13, 16, 0.92) 100%) !important;
+  }
+
+  /* إلغاء كارت الزجاج بالكامل */
+  .hero-content {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    max-width: 58rem !important;
+    text-align: center;
+  }
+
+  /* إيقاف أي animations داخل الهيرو (سبب القفزات) */
+  .hero-content > * {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  /* العين → أنيقة وأصغر */
+  .hero-content > p.eyebrow {
+    font-size: 0.7rem !important;
+    letter-spacing: 0.32em !important;
+    margin-bottom: 1.25rem !important;
+    color: #E8C88A !important;
+  }
+
+  /* شارة "Limited Founding Price" — أصغر وأنظف */
+  .hero-content > div:first-of-type:not(.flex) {
+    font-size: 0.55rem !important;
+    padding: 0.35rem 0.9rem !important;
+    margin-bottom: 1.5rem !important;
+    letter-spacing: 0.16em !important;
+    opacity: .85;
+  }
+
+  /* H1 — العنوان الرئيسي قوي وواضح */
+  .hero-content h1 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: clamp(2.2rem, 6vw, 4.2rem) !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.03em !important;
+    font-weight: 700 !important;
+    margin-bottom: 1.5rem !important;
+    text-shadow: 0 2px 30px rgba(0,0,0,0.4);
+  }
+  .hero-content h1 .gold-text {
+    color: #E8C88A !important;
+    -webkit-text-fill-color: #E8C88A !important;
+    background: none !important;
+    animation: none !important;
+  }
+  /* إخفاء العنوان الفرعي المكرر داخل H1 */
+  .hero-content h1 > span.block {
+    display: none !important;
+  }
+
+  /* الفقرة التحتية — قصيرة وأنيقة */
+  .hero-content > p:not(.eyebrow):not(.text-center.mt-4) {
+    font-size: clamp(0.9rem, 1.6vw, 1.05rem) !important;
+    font-weight: 300 !important;
+    line-height: 1.65 !important;
+    color: rgba(255, 255, 255, 0.88) !important;
+    max-width: 40rem !important;
+    margin: 0 auto 2rem !important;
+  }
+  /* تنظيف الفقرة من الـ strong المزدحم */
+  .hero-content > p:not(.eyebrow):not(.text-center.mt-4) strong {
+    color: #fff !important;
+    font-weight: 500 !important;
+  }
+
+  /* صف الأزرار — زر أساسي واحد، ثانوي خفيف */
+  .hero-content .flex.flex-col.sm\:flex-row {
+    flex-direction: row !important;
+    gap: 1rem !important;
+    justify-content: center !important;
+    max-width: 36rem !important;
+    margin: 0 auto !important;
+    flex-wrap: wrap !important;
+  }
+
+  /* الزر الأساسي — ضخم وواضح */
+  .hero-content #heroMainCta {
+    flex: 0 0 auto !important;
+    min-width: 17rem !important;
+    padding: 1.15rem 2.5rem !important;
+    font-size: 0.78rem !important;
+    letter-spacing: 0.18em !important;
+    font-weight: 700 !important;
+  }
+
+  /* الزر الثانوي (Turkey) — خفيف، خط فقط */
+  .hero-content a[href="#turkey-rescue"] {
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(232, 200, 138, 0.35) !important;
+    color: rgba(255, 255, 255, 0.68) !important;
+    border-radius: 0 !important;
+    padding: 0.55rem 0.25rem !important;
+    min-height: auto !important;
+    font-size: 0.65rem !important;
+    letter-spacing: 0.12em !important;
+    font-weight: 500 !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  .hero-content a[href="#turkey-rescue"]:hover {
+    color: #E8C88A !important;
+    border-bottom-color: #E8C88A !important;
+    background: transparent !important;
+    transform: none !important;
+  }
+
+  /* سطر "Free 24–72 Hour Response" — أنيق */
+  .hero-content > p.text-center.mt-4 {
+    font-size: 0.62rem !important;
+    letter-spacing: 0.22em !important;
+    margin-top: 1.5rem !important;
+    color: rgba(232, 200, 138, 0.75) !important;
+    font-weight: 500 !important;
+  }
+
+  /* شريط الثقة — خط فاصل، هادئ، ومرتب */
+  .hero-content > .flex.flex-wrap.justify-center.gap-x-6 {
+    margin-top: 2.5rem !important;
+    padding-top: 1.5rem !important;
+    border-top: 1px solid rgba(232, 200, 138, 0.18) !important;
+    gap: 1.5rem 2rem !important;
+    opacity: 0.62 !important;
+    font-size: 0.55rem !important;
+    letter-spacing: 0.16em !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+
+  /* زر "scroll down" — أصغر */
+  .hero > a[href="#trust"] {
+    bottom: 1.5rem !important;
+    opacity: 0.4 !important;
+  }
+
+  /* ═══ 3. FOOTER — تصميم مضغوط واحترافي ═══ */
+  footer.bg-nile-blue-dark {
+    padding-top: 3rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  /* CTA العلوي في الفوتر — تصغير وتنظيم */
+  footer > .container > .text-center.mb-14 {
+    margin-bottom: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+  footer > .container > .text-center.mb-14 h2 {
+    font-size: clamp(1.5rem, 3.5vw, 2.1rem) !important;
+    margin-bottom: 1.5rem !important;
+  }
+  footer > .container > .text-center.mb-14 .btn-gold,
+  footer > .container > .text-center.mb-14 .btn-outline {
+    padding: 0.9rem 1.75rem !important;
+    font-size: 0.68rem !important;
+  }
+  footer > .container > .text-center.mb-14 p:last-child {
+    margin-top: 1rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  /* شبكة الأعمدة — أنظف */
+  footer .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4 {
+    gap: 2rem !important;
+    margin-bottom: 2.5rem !important;
+  }
+  footer .grid h3 {
+    font-size: 0.95rem !important;
+    margin-bottom: 1rem !important;
+    letter-spacing: 0.02em;
+  }
+  footer .grid ul {
+    gap: 0.55rem !important;
+  }
+  footer .grid ul li,
+  footer .grid ul li a {
+    font-size: 0.8rem !important;
+    line-height: 1.5 !important;
+  }
+
+  /* لوجو الفوتر — حجم منطقي */
+  footer .logo-script {
+    font-size: 2.2rem !important;
+    line-height: 1 !important;
+  }
+  footer .logo-sans {
+    font-size: 0.6rem !important;
+    letter-spacing: 0.24em !important;
+  }
+
+  /* صف المدفوعات + السوشيال — في سطر واحد */
+  footer .py-6.border-t.border-white\/10 {
+    padding: 1.25rem 0 !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+  footer .py-6.border-t.border-white\/10 > div {
+    justify-content: center !important;
+  }
+
+  /* ديسكليمر طبي — نخفيه مؤقتاً (نعيد إدراجه في details) */
+  footer .bg-white\/5.p-6.mb-8 {
+    display: none !important;
+  }
+
+  /* سطر الحقوق — صغير وأنيق */
+  footer .border-t.border-white\/10.pt-6 {
+    padding-top: 1.25rem !important;
+    font-size: 0.7rem !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 0.75rem !important;
+  }
+  @media (min-width: 768px) {
+    footer .border-t.border-white\/10.pt-6 {
+      justify-content: space-between !important;
+    }
+  }
+
+  /* الديسكليمر بعد اللف في details — تصميم أنيق */
+  footer details.legal-notices {
+    margin: 1.5rem 0 !important;
+    border: 1px solid rgba(232, 200, 138, 0.22) !important;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  footer details.legal-notices summary {
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #C9A96E;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.2s ease;
+  }
+  footer details.legal-notices summary:hover {
+    background: rgba(232, 200, 138, 0.06);
+  }
+  footer details.legal-notices summary::-webkit-details-marker { display: none; }
+  footer details.legal-notices summary::after {
+    content: '+';
+    font-size: 1.2rem;
+    font-weight: 400;
+    transition: transform 0.3s ease;
+    color: #C9A96E;
+  }
+  footer details.legal-notices[open] summary::after {
+    transform: rotate(45deg);
+  }
+  footer details.legal-notices > div {
+    padding: 0 1.5rem 1.5rem !important;
+    border: none !important;
+    background: transparent !important;
+    margin: 0 !important;
+    font-size: 0.75rem !important;
+    line-height: 1.65 !important;
+    color: rgba(255, 255, 255, 0.55) !important;
+  }
+  footer details.legal-notices h4 {
+    color: #E8C88A !important;
+    margin-top: 1rem !important;
+    margin-bottom: 0.5rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  /* ═══ 4. DOCK — تحسين + إضافة واتساب ═══ */
+  #appleDock {
+    bottom: 24px !important;
+    padding: 10px 14px !important;
+    gap: 4px !important;
+    background: rgba(255, 255, 255, 0.72) !important;
+    border: 1px solid rgba(174, 145, 100, 0.22) !important;
+    box-shadow:
+      0 20px 50px rgba(31, 42, 54, 0.15),
+      0 0 0 1px rgba(174, 145, 100, 0.10) inset !important;
+  }
+  .dock-item {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 12px !important;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  }
+  .dock-item svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .dock-item:hover {
+    background: rgba(174, 145, 100, 0.12) !important;
+    transform: translateY(-3px) scale(1.08) !important;
+  }
+  .dock-item.home-btn {
+    background: linear-gradient(135deg, #AE9164, #E8C88A) !important;
+    color: #1F2A36 !important;
+  }
+  .dock-item.wa-btn {
+    background: linear-gradient(135deg, #25D366, #128C4A) !important;
+    color: #fff !important;
+  }
+  .dock-item.wa-btn:hover {
+    background: linear-gradient(135deg, #2ee074, #16a857) !important;
+    color: #fff !important;
+  }
+  .dock-item.active::before {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #AE9164;
+    box-shadow: 0 0 10px #AE9164;
+  }
+  .dock-item.wa-btn.active::before { display: none; }
+
+  /* على الموبايل — الدوك يأخذ عرض مريح */
+  @media (max-width: 767px) {
+    #appleDock {
+      bottom: 16px !important;
+      padding: 8px 10px !important;
+      width: calc(100vw - 32px) !important;
+      max-width: 480px;
+      justify-content: space-around !important;
+    }
+    .dock-item { width: 42px !important; height: 42px !important; }
+    .dock-item svg { width: 19px !important; height: 19px !important; }
+  }
+
+  /* إخفاء الشريط السفلي القديم — الدوك يكفي */
+  .sticky-mobile { display: none !important; }
+  body { padding-bottom: 0 !important; }
+  @media (max-width: 767px) {
+    body { padding-bottom: 88px !important; }
+  }
+
+  /* ═══ 5. PERFORMANCE — تقليل الحمل ═══ */
+  /* إيقاف الـ shimmer على اللوجو */
+  .logo-shimmer { display: none !important; }
+  /* إيقاف الـ signature-line */
+  .signature-line { display: none !important; }
+  /* إيقاف نبضات الأزرار العشوائية */
+  .btn-gold.shine-auto::before { animation-duration: 12s !important; }
+
+  /* ═══ 6. REDUCED MOTION ═══ */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto !important; }
+  }
+
+</style>
+
+<script id="premiumRedesignFinalJS">
+(function () {
+  'use strict';
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 1 — SCROLL UNIFIÉ
+     اعتراض كل لينك داخلي في capture phase قبل أي handler
+     → يوقف التضارب بين cinematic scroll + dock handler
+     ═══════════════════════════════════════════════════════════ */
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    var href = link.getAttribute('href');
+    if (!href || href === '#' || href.length < 2) return;
+    var target = document.querySelector(href);
+    if (!target) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    // اقفل قائمة الموبايل إن كانت مفتوحة
+    document.body.classList.remove('lgh-menu-open');
+    var hdr = document.getElementById('liquidGlassHeader');
+    if (hdr) {
+      hdr.classList.remove('menu-open');
+      var ham = hdr.querySelector('.lgh-hamburger');
+      if (ham) {
+        ham.classList.remove('is-open');
+        ham.setAttribute('aria-expanded', 'false');
+      }
+    }
+    var menu = document.getElementById('lghMobileMenu');
+    if (menu) menu.classList.remove('is-open');
+
+    // Scroll ناعم واحد فقط
+    var offset = window.innerWidth < 768 ? 80 : 100;
+    var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+
+    if (history.pushState) history.pushState(null, '', href);
+  }, true); // capture = true — يمنع كل handlers لاحقة على نفس اللينك
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 2 — FOOTER COMPACT
+     لف الديسكليمر الطبي في <details> قابل للفتح
+     ═══════════════════════════════════════════════════════════ */
+  function compactFooter() {
+    var footer = document.querySelector('footer');
+    if (!footer || footer.dataset.compacted) return;
+    footer.dataset.compacted = '1';
+
+    // استخرج كل بلوكات الديسكليمر
+    var disclaimerBlocks = footer.querySelectorAll('.bg-white\\/5.p-6');
+    if (!disclaimerBlocks.length) return;
+
+    var details = document.createElement('details');
+    details.className = 'legal-notices';
+    var summary = document.createElement('summary');
+    summary.textContent = 'Legal & Medical Notices';
+    details.appendChild(summary);
+
+    var content = document.createElement('div');
+    disclaimerBlocks.forEach(function (block) {
+      // اعمل نسخة نظيفة من المحتوى
+      var clone = block.cloneNode(true);
+      clone.className = '';
+      clone.style.cssText = '';
+      // شيل الـ border و الـ background
+      clone.removeAttribute('class');
+      content.appendChild(clone);
+      // اخفي الأصل
+      block.style.display = 'none';
+    });
+    details.appendChild(content);
+
+    // أدرج قبل سطر الحقوق
+    var copyright = footer.querySelector('.border-t.border-white\\/10.pt-6');
+    if (copyright && copyright.parentNode) {
+      copyright.parentNode.insertBefore(details, copyright);
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 3 — DOCK: إضافة زر واتساب + تحسين
+     ═══════════════════════════════════════════════════════════ */
+  function enhanceDock() {
+    var dock = document.getElementById('appleDock');
+    if (!dock) return;
+    if (dock.dataset.enhanced) return;
+    dock.dataset.enhanced = '1';
+
+    // زرار واتساب في الآخر
+    if (!dock.querySelector('.wa-btn')) {
+      var wa = document.createElement('a');
+      wa.href = 'https://wa.me/201503308333';
+      wa.target = '_blank';
+      wa.rel = 'noopener';
+      wa.className = 'dock-item wa-btn';
+      wa.setAttribute('data-tooltip', 'WhatsApp');
+      wa.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>';
+      dock.appendChild(wa);
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 4 — KILL rogue style mutations that flash colors
+     (نستبدل الـ setAttribute override بطريقة آمنة)
+     ═══════════════════════════════════════════════════════════ */
+  // لا نفعل شيء — نترك goldLock يعمل، لأننا عدّلنا الألوان في CSS مباشرة
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 5 — CONTENT-VISIBILITY OFF (ينفذ فوراً وبعد التحميل)
+     ═══════════════════════════════════════════════════════════ */
+  function killContentVisibility() {
+    document.querySelectorAll('section').forEach(function (s) {
+      if (s.style.contentVisibility !== 'visible') {
+        s.style.setProperty('content-visibility', 'visible', 'important');
+      }
+    });
+  }
+  killContentVisibility();
+  setTimeout(killContentVisibility, 500);
+  setTimeout(killContentVisibility, 2000);
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 6 — TEETH-MAP: ضمان وجوده في main بعد results
+     ═══════════════════════════════════════════════════════════ */
+  function ensureTeethMap() {
+    var teeth = document.getElementById('teeth-map');
+    var main  = document.getElementById('main');
+    if (!teeth || !main) return;
+    if (!main.contains(teeth)) main.appendChild(teeth);
+  }
+  setTimeout(ensureTeethMap, 1000);
+  setTimeout(ensureTeethMap, 3000);
+
+  /* ═══════════════════════════════════════════════════════════
+     RUNNER
+     ═══════════════════════════════════════════════════════════ */
+  function runAll() {
+    try { compactFooter(); } catch(e) { console.warn(e); }
+    try { enhanceDock(); }   catch(e) { console.warn(e); }
+    try { ensureTeethMap(); } catch(e) { console.warn(e); }
+  }
+
+  if (document.readyState === 'complete') {
+    setTimeout(runAll, 300);
+  } else {
+    window.addEventListener('load', function () { setTimeout(runAll, 300); });
+  }
+
+  // أعده مرة كمان بعد ما كل observers القديمة تخلص
+  setTimeout(runAll, 3000);
+  setTimeout(runAll, 6000);
+
+})();
+</script>
+<!-- ═══════════════════════════════════════════════════════════════
+     END PREMIUM REDESIGN
+     ═══════════════════════════════════════════════════════════════ -->
 </body>
 </html>
