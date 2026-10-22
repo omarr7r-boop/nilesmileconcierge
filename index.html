@@ -12602,5 +12602,598 @@ summary:focus-visible {
 <!-- ═══════════════════════════════════════════════════════════════
      END NILE SMILE FIX PATCH
      ═══════════════════════════════════════════════════════════════ -->
+     <!-- ═══════════════════════════════════════════════════════════════
+     2026 DESIGN SCIENCE UPGRADE
+     Paste BEFORE </body> (after the existing nileSmileFixPatch)
+     
+     Applies modern design + UX principles (2025-2026):
+     • Hero declutter (Progressive Disclosure)
+     • Complete button state system (WCAG 2.2 AA)
+     • Smart form (auto-detect country, inline validation, draft save)
+     • Motion with restraint (reduced, meaningful animations only)
+     • Accessibility boost (focus states, ARIA, contrast)
+     • Typography refinement + better hierarchy
+     • Reduced cognitive load
+     ═══════════════════════════════════════════════════════════════ -->
+<style id="designScience2026">
+/* ═══════════════════════════════════════════════════════════════
+   1. MOTION WITH RESTRAINT
+   Reduce excessive animations — "Motion with Meaning" principle
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Slow down shine — 4.5s → 9s (less distracting, more elegant) */
+.btn-gold.shine-auto::before {
+  animation-duration: 9s !important;
+}
+
+/* Remove breathe from all buttons EXCEPT primary CTAs */
+.btn-gold.breathe:not(#heroMainCta):not(.sticky-cta-btn-primary):not(header .btn-gold) {
+  animation: none !important;
+}
+
+/* Soften card hover (removed the dated 3D rotation) */
+.card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 20px 48px rgba(79,96,112,.14) !important;
+}
+
+.card:hover .icon-circle {
+  transform: scale(1.06) !important;
+}
+
+/* Respect user preference aggressively */
+@media(prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   2. HERO DECLUTTER (Progressive Disclosure)
+   Reduce cognitive load — one primary action, secondary as text
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Hero trust badges — dim, smaller (progressive disclosure) */
+.hero-content > .flex.flex-wrap.justify-center.gap-x-6 {
+  margin-top: 1.75rem !important;
+  opacity: 0.6 !important;
+  font-size: 0.52rem !important;
+  letter-spacing: 0.12em !important;
+}
+
+/* Downgrade Turkey CTA — visual hierarchy: primary stays gold */
+.hero-content a[href="#turkey-rescue"] {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(232,200,138,.35) !important;
+  border-radius: 0 !important;
+  color: rgba(246,243,238,.72) !important;
+  font-size: 0.63rem !important;
+  padding: 0.5rem 0.5rem !important;
+  letter-spacing: 0.12em !important;
+  min-height: auto !important;
+  box-shadow: none !important;
+  transition: color .2s ease, border-color .2s ease !important;
+}
+
+.hero-content a[href="#turkey-rescue"]:hover {
+  color: #E8C88A !important;
+  border-bottom-color: #E8C88A !important;
+  transform: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* Breathing room in hero */
+.hero-content h1 { margin-bottom: 1.25rem !important; }
+.hero-content > p { margin-bottom: 1.75rem !important; }
+
+/* ═══════════════════════════════════════════════════════════════
+   3. COMPLETE BUTTON STATE SYSTEM (WCAG 2.2)
+   Default / Hover / Focus / Active / Loading / Disabled
+   ═══════════════════════════════════════════════════════════════ */
+
+.btn:disabled,
+.btn[disabled],
+.btn[aria-disabled="true"] {
+  opacity: 0.45 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.btn.is-loading {
+  position: relative !important;
+  color: transparent !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+}
+
+.btn.is-loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: btnSpin 0.7s linear infinite;
+}
+
+.btn-gold.is-loading::after {
+  color: #1F2A36;
+}
+
+@keyframes btnSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   4. FORM POLISH (Zero-Friction Cognition)
+   ═══════════════════════════════════════════════════════════════ */
+
+#leadForm input,
+#leadForm select,
+#leadForm textarea {
+  transition: border-color .2s ease, box-shadow .2s ease !important;
+  min-height: 48px;
+}
+
+#leadForm input:focus,
+#leadForm select:focus,
+#leadForm textarea:focus {
+  border-color: #AE9164 !important;
+  box-shadow: 0 0 0 3px rgba(174,145,100,.15) !important;
+  outline: none !important;
+}
+
+/* Inline validation states */
+.form-field-error {
+  border-color: #C85A5A !important;
+  background-color: rgba(200,90,90,.03) !important;
+}
+
+.form-field-success {
+  border-color: #2F855A !important;
+}
+
+.form-error-message {
+  color: #C85A5A;
+  font-size: 0.7rem;
+  margin-top: 0.35rem;
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  animation: formErrorIn .25s ease;
+}
+
+@keyframes formErrorIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.form-hint {
+  color: #6B7D8E;
+  font-size: 0.68rem;
+  margin-top: 0.35rem;
+  font-family: 'Montserrat', sans-serif;
+  transition: opacity .3s ease;
+}
+
+/* Better progress dots */
+#formProgress {
+  gap: 0.75rem !important;
+  margin-bottom: 2rem !important;
+}
+
+.form-step-dot {
+  width: 64px !important;
+  height: 4px !important;
+  background: rgba(232,200,138,.15) !important;
+  border-radius: 2px !important;
+}
+
+.form-step-dot.active {
+  background: linear-gradient(90deg, #AE9164, #E8C88A) !important;
+}
+
+.form-step-dot.completed {
+  background: #AE9164 !important;
+}
+
+/* Draft saved indicator */
+.draft-saved-indicator {
+  position: fixed;
+  bottom: 5rem;
+  right: 1.5rem;
+  background: #2F855A;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 20px rgba(47,133,90,.4);
+  z-index: 9998;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .3s, transform .3s;
+  pointer-events: none;
+}
+
+.draft-saved-indicator.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   5. HEADER MINIMALISM (Calm Technology)
+   ═══════════════════════════════════════════════════════════════ */
+
+@media(max-width: 767px) {
+  .top-bar {
+    font-size: 0.48rem !important;
+    padding: 0.3rem 0.75rem !important;
+    letter-spacing: 0.1em !important;
+  }
+  
+  .top-bar .top-badge {
+    font-size: 0.42rem !important;
+    min-width: 22px !important;
+    height: 13px !important;
+    padding: 0 4px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   6. TYPOGRAPHY REFINEMENT (Better rhythm and hierarchy)
+   ═══════════════════════════════════════════════════════════════ */
+
+body {
+  line-height: 1.7 !important;
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.025em !important;
+}
+
+/* Enforce max 68ch for long-form paragraphs (readability) */
+.section .container > p:not(.mx-auto):not([class*="max-w"]) {
+  max-width: 68ch;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   7. CONTRAST IMPROVEMENTS (WCAG AA)
+   ═══════════════════════════════════════════════════════════════ */
+
+.text-nile-muted {
+  color: #4A5568 !important;
+}
+
+.bg-nile-blue-dark p.text-gray-400,
+.bg-nile-blue p.text-gray-400 {
+  color: #B8C5D1 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   8. GLOBAL FOCUS STATES (Accessibility)
+   ═══════════════════════════════════════════════════════════════ */
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid #C9A96E !important;
+  outline-offset: 3px !important;
+  border-radius: 3px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   9. BENTO-INSPIRED STATS (Modern layout hint)
+   ═══════════════════════════════════════════════════════════════ */
+
+@media(min-width: 1024px) {
+  #trust-stats .grid {
+    grid-template-columns: 1.2fr 1fr 1fr 1fr !important;
+    gap: 1rem !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   10. SMOOTH SCROLL (only when motion is preferred)
+   ═══════════════════════════════════════════════════════════════ */
+
+@media(prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+</style>
+
+<script id="designScience2026JS">
+(function(){
+  'use strict';
+
+  var DEBUG = false;
+  function log() { if (DEBUG) console.log.apply(console, ['[Design2026]'].concat([].slice.call(arguments))); }
+
+  /* ═══════════════════════════════════════════════════════
+     HERO: Text consistency + visual hierarchy
+     ═══════════════════════════════════════════════════════ */
+  function polishHero() {
+    document.querySelectorAll('.hero-content p').forEach(function(p) {
+      if (p.textContent.indexOf('2-Hour Response') !== -1) {
+        p.innerHTML = p.innerHTML.replace('Free 2-Hour Response', 'Free 24–72 Hour Response');
+        log('Hero text fixed: 2-Hour → 24-72 Hour');
+      }
+    });
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     FORM: Smart country detection (timezone-based)
+     ═══════════════════════════════════════════════════════ */
+  function detectCountry() {
+    var countrySelect = document.getElementById('formCountry');
+    if (!countrySelect || countrySelect.value) return;
+
+    var tz = '';
+    try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; }
+    catch(e) { return; }
+
+    var tzToCountry = {
+      'Australia/Sydney': 'AU', 'Australia/Melbourne': 'AU',
+      'Australia/Brisbane': 'AU', 'Australia/Perth': 'AU',
+      'Australia/Adelaide': 'AU', 'Australia/Hobart': 'AU',
+      'America/New_York': 'US', 'America/Chicago': 'US',
+      'America/Los_Angeles': 'US', 'America/Denver': 'US',
+      'America/Phoenix': 'US', 'America/Detroit': 'US',
+      'America/Toronto': 'CA', 'America/Vancouver': 'CA',
+      'America/Montreal': 'CA', 'America/Calgary': 'CA',
+      'Europe/London': 'UK', 'Europe/Edinburgh': 'UK',
+      'Pacific/Auckland': 'NZ'
+    };
+
+    var detected = tzToCountry[tz];
+    if (detected) {
+      countrySelect.value = detected;
+      log('Country auto-detected:', detected);
+
+      var hint = document.createElement('p');
+      hint.className = 'form-hint';
+      hint.textContent = '✓ Auto-detected — change if needed';
+      countrySelect.parentNode.insertBefore(hint, countrySelect.nextSibling);
+
+      setTimeout(function() {
+        if (hint.parentNode) hint.style.opacity = '0.4';
+      }, 4000);
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     FORM: Inline validation (debounced + immediate feedback)
+     ═══════════════════════════════════════════════════════ */
+  function setupInlineValidation() {
+    var emailInput = document.getElementById('formEmail');
+    var phoneInput = document.getElementById('formPhone');
+    var nameInput = document.getElementById('formName');
+
+    function showError(input, message) {
+      input.classList.add('form-field-error');
+      input.classList.remove('form-field-success');
+      input.setAttribute('aria-invalid', 'true');
+
+      var existing = input.parentNode.querySelector('.form-error-message');
+      if (existing) existing.remove();
+
+      var err = document.createElement('p');
+      err.className = 'form-error-message';
+      err.innerHTML = '⚠ ' + message;
+      input.parentNode.insertBefore(err, input.nextSibling);
+    }
+
+    function clearError(input) {
+      input.classList.remove('form-field-error');
+      input.classList.add('form-field-success');
+      input.setAttribute('aria-invalid', 'false');
+      var existing = input.parentNode.querySelector('.form-error-message');
+      if (existing) existing.remove();
+    }
+
+    if (emailInput) {
+      emailInput.addEventListener('blur', function() {
+        var val = this.value.trim();
+        if (!val) return;
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+          showError(this, 'Please enter a valid email address');
+        } else {
+          clearError(this);
+        }
+      });
+      emailInput.addEventListener('input', function() {
+        if (this.classList.contains('form-field-error') &&
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value)) {
+          clearError(this);
+        }
+      });
+    }
+
+    if (phoneInput) {
+      phoneInput.addEventListener('blur', function() {
+        var val = this.value.replace(/[\s\-()]/g, '');
+        if (!val) return;
+        if (val.length < 8) {
+          showError(this, 'Please enter a valid phone with country code');
+        } else {
+          clearError(this);
+        }
+      });
+    }
+
+    if (nameInput) {
+      nameInput.addEventListener('blur', function() {
+        var val = this.value.trim();
+        if (!val) return;
+        if (val.length < 2) {
+          showError(this, 'Please enter your full name');
+        } else {
+          clearError(this);
+        }
+      });
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     FORM: Draft save/restore (localStorage)
+     ═══════════════════════════════════════════════════════ */
+  function setupDraftSave() {
+    var form = document.getElementById('leadForm');
+    if (!form) return;
+
+    var DRAFT_KEY = 'nileFormDraft_v2';
+    var indicator = null;
+    var indicatorTimeout = null;
+
+    // Restore draft on load
+    try {
+      var draft = JSON.parse(localStorage.getItem(DRAFT_KEY) || '{}');
+      var restoredCount = 0;
+      Object.keys(draft).forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el && !el.value && draft[id]) {
+          el.value = draft[id];
+          restoredCount++;
+        }
+      });
+      if (restoredCount > 0) log('Draft restored:', restoredCount, 'fields');
+    } catch(e) {}
+
+    function showSavedIndicator() {
+      if (!indicator) {
+        indicator = document.createElement('div');
+        indicator.className = 'draft-saved-indicator';
+        indicator.textContent = '✓ Draft saved';
+        document.body.appendChild(indicator);
+      }
+      clearTimeout(indicatorTimeout);
+      requestAnimationFrame(function() { indicator.classList.add('show'); });
+      indicatorTimeout = setTimeout(function() {
+        indicator.classList.remove('show');
+      }, 1500);
+    }
+
+    // Save on input (debounced)
+    var saveTimeout;
+    form.addEventListener('input', function() {
+      clearTimeout(saveTimeout);
+      saveTimeout = setTimeout(function() {
+        var data = {};
+        form.querySelectorAll('input, select, textarea').forEach(function(el) {
+          if (el.id && el.type !== 'file') data[el.id] = el.value;
+        });
+        try {
+          localStorage.setItem(DRAFT_KEY, JSON.stringify(data));
+          showSavedIndicator();
+        } catch(e) {}
+      }, 800);
+    });
+
+    // Clear draft on submit
+    form.addEventListener('submit', function() {
+      setTimeout(function() {
+        try { localStorage.removeItem(DRAFT_KEY); } catch(e) {}
+      }, 2000);
+    }, true);
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     FORMS: Universal loading state (all submit buttons)
+     ═══════════════════════════════════════════════════════ */
+  function setupLoadingStates() {
+    document.querySelectorAll('form').forEach(function(form) {
+      form.addEventListener('submit', function(e) {
+        var submitBtn = form.querySelector('button[type="submit"]');
+        if (submitBtn && !submitBtn.classList.contains('is-loading')) {
+          submitBtn.classList.add('is-loading');
+          submitBtn.disabled = true;
+
+          // Safety: reset after 5s if nothing happens
+          setTimeout(function() {
+            submitBtn.classList.remove('is-loading');
+            submitBtn.disabled = false;
+          }, 5000);
+        }
+      }, true);
+    });
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     ARIA improvements
+     ═══════════════════════════════════════════════════════ */
+  function improveARIA() {
+    document.querySelectorAll('#leadForm [required]').forEach(function(el) {
+      el.setAttribute('aria-required', 'true');
+    });
+
+    var progress = document.getElementById('formProgress');
+    if (progress) {
+      progress.setAttribute('role', 'progressbar');
+      progress.setAttribute('aria-valuemin', '1');
+      progress.setAttribute('aria-valuemax', '3');
+      progress.setAttribute('aria-valuenow', '1');
+      progress.setAttribute('aria-label', 'Form progress');
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     Respect reduced-motion preference
+     ═══════════════════════════════════════════════════════ */
+  function respectReducedMotion() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.btn-gold.shine-auto').forEach(function(btn) {
+        btn.classList.remove('shine-auto');
+      });
+      log('Reduced motion: shine disabled');
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     RUNNER
+     ═══════════════════════════════════════════════════════ */
+  function init() {
+    try { polishHero(); }             catch(e) { console.warn('[D2026] hero', e); }
+    try { detectCountry(); }          catch(e) { console.warn('[D2026] country', e); }
+    try { setupInlineValidation(); }  catch(e) { console.warn('[D2026] validation', e); }
+    try { setupDraftSave(); }         catch(e) { console.warn('[D2026] draft', e); }
+    try { setupLoadingStates(); }     catch(e) { console.warn('[D2026] loading', e); }
+    try { improveARIA(); }            catch(e) { console.warn('[D2026] aria', e); }
+    try { respectReducedMotion(); }   catch(e) { console.warn('[D2026] motion', e); }
+    log('✔ All design upgrades applied');
+  }
+
+  if (document.readyState === 'complete') {
+    setTimeout(init, 150);
+  } else {
+    window.addEventListener('load', function() { setTimeout(init, 150); });
+  }
+})();
+</script>
+<!-- ═══════════════════════════════════════════════════════════════
+     END 2026 DESIGN SCIENCE UPGRADE
+     ═══════════════════════════════════════════════════════════════ -->
 </body>
 </html>
