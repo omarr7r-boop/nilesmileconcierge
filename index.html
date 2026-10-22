@@ -16553,6 +16553,787 @@ a, button, .card, .btn, details, summary, input, select, textarea {
   color: #E8C88A !important;
 }
 </style>
+<!-- ═══════════════════════════════════════════════════════════════
+     NILE SMILE — MASTER FIX PATCH v1.0
+     Paste RIGHT BEFORE </body>
+     ═══════════════════════════════════════════════════════════════ -->
 
+<style id="masterFixStyles">
+/* ═══════════════════════════════════════════════════════
+   1. TAILWIND FALLBACKS — prevent layout collapse
+   These run ONLY if Tailwind utility missing
+   ═══════════════════════════════════════════════════════ */
+
+/* Display */
+.hidden { display: none; }
+.block { display: block; }
+.inline-block { display: inline-block; }
+.inline-flex { display: inline-flex; }
+.flex { display: flex; }
+.grid { display: grid; }
+
+/* Flexbox */
+.flex-col { flex-direction: column; }
+.flex-row { flex-direction: row; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-1 { flex: 1 1 0%; }
+.flex-shrink-0 { flex-shrink: 0; }
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-end { justify-content: flex-end; }
+.gap-1 { gap: 0.25rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 0.75rem; }
+.gap-4 { gap: 1rem; }
+.gap-5 { gap: 1.25rem; }
+.gap-6 { gap: 1.5rem; }
+.gap-8 { gap: 2rem; }
+.gap-10 { gap: 2.5rem; }
+.gap-12 { gap: 3rem; }
+.gap-14 { gap: 3.5rem; }
+.gap-16 { gap: 4rem; }
+
+/* Grid */
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+/* Spacing (subset most used) */
+.p-3 { padding: 0.75rem; }
+.p-4 { padding: 1rem; }
+.p-5 { padding: 1.25rem; }
+.p-6 { padding: 1.5rem; }
+.p-7 { padding: 1.75rem; }
+.p-8 { padding: 2rem; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.px-5 { padding-left: 1.25rem; padding-right: 1.25rem; }
+.py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+.py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 0.75rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-8 { margin-top: 2rem; }
+.mt-10 { margin-top: 2.5rem; }
+.mt-12 { margin-top: 3rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-5 { margin-bottom: 1.25rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-10 { margin-bottom: 2.5rem; }
+.mb-12 { margin-bottom: 3rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.my-3 { margin-top: 0.75rem; margin-bottom: 0.75rem; }
+.pt-4 { padding-top: 1rem; }
+.pt-6 { padding-top: 1.5rem; }
+.pt-8 { padding-top: 2rem; }
+.pb-6 { padding-bottom: 1.5rem; }
+.pb-8 { padding-bottom: 2rem; }
+
+/* Sizing */
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.min-h-0 { min-height: 0; }
+
+/* Width containers */
+.max-w-sm { max-width: 24rem; }
+.max-w-md { max-width: 28rem; }
+.max-w-lg { max-width: 32rem; }
+.max-w-xl { max-width: 36rem; }
+.max-w-2xl { max-width: 42rem; }
+.max-w-3xl { max-width: 48rem; }
+.max-w-4xl { max-width: 56rem; }
+.max-w-5xl { max-width: 64rem; }
+.max-w-6xl { max-width: 72rem; }
+.max-w-7xl { max-width: 80rem; }
+
+/* Typography */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-xs { font-size: 0.75rem; line-height: 1rem; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.text-base { font-size: 1rem; line-height: 1.5rem; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+.text-2xl { font-size: 1.5rem; line-height: 2rem; }
+.text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+.text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+.text-5xl { font-size: 3rem; line-height: 1; }
+.font-normal { font-weight: 400; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.uppercase { text-transform: uppercase; }
+.italic { font-style: italic; }
+.leading-tight { line-height: 1.25; }
+.leading-relaxed { line-height: 1.625; }
+.leading-none { line-height: 1; }
+.tracking-wide { letter-spacing: 0.025em; }
+.tracking-wider { letter-spacing: 0.05em; }
+.tracking-widest { letter-spacing: 0.1em; }
+.whitespace-nowrap { white-space: nowrap; }
+.break-all { word-break: break-all; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* Brand colors */
+.text-nile-blue { color: #4F6070; }
+.text-nile-gold { color: #AE9164; }
+.text-nile-gold-bright { color: #E8C88A; }
+.text-nile-beige { color: #F6F3EE; }
+.text-nile-ink { color: #1F2A36; }
+.text-nile-muted { color: #4A5568; }
+.text-white { color: #fff; }
+.text-gray-200 { color: #e5e7eb; }
+.text-gray-300 { color: #d1d5db; }
+.text-gray-400 { color: #9ca3af; }
+.text-gray-500 { color: #6b7280; }
+.text-red-500 { color: #ef4444; }
+.text-red-600 { color: #dc2626; }
+.text-green-700 { color: #15803d; }
+
+.bg-nile-blue { background-color: #4F6070; }
+.bg-nile-blue-dark { background-color: #1F2A36; }
+.bg-nile-beige { background-color: #F6F3EE; }
+.bg-nile-gold { background-color: #AE9164; }
+.bg-nile-gold-light { background-color: #C9A96E; }
+.bg-nile-gold-bright { background-color: #E8C88A; }
+.bg-white { background-color: #fff; }
+.bg-white\/5 { background-color: rgba(255,255,255,0.05); }
+.bg-gray-50 { background-color: #f9fafb; }
+.bg-green-600 { background-color: #16a34a; }
+.bg-nile-gold\/5 { background-color: rgba(174,145,100,0.05); }
+.bg-nile-gold\/10 { background-color: rgba(174,145,100,0.10); }
+
+/* Borders */
+.border { border-width: 1px; border-style: solid; }
+.border-t { border-top-width: 1px; border-top-style: solid; }
+.border-b { border-bottom-width: 1px; border-bottom-style: solid; }
+.border-l-4 { border-left-width: 4px; border-left-style: solid; }
+.border-t-4 { border-top-width: 4px; border-top-style: solid; }
+.border-nile-gold { border-color: #AE9164; }
+.border-nile-gold\/15 { border-color: rgba(174,145,100,0.15); }
+.border-nile-gold\/20 { border-color: rgba(174,145,100,0.20); }
+.border-nile-gold\/25 { border-color: rgba(174,145,100,0.25); }
+.border-nile-gold\/30 { border-color: rgba(174,145,100,0.30); }
+.border-nile-gold\/40 { border-color: rgba(174,145,100,0.40); }
+.border-white\/10 { border-color: rgba(255,255,255,0.10); }
+.border-white\/20 { border-color: rgba(255,255,255,0.20); }
+.border-gray-300 { border-color: #d1d5db; }
+.border-nile-blue { border-color: #4F6070; }
+
+/* Positioning */
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed { position: fixed; }
+.sticky { position: sticky; }
+.inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+.top-0 { top: 0; }
+.top-3 { top: 0.75rem; }
+.right-0 { right: 0; }
+.right-3 { right: 0.75rem; }
+.left-0 { left: 0; }
+.left-1\/2 { left: 50%; }
+.-translate-x-1\/2 { transform: translateX(-50%); }
+.bottom-0 { bottom: 0; }
+.top-1\/2 { top: 50%; }
+.-translate-y-1\/2 { transform: translateY(-50%); }
+.-translate-y-1\/2.-translate-x-1\/2 { transform: translate(-50%, -50%); }
+
+/* Misc */
+.rounded { border-radius: 0.25rem; }
+.rounded-sm { border-radius: 0.125rem; }
+.rounded-full { border-radius: 9999px; }
+.overflow-hidden { overflow: hidden; }
+.overflow-x-auto { overflow-x: auto; }
+.overflow-y-auto { overflow-y: auto; }
+.cursor-pointer { cursor: pointer; }
+.pointer-events-none { pointer-events: none; }
+.opacity-70 { opacity: 0.7; }
+.z-10 { z-index: 10; }
+.z-50 { z-index: 50; }
+.order-first { order: -9999; }
+.hidden { display: none !important; }
+
+/* Responsive — critical breakpoints */
+@media (min-width: 640px) {
+  .sm\:flex-row { flex-direction: row; }
+  .sm\:w-auto { width: auto; }
+  .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 768px) {
+  .md\:flex-row { flex-direction: row; }
+  .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .md\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .md\:col-span-2 { grid-column: span 2; }
+  .md\:col-span-3 { grid-column: span 3; }
+  .md\:h-64 { height: 16rem; }
+  .md\:p-8 { padding: 2rem; }
+  .md\:p-10 { padding: 2.5rem; }
+  .md\:p-12 { padding: 3rem; }
+  .md\:gap-10 { gap: 2.5rem; }
+  .md\:text-sm { font-size: 0.875rem; }
+  .md\:text-base { font-size: 1rem; }
+  .md\:text-lg { font-size: 1.125rem; }
+  .md\:text-xl { font-size: 1.25rem; }
+  .md\:text-2xl { font-size: 1.5rem; }
+  .md\:text-3xl { font-size: 1.875rem; }
+  .md\:text-4xl { font-size: 2.25rem; }
+  .md\:block { display: block; }
+  .md\:hidden { display: none; }
+}
+@media (min-width: 1024px) {
+  .lg\:flex { display: flex; }
+  .lg\:hidden { display: none; }
+  .lg\:inline-flex { display: inline-flex; }
+  .lg\:flex-row { flex-direction: row; }
+  .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .lg\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .lg\:col-span-2 { grid-column: span 2; }
+  .lg\:max-w-2xl { max-width: 42rem; }
+  .lg\:mx-auto { margin-left: auto; margin-right: auto; }
+  .lg\:p-8 { padding: 2rem; }
+  .lg\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+}
+@media (min-width: 1280px) {
+  .xl\:gap-5 { gap: 1.25rem; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   2. KILL TEAL/CORAL — revert to gold/cream/slate
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  --ns-canvas: #F6F3EE !important;
+  --ns-surface: #FFFFFF !important;
+  --ns-surface-alt: #FBFAF7 !important;
+  --ns-primary: #4F6070 !important;
+  --ns-primary-light: #6B7D8E !important;
+  --ns-accent: #AE9164 !important;
+  --ns-accent-bright: #E8C88A !important;
+  --ns-coral: #AE9164 !important;
+  --ns-coral-soft: #C9A96E !important;
+  --ns-text: #1F2A36 !important;
+  --ns-text-muted: #4A5568 !important;
+}
+
+/* Force any remaining teal inline styles to gold */
+[style*="#00A6A6"], [style*="#2DD4BF"],
+[style*="#0B3B4A"], [style*="#14657D"],
+[style*="#FF6B5B"], [style*="#FF8A7A"] {
+  filter: hue-rotate(-45deg) saturate(0.7) brightness(1.05);
+}
+
+/* Header — gold glass, not teal */
+#liquidGlassHeader {
+  background: rgba(255, 249, 235, 0.92) !important;
+  border: 1px solid rgba(174, 145, 100, 0.25) !important;
+}
+#liquidGlassHeader.on-dark {
+  background: rgba(10, 13, 16, 0.92) !important;
+  border-color: rgba(232, 200, 138, 0.28) !important;
+}
+#liquidGlassHeader.is-scrolled {
+  background: rgba(255, 249, 235, 0.96) !important;
+}
+#liquidGlassHeader.on-dark.is-scrolled {
+  background: rgba(10, 13, 16, 0.96) !important;
+}
+
+/* Concierge — gold */
+#liquidGlassHeader .lgh-logo-text {
+  color: #AE9164 !important;
+}
+#liquidGlassHeader.on-dark .lgh-logo-text {
+  color: #E8C88A !important;
+}
+
+/* Slogan — slate light */
+#liquidGlassHeader .lgh-logo-sub {
+  display: block !important;
+  color: #8FA1B2 !important;
+}
+#liquidGlassHeader.on-dark .lgh-logo-sub {
+  color: #C9A96E !important;
+}
+
+/* Script — slate */
+#liquidGlassHeader .lgh-logo-script {
+  color: #4F6070 !important;
+}
+#liquidGlassHeader.on-dark .lgh-logo-script {
+  color: #F6F3EE !important;
+}
+
+/* Nav links */
+.lgh-link { color: #4F6070 !important; }
+.lgh-link:hover { color: #AE9164 !important; background: rgba(174,145,100,0.08) !important; }
+#liquidGlassHeader.on-dark .lgh-link { color: #E8E4DC !important; }
+#liquidGlassHeader.on-dark .lgh-link:hover { color: #E8C88A !important; }
+
+/* CTA */
+.lgh-cta {
+  background: linear-gradient(135deg, #AE9164, #C9A96E, #AE9164) !important;
+  color: #1a1a1a !important;
+}
+.lgh-active-pill {
+  background: linear-gradient(90deg, #AE9164, #E8C88A) !important;
+}
+
+/* Mobile menu */
+.lgh-mobile-menu {
+  background: rgba(255, 249, 235, 0.96) !important;
+  border: 1px solid rgba(174, 145, 100, 0.25) !important;
+}
+#liquidGlassHeader.on-dark .lgh-mobile-menu {
+  background: rgba(10, 13, 16, 0.96) !important;
+}
+.lgh-mobile-link { color: #1F2A36 !important; }
+#liquidGlassHeader.on-dark .lgh-mobile-link { color: #F6F3EE !important; }
+.lgh-mobile-cta {
+  background: linear-gradient(135deg, #AE9164, #C9A96E) !important;
+  color: #1a1a1a !important;
+}
+
+/* Buttons — gold */
+.btn-gold {
+  background: linear-gradient(135deg, #AE9164, #C9A96E, #AE9164) !important;
+  color: #1a1a1a !important;
+  border: 1px solid rgba(174,145,100,0.5) !important;
+}
+#turkey-rescue .btn-gold,
+#travel-addons .card a[href*="wa.me"] {
+  background: linear-gradient(135deg, #AE9164, #C9A96E, #AE9164) !important;
+  color: #1a1a1a !important;
+}
+
+/* Sections — warm backgrounds */
+body {
+  background: #F6F3EE !important;
+  color: #1a202c !important;
+}
+section.bg-nile-beige,
+#packages, #travel-addons, #reviews {
+  background: linear-gradient(180deg, #FBFAF7, #F6F3EE, #EDE6DA) !important;
+}
+section.bg-white { background: #fff !important; }
+section.bg-nile-blue,
+section.bg-nile-blue-dark,
+#price-anchor, #top-tier, #consult, #guarantees, #legal {
+  background: 
+    radial-gradient(ellipse at 80% 20%, rgba(174,145,100,0.06) 0%, transparent 50%),
+    linear-gradient(160deg, #0A0D10, #1F2A36 50%, #2A3744) !important;
+}
+
+/* Eyebrows */
+.eyebrow { color: #AE9164 !important; }
+.eyebrow-light { color: #C9A96E !important; }
+
+/* ═══════════════════════════════════════════════════════
+   3. FIX CONTRAST — restore gold text that got killed
+   ═══════════════════════════════════════════════════════ */
+
+/* Override the buggy selector that killed .text-nile-gold-bright */
+.bg-nile-blue span.text-nile-gold-bright,
+.bg-nile-blue-dark span.text-nile-gold-bright,
+#turkey-rescue span.text-nile-gold-bright,
+#top-tier span.text-nile-gold-bright,
+#guarantees span.text-nile-gold-bright,
+#price-anchor span.text-nile-gold-bright {
+  color: #E8C88A !important;
+}
+
+/* Fix inline styles in Most Chosen badge — restore dark text */
+#travel-addons .card .absolute[style*="background"] {
+  color: #1F2A36 !important;
+}
+
+/* Dark sections — body text readable */
+.bg-nile-blue p, .bg-nile-blue li,
+.bg-nile-blue-dark p, .bg-nile-blue-dark li,
+#price-anchor p, #top-tier p, #consult p,
+#guarantees p, #turkey-rescue p, #turkey-rescue li {
+  color: #D1D9E0 !important;
+}
+.bg-nile-blue h2, .bg-nile-blue h3, .bg-nile-blue h4,
+.bg-nile-blue-dark h2, .bg-nile-blue-dark h3, .bg-nile-blue-dark h4,
+#turkey-rescue h2, #turkey-rescue h3 {
+  color: #FFFFFF !important;
+}
+#turkey-rescue .text-gray-300,
+#turkey-rescue [style*="color:#8FA1B2"] {
+  color: #B8C5D1 !important;
+}
+
+/* Light sections — muted readable */
+.text-nile-muted { color: #4A5568 !important; }
+body, p, li { color: #2d3748 !important; }
+
+/* Gold text on light bg — dark gold for contrast */
+section.bg-white .gold-text,
+section.bg-nile-beige .gold-text {
+  color: #8A7248 !important;
+  -webkit-text-fill-color: currentColor !important;
+  background: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   4. HERO — restore desktop buttons side-by-side
+   ═══════════════════════════════════════════════════════ */
+
+/* Reset the broken blanket rule */
+.hero-content .flex-col,
+.hero-content .flex.flex-col.sm\:flex-row {
+  flex-direction: column !important;
+  gap: 1rem !important;
+  width: 100% !important;
+}
+.hero-content .btn {
+  width: 100% !important;
+  margin-bottom: 0 !important;
+}
+
+/* Desktop — restore row layout */
+@media (min-width: 640px) {
+  .hero-content .flex-col.sm\:flex-row,
+  .hero-content .flex.flex-col.sm\:flex-row {
+    flex-direction: row !important;
+    max-width: 34rem !important;
+    margin: 0 auto !important;
+  }
+  .hero-content .flex-col.sm\:flex-row > a,
+  .hero-content .flex.flex-col.sm\:flex-row > a {
+    width: auto !important;
+    flex: 1 !important;
+  }
+}
+
+/* Restore hero stagger animation */
+.hero-content > * {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroStaggerFix 1s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+}
+.hero-content > *:nth-child(1) { animation-delay: 0.4s !important; }
+.hero-content > *:nth-child(2) { animation-delay: 0.55s !important; }
+.hero-content > *:nth-child(3) { animation-delay: 0.7s !important; }
+.hero-content > *:nth-child(4) { animation-delay: 0.85s !important; }
+.hero-content > *:nth-child(5) { animation-delay: 1.0s !important; }
+.hero-content > *:nth-child(6) { animation-delay: 1.15s !important; }
+@keyframes heroStaggerFix {
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-content > * { opacity: 1 !important; transform: none !important; animation: none !important; }
+}
+
+/* Trust badges — visible again */
+.hero-content > .flex.flex-wrap.justify-center.gap-x-6,
+.hero-content > .flex.flex-wrap.justify-center.gap-x-8 {
+  opacity: 0.9 !important;
+  font-size: 0.62rem !important;
+  letter-spacing: 0.14em !important;
+  color: #E8E4DC !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   5. MOST CHOSEN BADGE — prevent clipping
+   ═══════════════════════════════════════════════════════ */
+
+#travel-addons .card,
+#packages .card,
+.card.relative {
+  overflow: visible !important;
+}
+#travel-addons .card > *:not(.absolute),
+#packages .card > *:not(.absolute) {
+  overflow: hidden;
+  border-radius: 28px;
+}
+#travel-addons .card > .absolute,
+#packages .card > .absolute {
+  z-index: 20 !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   6. CARD BORDERS — gold, not blue
+   ═══════════════════════════════════════════════════════ */
+
+.card {
+  border: 1px solid rgba(174,145,100,0.25) !important;
+  box-shadow: 0 4px 20px rgba(31,42,54,0.05) !important;
+}
+.card-top-blue {
+  border-top: 3px solid #AE9164 !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   7. STICKY MOBILE — white glass, dark text
+   ═══════════════════════════════════════════════════════ */
+
+@media (max-width: 767px) {
+  .sticky-mobile {
+    background: rgba(255,255,255,0.95) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-top: 1px solid rgba(174,145,100,0.2) !important;
+    padding: 0.6rem !important;
+    border-radius: 20px 20px 0 0 !important;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.05) !important;
+  }
+  .sticky-mobile a {
+    color: #1F2A36 !important;
+    background: transparent !important;
+    border: none !important;
+  }
+  .sticky-mobile a.btn-gold {
+    background: linear-gradient(135deg, #AE9164, #C9A96E) !important;
+    color: #1a1a1a !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   8. FIX #teeth-map position — move into main
+   ═══════════════════════════════════════════════════════ */
+/* (JS handles the DOM move, this styles the fallback) */
+body.teeth-moved #teeth-map {
+  position: relative;
+}
+
+/* ═══════════════════════════════════════════════════════
+   9. FORM — gold focus
+   ═══════════════════════════════════════════════════════ */
+
+#leadForm input:focus,
+#leadForm select:focus,
+#leadForm textarea:focus {
+  border-color: #AE9164 !important;
+  box-shadow: 0 0 0 4px rgba(174,145,100,0.15) !important;
+  outline: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   10. GLOBAL FOCUS — gold, not teal
+   ═══════════════════════════════════════════════════════ */
+
+a:focus-visible, button:focus-visible, summary:focus-visible,
+input:focus-visible, select:focus-visible, textarea:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible {
+  outline: 3px solid #AE9164 !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 6px rgba(174,145,100,0.15) !important;
+}
+</style>
+
+<script id="masterFixScript">
+(function() {
+  'use strict';
+  var DEBUG = false;
+  function log() { if (DEBUG) console.log.apply(console, ['[MasterFix]'].concat([].slice.call(arguments))); }
+
+  /* ═══════════════════════════════════════════════════════
+     FIX 1: Move #teeth-map into <main>
+     ═══════════════════════════════════════════════════════ */
+  function moveTeethMap() {
+    var teethMap = document.getElementById('teeth-map');
+    var main = document.getElementById('main');
+    if (!teethMap || !main) return;
+
+    if (main.contains(teethMap)) {
+      log('Teeth map already in main');
+      return;
+    }
+
+    // Insert after #results (or #guarantees if results missing)
+    var results = document.getElementById('results');
+    var guarantees = document.getElementById('guarantees');
+    var target = results || guarantees;
+
+    if (target && target.parentNode === main) {
+      target.parentNode.insertBefore(teethMap, target.nextSibling);
+    } else {
+      // Fallback: append to main
+      main.appendChild(teethMap);
+    }
+    document.body.classList.add('teeth-moved');
+    log('Teeth map moved into <main>');
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     FIX 2: Clean teal inline styles
+     ═══════════════════════════════════════════════════════ */
+  function cleanTealInline() {
+    var replacements = {
+      '#00A6A6': '#AE9164',
+      '#2DD4BF': '#E8C88A',
+      '#0B3B4A': '#4F6070',
+      '#14657D': '#6B7D8E',
+      '#FF6B5B': '#C9A96E',
+      '#FF8A7A': '#E8C88A',
+      '#071A22': '#0A0D10',
+      '#0F3B4D': '#2A3744',
+      '#F4F6F9': '#F6F3EE',
+      '#EEF1F6': '#FBFAF7',
+      '#0F1A24': '#1F2A36'
+    };
+    var changed = 0;
+    document.querySelectorAll('[style]').forEach(function(el) {
+      var style = el.getAttribute('style');
+      if (!style) return;
+      var original = style;
+      Object.keys(replacements).forEach(function(teal) {
+        style = style.replace(new RegExp(teal, 'gi'), replacements[teal]);
+      });
+      if (style !== original) {
+        el.setAttribute('style', style);
+        changed++;
+      }
+    });
+    if (changed > 0) log('Cleaned ' + changed + ' teal styles');
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     FIX 3: Restore .text-nile-gold-bright in dark sections
+     (Overriding criticalVisualFixes bug)
+     ═══════════════════════════════════════════════════════ */
+  function restoreGoldBright() {
+    var darkSelectors = [
+      '.bg-nile-blue', '.bg-nile-blue-dark',
+      '#turkey-rescue', '#top-tier', '#guarantees',
+      '#price-anchor', '#consult', '#legal'
+    ];
+    darkSelectors.forEach(function(sel) {
+      document.querySelectorAll(sel).forEach(function(section) {
+        section.querySelectorAll('span, div').forEach(function(el) {
+          if (el.classList.contains('text-nile-gold-bright') ||
+              el.classList.contains('gold-text')) {
+            el.style.setProperty('color', '#E8C88A', 'important');
+          }
+        });
+      });
+    });
+    log('Gold-bright restored in dark sections');
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     FIX 4: Ensure header visible + gold
+     ═══════════════════════════════════════════════════════ */
+  function ensureHeaderGold() {
+    var header = document.getElementById('liquidGlassHeader');
+    if (!header) return;
+
+    header.style.transform = 'translateX(-50%) translateY(0)';
+    header.style.opacity = '1';
+    header.classList.add('is-visible');
+
+    var concierge = header.querySelector('.lgh-logo-text');
+    if (concierge) concierge.style.color = '#AE9164';
+
+    var slogan = header.querySelector('.lgh-logo-sub');
+    if (slogan) {
+      slogan.style.display = 'block';
+      slogan.style.color = '#8FA1B2';
+    }
+
+    var script = header.querySelector('.lgh-logo-script');
+    if (script) script.style.color = '#4F6070';
+
+    log('Header gold identity ensured');
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     FIX 5: Hide dead Quick Bar (if exists)
+     ═══════════════════════════════════════════════════════ */
+  function cleanupDeadCode() {
+    // Remove Quick Bar if any remnants
+    var quickBar = document.querySelector('.quick-bar');
+    if (quickBar) quickBar.remove();
+
+    // Hide orphaned elements
+    ['hideRedundantSections', 'hideRedundantV2'].forEach(function(id) {
+      var s = document.getElementById(id);
+      if (s) s.remove();
+    });
+    log('Dead code cleaned');
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     FIX 6: Fix hero animation override
+     ═══════════════════════════════════════════════════════ */
+  function fixHeroAnimation() {
+    // Remove the broken inline rule that killed animation
+    var styles = document.querySelectorAll('style');
+    styles.forEach(function(styleEl) {
+      if (styleEl.id === 'heroKillFix') styleEl.remove();
+    });
+    log('Hero animation restored via CSS');
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     FIX 7: Ensure #teeth-map / #liquidGlassHeader don't
+     break scroll-padding (they're after footer)
+     ═══════════════════════════════════════════════════════ */
+  function ensureScrollTarget() {
+    // Add height placeholder for footer overlap fix
+    var header = document.getElementById('liquidGlassHeader');
+    if (header) {
+      // Ensure header doesn't overlap content
+      document.documentElement.style.setProperty('--header-height', '80px');
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     RUNNER
+     ═══════════════════════════════════════════════════════ */
+  function runAll() {
+    try { moveTeethMap(); }        catch(e) { console.warn('[MasterFix] teeth', e); }
+    try { cleanTealInline(); }     catch(e) { console.warn('[MasterFix] teal', e); }
+    try { restoreGoldBright(); }   catch(e) { console.warn('[MasterFix] gold', e); }
+    try { ensureHeaderGold(); }    catch(e) { console.warn('[MasterFix] header', e); }
+    try { cleanupDeadCode(); }     catch(e) { console.warn('[MasterFix] dead', e); }
+    try { fixHeroAnimation(); }    catch(e) { console.warn('[MasterFix] hero', e); }
+    try { ensureScrollTarget(); }  catch(e) { console.warn('[MasterFix] scroll', e); }
+    log('✔ All master fixes applied');
+  }
+
+  if (document.readyState === 'complete') {
+    setTimeout(runAll, 100);
+  } else {
+    window.addEventListener('load', function() { setTimeout(runAll, 100); });
+  }
+
+  // Re-run on dynamic changes
+  if (typeof MutationObserver !== 'undefined' && document.body) {
+    var timer;
+    var mo = new MutationObserver(function() {
+      clearTimeout(timer);
+      timer = setTimeout(function() {
+        try { restoreGoldBright(); } catch(e) {}
+        try { cleanTealInline(); } catch(e) {}
+      }, 500);
+    });
+    mo.observe(document.body, { childList: true, subtree: false });
+    setTimeout(function() { mo.disconnect(); }, 10000);
+  }
+})();
+</script>
+<!-- ═══════════════════════════════════════════════════════════════
+     END NILE SMILE — MASTER FIX PATCH
+     ═══════════════════════════════════════════════════════════════ -->
 </body>
 </html>
