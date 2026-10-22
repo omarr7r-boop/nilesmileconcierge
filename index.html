@@ -15086,5 +15086,671 @@ a[href^="tel:"],
 <!-- ═══════════════════════════════════════════════════════════════
      END NILE SMILE — FINAL PRODUCTION HARDENING v3.0
      ═══════════════════════════════════════════════════════════════ -->
+     <!-- ═══════════════════════════════════════════════════════════════
+     NILE SMILE — 2026 MODERNIZATION: VISIBLE HEADER + COLORED GLASS
+     Paste RIGHT BEFORE </body> (after all existing scripts)
+     ═══════════════════════════════════════════════════════════════ -->
+
+<style id="modernize2026">
+/* ═══════════════════════════════════════════════════════════════
+   1. NEW COLOR SYSTEM — Move away from beige
+   Quiet base + electric accents (per 2026 trend: "Electric accents on quiet bases")
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* New neutral base — cool, modern, not beige */
+  --ns-canvas: #F4F6F9;          /* cool off-white */
+  --ns-surface: #FFFFFF;
+  --ns-surface-alt: #EEF1F6;     /* very light cool gray */
+  
+  /* Primary brand — deep teal-navy (medical, trust, modern) */
+  --ns-primary: #0B3B4A;
+  --ns-primary-light: #14657D;
+  
+  /* Electric accent — vibrant teal (2026 "Transformative Teal") */
+  --ns-accent: #00A6A6;
+  --ns-accent-bright: #2DD4BF;
+  
+  /* Secondary accent — warm coral (not gold) */
+  --ns-coral: #FF6B5B;
+  --ns-coral-soft: #FF8A7A;
+  
+  /* Text */
+  --ns-text: #0F1A24;
+  --ns-text-muted: #4A5A6A;
+  
+  /* Colored glass tints */
+  --glass-tint-cyan: rgba(0, 166, 166, 0.10);
+  --glass-tint-coral: rgba(255, 107, 91, 0.09);
+  --glass-tint-navy: rgba(11, 59, 74, 0.08);
+  --glass-rim: rgba(255, 255, 255, 0.45);
+}
+
+/* ── 1a. Global background — cool gradient, NOT beige ── */
+body {
+  background: 
+    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(0, 166, 166, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 30%, rgba(255, 107, 91, 0.04) 0%, transparent 60%),
+    var(--ns-canvas) !important;
+  color: var(--ns-text) !important;
+}
+
+/* ── 1b. Beige sections → cool surfaces ── */
+section.bg-nile-beige,
+#packages,
+#travel-addons,
+#reviews {
+  background: linear-gradient(180deg, #F4F6F9 0%, #EEF1F6 100%) !important;
+}
+
+section.bg-white {
+  background: #FFFFFF !important;
+}
+
+/* ── 1c. Dark sections → tinted navy (not near-black) ── */
+section.bg-nile-blue,
+section.bg-nile-blue-dark,
+#price-anchor,
+#top-tier,
+#consult,
+#guarantees,
+#legal {
+  background: 
+    radial-gradient(ellipse at 80% 20%, rgba(0, 166, 166, 0.10) 0%, transparent 50%),
+    linear-gradient(160deg, #071A22 0%, #0B2D3A 50%, #0F3B4D 100%) !important;
+}
+
+/* ── 1d. Remove gold gradients → teal accent gradients ── */
+.gold-text,
+.gold-grad,
+.section-heading,
+.section-heading-light {
+  background: linear-gradient(135deg, #00A6A6 0%, #2DD4BF 50%, #00A6A6 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-size: 200% auto !important;
+  animation: accentFlow 6s ease-in-out infinite !important;
+}
+@keyframes accentFlow {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+}
+
+/* ── 1e. Remove gold borders/accents everywhere ── */
+.card,
+details,
+.table-wrap,
+.tier-section,
+.limited-badge {
+  border-color: rgba(0, 166, 166, 0.18) !important;
+}
+
+.card-top-gold,
+.card-left-gold,
+.card-top-blue {
+  border-top-color: var(--ns-accent) !important;
+  border-left-color: var(--ns-accent) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   2. FULLY ROUNDED CORNERS — No sharp edges anywhere
+   (2026 "Squircle radii 28-40px" per Apple-tier soft UI)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* 2a. Cards — generous rounding */
+.card {
+  border-radius: 28px !important;
+  overflow: hidden !important;
+}
+
+/* 2b. Buttons — full pills */
+.btn {
+  border-radius: 100px !important;
+}
+
+/* 2c. Inputs — rounded */
+input, select, textarea,
+#leadForm input,
+#leadForm select,
+#leadForm textarea {
+  border-radius: 16px !important;
+}
+
+/* 2d. Tables — rounded containers */
+.table-wrap {
+  border-radius: 24px !important;
+  overflow: hidden !important;
+}
+
+/* 2e. Accordions */
+details {
+  border-radius: 20px !important;
+}
+
+/* 2f. Modals */
+.modal-content {
+  border-radius: 32px !important;
+}
+
+/* 2g. Sticky mobile bar — rounded top */
+.sticky-mobile {
+  border-radius: 24px 24px 0 0 !important;
+}
+
+/* 2h. Badges — pills */
+.limited-badge,
+.top-badge,
+.tier-badge,
+.implant-badge {
+  border-radius: 100px !important;
+}
+
+/* 2i. Images inside cards */
+.card img {
+  border-radius: 20px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   3. COLORED GLASS — Real, tinted, luminous (not gray blur)
+   (Per 2026 glass recipes: tint + rim + saturation + grain)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* 3a. Header — colored glass, VISIBLE ON LOAD, logo + slogan restored */
+#liquidGlassHeader {
+  top: 16px !important;
+  max-width: 860px !important;
+  border-radius: 100px !important;
+  background: var(--glass-tint-cyan) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid var(--glass-rim) !important;
+  box-shadow: 
+    0 8px 32px rgba(11, 59, 74, 0.12),
+    0 2px 8px rgba(11, 59, 74, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+  transform: translateX(-50%) translateY(0) !important; /* VISIBLE from load */
+  opacity: 1 !important;
+  transition: 
+    background 0.4s cubic-bezier(0.32, 0.72, 0, 1),
+    box-shadow 0.4s cubic-bezier(0.32, 0.72, 0, 1),
+    top 0.35s cubic-bezier(0.32, 0.72, 0, 1) !important;
+}
+
+/* 3b. When over dark section — switch to navy tinted glass */
+#liquidGlassHeader.on-dark {
+  background: rgba(7, 26, 34, 0.72) !important;
+  border-color: rgba(0, 166, 166, 0.28) !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(0, 166, 166, 0.15) !important;
+}
+
+/* 3c. Scrolled state — tighter, firmer */
+#liquidGlassHeader.is-scrolled {
+  top: 10px !important;
+  background: rgba(255, 255, 255, 0.82) !important;
+  box-shadow: 
+    0 12px 40px rgba(11, 59, 74, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+#liquidGlassHeader.on-dark.is-scrolled {
+  background: rgba(7, 26, 34, 0.88) !important;
+}
+
+/* ── 3d. FIX: "Concierge" text color (was black — now themed) ── */
+#liquidGlassHeader .lgh-logo-text {
+  color: var(--ns-primary) !important;
+  font-weight: 700 !important;
+}
+
+#liquidGlassHeader.on-dark .lgh-logo-text {
+  color: #E8F4F6 !important;
+}
+
+/* ── 3e. RESTORE the slogan under the logo ── */
+.lgh-logo-sub {
+  display: block !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 0.42rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: var(--ns-accent) !important;
+  margin-top: 2px !important;
+  line-height: 1.2 !important;
+}
+
+#liquidGlassHeader.on-dark .lgh-logo-sub {
+  color: var(--ns-accent-bright) !important;
+}
+
+/* 3f. Logo script color */
+#liquidGlassHeader .lgh-logo-script {
+  color: var(--ns-primary) !important;
+  font-size: 1.8rem !important;
+}
+
+#liquidGlassHeader.on-dark .lgh-logo-script {
+  color: #E8F4F6 !important;
+}
+
+/* 3g. Nav links — themed */
+.lgh-link {
+  color: var(--ns-text) !important;
+  font-weight: 600 !important;
+}
+
+.lgh-link:hover {
+  color: var(--ns-accent) !important;
+  background: rgba(0, 166, 166, 0.08) !important;
+}
+
+#liquidGlassHeader.on-dark .lgh-link {
+  color: #D6E8EC !important;
+}
+
+#liquidGlassHeader.on-dark .lgh-link:hover {
+  color: var(--ns-accent-bright) !important;
+}
+
+/* 3h. Active pill — teal gradient */
+.lgh-active-pill {
+  background: linear-gradient(90deg, #00A6A6, #2DD4BF) !important;
+}
+
+/* 3i. CTA button — teal gradient, full pill */
+.lgh-cta {
+  background: linear-gradient(135deg, #00A6A6, #2DD4BF) !important;
+  color: #FFFFFF !important;
+  border-radius: 100px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 16px rgba(0, 166, 166, 0.35) !important;
+}
+
+.lgh-cta:hover {
+  box-shadow: 0 8px 24px rgba(0, 166, 166, 0.55) !important;
+  transform: translateY(-1px) scale(1.03) !important;
+}
+
+/* 3j. Mobile menu — colored glass, rounded */
+.lgh-mobile-menu {
+  background: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-radius: 28px !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 0 20px 50px rgba(11, 59, 74, 0.15) !important;
+}
+
+#liquidGlassHeader.on-dark .lgh-mobile-menu {
+  background: rgba(7, 26, 34, 0.90) !important;
+  border-color: rgba(0, 166, 166, 0.25) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   4. BUTTONS — teal/coral, rounded, modern (not gold)
+   ═══════════════════════════════════════════════════════════════ */
+
+.btn-gold {
+  background: linear-gradient(135deg, #00A6A6, #2DD4BF) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  border-radius: 100px !important;
+  box-shadow: 0 4px 18px rgba(0, 166, 166, 0.30) !important;
+  font-weight: 700 !important;
+}
+
+.btn-gold:hover {
+  box-shadow: 0 10px 28px rgba(0, 166, 166, 0.50) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+}
+
+.btn-gold::after {
+  background: radial-gradient(circle, rgba(0, 166, 166, 0.4) 0%, transparent 70%) !important;
+}
+
+.btn-outline {
+  border: 1px solid rgba(0, 166, 166, 0.5) !important;
+  color: #2DD4BF !important;
+  border-radius: 100px !important;
+}
+
+.btn-outline:hover {
+  background: rgba(0, 166, 166, 0.12) !important;
+  border-color: #2DD4BF !important;
+}
+
+.btn-outline-dark {
+  border: 1px solid rgba(11, 59, 74, 0.25) !important;
+  color: var(--ns-primary) !important;
+  border-radius: 100px !important;
+}
+
+.btn-outline-dark:hover {
+  background: rgba(0, 166, 166, 0.08) !important;
+  border-color: var(--ns-accent) !important;
+  color: var(--ns-primary) !important;
+}
+
+/* Coral accent for secondary CTAs */
+#turkey-rescue .btn-gold,
+#travel-addons .card a[href*="wa.me"] {
+  background: linear-gradient(135deg, #FF6B5B, #FF8A7A) !important;
+  box-shadow: 0 4px 18px rgba(255, 107, 91, 0.30) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   5. DYNAMIC DETAILS — Motion with meaning (Apple-tier)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* 5a. Spring easing for all transitions */
+a, button, .card, .btn, details, summary, input, select, textarea {
+  transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1) !important;
+}
+
+/* 5b. Card hover — soft lift, no 3D rotation */
+.card:hover {
+  transform: translateY(-4px) scale(1.005) !important;
+  box-shadow: 
+    0 20px 48px rgba(11, 59, 74, 0.10),
+    0 4px 12px rgba(11, 59, 74, 0.06) !important;
+  border-color: rgba(0, 166, 166, 0.30) !important;
+}
+
+/* 5c. Hero content — glass card with colored tint */
+.hero-content {
+  background: rgba(7, 26, 34, 0.55) !important;
+  backdrop-filter: blur(20px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+  border: 1px solid rgba(0, 166, 166, 0.22) !important;
+  border-radius: 32px !important;
+  box-shadow: 
+    0 24px 64px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+/* 5d. Section eyebrows — teal */
+.eyebrow {
+  color: var(--ns-accent) !important;
+}
+
+.eyebrow-light {
+  color: var(--ns-accent-bright) !important;
+}
+
+/* 5e. Smooth reveal — reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 5f. Colored glass for trust bar / badges */
+.hero-content .flex.flex-wrap.justify-center.gap-x-6 span {
+  color: #B8DDE2 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   6. TEXT & TYPOGRAPHY — Modern, airy, not "flat"
+   ═══════════════════════════════════════════════════════════════ */
+
+body {
+  font-family: 'Montserrat', system-ui, -apple-system, sans-serif !important;
+  line-height: 1.7 !important;
+  color: var(--ns-text) !important;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  letter-spacing: -0.025em !important;
+  text-wrap: balance !important;
+}
+
+p, li {
+  text-wrap: pretty !important;
+  color: var(--ns-text-muted) !important;
+}
+
+/* Dark sections text */
+.bg-nile-blue p,
+.bg-nile-blue-dark p,
+#consult p,
+#guarantees p {
+  color: #B8DDE2 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   7. FORM — Rounded, modern, teal focus
+   ═══════════════════════════════════════════════════════════════ */
+
+#leadForm input,
+#leadForm select,
+#leadForm textarea {
+  border: 1px solid rgba(11, 59, 74, 0.15) !important;
+  border-radius: 16px !important;
+  background: #FFFFFF !important;
+  color: var(--ns-text) !important;
+  padding: 0.9rem 1.1rem !important;
+}
+
+#leadForm input:focus,
+#leadForm select:focus,
+#leadForm textarea:focus {
+  border-color: var(--ns-accent) !important;
+  box-shadow: 0 0 0 4px rgba(0, 166, 166, 0.12) !important;
+  outline: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   8. MOBILE — Keep header compact, logo visible
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 767px) {
+  #liquidGlassHeader {
+    top: 10px !important;
+    width: calc(100% - 20px) !important;
+    max-width: 100% !important;
+    border-radius: 28px !important;
+    background: rgba(255, 255, 255, 0.80) !important;
+  }
+  
+  #liquidGlassHeader .lgh-logo-script {
+    font-size: 1.5rem !important;
+  }
+  
+  #liquidGlassHeader .lgh-logo-text {
+    font-size: 0.5rem !important;
+    letter-spacing: 0.22em !important;
+  }
+  
+  #liquidGlassHeader .lgh-logo-sub {
+    font-size: 0.38rem !important;
+    letter-spacing: 0.12em !important;
+  }
+  
+  /* Ensure logo area is compact */
+  .lgh-inner {
+    padding: 0.5rem 0.6rem 0.5rem 0.9rem !important;
+    min-height: 54px !important;
+  }
+}
+</style>
+
+<script id="modernize2026JS">
+(function() {
+  'use strict';
+
+  var DEBUG = false;
+  function log() { if (DEBUG) console.log.apply(console, ['[Modern2026]'].concat([].slice.call(arguments))); }
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 1: Header visible on load — no more hiding
+     ═══════════════════════════════════════════════════════════ */
+  function ensureHeaderVisibleOnLoad() {
+    var header = document.getElementById('liquidGlassHeader');
+    if (!header) return;
+
+    /* Force visible class immediately */
+    header.classList.add('is-visible');
+
+    /* Ensure CSS transform is correct */
+    header.style.transform = 'translateX(-50%) translateY(0)';
+    header.style.opacity = '1';
+
+    log('Header forced visible on load');
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 2: Slogan restoration — verify it's there
+     ═══════════════════════════════════════════════════════════ */
+  function ensureSloganVisible() {
+    var slogan = document.querySelector('#liquidGlassHeader .lgh-logo-sub');
+    if (!slogan) {
+      /* Re-create if missing */
+      var logoWrap = document.querySelector('#liquidGlassHeader .lgh-logo');
+      if (logoWrap) {
+        var span = document.createElement('span');
+        span.className = 'lgh-logo-sub';
+        span.textContent = 'World-Class Smile';
+        logoWrap.appendChild(span);
+        log('Slogan re-created');
+      }
+    } else {
+      slogan.style.display = 'block';
+      slogan.style.color = 'var(--ns-accent)';
+      log('Slogan made visible');
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 3: Concierge text color — ensure themed
+     ═══════════════════════════════════════════════════════════ */
+  function fixConciergeColor() {
+    var concierge = document.querySelector('#liquidGlassHeader .lgh-logo-text');
+    if (concierge) {
+      concierge.style.color = 'var(--ns-primary)';
+      log('Concierge color fixed');
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 4: Dynamic scroll — header stays visible, only condenses
+     (No more hide/show behavior)
+     ═══════════════════════════════════════════════════════════ */
+  function initDynamicHeader() {
+    var header = document.getElementById('liquidGlassHeader');
+    if (!header) return;
+
+    var ticking = false;
+    var lastY = 0;
+
+    function update() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function() {
+        var y = window.scrollY;
+
+        /* Always visible — never remove is-visible */
+        header.classList.add('is-visible');
+
+        /* Scrolled state only affects styling, not visibility */
+        if (y > 120) {
+          header.classList.add('is-scrolled');
+        } else {
+          header.classList.remove('is-scrolled');
+        }
+
+        lastY = y;
+        ticking = false;
+      });
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+    log('Dynamic header initialized — always visible');
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 5: Colored glass over dark sections — tint switch
+     ═══════════════════════════════════════════════════════════ */
+  function initTintSwitch() {
+    var header = document.getElementById('liquidGlassHeader');
+    if (!header) return;
+
+    var darkSections = [
+      'price-anchor', 'top-tier', 'science', 'turkey-rescue',
+      'guarantees', 'bone-graft', 'consult', 'teeth-map',
+      'discover-egypt', 'legal', 'implant-systems'
+    ];
+
+    function checkTint() {
+      var rect = header.getBoundingClientRect();
+      var mid = rect.top + rect.height / 2;
+      var overDark = false;
+
+      for (var i = 0; i < darkSections.length; i++) {
+        var el = document.getElementById(darkSections[i]);
+        if (!el) continue;
+        var r = el.getBoundingClientRect();
+        if (r.top <= mid && r.bottom >= mid) {
+          overDark = true;
+          break;
+        }
+      }
+
+      if (overDark) header.classList.add('on-dark');
+      else header.classList.remove('on-dark');
+    }
+
+    window.addEventListener('scroll', checkTint, { passive: true });
+    window.addEventListener('resize', checkTint, { passive: true });
+    checkTint();
+    log('Tint switch initialized');
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 6: Remove stale gold references — ensure no gold remains
+     ═══════════════════════════════════════════════════════════ */
+  function removeStaleGold() {
+    /* Remove gold-related inline styles */
+    document.querySelectorAll('[style*="AE9164"], [style*="C9A96E"], [style*="E8C88A"]').forEach(function(el) {
+      var style = el.getAttribute('style');
+      if (style) {
+        style = style.replace(/#AE9164/gi, '#00A6A6')
+                     .replace(/#C9A96E/gi, '#2DD4BF')
+                     .replace(/#E8C88A/gi, '#2DD4BF');
+        el.setAttribute('style', style);
+      }
+    });
+    log('Stale gold styles cleaned');
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     RUNNER
+     ═══════════════════════════════════════════════════════════ */
+  function runAll() {
+    try { ensureHeaderVisibleOnLoad(); } catch(e) { console.warn(e); }
+    try { ensureSloganVisible(); }       catch(e) { console.warn(e); }
+    try { fixConciergeColor(); }         catch(e) { console.warn(e); }
+    try { initDynamicHeader(); }         catch(e) { console.warn(e); }
+    try { initTintSwitch(); }            catch(e) { console.warn(e); }
+    try { removeStaleGold(); }           catch(e) { console.warn(e); }
+    log('✔ Modernization complete');
+  }
+
+  if (document.readyState === 'complete') {
+    setTimeout(runAll, 200);
+  } else {
+    window.addEventListener('load', function() { setTimeout(runAll, 200); });
+  }
+
+})();
+</script>
+<!-- ═══════════════════════════════════════════════════════════════
+     END NILE SMILE — 2026 MODERNIZATION
+     ═══════════════════════════════════════════════════════════════ -->
 </body>
 </html>
