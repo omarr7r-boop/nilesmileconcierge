@@ -21626,5 +21626,308 @@ input:focus-visible, select:focus-visible, textarea:focus-visible,
 
 })();
 </script>
+<style id="premiumAppleDockStyles">
+  /* ═══════════════════════════════════════════════════════════
+     1. إعدادات الانتقال السينمائي (View Transitions)
+     ═══════════════════════════════════════════════════════════ */
+  @view-transition {
+    navigation: auto;
+  }
+  
+  ::view-transition-old(root) {
+    animation: 0.5s cubic-bezier(0.16, 1, 0.3, 1) both fade-out;
+  }
+  ::view-transition-new(root) {
+    animation: 0.5s cubic-bezier(0.16, 1, 0.3, 1) both fade-in;
+  }
+  
+  @keyframes fade-out {
+    to { opacity: 0; transform: scale(0.98) translateY(10px); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; transform: scale(1.02) translateY(-10px); }
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     2. شريط التنقل العائم (The Premium Floating Dock)
+     ═══════════════════════════════════════════════════════════ */
+  #appleDock {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 100px;
+    
+    /* الزجاج الفخم (Glassmorphism) */
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(174, 145, 100, 0.1) inset;
+    
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* زرار الدوك (اللينك) */
+  .dock-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    color: #4F6070;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+  }
+
+  /* تأثير الـ Hover (التكبير زي الماك) */
+  .dock-item:hover {
+    background: rgba(174, 145, 100, 0.15);
+    color: #AE9164;
+    transform: scale(1.15) translateY(-5px);
+  }
+
+  /* الأيقونة */
+  .dock-item svg {
+    width: 22px;
+    height: 22px;
+    transition: all 0.3s ease;
+  }
+
+  /* التلميح (Tooltip) عند الوقوف على الأيقونة */
+  .dock-item::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: rgba(31, 42, 54, 0.9);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 6px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .dock-item:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* النقطة اللي تحت الأيقونة النشطة */
+  .dock-item.active::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #AE9164;
+    box-shadow: 0 0 10px #AE9164;
+  }
+
+  /* فاصل أنيق بين الأيقونات */
+  .dock-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(174, 145, 100, 0.2);
+    margin: 0 4px;
+  }
+
+  /* أيقونة الرئيسية (تكون مميزة) */
+  .dock-item.home-btn {
+    background: linear-gradient(135deg, #AE9164, #E8C88A);
+    color: #1F2A36;
+  }
+  .dock-item.home-btn:hover {
+    box-shadow: 0 8px 20px rgba(174, 145, 100, 0.4);
+  }
+
+  /* إخفاء الدوك في الأقسام اللي فيها مودالات عشان ميتعارضش */
+  body.modal-open #appleDock {
+    transform: translateX(-50%) translateY(100px);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* موبايل */
+  @media (max-width: 767px) {
+    #appleDock {
+      bottom: 20px;
+      padding: 6px 12px;
+      gap: 4px;
+      width: calc(100% - 40px);
+      justify-content: space-evenly;
+    }
+    .dock-item {
+      width: 42px;
+      height: 42px;
+    }
+    .dock-item svg { width: 20px; height: 20px; }
+  }
+</style>
+
+<script id="premiumAppleDockJS">
+(function () {
+  'use strict';
+
+  // 1. إزالة أي كود قديم كان بيبوظ التصميم
+  document.body.classList.remove('app-mode-active', 'home-view');
+  const oldBackBtn = document.getElementById('appBackBtn');
+  if (oldBackBtn) oldBackBtn.remove();
+  const oldGrid = document.querySelector('.app-menu-grid');
+  if (oldGrid) oldGrid.remove();
+
+  // 2. إنشاء شريط التنقل العائم (Dock)
+  function createDock() {
+    if (document.getElementById('appleDock')) return;
+
+    const dock = document.createElement('div');
+    dock.id = 'appleDock';
+    
+    // الأيقونات (مستوحاة من آبل)
+    const menuItems = [
+      { id: '#main', label: 'Home', icon: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline>', class: 'home-btn' },
+      { id: '#packages', label: 'Packages', icon: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line>' },
+      { id: '#results', label: 'Results', icon: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline>' },
+      { id: '#science', label: 'Science', icon: '<path d="M10 2v6.5a4.5 4.5 0 0 1-4.5 4.5H4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2h-1.5A4.5 4.5 0 0 1 14 8.5V2"></path><path d="M8 2h8"></path>' },
+      { id: '#guarantees', label: 'Warranty', icon: '<path d="M12 2l9 4v6c0 5.5-3.8 10.7-9 12-5.2-1.3-9-6.5-9-12V6l9-4z"></path><path d="M9 12l2 2 4-4"></path>' },
+      { id: '#faq', label: 'FAQ', icon: '<circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line>' }
+    ];
+
+    menuItems.forEach((item, index) => {
+      const a = document.createElement('a');
+      a.href = item.id;
+      a.className = 'dock-item ' + (item.class || '');
+      a.setAttribute('data-tooltip', item.label);
+      a.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${item.icon}</svg>`;
+      
+      // إضافة فاصل قبل آخر أيقونة
+      if (index === 1) {
+        const divider = document.createElement('div');
+        divider.className = 'dock-divider';
+        dock.appendChild(divider);
+      }
+      
+      dock.appendChild(a);
+    });
+
+    document.body.appendChild(dock);
+  }
+
+  // 3. تفعيل الانتقال السينمائي (View Transitions API)
+  function initSmoothNavigation() {
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href^="#"]');
+      if (!link) return;
+
+      const targetId = link.getAttribute('href');
+      if (targetId === '#' || targetId === '#main' || !targetId) {
+        // العودة للرئيسية
+        e.preventDefault();
+        if (document.startViewTransition) {
+          document.startViewTransition(() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            history.pushState(null, null, '#main');
+          });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        return;
+      }
+
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        
+        // استخدام View Transitions API لو المتصفح بيدعمها
+        if (document.startViewTransition) {
+          document.startViewTransition(() => {
+            const headerOffset = 100;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            window.scrollTo({ top: offsetPosition, behavior: 'instant' });
+            history.pushState(null, null, targetId);
+          });
+        } else {
+          // Fallback للمتصفحات القديمة
+          const headerOffset = 100;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+          history.pushState(null, null, targetId);
+        }
+      }
+    });
+  }
+
+  // 4. تمييز القسم النشط في الدوك (Active State)
+  function initActiveStateObserver() {
+    const sections = document.querySelectorAll('main > section, main > .hero');
+    const dockItems = document.querySelectorAll('.dock-item');
+
+    if (!('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id ? `#${entry.target.id}` : '#main';
+          
+          dockItems.forEach(item => {
+            item.classList.toggle('active', item.getAttribute('href') === id);
+          });
+        }
+      });
+    }, { rootMargin: '-20% 0px -60% 0px' });
+
+    sections.forEach(sec => observer.observe(sec));
+  }
+
+  // 5. إخفاء الدوك عند فتح المودالات
+  function initModalObserver() {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          const hasOpenModal = document.querySelector('.modal.open, .exit-popup.open, .search-modal.open');
+          document.body.classList.toggle('modal-open', !!hasOpenModal);
+        }
+      });
+    });
+    
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    document.querySelectorAll('.modal, .exit-popup, .search-modal').forEach(m => {
+      observer.observe(m, { attributes: true, attributeFilter: ['class'] });
+    });
+  }
+
+  // التشغيل بعد تحميل الصفحة
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      createDock();
+      initSmoothNavigation();
+      initActiveStateObserver();
+      initModalObserver();
+    }, 1000);
+  });
+
+})();
+</script>
 </body>
 </html>
