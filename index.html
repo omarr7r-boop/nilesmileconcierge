@@ -20623,5 +20623,98 @@ input:focus-visible, select:focus-visible, textarea:focus-visible,
   });
 })();
 </script>
+<style id="ultimateContrastAndColorFix">
+  /* ═══════════════════════════════════════════════════════════
+     1. إيقاف الـ Gradient المتحرك اللي بيخلي العناوين تختفي
+     ═══════════════════════════════════════════════════════════ */
+  .gold-text,
+  .gold-grad,
+  .section-heading,
+  .section-heading-light {
+    background: none !important;
+    background-clip: border-box !important;
+    -webkit-background-clip: border-box !important;
+    -webkit-text-fill-color: currentColor !important;
+    animation: none !important;
+  }
+
+  /* العناوين في الخلفيات الفاتحة (ذهبي غامق) */
+  section.bg-white .gold-text,
+  section.bg-nile-beige .gold-text,
+  section.bg-white .section-heading,
+  section.bg-nile-beige .section-heading {
+    color: #8A7248 !important; 
+  }
+
+  /* العناوين في الخلفيات الغامقة (ذهبي فاتح) */
+  .bg-nile-blue .gold-text,
+  .bg-nile-blue-dark .gold-text,
+  .bg-nile-blue .section-heading,
+  .bg-nile-blue-dark .section-heading,
+  #top-tier .gold-text, #top-tier .section-heading,
+  #academic .gold-text, #academic .section-heading {
+    color: #E8C88A !important; 
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     2. تثبيت لون العناوين الصغيرة (Eyebrow) عشان تبان
+     ═══════════════════════════════════════════════════════════ */
+  /* في الخلفيات الفاتحة */
+  section.bg-white p.eyebrow,
+  section.bg-nile-beige p.eyebrow,
+  #team .eyebrow,
+  #packages .eyebrow,
+  #reviews .eyebrow,
+  #results .eyebrow,
+  #faq .eyebrow,
+  #timeline .eyebrow {
+    color: #AE9164 !important;
+    opacity: 1 !important;
+    -webkit-text-fill-color: currentColor !important;
+  }
+
+  /* في الخلفيات الغامقة */
+  .bg-nile-blue p.eyebrow,
+  .bg-nile-blue-dark p.eyebrow,
+  #top-tier .eyebrow,
+  #academic .eyebrow,
+  #turkey-rescue .eyebrow,
+  #consult .eyebrow,
+  #guarantees .eyebrow {
+    color: #E8C88A !important;
+    opacity: 1 !important;
+    -webkit-text-fill-color: currentColor !important;
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     3. إصلاح النصوص والقوائم اللي مش باينة في الأقسام الغامقة
+     ═══════════════════════════════════════════════════════════ */
+  /* استثناء العناوين الصغيرة والعناوين الكبيرة من اللون الغامق */
+  .bg-nile-blue p:not(.eyebrow):not(.gold-text):not(.section-heading),
+  .bg-nile-blue-dark p:not(.eyebrow):not(.gold-text):not(.section-heading),
+  .bg-nile-blue li,
+  .bg-nile-blue-dark li,
+  #top-tier p:not(.eyebrow):not(.gold-text):not(.section-heading),
+  #top-tier li,
+  #turkey-rescue p:not(.eyebrow):not(.gold-text):not(.section-heading),
+  #turkey-rescue li,
+  #academic p:not(.eyebrow):not(.gold-text):not(.section-heading),
+  #academic li {
+    color: #D1D9E0 !important; /* لون رمادي فاتح مريح للعين */
+  }
+
+  /* إصلاح النصوص اللي كان ليها لون مخصص في الـ HTML واتلغى */
+  #top-tier p[style*="color:#E8C88A"],
+  #top-tier p[style*="color: #E8C88A"],
+  #turkey-rescue p[style*="color:#E8C88A"],
+  #turkey-rescue p[style*="color: #E8C88A"] {
+    color: #E8C88A !important;
+  }
+  
+  #top-tier span[style*="color:#E8938C"],
+  #turkey-rescue span[style*="color:#E8938C"] {
+    color: #E8938C !important;
+  }
+</style>
 </body>
 </html>
