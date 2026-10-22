@@ -21349,5 +21349,282 @@ input:focus-visible, select:focus-visible, textarea:focus-visible,
 
 })();
 </script>
+<style id="appleStyleAppView">
+  /* ═══════════════════════════════════════════════════════════
+     1. إعدادات العرض كتطبيق (App View)
+     ═══════════════════════════════════════════════════════════ */
+  body.app-mode-active {
+    overflow: hidden !important; /* قفل السكرول في الصفحة الرئيسية */
+    height: 100vh;
+  }
+
+  /* إخفاء كل الأقسام افتراضياً */
+  body.app-mode-active main > section {
+    display: none !important;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    min-height: 100vh; /* كل قسم بياخد الشاشة كاملة */
+    padding-top: 100px !important; /* مساحة للهيدر */
+  }
+
+  /* القسم النشط فقط هو اللي بيظهر */
+  body.app-mode-active main > section.app-section-active {
+    display: block !important; /* أو flex لو الهيرو */
+    opacity: 1;
+    transform: translateY(0);
+    overflow-y: auto;
+    height: 100vh;
+  }
+
+  /* الهيرو ياخد الشاشة بالكامل */
+  body.app-mode-active .hero.app-section-active {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 0 !important;
+  }
+
+  /* إخفاء الفوتر في الأقسام الفرعية وإظهاره بس في الرئيسية */
+  body.app-mode-active footer {
+    display: none !important;
+  }
+  body.app-mode-active.home-view footer {
+    display: block !important;
+    position: relative;
+    z-index: 10;
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     2. زرار الرجوع للواجهة الرئيسية (زي تطبيقات Apple)
+     ═══════════════════════════════════════════════════════════ */
+  #appBackBtn {
+    position: fixed;
+    top: 90px;
+    left: 20px;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(174, 145, 100, 0.4);
+    color: #1F2A36;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: none; /* مخفي في الواجهة الرئيسية */
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+  }
+
+  #appBackBtn:hover {
+    background: #AE9164;
+    color: #fff;
+    border-color: #AE9164;
+    transform: translateX(-5px);
+  }
+
+  body.app-mode-active:not(.home-view) #appBackBtn {
+    display: flex;
+  }
+
+  /* تعديل بسيط للهيدر في وضع التطبيق */
+  body.app-mode-active .site-header, 
+  body.app-mode-active #liquidGlassHeader {
+    background: rgba(255, 255, 255, 0.95) !important;
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     3. شبكة الروابط في الواجهة الرئيسية (Dashboard Links)
+     ═══════════════════════════════════════════════════════════ */
+  .app-menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .app-menu-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .app-menu-card:hover {
+    background: rgba(232, 200, 138, 0.2);
+    border-color: #E8C88A;
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+  }
+
+  .app-menu-card svg {
+    width: 24px;
+    height: 24px;
+    color: #E8C88A;
+  }
+
+  .app-menu-card span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+</style>
+
+<script id="appleStyleAppViewJS">
+(function () {
+  'use strict';
+
+  function initAppView() {
+    // 1. تفعيل وضع التطبيق
+    document.body.classList.add('app-mode-active', 'home-view');
+
+    // 2. تحديد القسم الرئيسي (الهيرو)
+    const hero = document.querySelector('.hero');
+    const footer = document.querySelector('footer');
+    const mainSections = document.querySelectorAll('main > section');
+
+    // إخفاء كل الأقسام ما عدا الهيرو
+    mainSections.forEach(sec => sec.classList.remove('app-section-active'));
+    if (hero) hero.classList.add('app-section-active');
+
+    // 3. إنشاء زرار الرجوع للرئيسية
+    if (!document.getElementById('appBackBtn')) {
+      const backBtn = document.createElement('button');
+      backBtn.id = 'appBackBtn';
+      backBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Home';
+      
+      backBtn.addEventListener('click', () => {
+        goToHome();
+      });
+      document.body.appendChild(backBtn);
+    }
+
+    // 4. دالة الانتقال للرئيسية
+    function goToHome() {
+      document.body.classList.add('home-view');
+      
+      mainSections.forEach(sec => sec.classList.remove('app-section-active'));
+      if (hero) hero.classList.add('app-section-active');
+      
+      window.scrollTo(0, 0);
+      history.pushState(null, null, '#');
+      
+      // إظهار الفوتر
+      if (footer) footer.style.display = 'block';
+    }
+
+    // 5. دالة الانتقال لأي قسم
+    function navigateToSection(targetId) {
+      const targetSection = document.querySelector(targetId);
+      if (!targetSection) return;
+
+      document.body.classList.remove('home-view');
+      
+      // إخفاء كل الأقسام
+      mainSections.forEach(sec => sec.classList.remove('app-section-active'));
+      
+      // إظهار القسم المطلوب
+      targetSection.classList.add('app-section-active');
+      
+      // إخفاء الفوتر في الأقسام الفرعية
+      if (footer) footer.style.display = 'none';
+
+      // عمل سكرول لأعلى القسم
+      const viewContainer = targetSection;
+      setTimeout(() => {
+        viewContainer.scrollTo(0, 0);
+        window.scrollTo(0, 0);
+      }, 50);
+
+      history.pushState(null, null, targetId);
+    }
+
+    // 6. اعتراض كل اللينكات اللي بتبدأ بـ #
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a[href^="#"]');
+      if (!link) return;
+
+      const targetId = link.getAttribute('href');
+      if (!targetId || targetId === '#' || targetId === '#main') {
+        e.preventDefault();
+        goToHome();
+        return;
+      }
+
+      const targetSection = document.querySelector(targetId);
+      if (targetSection && targetSection.closest('main')) {
+        e.preventDefault();
+        navigateToSection(targetId);
+      }
+    });
+
+    // 7. دعم زرار الـ Back بتاع المتصفح
+    window.addEventListener('popstate', function() {
+      const hash = window.location.hash;
+      if (hash && hash !== '#') {
+        navigateToSection(hash);
+      } else {
+        goToHome();
+      }
+    });
+
+    // 8. إضافة قائمة اللينكات السريعة (Apple Dashboard) في الهيرو
+    if (hero) {
+      const heroContent = hero.querySelector('.hero-content');
+      if (heroContent && !document.querySelector('.app-menu-grid')) {
+        const menuGrid = document.createElement('div');
+        menuGrid.className = 'app-menu-grid';
+        
+        const menuItems = [
+          { id: '#packages', label: 'Packages', icon: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line>' },
+          { id: '#results', label: 'Results', icon: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline>' },
+          { id: '#science', label: 'Science', icon: '<path d="M10 2v6.5a4.5 4.5 0 0 1-4.5 4.5H4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2h-1.5A4.5 4.5 0 0 1 14 8.5V2"></path><path d="M8 2h8"></path>' },
+          { id: '#guarantees', label: 'Warranty', icon: '<path d="M12 2l9 4v6c0 5.5-3.8 10.7-9 12-5.2-1.3-9-6.5-9-12V6l9-4z"></path><path d="M9 12l2 2 4-4"></path>' },
+          { id: '#reviews', label: 'Reviews', icon: '<path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>' },
+          { id: '#faq', label: 'FAQ', icon: '<circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line>' }
+        ];
+
+        menuItems.forEach(item => {
+          const a = document.createElement('a');
+          a.href = item.id;
+          a.className = 'app-menu-card';
+          a.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${item.icon}</svg><span>${item.label}</span>`;
+          menuGrid.appendChild(a);
+        });
+
+        heroContent.appendChild(menuGrid);
+      }
+    }
+  }
+
+  // تشغيل الكود بعد ما كل السكريبتات القديمة تخلص
+  setTimeout(initAppView, 2500);
+
+})();
+</script>
 </body>
 </html>
