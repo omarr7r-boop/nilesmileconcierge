@@ -20463,5 +20463,165 @@ input:focus-visible, select:focus-visible, textarea:focus-visible,
     }
   }
 </style>
+<style id="mobileMenuDefinitiveFix">
+  @media (max-width: 1023px) {
+
+    /* ═══ الحالة الطبيعية: المنيو child مباشر للـ body ═══ */
+    body > #lghMobileMenu {
+      position: fixed !important;
+      top: auto !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      border-radius: 28px 28px 0 0 !important;
+      max-height: 82vh !important;
+      padding: 0 !important;
+      transform: translateY(100%) !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      transition:
+        transform 0.45s cubic-bezier(0.32, 0.72, 0, 1),
+        visibility 0s linear 0.45s,
+        opacity 0.3s ease !important;
+      z-index: 1050 !important;
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(30px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+      box-shadow: 0 -20px 60px rgba(10, 13, 16, 0.25) !important;
+      overflow-y: auto !important;
+      overscroll-behavior: contain !important;
+      -webkit-overflow-scrolling: touch !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+
+    /* ═══ حالة مفتوحة: تنزلق من تحت ═══ */
+    body > #lghMobileMenu.is-open {
+      transform: translateY(0) !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      transition:
+        transform 0.45s cubic-bezier(0.32, 0.72, 0, 1),
+        visibility 0s linear 0s,
+        opacity 0.3s ease !important;
+    }
+
+    /* ═══ احتياطي: لو JS فشل قبل ما ينقل المنيو ═══ */
+    /* نخفيه بأي حال عشان ما يظهرش غلط */
+    #liquidGlassHeader > #lghMobileMenu:not(.is-open) {
+      transform: translateY(250vh) !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+
+<script id="mobileMenuDefinitiveFixJS">
+(function () {
+  'use strict';
+  var BREAKPOINT = 1023;
+
+  function init() {
+    var header = document.getElementById('liquidGlassHeader');
+    var menu   = document.getElementById('lghMobileMenu');
+    if (!header || !menu) return;
+
+    var isMobile = window.innerWidth <= BREAKPOINT;
+
+    if (isMobile) {
+      /* ── 1. انقل المنيو لـ body (مرة واحدة) ── */
+      if (menu.parentNode !== document.body) {
+        document.body.appendChild(menu);
+      }
+
+      /* ── 2. اربط .is-open على المنيو بحالة الهيدر والـ body ── */
+      function syncOpen() {
+        var isOpen =
+          header.classList.contains('menu-open') ||
+          document.body.classList.contains('lgh-menu-open');
+        menu.classList.toggle('is-open', isOpen);
+      }
+      syncOpen();
+
+      /* ── 3. راقب تغييرات الهيدر ── */
+      if ('MutationObserver' in window && !header.dataset.menuObsA) {
+        header.dataset.menuObsA = '1';
+        new MutationObserver(syncOpen).observe(header, {
+          attributes: true, attributeFilter: ['class']
+        });
+      }
+
+      /* ── 4. راقب تغييرات الـ body ── */
+      if ('MutationObserver' in window && !document.body.dataset.menuObsB) {
+        document.body.dataset.menuObsB = '1';
+        new MutationObserver(syncOpen).observe(document.body, {
+          attributes: true, attributeFilter: ['class']
+        });
+      }
+
+      /* ── 5. اضمن وجود الـ backdrop ── */
+      if (!document.querySelector('.lgh-mobile-backdrop')) {
+        var bd = document.createElement('div');
+        bd.className = 'lgh-mobile-backdrop';
+        document.body.appendChild(bd);
+        bd.addEventListener('click', function () {
+          header.classList.remove('menu-open');
+          document.body.classList.remove('lgh-menu-open');
+          menu.classList.remove('is-open');
+          var ham = header.querySelector('.lgh-hamburger');
+          if (ham) {
+            ham.classList.remove('is-open');
+            ham.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      /* ── 6. اقفل المنيو عند الضغط على أي لينك (لأنه مش جوه الهيدر) ── */
+      if (!menu.dataset.menuLinksBound) {
+        menu.dataset.menuLinksBound = '1';
+        menu.querySelectorAll('a').forEach(function (a) {
+          a.addEventListener('click', function () {
+            header.classList.remove('menu-open');
+            document.body.classList.remove('lgh-menu-open');
+            menu.classList.remove('is-open');
+            var ham = header.querySelector('.lgh-hamburger');
+            if (ham) {
+              ham.classList.remove('is-open');
+              ham.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+      }
+
+    } else {
+      /* ── ديسكتوب: ارجّع المنيو لمكانه الأصلي ── */
+      if (menu.parentNode !== header) {
+        header.appendChild(menu);
+      }
+      menu.classList.remove('is-open');
+    }
+  }
+
+  /* شغّل في أوقات متعددة لتغطية race conditions */
+  function boot() {
+    setTimeout(init, 60);
+    setTimeout(init, 400);
+    setTimeout(init, 1200);
+    setTimeout(init, 3000);
+  }
+
+  if (document.readyState === 'complete') boot();
+  else window.addEventListener('load', boot);
+
+  var rt;
+  window.addEventListener('resize', function () {
+    clearTimeout(rt);
+    rt = setTimeout(init, 200);
+  });
+})();
+</script>
 </body>
 </html>
