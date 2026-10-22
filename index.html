@@ -20151,5 +20151,292 @@ input:focus-visible, select:focus-visible, textarea:focus-visible,
 })();
 </script>
 <!-- ═══ END UX POLISH ═══ -->
+ <!-- ═══════════════════════════════════════════════════════════════
+     NILE SMILE — FINAL FIX v3.0
+     Fixes: form validation + customize button + aria + colors + padding
+     ═══════════════════════════════════════════════════════════════ -->
+
+<style id="nileFinalFixV3">
+  /* ═══ 1. الذهبي على البيج/الأبيض — دافئ مش طيني ═══ */
+  section.bg-white .text-nile-gold,
+  section.bg-nile-beige .text-nile-gold,
+  #packages .text-nile-gold,
+  #travel-addons .text-nile-gold,
+  #curated-tours .text-nile-gold,
+  #expectations .text-nile-gold,
+  #results .text-nile-gold,
+  #reviews .text-nile-gold,
+  #journey .text-nile-gold,
+  #timeline .text-nile-gold,
+  #recovery .text-nile-gold,
+  #who-for .text-nile-gold,
+  #location .text-nile-gold,
+  #faq .text-nile-gold {
+    color: #8A7248 !important;
+  }
+
+  /* ═══ 2. gradient text على الخلفيات الفاتحة — ذهبي دافئ ═══ */
+  section.bg-white .gold-text,
+  section.bg-nile-beige .gold-text {
+    background: linear-gradient(135deg, #8A7248 0%, #AE9164 50%, #8A7248 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-size: 200% auto !important;
+  }
+
+  /* ═══ 3. Cookie banner padding — كان 160px، محتاج 90px فقط ═══ */
+  body.has-cookie-banner {
+    padding-bottom: 90px !important;
+  }
+  @media (min-width: 768px) {
+    body.has-cookie-banner {
+      padding-bottom: 84px !important;
+    }
+  }
+  /* Sticky mobile فوق الكوكي بانر */
+  @media (max-width: 767px) {
+    body.has-cookie-banner .sticky-mobile {
+      bottom: 82px !important;
+    }
+  }
+
+  /* ═══ 4. Header light — تأكيد الشكل الزجاجي الأبيض (زي ما عجبك) ═══ */
+  #liquidGlassHeader:not(.on-dark) {
+    background: rgba(255, 255, 255, 0.55) !important;
+    border: none !important;
+    box-shadow:
+      0 8px 32px rgba(31, 42, 54, 0.08),
+      0 2px 8px rgba(31, 42, 54, 0.04) !important;
+    backdrop-filter: blur(26px) saturate(170%) !important;
+    -webkit-backdrop-filter: blur(26px) saturate(170%) !important;
+  }
+  #liquidGlassHeader:not(.on-dark).is-scrolled {
+    background: rgba(255, 255, 255, 0.88) !important;
+  }
+
+  /* ═══ 5. Header dark — تأكيد الإطار الذهبي (زي ما عجبك) ═══ */
+  #liquidGlassHeader.on-dark {
+    background: rgba(10, 13, 16, 0.85) !important;
+    border: 1px solid rgba(232, 200, 138, 0.32) !important;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(232, 200, 138, 0.15) !important;
+  }
+  #liquidGlassHeader.on-dark.is-scrolled {
+    background: rgba(10, 13, 16, 0.94) !important;
+  }
+
+  /* ═══ 6. Tooth info panel — word wrap على الموبايل ═══ */
+  @media (max-width: 767px) {
+    .tooth-info-panel {
+      max-width: calc(100vw - 2rem) !important;
+      width: auto !important;
+      min-width: 240px !important;
+    }
+    .tooth-info-name {
+      font-size: 0.85rem !important;
+      line-height: 1.35 !important;
+      word-break: break-word !important;
+      white-space: normal !important;
+    }
+  }
+
+  /* ═══ 7. تنظيف form-field-error بالذهبي (تناسق) ═══ */
+  .form-field-success {
+    border-color: #2F855A !important;
+    background-color: rgba(47, 133, 90, 0.03) !important;
+  }
+</style>
+
+<script id="nileFinalFixV3JS">
+(function () {
+  'use strict';
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 1 — إصلاح الفورم بعد clone fixDoubleSubmit (حرج!)
+     
+     المشكلة: clone بياخد الفلاجز لكن بيفقد الـ listeners.
+     الـ patches التالية بتتخطى بسبب الفلاجز → validation ميتة.
+     
+     الحل: امسح الفلاجز → اربط listeners جديدة → ارجع حط الفلاجز
+     عشان الـ patches القديمة متكررش الربط.
+     ═══════════════════════════════════════════════════════════ */
+  function repairForm() {
+    var form = document.getElementById('leadForm');
+    if (!form || form.dataset.v3repaired === '1') return;
+
+    // امسح الفلاجز الموروثة من الـ clone
+    delete form.dataset.nileFormBound;
+    delete form.dataset.featuresBound;
+    delete form.dataset.masterBound;
+
+    form.dataset.v3repaired = '1';
+
+    // ── Helper functions ──
+    function showErr(input, msg) {
+      input.classList.add('form-field-error');
+      input.setAttribute('aria-invalid', 'true');
+      var ex = input.parentNode.querySelector('.form-error-message');
+      if (ex) ex.remove();
+      var err = document.createElement('p');
+      err.className = 'form-error-message';
+      err.textContent = '⚠ ' + msg;
+      input.parentNode.insertBefore(err, input.nextSibling);
+    }
+    function clearErr(input) {
+      input.classList.remove('form-field-error');
+      input.classList.add('form-field-success');
+      input.setAttribute('aria-invalid', 'false');
+      var ex = input.parentNode.querySelector('.form-error-message');
+      if (ex) ex.remove();
+    }
+
+    var email = form.querySelector('#formEmail');
+    var phone = form.querySelector('#formPhone');
+    var name  = form.querySelector('#formName');
+
+    // ── Inline validation ──
+    if (email && !email.dataset.v3bound) {
+      email.dataset.v3bound = '1';
+      email.addEventListener('blur', function () {
+        var v = this.value.trim();
+        if (!v) return;
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) showErr(this, 'Please enter a valid email');
+        else clearErr(this);
+      });
+      email.addEventListener('input', function () {
+        if (this.classList.contains('form-field-error') &&
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value)) clearErr(this);
+      });
+    }
+    if (phone && !phone.dataset.v3bound) {
+      phone.dataset.v3bound = '1';
+      phone.addEventListener('blur', function () {
+        var v = this.value.replace(/[\s\-()]/g, '');
+        if (!v) return;
+        if (v.length < 8) showErr(this, 'Enter a valid phone with country code');
+        else clearErr(this);
+      });
+    }
+    if (name && !name.dataset.v3bound) {
+      name.dataset.v3bound = '1';
+      name.addEventListener('blur', function () {
+        var v = this.value.trim();
+        if (!v) return;
+        if (v.length < 2) showErr(this, 'Please enter your full name');
+        else clearErr(this);
+      });
+    }
+
+    // ── Draft save ──
+    if (!form.dataset.v3draft) {
+      form.dataset.v3draft = '1';
+      var dt;
+      form.addEventListener('input', function () {
+        clearTimeout(dt);
+        dt = setTimeout(function () {
+          var data = {};
+          form.querySelectorAll('input, select').forEach(function (el) {
+            if (el.id && el.type !== 'file') data[el.id] = el.value;
+          });
+          try { localStorage.setItem('nileFormDraft_v2', JSON.stringify(data)); } catch (e) {}
+        }, 800);
+      });
+    }
+
+    // ── Submit guard (clone فقد الـ guard الأصلي) ──
+    if (!form.dataset.v3guard) {
+      form.dataset.v3guard = '1';
+      form.addEventListener('submit', function (e) {
+        if (window.__nileSubmittingV3) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          return false;
+        }
+        window.__nileSubmittingV3 = true;
+        setTimeout(function () { window.__nileSubmittingV3 = false; }, 4000);
+      }, true);
+    }
+
+    // ── رجّع الفلاجز عشان الـ patches القديمة متكررش ──
+    form.dataset.nileFormBound = '1';
+    form.dataset.featuresBound = '1';
+    form.dataset.masterBound = '1';
+
+    // ── استعادة الـ draft ──
+    try {
+      var draft = JSON.parse(localStorage.getItem('nileFormDraft_v2') || '{}');
+      Object.keys(draft).forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el && !el.value) el.value = draft[id];
+      });
+    } catch (e) {}
+  }
+
+  // شغّل بعد ما fixDoubleSubmit يخلص (200ms) وتأكد
+  setTimeout(repairForm, 1500);
+  setTimeout(repairForm, 3000);
+  setTimeout(repairForm, 5000);
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 2 — "Customize My Travel" يخفي الـ 3 Bundles
+     ═══════════════════════════════════════════════════════════ */
+  setTimeout(function () {
+    var btn = document.getElementById('showCustomTravel');
+    if (!btn || btn.dataset.v3customized) return;
+    btn.dataset.v3customized = '1';
+
+    btn.addEventListener('click', function () {
+      var bundles = document.getElementById('combined-travel-bundles');
+      if (bundles) bundles.style.display = 'none';
+      // اقفل على الـ Step 1 header
+      var firstStep = document.querySelector('#travel-addons .limited-badge');
+      if (firstStep) {
+        setTimeout(function () {
+          firstStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    });
+  }, 3500);
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 3 — hamburger aria-label يتبدل بين Open/Close
+     ═══════════════════════════════════════════════════════════ */
+  setTimeout(function () {
+    var header = document.getElementById('liquidGlassHeader');
+    if (!header) return;
+    var ham = header.querySelector('.lgh-hamburger');
+    if (!ham || ham.dataset.v3aria) return;
+    ham.dataset.v3aria = '1';
+
+    // Sync aria-label مع الحالة
+    var syncAria = function () {
+      var isOpen = header.classList.contains('menu-open');
+      ham.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+      ham.setAttribute('aria-expanded', String(isOpen));
+    };
+    syncAria();
+    // رصد التغييرات
+    new MutationObserver(syncAria).observe(header, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+  }, 1500);
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 4 — تنظيف نهائي: تأكد إن الـ header مش بيتخفي أبداً
+     ═══════════════════════════════════════════════════════════ */
+  setTimeout(function () {
+    var header = document.getElementById('liquidGlassHeader');
+    if (!header) return;
+    header.classList.add('is-visible');
+    header.style.opacity = '1';
+    header.style.transform = 'translateX(-50%) translateY(0)';
+  }, 500);
+
+})();
+</script>
+<!-- ═══ END NILE SMILE FINAL FIX v3.0 ═══ -->
 </body>
 </html>
