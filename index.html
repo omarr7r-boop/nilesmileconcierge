@@ -22636,5 +22636,268 @@ input:focus-visible, select:focus-visible, textarea:focus-visible,
 <!-- ═══════════════════════════════════════════════════════════════
      END EMERGENCY CLEANUP
      ═══════════════════════════════════════════════════════════════ -->
+     <!-- ═══════════════════════════════════════════════════════════════
+     NILE SMILE — ABSOLUTE FINAL HEADER & UI FIX (COPY & REPLACE)
+     ═══════════════════════════════════════════════════════════════ -->
+
+<style id="absoluteFinalUI">
+  /* ═══════════ 1. إعدادات الهيدر الأساسية ═══════════ */
+  #liquidGlassHeader {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border-bottom: 1px solid rgba(174, 145, 100, 0.2) !important;
+    z-index: 999999 !important;
+    transform: translateX(-50%) translateY(0) !important;
+    opacity: 1 !important;
+    display: block !important;
+  }
+
+  #liquidGlassHeader.on-dark {
+    background: rgba(10, 13, 16, 0.95) !important;
+    border-bottom: 1px solid rgba(232, 200, 138, 0.2) !important;
+  }
+
+  /* ═══════════ 2. تخطيط الهيدر (Flexbox) ═══════════ */
+  #liquidGlassHeader .lgh-inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 1rem !important;
+    height: 64px !important; /* ارتفاع ثابت يمنع أي لخبطة */
+    max-width: 860px !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+  }
+
+  /* اللوجو */
+  #liquidGlassHeader .lgh-logo {
+    display: flex !important;
+    align-items: center !important;
+    text-decoration: none !important;
+    flex-shrink: 1 !important; /* يسمح له بالانكماش لو الشاشة ضيقة */
+    min-width: 0 !important;
+    position: relative !important;
+  }
+
+  /* اللمعة الذهبية (Shine) */
+  #liquidGlassHeader .lgh-logo-script {
+    font-family: 'Italianno', cursive !important;
+    font-size: 1.8rem !important;
+    color: #4F6070 !important;
+    -webkit-text-fill-color: #4F6070 !important;
+    line-height: 1 !important;
+    display: inline-block !important;
+    background: linear-gradient(110deg, transparent 35%, rgba(232, 200, 138, 0.8) 50%, transparent 65%) !important;
+    background-size: 200% auto !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    animation: logoShineAnim 6s ease-in-out infinite !important;
+  }
+  #liquidGlassHeader.on-dark .lgh-logo-script {
+    color: #F6F3EE !important; -webkit-text-fill-color: #F6F3EE !important;
+  }
+
+  #liquidGlassHeader .lgh-logo-text {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 0.6rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.25em !important;
+    color: #AE9164 !important;
+    margin-left: 8px !important;
+    white-space: nowrap !important;
+  }
+  #liquidGlassHeader.on-dark .lgh-logo-text { color: #E8C88A !important; }
+
+  #liquidGlassHeader .lgh-logo-sub { display: none !important; }
+
+  @keyframes logoShineAnim {
+    0%, 70% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  /* ═══════════ 3. صندوق الأزرار (اليمين) ═══════════ */
+  #liquidGlassHeader .lgh-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    flex-shrink: 0 !important; /* يمنع ضغط الأزرار */
+  }
+
+  /* زر البحث */
+  #liquidGlassHeader .lgh-search-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    background: rgba(174, 145, 100, 0.1) !important;
+    border: 1px solid rgba(174, 145, 100, 0.25) !important;
+    color: #4F6070 !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    transition: 0.3s !important;
+  }
+  #liquidGlassHeader .lgh-search-btn:hover {
+    background: rgba(174, 145, 100, 0.2) !important;
+  }
+
+  /* زر Free Review (مضبوط 100%) */
+  #liquidGlassHeader .lgh-cta {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 36px !important;
+    padding: 0 18px !important;
+    border-radius: 50px !important;
+    background: linear-gradient(135deg, #AE9164, #E8C88A) !important;
+    color: #1F2A36 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 0.7rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    white-space: nowrap !important; /* يمنع الكلام من النزول لسطر جديد */
+    box-sizing: border-box !important;
+    box-shadow: 0 4px 15px rgba(174, 145, 100, 0.3) !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: 0.3s !important;
+  }
+  #liquidGlassHeader .lgh-cta:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(174, 145, 100, 0.5) !important;
+  }
+
+  /* مسح أي زراير أو أيقونات مكررة بالغلط */
+  #liquidGlassHeader .lgh-cta ~ .lgh-cta,
+  #liquidGlassHeader .lgh-cta ~ .lgh-search-btn {
+    display: none !important;
+  }
+
+  /* ═══════════ 4. حل مشكلة أيقونة الساعة في الهيرو ═══════════ */
+  .hero-content div[style*="background:rgba(232,200,138,.15)"],
+  .hero-content div[style*="background: rgba(232, 200, 138, 0.15)"] {
+    padding: 6px 16px !important;
+    border-radius: 100px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin: 0 auto 1.5rem auto !important;
+    width: max-content !important;
+    max-width: 100% !important;
+    height: auto !important;
+    box-sizing: border-box !important;
+  }
+  .hero-content div[style*="background:rgba(232,200,138,.15)"] svg {
+    width: 14px !important;
+    height: 14px !important;
+    min-width: 14px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* ═══════════ 5. تظبيط الموبايل ═══════════ */
+  @media (max-width: 767px) {
+    #liquidGlassHeader .lgh-inner {
+      height: 56px !important;
+      padding: 0 12px !important;
+    }
+    /* إخفاء البحث في الموبايل لترك مساحة للوجو والزرار */
+    #liquidGlassHeader .lgh-search-btn {
+      display: none !important;
+    }
+    #liquidGlassHeader .lgh-logo-script {
+      font-size: 1.4rem !important;
+    }
+    #liquidGlassHeader .lgh-logo-text {
+      font-size: 0.5rem !important;
+      letter-spacing: 0.15em !important;
+    }
+    #liquidGlassHeader .lgh-cta {
+      height: 32px !important;
+      padding: 0 14px !important;
+      font-size: 0.6rem !important;
+    }
+    /* إخفاء الـ Tooltip المزعج في الموبايل */
+    .dock-item::after {
+      display: none !important;
+    }
+  }
+
+  /* ═══════════ 6. تظبيط عناوين الأقسام (The Real Numbers) ═══════════ */
+  section h2, 
+  section .eyebrow {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+</style>
+
+<script id="absoluteFinalUI_JS">
+(function() {
+  'use strict';
+
+  // مسح الهيدر وإعادة بنائه من الصفر لضمان عدم وجود أي تكرار
+  function rebuildHeaderSafely() {
+    var header = document.getElementById('liquidGlassHeader');
+    if (!header) return;
+    
+    var inner = header.querySelector('.lgh-inner');
+    if (!inner) return;
+
+    // سحب اللوجو الأصلي
+    var logo = inner.querySelector('.lgh-logo');
+    if (!logo) return;
+
+    // مسح كل حاجة في الهيدر (عشان نمسح الأزرار المكررة اللي السكريبتات القديمة ضافتها)
+    inner.innerHTML = '';
+    
+    // إرجاع اللوجو
+    inner.appendChild(logo);
+
+    // بناء صندوق الأزرار النظيف
+    var actions = document.createElement('div');
+    actions.className = 'lgh-actions';
+
+    // زر البحث
+    var searchBtn = document.createElement('button');
+    searchBtn.className = 'lgh-search-btn';
+    searchBtn.setAttribute('aria-label', 'Search');
+    searchBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+    searchBtn.onclick = function() {
+      var trigger = document.getElementById('searchTrigger');
+      if (trigger) trigger.click();
+    };
+
+    // زر Free Review
+    var cta = document.createElement('a');
+    cta.href = '#consult';
+    cta.className = 'lgh-cta';
+    cta.textContent = 'Free Review';
+
+    actions.appendChild(searchBtn);
+    actions.appendChild(cta);
+    inner.appendChild(actions);
+
+    // مسح أي منيو قديم متبقي في الـ DOM
+    var oldMenu = document.getElementById('lghMobileMenu');
+    if (oldMenu) oldMenu.remove();
+  }
+
+  // تطبيق فوري
+  rebuildHeaderSafely();
+
+  // تطبيق كإجراء أمان بعد التحميل (لمنع أي سكريبت تاني من تخريب الشكل)
+  window.addEventListener('load', function() {
+    setTimeout(rebuildHeaderSafely, 100);
+    setTimeout(rebuildHeaderSafely, 800);
+  });
+
+})();
+</script>
+<!-- ═══════════════════════════════════════════════════════════════ -->
 </body>
 </html>
