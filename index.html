@@ -22456,5 +22456,294 @@ input:focus-visible, select:focus-visible, textarea:focus-visible,
 <!-- ═══════════════════════════════════════════════════════════════
      END COMMAND BAR + DOCK SCROLL
      ═══════════════════════════════════════════════════════════════ -->
+     <!-- ═══════════════════════════════════════════════════════════════
+     NILE SMILE — MASTER FINAL POLISH v4.0
+     ألوان اللوجو + الهيدر الزجاجي + زرار Free Review + 
+     سكرول الدوك + توسيط العناوين
+     ═══════════════════════════════════════════════════════════════ -->
+
+<style id="masterFinalPolishV4">
+
+  /* ═══════════ 1. إصلاح الهيدر (The Glass Header Fix) ═══════════ */
+  
+  /* زيادة التعتيم لمنع شفافية الكلام اللي تحته */
+  #liquidGlassHeader {
+    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    z-index: 999999 !important; /* أعلى من أي قسم */
+    border-bottom: 1px solid rgba(174, 145, 100, 0.15) !important;
+  }
+  #liquidGlassHeader.on-dark {
+    background: rgba(10, 13, 16, 0.92) !important;
+    border-bottom: 1px solid rgba(232, 200, 138, 0.2) !important;
+  }
+
+  /* إصلاح صندوق الأزرار في الهيدر */
+  #liquidGlassHeader .lgh-inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0.5rem 1rem !important;
+    gap: 0.75rem !important;
+  }
+
+  /* إصلاح زر Free Review (حجمه ولونه) */
+  #liquidGlassHeader .lgh-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    flex-shrink: 0 !important;
+  }
+  
+  #liquidGlassHeader .lgh-cta {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 40px !important;
+    padding: 0 1.25rem !important;
+    border-radius: 100px !important;
+    background: linear-gradient(135deg, #AE9164, #E8C88A) !important;
+    color: #1F2A36 !important;
+    font-size: 0.65rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+    box-shadow: 0 4px 12px rgba(174, 145, 100, 0.3) !important;
+    border: none !important;
+    cursor: pointer !important;
+  }
+  #liquidGlassHeader .lgh-cta:hover {
+    transform: translateY(-1px) scale(1.03) !important;
+    box-shadow: 0 6px 16px rgba(174, 145, 100, 0.5) !important;
+  }
+
+  /* ═══════════ 2. إصلاح ألوان اللوجو واللمعة ═══════════ */
+  
+  /* اللون الأساسي */
+  #liquidGlassHeader .lgh-logo-script {
+    color: #4F6070 !important;
+    -webkit-text-fill-color: #4F6070 !important;
+    font-size: 1.6rem !important;
+    font-family: 'Italianno', cursive !important;
+  }
+  #liquidGlassHeader .lgh-logo-text {
+    color: #AE9164 !important;
+    -webkit-text-fill-color: #AE9164 !important;
+    font-size: 0.55rem !important;
+    letter-spacing: 0.25em !important;
+  }
+  #liquidGlassHeader .lgh-logo-sub {
+    color: #8FA1B2 !important;
+    display: block !important;
+    font-size: 0.4rem !important;
+  }
+  
+  /* الوضع الداكن */
+  #liquidGlassHeader.on-dark .lgh-logo-script { color: #F6F3EE !important; -webkit-text-fill-color: #F6F3EE !important; }
+  #liquidGlassHeader.on-dark .lgh-logo-text { color: #E8C88A !important; -webkit-text-fill-color: #E8C88A !important; }
+  #liquidGlassHeader.on-dark .lgh-logo-sub { color: #C9A96E !important; }
+
+  /* إعادة حركة اللمعة (Shine) */
+  @keyframes logoShineV4 {
+    0%, 70% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  #liquidGlassHeader .lgh-logo-script {
+    background: linear-gradient(110deg, transparent 40%, rgba(232, 200, 138, 0.8) 50%, transparent 60%) !important;
+    background-size: 200% auto !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    animation: logoShineV4 6s ease-in-out infinite !important;
+    display: inline-block !important;
+  }
+
+  /* ═══════════ 3. إصلاح توسيط العناوين (Typography) ═══════════ */
+  
+  /* تأكيد توسيط كل العناوين الفرعية (eyebrows) */
+  .eyebrow, .eyebrow-light {
+    text-align: center !important;
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
+  }
+
+  /* توسيط عناوين الأقسام (H2) */
+  section h2:not(.text-left) {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 900px !important;
+  }
+
+  /* توسيط حاويات النصوص في الأقسام */
+  .container > .text-center,
+  .container-narrow > .text-center {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .container > .text-center p {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* ═══════════ 4. إصلاح السكرول والدوك (Dock & Scroll) ═══════════ */
+  
+  /* تثبيت الدوك في كل مكان */
+  #appleDock {
+    position: fixed !important;
+    bottom: 24px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 99999 !important;
+  }
+
+  /* شريط تقدم السكرول جوه الدوك */
+  .dock-scroll-progress {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: rgba(174, 145, 100, 0.15);
+    border-radius: 100px 100px 0 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .dock-scroll-progress-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, #AE9164, #E8C88A);
+    transition: width 0.1s linear;
+  }
+
+  /* إخفاء البار القديم اللي فوق عشان ميبقاش فيه تكرار */
+  #progress { display: none !important; }
+
+  /* موبايل: شكل مرتب */
+  @media (max-width: 767px) {
+    #appleDock { width: calc(100% - 32px) !important; justify-content: space-between !important; }
+    #liquidGlassHeader .lgh-cta { padding: 0 0.8rem !important; font-size: 0.6rem !important; }
+  }
+
+</style>
+
+<script id="masterFinalPolishV4JS">
+(function() {
+  'use strict';
+
+  /* ═══════════ 1. إعادة بناء الهيدر (بحث + Free Review) ═══════════ */
+  function rebuildHeader() {
+    var header = document.getElementById('liquidGlassHeader');
+    if (!header || header.dataset.rebuilt === '1') return;
+    header.dataset.rebuilt = '1';
+
+    // شيل أي منيو أو هامبرجر قديم
+    var ham = header.querySelector('.lgh-hamburger');
+    if (ham) ham.remove();
+    var menu = document.getElementById('lghMobileMenu');
+    if (menu) menu.remove();
+
+    var inner = header.querySelector('.lgh-inner');
+    var actions = header.querySelector('.lgh-actions');
+    
+    if (!actions && inner) {
+      actions = document.createElement('div');
+      actions.className = 'lgh-actions';
+      inner.appendChild(actions);
+    }
+
+    // ضيف زر البحث لو مش موجود
+    if (actions && !actions.querySelector('.lgh-search-btn')) {
+      var searchBtn = document.createElement('button');
+      searchBtn.className = 'lgh-search-btn';
+      searchBtn.setAttribute('aria-label', 'Search');
+      searchBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+      searchBtn.style.cssText = 'width:40px;height:40px;border-radius:50%;background:rgba(174,145,100,.1);border:1px solid rgba(174,145,100,.2);color:#4F6070;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;';
+      searchBtn.addEventListener('click', function() {
+        var trigger = document.getElementById('searchTrigger');
+        if (trigger) trigger.click();
+        else if (typeof openCommandPalette === 'function') openCommandPalette();
+      });
+      actions.insertBefore(searchBtn, actions.firstChild);
+    }
+
+    // تأكيد وجود زر Free Review في المكان الصح
+    var cta = header.querySelector('.lgh-cta');
+    if (cta && actions && !actions.contains(cta)) {
+      actions.appendChild(cta);
+    }
+  }
+
+  /* ═══════════ 2. إصلاح شريط التقدم في الدوك ═══════════ */
+  function setupDockProgress() {
+    var dock = document.getElementById('appleDock');
+    if (!dock || dock.querySelector('.dock-scroll-progress')) return;
+
+    var wrapper = document.createElement('div');
+    wrapper.className = 'dock-scroll-progress';
+    wrapper.innerHTML = '<div class="dock-scroll-progress-fill"></div>';
+    dock.style.position = 'fixed'; // تأكيد التثبيت
+    dock.insertBefore(wrapper, dock.firstChild);
+
+    // تحديث السكرول
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function() {
+        var fill = dock.querySelector('.dock-scroll-progress-fill');
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+        if (fill) fill.style.width = Math.min(100, Math.max(0, pct)) + '%';
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+
+  /* ═══════════ 3. تحسين العناوين (تأكيد التوسيط) ═══════════ */
+  function fixHeadings() {
+    document.querySelectorAll('section h2, .eyebrow, .section-heading').forEach(function(el) {
+      el.style.setProperty('text-align', 'center', 'important');
+      if (el.classList.contains('eyebrow') || el.classList.contains('section-heading')) {
+         el.style.setProperty('margin-left', 'auto', 'important');
+         el.style.setProperty('margin-right', 'auto', 'important');
+      }
+    });
+  }
+
+  /* ═══════════ 4. إخفاء الكلام المتداخل تحت الهيدر ═══════════ */
+  function fixOverlap() {
+    // زيادة z-index للهيدر كاحتياط
+    var header = document.getElementById('liquidGlassHeader');
+    if (header) {
+      header.style.zIndex = '999999';
+      header.style.background = header.classList.contains('on-dark') ? 'rgba(10,13,16,0.92)' : 'rgba(255,255,255,0.92)';
+    }
+  }
+
+  /* ═══════════ التشغيل ═══════════ */
+  function init() {
+    try { rebuildHeader(); } catch(e) { console.warn(e); }
+    try { setupDockProgress(); } catch(e) { console.warn(e); }
+    try { fixHeadings(); } catch(e) { console.warn(e); }
+    try { fixOverlap(); } catch(e) { console.warn(e); }
+  }
+
+  if (document.readyState === 'complete') setTimeout(init, 100);
+  else window.addEventListener('load', function() { setTimeout(init, 100); });
+
+  // إعادة المحاولة لضمان التطبيق بعد أي سكريبتات تانية
+  setTimeout(init, 1500);
+  setTimeout(init, 3000);
+
+})();
+</script>
+<!-- ═══════════════════════════════════════════════════════════════
+     END MASTER FINAL POLISH V4.0
+     ═══════════════════════════════════════════════════════════════ -->
 </body>
 </html>
