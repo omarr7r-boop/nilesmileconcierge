@@ -22043,5 +22043,418 @@ input:focus-visible, select:focus-visible, textarea:focus-visible,
 <!-- ═══════════════════════════════════════════════════════════════
      END PREMIUM REDESIGN
      ═══════════════════════════════════════════════════════════════ -->
+     <!-- ═══════════════════════════════════════════════════════════════
+     NILE SMILE — COMMAND BAR + DOCK SCROLL v1.0
+     ضعه آخر حاجة قبل </body>
+     ═══════════════════════════════════════════════════════════════ -->
+
+<style id="commandBarDockScroll">
+
+  /* ═══ 1. COMMAND BAR — هيدر نظيف بدون منيو ═══ */
+
+  /* نخفي كل المنيو القديمة */
+  #liquidGlassHeader .lgh-links,
+  #liquidGlassHeader .lgh-hamburger,
+  #liquidGlassHeader .lgh-mobile-menu,
+  #liquidGlassHeader .lgh-mobile-actions,
+  .lgh-mobile-backdrop,
+  #mobileMenu,
+  .site-header {
+    display: none !important;
+  }
+
+  /* الهيدر — تخطيط بسيط */
+  #liquidGlassHeader .lgh-inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0.5rem 0.55rem 0.5rem 1.1rem !important;
+    gap: 0.5rem !important;
+  }
+
+  /* صندوق الأزرار يمين */
+  #liquidGlassHeader .lgh-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    flex-shrink: 0;
+  }
+
+  /* زر البحث */
+  #liquidGlassHeader .lgh-search-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    background: rgba(174, 145, 100, 0.10) !important;
+    border: 1px solid rgba(174, 145, 100, 0.22) !important;
+    color: #4F6070 !important;
+    cursor: pointer !important;
+    transition: all 0.25s ease !important;
+    flex-shrink: 0;
+  }
+  #liquidGlassHeader .lgh-search-btn:hover,
+  #liquidGlassHeader .lgh-search-btn:focus-visible {
+    background: rgba(174, 145, 100, 0.20) !important;
+    color: #AE9164 !important;
+    transform: scale(1.06);
+  }
+  #liquidGlassHeader.on-dark .lgh-search-btn {
+    background: rgba(232, 200, 138, 0.10) !important;
+    border-color: rgba(232, 200, 138, 0.28) !important;
+    color: #E8C88A !important;
+  }
+  #liquidGlassHeader.on-dark .lgh-search-btn:hover {
+    background: rgba(232, 200, 138, 0.22) !important;
+  }
+
+  /* الـ CTA — يظهر دايماً */
+  #liquidGlassHeader .lgh-actions .lgh-cta {
+    display: inline-flex !important;
+    padding: 0.55rem 1.05rem !important;
+    font-size: 0.6rem !important;
+    height: 40px !important;
+    letter-spacing: 0.12em !important;
+    font-weight: 700 !important;
+  }
+
+  /* شاشات صغيرة — CTA أيقونة فقط */
+  @media (max-width: 420px) {
+    #liquidGlassHeader .lgh-actions .lgh-cta span {
+      display: none !important;
+    }
+    #liquidGlassHeader .lgh-actions .lgh-cta {
+      width: 40px !important;
+      padding: 0 !important;
+      justify-content: center !important;
+    }
+  }
+
+  /* ═══ 2. DOCK — شريط التقدم ═══ */
+  #appleDock {
+    overflow: visible !important;
+  }
+
+  .dock-scroll-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(174, 145, 100, 0.10);
+    border-radius: 100px 100px 0 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .dock-scroll-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #AE9164, #E8C88A);
+    border-radius: 100px;
+    transition: width 0.15s linear;
+  }
+
+  /* نقطة القسم النشط */
+  .dock-item.active::before {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #AE9164;
+    box-shadow: 0 0 8px rgba(174, 145, 100, 0.7);
+  }
+  .dock-item.wa-btn.active::before { display: none; }
+
+  /* ═══ 3. إخفاء واتساب العائم (الدوك فيه) ═══ */
+  .float-wa { display: none !important; }
+
+  /* ═══ 4. البحث كـ Command Palette ═══ */
+  .search-modal-results .cmd-section-list {
+    padding: 0.5rem;
+  }
+  .search-modal-results .search-result-item {
+    padding: 0.85rem 1rem !important;
+  }
+  .search-modal-input::placeholder {
+    color: #8FA1B2 !important;
+    font-size: 0.9rem !important;
+  }
+</style>
+
+<script id="commandBarDockScrollJS">
+(function () {
+  'use strict';
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 1 — بناء الـ Command Bar (بحث + CTA فقط)
+     ═══════════════════════════════════════════════════════════ */
+  function buildCommandBar() {
+    var header = document.getElementById('liquidGlassHeader');
+    if (!header || header.dataset.cmdBarBuilt === '1') return;
+    header.dataset.cmdBarBuilt = '1';
+
+    var inner = header.querySelector('.lgh-inner');
+    if (!inner) return;
+
+    // صندوق الأزرار
+    var actions = document.createElement('div');
+    actions.className = 'lgh-actions';
+
+    // زر البحث
+    var searchBtn = document.createElement('button');
+    searchBtn.type = 'button';
+    searchBtn.className = 'lgh-search-btn';
+    searchBtn.setAttribute('aria-label', 'Search the site (Ctrl+K)');
+    searchBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+    actions.appendChild(searchBtn);
+
+    // نقل الـ CTA الموجود
+    var existingCta = header.querySelector('.lgh-cta');
+    if (existingCta && existingCta.parentNode !== actions) {
+      existingCta.parentNode.removeChild(existingCta);
+      actions.appendChild(existingCta);
+    }
+
+    inner.appendChild(actions);
+
+    searchBtn.addEventListener('click', openCommandPalette);
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 2 — Command Palette (بحث + fallback)
+     ═══════════════════════════════════════════════════════════ */
+  var fallbackIndex = null;
+
+  function buildFallbackIndex() {
+    if (fallbackIndex) return fallbackIndex;
+    fallbackIndex = [];
+    document.querySelectorAll('main > section[id], main > .hero, #main').forEach(function (sec) {
+      var heading = sec.querySelector('h2, h1');
+      if (!heading) return;
+      var title = heading.textContent.trim().replace(/\s+/g, ' ');
+      if (title.length > 90) title = title.slice(0, 87) + '…';
+      fallbackIndex.push({
+        id: sec.id || 'main',
+        title: title,
+        haystack: (title + ' ' + (sec.id || '') + ' ' + sec.textContent.slice(0, 500)).toLowerCase()
+      });
+    });
+    return fallbackIndex;
+  }
+
+  function renderFallback(resultsEl, query) {
+    var idx = buildFallbackIndex();
+    var q = (query || '').toLowerCase().trim();
+    var filtered = q
+      ? idx.filter(function (s) { return s.haystack.indexOf(q) !== -1; })
+      : idx;
+
+    if (!filtered.length) {
+      resultsEl.innerHTML = '<div class="search-empty"><strong>No results</strong>Try "packages", "results", "warranty", "faq"</div>';
+      return;
+    }
+
+    resultsEl.innerHTML = '<div class="cmd-section-list">' +
+      filtered.slice(0, 12).map(function (s) {
+        var title = q
+          ? s.title.replace(new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi'), '<mark>$1</mark>')
+          : s.title;
+        return '<a href="#' + s.id + '" class="search-result-item" data-command-jump="' + s.id + '">' +
+          '<strong>' + title + '</strong>' +
+          '<span>Jump to section →</span>' +
+        '</a>';
+      }).join('') +
+    '</div>';
+  }
+
+  function wireFallbackEvents(resultsEl, inputEl) {
+    if (resultsEl.dataset.cmdWired === '1') return;
+    resultsEl.dataset.cmdWired = '1';
+
+    inputEl.addEventListener('input', function () {
+      renderFallback(resultsEl, this.value);
+    });
+
+    resultsEl.addEventListener('click', function (e) {
+      var link = e.target.closest('[data-command-jump]');
+      if (!link) return;
+      e.preventDefault();
+      var id = link.getAttribute('data-command-jump');
+      closeSearchModal();
+      setTimeout(function () {
+        var target = document.getElementById(id);
+        if (!target) return;
+        var offset = window.innerWidth < 768 ? 80 : 100;
+        var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }, 100);
+    });
+  }
+
+  function closeSearchModal() {
+    var modal = document.getElementById('searchModal');
+    if (modal) {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+    document.body.style.overflow = '';
+  }
+
+  function openCommandPalette() {
+    var modal = document.getElementById('searchModal');
+    var oldTrigger = document.getElementById('searchTrigger');
+
+    // جرّب تشغيل المحرك الأصلي
+    if (oldTrigger) {
+      try { oldTrigger.click(); } catch (e) {}
+    }
+
+    // تحقق إذا فتح
+    setTimeout(function () {
+      if (!modal || !modal.classList.contains('open')) {
+        // المحرك الأصلي فشل — فعّل الـ fallback
+        if (modal) {
+          modal.classList.add('open');
+          modal.setAttribute('aria-hidden', 'false');
+        }
+        document.body.style.overflow = 'hidden';
+
+        var resultsEl = document.getElementById('searchModalResults');
+        var inputEl = document.getElementById('searchModalInput');
+        if (resultsEl && inputEl) {
+          renderFallback(resultsEl, '');
+          wireFallbackEvents(resultsEl, inputEl);
+        }
+      }
+
+      var input = document.getElementById('searchModalInput');
+      if (input) setTimeout(function () { input.focus(); }, 100);
+    }, 250);
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 3 — شريط تقدم الدوك
+     ═══════════════════════════════════════════════════════════ */
+  function setupDockProgress() {
+    var dock = document.getElementById('appleDock');
+    if (!dock || dock.querySelector('.dock-scroll-progress')) return;
+
+    var wrapper = document.createElement('div');
+    wrapper.className = 'dock-scroll-progress';
+    wrapper.innerHTML = '<div class="dock-scroll-progress-fill"></div>';
+    dock.insertBefore(wrapper, dock.firstChild);
+  }
+
+  function updateProgressBar() {
+    var fill = document.querySelector('.dock-scroll-progress-fill');
+    if (!fill) return;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+    fill.style.width = Math.min(100, Math.max(0, pct)) + '%';
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 4 — تتبع القسم النشط
+     ═══════════════════════════════════════════════════════════ */
+  function setupActiveTracking() {
+    var dockItems = document.querySelectorAll('.dock-item[href^="#"]');
+    if (!dockItems.length) return;
+
+    var sections = [];
+    dockItems.forEach(function (item) {
+      var href = item.getAttribute('href');
+      if (!href || href === '#' || href === '#main') {
+        sections.push({ el: document.getElementById('main') || document.body, item: item });
+        return;
+      }
+      var el = document.querySelector(href);
+      if (el) sections.push({ el: el, item: item });
+    });
+
+    if (!sections.length) return;
+
+    function updateActive() {
+      var scrollPos = window.scrollY + window.innerHeight * 0.4;
+      var current = null;
+
+      for (var i = 0; i < sections.length; i++) {
+        var sec = sections[i];
+        var top = sec.el.offsetTop;
+        var bottom = top + sec.el.offsetHeight;
+        if (scrollPos >= top && scrollPos < bottom) current = sec;
+      }
+
+      if (!current) {
+        for (var j = 0; j < sections.length; j++) {
+          if (sections[j].el.offsetTop <= scrollPos) current = sections[j];
+        }
+      }
+
+      dockItems.forEach(function (item) { item.classList.remove('active'); });
+      if (current) current.item.classList.add('active');
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        updateProgressBar();
+        updateActive();
+        ticking = false;
+      });
+    }, { passive: true });
+
+    window.addEventListener('resize', function () {
+      updateProgressBar();
+      updateActive();
+    }, { passive: true });
+
+    updateProgressBar();
+    updateActive();
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     FIX 5 — اختصار ⌘K / Ctrl+K للبحث
+     ═══════════════════════════════════════════════════════════ */
+  document.addEventListener('keydown', function (e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      openCommandPalette();
+    }
+  });
+
+  /* ═══════════════════════════════════════════════════════════
+     RUNNER
+     ═══════════════════════════════════════════════════════════ */
+  function runAll() {
+    try { buildCommandBar(); }       catch (e) { console.warn(e); }
+    try { setupDockProgress(); }     catch (e) { console.warn(e); }
+    try { setupActiveTracking(); }   catch (e) { console.warn(e); }
+  }
+
+  if (document.readyState === 'complete') {
+    setTimeout(runAll, 300);
+  } else {
+    window.addEventListener('load', function () { setTimeout(runAll, 300); });
+  }
+
+  setTimeout(runAll, 1500);
+  setTimeout(runAll, 3000);
+  setTimeout(runAll, 6000);
+
+})();
+</script>
+<!-- ═══════════════════════════════════════════════════════════════
+     END COMMAND BAR + DOCK SCROLL
+     ═══════════════════════════════════════════════════════════════ -->
 </body>
 </html>
