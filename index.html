@@ -16445,5 +16445,113 @@ a, button, .card, .btn, details, summary, input, select, textarea {
 <!-- ═══════════════════════════════════════════════════════════════
      END GOLD IDENTITY RESTORATION
      ═══════════════════════════════════════════════════════════════ -->
+     <!-- ═══════════════════════════════════════════════════════════════
+     NILE SMILE — CRITICAL VISUAL FIXES (Based on Mobile Screenshots)
+     ═══════════════════════════════════════════════════════════════ -->
+<style id="criticalVisualFixes">
+/* 1. إصلاح كارثة التباين: جعل النصوص في الأقسام الداكنة بيضاء ومقروءة */
+.bg-nile-blue p, 
+.bg-nile-blue li, 
+.bg-nile-blue span:not(.gold-text):not(.text-nile-gold),
+.bg-nile-blue-dark p, 
+.bg-nile-blue-dark li, 
+.bg-nile-blue-dark span:not(.gold-text):not(.text-nile-gold),
+#price-anchor p, 
+#top-tier p, 
+#consult p, 
+#guarantees p,
+#turkey-rescue p,
+#turkey-rescue li,
+#turkey-rescue div {
+  color: #D1D9E0 !important; /* رمادي فاتح مريح للعين */
+}
+
+/* النصوص الأساسية (العناوين) في الأقسام الداكنة تبقى بيضاء ناصعة */
+.bg-nile-blue h2, .bg-nile-blue h3, .bg-nile-blue h4,
+.bg-nile-blue-dark h2, .bg-nile-blue-dark h3, .bg-nile-blue-dark h4,
+#turkey-rescue h2, #turkey-rescue h3 {
+  color: #FFFFFF !important;
+}
+
+/* إصلاح خلفية الكروت داخل الأقسام الداكنة (لتكون داكنة وليس بيضاء) */
+#turkey-rescue > .container > .grid > div,
+#top-tier .bg-white\/5 {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(232, 200, 138, 0.3) !important;
+}
+
+/* 2. إزالة الحواف الزرقاء/السماوية الغريبة من الكروت */
+.card, 
+#results .card, 
+#travel-addons .card,
+.credential-card {
+  border: 1px solid rgba(174, 145, 100, 0.25) !important;
+  box-shadow: 0 4px 20px rgba(31, 42, 54, 0.05) !important;
+}
+.card-top-blue {
+  border-top: 3px solid #AE9164 !important; /* تحويل الأزرق إلى ذهبي */
+}
+
+/* 3. إصلاح مشكلة قطع شارة "MOST CHOSEN" */
+#travel-addons .card.relative {
+  overflow: visible !important; /* السماح للشارة بالظهور */
+  margin-top: 1.5rem; /* إعطاء مساحة للشارة */
+}
+#travel-addons .card.relative > .absolute {
+  top: -12px !important;
+}
+
+/* إصلاح مشكلة قطع علامة الدولار في كارت 5 نجوم */
+#travel-addons .font-serif.text-nile-gold {
+  line-height: 1.2 !important;
+  padding-bottom: 4px !important;
+}
+
+/* 4. إصلاح شفافية الهيدر (ليكون أكثر كثافة وأقل تشويشاً) */
+#liquidGlassHeader {
+  background: rgba(255, 250, 240, 0.95) !important; /* زيادة الكثافة */
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+}
+#liquidGlassHeader.on-dark {
+  background: rgba(10, 13, 16, 0.95) !important; /* داكن صلب فوق الأقسام الداكنة */
+}
+
+/* 5. إصلاح الشريط السفلي (Sticky Mobile) ليكون أنحف وأكثر أناقة */
+@media (max-width: 767px) {
+  .sticky-mobile {
+    background: rgba(255, 255, 255, 0.95) !important; /* أبيض زجاجي */
+    backdrop-filter: blur(16px) !important;
+    border-top: 1px solid rgba(174, 145, 100, 0.2) !important;
+    padding: 0.6rem !important;
+    border-radius: 20px 20px 0 0 !important;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.05) !important;
+  }
+  .sticky-mobile a {
+    color: #1F2A36 !important; /* نص داكن على الخلفية البيضاء */
+    background: transparent !important;
+    border: none !important;
+  }
+  .sticky-mobile a.btn-gold {
+    background: linear-gradient(135deg, #AE9164, #C9A96E) !important;
+    color: #1A1A1A !important;
+  }
+  .sticky-mobile a svg {
+    fill: currentColor !important;
+  }
+}
+
+/* 6. إصلاح النصوص الباهتة في قسم Turkey Rescue (الخطوط الرمادية الداكنة) */
+#turkey-rescue .text-gray-300,
+#turkey-rescue [style*="color:#8FA1B2"] {
+  color: #A0B0C0 !important; /* لون أفتح */
+}
+
+/* 7. إصلاح نص "OUR HOTEL PARTNERS" الباهت */
+.bg-nile-blue .eyebrow,
+.bg-nile-blue-dark .eyebrow {
+  color: #E8C88A !important;
+}
+</style>
 </body>
 </html>
