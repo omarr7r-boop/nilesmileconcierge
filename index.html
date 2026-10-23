@@ -3173,6 +3173,23 @@ body { padding-bottom: 90px !important; }
 }
 </style>
 
+
+<style id="zIndexAndModalFix">
+/* Strict Z-Index Hierarchy to prevent overlapping bugs */
+.site-header { z-index: 1000 !important; }
+.apple-dock { z-index: 900 !important; }
+.float-wa { z-index: 800 !important; }
+.modal { z-index: 9000 !important; }
+.search-modal { z-index: 9500 !important; }
+.exit-popup { z-index: 10000 !important; }
+
+/* Ensure exit popup clickability */
+.exit-popup { pointer-events: none; }
+.exit-popup.open { pointer-events: auto; }
+.exit-popup-overlay { pointer-events: auto; }
+.exit-popup-box { pointer-events: auto; }
+</style>
+
 </head>
 <body>
 
@@ -9451,17 +9468,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link=>{
   }
 
   /* ═════════ 9. MAGNETIC BUTTONS ═════════ */
-  if(window.innerWidth > 1024 && !prefersReduced){
-    document.querySelectorAll('.btn-gold').forEach(btn=>{
-      btn.addEventListener('mousemove', (e)=>{
-        const r = btn.getBoundingClientRect();
-        const x = e.clientX - r.left - r.width/2;
-        const y = e.clientY - r.top - r.height/2;
-        btn.style.transform = `translate(${x*0.10}px, ${y*0.10}px) translateY(-2px)`;
-      });
-      btn.addEventListener('mouseleave', ()=>{ btn.style.transform = ''; });
-    });
-  }
+  /* Magnetic buttons disabled for performance */
 
   /* ═════════ 10. MODALS ═════════ */
   let lastFocused = null;
@@ -9814,88 +9821,52 @@ document.querySelectorAll('a[href^="#"]').forEach(link=>{
   render('all');
 })();
 </script>
+
 <script>
-/* ═════════ STICKY TOC — Highlight current section ═════════ */
+/* FIXED STICKY TOC — Optimized with requestAnimationFrame and Cached Positions */
 (function(){
   const toc = document.getElementById('stickyToc');
+  if (!toc) return;
   const dots = toc.querySelectorAll('.toc-dot');
   const sections = Array.from(dots).map(d => document.querySelector(d.getAttribute('href'))).filter(Boolean);
+  let sectionTops = [];
   
+  function calcTops() {
+    sectionTops = sections.map(sec => ({
+      id: sec.id,
+      top: sec.getBoundingClientRect().top + window.scrollY - 200
+    }));
+  }
+  
+  let ticking = false;
   function updateToc(){
-    const scrollY = window.scrollY;
-    if(scrollY > 600) toc.classList.add('show');
-    else toc.classList.remove('show');
-    
-    let current = null;
-    sections.forEach(sec => {
-      const top = sec.offsetTop - 200;
-      if(scrollY >= top) current = sec.id;
-    });
-    
-    dots.forEach(d => {
-      const isActive = d.getAttribute('href') === '#' + current;
-      d.classList.toggle('active', isActive);
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const scrollY = window.scrollY;
+      if (scrollY > 600) toc.classList.add('show');
+      else toc.classList.remove('show');
+      
+      let current = null;
+      for (let i = 0; i < sectionTops.length; i++) {
+        if (scrollY >= sectionTops[i].top) current = sectionTops[i].id;
+      }
+      
+      dots.forEach(d => {
+        d.classList.toggle('active', d.getAttribute('href') === '#' + current);
+      });
+      ticking = false;
     });
   }
   
-  window.addEventListener('scroll', updateToc, {passive:true});
+  window.addEventListener('load', calcTops);
+  window.addEventListener('resize', () => { calcTops(); updateToc(); });
+  window.addEventListener('scroll', updateToc, {passive: true});
+  calcTops();
   updateToc();
 })();
-/* ═══════════ CLINIC PHOTOS CAROUSEL ═══════════ */
-(function(){
-  const track = document.getElementById('clinicTrack');
-  const prev  = document.getElementById('clinicPrev');
-  const next  = document.getElementById('clinicNext');
-  if(!track) return;
-
-  const scrollAmount = 340;
-
-  if(prev) prev.addEventListener('click', () => {
-    track.scrollBy({left: -scrollAmount, behavior: 'smooth'});
-  });
-  if(next) next.addEventListener('click', () => {
-    track.scrollBy({left: scrollAmount, behavior: 'smooth'});
-  });
-
-  let autoPlay = null;
-  let isVisible = false;
-
-  function autoScroll(){
-    const maxScroll = track.scrollWidth - track.clientWidth;
-    if(track.scrollLeft >= maxScroll - 10){
-      track.scrollTo({left: 0, behavior: 'smooth'});
-    } else {
-      track.scrollBy({left: scrollAmount, behavior: 'smooth'});
-    }
-  }
-
-  function startAutoPlay(){
-    if(autoPlay) return;
-    autoPlay = setInterval(autoScroll, 5000);
-  }
-  function stopAutoPlay(){
-    if(autoPlay){ clearInterval(autoPlay); autoPlay = null; }
-  }
-
-  // شغّل بس لما الجاليري يبان
-  if('IntersectionObserver' in window){
-    const carouselObs = new IntersectionObserver((entries)=>{
-      entries.forEach(e => {
-        isVisible = e.isIntersecting;
-        if(isVisible) startAutoPlay();
-        else stopAutoPlay();
-      });
-    }, { threshold: 0.3 });
-    carouselObs.observe(track);
-  } else {
-    startAutoPlay();
-  }
-
-  track.addEventListener('mouseenter', stopAutoPlay);
-  track.addEventListener('touchstart', stopAutoPlay, {passive:true});
-  track.addEventListener('mouseleave', ()=>{ if(isVisible) startAutoPlay(); });
-})();
 </script>
+
 
 <!-- ═══════════════════ A/B TESTING SUITE ═══════════════════ -->
 <script>
@@ -11124,163 +11095,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link=>{
 </script>
 <!-- ═══════════════════ END MOBILE LUXE ═══════════════════ -->
 
-<script>
-/* ═══════════════════ FINAL SECTION ORDER v7 — CLUSTER-OPTIMIZED ═══════════════════ */
-(function(){
-  'use strict';
-
-  /* ───── CLUSTER-BASED ORDER — 14 logical groups ───── */
-  /* ═══ CONVERSION-OPTIMIZED ORDER — AIDA FUNNEL ═══
-     كل الأقسام موجودة — بس بترتيب نفسي وتسويقي أفضل:
-     1) HOOK → 2) AUTHORITY → 3) SOLUTION → 4) MECHANISM
-     → 5) EDUCATION → 6) OFFER → 7) RISK REVERSAL
-     → 8) PROOF → 9) LOGISTICS → 10) ACTION
-  */
-  var ORDER = [
-    // ── 1. HOOK — الثواني الأولى ──
-    'trust-stats', 'trust',
-    'price-anchor',
-    'top-tier',
-
-    // ── 2. SOLUTION — ليه مصر؟ (قبل Authority) ──
-    'why-egypt', 'academic',
-
-    // ── 3. AUTHORITY — مين إحنا؟ ──
-    'founder', 'team', 'doctor-credentials', 'verify-us',
-    'global-patients',
-
-    // ── 4. MECHANISM — إزاي بيشتغل علمياً؟ ──
-    'science', 'implant-systems', 'surface-material',
-    'technology-stack', 'comfort',
-
-    // ── 5. EDUCATION — ليه مش الأرخص؟ ──
-    'brutal-truth', 'cost-of-cheap',
-    'turkey-rescue',
-    'comparison', 'destination-deep-dive',
-    'why-prices',
-
-    // ── 6. OFFER — الآن جاهز للسعر ──
-    'packages', 'payment',
-
-    // ── 7. RISK REVERSAL — إنت محمي ──
-    'guarantees', 'warranty-truth', 'implant-passport',
-    'peace-of-mind',
-
-    // ── 8. PROOF — شوف النتائج ──
-    'results', 'reviews', 'journey', 'clinical-protocol',
-
-    // ── 9. OBJECTIONS — حسابات وشكوك ──
-    'savings', 'estimator', 'expectations', 'risks',
-
-    // ── 10. LOGISTICS — التفاصيل العملية ──
-    'timeline', 'recovery', 'travel', 'travel-addons',
-    'curated-tours', 'discover-egypt', 'location',
-    'bone-graft', 'crown-materials', 'orthodontics',
-
-    // ── 11. OBJECTIONS + ACTION ──
-    'who-for', 'faq', 'legal', 'consult'
-  ];
-
-  /* ───── H2 → H3 downgrade — DISABLED (breaks SEO hierarchy) ───── */
-  var DOWNGRADE_H2 = []; // disabled — all sections keep real H2
-
-  function apply(){
-    var main = document.getElementById('main');
-    if(!main) return;
-
-    // ─── Early return: لو الترتيب صح خلاص، اطلع ───
-    var existingSections = main.querySelectorAll(':scope > section');
-    var orderSet = {};
-    ORDER.forEach(function(id){ orderSet[id] = true; });
-    var currentOrder = [];
-    existingSections.forEach(function(s){ 
-      if(s.id && orderSet[s.id]) currentOrder.push(s.id); 
-    });
-    var expectedOrder = ORDER.filter(function(id){ return document.getElementById(id); });
-    
-    if(currentOrder.length === expectedOrder.length){
-      var same = true;
-      for(var i = 0; i < currentOrder.length; i++){
-        if(currentOrder[i] !== expectedOrder[i]){ same = false; break; }
-      }
-      if(same){
-        // تحقق إن الـ hero في الأول كمان
-        var firstSec = main.firstElementChild;
-        if(firstSec && firstSec.classList.contains('hero')) return;
-      }
-    }
-
-    var frag = document.createDocumentFragment();
-    ORDER.forEach(function(id){
-      var el = document.getElementById(id);
-      if(el) frag.appendChild(el);
-    });
-    main.appendChild(frag);
-
-    var hero = main.querySelector('.hero');
-    if(hero && main.firstElementChild !== hero){ 
-      main.insertBefore(hero, main.firstChild); 
-    }
-
-    /* ═══ مسح الأقسام اللي مش في ORDER نهائياً ═══ */
-    var orderSet = {};
-    ORDER.forEach(function(id){ orderSet[id] = true; });
-    
-    main.querySelectorAll(':scope > section').forEach(function(sec){
-      // استثناء الـ hero (مش في ORDER بس محتاجينه)
-      if(sec.classList.contains('hero')) return;
-      // استثناء أي قسم مش عنده id (زي الأقسام اللي ممكن تكون static)
-      if(!sec.id) return;
-      // لو القسم مش في الـORDER → امسحه
-      if(!orderSet[sec.id]){
-        sec.remove();
-      }
-    });
-
-    DOWNGRADE_H2.forEach(function(id){
-      var sec = document.getElementById(id);
-      if(!sec) return;
-      var h2 = sec.querySelector('h2');
-      if(h2 && h2.tagName === 'H2'){
-        var h3 = document.createElement('h3');
-        Array.from(h2.attributes).forEach(function(attr){
-          h3.setAttribute(attr.name, attr.value);
-        });
-        h3.innerHTML = h2.innerHTML;
-        h3.className = (h3.className || '') + ' h2-as-h3';
-        h2.parentNode.replaceChild(h3, h2);
-      }
-    });
-  }
-
-  // Apply once immediately (DOM is already parsed at this point)
-  apply();
-
-  // Re-apply on DOMContentLoaded if still loading
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', apply);
-  }
-
-  // MutationObserver — handles async DOM changes, self-disconnects after 8s
-  var main = document.getElementById('main');
-  if(main && typeof MutationObserver !== 'undefined'){
-    var scheduled = false;
-    var observer = new MutationObserver(function(){
-      if(scheduled) return;
-      scheduled = true;
-      requestAnimationFrame(function(){
-        scheduled = false;
-        apply();
-      });
-    });
-    observer.observe(main, { childList: true });
-    setTimeout(function(){
-      observer.disconnect();
-      apply();
-    }, 8000);
-  }
-})();
-</script>
+<!-- Removed Infinite Loop Script -->
 
 <!-- ═══════════════════ H2-AS-H3 VISUAL STYLE ═══════════════════ -->
 <style>
@@ -11576,28 +11391,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link=>{
 
 </script>
 <!-- ═══════════════════ FINAL CLEANUP — v2 ═══════════════════ -->
-<script id="finalCleanup">
-(function(){
-  'use strict';
 
-  /* ═══ 1. إزالة CSS الإخفاء العاطل (لو لسه موجود) ═══ */
-  ['hideRedundantSections', 'hideRedundantV2'].forEach(function(id){
-    var s = document.getElementById(id);
-    if (s) s.remove();
-  });
-
-  /* ═══ 3. إزالة زر Refund المكرر (لو لسه موجود) ═══ */
-  var refundBtn = document.querySelector('#guarantees button[onclick*="refundModal"]');
-  if (refundBtn) refundBtn.remove();
-
-  /* ═══ 4. إزالة Quick Chips الزائدة (لو لسه موجودة) ═══ */
-  var extraChips = document.querySelectorAll(
-    '.quick-chip[data-section="founder"], .quick-chip[data-section="guarantees"]'
-  );
-  extraChips.forEach(function(c){ c.remove(); });
-
-})();
-</script>
 <!-- ═══════════ UX/UI POLISH — Conversion & Readability ═══════════ -->
 <style id="uxPolish">
 /* ═══ 1. تحسين التباين (WCAG AA) ═══ */
@@ -11999,29 +11793,44 @@ summary:focus-visible {
 </nav>
 
 
+
 <script id="dynamicUIScript">
 (function() {
   'use strict';
 
-  // 1. Search Modal Logic
+  // 1. Search Modal Logic (Toggle & Fix)
   var trigger = document.getElementById('searchTrigger');
   var modal = document.getElementById('searchModal');
+  
   if (trigger && modal) {
     trigger.addEventListener('click', function(e) {
       e.preventDefault();
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      var input = document.getElementById('searchModalInput');
-      if (input) setTimeout(function() { input.focus(); }, 100);
+      e.stopPropagation(); // Prevent event bubbling
+      
+      var isOpen = modal.classList.contains('open');
+      if (isOpen) {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      } else {
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        var input = document.getElementById('searchModalInput');
+        if (input) setTimeout(function() { input.focus(); }, 100);
+      }
     });
+    
+    // Close on overlay click or close button
     modal.addEventListener('click', function(e) {
-      if (e.target === modal || e.target.hasAttribute('data-search-close')) {
+      if (e.target === modal || e.target.hasAttribute('data-search-close') || e.target.closest('[data-search-close]')) {
         modal.classList.remove('open');
         modal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
       }
     });
+    
+    // ESC key to close
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && modal.classList.contains('open')) {
         modal.classList.remove('open');
@@ -12031,11 +11840,9 @@ summary:focus-visible {
     });
   }
 
-  // 2. Dynamic Header & Dock Theming
+  // 2. Dynamic Header & Dock Theming (Optimized with rAF)
   var header = document.getElementById('header');
   var dock = document.getElementById('appleDock');
-  
-  // Sections that have dark backgrounds
   var darkSections = document.querySelectorAll('.hero, .bg-nile-blue, .bg-nile-blue-dark, #science, #consult, #turkey-rescue, #top-tier, #guarantees, #legal');
   var darkRanges = [];
 
@@ -12047,62 +11854,41 @@ summary:focus-visible {
     });
   }
 
+  var themeTicking = false;
   function updateTheme() {
-    var scrollY = window.scrollY;
-    
-    // Check Header Theme (Top 52px + 10px offset)
-    var headerCenter = scrollY + 40; 
-    var isHeaderDark = darkRanges.some(function(range) {
-      return headerCenter >= range.top && headerCenter <= range.bottom;
+    if (themeTicking) return;
+    themeTicking = true;
+    requestAnimationFrame(function() {
+      var scrollY = window.scrollY;
+      
+      // Header Theme
+      var headerCenter = scrollY + 40; 
+      var isHeaderDark = darkRanges.some(function(r) { return headerCenter >= r.top && headerCenter <= r.bottom; });
+      if (header) {
+        header.classList.toggle('theme-dark', isHeaderDark);
+        header.classList.toggle('theme-light', !isHeaderDark);
+      }
+
+      // Dock Theme
+      var dockCenter = scrollY + window.innerHeight - 45;
+      var isDockDark = darkRanges.some(function(r) { return dockCenter >= r.top && dockCenter <= r.bottom; });
+      if (dock) {
+        dock.classList.toggle('theme-dark', isDockDark);
+        dock.classList.toggle('theme-light', !isDockDark);
+      }
+      
+      themeTicking = false;
     });
-
-    if (isHeaderDark) {
-      header.classList.remove('theme-light');
-      header.classList.add('theme-dark');
-    } else {
-      header.classList.remove('theme-dark');
-      header.classList.add('theme-light');
-    }
-
-    // Check Dock Theme (Bottom 60px + 15px offset)
-    var dockCenter = scrollY + window.innerHeight - 45;
-    var isDockDark = darkRanges.some(function(range) {
-      return dockCenter >= range.top && dockCenter <= range.bottom;
-    });
-
-    if (isDockDark) {
-      dock.classList.remove('theme-light');
-      dock.classList.add('theme-dark');
-    } else {
-      dock.classList.remove('theme-dark');
-      dock.classList.add('theme-light');
-    }
   }
 
-  // Recalculate ranges on load and resize
   window.addEventListener('load', calculateRanges);
-  window.addEventListener('resize', function() {
-    calculateRanges();
-    updateTheme();
-  });
-
-  // Throttled scroll listener
-  var ticking = false;
-  window.addEventListener('scroll', function() {
-    if (!ticking) {
-      window.requestAnimationFrame(function() {
-        updateTheme();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
-
-  // Initial run
+  window.addEventListener('resize', function() { calculateRanges(); updateTheme(); });
+  window.addEventListener('scroll', updateTheme, { passive: true });
+  
   setTimeout(calculateRanges, 100);
   setTimeout(updateTheme, 200);
 
-  // 3. Dock Active State Logic
+  // 3. Dock Active State
   var dockItems = document.querySelectorAll('.dock-item[data-target]');
   if (dockItems.length) {
     var navSections = Array.from(dockItems).map(function(item) {
@@ -12123,6 +11909,7 @@ summary:focus-visible {
   }
 })();
 </script>
+
 
 </body>
 </html>

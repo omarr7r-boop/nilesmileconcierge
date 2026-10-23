@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Nile Smile — Modern Hero Buttons & Cleanup
-==========================================
-- إخفاء كل الأزرار العائمة (Sticky/WhatsApp)
-- تحديث أزرار الـ Hero لتكون Rounded وتتبع تسلسل هرمي حديث
+Nile Smile — Architectural & Performance Fix
+============================================
+- Fixes Infinite Loop (MutationObserver)
+- Fixes Layout Thrashing (Scroll & Mouse events)
+- Fixes Z-Index hierarchy (Modals vs Header)
+- Fixes Search Toggle logic
 """
 
 import re
@@ -12,158 +14,251 @@ import shutil
 import sys
 from pathlib import Path
 
-def main():
-    if len(sys.argv) < 2:
-        print("Usage: python modern_hero.py <path-to-html>")
-        sys.exit(1)
-
-    html_path = Path(sys.argv[1])
-    if not html_path.exists():
+def fix_architecture(html_path):
+    path = Path(html_path)
+    if not path.exists():
         print(f"[X] File not found: {html_path}")
-        sys.exit(1)
+        return
 
-    print("\n============================================")
-    print("  Nile Smile - Modern Hero & Cleanup")
-    print("============================================\n")
+    shutil.copy2(path, str(path) + ".backup_arch")
+    print(f"[OK] Backup created: {path.name}.backup_arch\n")
 
-    # Backup
-    backup_path = html_path.with_suffix(html_path.suffix + ".backup_hero")
-    shutil.copy2(html_path, backup_path)
-    print(f"[OK] Backup created: {backup_path.name}\n")
-
-    # Read
-    with open(html_path, 'r', encoding='utf-8', newline='') as f:
+    with open(path, 'r', encoding='utf-8') as f:
         content = f.read()
 
-    has_crlf = '\r\n' in content
-    content = content.replace('\r\n', '\n')
+    # ============================================================
+    # 1. REMOVE THE INFINITE LOOP (FINAL SECTION ORDER)
+    # ============================================================
+    # This script modifies the DOM and watches for DOM changes, causing a massive CPU spike.
+    old_order_script = re.search(r'<script>\s*/\* ═══════════════════ FINAL SECTION ORDER v7.*?</script>', content, flags=re.DOTALL)
+    if old_order_script:
+        content = content.replace(old_order_script.group(0), '<!-- Removed Infinite Loop Script -->')
+        print("[OK] Removed: FINAL SECTION ORDER (Infinite Loop)")
 
-    # 1. Remove previous hero button styles if they exist
-    content = re.sub(r'<style id="modernHeroButtons">.*?</style>', '', content, flags=re.DOTALL)
+    # ============================================================
+    # 2. REMOVE LAYOUT THRASHING (Magnetic Buttons)
+    # ============================================================
+    old_magnetic = re.search(r'if\(window\.innerWidth > 1024 && !prefersReduced\)\{\s*document\.querySelectorAll\(\'\.btn-gold\'\).*?\n  \}', content, flags=re.DOTALL)
+    if old_magnetic:
+        content = content.replace(old_magnetic.group(0), '/* Magnetic buttons disabled for performance */')
+        print("[OK] Removed: Magnetic Buttons (Layout Thrashing)")
 
-    # 2. Inject New Modern CSS
-    new_css = r'''
-<style id="modernHeroButtons">
-/* ============================================================
-   HIDE ALL STICKY / FLOATING BUTTONS
-   (We use the Apple Dock at the bottom instead)
-   ============================================================ */
-.float-wa, 
-.sticky-mobile, 
-#stickyCta, 
-#exitPopup {
-  display: none !important;
-}
-
-/* ============================================================
-   MODERN HERO BUTTONS (2026 UI/UX Standards)
-   ============================================================ */
-/* 1. Container Layout */
-.hero-content > div.flex.flex-col.sm\:flex-row {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 1rem !important;
-  max-width: 30rem !important;
-  margin: 2rem auto 0 !important;
-  align-items: stretch !important;
-  padding: 0 1rem !important;
-}
-@media (min-width: 640px) {
-  .hero-content > div.flex.flex-col.sm\:flex-row {
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 0 !important;
+    # ============================================================
+    # 3. FIX LAYOUT THRASHING (STICKY TOC SCROLL)
+    # ============================================================
+    old_toc = re.search(r'<script>\s*/\* ═════════ STICKY TOC.*?</script>', content, flags=re.DOTALL)
+    if old_toc:
+        new_toc = """
+<script>
+/* FIXED STICKY TOC — Optimized with requestAnimationFrame and Cached Positions */
+(function(){
+  const toc = document.getElementById('stickyToc');
+  if (!toc) return;
+  const dots = toc.querySelectorAll('.toc-dot');
+  const sections = Array.from(dots).map(d => document.querySelector(d.getAttribute('href'))).filter(Boolean);
+  let sectionTops = [];
+  
+  function calcTops() {
+    sectionTops = sections.map(sec => ({
+      id: sec.id,
+      top: sec.getBoundingClientRect().top + window.scrollY - 200
+    }));
   }
-}
+  
+  let ticking = false;
+  function updateToc(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const scrollY = window.scrollY;
+      if (scrollY > 600) toc.classList.add('show');
+      else toc.classList.remove('show');
+      
+      let current = null;
+      for (let i = 0; i < sectionTops.length; i++) {
+        if (scrollY >= sectionTops[i].top) current = sectionTops[i].id;
+      }
+      
+      dots.forEach(d => {
+        d.classList.toggle('active', d.getAttribute('href') === '#' + current);
+      });
+      ticking = false;
+    });
+  }
+  
+  window.addEventListener('load', calcTops);
+  window.addEventListener('resize', () => { calcTops(); updateToc(); });
+  window.addEventListener('scroll', updateToc, {passive: true});
+  calcTops();
+  updateToc();
+})();
+</script>
+"""
+        content = content.replace(old_toc.group(0), new_toc)
+        print("[OK] Fixed: Sticky TOC (Optimized Scroll)")
 
-/* 2. Base Button Styles */
-.hero-content .btn {
-  border-radius: 50px !important;
-  min-height: 56px !important; /* Touch-friendly size */
-  font-size: 0.75rem !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.08em !important;
-  text-transform: uppercase !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 0 2rem !important;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  text-decoration: none !important;
-}
+    # ============================================================
+    # 4. FIX Z-INDEX & MODALS HIERARCHY
+    # ============================================================
+    z_index_fix = """
+<style id="zIndexAndModalFix">
+/* Strict Z-Index Hierarchy to prevent overlapping bugs */
+.site-header { z-index: 1000 !important; }
+.apple-dock { z-index: 900 !important; }
+.float-wa { z-index: 800 !important; }
+.modal { z-index: 9000 !important; }
+.search-modal { z-index: 9500 !important; }
+.exit-popup { z-index: 10000 !important; }
 
-/* 3. Primary Button (Get Free Treatment Plan) */
-.hero-content #heroMainCta {
-  background: linear-gradient(135deg, #AE9164 0%, #E8C88A 100%) !important;
-  color: #1F2A36 !important;
-  border: none !important;
-  box-shadow: 0 8px 24px rgba(174, 145, 100, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
-  flex: 1 !important; /* Takes up more space than secondary */
-  position: relative !important;
-  overflow: hidden !important;
-}
-
-/* Shimmer Effect for Primary Button */
-.hero-content #heroMainCta::before {
-  content: '' !important;
-  position: absolute !important;
-  top: 0; left: -100% !important;
-  width: 100%; height: 100% !important;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent) !important;
-  animation: btnShimmer 4s infinite !important;
-}
-@keyframes btnShimmer {
-  0% { left: -100%; }
-  20% { left: 100%; }
-  100% { left: 100%; }
-}
-
-.hero-content #heroMainCta:hover {
-  transform: translateY(-3px) scale(1.02) !important;
-  box-shadow: 0 12px 32px rgba(174, 145, 100, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
-}
-
-/* 4. Secondary Button (Turkey Rescue) */
-.hero-content a[href="#turkey-rescue"] {
-  background: rgba(255, 255, 255, 0.05) !important; /* Glassmorphism */
-  color: #F6F3EE !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.3) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  flex: 0.8 !important; /* Slightly smaller */
-}
-
-.hero-content a[href="#turkey-rescue"]:hover {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border-color: rgba(255, 255, 255, 0.7) !important;
-  transform: translateY(-3px) !important;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
-}
-
-/* 5. Clean up text below buttons */
-.hero-content p.text-center.mt-4 {
-  margin-top: 1.5rem !important;
-  font-size: 0.65rem !important;
-  letter-spacing: 0.15em !important;
-  color: #E8C88A !important;
-  opacity: 0.9 !important;
-}
+/* Ensure exit popup clickability */
+.exit-popup { pointer-events: none; }
+.exit-popup.open { pointer-events: auto; }
+.exit-popup-overlay { pointer-events: auto; }
+.exit-popup-box { pointer-events: auto; }
 </style>
-'''
+"""
+    content = content.replace('</head>', z_index_fix + '\n</head>')
+    print("[OK] Fixed: Z-Index Hierarchy (Modals now appear ABOVE Header)")
 
-    # Insert before </head>
-    content = content.replace('</head>', new_css + '\n</head>')
-    print("[OK] Injected Modern Hero CSS & Removed Sticky Buttons")
+    # ============================================================
+    # 5. FIX SEARCH TOGGLE & THEME LOGIC (Dynamic UI)
+    # ============================================================
+    old_dynamic_script = re.search(r'<script id="dynamicUIScript">.*?</script>', content, flags=re.DOTALL)
+    if old_dynamic_script:
+        new_dynamic_script = """
+<script id="dynamicUIScript">
+(function() {
+  'use strict';
 
-    # Write back
-    if has_crlf:
-        content = content.replace('\n', '\r\n')
-    with open(html_path, 'w', encoding='utf-8', newline='') as f:
+  // 1. Search Modal Logic (Toggle & Fix)
+  var trigger = document.getElementById('searchTrigger');
+  var modal = document.getElementById('searchModal');
+  
+  if (trigger && modal) {
+    trigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation(); // Prevent event bubbling
+      
+      var isOpen = modal.classList.contains('open');
+      if (isOpen) {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      } else {
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        var input = document.getElementById('searchModalInput');
+        if (input) setTimeout(function() { input.focus(); }, 100);
+      }
+    });
+    
+    // Close on overlay click or close button
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal || e.target.hasAttribute('data-search-close') || e.target.closest('[data-search-close]')) {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+    });
+    
+    // ESC key to close
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('open')) {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+
+  // 2. Dynamic Header & Dock Theming (Optimized with rAF)
+  var header = document.getElementById('header');
+  var dock = document.getElementById('appleDock');
+  var darkSections = document.querySelectorAll('.hero, .bg-nile-blue, .bg-nile-blue-dark, #science, #consult, #turkey-rescue, #top-tier, #guarantees, #legal');
+  var darkRanges = [];
+
+  function calculateRanges() {
+    darkRanges = Array.from(darkSections).map(function(sec) {
+      var rect = sec.getBoundingClientRect();
+      var top = rect.top + window.scrollY;
+      return { top: top, bottom: top + rect.height };
+    });
+  }
+
+  var themeTicking = false;
+  function updateTheme() {
+    if (themeTicking) return;
+    themeTicking = true;
+    requestAnimationFrame(function() {
+      var scrollY = window.scrollY;
+      
+      // Header Theme
+      var headerCenter = scrollY + 40; 
+      var isHeaderDark = darkRanges.some(function(r) { return headerCenter >= r.top && headerCenter <= r.bottom; });
+      if (header) {
+        header.classList.toggle('theme-dark', isHeaderDark);
+        header.classList.toggle('theme-light', !isHeaderDark);
+      }
+
+      // Dock Theme
+      var dockCenter = scrollY + window.innerHeight - 45;
+      var isDockDark = darkRanges.some(function(r) { return dockCenter >= r.top && dockCenter <= r.bottom; });
+      if (dock) {
+        dock.classList.toggle('theme-dark', isDockDark);
+        dock.classList.toggle('theme-light', !isDockDark);
+      }
+      
+      themeTicking = false;
+    });
+  }
+
+  window.addEventListener('load', calculateRanges);
+  window.addEventListener('resize', function() { calculateRanges(); updateTheme(); });
+  window.addEventListener('scroll', updateTheme, { passive: true });
+  
+  setTimeout(calculateRanges, 100);
+  setTimeout(updateTheme, 200);
+
+  // 3. Dock Active State
+  var dockItems = document.querySelectorAll('.dock-item[data-target]');
+  if (dockItems.length) {
+    var navSections = Array.from(dockItems).map(function(item) {
+      return { el: document.getElementById(item.getAttribute('data-target')), link: item };
+    }).filter(function(s) { return s.el !== null; });
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          dockItems.forEach(function(item) { item.classList.remove('active'); });
+          var activeItem = navSections.find(function(s) { return s.el === entry.target; });
+          if (activeItem) activeItem.link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -50% 0px', threshold: 0 });
+
+    navSections.forEach(function(s) { observer.observe(s.el); });
+  }
+})();
+</script>
+"""
+        content = content.replace(old_dynamic_script.group(0), new_dynamic_script)
+        print("[OK] Fixed: Search Toggle & Theming Logic")
+
+    # ============================================================
+    # 6. REMOVE REDUNDANT CLEANUP SCRIPTS
+    # ============================================================
+    content = re.sub(r'<script id="finalCleanup">.*?</script>', '', content, flags=re.DOTALL)
+    print("[OK] Removed redundant cleanup scripts")
+
+    with open(path, 'w', encoding='utf-8') as f:
         f.write(content)
+    
+    print("\nSUCCESS! The website architecture is now stable.")
+    print("Please do a Hard Refresh (Ctrl+Shift+R) and test the site.")
 
-    print("\nSUCCESS! Modern buttons applied and sticky elements removed.")
-    print("Refresh your browser (Ctrl+Shift+R).\n")
-
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python fix_architecture.py <path-to-html>")
+    else:
+        fix_architecture(sys.argv[1])
