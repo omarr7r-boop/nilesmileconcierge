@@ -4800,14 +4800,26 @@ body { padding-bottom: 90px !important; }
 
       controls.addEventListener('start', function(){ controls.autoRotate = false; });
 
-      if(loading) loading.style.display = 'none';
+      
+        if(loading) loading.style.display = 'none';
 
-      function animate(){
-        requestAnimationFrame(animate);
-        controls.update();
-        renderer.render(scene, camera);
-      }
-      animate();
+        // Pause 3D rendering when not in viewport to save CPU
+        let is3DVisible = false;
+        const obs3D = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            is3DVisible = entry.isIntersecting;
+            if (is3DVisible) animate();
+          });
+        }, { threshold: 0 });
+        obs3D.observe(container);
+
+        function animate(){
+          if (!is3DVisible) return; // Stop infinite loop
+          requestAnimationFrame(animate);
+          controls.update();
+          renderer.render(scene, camera);
+        }
+        
 
       // 6. Layer Toggles
       var toggleBone = document.getElementById('toggleBone');
@@ -6243,7 +6255,51 @@ body { padding-bottom: 90px !important; }
       </div>
     </div>
 
-    <!-- CTA -->
+    
+    <!-- PRICE BREAKDOWN -->
+    <div class="mt-10 max-w-3xl mx-auto">
+      <details class="bg-white/5 border border-nile-gold/30 rounded-lg p-5 cursor-pointer group">
+        <summary class="font-serif text-nile-gold-bright text-lg flex justify-between items-center list-none">
+          <span>What does the $4,990 Full Rescue include? (Click to expand)</span>
+          <span class="text-2xl group-open:rotate-180 transition-transform">▾</span>
+        </summary>
+        <div class="mt-6 space-y-3 text-sm text-gray-300">
+          <div class="flex justify-between border-b border-white/10 pb-2">
+            <span>Atraumatic removal of failed implants</span>
+            <span class="font-bold text-white">$500</span>
+          </div>
+          <div class="flex justify-between border-b border-white/10 pb-2">
+            <span>Bone grafting / Socket preservation (if needed)</span>
+            <span class="font-bold text-white">$600 – $1,500</span>
+          </div>
+          <div class="flex justify-between border-b border-white/10 pb-2">
+            <span>New Premium Implant (Straumann / Nobel)</span>
+            <span class="font-bold text-white">$1,200</span>
+          </div>
+          <div class="flex justify-between border-b border-white/10 pb-2">
+            <span>New Zirconia Crown</span>
+            <span class="font-bold text-white">$800</span>
+          </div>
+          <div class="flex justify-between border-b border-white/10 pb-2">
+            <span>CBCT 3D Scan + Surgical Guide</span>
+            <span class="font-bold text-white">$200</span>
+          </div>
+          <div class="flex justify-between border-b border-white/10 pb-2">
+            <span>Clinical Labor & Follow-ups</span>
+            <span class="font-bold text-white">$500</span>
+          </div>
+          <div class="flex justify-between pt-2 text-nile-gold-bright text-lg font-bold">
+            <span>Total Estimated Value</span>
+            <span>$3,800 – $4,700+</span>
+          </div>
+          <p class="text-xs text-gray-400 italic mt-4">
+            * The $4,990 flat fee covers a complete single-tooth rescue (removal + grafting + new premium implant + crown). Complex full-arch rescues are quoted separately. This fee is fully deductible from your final treatment package if you decide to proceed with us.
+          </p>
+        </div>
+      </details>
+    </div>
+    
+<!-- CTA -->
     <div class="text-center" style="display:flex;flex-direction:column;gap:.75rem;max-width:32rem;margin:0 auto">
       <a href="https://wa.me/201503308333?text=Hi%20Nile%20Smile%2C%20I%20need%20a%20Turkey%20Rescue%20Second%20Opinion%20(%24250)" target="_blank" rel="noopener" class="btn btn-gold shine-auto" style="justify-content:center">
         Get Turkey Rescue Second Opinion — $250
@@ -6413,233 +6469,145 @@ body { padding-bottom: 90px !important; }
 </section>
 
 <!-- ═══════════════════ HOTEL & CONCIERGE ADD-ONS — SEPARATED ═══════════════════ -->
+
 <section id="travel-addons" class="section bg-white reveal">
   <div class="container">
-    <div class="text-center max-w-3xl mx-auto mb-14">
-      <p class="eyebrow mb-4">Hotel & Concierge Add-Ons</p>
-      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.75rem)">Build Your Stay — Your Way</h2>
-      <p class="text-nile-muted" style="font-size:1.05rem">
-        <strong class="text-nile-blue">Clinical packages above are treatment-only.</strong> Hotel and concierge are completely separate — choose only what you need. No forced bundles.
-      </p>
-      <p class="text-nile-gold italic mt-4 text-sm">
-        Prices below are indicative for a standard 10-night stay. Final quotes are confirmed in writing after your clinical review.
-      </p>
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <p class="eyebrow mb-4">Build Your Stay — Your Way</p>
+      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.75rem)">Unified Travel & Concierge Builder</h2>
+      <p class="text-nile-muted">Select your preferred hotel tier and add any concierge services. Prices are indicative for a standard 10-night stay and confirmed in writing after your clinical review.</p>
     </div>
 
-    <!-- ═══════════ STEP 1: HOTEL TIERS ═══════════ -->
-    <div class="text-center mb-8">
-      <div class="limited-badge" style="justify-content:center">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        Step 1 — Choose Your Hotel (Optional)
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      
+      <!-- LEFT: HOTELS -->
+      <div>
+        <div class="flex items-center gap-3 mb-6 border-b border-nile-gold/20 pb-3">
+          <span class="limited-badge" style="margin-bottom:0">Step 1</span>
+          <h3 class="font-serif text-nile-blue text-2xl">Select Hotel Tier (10 Nights)</h3>
+        </div>
+        
+        <div class="space-y-4">
+          <!-- 3 Star -->
+          <div class="card p-5 flex justify-between items-center border-l-4 border-gray-400">
+            <div>
+              <h4 class="font-serif text-nile-blue text-lg">3★ Hotel</h4>
+              <p class="text-nile-muted text-xs">Sheikh Zayed / New Cairo · Breakfast & Transfers</p>
+            </div>
+            <div class="text-right">
+              <p class="font-serif text-nile-gold text-xl">$700</p>
+              <p class="text-[10px] text-nile-muted uppercase">$70/night</p>
+            </div>
+          </div>
+          <!-- 4 Star -->
+          <div class="card p-5 flex justify-between items-center border-l-4 border-nile-gold bg-nile-gold/5">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-serif text-nile-blue text-lg">4★ Hotel</h4>
+                <span class="bg-nile-gold text-white text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Most Chosen</span>
+              </div>
+              <p class="text-nile-muted text-xs">Novotel / Hilton / Marriott · Breakfast & Transfers</p>
+            </div>
+            <div class="text-right">
+              <p class="font-serif text-nile-gold text-xl">$1,200</p>
+              <p class="text-[10px] text-nile-muted uppercase">$120/night</p>
+            </div>
+          </div>
+          <!-- 5 Star -->
+          <div class="card p-5 flex justify-between items-center border-l-4 border-nile-blue">
+            <div>
+              <h4 class="font-serif text-nile-blue text-lg">5★ Hotel</h4>
+              <p class="text-nile-muted text-xs">Four Seasons / Ritz-Carlton · Nile/Pyramids View</p>
+            </div>
+            <div class="text-right">
+              <p class="font-serif text-nile-gold text-xl">$2,500</p>
+              <p class="text-[10px] text-nile-muted uppercase">$250/night</p>
+            </div>
+          </div>
+          <!-- 5 Star Suite -->
+          <div class="card p-5 flex justify-between items-center border-l-4 border-nile-blue">
+            <div>
+              <h4 class="font-serif text-nile-blue text-lg">5★ Suite VIP</h4>
+              <p class="text-nile-muted text-xs">Four Seasons Nile Plaza / St. Regis · Private Chauffeur</p>
+            </div>
+            <div class="text-right">
+              <p class="font-serif text-nile-gold text-xl">$4,500</p>
+              <p class="text-[10px] text-nile-muted uppercase">$450/night</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <h3 class="font-serif text-nile-blue text-xl md:text-2xl">4 Hotel Tiers — 10 Nights + Airport Transfers</h3>
+
+      <!-- RIGHT: CONCIERGE ADD-ONS -->
+      <div>
+        <div class="flex items-center gap-3 mb-6 border-b border-nile-gold/20 pb-3">
+          <span class="limited-badge" style="margin-bottom:0">Step 2</span>
+          <h3 class="font-serif text-nile-blue text-2xl">Optional Concierge Add-Ons</h3>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Recovery Care -->
+          <div class="card p-5 flex justify-between items-center border-l-4 border-nile-gold">
+            <div>
+              <h4 class="font-serif text-nile-blue text-lg">Recovery Care</h4>
+              <p class="text-nile-muted text-xs">Daily nurse, physiotherapy, pharmacy delivery, chef meals.</p>
+            </div>
+            <div class="text-right">
+              <p class="font-serif text-nile-gold text-xl">+$1,700</p>
+              <p class="text-[10px] text-nile-muted uppercase">Per patient</p>
+            </div>
+          </div>
+          <!-- Premium Concierge -->
+          <div class="card p-5 flex justify-between items-center border-l-4 border-nile-gold bg-nile-gold/5">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-serif text-nile-blue text-lg">Premium Concierge</h4>
+                <span class="bg-nile-gold text-white text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Most Chosen</span>
+              </div>
+              <p class="text-nile-muted text-xs">Dedicated coordinator, unlimited transfers, Nile dinner cruise.</p>
+            </div>
+            <div class="text-right">
+              <p class="font-serif text-nile-gold text-xl">+$1,700</p>
+              <p class="text-[10px] text-nile-muted uppercase">Per patient</p>
+            </div>
+          </div>
+          <!-- Signature VIP -->
+          <div class="card p-5 flex justify-between items-center border-l-4 border-nile-blue">
+            <div>
+              <h4 class="font-serif text-nile-blue text-lg">Signature VIP Experience</h4>
+              <p class="text-nile-muted text-xs">Private chef, Giza tour, Luxor trip, personal shopper, yacht dinner.</p>
+            </div>
+            <div class="text-right">
+              <p class="font-serif text-nile-gold text-xl">+$3,000</p>
+              <p class="text-[10px] text-nile-muted uppercase">Per patient</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
-      <!-- 3★ Hotel -->
-      <div class="card card-top-blue p-6 flex flex-col">
-        <p class="eyebrow mb-2" style="color:#4F6070">Essential Tier</p>
-        <h4 class="font-serif text-nile-blue text-lg mb-2">3★ Hotel</h4>
-        <p class="text-nile-muted text-xs mb-4">Sheikh Zayed / New Cairo — 15–25 min from clinics.</p>
-        <p class="font-serif text-nile-gold mb-3" style="font-size:2rem">$700</p>
-        <p class="text-xs text-nile-muted mb-3">10 nights · $70/night</p>
-        <ul class="text-xs text-nile-muted space-y-1 mt-auto">
-          <li>✓ Breakfast included</li>
-          <li>✓ Airport transfers (round trip)</li>
-          <li>✓ Bilingual coordinator on call</li>
-        </ul>
-      </div>
-
-      <!-- 4★ Hotel — Most Chosen -->
-      <div class="card card-top-gold p-6 flex flex-col relative">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-nile-gold via-nile-gold-light to-nile-gold text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full z-10 shadow-lg">Most Chosen</div>
-        <p class="eyebrow mb-2" style="color:#AE9164">Premium Tier</p>
-        <h4 class="font-serif text-nile-blue text-lg mb-2">4★ Hotel</h4>
-        <p class="text-nile-muted text-xs mb-4">Novotel · Hilton · Marriott · Holiday Inn — Sheikh Zayed / Zamalek / New Cairo.</p>
-        <p class="font-serif text-nile-gold mb-3" style="font-size:2rem">$1,200</p>
-        <p class="text-xs text-nile-muted mb-3">10 nights · $120/night</p>
-        <ul class="text-xs text-nile-muted space-y-1 mt-auto">
-          <li>✓ Breakfast included</li>
-          <li>✓ Airport transfers (round trip)</li>
-          <li>✓ Priority clinic scheduling</li>
-          <li>✓ Bilingual coordinator on call</li>
-        </ul>
-      </div>
-
-      <!-- 5★ Hotel -->
-      <div class="card card-top-gold p-6 flex flex-col">
-        <p class="eyebrow mb-2" style="color:#AE9164">Signature Tier</p>
-        <h4 class="font-serif text-nile-blue text-lg mb-2">5★ Hotel</h4>
-        <p class="text-nile-muted text-xs mb-4">Four Seasons · Ritz-Carlton · Marriott Mena House — Nile / Pyramids view.</p>
-        <p class="font-serif text-nile-gold mb-3" style="font-size:2rem">$2,500</p>
-        <p class="text-xs text-nile-muted mb-3">10 nights · $250/night</p>
-        <ul class="text-xs text-nile-muted space-y-1 mt-auto">
-          <li>✓ Breakfast included</li>
-          <li>✓ Panoramic Nile or Pyramids view</li>
-          <li>✓ Airport transfers (round trip)</li>
-          <li>✓ Dedicated concierge</li>
-        </ul>
-      </div>
-
-      <!-- 5★ Suite VIP -->
-      <div class="card card-top-gold p-6 flex flex-col">
-        <p class="eyebrow mb-2" style="color:#AE9164">Signature+</p>
-        <h4 class="font-serif text-nile-blue text-lg mb-2">5★ Suite VIP</h4>
-        <p class="text-nile-muted text-xs mb-4">Four Seasons Nile Plaza · St. Regis · Fairmont — luxury suite.</p>
-        <p class="font-serif text-nile-gold mb-3" style="font-size:2rem">$4,500</p>
-        <p class="text-xs text-nile-muted mb-3">10 nights · $450/night</p>
-        <ul class="text-xs text-nile-muted space-y-1 mt-auto">
-          <li>✓ Panoramic suite view</li>
-          <li>✓ Private chauffeur (not shared)</li>
-          <li>✓ Airport fast-track + meet & greet</li>
-          <li>✓ Dedicated personal concierge</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- ═══════════ STEP 2: CONCIERGE ADD-ONS ═══════════ -->
-    <div class="text-center mb-8">
-      <div class="limited-badge" style="justify-content:center">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        Step 2 — Choose Your Concierge Add-On (Optional)
-      </div>
-      <h3 class="font-serif text-nile-blue text-xl md:text-2xl">3 Concierge Tiers — No Hotel Included</h3>
-      <p class="text-nile-muted text-sm max-w-2xl mx-auto mt-2">These are experience add-ons on top of any hotel tier above — they do not include accommodation.</p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
-      <!-- Recovery Care -->
-      <div class="card card-top-blue p-6 flex flex-col">
-        <p class="eyebrow mb-2" style="color:#4F6070">Concierge 01</p>
-        <h4 class="font-serif text-nile-blue text-lg mb-2">Recovery Care</h4>
-        <p class="text-nile-muted text-xs mb-4">Clinical comfort during recovery — for patients who want extra medical support.</p>
-        <p class="font-serif text-nile-gold mb-3" style="font-size:2rem">+$1,700</p>
-        <p class="text-xs text-nile-muted mb-3">Per patient, per visit</p>
-        <ul class="text-xs text-nile-muted space-y-1 mt-auto">
-          <li>✓ Daily in-room nurse (2h/day)</li>
-          <li>✓ Physiotherapy (3 sessions)</li>
-          <li>✓ Pharmacy delivery to hotel</li>
-          <li>✓ Chef-prepared soft meals</li>
-          <li>✓ Priority recovery room</li>
-        </ul>
-      </div>
-
-      <!-- Premium Concierge -->
-      <div class="card card-top-gold p-6 flex flex-col relative">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-nile-gold via-nile-gold-light to-nile-gold text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full z-10 shadow-lg">Most Chosen</div>
-        <p class="eyebrow mb-2" style="color:#AE9164">Concierge 02</p>
-        <h4 class="font-serif text-nile-blue text-lg mb-2">Premium Concierge</h4>
-        <p class="text-nile-muted text-xs mb-4">The complete VIP coordination experience — comfortable, curated, stress-free.</p>
-        <p class="font-serif text-nile-gold mb-3" style="font-size:2rem">+$1,700</p>
-        <p class="text-xs text-nile-muted mb-3">Per patient, 10-day stay</p>
-        <ul class="text-xs text-nile-muted space-y-1 mt-auto">
-          <li>✓ Dedicated bilingual coordinator</li>
-          <li>✓ Unlimited clinic transfers</li>
-          <li>✓ Nile dinner cruise (1 evening)</li>
-          <li>✓ Welcome kit + curated recovery meals</li>
-          <li>✓ Family-friendly accommodation option</li>
-        </ul>
-      </div>
-
-      <!-- Signature VIP Experience -->
-      <div class="card card-top-gold p-6 flex flex-col">
-        <p class="eyebrow mb-2" style="color:#AE9164">Concierge 03</p>
-        <h4 class="font-serif text-nile-blue text-lg mb-2">Signature VIP Experience</h4>
-        <p class="text-nile-muted text-xs mb-4">The full luxury concierge experience — exclusivity, privacy, and genuine VIP treatment.</p>
-        <p class="font-serif text-nile-gold mb-3" style="font-size:2rem">+$3,000</p>
-        <p class="text-xs text-nile-muted mb-3">Per patient, 10-day stay</p>
-        <ul class="text-xs text-nile-muted space-y-1 mt-auto">
-          <li>✓ In-room private chef (3 meals)</li>
-          <li>✓ Private Giza Pyramids tour</li>
-          <li>✓ Luxor day trip (post-recovery)</li>
-          <li>✓ Private Nile yacht dinner</li>
-          <li>✓ Personal shopper (1 day)</li>
-          <li>✓ Airport fast-track + meet & greet</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- ═══════════ STEP 3: HOW TO COMBINE ═══════════ -->
-    <div class="bg-nile-beige p-8 border-l-4 border-nile-gold max-w-4xl mx-auto mb-10">
-      <h3 class="font-serif text-nile-blue text-xl mb-4 text-center">How to Combine (Examples)</h3>
+    <!-- Examples -->
+    <div class="bg-nile-beige p-6 md:p-8 border border-nile-gold/20 mt-12 max-w-4xl mx-auto">
+      <h3 class="font-serif text-nile-blue text-xl mb-6 text-center">How to Combine (Examples)</h3>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-nile-muted">
-        <div class="text-center">
+        <div class="text-center bg-white p-4 border border-nile-gold/10">
           <p class="font-semibold text-nile-blue mb-1">Budget-Conscious</p>
-          <p>3★ Hotel ($700) + no add-on = <strong class="text-nile-gold">$700</strong> total travel cost</p>
+          <p>3★ Hotel + No Add-on = <strong class="text-nile-gold">$700</strong></p>
         </div>
-        <div class="text-center">
+        <div class="text-center bg-white p-4 border border-nile-gold/10">
           <p class="font-semibold text-nile-blue mb-1">Balanced</p>
-          <p>4★ Hotel ($1,200) + Premium Concierge ($1,700) = <strong class="text-nile-gold">$2,900</strong></p>
+          <p>4★ Hotel + Premium Concierge = <strong class="text-nile-gold">$2,900</strong></p>
         </div>
-        <div class="text-center">
+        <div class="text-center bg-white p-4 border border-nile-gold/10">
           <p class="font-semibold text-nile-blue mb-1">Full VIP</p>
-          <p>5★ Suite ($4,500) + Signature VIP ($3,000) = <strong class="text-nile-gold">$7,500</strong></p>
+          <p>5★ Suite + Signature VIP = <strong class="text-nile-gold">$7,500</strong></p>
         </div>
       </div>
     </div>
-
-    <!-- Hotel Selection Info -->
-    <div class="bg-nile-blue text-white p-8 md:p-10 max-w-4xl mx-auto mb-8">
-      <div class="text-center mb-6">
-        <p class="eyebrow eyebrow-light mb-2">Our Hotel Partners</p>
-        <h3 class="font-serif text-nile-beige text-xl md:text-2xl mb-3">Handpicked Cairo Hotels — Your Choice</h3>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-300">
-        <div class="text-center">
-          <p class="text-nile-gold-bright font-bold mb-2">3★–4★ Tier</p>
-          <p>Modern hotels in Sheikh Zayed, Zamalek, or New Cairo — 15–25 min from partner clinics.</p>
-        </div>
-        <div class="text-center">
-          <p class="text-nile-gold-bright font-bold mb-2">5★ Tier</p>
-          <p>Four Seasons, Ritz-Carlton, Marriott Mena House, Steigenberger — Nile or Pyramids view.</p>
-        </div>
-        <div class="text-center">
-          <p class="text-nile-gold-bright font-bold mb-2">5★ Suite VIP</p>
-          <p>Four Seasons Nile Plaza, St. Regis, Fairmont — panoramic suites with personal concierge.</p>
-        </div>
-      </div>
-      <p class="text-center text-xs text-gray-400 italic mt-6 border-t border-nile-gold/20 pt-4">
-        <strong class="text-nile-gold-bright">Note:</strong> Specific hotel names and confirmed rates are shared in writing after your free clinical review — based on availability and preferences.
-      </p>
-    </div>
-
-    <!-- Flights Table (kept) -->
-    <div class="bg-white p-8 border-t-4 border-nile-blue max-w-4xl mx-auto mb-10">
-      <div class="text-center mb-6">
-        <p class="eyebrow mb-3">Estimated Flights</p>
-        <h3 class="font-serif text-nile-blue text-xl md:text-2xl mb-3">Round-Trip Flights to Cairo (Indicative)</h3>
-        <p class="text-nile-muted text-sm">Flights are <strong>not included</strong> in clinical packages, hotels, or add-ons.</p>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>From</th>
-              <th class="center">Economy</th>
-              <th class="center">Business</th>
-              <th class="center">Flight Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td class="td-label">Sydney / Melbourne</td><td class="td-center">$1,100 – $1,800</td><td class="td-center">$3,800 – $5,500</td><td class="td-center">16–20 hrs (1 stop)</td></tr>
-            <tr><td class="td-label">Brisbane / Perth</td><td class="td-center">$1,200 – $1,900</td><td class="td-center">$4,000 – $5,800</td><td class="td-center">17–22 hrs (1 stop)</td></tr>
-            <tr><td class="td-label">Auckland / NZ</td><td class="td-center">$1,300 – $2,000</td><td class="td-center">$4,200 – $6,000</td><td class="td-center">20–24 hrs (1 stop)</td></tr>
-            <tr><td class="td-label">New York / Toronto</td><td class="td-center">$700 – $1,100</td><td class="td-center">$2,500 – $3,500</td><td class="td-center">10–12 hrs</td></tr>
-            <tr><td class="td-label">Chicago / Los Angeles</td><td class="td-center">$850 – $1,300</td><td class="td-center">$3,000 – $4,200</td><td class="td-center">12–15 hrs</td></tr>
-            <tr><td class="td-label">London</td><td class="td-center">$250 – $500</td><td class="td-center">$1,200 – $2,000</td><td class="td-center">4–5 hrs</td></tr>
-            <tr><td class="td-label">Riyadh / Jeddah</td><td class="td-center">$200 – $400</td><td class="td-center">$900 – $1,500</td><td class="td-center">2–3 hrs</td></tr>
-            <tr><td class="td-label">Dubai / Abu Dhabi</td><td class="td-center">$250 – $450</td><td class="td-center">$1,000 – $1,800</td><td class="td-center">3–4 hrs</td></tr>
-            <tr><td class="td-label">Kuwait / Doha</td><td class="td-center">$220 – $400</td><td class="td-center">$950 – $1,600</td><td class="td-center">2–3 hrs</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="text-xs text-nile-muted italic text-center mt-6">
-        Fares are indicative and vary by season, booking window, and airline. <strong>Peak season (Nov–Mar)</strong> and major holidays may see 30–50% increases. We recommend booking 6–10 weeks in advance.
-      </p>
-    </div>
-
   </div>
 </section>
+
 <!-- ═══════════════════ PRICE ESTIMATOR ═══════════════════ -->
 <section id="estimator" class="section bg-nile-blue text-white reveal">
   <div class="container-narrow">
@@ -9350,28 +9318,7 @@ body { padding-bottom: 90px !important; }
     revealEls.forEach(el=>el.classList.add('visible'));
   }
 
-  /* ✅ Fallback 1: افتح الأقسام في الـ viewport عند الـ scroll */
-  let revealScrollTick = false;
-  function revealManualFallback(){
-    if(revealScrollTick) return;
-    revealScrollTick = true;
-    requestAnimationFrame(()=>{
-      const vh = window.innerHeight;
-      document.querySelectorAll('.reveal:not(.visible), .stagger:not(.visible)').forEach(el=>{
-        const rect = el.getBoundingClientRect();
-        if(rect.top < vh - 40 && rect.bottom > 0){
-          el.classList.add('visible');
-        }
-      });
-      revealScrollTick = false;
-    });
-  }
-  let resizeTimer;
-  window.addEventListener('resize', ()=>{
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(revealManualFallback, 150);
-  }, {passive:true});
-  revealManualFallback();
+  /* Fallback removed for performance */
 
   /* ✅ Fallback 2: ضمان نهائي — يشتغل بس لو IO مش مدعوم */
   if(!('IntersectionObserver' in window)){
@@ -11911,5 +11858,26 @@ summary:focus-visible {
 </script>
 
 
+
+    <script id="svgPerformanceFix">
+    (function(){
+      var mapWrap = document.querySelector('.world-map-wrap');
+      if(!mapWrap) return;
+      var svg = mapWrap.querySelector('svg');
+      if(!svg) return;
+      
+      var observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            if(svg.unpauseAnimations) svg.unpauseAnimations();
+          } else {
+            if(svg.pauseAnimations) svg.pauseAnimations();
+          }
+        });
+      }, { threshold: 0 });
+      observer.observe(mapWrap);
+    })();
+    </script>
+    
 </body>
 </html>

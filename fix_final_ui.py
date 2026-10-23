@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Nile Smile — Architectural & Performance Fix
-============================================
-- Fixes Infinite Loop (MutationObserver)
-- Fixes Layout Thrashing (Scroll & Mouse events)
-- Fixes Z-Index hierarchy (Modals vs Header)
-- Fixes Search Toggle logic
+Nile Smile — Ultimate Performance & UI Architecture Fix
+=======================================================
+1. Stops the 2-minute freezing (Three.js, SVG, Scroll Thrashing).
+2. Combines Hotel & Concierge Add-ons into a single unified UI.
+3. Adds a detailed breakdown for Turkey Rescue ($4,990).
 """
 
 import re
@@ -14,251 +13,291 @@ import shutil
 import sys
 from pathlib import Path
 
-def fix_architecture(html_path):
+def fix_site(html_path):
     path = Path(html_path)
     if not path.exists():
         print(f"[X] File not found: {html_path}")
         return
 
-    shutil.copy2(path, str(path) + ".backup_arch")
-    print(f"[OK] Backup created: {path.name}.backup_arch\n")
+    shutil.copy2(path, str(path) + ".backup_ultimate")
+    print(f"[OK] Backup created: {path.name}.backup_ultimate\n")
 
     with open(path, 'r', encoding='utf-8') as f:
         content = f.read()
 
     # ============================================================
-    # 1. REMOVE THE INFINITE LOOP (FINAL SECTION ORDER)
+    # 1. FIX SCROLL FREEZING (Performance Fixes)
     # ============================================================
-    # This script modifies the DOM and watches for DOM changes, causing a massive CPU spike.
-    old_order_script = re.search(r'<script>\s*/\* ═══════════════════ FINAL SECTION ORDER v7.*?</script>', content, flags=re.DOTALL)
-    if old_order_script:
-        content = content.replace(old_order_script.group(0), '<!-- Removed Infinite Loop Script -->')
-        print("[OK] Removed: FINAL SECTION ORDER (Infinite Loop)")
-
-    # ============================================================
-    # 2. REMOVE LAYOUT THRASHING (Magnetic Buttons)
-    # ============================================================
-    old_magnetic = re.search(r'if\(window\.innerWidth > 1024 && !prefersReduced\)\{\s*document\.querySelectorAll\(\'\.btn-gold\'\).*?\n  \}', content, flags=re.DOTALL)
-    if old_magnetic:
-        content = content.replace(old_magnetic.group(0), '/* Magnetic buttons disabled for performance */')
-        print("[OK] Removed: Magnetic Buttons (Layout Thrashing)")
-
-    # ============================================================
-    # 3. FIX LAYOUT THRASHING (STICKY TOC SCROLL)
-    # ============================================================
-    old_toc = re.search(r'<script>\s*/\* ═════════ STICKY TOC.*?</script>', content, flags=re.DOTALL)
-    if old_toc:
-        new_toc = """
-<script>
-/* FIXED STICKY TOC — Optimized with requestAnimationFrame and Cached Positions */
-(function(){
-  const toc = document.getElementById('stickyToc');
-  if (!toc) return;
-  const dots = toc.querySelectorAll('.toc-dot');
-  const sections = Array.from(dots).map(d => document.querySelector(d.getAttribute('href'))).filter(Boolean);
-  let sectionTops = [];
-  
-  function calcTops() {
-    sectionTops = sections.map(sec => ({
-      id: sec.id,
-      top: sec.getBoundingClientRect().top + window.scrollY - 200
-    }));
-  }
-  
-  let ticking = false;
-  function updateToc(){
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      const scrollY = window.scrollY;
-      if (scrollY > 600) toc.classList.add('show');
-      else toc.classList.remove('show');
-      
-      let current = null;
-      for (let i = 0; i < sectionTops.length; i++) {
-        if (scrollY >= sectionTops[i].top) current = sectionTops[i].id;
-      }
-      
-      dots.forEach(d => {
-        d.classList.toggle('active', d.getAttribute('href') === '#' + current);
-      });
-      ticking = false;
-    });
-  }
-  
-  window.addEventListener('load', calcTops);
-  window.addEventListener('resize', () => { calcTops(); updateToc(); });
-  window.addEventListener('scroll', updateToc, {passive: true});
-  calcTops();
-  updateToc();
-})();
-</script>
-"""
-        content = content.replace(old_toc.group(0), new_toc)
-        print("[OK] Fixed: Sticky TOC (Optimized Scroll)")
-
-    # ============================================================
-    # 4. FIX Z-INDEX & MODALS HIERARCHY
-    # ============================================================
-    z_index_fix = """
-<style id="zIndexAndModalFix">
-/* Strict Z-Index Hierarchy to prevent overlapping bugs */
-.site-header { z-index: 1000 !important; }
-.apple-dock { z-index: 900 !important; }
-.float-wa { z-index: 800 !important; }
-.modal { z-index: 9000 !important; }
-.search-modal { z-index: 9500 !important; }
-.exit-popup { z-index: 10000 !important; }
-
-/* Ensure exit popup clickability */
-.exit-popup { pointer-events: none; }
-.exit-popup.open { pointer-events: auto; }
-.exit-popup-overlay { pointer-events: auto; }
-.exit-popup-box { pointer-events: auto; }
-</style>
-"""
-    content = content.replace('</head>', z_index_fix + '\n</head>')
-    print("[OK] Fixed: Z-Index Hierarchy (Modals now appear ABOVE Header)")
-
-    # ============================================================
-    # 5. FIX SEARCH TOGGLE & THEME LOGIC (Dynamic UI)
-    # ============================================================
-    old_dynamic_script = re.search(r'<script id="dynamicUIScript">.*?</script>', content, flags=re.DOTALL)
-    if old_dynamic_script:
-        new_dynamic_script = """
-<script id="dynamicUIScript">
-(function() {
-  'use strict';
-
-  // 1. Search Modal Logic (Toggle & Fix)
-  var trigger = document.getElementById('searchTrigger');
-  var modal = document.getElementById('searchModal');
-  
-  if (trigger && modal) {
-    trigger.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation(); // Prevent event bubbling
-      
-      var isOpen = modal.classList.contains('open');
-      if (isOpen) {
-        modal.classList.remove('open');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-      } else {
-        modal.classList.add('open');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-        var input = document.getElementById('searchModalInput');
-        if (input) setTimeout(function() { input.focus(); }, 100);
-      }
-    });
     
-    // Close on overlay click or close button
-    modal.addEventListener('click', function(e) {
-      if (e.target === modal || e.target.hasAttribute('data-search-close') || e.target.closest('[data-search-close]')) {
-        modal.classList.remove('open');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-      }
-    });
-    
-    // ESC key to close
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && modal.classList.contains('open')) {
-        modal.classList.remove('open');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-      }
-    });
-  }
+    # A. Remove the expensive DOM-thrashing scroll fallback
+    old_reveal_fallback = re.search(r'/\* ✅ Fallback 1: افتح الأقسام في الـ viewport عند الـ scroll \*/.*?revealManualFallback\(\);', content, flags=re.DOTALL)
+    if old_reveal_fallback:
+        content = content.replace(old_reveal_fallback.group(0), '/* Fallback removed for performance */')
+        print("[OK] Removed: Scroll DOM-thrashing fallback")
 
-  // 2. Dynamic Header & Dock Theming (Optimized with rAF)
-  var header = document.getElementById('header');
-  var dock = document.getElementById('appleDock');
-  var darkSections = document.querySelectorAll('.hero, .bg-nile-blue, .bg-nile-blue-dark, #science, #consult, #turkey-rescue, #top-tier, #guarantees, #legal');
-  var darkRanges = [];
+    # B. Pause Three.js rendering when out of view
+    old_three_animate = re.search(r'if\(loading\) loading\.style\.display = \'none\';\s*function animate\(\)\{\s*requestAnimationFrame\(animate\);\s*controls\.update\(\);\s*renderer\.render\(scene, camera\);\s*\}\s*animate\(\);', content, flags=re.DOTALL)
+    if old_three_animate:
+        new_three_animate = """
+        if(loading) loading.style.display = 'none';
 
-  function calculateRanges() {
-    darkRanges = Array.from(darkSections).map(function(sec) {
-      var rect = sec.getBoundingClientRect();
-      var top = rect.top + window.scrollY;
-      return { top: top, bottom: top + rect.height };
-    });
-  }
+        // Pause 3D rendering when not in viewport to save CPU
+        let is3DVisible = false;
+        const obs3D = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            is3DVisible = entry.isIntersecting;
+            if (is3DVisible) animate();
+          });
+        }, { threshold: 0 });
+        obs3D.observe(container);
 
-  var themeTicking = false;
-  function updateTheme() {
-    if (themeTicking) return;
-    themeTicking = true;
-    requestAnimationFrame(function() {
-      var scrollY = window.scrollY;
-      
-      // Header Theme
-      var headerCenter = scrollY + 40; 
-      var isHeaderDark = darkRanges.some(function(r) { return headerCenter >= r.top && headerCenter <= r.bottom; });
-      if (header) {
-        header.classList.toggle('theme-dark', isHeaderDark);
-        header.classList.toggle('theme-light', !isHeaderDark);
-      }
-
-      // Dock Theme
-      var dockCenter = scrollY + window.innerHeight - 45;
-      var isDockDark = darkRanges.some(function(r) { return dockCenter >= r.top && dockCenter <= r.bottom; });
-      if (dock) {
-        dock.classList.toggle('theme-dark', isDockDark);
-        dock.classList.toggle('theme-light', !isDockDark);
-      }
-      
-      themeTicking = false;
-    });
-  }
-
-  window.addEventListener('load', calculateRanges);
-  window.addEventListener('resize', function() { calculateRanges(); updateTheme(); });
-  window.addEventListener('scroll', updateTheme, { passive: true });
-  
-  setTimeout(calculateRanges, 100);
-  setTimeout(updateTheme, 200);
-
-  // 3. Dock Active State
-  var dockItems = document.querySelectorAll('.dock-item[data-target]');
-  if (dockItems.length) {
-    var navSections = Array.from(dockItems).map(function(item) {
-      return { el: document.getElementById(item.getAttribute('data-target')), link: item };
-    }).filter(function(s) { return s.el !== null; });
-
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          dockItems.forEach(function(item) { item.classList.remove('active'); });
-          var activeItem = navSections.find(function(s) { return s.el === entry.target; });
-          if (activeItem) activeItem.link.classList.add('active');
+        function animate(){
+          if (!is3DVisible) return; // Stop infinite loop
+          requestAnimationFrame(animate);
+          controls.update();
+          renderer.render(scene, camera);
         }
-      });
-    }, { rootMargin: '-20% 0px -50% 0px', threshold: 0 });
+        """
+        content = content.replace(old_three_animate.group(0), new_three_animate)
+        print("[OK] Fixed: Three.js infinite rendering loop paused on scroll")
 
-    navSections.forEach(function(s) { observer.observe(s.el); });
-  }
-})();
-</script>
+    # C. Pause SVG Map animations when out of view
+    old_map_script = re.search(r'/\* ═══════════ DISCOVER EGYPT.*?render\(\'all\'\);\s*\}\)\(\);', content, flags=re.DOTALL)
+    # We add a specific SVG pauser at the end of body
+    svg_pauser = """
+    <script id="svgPerformanceFix">
+    (function(){
+      var mapWrap = document.querySelector('.world-map-wrap');
+      if(!mapWrap) return;
+      var svg = mapWrap.querySelector('svg');
+      if(!svg) return;
+      
+      var observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            if(svg.unpauseAnimations) svg.unpauseAnimations();
+          } else {
+            if(svg.pauseAnimations) svg.pauseAnimations();
+          }
+        });
+      }, { threshold: 0 });
+      observer.observe(mapWrap);
+    })();
+    </script>
+    """
+    content = content.replace('</body>', svg_pauser + '\n</body>')
+    print("[OK] Fixed: SVG Map animations pause when out of view")
+
+    # ============================================================
+    # 2. COMBINE HOTELS & ADD-ONS (UI Architecture Fix)
+    # ============================================================
+    # We will replace the entire #travel-addons section with a combined, better-engineered layout.
+    new_travel_addons = """
+<section id="travel-addons" class="section bg-white reveal">
+  <div class="container">
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <p class="eyebrow mb-4">Build Your Stay — Your Way</p>
+      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.75rem)">Unified Travel & Concierge Builder</h2>
+      <p class="text-nile-muted">Select your preferred hotel tier and add any concierge services. Prices are indicative for a standard 10-night stay and confirmed in writing after your clinical review.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      
+      <!-- LEFT: HOTELS -->
+      <div>
+        <div class="flex items-center gap-3 mb-6 border-b border-nile-gold/20 pb-3">
+          <span class="limited-badge" style="margin-bottom:0">Step 1</span>
+          <h3 class="font-serif text-nile-blue text-2xl">Select Hotel Tier (10 Nights)</h3>
+        </div>
+        
+        <div class="space-y-4">
+          <!-- 3 Star -->
+          <div class="card p-5 flex justify-between items-center border-l-4 border-gray-400">
+            <div>
+              <h4 class="font-serif text-nile-blue text-lg">3★ Hotel</h4>
+              <p class="text-nile-muted text-xs">Sheikh Zayed / New Cairo · Breakfast & Transfers</p>
+            </div>
+            <div class="text-right">
+              <p class="font-serif text-nile-gold text-xl">$700</p>
+              <p class="text-[10px] text-nile-muted uppercase">$70/night</p>
+            </div>
+          </div>
+          <!-- 4 Star -->
+          <div class="card p-5 flex justify-between items-center border-l-4 border-nile-gold bg-nile-gold/5">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-serif text-nile-blue text-lg">4★ Hotel</h4>
+                <span class="bg-nile-gold text-white text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Most Chosen</span>
+              </div>
+              <p class="text-nile-muted text-xs">Novotel / Hilton / Marriott · Breakfast & Transfers</p>
+            </div>
+            <div class="text-right">
+              <p class="font-serif text-nile-gold text-xl">$1,200</p>
+              <p class="text-[10px] text-nile-muted uppercase">$120/night</p>
+            </div>
+          </div>
+          <!-- 5 Star -->
+          <div class="card p-5 flex justify-between items-center border-l-4 border-nile-blue">
+            <div>
+              <h4 class="font-serif text-nile-blue text-lg">5★ Hotel</h4>
+              <p class="text-nile-muted text-xs">Four Seasons / Ritz-Carlton · Nile/Pyramids View</p>
+            </div>
+            <div class="text-right">
+              <p class="font-serif text-nile-gold text-xl">$2,500</p>
+              <p class="text-[10px] text-nile-muted uppercase">$250/night</p>
+            </div>
+          </div>
+          <!-- 5 Star Suite -->
+          <div class="card p-5 flex justify-between items-center border-l-4 border-nile-blue">
+            <div>
+              <h4 class="font-serif text-nile-blue text-lg">5★ Suite VIP</h4>
+              <p class="text-nile-muted text-xs">Four Seasons Nile Plaza / St. Regis · Private Chauffeur</p>
+            </div>
+            <div class="text-right">
+              <p class="font-serif text-nile-gold text-xl">$4,500</p>
+              <p class="text-[10px] text-nile-muted uppercase">$450/night</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: CONCIERGE ADD-ONS -->
+      <div>
+        <div class="flex items-center gap-3 mb-6 border-b border-nile-gold/20 pb-3">
+          <span class="limited-badge" style="margin-bottom:0">Step 2</span>
+          <h3 class="font-serif text-nile-blue text-2xl">Optional Concierge Add-Ons</h3>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Recovery Care -->
+          <div class="card p-5 flex justify-between items-center border-l-4 border-nile-gold">
+            <div>
+              <h4 class="font-serif text-nile-blue text-lg">Recovery Care</h4>
+              <p class="text-nile-muted text-xs">Daily nurse, physiotherapy, pharmacy delivery, chef meals.</p>
+            </div>
+            <div class="text-right">
+              <p class="font-serif text-nile-gold text-xl">+$1,700</p>
+              <p class="text-[10px] text-nile-muted uppercase">Per patient</p>
+            </div>
+          </div>
+          <!-- Premium Concierge -->
+          <div class="card p-5 flex justify-between items-center border-l-4 border-nile-gold bg-nile-gold/5">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-serif text-nile-blue text-lg">Premium Concierge</h4>
+                <span class="bg-nile-gold text-white text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Most Chosen</span>
+              </div>
+              <p class="text-nile-muted text-xs">Dedicated coordinator, unlimited transfers, Nile dinner cruise.</p>
+            </div>
+            <div class="text-right">
+              <p class="font-serif text-nile-gold text-xl">+$1,700</p>
+              <p class="text-[10px] text-nile-muted uppercase">Per patient</p>
+            </div>
+          </div>
+          <!-- Signature VIP -->
+          <div class="card p-5 flex justify-between items-center border-l-4 border-nile-blue">
+            <div>
+              <h4 class="font-serif text-nile-blue text-lg">Signature VIP Experience</h4>
+              <p class="text-nile-muted text-xs">Private chef, Giza tour, Luxor trip, personal shopper, yacht dinner.</p>
+            </div>
+            <div class="text-right">
+              <p class="font-serif text-nile-gold text-xl">+$3,000</p>
+              <p class="text-[10px] text-nile-muted uppercase">Per patient</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Examples -->
+    <div class="bg-nile-beige p-6 md:p-8 border border-nile-gold/20 mt-12 max-w-4xl mx-auto">
+      <h3 class="font-serif text-nile-blue text-xl mb-6 text-center">How to Combine (Examples)</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-nile-muted">
+        <div class="text-center bg-white p-4 border border-nile-gold/10">
+          <p class="font-semibold text-nile-blue mb-1">Budget-Conscious</p>
+          <p>3★ Hotel + No Add-on = <strong class="text-nile-gold">$700</strong></p>
+        </div>
+        <div class="text-center bg-white p-4 border border-nile-gold/10">
+          <p class="font-semibold text-nile-blue mb-1">Balanced</p>
+          <p>4★ Hotel + Premium Concierge = <strong class="text-nile-gold">$2,900</strong></p>
+        </div>
+        <div class="text-center bg-white p-4 border border-nile-gold/10">
+          <p class="font-semibold text-nile-blue mb-1">Full VIP</p>
+          <p>5★ Suite + Signature VIP = <strong class="text-nile-gold">$7,500</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 """
-        content = content.replace(old_dynamic_script.group(0), new_dynamic_script)
-        print("[OK] Fixed: Search Toggle & Theming Logic")
+    content = re.sub(r'<section id="travel-addons".*?</section>', new_travel_addons, content, flags=re.DOTALL)
+    print("[OK] UI Architecture: Hotels & Add-ons combined into a unified builder")
 
     # ============================================================
-    # 6. REMOVE REDUNDANT CLEANUP SCRIPTS
+    # 3. TURKEY RESCUE PRICING BREAKDOWN ($4,990)
     # ============================================================
-    content = re.sub(r'<script id="finalCleanup">.*?</script>', '', content, flags=re.DOTALL)
-    print("[OK] Removed redundant cleanup scripts")
+    # Insert an accordion explaining the $4,990 cost inside the turkey-rescue section.
+    turkey_breakdown = """
+    <!-- PRICE BREAKDOWN -->
+    <div class="mt-10 max-w-3xl mx-auto">
+      <details class="bg-white/5 border border-nile-gold/30 rounded-lg p-5 cursor-pointer group">
+        <summary class="font-serif text-nile-gold-bright text-lg flex justify-between items-center list-none">
+          <span>What does the $4,990 Full Rescue include? (Click to expand)</span>
+          <span class="text-2xl group-open:rotate-180 transition-transform">▾</span>
+        </summary>
+        <div class="mt-6 space-y-3 text-sm text-gray-300">
+          <div class="flex justify-between border-b border-white/10 pb-2">
+            <span>Atraumatic removal of failed implants</span>
+            <span class="font-bold text-white">$500</span>
+          </div>
+          <div class="flex justify-between border-b border-white/10 pb-2">
+            <span>Bone grafting / Socket preservation (if needed)</span>
+            <span class="font-bold text-white">$600 – $1,500</span>
+          </div>
+          <div class="flex justify-between border-b border-white/10 pb-2">
+            <span>New Premium Implant (Straumann / Nobel)</span>
+            <span class="font-bold text-white">$1,200</span>
+          </div>
+          <div class="flex justify-between border-b border-white/10 pb-2">
+            <span>New Zirconia Crown</span>
+            <span class="font-bold text-white">$800</span>
+          </div>
+          <div class="flex justify-between border-b border-white/10 pb-2">
+            <span>CBCT 3D Scan + Surgical Guide</span>
+            <span class="font-bold text-white">$200</span>
+          </div>
+          <div class="flex justify-between border-b border-white/10 pb-2">
+            <span>Clinical Labor & Follow-ups</span>
+            <span class="font-bold text-white">$500</span>
+          </div>
+          <div class="flex justify-between pt-2 text-nile-gold-bright text-lg font-bold">
+            <span>Total Estimated Value</span>
+            <span>$3,800 – $4,700+</span>
+          </div>
+          <p class="text-xs text-gray-400 italic mt-4">
+            * The $4,990 flat fee covers a complete single-tooth rescue (removal + grafting + new premium implant + crown). Complex full-arch rescues are quoted separately. This fee is fully deductible from your final treatment package if you decide to proceed with us.
+          </p>
+        </div>
+      </details>
+    </div>
+    """
+    
+    # Inject it just before the CTA in Turkey Rescue section
+    old_turkey_cta = re.search(r'<!-- CTA -->\s*<div class="text-center" style="display:flex;flex-direction:column;gap:.75rem;max-width:32rem;margin:0 auto">', content, flags=re.DOTALL)
+    if old_turkey_cta:
+        content = content.replace(old_turkey_cta.group(0), turkey_breakdown + '\n' + old_turkey_cta.group(0))
+        print("[OK] Added: Turkey Rescue pricing breakdown ($4,990)")
 
+    # Write back
     with open(path, 'w', encoding='utf-8') as f:
         f.write(content)
-    
-    print("\nSUCCESS! The website architecture is now stable.")
-    print("Please do a Hard Refresh (Ctrl+Shift+R) and test the site.")
+        
+    print("\nSUCCESS! Architecture and UI are now optimized.")
+    print("Please do a Hard Refresh (Ctrl+Shift+R).")
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python fix_architecture.py <path-to-html>")
+        print("Usage: python ultimate_fix.py <path-to-html>")
     else:
-        fix_architecture(sys.argv[1])
+        fix_site(sys.argv[1])
