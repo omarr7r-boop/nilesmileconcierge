@@ -2814,10 +2814,13 @@ section.bg-nile-beige .limited-badge,
 }
 </style>
 
+
+
+
 <style id="modernHeaderStyles">
 :root {
-  --header-bg: rgba(255, 255, 255, 0.75);
-  --header-border: rgba(255, 255, 255, 0.9);
+  --header-bg: rgba(10, 13, 16, 0.35); /* Dark transparent overlay */
+  --header-border: rgba(255, 255, 255, 0.15);
 }
 .site-header {
   position: fixed;
@@ -2828,18 +2831,18 @@ section.bg-nile-beige .limited-badge,
   max-width: 800px;
   z-index: 9999;
   background: var(--header-bg);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+  backdrop-filter: blur(8px) saturate(140%);
   border: 1px solid var(--header-border);
   border-radius: 50px;
-  box-shadow: 0 10px 30px rgba(31, 42, 54, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
 }
 .header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 64px;
+  min-height: 60px;
   padding: 0 1rem;
 }
 .logo {
@@ -2855,7 +2858,7 @@ section.bg-nile-beige .limited-badge,
 .logo-script {
   font-family: 'Italianno', cursive;
   font-size: 1.8rem;
-  color: #4F6070;
+  color: #F6F3EE; /* Light color for dark background */
   line-height: 0.9;
 }
 .logo-sub {
@@ -2869,19 +2872,18 @@ section.bg-nile-beige .limited-badge,
   font-size: 0.5rem;
   font-weight: 700;
   letter-spacing: 0.25em;
-  color: #4F6070;
+  color: #E8C88A; /* Gold */
   text-transform: uppercase;
 }
 .logo-tagline {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.35rem;
   letter-spacing: 0.12em;
-  color: #6B7D8E;
+  color: #B8C5D1;
   text-transform: uppercase;
   margin-top: 1px;
   opacity: 0.8;
 }
-.main-nav { display: none; }
 .header-actions {
   display: flex;
   align-items: center;
@@ -2896,86 +2898,111 @@ section.bg-nile-beige .limited-badge,
   height: 38px;
   border: none;
   background: transparent;
-  color: #4F6070;
+  color: #F6F3EE; /* Light icon */
   border-radius: 50%;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
 }
-.icon-btn:hover { background: rgba(174, 145, 100, 0.12); color: #AE9164; }
+.icon-btn:hover { background: rgba(255, 255, 255, 0.15); color: #E8C88A; }
 .header-cta {
   display: none;
   font-size: 0.65rem;
   padding: 0.55rem 1.1rem;
   white-space: nowrap;
-  border-radius: 50px; /* Pill shaped */
+  border-radius: 50px;
   font-weight: 700;
+  color: #1F2A36;
 }
-.menu-toggle {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 24px;
-  height: 16px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-.menu-toggle span {
-  display: block;
-  width: 100%;
-  height: 2px;
-  background: #4F6070;
-  border-radius: 2px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-.menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-.menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-.mobile-menu {
-  position: absolute;
-  top: calc(100% + 10px);
-  left: 0;
-  right: 0;
-  background: var(--header-bg);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--header-border);
-  border-radius: 20px;
-  padding: 1.25rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  animation: menuSlide 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  max-height: calc(100vh - 100px);
-  overflow-y: auto;
-}
-.mobile-menu[hidden] { display: none !important; }
-@keyframes menuSlide {
-  from { opacity: 0; transform: translateY(-8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.mobile-nav-list { list-style: none; margin: 0 0 1rem; padding: 0; }
-.mobile-nav-list .nav-link {
-  display: block;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(174, 145, 100, 0.12);
-  font-size: 0.8rem;
-  color: #4F6070;
-  text-decoration: none;
-  font-weight: 600;
-}
-.mobile-cta { width: 100%; justify-content: center; }
 @media (min-width: 768px) {
-  .main-nav { display: block; }
-  .menu-toggle { display: none; }
-  .header-cta { display: inline-flex; }
-  .mobile-menu { display: none !important; }
   .header-inner { padding: 0 1.5rem; }
   .logo-script { font-size: 2.2rem; }
   .logo { margin-left: 0; }
+  .header-cta { display: inline-flex; }
 }
-/* Adjust hero top padding for the floating header */
+/* Adjust hero top padding */
 .hero { padding-top: 8rem; }
 @media (max-width: 768px) { .hero { padding-top: 7rem; } }
+</style>
+
+
+<style id="appleDockStyles">
+.apple-dock {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  max-width: 400px;
+  height: 64px;
+  background: rgba(246, 243, 238, 0.85); /* Slightly more opaque for readability */
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 35px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.6);
+  z-index: 9990;
+  border: 1px solid rgba(255,255,255,0.5);
+  padding: 0 10px;
+}
+@media(min-width: 768px) {
+  .apple-dock {
+    max-width: 450px;
+  }
+}
+.dock-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  color: #6B7D8E;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  text-decoration: none;
+  position: relative;
+}
+.dock-item svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.8;
+  fill: none;
+  stroke: currentColor;
+}
+.dock-item:hover, .dock-item.active {
+  background: rgba(174, 145, 100, 0.15);
+  color: #AE9164;
+}
+.dock-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: #AE9164;
+  border-radius: 50%;
+}
+
+/* Gold WhatsApp Button */
+.dock-item.wa-btn {
+  background: linear-gradient(135deg, #AE9164, #E8C88A); /* Gold gradient */
+  color: #1F2A36; /* Dark text for contrast */
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(174, 145, 100, 0.4);
+}
+.dock-item.wa-btn:hover {
+  background: linear-gradient(135deg, #E8C88A, #AE9164);
+  color: #1F2A36;
+  transform: scale(1.05);
+}
+
+/* Ensure body has space for dock */
+body {
+  padding-bottom: 100px !important;
+}
 </style>
 
 </head>
@@ -2991,16 +3018,6 @@ section.bg-nile-beige .limited-badge,
       </span>
     </a>
 
-    <nav class="main-nav" aria-label="Primary">
-      <ul class="nav-list" style="display:flex; gap:1.25rem; list-style:none; margin:0; padding:0;">
-        <li><a href="#packages" class="nav-link" style="font-size:.7rem; font-weight:600; color:#4F6070; text-decoration:none;">Packages</a></li>
-        <li><a href="#results" class="nav-link" style="font-size:.7rem; font-weight:600; color:#4F6070; text-decoration:none;">Results</a></li>
-        <li><a href="#founder" class="nav-link" style="font-size:.7rem; font-weight:600; color:#4F6070; text-decoration:none;">Founder</a></li>
-        <li><a href="#guarantees" class="nav-link" style="font-size:.7rem; font-weight:600; color:#4F6070; text-decoration:none;">Guarantees</a></li>
-        <li><a href="#faq" class="nav-link" style="font-size:.7rem; font-weight:600; color:#4F6070; text-decoration:none;">FAQ</a></li>
-      </ul>
-    </nav>
-
     <div class="header-actions">
       <button type="button" id="darkModeToggle" class="icon-btn" aria-label="Toggle dark mode">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -3012,45 +3029,15 @@ section.bg-nile-beige .limited-badge,
           <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
       </button>
-      <!-- Changed from Free Review to Consult -->
       <a href="#consult" class="btn btn-gold header-cta">Consult</a>
-      <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
-        <span></span><span></span><span></span>
-      </button>
     </div>
-  </div>
-
-  <div id="mobileMenu" class="mobile-menu" hidden>
-    <ul class="mobile-nav-list">
-      <li><a href="#packages" class="nav-link">Packages</a></li>
-      <li><a href="#results" class="nav-link">Results</a></li>
-      <li><a href="#founder" class="nav-link">Founder</a></li>
-      <li><a href="#verify-us" class="nav-link">Verify Us</a></li>
-      <li><a href="#guarantees" class="nav-link">Guarantees</a></li>
-      <li><a href="#faq" class="nav-link">FAQ</a></li>
-    </ul>
-    <a href="#consult" class="btn btn-gold mobile-cta">Get My Consultation</a>
   </div>
 </header>
 
-<script id="modernHeaderScript">
-(function() {
-  var toggle = document.getElementById('menuToggle');
-  var menu = document.getElementById('mobileMenu');
-  if (!toggle || !menu) return;
-  function openMenu() { toggle.setAttribute('aria-expanded', 'true'); menu.hidden = false; }
-  function closeMenu() { toggle.setAttribute('aria-expanded', 'false'); menu.hidden = true; }
-  toggle.addEventListener('click', function() { toggle.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu(); });
-  var links = menu.querySelectorAll('a');
-  for (var i = 0; i < links.length; i++) links[i].addEventListener('click', closeMenu);
-  document.addEventListener('click', function(e) {
-    if (!menu.hidden && !menu.contains(e.target) && !toggle.contains(e.target)) closeMenu();
-  });
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && !menu.hidden) { closeMenu(); toggle.focus(); }
-  });
-})();
-</script>
+
+
+
+
 
 
 <!-- Quick bar disabled — handled by fixesBundle CSS -->
@@ -11771,84 +11758,7 @@ summary:focus-visible {
 
 
 
-<style id="appleDockStyles">
-.apple-dock {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 92%;
-  max-width: 400px;
-  height: 64px;
-  background: rgba(255, 255, 255, 0.8);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  backdrop-filter: blur(20px) saturate(180%);
-  border-radius: 35px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.6);
-  z-index: 9990;
-  border: 1px solid rgba(255,255,255,0.5);
-  padding: 0 10px;
-}
-@media(min-width: 768px) {
-  .apple-dock {
-    max-width: 450px;
-  }
-}
-.dock-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  color: #6B7D8E;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  text-decoration: none;
-  position: relative;
-}
-.dock-item svg {
-  width: 22px;
-  height: 22px;
-  stroke-width: 1.8;
-  fill: none;
-  stroke: currentColor;
-}
-.dock-item:hover, .dock-item.active {
-  background: rgba(174, 145, 100, 0.15);
-  color: #AE9164;
-}
-.dock-item.active::after {
-  content: '';
-  position: absolute;
-  bottom: 4px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 4px;
-  height: 4px;
-  background: #AE9164;
-  border-radius: 50%;
-}
-.dock-item.wa-btn {
-  background: #25D366;
-  color: #fff;
-  border-radius: 50%;
-  box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
-}
-.dock-item.wa-btn:hover {
-  background: #1EBE5A;
-  color: #fff;
-}
-body {
-  padding-bottom: 100px !important; /* Space for the dock */
-}
-/* Hide old sticky mobile */
-.sticky-mobile {
-  display: none !important;
-}
-</style>
+
 
 
 <nav class="apple-dock" id="appleDock">
@@ -11927,6 +11837,40 @@ body {
   sections.forEach(function(s) {
     observer.observe(s.el);
   });
+})();
+</script>
+
+
+<script id="searchScript">
+(function() {
+  var trigger = document.getElementById('searchTrigger');
+  var modal = document.getElementById('searchModal');
+  if (trigger && modal) {
+    trigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      var input = document.getElementById('searchModalInput');
+      if (input) setTimeout(function() { input.focus(); }, 100);
+    });
+    
+    // Close logic (overlay, ESC)
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal || e.target.hasAttribute('data-search-close')) {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('open')) {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+    });
+  }
 })();
 </script>
 
