@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Nile Smile — Ultimate Performance & UI Architecture Fix
-=======================================================
-1. Stops the 2-minute freezing (Three.js, SVG, Scroll Thrashing).
-2. Combines Hotel & Concierge Add-ons into a single unified UI.
-3. Adds a detailed breakdown for Turkey Rescue ($4,990).
+Nile Smile — Site Makeover & Performance Fix
+=============================================
+1. Fixes Scrolling Freeze (Removes custom JS smooth scroll)
+2. Reorders sections logically (AIDA funnel)
+3. Redesigns Travel Add-ons & Hotels (Combined UI)
 """
 
 import re
@@ -13,167 +13,138 @@ import shutil
 import sys
 from pathlib import Path
 
-def fix_site(html_path):
+def makeover_site(html_path):
     path = Path(html_path)
     if not path.exists():
         print(f"[X] File not found: {html_path}")
         return
 
-    shutil.copy2(path, str(path) + ".backup_ultimate")
-    print(f"[OK] Backup created: {path.name}.backup_ultimate\n")
+    shutil.copy2(path, str(path) + ".backup_makeover")
+    print(f"[OK] Backup created: {path.name}.backup_makeover\n")
 
     with open(path, 'r', encoding='utf-8') as f:
         content = f.read()
 
     # ============================================================
-    # 1. FIX SCROLL FREEZING (Performance Fixes)
+    # 1. REMOVE CUSTOM SMOOTH SCROLL (FIXES FREEZING)
     # ============================================================
-    
-    # A. Remove the expensive DOM-thrashing scroll fallback
-    old_reveal_fallback = re.search(r'/\* ✅ Fallback 1: افتح الأقسام في الـ viewport عند الـ scroll \*/.*?revealManualFallback\(\);', content, flags=re.DOTALL)
-    if old_reveal_fallback:
-        content = content.replace(old_reveal_fallback.group(0), '/* Fallback removed for performance */')
-        print("[OK] Removed: Scroll DOM-thrashing fallback")
-
-    # B. Pause Three.js rendering when out of view
-    old_three_animate = re.search(r'if\(loading\) loading\.style\.display = \'none\';\s*function animate\(\)\{\s*requestAnimationFrame\(animate\);\s*controls\.update\(\);\s*renderer\.render\(scene, camera\);\s*\}\s*animate\(\);', content, flags=re.DOTALL)
-    if old_three_animate:
-        new_three_animate = """
-        if(loading) loading.style.display = 'none';
-
-        // Pause 3D rendering when not in viewport to save CPU
-        let is3DVisible = false;
-        const obs3D = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            is3DVisible = entry.isIntersecting;
-            if (is3DVisible) animate();
-          });
-        }, { threshold: 0 });
-        obs3D.observe(container);
-
-        function animate(){
-          if (!is3DVisible) return; // Stop infinite loop
-          requestAnimationFrame(animate);
-          controls.update();
-          renderer.render(scene, camera);
-        }
-        """
-        content = content.replace(old_three_animate.group(0), new_three_animate)
-        print("[OK] Fixed: Three.js infinite rendering loop paused on scroll")
-
-    # C. Pause SVG Map animations when out of view
-    old_map_script = re.search(r'/\* ═══════════ DISCOVER EGYPT.*?render\(\'all\'\);\s*\}\)\(\);', content, flags=re.DOTALL)
-    # We add a specific SVG pauser at the end of body
-    svg_pauser = """
-    <script id="svgPerformanceFix">
-    (function(){
-      var mapWrap = document.querySelector('.world-map-wrap');
-      if(!mapWrap) return;
-      var svg = mapWrap.querySelector('svg');
-      if(!svg) return;
+    old_smooth_scroll = re.search(r'/\* ═════════ 6\. SMOOTH SCROLL — CINEMATIC ═════════ \*/.*?(?=/\* ═════════ 8\. HERO PARALLAX)', content, flags=re.DOTALL)
+    if old_smooth_scroll:
+        new_scroll = """
+  /* ═════════ 6. NATIVE SMOOTH SCROLL (Performance Fix) ═════════ */
+  // Custom JS smooth scroll removed to fix freezing with Dock buttons.
+  // Native CSS scroll-behavior: smooth handles this much better.
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if(!href || href === '#' || href === '#!') return;
+      const target = document.querySelector(href);
+      if(!target) return;
       
-      var observer = new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){
-          if(entry.isIntersecting){
-            if(svg.unpauseAnimations) svg.unpauseAnimations();
-          } else {
-            if(svg.pauseAnimations) svg.pauseAnimations();
-          }
-        });
-      }, { threshold: 0 });
-      observer.observe(mapWrap);
-    })();
-    </script>
-    """
-    content = content.replace('</body>', svg_pauser + '\n</body>')
-    print("[OK] Fixed: SVG Map animations pause when out of view")
+      // Close mobile menu if open
+      const menu = document.getElementById('mobileMenu');
+      const btn = document.getElementById('menuBtn');
+      if(menu && menu.classList.contains('open')){
+        menu.classList.remove('open');
+        if(btn) btn.classList.remove('open');
+      }
+      // Let the browser handle the scrolling naturally via CSS
+    });
+  });
+
+  """
+        content = content.replace(old_smooth_scroll.group(0), new_scroll)
+        print("[OK] Fixed: Removed custom JS smooth scroll (Prevents Freezing)")
 
     # ============================================================
-    # 2. COMBINE HOTELS & ADD-ONS (UI Architecture Fix)
+    # 2. REDESIGN TRAVEL ADD-ONS (Hotels & Concierge)
     # ============================================================
-    # We will replace the entire #travel-addons section with a combined, better-engineered layout.
     new_travel_addons = """
 <section id="travel-addons" class="section bg-white reveal">
   <div class="container">
-    <div class="text-center max-w-3xl mx-auto mb-12">
+    <div class="text-center max-w-3xl mx-auto mb-14">
       <p class="eyebrow mb-4">Build Your Stay — Your Way</p>
-      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.75rem)">Unified Travel & Concierge Builder</h2>
-      <p class="text-nile-muted">Select your preferred hotel tier and add any concierge services. Prices are indicative for a standard 10-night stay and confirmed in writing after your clinical review.</p>
+      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.75rem)">Hotels & Concierge Add-Ons</h2>
+      <p class="text-nile-muted" style="font-size:1.05rem">
+        <strong class="text-nile-blue">Clinical packages are treatment-only.</strong> Choose your preferred hotel and add any concierge services. Prices are indicative for a standard 10-night stay and confirmed in writing after your review.
+      </p>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
       
       <!-- LEFT: HOTELS -->
-      <div>
-        <div class="flex items-center gap-3 mb-6 border-b border-nile-gold/20 pb-3">
-          <span class="limited-badge" style="margin-bottom:0">Step 1</span>
-          <h3 class="font-serif text-nile-blue text-2xl">Select Hotel Tier (10 Nights)</h3>
+      <div class="bg-nile-beige p-6 md:p-8 rounded-lg border border-nile-gold/30 shadow-sm">
+        <div class="flex items-center gap-3 mb-6 border-b border-nile-gold/20 pb-4">
+          <span class="bg-nile-gold text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">1</span>
+          <h3 class="font-serif text-nile-blue text-2xl">Select Hotel Tier</h3>
         </div>
         
         <div class="space-y-4">
           <!-- 3 Star -->
-          <div class="card p-5 flex justify-between items-center border-l-4 border-gray-400">
+          <div class="bg-white p-5 rounded border-l-4 border-gray-400 shadow-sm flex justify-between items-center transition hover:shadow-md">
             <div>
               <h4 class="font-serif text-nile-blue text-lg">3★ Hotel</h4>
-              <p class="text-nile-muted text-xs">Sheikh Zayed / New Cairo · Breakfast & Transfers</p>
+              <p class="text-nile-muted text-xs">Sheikh Zayed / New Cairo</p>
+              <p class="text-[10px] text-gray-500 mt-1">✓ Breakfast & Airport Transfers</p>
             </div>
             <div class="text-right">
-              <p class="font-serif text-nile-gold text-xl">$700</p>
-              <p class="text-[10px] text-nile-muted uppercase">$70/night</p>
+              <p class="font-serif text-nile-gold text-2xl">$700</p>
+              <p class="text-[10px] text-nile-muted uppercase">10 nights</p>
             </div>
           </div>
           <!-- 4 Star -->
-          <div class="card p-5 flex justify-between items-center border-l-4 border-nile-gold bg-nile-gold/5">
+          <div class="bg-white p-5 rounded border-l-4 border-nile-gold shadow-md flex justify-between items-center relative transform scale-[1.02] transition hover:shadow-lg">
+            <div class="absolute top-0 right-0 bg-nile-gold text-white text-[8px] font-bold px-2 py-1 rounded-bl">Most Chosen</div>
             <div>
-              <div class="flex items-center gap-2 mb-1">
-                <h4 class="font-serif text-nile-blue text-lg">4★ Hotel</h4>
-                <span class="bg-nile-gold text-white text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Most Chosen</span>
-              </div>
-              <p class="text-nile-muted text-xs">Novotel / Hilton / Marriott · Breakfast & Transfers</p>
+              <h4 class="font-serif text-nile-blue text-lg">4★ Hotel</h4>
+              <p class="text-nile-muted text-xs">Novotel / Hilton / Marriott</p>
+              <p class="text-[10px] text-gray-500 mt-1">✓ Breakfast, Transfers & Priority Clinic</p>
             </div>
             <div class="text-right">
-              <p class="font-serif text-nile-gold text-xl">$1,200</p>
-              <p class="text-[10px] text-nile-muted uppercase">$120/night</p>
+              <p class="font-serif text-nile-gold text-2xl">$1,200</p>
+              <p class="text-[10px] text-nile-muted uppercase">10 nights</p>
             </div>
           </div>
           <!-- 5 Star -->
-          <div class="card p-5 flex justify-between items-center border-l-4 border-nile-blue">
+          <div class="bg-white p-5 rounded border-l-4 border-nile-blue shadow-sm flex justify-between items-center transition hover:shadow-md">
             <div>
               <h4 class="font-serif text-nile-blue text-lg">5★ Hotel</h4>
-              <p class="text-nile-muted text-xs">Four Seasons / Ritz-Carlton · Nile/Pyramids View</p>
+              <p class="text-nile-muted text-xs">Four Seasons / Ritz-Carlton</p>
+              <p class="text-[10px] text-gray-500 mt-1">✓ Nile/Pyramids View + Dedicated Concierge</p>
             </div>
             <div class="text-right">
-              <p class="font-serif text-nile-gold text-xl">$2,500</p>
-              <p class="text-[10px] text-nile-muted uppercase">$250/night</p>
+              <p class="font-serif text-nile-gold text-2xl">$2,500</p>
+              <p class="text-[10px] text-nile-muted uppercase">10 nights</p>
             </div>
           </div>
           <!-- 5 Star Suite -->
-          <div class="card p-5 flex justify-between items-center border-l-4 border-nile-blue">
+          <div class="bg-white p-5 rounded border-l-4 border-nile-blue shadow-sm flex justify-between items-center transition hover:shadow-md">
             <div>
               <h4 class="font-serif text-nile-blue text-lg">5★ Suite VIP</h4>
-              <p class="text-nile-muted text-xs">Four Seasons Nile Plaza / St. Regis · Private Chauffeur</p>
+              <p class="text-nile-muted text-xs">Four Seasons Nile Plaza / St. Regis</p>
+              <p class="text-[10px] text-gray-500 mt-1">✓ Panoramic Suite + Private Chauffeur</p>
             </div>
             <div class="text-right">
-              <p class="font-serif text-nile-gold text-xl">$4,500</p>
-              <p class="text-[10px] text-nile-muted uppercase">$450/night</p>
+              <p class="font-serif text-nile-gold text-2xl">$4,500</p>
+              <p class="text-[10px] text-nile-muted uppercase">10 nights</p>
             </div>
           </div>
         </div>
       </div>
 
       <!-- RIGHT: CONCIERGE ADD-ONS -->
-      <div>
-        <div class="flex items-center gap-3 mb-6 border-b border-nile-gold/20 pb-3">
-          <span class="limited-badge" style="margin-bottom:0">Step 2</span>
-          <h3 class="font-serif text-nile-blue text-2xl">Optional Concierge Add-Ons</h3>
+      <div class="bg-nile-beige p-6 md:p-8 rounded-lg border border-nile-gold/30 shadow-sm">
+        <div class="flex items-center gap-3 mb-6 border-b border-nile-gold/20 pb-4">
+          <span class="bg-nile-gold text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">2</span>
+          <h3 class="font-serif text-nile-blue text-2xl">Add Concierge Services</h3>
         </div>
 
         <div class="space-y-4">
           <!-- Recovery Care -->
-          <div class="card p-5 flex justify-between items-center border-l-4 border-nile-gold">
+          <div class="bg-white p-5 rounded border-l-4 border-nile-gold shadow-sm flex justify-between items-center transition hover:shadow-md">
             <div>
               <h4 class="font-serif text-nile-blue text-lg">Recovery Care</h4>
-              <p class="text-nile-muted text-xs">Daily nurse, physiotherapy, pharmacy delivery, chef meals.</p>
+              <p class="text-nile-muted text-xs">Nurse, physio, pharmacy delivery</p>
             </div>
             <div class="text-right">
               <p class="font-serif text-nile-gold text-xl">+$1,700</p>
@@ -181,13 +152,11 @@ def fix_site(html_path):
             </div>
           </div>
           <!-- Premium Concierge -->
-          <div class="card p-5 flex justify-between items-center border-l-4 border-nile-gold bg-nile-gold/5">
+          <div class="bg-white p-5 rounded border-l-4 border-nile-gold shadow-md flex justify-between items-center relative transform scale-[1.02] transition hover:shadow-lg">
+            <div class="absolute top-0 right-0 bg-nile-gold text-white text-[8px] font-bold px-2 py-1 rounded-bl">Most Chosen</div>
             <div>
-              <div class="flex items-center gap-2 mb-1">
-                <h4 class="font-serif text-nile-blue text-lg">Premium Concierge</h4>
-                <span class="bg-nile-gold text-white text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Most Chosen</span>
-              </div>
-              <p class="text-nile-muted text-xs">Dedicated coordinator, unlimited transfers, Nile dinner cruise.</p>
+              <h4 class="font-serif text-nile-blue text-lg">Premium Concierge</h4>
+              <p class="text-nile-muted text-xs">Coordinator, transfers, Nile cruise</p>
             </div>
             <div class="text-right">
               <p class="font-serif text-nile-gold text-xl">+$1,700</p>
@@ -195,10 +164,10 @@ def fix_site(html_path):
             </div>
           </div>
           <!-- Signature VIP -->
-          <div class="card p-5 flex justify-between items-center border-l-4 border-nile-blue">
+          <div class="bg-white p-5 rounded border-l-4 border-nile-blue shadow-sm flex justify-between items-center transition hover:shadow-md">
             <div>
-              <h4 class="font-serif text-nile-blue text-lg">Signature VIP Experience</h4>
-              <p class="text-nile-muted text-xs">Private chef, Giza tour, Luxor trip, personal shopper, yacht dinner.</p>
+              <h4 class="font-serif text-nile-blue text-lg">Signature VIP</h4>
+              <p class="text-nile-muted text-xs">Private chef, tours, yacht dinner</p>
             </div>
             <div class="text-right">
               <p class="font-serif text-nile-gold text-xl">+$3,000</p>
@@ -211,20 +180,20 @@ def fix_site(html_path):
     </div>
 
     <!-- Examples -->
-    <div class="bg-nile-beige p-6 md:p-8 border border-nile-gold/20 mt-12 max-w-4xl mx-auto">
-      <h3 class="font-serif text-nile-blue text-xl mb-6 text-center">How to Combine (Examples)</h3>
+    <div class="bg-nile-gold/10 border border-nile-gold/30 p-6 md:p-8 mt-10 max-w-4xl mx-auto rounded-lg text-center">
+      <h3 class="font-serif text-nile-blue text-xl mb-6">How to Combine (Examples)</h3>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-nile-muted">
-        <div class="text-center bg-white p-4 border border-nile-gold/10">
+        <div class="bg-white p-4 border border-nile-gold/20 shadow-sm rounded">
           <p class="font-semibold text-nile-blue mb-1">Budget-Conscious</p>
-          <p>3★ Hotel + No Add-on = <strong class="text-nile-gold">$700</strong></p>
+          <p>3★ Hotel + No Add-on = <strong class="text-nile-gold text-lg">$700</strong></p>
         </div>
-        <div class="text-center bg-white p-4 border border-nile-gold/10">
+        <div class="bg-white p-4 border border-nile-gold/40 shadow-md rounded transform scale-105">
           <p class="font-semibold text-nile-blue mb-1">Balanced</p>
-          <p>4★ Hotel + Premium Concierge = <strong class="text-nile-gold">$2,900</strong></p>
+          <p>4★ Hotel + Premium Concierge = <strong class="text-nile-gold text-lg">$2,900</strong></p>
         </div>
-        <div class="text-center bg-white p-4 border border-nile-gold/10">
+        <div class="bg-white p-4 border border-nile-gold/20 shadow-sm rounded">
           <p class="font-semibold text-nile-blue mb-1">Full VIP</p>
-          <p>5★ Suite + Signature VIP = <strong class="text-nile-gold">$7,500</strong></p>
+          <p>5★ Suite + Signature VIP = <strong class="text-nile-gold text-lg">$7,500</strong></p>
         </div>
       </div>
     </div>
@@ -232,72 +201,81 @@ def fix_site(html_path):
 </section>
 """
     content = re.sub(r'<section id="travel-addons".*?</section>', new_travel_addons, content, flags=re.DOTALL)
-    print("[OK] UI Architecture: Hotels & Add-ons combined into a unified builder")
+    print("[OK] Redesigned: Travel Add-ons & Hotels UI")
 
     # ============================================================
-    # 3. TURKEY RESCUE PRICING BREAKDOWN ($4,990)
+    # 3. REORDER SECTIONS (AIDA FUNNEL)
     # ============================================================
-    # Insert an accordion explaining the $4,990 cost inside the turkey-rescue section.
-    turkey_breakdown = """
-    <!-- PRICE BREAKDOWN -->
-    <div class="mt-10 max-w-3xl mx-auto">
-      <details class="bg-white/5 border border-nile-gold/30 rounded-lg p-5 cursor-pointer group">
-        <summary class="font-serif text-nile-gold-bright text-lg flex justify-between items-center list-none">
-          <span>What does the $4,990 Full Rescue include? (Click to expand)</span>
-          <span class="text-2xl group-open:rotate-180 transition-transform">▾</span>
-        </summary>
-        <div class="mt-6 space-y-3 text-sm text-gray-300">
-          <div class="flex justify-between border-b border-white/10 pb-2">
-            <span>Atraumatic removal of failed implants</span>
-            <span class="font-bold text-white">$500</span>
-          </div>
-          <div class="flex justify-between border-b border-white/10 pb-2">
-            <span>Bone grafting / Socket preservation (if needed)</span>
-            <span class="font-bold text-white">$600 – $1,500</span>
-          </div>
-          <div class="flex justify-between border-b border-white/10 pb-2">
-            <span>New Premium Implant (Straumann / Nobel)</span>
-            <span class="font-bold text-white">$1,200</span>
-          </div>
-          <div class="flex justify-between border-b border-white/10 pb-2">
-            <span>New Zirconia Crown</span>
-            <span class="font-bold text-white">$800</span>
-          </div>
-          <div class="flex justify-between border-b border-white/10 pb-2">
-            <span>CBCT 3D Scan + Surgical Guide</span>
-            <span class="font-bold text-white">$200</span>
-          </div>
-          <div class="flex justify-between border-b border-white/10 pb-2">
-            <span>Clinical Labor & Follow-ups</span>
-            <span class="font-bold text-white">$500</span>
-          </div>
-          <div class="flex justify-between pt-2 text-nile-gold-bright text-lg font-bold">
-            <span>Total Estimated Value</span>
-            <span>$3,800 – $4,700+</span>
-          </div>
-          <p class="text-xs text-gray-400 italic mt-4">
-            * The $4,990 flat fee covers a complete single-tooth rescue (removal + grafting + new premium implant + crown). Complex full-arch rescues are quoted separately. This fee is fully deductible from your final treatment package if you decide to proceed with us.
-          </p>
-        </div>
-      </details>
-    </div>
-    """
-    
-    # Inject it just before the CTA in Turkey Rescue section
-    old_turkey_cta = re.search(r'<!-- CTA -->\s*<div class="text-center" style="display:flex;flex-direction:column;gap:.75rem;max-width:32rem;margin:0 auto">', content, flags=re.DOTALL)
-    if old_turkey_cta:
-        content = content.replace(old_turkey_cta.group(0), turkey_breakdown + '\n' + old_turkey_cta.group(0))
-        print("[OK] Added: Turkey Rescue pricing breakdown ($4,990)")
+    # Extract all sections
+    section_pattern = re.compile(r'(<section id="([^"]+)".*?</section>)', re.DOTALL)
+    sections = {}
+    for match in section_pattern.finditer(content):
+        sec_id = match.group(2)
+        sec_html = match.group(1)
+        sections[sec_id] = sec_html
 
-    # Write back
+    # Define New Order
+    NEW_ORDER = [
+        # 1. HOOK & PRICE
+        'price-anchor', 'top-tier',
+        # 2. AUTHORITY & PROOF
+        'trust-stats', 'trust', 'founder', 'verify-us', 'results',
+        # 3. THE OFFER (PRICES)
+        'packages', 'savings', 'estimator',
+        # 4. COMPARISON
+        'comparison', 'destination-deep-dive',
+        # 5. MECHANISM (WHY IT WORKS)
+        'science', 'implant-systems', 'technology-stack', 'comfort', 'team',
+        # 6. EDUCATION (WHY NOT CHEAP)
+        'brutal-truth', 'cost-of-cheap', 'surface-material', 'clinical-protocol', 'why-prices', 'why-egypt', 'academic',
+        # 7. RISK REVERSAL
+        'guarantees', 'warranty-truth', 'implant-passport', 'peace-of-mind',
+        # 8. OBJECTIONS & FAQ
+        'risks', 'expectations', 'who-for', 'faq',
+        # 9. JOURNEY & LOGISTICS
+        'journey', 'timeline', 'recovery', 'travel', 'travel-addons',
+        # 10. TOURISM
+        'curated-tours', 'discover-egypt', 'location',
+        # 11. EXTRA INFO
+        'reviews', 'turkey-rescue', 'payment', 'doctor-credentials', 'bone-graft', 'crown-materials', 'orthodontics',
+        # 12. LEGAL & ACTION
+        'legal', 'consult'
+    ]
+
+    # Get the main content
+    main_match = re.search(r'(<main id="main">)(.*?)(</main>)', content, flags=re.DOTALL)
+    if main_match:
+        # We need to preserve the Hero section as it has no ID (it's `<section class="hero">`)
+        hero_match = re.search(r'(<section class="hero">.*?</section>)', main_match.group(2), flags=re.DOTALL)
+        hero_html = hero_match.group(1) if hero_match else ""
+        
+        new_main_content = hero_html + "\n"
+        
+        for sec_id in NEW_ORDER:
+            if sec_id in sections:
+                new_main_content += sections[sec_id] + "\n"
+                
+        # Add any missing sections that were in the original but not in NEW_ORDER
+        for sec_id, sec_html in sections.items():
+            if sec_id not in NEW_ORDER:
+                new_main_content += sec_html + "\n"
+
+        content = content.replace(main_match.group(0), f"<main id=\"main\">\n{new_main_content}\n</main>")
+        print("[OK] Reordered: Sections logically (AIDA funnel)")
+
+    # ============================================================
+    # 4. WRITE BACK
+    # ============================================================
     with open(path, 'w', encoding='utf-8') as f:
         f.write(content)
         
-    print("\nSUCCESS! Architecture and UI are now optimized.")
-    print("Please do a Hard Refresh (Ctrl+Shift+R).")
+    print("\nSUCCESS! Site is optimized.")
+    print("1. Freezing issue resolved.")
+    print("2. Travel Add-ons redesigned.")
+    print("3. Sections reordered.")
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python ultimate_fix.py <path-to-html>")
+        print("Usage: python site_makeover.py <path-to-html>")
     else:
-        fix_site(sys.argv[1])
+        makeover_site(sys.argv[1])
