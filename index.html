@@ -12016,12 +12016,21 @@ summary:focus-visible {
 }
 </style>
 <!-- ═══════════════════════════════════════════════════════════════
-     NILE SMILE — THE ABSOLUTE FINAL OVERRIDE (v11.0)
+     NILE SMILE — THE NUCLEAR FIX (v12.0) - DO NOT REMOVE
      ═══════════════════════════════════════════════════════════════ -->
-<style id="ZK_ULTIMATE_FIX_V11">
-  /* 1. الهيدر: زجاجي، نضيف، وصغير (زي الصورة) */
+<style id="ZK_NUCLEAR_V12">
+  /* 1. إخفاء الهيدر القديم نهائياً */
+  .site-header, #header { 
+    display: none !important; 
+  }
+
+  /* 2. إظهار الهيدر الجديد (الزجاجي) وإجباره على الظهور */
   #liquidGlassHeader {
-    background: rgba(255, 255, 255, 0.7) !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(-50%) translateY(0) !important;
+    background: rgba(255, 255, 255, 0.75) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
     border-radius: 50px !important;
@@ -12033,11 +12042,12 @@ summary:focus-visible {
     border: 1px solid rgba(255, 255, 255, 0.8) !important;
     box-shadow: 0 10px 30px rgba(31, 42, 54, 0.1) !important;
   }
+
   #liquidGlassHeader .lgh-inner {
     padding: 0.4rem 1.2rem !important;
   }
   
-  /* 2. اللوجو والسلوغان (تحت Concierge) */
+  /* 3. اللوجو (تحت بعضه) */
   .lgh-logo {
     display: flex !important;
     flex-direction: column !important;
@@ -12059,7 +12069,7 @@ summary:focus-visible {
     letter-spacing: 0.1em !important;
   }
 
-  /* 3. مسح البوكس الغامق اللي في الـ Hero نهائياً */
+  /* 4. تدمير البوكس الغامق بتاع الهيرو */
   .hero-content {
     background: transparent !important;
     backdrop-filter: none !important;
@@ -12067,19 +12077,18 @@ summary:focus-visible {
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
+    max-width: 100% !important;
   }
 
-  /* 4. أزرار الـ Hero (زي الصورة المرجعية بالظبط: زر ذهبي عريض + لينك نصي تحته) */
-  .hero-content .flex.flex-col.sm\:flex-row {
+  /* 5. الأزرار (عكس اللي في الصورة) */
+  .hero-content > div.flex.flex-col.sm\:flex-row {
     flex-direction: column !important;
-    width: 100% !important;
     max-width: 26rem !important;
     margin: 0 auto !important;
-    gap: 1.5rem !important;
+    gap: 1.2rem !important;
   }
   
-  /* الزر الأساسي (Get My Free Treatment Plan) */
-  .hero-content a[href="#consult"] {
+  .hero-content #heroMainCta {
     width: 100% !important;
     border-radius: 100px !important;
     padding: 1.2rem 1rem !important;
@@ -12088,7 +12097,6 @@ summary:focus-visible {
     box-shadow: 0 10px 30px rgba(174, 145, 100, 0.4) !important;
   }
   
-  /* الزر الثانوي (Turkey Rescue) */
   .hero-content a[href="#turkey-rescue"] {
     width: auto !important;
     background: transparent !important;
@@ -12102,55 +12110,50 @@ summary:focus-visible {
     min-height: auto !important;
     letter-spacing: 0.1em !important;
   }
-  .hero-content a[href="#turkey-rescue"]:hover {
-    color: #E8C88A !important;
-    border-bottom-color: #E8C88A !important;
-  }
 
-  /* 5. الدوك السفلي: تصليح زر الواتساب (شفاف بحدود ذهبية) */
-  .dock-item[href*="wa.me"] {
+  /* 6. زر الواتساب في الدوك (شفاف وذهبي) */
+  #appleDock .dock-item[href*="wa.me"] {
     background: rgba(255, 255, 255, 0.5) !important;
     border: 1.5px solid #AE9164 !important;
     color: #AE9164 !important;
     box-shadow: none !important;
+    border-radius: 50% !important;
   }
-  .dock-item[href*="wa.me"] svg {
+  #appleDock .dock-item[href*="wa.me"] svg {
     fill: #AE9164 !important;
     color: #AE9164 !important;
-    width: 22px !important; 
-    height: 22px !important;
-  }
-  .dock-item[href*="wa.me"]:hover {
-    background: rgba(174, 145, 100, 0.15) !important;
-    transform: scale(1.05) !important;
   }
 </style>
 
-<script id="ZK_ULTIMATE_FIX_V11_JS">
+<script id="ZK_NUCLEAR_V12_JS">
 (function() {
     'use strict';
     
-    // مسح أي ستايل مكتوب بشكل inline في الـ HTML بيبوظ الهيرو
-    var heroContent = document.querySelector('.hero-content');
-    if (heroContent) {
-        heroContent.style.background = 'transparent';
-        heroContent.style.backdropFilter = 'none';
-        heroContent.style.border = 'none';
-        heroContent.style.boxShadow = 'none';
-        heroContent.style.padding = '0';
-    }
-
-    // إجبار زر الواتساب في الدوك إنه يبقى ذهبي وميتلونش أخضر
-    function enforceDockDesign() {
-        var dock = document.getElementById('appleDock');
-        if (!dock) return;
+    // دالة همجية بتمسح الستايل القديم من الـ DOM كل ما السكريبتات القديمة تحاول ترجعه
+    function enforceDesign() {
+        // 1. مسح ستايل البوكس الغامق
+        var heroBox = document.querySelector('.hero-content');
+        if (heroBox && heroBox.hasAttribute('style')) {
+            heroBox.removeAttribute('style');
+        }
         
-        var waBtn = dock.querySelector('.dock-item[href*="wa.me"]');
+        // 2. إخفاء الهيدر القديم
+        var oldHeader = document.getElementById('header');
+        if (oldHeader) oldHeader.style.display = 'none';
+
+        // 3. إظهار الهيدر الجديد
+        var newHeader = document.getElementById('liquidGlassHeader');
+        if (newHeader) {
+            newHeader.style.display = 'block';
+            newHeader.classList.add('is-visible');
+        }
+
+        // 4. تعديل زر الواتساب في الدوك
+        var waBtn = document.querySelector('#appleDock .dock-item[href*="wa.me"]');
         if (waBtn) {
             waBtn.style.setProperty('background', 'rgba(255, 255, 255, 0.5)', 'important');
             waBtn.style.setProperty('border', '1.5px solid #AE9164', 'important');
             waBtn.style.setProperty('color', '#AE9164', 'important');
-            
             var svg = waBtn.querySelector('svg');
             if (svg) {
                 svg.style.setProperty('fill', '#AE9164', 'important');
@@ -12159,11 +12162,11 @@ summary:focus-visible {
         }
     }
 
-    // تشغيل الدالة فوراً وبعد فترات عشان نلغي أي سكريبت تاني بيحاول يغيره
-    enforceDockDesign();
-    setTimeout(enforceDockDesign, 500);
-    setTimeout(enforceDockDesign, 1500);
-    setTimeout(enforceDockDesign, 3000);
+    // تشغيل فوري
+    enforceDesign();
+    
+    // تشغيل متكرر عشان نكسر أي سكريبت تاني (زي السكريبتات اللي بتعمل Animation)
+    setInterval(enforceDesign, 500); 
 })();
 </script>
 </body>
