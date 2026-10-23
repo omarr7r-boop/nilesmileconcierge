@@ -14903,75 +14903,200 @@ textarea:focus-visible,
      NILE SMILE — ULTIMATE FIX v5.0 (FINAL — DO NOT ADD ANYTHING AFTER)
      يحل: الهيدر، الفورم، الألوان، الأقسام، السكرول، الدوك
      ═══════════════════════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════════════════════
+     NILE SMILE — MOBILE FIX v6.0 (SINGLE SOURCE OF TRUTH)
+     يحل: القائمة، تداخل واتساب مع الدوك، الأزرار، زر الإغلاق
+     ═══════════════════════════════════════════════════════════════ -->
 <style id="ZK_ULTIMATE_V5">
-  /* ═══════════════════════════════════════════════════════════
-     1. حل مشكلة تداخل الهيدر مع المودالات (Z-Index & Overlap)
-     ═══════════════════════════════════════════════════════════ */
-  /* رفع طبقة المودالات فوق الهيدر لضمان ظهور زر الإغلاق (X) */
-  .exit-popup, .modal, .search-modal { 
-    z-index: 10005 !important; 
+  /* ═══════════════════════════════════════════════════════
+     1. Z-INDEX STACK — المودالات فوق الهيدر (WCAG 2.2)
+     ═══════════════════════════════════════════════════════ */
+  #liquidGlassHeader {
+    z-index: 9999 !important;
   }
-  /* إزاحة المودال للأسفل قليلاً لضمان عدم اختباء زر X خلف الهيدر */
-  .exit-popup { 
-    padding-top: 90px !important; 
-    align-items: flex-start !important; 
+  #appleDock {
+    z-index: 9998 !important;
   }
-  #liquidGlassHeader { 
-    z-index: 9999 !important; 
+  .exit-popup, .modal, .search-modal {
+    z-index: 10005 !important;
   }
 
-  /* ═══════════════════════════════════════════════════════════
-     2. إخفاء زر الهامبرجر (القائمة العلوية) والاعتماد على الـ Dock
-     ═══════════════════════════════════════════════════════════ */
-  /* نخفي زر الهامبرجر على الموبايل لتجنب التشتت */
+  /* Modal يجب ألا يغطي زر الإغلاق */
+  .exit-popup {
+    padding-top: 100px !important;
+    align-items: flex-start !important;
+  }
+  .exit-popup-box {
+    max-height: calc(100vh - 130px) !important;
+    overflow-y: auto !important;
+  }
+  .exit-popup-close {
+    top: 0.75rem !important;
+    right: 0.75rem !important;
+    z-index: 10 !important;
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     2. إخفاء الهامبرجر والقائمة المنسدلة على الموبايل
+     (الدوك السفلي يقوم بدور التنقل — لا ازدواجية)
+     ═══════════════════════════════════════════════════════ */
   @media (max-width: 1023px) {
-    .lgh-hamburger { 
-      display: none !important; 
+    #liquidGlassHeader .lgh-hamburger,
+    #liquidGlassHeader .lgh-mobile-menu {
+      display: none !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      width: 0 !important;
+      height: 0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: 0 !important;
+      overflow: hidden !important;
     }
-    /* ضبط مساحة الهيدر لاستيعاب اللوجو وزر Free Review فقط */
-    #liquidGlassHeader .lgh-inner { 
-      justify-content: space-between !important; 
-      padding: 0.5rem 1rem !important; 
+
+    /* الهيدر: لوجو شمال + CTA يمين — مساحة مريحة */
+    #liquidGlassHeader .lgh-inner {
+      justify-content: space-between !important;
+      padding: 0.55rem 1rem !important;
+      gap: 0.5rem !important;
+    }
+
+    /* إظهار زر Free Review في الهيدر */
+    #liquidGlassHeader .lgh-mobile-actions {
+      display: flex !important;
+      align-items: center !important;
+      gap: 0 !important;
+    }
+    #liquidGlassHeader .lgh-mobile-actions .lgh-cta {
+      display: inline-flex !important;
+      padding: 0.55rem 0.95rem !important;
+      font-size: 0.58rem !important;
+      letter-spacing: 0.1em !important;
     }
   }
 
-  /* ═══════════════════════════════════════════════════════════
-     3. تحسين تصميم الأزرار (Hero Buttons) على الموبايل
-     ═══════════════════════════════════════════════════════════ */
+  /* ═══════════════════════════════════════════════════════
+     3. الدوك السفلي + واتساب — بدون تداخل
+     ═══════════════════════════════════════════════════════ */
   @media (max-width: 767px) {
-    /* جعل الأزرار تأخذ عرض الشاشة بالكامل لتسهيل النقر (44px min height) */
-    .hero-content .flex.flex-col.sm\:flex-row { 
-      flex-direction: column !important; 
-      gap: 12px !important; 
-      width: 100% !important; 
+    /* الدوك في الأسفل مع دعم Safe Area (iPhone Notch) */
+    #appleDock {
+      bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
     }
-    .hero-content .btn { 
-      width: 100% !important; 
-      min-height: 48px !important; /* معيار اللمس المريح */
+
+    /* إخفاء زر الواتساب العائم (يتداخل مع الدوك) */
+    .float-wa {
+      display: none !important;
+    }
+
+    /* تحويل الشريط السفلي لزر واتساب واحد أنيق فوق الدوك */
+    .sticky-mobile {
+      bottom: calc(78px + env(safe-area-inset-bottom, 0px)) !important;
+      left: 1rem !important;
+      right: 1rem !important;
+      border-radius: 100px !important;
+      padding: 0 !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      display: flex !important;
       justify-content: center !important;
     }
+
+    /* إخفاء زر الاتصال — نبقى على واتساب فقط */
+    .sticky-mobile a[href^="tel:"] {
+      display: none !important;
+    }
+
+    /* زر واتساب أنيق بعرض مناسب */
+    .sticky-mobile a[href*="wa.me"] {
+      border-radius: 100px !important;
+      min-height: 52px !important;
+      padding: 0.85rem 1.75rem !important;
+      font-size: 0.7rem !important;
+      letter-spacing: 0.08em !important;
+      box-shadow: 0 8px 28px rgba(37, 211, 102, 0.45) !important;
+      animation: waPulseMobile 2.6s ease-in-out infinite !important;
+    }
+
+    body {
+      padding-bottom: 0 !important;
+    }
   }
 
-  /* ═══════════════════════════════════════════════════════════
-     4. الهيدر الزجاجي الفخم (Glassmorphism) مع الحفاظ على اللوجو
-     ═══════════════════════════════════════════════════════════ */
+  @keyframes waPulseMobile {
+    0%, 100% { box-shadow: 0 8px 28px rgba(37, 211, 102, 0.45); }
+    50%      { box-shadow: 0 10px 36px rgba(37, 211, 102, 0.7), 0 0 0 8px rgba(37, 211, 102, 0.12); }
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     4. أزرار الـ Hero — وفق أفضل ممارسات 2026
+     • touch target ≥ 48px
+     • عرض كامل على الموبايل
+     • تسلسل هرمي واضح (Primary vs Secondary)
+     ═══════════════════════════════════════════════════════ */
+  @media (max-width: 767px) {
+    .hero-content .flex.flex-col.sm\:flex-row {
+      flex-direction: column !important;
+      gap: 10px !important;
+      width: 100% !important;
+    }
+
+    .hero-content .btn {
+      width: 100% !important;
+      min-height: 52px !important;
+      padding: 1rem 1.5rem !important;
+      font-size: 0.72rem !important;
+      letter-spacing: 0.12em !important;
+      justify-content: center !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Primary: ذهبي صلب + ظل واضح */
+    .hero-content a[href="#consult"] {
+      display: flex !important;
+      order: 1 !important;
+      box-shadow: 0 8px 24px rgba(174, 145, 100, 0.4) !important;
+    }
+
+    /* Secondary: Outline خفيف، أهدأ بصريًا */
+    .hero-content a[href="#turkey-rescue"] {
+      display: flex !important;
+      order: 2 !important;
+      background: transparent !important;
+      border: 1.5px solid rgba(232, 200, 138, 0.4) !important;
+      color: rgba(232, 200, 138, 0.85) !important;
+      font-size: 0.66rem !important;
+      min-height: 48px !important;
+      box-shadow: none !important;
+    }
+
+    .hero-content a[href="#turkey-rescue"]:active {
+      background: rgba(232, 200, 138, 0.1) !important;
+      color: #E8C88A !important;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     5. الهيدر الزجاجي — هوية ذهبية محفوظة
+     ═══════════════════════════════════════════════════════ */
   #liquidGlassHeader:not(.on-dark) {
-    background: rgba(255, 255, 255, 0.55) !important; /* شفافية عالية */
+    background: rgba(255, 255, 255, 0.62) !important;
     backdrop-filter: blur(24px) saturate(180%) !important;
     -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.6) !important;
-    box-shadow: 0 8px 32px rgba(31, 42, 54, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.55) !important;
+    box-shadow: 0 8px 32px rgba(31, 42, 54, 0.10) !important;
   }
   #liquidGlassHeader.on-dark {
-    background: rgba(10, 13, 16, 0.55) !important;
+    background: rgba(10, 13, 16, 0.62) !important;
     backdrop-filter: blur(24px) saturate(180%) !important;
     -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-    border: 1px solid rgba(232, 200, 138, 0.2) !important;
+    border: 1px solid rgba(232, 200, 138, 0.22) !important;
   }
 
-  /* ═══════════════════════════════════════════════════════════
-     5. حركة اللمعة الذهبية للوجو كل 16 ثانية (Gold Sweep)
-     ═══════════════════════════════════════════════════════════ */
+  /* ═══════════════════════════════════════════════════════
+     6. حركة اللمعة الذهبية للوجو (16s cycle)
+     ═══════════════════════════════════════════════════════ */
   @supports ((-webkit-background-clip: text) or (background-clip: text)) {
     .lgh-logo-script {
       background-image: linear-gradient(110deg, #4F6070 0%, #4F6070 40%, #AE9164 47%, #F5E9D0 50%, #AE9164 53%, #4F6070 60%, #4F6070 100%) !important;
@@ -15000,39 +15125,265 @@ textarea:focus-visible,
   }
   @keyframes ultimateGoldSweep {
     0%, 87.5% { background-position: -200% 0; }
-    100% { background-position: 0% 0; }
+    100%      { background-position: 0% 0; }
   }
 
-  /* ═══════════════════════════════════════════════════════════
-     6. ضبط الدوك السفلي (Bottom Dock) ليكون آمنًا مع الـ Safe Area
-     ═══════════════════════════════════════════════════════════ */
-  #appleDock {
-    bottom: calc(16px + env(safe-area-inset-bottom)) !important; /* دعم شاشات iPhone Notch */
-    z-index: 9998 !important;
-  }
-  /* إخفاء أي أزرار واتساب عائمة قديمة لتجنب التداخل مع الدوك */
-  .float-wa { 
-    display: none !important; 
+  @media (prefers-reduced-motion: reduce) {
+    .lgh-logo-script, .lgh-logo-text {
+      animation: none !important;
+      background: none !important;
+      -webkit-text-fill-color: currentColor !important;
+    }
+    .sticky-mobile a[href*="wa.me"] {
+      animation: none !important;
+    }
   }
 
-  /* ═══════════════════════════════════════════════════════════
-     7. ضمان ظهور المحتوى وإخفاء عناصر التحميل القديمة
-     ═══════════════════════════════════════════════════════════ */
-  section, section *, .reveal, .stagger, .stagger > * {
-    content-visibility: visible !important;
-    contain-intrinsic-size: auto !important;
-    opacity: 1 !important; 
-    transform: none !important; 
-    animation: none !important;
+  /* ═══════════════════════════════════════════════════════
+     7. ضمان ظهور المحتوى + تنظيف بقايا القائمة القديمة
+     ═══════════════════════════════════════════════════════ */
+  #logoIntro, .signature-line, .logo-shimmer {
+    display: none !important;
   }
-  #logoIntro, .signature-line, .logo-shimmer { 
-    display: none !important; 
+  body.intro-active {
+    overflow: auto !important;
+    padding-bottom: 0 !important;
   }
-  body.intro-active { 
-    overflow: auto !important; 
-    padding-bottom: 0 !important; 
+  body.has-sticky-mobile {
+    padding-bottom: 0 !important;
   }
 </style>
+
+<script id="ZK_ULTIMATE_V5_JS">
+(function () {
+  'use strict';
+
+  /* ═══ إزالة زر الهامبرجر والقائمة من DOM نهائيًا ═══ */
+  function killHamburger() {
+    var header = document.getElementById('liquidGlassHeader');
+    if (!header) return;
+    header.querySelectorAll('.lgh-hamburger').forEach(function (el) { el.remove(); });
+    var menu = header.querySelector('.lgh-mobile-menu');
+    if (menu) menu.remove();
+    header.classList.remove('menu-open');
+  }
+
+  /* ═══ ضمان ظهور الهيدر ═══ */
+  function ensureHeaderVisible() {
+    var header = document.getElementById('liquidGlassHeader');
+    if (!header) return;
+    header.style.setProperty('opacity', '1', 'important');
+    header.style.setProperty('visibility', 'visible', 'important');
+    header.style.setProperty('display', 'block', 'important');
+    header.classList.add('is-visible');
+  }
+
+  /* ═══ نقل خريطة الأسنان لمكانها الصحيح ═══ */
+  function positionTeethMap() {
+    var teeth = document.getElementById('teeth-map');
+    var main = document.getElementById('main');
+    var results = document.getElementById('results');
+    if (!teeth || !main) return;
+    if (results && results.parentNode === main) {
+      if (teeth.previousElementSibling !== results) {
+        results.parentNode.insertBefore(teeth, results.nextSibling);
+      }
+    } else if (!main.contains(teeth)) {
+      main.appendChild(teeth);
+    }
+  }
+
+  /* ═══ إصلاح الفورم (submit واحد فقط) ═══ */
+  function fixForm() {
+    var form = document.getElementById('leadForm');
+    if (!form || form.dataset.zkV6 === '1') return;
+
+    var cloned = form.cloneNode(true);
+    cloned.dataset.zkV6 = '1';
+    form.parentNode.replaceChild(cloned, form);
+
+    var steps = cloned.querySelectorAll('.form-step');
+    var dots = cloned.querySelectorAll('.form-step-dot');
+    var current = 1;
+
+    function showStep(n) {
+      current = n;
+      steps.forEach(function (s) { s.style.display = 'none'; });
+      var target = cloned.querySelector('.form-step[data-step="' + n + '"]');
+      if (target) target.style.display = 'block';
+      dots.forEach(function (d, i) {
+        d.classList.remove('active', 'completed');
+        if (i + 1 === n) d.classList.add('active');
+        if (i + 1 < n) d.classList.add('completed');
+      });
+      var prog = document.getElementById('formProgress');
+      if (prog) prog.setAttribute('aria-valuenow', String(n));
+    }
+
+    function validate(stepEl) {
+      var required = stepEl.querySelectorAll('[required]');
+      var valid = true;
+      required.forEach(function (f) {
+        if (!f.value.trim()) {
+          valid = false;
+          f.style.setProperty('border-color', '#C85A5A', 'important');
+        } else {
+          f.style.removeProperty('border-color');
+        }
+      });
+      return valid;
+    }
+
+    cloned.querySelectorAll('.form-next').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var step = cloned.querySelector('.form-step[data-step="' + current + '"]');
+        if (!step || !validate(step)) return;
+        if (current < 3) showStep(current + 1);
+      });
+    });
+
+    cloned.querySelectorAll('.form-prev').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (current > 1) showStep(current - 1);
+      });
+    });
+
+    cloned.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (cloned.dataset.submitting === '1') return;
+      cloned.dataset.submitting = '1';
+
+      var country   = (document.getElementById('formCountry')   || {}).value || '';
+      var treatment = (document.getElementById('formTreatment') || {}).value || '';
+      var name      = (document.getElementById('formName')      || {}).value || '';
+      var email     = (document.getElementById('formEmail')     || {}).value || '';
+      var phone     = (document.getElementById('formPhone')     || {}).value || '';
+
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        cloned.dataset.submitting = '0';
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      var msg = 'Hi Nile Smile, I would like a free X-ray review.\n\n'
+        + 'Name: ' + name + '\nCountry: ' + country
+        + '\nTreatment: ' + treatment + '\nEmail: ' + email + '\nPhone: ' + phone;
+
+      try {
+        var leads = JSON.parse(localStorage.getItem('nile_leads') || '[]');
+        var cutoff = Date.now() - 30 * 24 * 60 * 60 * 1000;
+        leads = leads.filter(function (l) { return l.timestamp > cutoff; });
+        leads.push({ name: name, email: email, phone: phone, country: country,
+                     treatment: treatment, timestamp: Date.now(), source: 'zk_v6' });
+        localStorage.setItem('nile_leads', JSON.stringify(leads));
+      } catch (err) {}
+
+      var wa = document.createElement('a');
+      wa.href = 'https://wa.me/201503308333?text=' + encodeURIComponent(msg);
+      wa.target = '_blank';
+      wa.rel = 'noopener';
+      wa.style.display = 'none';
+      document.body.appendChild(wa);
+      wa.click();
+      setTimeout(function () { if (wa.parentNode) document.body.removeChild(wa); }, 100);
+
+      if (typeof gtag === 'function') {
+        gtag('event', 'lead_form_submit_zk_v6', { country: country, treatment: treatment });
+      }
+
+      cloned.innerHTML = '<div style="background:rgba(174,145,100,.1);border:1px solid rgba(174,145,100,.4);padding:2rem;border-radius:12px;text-align:center">'
+        + '<div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#AE9164,#E8C88A);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem">'
+        + '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1F2A36" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>'
+        + '<h3 style="color:#E8C88A;font-family:Playfair Display,serif;font-size:1.5rem;margin-bottom:.75rem">Thank You!</h3>'
+        + '<p style="color:#F6F3EE;font-size:.95rem;line-height:1.7">A licensed dentist will review your case and respond within <strong style="color:#E8C88A">24–72 hours</strong>.</p>'
+        + '<p style="color:#8FA1B2;font-size:.8rem;margin-top:1rem">WhatsApp opened — if not, message <a href="https://wa.me/201503308333" target="_blank" style="color:#C9A96E;text-decoration:underline">+20 150 330 8333</a>.</p></div>';
+    });
+
+    showStep(1);
+  }
+
+  /* ═══ Smooth scroll موحد ═══ */
+  function setupSmoothScroll() {
+    if (document.body.dataset.zkScroll === '1') return;
+    document.body.dataset.zkScroll = '1';
+
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('a[href^="#"]');
+      if (!link) return;
+      var href = link.getAttribute('href');
+      if (!href || href === '#' || href.length < 2) return;
+      var target = document.querySelector(href);
+      if (!target) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      var offset = window.innerWidth < 768 ? 70 : 90;
+      var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+      if (history.pushState) history.pushState(null, '', href);
+    }, true);
+  }
+
+  /* ═══ إغلاق مودال البحث ═══ */
+  function wireSearchClose() {
+    var modal = document.getElementById('searchModal');
+    if (!modal || modal.dataset.zkSearchClose === '1') return;
+    modal.dataset.zkSearchClose = '1';
+
+    modal.querySelectorAll('[data-search-close]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.classList.contains('open')) {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+
+  /* ═══ تنظيف ═══ */
+  function cleanup() {
+    var quickBar = document.querySelector('.quick-bar');
+    if (quickBar) quickBar.remove();
+    var intro = document.getElementById('logoIntro');
+    if (intro) intro.remove();
+    document.body.classList.remove('intro-active');
+    document.body.classList.remove('has-cookie-banner');
+    document.body.classList.remove('has-sticky-mobile');
+  }
+
+  /* ═══ Runner ═══ */
+  function runAll() {
+    try { cleanup(); }             catch (e) {}
+    try { killHamburger(); }        catch (e) {}
+    try { ensureHeaderVisible(); }  catch (e) {}
+    try { positionTeethMap(); }     catch (e) {}
+    try { fixForm(); }              catch (e) {}
+    try { setupSmoothScroll(); }    catch (e) {}
+    try { wireSearchClose(); }      catch (e) {}
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runAll);
+  } else {
+    runAll();
+  }
+
+  setTimeout(runAll, 200);
+  setTimeout(runAll, 800);
+  setTimeout(runAll, 2000);
+  setTimeout(runAll, 5000);
+})();
+</script>
+<!-- ═══════════════════════════════════════════════════════════════
+     END MOBILE FIX v6.0
+     ═══════════════════════════════════════════════════════════════ -->
 <script id="ZK_ULTIMATE_V5_JS">
 (function () {
   'use strict';
