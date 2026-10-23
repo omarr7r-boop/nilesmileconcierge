@@ -14907,10 +14907,6 @@ textarea:focus-visible,
      NILE SMILE — MOBILE FIX v6.0 (SINGLE SOURCE OF TRUTH)
      يحل: القائمة، تداخل واتساب مع الدوك، الأزرار، زر الإغلاق
      ═══════════════════════════════════════════════════════════════ -->
-<!-- ═══════════════════════════════════════════════════════════════
-     NILE SMILE — MOBILE FIX v6.0 (SINGLE SOURCE OF TRUTH)
-     يحل: القائمة، تداخل واتساب مع الدوك، الأزرار، زر الإغلاق
-     ═══════════════════════════════════════════════════════════════ -->
 <style id="ZK_ULTIMATE_V5">
   /* ═══════════════════════════════════════════════════════
      1. Z-INDEX STACK — المودالات فوق الهيدر (WCAG 2.2)
@@ -15387,8 +15383,6 @@ textarea:focus-visible,
 </script>
 <!-- ═══════════════════════════════════════════════════════════════
      END MOBILE FIX v6.0
-     ═══════════════════════════════════════════════════════════════ --><!-- ═══════════════════════════════════════════════════════════════
-     END MOBILE FIX v6.0
      ═══════════════════════════════════════════════════════════════ -->
 <script id="ZK_ULTIMATE_V5_JS">
 (function () {
@@ -15798,6 +15792,132 @@ textarea:focus-visible,
 </script>
 <!-- ═══════════════════════════════════════════════════════════════
      END ULTIMATE FIX v5.0
+     ═══════════════════════════════════════════════════════════════ -->
+     <!-- ═══════════════════════════════════════════════════════════════
+     NILE SMILE — ULTIMATE OVERRIDE v8.0 (2026 STANDARDS)
+     ═══════════════════════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════════════════════
+     NILE SMILE — NUCLEAR FIX v9.0 (النسخة النهائية القاتلة للأخطاء)
+     ═══════════════════════════════════════════════════════════════ -->
+<style id="ZK_NUCLEAR_FIX">
+  /* 1. اللوجو: السلوغان أسفل كونسيرج + وضوح تام للهيدر */
+  .lgh-logo { 
+    display: flex !important; 
+    flex-direction: column !important; 
+    align-items: flex-start !important; 
+    gap: 0 !important; 
+  }
+  .lgh-logo > span:last-child { 
+    display: flex !important; 
+    flex-direction: column !important; 
+    align-items: flex-start !important; 
+  }
+  .lgh-logo-script { 
+    font-size: 1.9rem !important; 
+    line-height: 0.9 !important; 
+    margin-bottom: 2px !important; 
+  }
+  .lgh-logo-text { 
+    font-size: 0.55rem !important; 
+    color: #1F2A36 !important; 
+    letter-spacing: 0.25em !important; 
+  }
+  .lgh-logo-sub { 
+    display: block !important; 
+    font-size: 0.42rem !important; 
+    color: #6B7D8E !important; 
+    margin-top: 2px !important; 
+  }
+  /* وضوح الهيدر الزجاجي */
+  #liquidGlassHeader:not(.on-dark) { 
+    background: rgba(255, 255, 255, 0.92) !important; 
+    backdrop-filter: blur(20px) !important;
+  }
+
+  /* 2. أزرار الـ Hero: جنب بعض + دائرية */
+  .hero-content div[style*="max-width:34rem"] {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+  .hero-content div[style*="max-width:34rem"] .btn {
+    flex: 1 !important;
+    border-radius: 100px !important;
+    font-size: 0.65rem !important;
+    min-height: 48px !important;
+    padding: 0.8rem 0.5rem !important;
+    white-space: nowrap !important;
+  }
+
+  /* 3. إخفاء أزرار الواتساب القديمة نهائياً */
+  .sticky-mobile, .float-wa { 
+    display: none !important; 
+    opacity: 0 !important; 
+    pointer-events: none !important; 
+  }
+
+  /* 4. زر الواتساب الجديد داخل الدوك (بلون ذهبي فخم) */
+  .dock-item.wa-custom-btn {
+    background: linear-gradient(135deg, #AE9164, #E8C88A) !important;
+    color: #1F2A36 !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    display: flex !important; 
+    align-items: center !important; 
+    justify-content: center !important;
+    box-shadow: 0 4px 12px rgba(174, 145, 100, 0.4) !important;
+  }
+</style>
+
+<script id="ZK_NUCLEAR_FIX_JS">
+(function () {
+  'use strict';
+
+  // دالة المراقبة المستمرة (تتغلب على أي كود قديم)
+  setInterval(function () {
+    
+    // 1. مسح أزرار الواتساب القديمة من الـ DOM نهائياً
+    document.querySelectorAll('.sticky-mobile, .float-wa').forEach(function (el) {
+      el.remove();
+    });
+
+    // 2. حقن زر الواتساب داخل الـ Dock (بعد زر الرئيسية)
+    var dock = document.getElementById('appleDock');
+    if (dock && !dock.querySelector('.wa-custom-btn')) {
+      var waBtn = document.createElement('a');
+      waBtn.href = 'https://wa.me/201503308333';
+      waBtn.target = '_blank';
+      waBtn.rel = 'noopener';
+      waBtn.className = 'dock-item wa-custom-btn';
+      waBtn.setAttribute('aria-label', 'WhatsApp');
+      waBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>';
+      
+      // إضافة الزر بجوار زر "الرئيسية"
+      var homeBtn = dock.querySelector('.home-btn');
+      if (homeBtn && homeBtn.nextSibling) {
+        dock.insertBefore(waBtn, homeBtn.nextSibling);
+      } else {
+        dock.appendChild(waBtn);
+      }
+    }
+
+    // 3. إجبار أزرار الـ Hero على البقاء بجانب بعضها
+    var heroBtnWrap = document.querySelector('.hero-content div[style*="max-width:34rem"]');
+    if (heroBtnWrap) {
+      heroBtnWrap.style.setProperty('flex-direction', 'row', 'important');
+      heroBtnWrap.style.setProperty('flex-wrap', 'nowrap', 'important');
+    }
+
+  }, 300); // يفحص كل 0.3 ثانية لضمان عدم رجوع التصميم القديم
+
+})();
+</script>
+<!-- ═══════════════════════════════════════════════════════════════
+     END NUCLEAR FIX v9.0
+     ═══════════════════════════════════════════════════════════════ --><!-- ═══════════════════════════════════════════════════════════════
+     END ULTIMATE OVERRIDE v8.0
      ═══════════════════════════════════════════════════════════════ -->
 </body>
 </html>
