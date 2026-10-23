@@ -245,27 +245,7 @@ thead tr{
 </style>
 
 <style>
-@keyframes logoGlowPulse{
-  0%,100%{text-shadow:0 0 12px rgba(174,145,100,0),0 0 24px rgba(174,145,100,0)}
-  50%{text-shadow:0 0 18px rgba(174,145,100,.4),0 0 36px rgba(174,145,100,.18)}
-}
-.logo-script{
-  font-family:'Italianno',cursive;
-  font-size:3.6rem;
-  line-height:.85;
-  color:#4F6070;
-  padding-right:8px;
-  display:block;
-  animation:logoGlowPulse 4.5s ease-in-out infinite;
-}
-.signature-line{
-  position:absolute;bottom:0;left:0;right:0;height:1px;
-    background:linear-gradient(90deg,transparent,#AE9164,transparent);
-    transform:scaleX(0);transform-origin:left;
-    animation:sigDraw 4s ease-in-out infinite;pointer-events:none;
-}
-@keyframes sigDraw{
-  0%,100%{transform:scaleX(0);opacity:.4}
+
   50%{transform:scaleX(1);opacity:1}
 }
 .nav-link{position:relative;padding:4px 0}
@@ -277,16 +257,7 @@ thead tr{
   box-shadow:0 0 8px rgba(201,169,110,.85);
 }
 .nav-link:hover::before{opacity:1;transform:translateY(-50%) scale(1)}
-@keyframes heartbeat{
-  0%,100%{box-shadow:0 6px 20px rgba(174,145,100,.25);transform:scale(1)}
-  50%{box-shadow:0 12px 40px rgba(174,145,100,.55),0 0 0 6px rgba(174,145,100,.08);transform:scale(1.015)}
-}
-.btn-gold.breathe{animation:heartbeat 2.8s ease-in-out infinite}
-@keyframes autoShineLoop{
-  0%,72%{left:-100%}
-  100%{left:100%}
-}
-.btn-gold.shine-auto::before{animation:autoShineLoop 4.5s ease-in-out infinite}
+
 
 .section-heading{
   background:linear-gradient(135deg,#4F6070 0%,#6B7D8E 45%,#4F6070 100%);
@@ -709,17 +680,7 @@ img{
                 max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1),
                 margin-top 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .site-header.scrolled .logo-slogan{
-    opacity: 0;
-    max-height: 0;
-    margin-top: 0;
-    overflow: hidden;
-    visibility: hidden;
-  }
-  @media(max-width:640px){
-    .logo-script{font-size:2.8rem}
-    .logo-sans{font-size:.6rem;letter-spacing:.28em}
-  }
+  
   .logo-shimmer{
     position:absolute;top:0;left:-150%;width:100%;height:100%;
     background:linear-gradient(120deg,transparent 30%,rgba(255,215,130,.45) 50%,transparent 70%);
@@ -728,93 +689,7 @@ img{
   }
   @keyframes shimmer{0%,72%{left:-150%}100%{left:160%}}
 
-  /* ============ HEADER — FIXED + SMOOTH SHRINK ============ */
-  .site-header{
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    background: rgba(246,243,238,0.98);
-    backdrop-filter: blur(16px) saturate(1.2);
-    -webkit-backdrop-filter: blur(16px) saturate(1.2);
-    border-bottom: 1px solid rgba(174,145,100,0.15);
-    transition: box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                background-color 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                padding 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: padding, background-color;
-  }
   
-  /* ❌ مش محتاجين hidden-up تاني — الهيدر ثابت */
-  .site-header.hidden-up{
-    transform: translateY(0); /* نلغيه */
-  }
-  
-  .site-header.scrolled{
-    box-shadow: 0 8px 32px rgba(79,96,112,.08);
-    background: rgba(246,243,238,.98);
-  }
-  
-  .site-header nav{
-    min-height: 88px;
-    transition: min-height 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: min-height;
-  }
-  
-  .site-header.scrolled nav{
-    min-height: 64px;
-  }
-  
-  .top-bar{
-    background: linear-gradient(90deg,#1F2A36 0%,#3A4855 50%,#1F2A36 100%);
-    color: #F6F3EE;
-    font-size: .7rem;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    font-weight: 500;
-    padding: .55rem 1rem;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: .5rem;
-    transition: padding 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .site-header.scrolled .top-bar{
-    padding: .35rem 1rem;
-  }
-  .top-bar svg{ color: #C9A96E; flex-shrink: 0; }
-
-  /* ============ NAV LINKS ============ */
-  .nav-link{position:relative;padding:.5rem 0;color:#4F6070;font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;transition:color .3s ease;white-space:nowrap}
-  @media (min-width:1024px) and (max-width:1279px){
-    .nav-link{font-size:.64rem;letter-spacing:.1em}
-  }
-  .nav-link::after{content:'';position:absolute;left:50%;bottom:0;width:0;height:2px;background:linear-gradient(90deg,transparent,#AE9164,transparent);transition:all .35s cubic-bezier(.34,1.56,.64,1);transform:translateX(-50%)}
-  .nav-link:hover{color:#AE9164}
-  .nav-link:hover::after{width:100%}
-
-  /* ============ MOBILE MENU ============ */
-  #mobileMenu{
-    transition:max-height .4s ease,opacity .3s ease,visibility .3s ease;
-    max-height:0;
-    overflow:hidden;
-    opacity:0;
-    visibility:hidden;
-  }
-  #mobileMenu.open{
-    max-height:calc(100vh - 140px);
-    overflow-y:auto;
-    -webkit-overflow-scrolling:touch;
-    overscroll-behavior:contain;
-    opacity:1;
-    visibility:visible;
-  }
-  .hamburger{width:32px;height:24px;display:flex;flex-direction:column;justify-content:space-between;padding:0;position:relative;z-index:101}
-  .hamburger span{width:100%;height:2px;background:#4F6070;border-radius:2px;transition:all .4s cubic-bezier(.34,1.56,.64,1);transform-origin:center}
-  .hamburger.open span:nth-child(1){transform:translateY(11px) rotate(45deg)}
-  .hamburger.open span:nth-child(2){opacity:0;transform:translateX(12px)}
-  .hamburger.open span:nth-child(3){transform:translateY(-11px) rotate(-45deg)}
-
-  /* ============ BUTTONS — PREMIUM HIGHLIGHT + GLOW ============ */
   .btn{
     display: inline-flex;
     align-items: center;
@@ -2938,61 +2813,34 @@ section.bg-nile-beige .limited-badge,
   vertical-align:middle;
 }
 </style>
-</head>
-<body class="intro-active">
 
-<!-- Quick bar disabled — handled by fixesBundle CSS -->
-<!-- ═══════════════════ PROGRESS ═══════════════════ -->
-<div id="progress" aria-hidden="true"></div>
-
-<!-- ═══════════════════ SKIP LINK ═══════════════════ -->
-<a href="#main" class="skip-link">Skip to main content</a>
-
-<!-- ═══════════════════ HERO ═══════════════════ -->
-
-<!-- ═══════════════════ HEADER — MODERN 2026 ═══════════════════ -->
 <style id="modernHeaderStyles">
 :root {
-  --header-height: 72px;
-  --header-bg: rgba(246, 243, 238, 0.88);
-  --header-bg-scrolled: rgba(246, 243, 238, 0.97);
-  --header-border: rgba(174, 145, 100, 0.2);
-  --header-blur: 12px;
+  --header-bg: rgba(255, 255, 255, 0.75);
+  --header-border: rgba(255, 255, 255, 0.9);
 }
 .site-header {
   position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 94%;
+  max-width: 800px;
+  z-index: 9999;
   background: var(--header-bg);
-  -webkit-backdrop-filter: blur(var(--header-blur)) saturate(180%);
-  backdrop-filter: blur(var(--header-blur)) saturate(180%);
-  border-bottom: 1px solid var(--header-border);
-}
-@supports (animation-timeline: scroll()) {
-  .site-header {
-    animation: headerScroll linear both;
-    animation-timeline: scroll();
-    animation-range: 0px 120px;
-  }
-}
-@keyframes headerScroll {
-  to {
-    background: var(--header-bg-scrolled);
-    box-shadow: 0 8px 32px rgba(79, 96, 112, 0.10);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .site-header { animation: none !important; }
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--header-border);
+  border-radius: 50px;
+  box-shadow: 0 10px 30px rgba(31, 42, 54, 0.1);
+  transition: all 0.3s ease;
 }
 .header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
-  min-height: var(--header-height);
-  max-width: 80rem;
-  margin: 0 auto;
-  padding: 0 1.25rem;
+  min-height: 64px;
+  padding: 0 1rem;
 }
 .logo {
   display: flex;
@@ -3002,24 +2850,23 @@ section.bg-nile-beige .limited-badge,
   line-height: 1;
   flex-shrink: 0;
   gap: 0;
+  margin-left: 0.5rem;
 }
 .logo-script {
   font-family: 'Italianno', cursive;
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   color: #4F6070;
   line-height: 0.9;
-  animation: none !important;
-  text-shadow: none !important;
 }
 .logo-sub {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: -4px;
+  margin-top: -2px;
 }
 .logo-sans {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.55rem;
+  font-size: 0.5rem;
   font-weight: 700;
   letter-spacing: 0.25em;
   color: #4F6070;
@@ -3027,51 +2874,18 @@ section.bg-nile-beige .limited-badge,
 }
 .logo-tagline {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.4rem;
+  font-size: 0.35rem;
   letter-spacing: 0.12em;
   color: #6B7D8E;
   text-transform: uppercase;
-  margin-top: 2px;
+  margin-top: 1px;
   opacity: 0.8;
 }
 .main-nav { display: none; }
-.nav-list {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.nav-link {
-  position: relative;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #4F6070;
-  text-decoration: none;
-  padding: 0.5rem 0;
-  transition: color 0.3s ease;
-}
-.nav-link::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 0;
-  height: 1.5px;
-  background: #AE9164;
-  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1), left 0.35s ease;
-  transform: translateX(-50%);
-}
-.nav-link:hover { color: #AE9164; }
-.nav-link:hover::after { width: 100%; }
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.4rem;
   flex-shrink: 0;
 }
 .icon-btn {
@@ -3088,19 +2902,20 @@ section.bg-nile-beige .limited-badge,
   transition: background 0.2s, color 0.2s;
 }
 .icon-btn:hover { background: rgba(174, 145, 100, 0.12); color: #AE9164; }
-.icon-btn:focus-visible { outline: 2px solid #AE9164; outline-offset: 2px; }
 .header-cta {
   display: none;
-  font-size: 0.68rem;
-  padding: 0.65rem 1.2rem;
+  font-size: 0.65rem;
+  padding: 0.55rem 1.1rem;
   white-space: nowrap;
+  border-radius: 50px; /* Pill shaped */
+  font-weight: 700;
 }
 .menu-toggle {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 26px;
-  height: 18px;
+  width: 24px;
+  height: 16px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -3114,20 +2929,23 @@ section.bg-nile-beige .limited-badge,
   border-radius: 2px;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
-.menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-.menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+.menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 .mobile-menu {
   position: absolute;
-  top: 100%; left: 0; right: 0;
-  background: var(--header-bg-scrolled);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--header-border);
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  background: var(--header-bg);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--header-border);
+  border-radius: 20px;
   padding: 1.25rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   animation: menuSlide 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  max-height: calc(100vh - var(--header-height));
+  max-height: calc(100vh - 100px);
   overflow-y: auto;
 }
 .mobile-menu[hidden] { display: none !important; }
@@ -3138,9 +2956,12 @@ section.bg-nile-beige .limited-badge,
 .mobile-nav-list { list-style: none; margin: 0 0 1rem; padding: 0; }
 .mobile-nav-list .nav-link {
   display: block;
-  padding: 0.85rem 0;
+  padding: 0.75rem 0;
   border-bottom: 1px solid rgba(174, 145, 100, 0.12);
   font-size: 0.8rem;
+  color: #4F6070;
+  text-decoration: none;
+  font-weight: 600;
 }
 .mobile-cta { width: 100%; justify-content: center; }
 @media (min-width: 768px) {
@@ -3148,23 +2969,17 @@ section.bg-nile-beige .limited-badge,
   .menu-toggle { display: none; }
   .header-cta { display: inline-flex; }
   .mobile-menu { display: none !important; }
+  .header-inner { padding: 0 1.5rem; }
+  .logo-script { font-size: 2.2rem; }
+  .logo { margin-left: 0; }
 }
-@media (min-width: 1024px) {
-  .nav-list { gap: 1.75rem; }
-  .nav-link { font-size: 0.72rem; }
-}
-/* Neutralize legacy scroll-state styles (from old header CSS) */
-.site-header nav,
-.site-header.scrolled nav { min-height: unset !important; }
-.site-header.scrolled { box-shadow: none; }
-/* Fallback if backdrop-filter unsupported */
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .site-header { background: rgba(246, 243, 238, 0.98); }
-}
-/* Adjust hero top padding for smaller header */
+/* Adjust hero top padding for the floating header */
 .hero { padding-top: 8rem; }
 @media (max-width: 768px) { .hero { padding-top: 7rem; } }
 </style>
+
+</head>
+<body>
 
 <header class="site-header" id="header">
   <div class="header-inner">
@@ -3172,18 +2987,17 @@ section.bg-nile-beige .limited-badge,
       <span class="logo-script">Nile Smile</span>
       <span class="logo-sub">
         <span class="logo-sans">Concierge</span>
-        <span class="logo-tagline">World-Class Smile &bull; Timeless Journey</span>
+        <span class="logo-tagline">World-Class Smile</span>
       </span>
     </a>
 
     <nav class="main-nav" aria-label="Primary">
-      <ul class="nav-list">
-        <li><a href="#packages" class="nav-link">Packages</a></li>
-        <li><a href="#results" class="nav-link">Results</a></li>
-        <li><a href="#founder" class="nav-link">Founder</a></li>
-        <li><a href="#verify-us" class="nav-link">Verify Us</a></li>
-        <li><a href="#guarantees" class="nav-link">Guarantees</a></li>
-        <li><a href="#faq" class="nav-link">FAQ</a></li>
+      <ul class="nav-list" style="display:flex; gap:1.25rem; list-style:none; margin:0; padding:0;">
+        <li><a href="#packages" class="nav-link" style="font-size:.7rem; font-weight:600; color:#4F6070; text-decoration:none;">Packages</a></li>
+        <li><a href="#results" class="nav-link" style="font-size:.7rem; font-weight:600; color:#4F6070; text-decoration:none;">Results</a></li>
+        <li><a href="#founder" class="nav-link" style="font-size:.7rem; font-weight:600; color:#4F6070; text-decoration:none;">Founder</a></li>
+        <li><a href="#guarantees" class="nav-link" style="font-size:.7rem; font-weight:600; color:#4F6070; text-decoration:none;">Guarantees</a></li>
+        <li><a href="#faq" class="nav-link" style="font-size:.7rem; font-weight:600; color:#4F6070; text-decoration:none;">FAQ</a></li>
       </ul>
     </nav>
 
@@ -3198,7 +3012,8 @@ section.bg-nile-beige .limited-badge,
           <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
       </button>
-      <a href="#consult" class="btn btn-gold header-cta">Free Review</a>
+      <!-- Changed from Free Review to Consult -->
+      <a href="#consult" class="btn btn-gold header-cta">Consult</a>
       <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
         <span></span><span></span><span></span>
       </button>
@@ -3214,29 +3029,18 @@ section.bg-nile-beige .limited-badge,
       <li><a href="#guarantees" class="nav-link">Guarantees</a></li>
       <li><a href="#faq" class="nav-link">FAQ</a></li>
     </ul>
-    <a href="#consult" class="btn btn-gold mobile-cta">Get My Free Review</a>
+    <a href="#consult" class="btn btn-gold mobile-cta">Get My Consultation</a>
   </div>
 </header>
 
 <script id="modernHeaderScript">
 (function() {
-  'use strict';
   var toggle = document.getElementById('menuToggle');
   var menu = document.getElementById('mobileMenu');
   if (!toggle || !menu) return;
-  function openMenu() {
-    toggle.setAttribute('aria-expanded', 'true');
-    toggle.setAttribute('aria-label', 'Close menu');
-    menu.hidden = false;
-  }
-  function closeMenu() {
-    toggle.setAttribute('aria-expanded', 'false');
-    toggle.setAttribute('aria-label', 'Open menu');
-    menu.hidden = true;
-  }
-  toggle.addEventListener('click', function() {
-    toggle.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu();
-  });
+  function openMenu() { toggle.setAttribute('aria-expanded', 'true'); menu.hidden = false; }
+  function closeMenu() { toggle.setAttribute('aria-expanded', 'false'); menu.hidden = true; }
+  toggle.addEventListener('click', function() { toggle.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu(); });
   var links = menu.querySelectorAll('a');
   for (var i = 0; i < links.length; i++) links[i].addEventListener('click', closeMenu);
   document.addEventListener('click', function(e) {
@@ -3245,14 +3049,23 @@ section.bg-nile-beige .limited-badge,
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && !menu.hidden) { closeMenu(); toggle.focus(); }
   });
-  if ('ResizeObserver' in window) {
-    var ro = new ResizeObserver(function() {
-      if (window.innerWidth >= 768 && !menu.hidden) closeMenu();
-    });
-    ro.observe(document.querySelector('.site-header'));
-  }
 })();
 </script>
+
+
+<!-- Quick bar disabled — handled by fixesBundle CSS -->
+<!-- ═══════════════════ PROGRESS ═══════════════════ -->
+<div id="progress" aria-hidden="true"></div>
+
+<!-- ═══════════════════ SKIP LINK ═══════════════════ -->
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- ═══════════════════ HEADER — MODERN 2026 ═══════════════════ -->
+
+
+
+
+
 <!-- ═══════════════════ /HEADER ═══════════════════ -->
 
 <main id="main">
@@ -3264,7 +3077,7 @@ section.bg-nile-beige .limited-badge,
      alt="Giza Pyramids at golden hour" id="heroImg">    <div class="hero-overlay"></div>
   </div>
 
-  <div class="hero-content" style="background: rgba(10, 13, 16, 0.65); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 2.5rem 1.5rem; border-radius: 12px; border: 1px solid rgba(232, 200, 138, 0.35); box-shadow: 0 30px 60px rgba(0,0,0,0.45); width: 100%; max-width: 100%;">
+  <div class="hero-content">
     <p class="eyebrow eyebrow-light mb-4">Clinician-Reviewed • Cairo, Egypt</p>
     <div style="display:inline-flex;align-items:center;gap:.4rem;background:rgba(232,200,138,.15);border:1px solid rgba(232,200,138,.5);padding:.3rem .85rem;border-radius:100px;font-family:'Montserrat',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#E8C88A;margin-bottom:1rem">
   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -11955,11 +11768,167 @@ summary:focus-visible {
   display: none !important;
 }
 </style>
-<!-- ═══════════════════════════════════════════════════════════════
-     NILE SMILE — THE NUCLEAR FIX (v12.0) - DO NOT REMOVE
-     ═══════════════════════════════════════════════════════════════ -->
-<!-- ═══════════════════════════════════════════════════════════════
-     NILE SMILE — FINAL PERFECTION (v14.0)
-     ═══════════════════════════════════════════════════════════════ -->
+
+
+
+<style id="appleDockStyles">
+.apple-dock {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  max-width: 400px;
+  height: 64px;
+  background: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 35px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.6);
+  z-index: 9990;
+  border: 1px solid rgba(255,255,255,0.5);
+  padding: 0 10px;
+}
+@media(min-width: 768px) {
+  .apple-dock {
+    max-width: 450px;
+  }
+}
+.dock-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  color: #6B7D8E;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  text-decoration: none;
+  position: relative;
+}
+.dock-item svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.8;
+  fill: none;
+  stroke: currentColor;
+}
+.dock-item:hover, .dock-item.active {
+  background: rgba(174, 145, 100, 0.15);
+  color: #AE9164;
+}
+.dock-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: #AE9164;
+  border-radius: 50%;
+}
+.dock-item.wa-btn {
+  background: #25D366;
+  color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+}
+.dock-item.wa-btn:hover {
+  background: #1EBE5A;
+  color: #fff;
+}
+body {
+  padding-bottom: 100px !important; /* Space for the dock */
+}
+/* Hide old sticky mobile */
+.sticky-mobile {
+  display: none !important;
+}
+</style>
+
+
+<nav class="apple-dock" id="appleDock">
+  <a href="#main" class="dock-item active" aria-label="Home" data-target="main">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+      <polyline points="9 22 9 12 15 12 15 22"/>
+    </svg>
+  </a>
+  <a href="#packages" class="dock-item" aria-label="Packages" data-target="packages">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="7" height="7"/>
+      <rect x="14" y="3" width="7" height="7"/>
+      <rect x="14" y="14" width="7" height="7"/>
+      <rect x="3" y="14" width="7" height="7"/>
+    </svg>
+  </a>
+  <a href="#results" class="dock-item" aria-label="Results" data-target="results">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+      <circle cx="8.5" cy="8.5" r="1.5"/>
+      <polyline points="21 15 16 10 5 21"/>
+    </svg>
+  </a>
+  <a href="#implant-systems" class="dock-item" aria-label="Implants" data-target="implant-systems">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2v6.5a4.5 4.5 0 0 1-4.5 4.5H4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2h-1.5A4.5 4.5 0 0 1 14 8.5V2"/>
+      <path d="M8 2h8"/><path d="M12 14v4"/><path d="M10 18h4"/>
+    </svg>
+  </a>
+  <a href="#guarantees" class="dock-item" aria-label="Guarantees" data-target="guarantees">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      <path d="M9 12l2 2 4-4"/>
+    </svg>
+  </a>
+  <a href="#faq" class="dock-item" aria-label="FAQ" data-target="faq">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+      <line x1="12" y1="17" x2="12.01" y2="17"/>
+    </svg>
+  </a>
+  <a href="https://wa.me/201503308333" target="_blank" rel="noopener" class="dock-item wa-btn" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" stroke="none" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+    </svg>
+  </a>
+</nav>
+
+
+<script id="appleDockScript">
+(function() {
+  'use strict';
+  var dockItems = document.querySelectorAll('.dock-item[data-target]');
+  if(!dockItems.length) return;
+
+  // Active state tracking on scroll
+  var sections = Array.from(dockItems).map(function(item) {
+    var targetId = item.getAttribute('data-target');
+    return { el: document.getElementById(targetId), link: item };
+  }).filter(function(s) { return s.el !== null; });
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        dockItems.forEach(function(item) { item.classList.remove('active'); });
+        var activeItem = sections.find(function(s) { return s.el === entry.target; });
+        if(activeItem) {
+          activeItem.link.classList.add('active');
+        }
+      }
+    });
+  }, { rootMargin: '-20% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(function(s) {
+    observer.observe(s.el);
+  });
+})();
+</script>
+
 </body>
 </html>
