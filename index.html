@@ -14904,301 +14904,135 @@ textarea:focus-visible,
      يحل: الهيدر، الفورم، الألوان، الأقسام، السكرول، الدوك
      ═══════════════════════════════════════════════════════════════ -->
 <style id="ZK_ULTIMATE_V5">
-  /* ═══ 1. قتل التكواز نهائياً ═══ */
-  :root {
-    --ns-accent: #AE9164 !important;
-    --ns-accent-bright: #E8C88A !important;
-    --ns-primary: #4F6070 !important;
+  /* ═══════════════════════════════════════════════════════════
+     1. حل مشكلة تداخل الهيدر مع المودالات (Z-Index & Overlap)
+     ═══════════════════════════════════════════════════════════ */
+  /* رفع طبقة المودالات فوق الهيدر لضمان ظهور زر الإغلاق (X) */
+  .exit-popup, .modal, .search-modal { 
+    z-index: 10005 !important; 
   }
-  [style*="#00A6A6" i], [style*="#00a6a6" i],
-  [style*="#2DD4BF" i], [style*="#2dd4bf" i],
-  [style*="#0B3B4A" i], [style*="#0b3b4a" i],
-  [style*="#14657D" i], [style*="#14657d" i],
-  [style*="#FF6B5B" i], [style*="#ff6b5b" i],
-  [style*="#FF8A7A" i], [style*="#ff8a7a" i] {
-    filter: none !important;
+  /* إزاحة المودال للأسفل قليلاً لضمان عدم اختباء زر X خلف الهيدر */
+  .exit-popup { 
+    padding-top: 90px !important; 
+    align-items: flex-start !important; 
+  }
+  #liquidGlassHeader { 
+    z-index: 9999 !important; 
   }
 
-  /* ═══ 2. الهيدر — نسخة واحدة، ثابتة، ذهبية ═══ */
-  #liquidGlassHeader {
-    position: fixed !important;
-    top: 14px !important;
-    left: 50% !important;
-    right: auto !important;
-    transform: translateX(-50%) !important;
-    width: calc(100% - 28px) !important;
-    max-width: 880px !important;
-    min-height: 56px !important;
-    background: rgba(255, 249, 235, 0.94) !important;
-    backdrop-filter: blur(22px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(22px) saturate(180%) !important;
-    border: 1px solid rgba(174, 145, 100, 0.24) !important;
-    border-radius: 100px !important;
-    box-shadow: 0 8px 32px rgba(31, 42, 54, 0.12) !important;
-    z-index: 9999 !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: block !important;
-    pointer-events: auto !important;
-    padding: 0 !important;
-    margin: 0 !important;
+  /* ═══════════════════════════════════════════════════════════
+     2. إخفاء زر الهامبرجر (القائمة العلوية) والاعتماد على الـ Dock
+     ═══════════════════════════════════════════════════════════ */
+  /* نخفي زر الهامبرجر على الموبايل لتجنب التشتت */
+  @media (max-width: 1023px) {
+    .lgh-hamburger { 
+      display: none !important; 
+    }
+    /* ضبط مساحة الهيدر لاستيعاب اللوجو وزر Free Review فقط */
+    #liquidGlassHeader .lgh-inner { 
+      justify-content: space-between !important; 
+      padding: 0.5rem 1rem !important; 
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     3. تحسين تصميم الأزرار (Hero Buttons) على الموبايل
+     ═══════════════════════════════════════════════════════════ */
+  @media (max-width: 767px) {
+    /* جعل الأزرار تأخذ عرض الشاشة بالكامل لتسهيل النقر (44px min height) */
+    .hero-content .flex.flex-col.sm\:flex-row { 
+      flex-direction: column !important; 
+      gap: 12px !important; 
+      width: 100% !important; 
+    }
+    .hero-content .btn { 
+      width: 100% !important; 
+      min-height: 48px !important; /* معيار اللمس المريح */
+      justify-content: center !important;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     4. الهيدر الزجاجي الفخم (Glassmorphism) مع الحفاظ على اللوجو
+     ═══════════════════════════════════════════════════════════ */
+  #liquidGlassHeader:not(.on-dark) {
+    background: rgba(255, 255, 255, 0.55) !important; /* شفافية عالية */
+    backdrop-filter: blur(24px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.6) !important;
+    box-shadow: 0 8px 32px rgba(31, 42, 54, 0.1) !important;
   }
   #liquidGlassHeader.on-dark {
-    background: rgba(10, 13, 16, 0.92) !important;
-    border-color: rgba(232, 200, 138, 0.26) !important;
+    background: rgba(10, 13, 16, 0.55) !important;
+    backdrop-filter: blur(24px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+    border: 1px solid rgba(232, 200, 138, 0.2) !important;
   }
-  #liquidGlassHeader.is-scrolled { top: 8px !important; }
 
-  #liquidGlassHeader .lgh-inner {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    gap: 0.75rem !important;
-    padding: 0.5rem 0.6rem 0.5rem 1rem !important;
-    min-height: 56px !important;
-    box-sizing: border-box !important;
-  }
-  #liquidGlassHeader .lgh-logo {
-    display: flex !important; align-items: center !important;
-    gap: 0.55rem !important; flex-shrink: 0 !important;
-    text-decoration: none !important; min-width: 0 !important;
-  }
-  #liquidGlassHeader .lgh-logo-script {
-    font-family: 'Italianno', cursive !important;
-    font-size: 1.7rem !important; line-height: 0.85 !important;
-    color: #4F6070 !important; -webkit-text-fill-color: #4F6070 !important;
-    background: none !important; animation: none !important;
-    display: inline-block !important; flex-shrink: 0 !important;
-  }
-  #liquidGlassHeader.on-dark .lgh-logo-script {
-    color: #F6F3EE !important; -webkit-text-fill-color: #F6F3EE !important;
-  }
-  #liquidGlassHeader .lgh-logo-text {
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 0.55rem !important; font-weight: 700 !important;
-    letter-spacing: 0.28em !important;
-    color: #AE9164 !important; -webkit-text-fill-color: #AE9164 !important;
-    background: none !important; animation: none !important;
-    display: block !important; line-height: 1.1 !important; margin: 0 !important;
-  }
-  #liquidGlassHeader.on-dark .lgh-logo-text {
-    color: #E8C88A !important; -webkit-text-fill-color: #E8C88A !important;
-  }
-  #liquidGlassHeader .lgh-logo-sub {
-    display: block !important;
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 0.42rem !important; font-weight: 500 !important;
-    letter-spacing: 0.14em !important; text-transform: uppercase !important;
-    color: #8FA1B2 !important; -webkit-text-fill-color: #8FA1B2 !important;
-    margin-top: 2px !important; line-height: 1.2 !important;
-  }
-  #liquidGlassHeader.on-dark .lgh-logo-sub {
-    color: #C9A96E !important; -webkit-text-fill-color: #C9A96E !important;
-  }
-  #liquidGlassHeader .lgh-actions {
-    display: flex !important; align-items: center !important;
-    gap: 8px !important; flex-shrink: 0 !important;
-  }
-  #liquidGlassHeader .lgh-search-btn {
-    display: inline-flex !important; align-items: center !important;
-    justify-content: center !important;
-    width: 36px !important; height: 36px !important;
-    border-radius: 50% !important;
-    background: rgba(174, 145, 100, 0.14) !important;
-    border: 1px solid rgba(174, 145, 100, 0.28) !important;
-    color: #4F6070 !important; cursor: pointer !important;
-    padding: 0 !important; flex-shrink: 0 !important;
-    transition: background 0.2s !important;
-  }
-  #liquidGlassHeader .lgh-search-btn:hover { background: rgba(174, 145, 100, 0.24) !important; }
-  #liquidGlassHeader.on-dark .lgh-search-btn {
-    color: #E8C88A !important; border-color: rgba(232, 200, 138, 0.3) !important;
-  }
-  #liquidGlassHeader .lgh-cta {
-    display: inline-flex !important; align-items: center !important;
-    justify-content: center !important;
-    height: 36px !important; padding: 0 16px !important;
-    border-radius: 100px !important;
-    background: linear-gradient(135deg, #AE9164, #E8C88A) !important;
-    color: #1F2A36 !important; -webkit-text-fill-color: #1F2A36 !important;
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 0.65rem !important; font-weight: 700 !important;
-    letter-spacing: 0.1em !important; text-transform: uppercase !important;
-    text-decoration: none !important; white-space: nowrap !important;
-    box-shadow: 0 4px 12px rgba(174, 145, 100, 0.3) !important;
-    border: none !important; cursor: pointer !important;
-    flex-shrink: 0 !important;
-    transition: transform 0.2s, box-shadow 0.2s !important;
-  }
-  #liquidGlassHeader .lgh-cta:hover {
-    transform: translateY(-1px) !important;
-    box-shadow: 0 6px 18px rgba(174, 145, 100, 0.5) !important;
-  }
-  #liquidGlassHeader .lgh-hamburger {
-    display: none !important; width: 36px !important; height: 36px !important;
-    flex-direction: column !important; align-items: center !important;
-    justify-content: center !important; gap: 4px !important;
-    border-radius: 50% !important; background: transparent !important;
-    border: none !important; cursor: pointer !important; padding: 0 !important;
-  }
-  #liquidGlassHeader .lgh-hamburger span {
-    display: block !important; width: 18px !important; height: 2px !important;
-    background: #4F6070 !important; border-radius: 2px !important;
-    transition: transform 0.3s, opacity 0.3s !important;
-  }
-  #liquidGlassHeader.on-dark .lgh-hamburger span { background: #F6F3EE !important; }
-  #liquidGlassHeader .lgh-hamburger.is-open span:nth-child(1) {
-    transform: translateY(6px) rotate(45deg) !important;
-  }
-  #liquidGlassHeader .lgh-hamburger.is-open span:nth-child(2) { opacity: 0 !important; }
-  #liquidGlassHeader .lgh-hamburger.is-open span:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg) !important;
-  }
-  #liquidGlassHeader .lgh-mobile-menu {
-    position: absolute !important;
-    top: calc(100% + 8px) !important;
-    left: 0 !important; right: 0 !important;
-    background: rgba(255, 249, 235, 0.98) !important;
-    border: 1px solid rgba(174, 145, 100, 0.25) !important;
-    border-radius: 24px !important;
-    box-shadow: 0 20px 50px rgba(31, 42, 54, 0.18) !important;
-    padding: 0.6rem !important;
-    opacity: 0 !important; visibility: hidden !important;
-    transform: translateY(-8px) !important;
-    transition: opacity 0.25s, transform 0.25s, visibility 0.25s !important;
-    max-height: 70vh !important; overflow-y: auto !important;
-    z-index: 998 !important;
-  }
-  #liquidGlassHeader.on-dark .lgh-mobile-menu {
-    background: rgba(10, 13, 16, 0.98) !important;
-    border-color: rgba(232, 200, 138, 0.25) !important;
-  }
-  #liquidGlassHeader.menu-open .lgh-mobile-menu {
-    opacity: 1 !important; visibility: visible !important;
-    transform: translateY(0) !important;
-  }
-  #liquidGlassHeader .lgh-mobile-menu a {
-    display: flex !important; align-items: center !important;
-    justify-content: space-between !important;
-    padding: 0.85rem 1rem !important;
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 0.85rem !important; font-weight: 600 !important;
-    color: #1F2A36 !important; text-decoration: none !important;
-    border-radius: 12px !important; transition: background 0.2s !important;
-  }
-  #liquidGlassHeader .lgh-mobile-menu a:hover {
-    background: rgba(174, 145, 100, 0.12) !important; color: #AE9164 !important;
-  }
-  #liquidGlassHeader.on-dark .lgh-mobile-menu a { color: #F6F3EE !important; }
-
-  /* ═══ 3. الموبايل ═══ */
-  @media (max-width: 767px) {
-    #liquidGlassHeader {
-      top: 10px !important;
-      width: calc(100% - 20px) !important;
-      border-radius: 28px !important;
+  /* ═══════════════════════════════════════════════════════════
+     5. حركة اللمعة الذهبية للوجو كل 16 ثانية (Gold Sweep)
+     ═══════════════════════════════════════════════════════════ */
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .lgh-logo-script {
+      background-image: linear-gradient(110deg, #4F6070 0%, #4F6070 40%, #AE9164 47%, #F5E9D0 50%, #AE9164 53%, #4F6070 60%, #4F6070 100%) !important;
+      background-size: 200% 100% !important;
+      background-position: -200% 0 !important;
+      -webkit-background-clip: text !important;
+      background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      animation: ultimateGoldSweep 16s ease-in-out infinite !important;
     }
-    #liquidGlassHeader .lgh-inner {
-      min-height: 52px !important;
-      padding: 0.5rem 0.55rem 0.5rem 0.85rem !important;
+    #liquidGlassHeader.on-dark .lgh-logo-script {
+      background-image: linear-gradient(110deg, #F6F3EE 0%, #F6F3EE 40%, #AE9164 47%, #F5E9D0 50%, #AE9164 53%, #F6F3EE 60%, #F6F3EE 100%) !important;
     }
-    #liquidGlassHeader .lgh-logo-script { font-size: 1.4rem !important; }
-    #liquidGlassHeader .lgh-logo-text { font-size: 0.5rem !important; letter-spacing: 0.2em !important; }
-    #liquidGlassHeader .lgh-logo-sub { font-size: 0.38rem !important; }
-    #liquidGlassHeader .lgh-search-btn { display: none !important; }
-    #liquidGlassHeader .lgh-hamburger { display: flex !important; }
-    #liquidGlassHeader .lgh-cta { height: 32px !important; padding: 0 12px !important; font-size: 0.58rem !important; }
+    .lgh-logo-text {
+      background-image: linear-gradient(110deg, #AE9164 0%, #AE9164 40%, #F5E9D0 47%, #FFFFFF 50%, #F5E9D0 53%, #AE9164 60%, #AE9164 100%) !important;
+      background-size: 200% 100% !important;
+      background-position: -200% 0 !important;
+      -webkit-background-clip: text !important;
+      background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      animation: ultimateGoldSweep 16s ease-in-out infinite !important;
+    }
+    #liquidGlassHeader.on-dark .lgh-logo-text {
+      background-image: linear-gradient(110deg, #E8C88A 0%, #E8C88A 40%, #F5E9D0 47%, #FFFFFF 50%, #F5E9D0 53%, #E8C88A 60%, #E8C88A 100%) !important;
+    }
   }
-  @media (min-width: 768px) {
-    #liquidGlassHeader .lgh-hamburger { display: none !important; }
+  @keyframes ultimateGoldSweep {
+    0%, 87.5% { background-position: -200% 0; }
+    100% { background-position: 0% 0; }
   }
 
-  /* ═══ 4. الأقسام — كلها ظاهرة ═══ */
+  /* ═══════════════════════════════════════════════════════════
+     6. ضبط الدوك السفلي (Bottom Dock) ليكون آمنًا مع الـ Safe Area
+     ═══════════════════════════════════════════════════════════ */
+  #appleDock {
+    bottom: calc(16px + env(safe-area-inset-bottom)) !important; /* دعم شاشات iPhone Notch */
+    z-index: 9998 !important;
+  }
+  /* إخفاء أي أزرار واتساب عائمة قديمة لتجنب التداخل مع الدوك */
+  .float-wa { 
+    display: none !important; 
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     7. ضمان ظهور المحتوى وإخفاء عناصر التحميل القديمة
+     ═══════════════════════════════════════════════════════════ */
   section, section *, .reveal, .stagger, .stagger > * {
     content-visibility: visible !important;
     contain-intrinsic-size: auto !important;
+    opacity: 1 !important; 
+    transform: none !important; 
+    animation: none !important;
   }
-  .reveal, .reveal.visible, .stagger, .stagger.visible, .stagger > * {
-    opacity: 1 !important; transform: none !important; animation: none !important;
+  #logoIntro, .signature-line, .logo-shimmer { 
+    display: none !important; 
   }
-
-  /* ═══ 5. الفورم ═══ */
-  #leadForm .form-step[style*="display: block"],
-  #leadForm .form-step[style*="display:block"] { display: block !important; }
-  #leadForm .form-step[style*="display: none"],
-  #leadForm .form-step[style*="display:none"] { display: none !important; }
-
-  /* ═══ 6. الأزرار الذهبية ═══ */
-  .btn-gold {
-    background: linear-gradient(135deg, #AE9164 0%, #C9A96E 50%, #AE9164 100%) !important;
-    color: #1a1a1a !important; -webkit-text-fill-color: #1a1a1a !important;
-    border: 1px solid rgba(174, 145, 100, 0.5) !important;
+  body.intro-active { 
+    overflow: auto !important; 
+    padding-bottom: 0 !important; 
   }
-  .btn-gold:hover {
-    background: linear-gradient(135deg, #C9A96E 0%, #E8C88A 50%, #C9A96E 100%) !important;
-    box-shadow: 0 12px 32px rgba(174, 145, 100, 0.5) !important;
-  }
-
-  /* ═══ 7. النصوص الذهبية ═══ */
-  .bg-nile-blue [class*="text-nile-gold"],
-  .bg-nile-blue-dark [class*="text-nile-gold"],
-  #turkey-rescue [class*="text-nile-gold"],
-  #top-tier [class*="text-nile-gold"],
-  #guarantees [class*="text-nile-gold"],
-  #price-anchor [class*="text-nile-gold"],
-  #consult [class*="text-nile-gold"] {
-    color: #E8C88A !important; -webkit-text-fill-color: #E8C88A !important;
-  }
-  section.bg-white .gold-text,
-  section.bg-nile-beige .gold-text {
-    color: #8A7248 !important; -webkit-text-fill-color: #8A7248 !important;
-    background: none !important; animation: none !important;
-  }
-  .bg-nile-blue .gold-text,
-  .bg-nile-blue-dark .gold-text {
-    color: #E8C88A !important; -webkit-text-fill-color: #E8C88A !important;
-    background: none !important; animation: none !important;
-  }
-
-  /* ═══ 8. أيقونة الساعة في الهيرو ═══ */
-  .hero-content div[style*="232,200,138,.15"],
-  .hero-content div[style*="232, 200, 138, 0.15"] {
-    padding: 6px 14px !important; border-radius: 100px !important;
-    display: inline-flex !important; align-items: center !important;
-    justify-content: center !important; gap: 6px !important;
-    width: max-content !important; max-width: 100% !important;
-    height: auto !important; box-sizing: border-box !important;
-  }
-  .hero-content div[style*="232,200,138,.15"] svg,
-  .hero-content div[style*="232, 200, 138, 0.15"] svg {
-    width: 14px !important; height: 14px !important;
-    min-width: 14px !important; flex-shrink: 0 !important;
-  }
-
-  /* ═══ 9. الهيرو — أزرار جنب بعض على الديسكتوب ═══ */
-  @media (min-width: 640px) {
-    .hero-content .flex.flex-col.sm\:flex-row { flex-direction: row !important; }
-    .hero-content .flex.flex-col.sm\:flex-row > a { flex: 1 !important; width: auto !important; }
-  }
-
-  /* ═══ 10. الدوك ═══ */
-  #appleDock { display: flex !important; z-index: 9999 !important; bottom: 24px !important; }
-
-  /* ═══ 11. السكرول ═══ */
-  html { scroll-padding-top: 90px !important; scroll-behavior: smooth !important; }
-  section[id], main[id], header[id] { scroll-margin-top: 90px !important; }
-  @media (max-width: 767px) {
-    html { scroll-padding-top: 70px !important; }
-    section[id], main[id], header[id] { scroll-margin-top: 70px !important; }
-  }
-
-  /* ═══ 12. تنظيف ═══ */
-  #logoIntro { display: none !important; }
-  .signature-line { display: none !important; }
-  .logo-shimmer { display: none !important; }
-  body.intro-active { overflow: auto !important; padding-bottom: 0 !important; }
 </style>
-
 <script id="ZK_ULTIMATE_V5_JS">
 (function () {
   'use strict';
