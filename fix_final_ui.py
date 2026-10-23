@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Nile Smile — Final Performance & UI Makeover (Fixed Version)
-=============================================================
+Nile Smile — Fix Scroll Jitter & Badge Overlap
+================================================
+1. Fixes horizontal page shift during scroll (overflow-x).
+2. Fixes "Most Chosen" badge overlapping prices.
 """
 
 import re
@@ -10,13 +12,13 @@ import shutil
 import sys
 from pathlib import Path
 
-def final_makeover(html_path):
-    path = Path(html_path)
+def fix_jitter(path_arg):
+    path = Path(path_arg)
     if not path.exists():
-        print(f"[X] File not found: {html_path}")
+        print(f"[X] File not found: {path_arg}")
         return
 
-    backup = path.with_suffix(path.suffix + ".backup_final")
+    backup = path.with_suffix(path.suffix + ".backup_jitter")
     shutil.copy2(path, backup)
     print(f"[OK] Backup: {backup.name}\n")
 
@@ -24,27 +26,31 @@ def final_makeover(html_path):
         content = f.read()
 
     # ============================================================
-    # 1. REMOVE PERFORMANCE KILLERS (backdrop-filter & continuous animations)
+    # 1. FIX HORIZONTAL JITTER (The "Dancing" issue)
     # ============================================================
-    content = re.sub(r'backdrop-filter\s*:\s*[^;]+;', '', content)
-    content = re.sub(r'-webkit-backdrop-filter\s*:\s*[^;]+;', '', content)
-
-    continuous_anims = [
-        'logoGlowPulse', 'heartbeat', 'autoShine', 'primaryShimmer', 'quickDot',
-        'waPulse', 'trustFloat', 'monogramGlow', 'goldFlow', 'sectionFlow',
-        'goldFlowSection', 'shimmer', 'breathe', 'pulse', 'float', 'blink'
-    ]
-    for anim in continuous_anims:
-        content = re.sub(rf'animation\s*:\s*{anim}[^;]*;', '', content)
-        content = re.sub(rf'animation-name\s*:\s*{anim}[^;]*;', '', content)
-        content = re.sub(rf'\.{anim}\s*{{[^}}]*}}', '', content)
-
-    content = re.sub(r'will-change\s*:\s*[^;]+;', '', content)
-    print("[OK] Removed backdrop-filter, continuous animations, and will-change")
+    # Inject a CSS fix at the end of <head> to force no horizontal overflow
+    jitter_css = """
+<style id="fixJitterCSS">
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    position: relative;
+  }
+  /* Prevent any section from causing horizontal scroll */
+  section, .container, .container-narrow {
+    max-width: 100%;
+  }
+</style>
+"""
+    if '</head>' in content:
+        content = content.replace('</head>', jitter_css + '\n</head>')
+        print("[OK] Injected CSS to fix horizontal jitter (overflow-x)")
 
     # ============================================================
-    # 2. REDESIGN TRAVEL ADD-ONS (Combined Hotels + Concierge)
+    # 2. FIX "MOST CHOSEN" BADGE OVERLAP
     # ============================================================
+    # Replace the travel-addons section with a fixed version (inline badges)
     new_travel_section = """
 <section id="travel-addons" class="section bg-white reveal">
   <div class="container">
@@ -63,6 +69,8 @@ def final_makeover(html_path):
           <h3 class="font-serif text-nile-blue text-2xl">Hotel Tier (10 Nights)</h3>
         </div>
         <div class="space-y-3">
+          
+          <!-- 3 Star -->
           <div class="bg-white p-4 rounded border-l-4 border-gray-400 shadow-sm flex justify-between items-center">
             <div>
               <h4 class="font-serif text-nile-blue text-lg">3★ Hotel</h4>
@@ -73,10 +81,14 @@ def final_makeover(html_path):
               <p class="text-[10px] text-nile-muted">$70/night</p>
             </div>
           </div>
-          <div class="bg-white p-4 rounded border-l-4 border-nile-gold shadow-md flex justify-between items-center relative">
-            <div class="absolute top-0 right-0 bg-nile-gold text-white text-[8px] font-bold px-2 py-1 rounded-bl">Most Chosen</div>
+
+          <!-- 4 Star -->
+          <div class="bg-white p-4 rounded border-l-4 border-nile-gold shadow-md flex justify-between items-center relative overflow-hidden">
             <div>
-              <h4 class="font-serif text-nile-blue text-lg">4★ Hotel</h4>
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-serif text-nile-blue text-lg">4★ Hotel</h4>
+                <span class="bg-nile-gold text-white text-[8px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Most Chosen</span>
+              </div>
               <p class="text-nile-muted text-xs">Novotel / Hilton / Marriott · Breakfast & Transfers</p>
             </div>
             <div class="text-right">
@@ -84,6 +96,8 @@ def final_makeover(html_path):
               <p class="text-[10px] text-nile-muted">$120/night</p>
             </div>
           </div>
+
+          <!-- 5 Star -->
           <div class="bg-white p-4 rounded border-l-4 border-nile-blue shadow-sm flex justify-between items-center">
             <div>
               <h4 class="font-serif text-nile-blue text-lg">5★ Hotel</h4>
@@ -94,6 +108,8 @@ def final_makeover(html_path):
               <p class="text-[10px] text-nile-muted">$250/night</p>
             </div>
           </div>
+
+          <!-- 5 Star Suite -->
           <div class="bg-white p-4 rounded border-l-4 border-nile-blue shadow-sm flex justify-between items-center">
             <div>
               <h4 class="font-serif text-nile-blue text-lg">5★ Suite VIP</h4>
@@ -114,6 +130,8 @@ def final_makeover(html_path):
           <h3 class="font-serif text-nile-blue text-2xl">Concierge Add-Ons</h3>
         </div>
         <div class="space-y-3">
+          
+          <!-- Recovery Care -->
           <div class="bg-white p-4 rounded border-l-4 border-nile-gold shadow-sm flex justify-between items-center">
             <div>
               <h4 class="font-serif text-nile-blue text-lg">Recovery Care</h4>
@@ -124,10 +142,14 @@ def final_makeover(html_path):
               <p class="text-[10px] text-nile-muted">Per patient</p>
             </div>
           </div>
-          <div class="bg-white p-4 rounded border-l-4 border-nile-gold shadow-md flex justify-between items-center relative">
-            <div class="absolute top-0 right-0 bg-nile-gold text-white text-[8px] font-bold px-2 py-1 rounded-bl">Most Chosen</div>
+
+          <!-- Premium Concierge -->
+          <div class="bg-white p-4 rounded border-l-4 border-nile-gold shadow-md flex justify-between items-center relative overflow-hidden">
             <div>
-              <h4 class="font-serif text-nile-blue text-lg">Premium Concierge</h4>
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-serif text-nile-blue text-lg">Premium Concierge</h4>
+                <span class="bg-nile-gold text-white text-[8px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Most Chosen</span>
+              </div>
               <p class="text-nile-muted text-xs">Coordinator, unlimited transfers, Nile dinner cruise</p>
             </div>
             <div class="text-right">
@@ -135,6 +157,8 @@ def final_makeover(html_path):
               <p class="text-[10px] text-nile-muted">Per patient</p>
             </div>
           </div>
+
+          <!-- Signature VIP -->
           <div class="bg-white p-4 rounded border-l-4 border-nile-blue shadow-sm flex justify-between items-center">
             <div>
               <h4 class="font-serif text-nile-blue text-lg">Signature VIP</h4>
@@ -173,64 +197,19 @@ def final_makeover(html_path):
   </div>
 </section>
 """
+    
+    # Replace section
     content = re.sub(r'<section id="travel-addons".*?</section>', new_travel_section, content, flags=re.DOTALL)
-    print("[OK] Combined Hotels + Concierge into a single section")
+    print("[OK] Fixed: 'Most Chosen' badge overlaps (moved inline with title)")
 
-    # ============================================================
-    # 3. REORDER SECTIONS (Safe String Replacement)
-    # ============================================================
-    section_pattern = re.compile(r'(<section id="([^"]+)".*?</section>)', re.DOTALL)
-    sections = {}
-    for match in section_pattern.finditer(content):
-        sec_id = match.group(2)
-        sections[sec_id] = match.group(1)
-
-    NEW_ORDER = [
-        'price-anchor', 'top-tier', 'trust-stats', 'trust', 'founder', 'verify-us', 'results',
-        'packages', 'savings', 'estimator', 'comparison', 'destination-deep-dive',
-        'science', 'implant-systems', 'technology-stack', 'comfort', 'team',
-        'brutal-truth', 'cost-of-cheap', 'surface-material', 'clinical-protocol', 'why-prices', 'why-egypt', 'academic',
-        'guarantees', 'warranty-truth', 'implant-passport', 'peace-of-mind',
-        'risks', 'expectations', 'who-for', 'faq',
-        'journey', 'timeline', 'recovery', 'travel', 'travel-addons',
-        'curated-tours', 'discover-egypt', 'location',
-        'reviews', 'turkey-rescue', 'payment', 'doctor-credentials',
-        'bone-graft', 'crown-materials', 'orthodontics',
-        'legal', 'consult'
-    ]
-
-    hero_match = re.search(r'(<section class="hero">.*?</section>)', content, flags=re.DOTALL)
-    hero_html = hero_match.group(1) if hero_match else ""
-
-    new_main = hero_html + "\n"
-    for sec_id in NEW_ORDER:
-        if sec_id in sections:
-            new_main += sections[sec_id] + "\n"
-
-    for sec_id, sec_html in sections.items():
-        if sec_id not in NEW_ORDER:
-            new_main += sec_html + "\n"
-
-    # ⚡ الأمان هنا: استخدام String Slicing بدل regex
-    main_start = content.find('<main id="main">')
-    main_end = content.find('</main>')
-    if main_start != -1 and main_end != -1:
-        content = content[:main_start] + '<main id="main">\n' + new_main + '\n</main>' + content[main_end + len('</main>'):]
-        print("[OK] Reordered sections (Patient Journey)")
-
-    # ============================================================
-    # 4. WRITE BACK
-    # ============================================================
+    # Save
     with open(path, 'w', encoding='utf-8') as f:
         f.write(content)
 
-    print("\nSUCCESS! Site optimized.")
-    print("- Freezing issue addressed (removed backdrop-filter & heavy animations)")
-    print("- Hotels & Add-ons combined into one section")
-    print("- Sections reordered for better conversion")
+    print("\nSUCCESS! Jitter and badge issues resolved.")
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python fix_crash.py <path-to-html>")
+        print("Usage: python fix_jitter.py <path-to-html>")
     else:
-        final_makeover(sys.argv[1])
+        fix_jitter(sys.argv[1])
