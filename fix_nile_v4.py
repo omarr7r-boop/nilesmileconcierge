@@ -1,332 +1,180 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Nile Smile — Surgical Fix v4.0
-================================
-Fixes ONLY the critical issues (safe, atomic, verifiable):
-
-1. Removes `<script id="perf-scroll">` which:
-   - Hijacks window.addEventListener globally (breaks future code)
-   - Hijacks c.appendChild on #implant3d (blocks any additions)
-
-2. Fixes 4 price inconsistencies across 4 locations:
-   - Zirconia Crowns — Premium:  $7,490 → $4,990
-   - All-on-6 — Premium:         $8,490 → $7,990
-   - All-on-4 — Signature:       $7,490 → $8,490
-   - All-on-6 — Signature:       $8,990 → $9,990
-   (Plus matching save amounts in cards + tables)
-
-USAGE:
-    python fix_nile_v4.py index.html --dry-run   # Preview
-    python fix_nile_v4.py index.html             # Apply + backup
-    python fix_nile_v4.py index.html --verify    # Verify current state
-
-SAFETY:
-    - Creates timestamped backup before saving
-    - Won't corrupt file if pattern doesn't match
-    - Reports every change + warning + verification
+Nile Smile — Ultimate UI Makeover v6.0
+======================================
+Transforms the dated design into a modern, luxurious 
+"Pharaonic Gold + Dental Teal" theme.
 """
 
-import argparse
-import re
 import shutil
 import sys
 from datetime import datetime
 from pathlib import Path
 
-
-# ═══════════════════════════════════════════════════════════════
-#  PRICE MAP
-# ═══════════════════════════════════════════════════════════════
-PRICE_FIXES = {
-    'Zirconia Crowns — Premium': {
-        'old_raw': '7490', 'new_raw': '4990',
-        'old_fmt': '7,490', 'new_fmt': '4,990',
-        'old_save': '2,010', 'new_save': '4,510',
-    },
-    'All-on-6 — Premium': {
-        'old_raw': '8490', 'new_raw': '7990',
-        'old_fmt': '8,490', 'new_fmt': '7,990',
-        'old_save': '3,000', 'new_save': '3,500',
-    },
-    'All-on-4 — Signature': {
-        'old_raw': '7490', 'new_raw': '8490',
-        'old_fmt': '7,490', 'new_fmt': '8,490',
-        'old_save': '2,500', 'new_save': '1,500',
-    },
-    'All-on-6 — Signature': {
-        'old_raw': '8990', 'new_raw': '9990',
-        'old_fmt': '8,990', 'new_fmt': '9,990',
-        'old_save': '3,000', 'new_save': '2,000',
-    },
+CSS_MAKEOVER = """
+<!-- ═══════════════════ ULTIMATE UI MAKEOVER v6.0 ═══════════════════ -->
+<style id="modern-makeover">
+:root {
+  --primary-gold: #D4AF37;
+  --primary-gold-light: #FDE047;
+  --dental-teal: #0D9488;
+  --dental-teal-light: #14B8A6;
+  --bg-clinical: #F8FAFC;
+  --text-dark: #1E293B;
 }
 
-# The estimator dropdown uses different names for Signature tier
-ESTIMATOR_NAME_MAP = {
-    'Zirconia Crowns — Premium': 'Zirconia Crowns — Premium',
-    'All-on-6 — Premium':        'All-on-6 Premium',
-    'All-on-4 — Signature':      'All-on-4 Top Tier',
-    'All-on-6 — Signature':      'All-on-6 Top Tier',
+/* 1. إصلاح الخلفيات المسمطة (من بيج لـ Clinical White فخم) */
+body, section.bg-nile-beige, section.bg-white, .bg-white {
+  background: var(--bg-clinical) !important;
+  color: var(--text-dark) !important;
 }
 
+/* خلط الفرعوني (ذهبي) مع طب الأسنان (تركواز) في الخلفية */
+body {
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(13, 148, 136, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 85% 30%, rgba(212, 175, 55, 0.04) 0%, transparent 50%) !important;
+  background-attachment: fixed !important;
+}
 
-class Fixer:
-    def __init__(self, html):
-        self.html = html
-        self.original = html
-        self.changes = []
-        self.warnings = []
+/* تحويل الأقسام لكروت ضخمة ناعمة لتعطي شكل حديث */
+section.section {
+  max-width: 96% !important;
+  margin: 2rem auto !important;
+  border-radius: 24px !important;
+  background: #ffffff !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03) !important;
+  border: 1px solid rgba(0, 0, 0, 0.02) !important;
+  overflow: hidden !important;
+}
 
-    def log(self, kind, msg):
-        if kind == 'change':
-            self.changes.append(msg)
-            print(f"   ✅ {msg}")
-        else:
-            self.warnings.append(msg)
-            print(f"   ⚠️  {msg}")
+/* 2. تطوير الأزرار (Pill Shape + 3D Glow) */
+.btn, .btn-gold, .btn-outline, .btn-outline-dark, button {
+  border-radius: 100px !important; /* كبسولة */
+  padding: 0.9rem 2rem !important;
+  font-weight: 700 !important;
+  font-size: 0.85rem !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  border: none !important;
+}
 
-    # ─── 1. Remove perf-scroll ─────────────────────────────────
-    def fix_perf_scroll(self):
-        pattern = r'<script\s+id="perf-scroll"[^>]*>.*?</script>'
-        if re.search(pattern, self.html, re.DOTALL):
-            self.html = re.sub(
-                pattern,
-                '<!-- perf-scroll removed by fix_nile_v4 '
-                '(was hijacking window.addEventListener & appendChild) -->',
-                self.html, flags=re.DOTALL
-            )
-            self.log('change', 'Removed <script id="perf-scroll"> (fixed both hijacks)')
-        else:
-            self.log('warn', 'perf-scroll not found (already removed?)')
+/* الزر الفرعوني الذهبي (للأزرار المهمة جداً) */
+.btn-gold {
+  background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%) !important;
+  color: #1a1a1a !important;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3) !important;
+}
 
-    # ─── 2. Schema.org prices ──────────────────────────────────
-    def fix_schema_prices(self):
-        for name, p in PRICE_FIXES.items():
-            pat = (
-                r'("name":\s*"' + re.escape(name) + r'"'
-                r'[\s\S]{0,500}?"price":\s*")' + p['old_raw'] + r'(")'
-            )
-            n = len(re.findall(pat, self.html))
-            if n:
-                self.html = re.sub(pat, r'\g<1>' + p['new_raw'] + r'\g<2>', self.html)
-                self.log('change', f'Schema: "{name}" {p["old_raw"]}→{p["new_raw"]} ({n}x)')
-            else:
-                self.log('warn', f'Schema: "{name}" pattern not found')
+.btn-gold:hover {
+  transform: translateY(-4px) scale(1.02) !important;
+  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5) !important;
+}
 
-    # ─── 3. Estimator dropdown ─────────────────────────────────
-    def fix_estimator_prices(self):
-        for name, p in PRICE_FIXES.items():
-            est_name = ESTIMATOR_NAME_MAP.get(name, name)
-            pat = (
-                r'(<option value=")' + p['old_raw'] + r'(\|\d+">'
-                + re.escape(est_name) + r'[^<]*?\$)' + re.escape(p['old_fmt'])
-                + r'(</option>)'
-            )
-            n = len(re.findall(pat, self.html))
-            if n:
-                self.html = re.sub(
-                    pat,
-                    r'\g<1>' + p['new_raw'] + r'\g<2>' + p['new_fmt'] + r'\g<3>',
-                    self.html
-                )
-                self.log('change', f'Estimator: "{est_name}" → ${p["new_fmt"]}')
-            else:
-                self.log('warn', f'Estimator: "{est_name}" pattern not found')
+/* الزر الطبي التركواز (للأزرار الثانوية) */
+.btn-outline, .btn-outline-dark {
+  background: transparent !important;
+  color: var(--dental-teal) !important;
+  border: 2px solid var(--dental-teal) !important;
+  box-shadow: none !important;
+}
 
-    # ─── 4. Card prices ────────────────────────────────────────
-    def fix_card_prices(self):
-        for name, p in PRICE_FIXES.items():
-            pat = (
-                r'(<h3[^>]*>' + re.escape(name) + r'</h3>[\s\S]{0,800}?\$)'
-                + re.escape(p['old_fmt'])
-            )
-            n = len(re.findall(pat, self.html))
-            if n:
-                self.html = re.sub(pat, r'\g<1>' + p['new_fmt'], self.html)
-                self.log('change', f'Card: "{name}" ${p["old_fmt"]}→${p["new_fmt"]}')
-            else:
-                self.log('warn', f'Card: "{name}" pattern not found')
+.btn-outline:hover, .btn-outline-dark:hover {
+  background: var(--dental-teal) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(13, 148, 136, 0.3) !important;
+}
 
-    # ─── 5. Card save amounts ──────────────────────────────────
-    def fix_card_save_amounts(self):
-        # (unique prefix pattern, old save, new save, label)
-        saves = [
-            ('Standard: $9,500</span> <span style="color:#AE9164;font-style:italic">— save $',
-             '2,010', '4,510', 'Zirconia'),
-            ('Standard: $11,490</span> <span style="color:#AE9164;font-style:italic">— save $',
-             '3,000', '3,500', 'All-on-6 Premium'),
-            ('Standard: $9,990</span> <span style="color:#AE9164;font-style:italic">— save $',
-             '2,500', '1,500', 'All-on-4 Signature'),
-            ('Standard: $11,990</span> <span style="color:#AE9164;font-style:italic">— save $',
-             '3,000', '2,000', 'All-on-6 Signature'),
-        ]
-        for prefix, old_s, new_s, label in saves:
-            old = prefix + old_s
-            new = prefix + new_s
-            if old in self.html:
-                self.html = self.html.replace(old, new, 1)
-                self.log('change', f'Save amount ({label}): ${old_s}→${new_s}')
-            else:
-                self.log('warn', f'Save amount ({label}) not found')
+/* 3. إصلاح الزوايا الحادة في الصناديق والنماذج */
+input, select, textarea, .card, .modal-content, .bg-white, .bg-nile-beige {
+  border-radius: 16px !important;
+}
 
-    # ─── 6. Reviews tables ─────────────────────────────────────
-    def fix_review_tables(self):
-        # 6a. Founding-vs-Standard table (full row replacement)
-        founding = {
-            'Zirconia Crowns — Premium': {
-                'old': '<tr><td class="td-label">Zirconia Crowns — Premium</td><td class="td-center">$7,490</td><td class="td-muted td-center"><span style="text-decoration:line-through">$9,500</span></td><td class="td-gold td-center">$2,010</td></tr>',
-                'new': '<tr><td class="td-label">Zirconia Crowns — Premium</td><td class="td-center">$4,990</td><td class="td-muted td-center"><span style="text-decoration:line-through">$9,500</span></td><td class="td-gold td-center">$4,510</td></tr>',
-            },
-            'All-on-6 — Premium': {
-                'old': '<tr><td class="td-label">All-on-6 — Premium</td><td class="td-center">$8,490</td><td class="td-muted td-center"><span style="text-decoration:line-through">$11,490</span></td><td class="td-gold td-center">$3,000</td></tr>',
-                'new': '<tr><td class="td-label">All-on-6 — Premium</td><td class="td-center">$7,990</td><td class="td-muted td-center"><span style="text-decoration:line-through">$11,490</span></td><td class="td-gold td-center">$3,500</td></tr>',
-            },
-            'All-on-4 — Signature': {
-                'old': '<tr><td class="td-label">All-on-4 — Signature</td><td class="td-center">$7,490</td><td class="td-muted td-center"><span style="text-decoration:line-through">$9,990</span></td><td class="td-gold td-center">$2,500</td></tr>',
-                'new': '<tr><td class="td-label">All-on-4 — Signature</td><td class="td-center">$8,490</td><td class="td-muted td-center"><span style="text-decoration:line-through">$9,990</span></td><td class="td-gold td-center">$1,500</td></tr>',
-            },
-            'All-on-6 — Signature': {
-                'old': '<tr><td class="td-label">All-on-6 — Signature</td><td class="td-center">$8,990</td><td class="td-muted td-center"><span style="text-decoration:line-through">$11,990</span></td><td class="td-gold td-center">$3,000</td></tr>',
-                'new': '<tr><td class="td-label">All-on-6 — Signature</td><td class="td-center">$9,990</td><td class="td-muted td-center"><span style="text-decoration:line-through">$11,990</span></td><td class="td-gold td-center">$2,000</td></tr>',
-            },
-        }
-        for name, r in founding.items():
-            if r['old'] in self.html:
-                self.html = self.html.replace(r['old'], r['new'], 1)
-                self.log('change', f'Reviews (Founding table): {name}')
-            else:
-                self.log('warn', f'Reviews (Founding): {name} row not found')
+/* صناديق الإدخال */
+input, select, textarea {
+  border: 2px solid #E2E8F0 !important;
+  padding: 1rem 1.2rem !important;
+  background: #F8FAFC !important;
+  transition: all 0.3s ease !important;
+}
 
-        # 6b. Recap table (Which Package Is Right for You?)
-        recap = {
-            'Zirconia': (
-                '<td class="td-label">Zirconia Crowns — Premium</td><td class="td-center">1 (single jaw)</td><td class="td-muted td-center">— crowns only</td><td class="td-center">12–14</td><td class="td-gold td-center">$7,490</td>',
-                '<td class="td-label">Zirconia Crowns — Premium</td><td class="td-center">1 (single jaw)</td><td class="td-muted td-center">— crowns only</td><td class="td-center">12–14</td><td class="td-gold td-center">$4,990</td>',
-            ),
-            'All-on-6 Premium': (
-                '<td class="td-label">All-on-6 — Premium</td><td class="td-center">1 (single jaw)</td><td class="td-center">6</td><td class="td-center">12–14</td><td class="td-gold td-center">$8,490</td>',
-                '<td class="td-label">All-on-6 — Premium</td><td class="td-center">1 (single jaw)</td><td class="td-center">6</td><td class="td-center">12–14</td><td class="td-gold td-center">$7,990</td>',
-            ),
-            'All-on-4 Signature': (
-                '<td class="td-label">All-on-4 — Signature</td><td class="td-center">1 (single jaw)</td><td class="td-center">4</td><td class="td-center">10–12</td><td class="td-gold td-center">$7,490</td>',
-                '<td class="td-label">All-on-4 — Signature</td><td class="td-center">1 (single jaw)</td><td class="td-center">4</td><td class="td-center">10–12</td><td class="td-gold td-center">$8,490</td>',
-            ),
-            'All-on-6 Signature': (
-                '<td class="td-label">All-on-6 — Signature</td><td class="td-center">1 (single jaw)</td><td class="td-center">6</td><td class="td-center">12–14</td><td class="td-gold td-center">$8,990</td>',
-                '<td class="td-label">All-on-6 — Signature</td><td class="td-center">1 (single jaw)</td><td class="td-center">6</td><td class="td-center">12–14</td><td class="td-gold td-center">$9,990</td>',
-            ),
-        }
-        for label, (old, new) in recap.items():
-            if old in self.html:
-                self.html = self.html.replace(old, new, 1)
-                self.log('change', f'Reviews (Recap): {label}')
-            else:
-                self.log('warn', f'Reviews (Recap): {label} not found')
+input:focus, select:focus, textarea:focus {
+  border-color: var(--dental-teal) !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.1) !important;
+  outline: none !important;
+}
 
-    # ─── RUN ───────────────────────────────────────────────────
-    def run(self):
-        print("\n🔧 Applying fixes...\n")
-        self.fix_perf_scroll()
-        self.fix_schema_prices()
-        self.fix_estimator_prices()
-        self.fix_card_prices()
-        self.fix_card_save_amounts()
-        self.fix_review_tables()
-        return self.html
+/* 4. إخفاء الأزرار الزائدة والمكررة لترتيب الصفحة */
+/* إخفاء زر الاتصال في الهيدر لأنه مكرر مع الواتساب */
+.header-cta { display: none !important; }
 
+/* تصغير أزرار الباقات عشان ميبقوش ضخمين */
+#packages .btn-gold { 
+  font-size: 0.75rem !important; 
+  padding: 0.7rem 1.5rem !important; 
+}
 
-# ═══════════════════════════════════════════════════════════════
-#  VERIFICATION
-# ═══════════════════════════════════════════════════════════════
-def verify(html):
-    issues = []
-    if 'id="perf-scroll"' in html:
-        issues.append('perf-scroll still present')
-    if 'window.addEventListener = function' in html:
-        issues.append('window.addEventListener hijack still present')
-    if 'c.appendChild = function()' in html:
-        issues.append('c.appendChild hijack still present')
+/* 5. لمسة فرعونية فخمة للعناوين الرئيسية */
+h2, h3 {
+  color: #0F172A !important;
+  letter-spacing: -0.02em !important;
+}
 
-    for name, p in PRICE_FIXES.items():
-        # Look for the OLD price near the package name
-        pat = re.escape(name) + r'[\s\S]{0,800}?\$' + re.escape(p['old_fmt'])
-        if re.search(pat, html):
-            issues.append(f'Old price still present: {name} (${p["old_fmt"]})')
-    return issues
+/* تحويل اللون الذهبي النصي ليكون أوضح */
+.text-nile-gold, .gold-text {
+  background: linear-gradient(135deg, #B45309, #F59E0B, #B45309) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  font-weight: 800 !important;
+}
 
+/* 6. الشريط العلوي (Header) - زجاجي حديث */
+.site-header {
+  border-radius: 100px !important;
+  margin-top: 10px !important;
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255,255,255,0.5) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important;
+}
+</style>
+<!-- ═══════════════════ END MAKEOVER ═══════════════════ -->
+"""
 
-# ═══════════════════════════════════════════════════════════════
-#  MAIN
-# ═══════════════════════════════════════════════════════════════
 def main():
-    ap = argparse.ArgumentParser(
-        description='Nile Smile — surgical fix v4 (hijacks + prices)'
-    )
-    ap.add_argument('file', help='Path to index.html')
-    ap.add_argument('--dry-run', action='store_true', help='Preview without saving')
-    ap.add_argument('--verify', action='store_true', help='Verify current state only')
-    args = ap.parse_args()
-
-    path = Path(args.file)
+    path = Path(sys.argv[1]) if len(sys.argv) > 1 else Path('index.html')
     if not path.exists():
-        print(f'❌ File not found: {path}')
-        sys.exit(1)
-
-    print(f'\n{"═"*66}')
-    print(f'  🔧 Nile Smile — Surgical Fix v4.0')
-    print(f'  📄 {path.name} — {path.stat().st_size:,} bytes')
-    print(f'{"═"*66}\n')
+        print(f"❌ File not found: {path}")
+        return
 
     html = path.read_text(encoding='utf-8')
-
-    # ─── VERIFY MODE ───
-    if args.verify:
-        issues = verify(html)
-        if issues:
-            print('❌ Issues found:')
-            for i in issues:
-                print(f'   • {i}')
-            sys.exit(1)
-        print('✅ Clean — no critical issues')
-        sys.exit(0)
-
-    # ─── APPLY ───
-    fixer = Fixer(html)
-    new_html = fixer.run()
-
-    # ─── VERIFY AFTER ───
-    print("\n🔍 Verifying after fixes:\n")
-    remaining = verify(new_html)
-    if remaining:
-        for r in remaining:
-            print(f'   ❌ {r}')
-    else:
-        print('   ✅ All clear — no hijacks, no stale prices')
-
-    # ─── SIZE ───
-    print(f'\n📦 Size: {len(html):,} → {len(new_html):,} bytes '
-          f'({len(new_html)-len(html):+,})')
-
-    # ─── SAVE ───
-    if args.dry_run:
-        print('\n⚠️  DRY RUN — nothing saved\n')
+    
+    if 'id="modern-makeover"' in html:
+        print("⚠️ Makeover already applied. Skipping...")
         return
-    if new_html == html:
-        print('\n⚠️  No changes made — file unchanged\n')
+
+    print(f"\n🎨 Applying Ultimate UI Makeover v6.0...\n")
+
+    # حقن الكود قبل إغلاق الـ head
+    if '</head>' in html:
+        html = html.replace('</head>', CSS_MAKEOVER + '\n</head>')
+        print("   ✅ Injected Modern CSS Theme")
+    else:
+        print("   ❌ </head> tag not found!")
         return
 
     ts = datetime.now().strftime('%Y%m%d_%H%M%S')
-    backup = path.with_name(f'{path.stem}.backup_{ts}{path.suffix}')
+    backup = path.with_name(f'{path.stem}.backup_v6_{ts}{path.suffix}')
     shutil.copy2(path, backup)
-    print(f'\n💾 Backup: {backup.name}')
-
-    path.write_text(new_html, encoding='utf-8')
-    print(f'💾 Saved: {path.name}')
-    print(f'\n✅ Done. Test the site:')
-    print(f'   • Mobile: NO scroll freeze')
-    print(f'   • Prices: logical tiers (Premium < Signature)')
-    print(f'   • No console errors\n')
-
+    
+    path.write_text(html, encoding='utf-8')
+    print(f"\n💾 Backup: {backup.name}")
+    print(f"💾 Saved: {path.name}")
+    print("\n🚀 Done! Open the website and Hard Refresh (Ctrl+F5)\n")
 
 if __name__ == '__main__':
     main()
