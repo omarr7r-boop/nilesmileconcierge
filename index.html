@@ -12087,5 +12087,117 @@ summary:focus-visible {
   }
 }
 </style>
+<!-- ═══════════════════ CURRENCY CONVERTER ADDITION ═══════════════════ -->
+<style id="currencySwitcherStyles">
+  .currency-switcher {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .currency-btn {
+    padding: 0.5rem 1.2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    border-radius: 100px;
+    cursor: pointer;
+    border: 1px solid rgba(174,145,100,.4);
+    background: transparent;
+    color: #4F6070;
+    transition: all 0.3s;
+  }
+  .currency-btn.active {
+    background: linear-gradient(135deg, #AE9164, #E8C88A);
+    color: #1F2A36;
+    border-color: #E8C88A;
+    box-shadow: 0 4px 15px rgba(174,145,100,0.4);
+  }
+</style>
+
+<script id="currencySwitcherScript">
+(function(){
+  'use strict';
+  // Exchange rates (Approximate for demo purposes)
+  const rates = {
+    USD: 1,
+    AUD: 1.52,
+    GBP: 0.78,
+    EUR: 0.92,
+    CAD: 1.36
+  };
+
+  const symbols = {
+    USD: '$',
+    AUD: 'A$',
+    GBP: '£',
+    EUR: '€',
+    CAD: 'C$'
+  };
+
+  // Inject the switcher UI into the #packages section
+  const packagesSection = document.getElementById('packages');
+  if(packagesSection){
+    const header = packagesSection.querySelector('.text-center');
+    if(header){
+      const switcherHTML = `
+        <div class="currency-switcher mt-6">
+          <button class="currency-btn active" data-currency="USD">USD ($)</button>
+          <button class="currency-btn" data-currency="AUD">AUD (A$)</button>
+          <button class="currency-btn" data-currency="GBP">GBP (£)</button>
+          <button class="currency-btn" data-currency="EUR">EUR (€)</button>
+          <button class="currency-btn" data-currency="CAD">CAD (C$)</button>
+        </div>
+      `;
+      header.insertAdjacentHTML('beforeend', switcherHTML);
+    }
+  }
+
+  // Function to find and convert prices
+  function convertPrices(currency) {
+    const rate = rates[currency];
+    const symbol = symbols[currency];
+    
+    // Find all price elements inside the packages section
+    const priceElements = document.querySelectorAll('#packages .font-serif.font-bold.text-nile-gold');
+    
+    priceElements.forEach(el => {
+      // Get the raw text, e.g., "$4,490 USD" or "$7,490"
+      const text = el.innerText;
+      
+      // Regex to match numbers like 4,490
+      const match = text.match(/([\d,]+)/);
+      if (match) {
+        const originalNum = parseFloat(match[0].replace(/,/g, ''));
+        if (originalNum > 0) {
+          // Convert
+          const newNum = Math.round(originalNum * rate);
+          // Format with commas
+          const formattedNewNum = newNum.toLocaleString('en-US');
+          
+          // Replace the number in the text
+          const newText = text.replace(match[0], formattedNewNum).replace('$', symbol);
+          el.innerHTML = newText;
+        }
+      }
+    });
+  }
+
+  // Attach click events
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('currency-btn')) {
+      // Remove active from all
+      document.querySelectorAll('.currency-btn').forEach(btn => btn.classList.remove('active'));
+      // Add active to clicked
+      e.target.classList.add('active');
+      // Convert
+      convertPrices(e.target.dataset.currency);
+    }
+  });
+})();
+</script>
+<!-- ═══════════════════ END CURRENCY CONVERTER ═══════════════════ -->
 </body>
 </html>
