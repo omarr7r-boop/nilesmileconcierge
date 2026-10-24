@@ -11878,6 +11878,160 @@ summary:focus-visible {
       observer.observe(mapWrap);
     })();
     </script>
-    
+    <!-- ═══════ SOLUTION: Performance Master Fix ═══════ -->
+<style id="perf-master">
+/* 1) إيقاف كل الأنيميشن اللانهائي */
+.breathe,.waPulse,.goldFlow,.sectionFlow,.shimmer,.logoGoldSweep,
+.routeDash,.mapPinPulse,.hubPulse,.autoShine,.primaryShimmer,
+.quickDot,.trustFloat,.monogramGlow,.shine-auto::before{
+  animation: none !important;
+}
+/* 2) إزالة backdrop-filter من العناصر الثقيلة */
+.site-header,.apple-dock,.card,.modal-content,.search-modal-overlay,
+.exit-popup-overlay,.quick-bar,.sticky-mobile,.hero-content,
+.world-map-wrap,.float-wa{
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+/* 3) إيقاف حركة الخريطة (SVG animateMotion) */
+.world-map-svg animateMotion{ display: none !important; }
+/* 4) تقليل box-shadow الثقيل على البطاقات */
+.card{ box-shadow: 0 2px 8px rgba(0,0,0,.04) !important; }
+.card:hover{ box-shadow: 0 8px 24px rgba(79,96,112,.1) !important; }
+</style>
+
+<script id="perf-scroll">
+/* 5) دمج كل سكرولات الموقع في مستمع واحد */
+(function(){
+  if (window.__scrollUnified) return;
+  window.__scrollUnified = true;
+
+  // إلغاء كل مستمعي scroll القدام (باستثناء اللي هنعمله)
+  const oldAdd = window.addEventListener;
+  window.addEventListener = function(type, fn, opts){
+    if (type === 'scroll' && !fn.__isUnified) {
+      // تجاهل مستمعي السكرول القدام
+      return;
+    }
+    return oldAdd.call(this, type, fn, opts);
+  };
+
+  let ticking = false;
+  const progressEl = document.getElementById('progress');
+  const headerEl   = document.getElementById('header');
+  const stickyCta  = document.getElementById('stickyCta');
+
+  function unified(){
+    const y = window.scrollY;
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+
+    if (progressEl) progressEl.style.width = h>0 ? (y/h*100)+'%' : '0%';
+    if (headerEl) headerEl.classList.toggle('scrolled', y > 60);
+    if (stickyCta && !sessionStorage.getItem('stickyCtaDismissed')) {
+      stickyCta.classList.toggle('show', y > 800 && y < h - 400);
+    }
+    ticking = false;
+  }
+  const handler = function(){ if(!ticking){ ticking=true; requestAnimationFrame(unified);} };
+  handler.__isUnified = true;
+  oldAdd.call(window, 'scroll', handler, {passive:true});
+})();
+
+/* 6) إيقاف Three.js إلا لو المستخدم وصل للقسم */
+(function(){
+  const c = document.getElementById('implant3d');
+  if (!c || !('IntersectionObserver' in window)) return;
+  const origAppend = c.appendChild;
+  c.appendChild = function(){ return this; }; // منع إضافة الـ canvas إلا عند الحاجة
+  new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) {
+        c.appendChild = origAppend; // إعادة تفعيل الإضافة
+        // تفريغ المراقب
+        this.disconnect && this.disconnect();
+      }
+    }.bind(this));
+  }, {rootMargin:'400px'}).observe(c);
+})();
+
+/* 7) إيقاف الساعات (تشتغل مرة واحدة عند الظهور فقط) */
+(function(){
+  const clocks = document.querySelectorAll('.map-stat-time[data-tz]');
+  if (!clocks.length) return;
+  let started = false;
+  function tick(){
+    const now = new Date();
+    clocks.forEach(function(el){
+      try{
+        el.textContent = new Intl.DateTimeFormat('en-GB',{
+          timeZone: el.dataset.tz, hour:'2-digit', minute:'2-digit', hour12:false
+        }).format(now);
+      }catch(e){ el.textContent='—'; }
+    });
+  }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(es){
+      if (es[0].isIntersecting && !started) {
+        started = true; tick();
+        setInterval(tick, 60000); // كل دقيقة بدل 15 ثانية
+      }
+    }, {rootMargin:'200px'}).observe(document.querySelector('.map-stats-grid')||document.body);
+  } else { tick(); }
+})();
+</script>
+<style id="desktop-fix">
+@media (min-width: 1024px){
+  /* الهيدر: شريط كامل عرض الصفحة، مش كبسولة عائمة */
+  .site-header{
+    position: fixed !important;
+    top: 0 !important; left: 0 !important;
+    width: 100% !important; max-width: 100% !important;
+    border-radius: 0 !important;
+    transform: none !important;
+    background: #FBFAF7 !important;
+    border-bottom: 1px solid rgba(174,145,100,.25) !important;
+    box-shadow: 0 2px 12px rgba(0,0,0,.04) !important;
+    padding: .75rem 2rem !important;
+  }
+  .site-header .header-inner{ max-width: 1400px; margin: 0 auto; }
+
+  /* إخفاء الـ Dock السفلي والزر العائم */
+  .apple-dock, .float-wa, .sticky-mobile { display: none !important; }
+
+  /* مساحة الهيدر */
+  .hero { padding-top: 9rem !important; }
+  body { padding-bottom: 0 !important; }
+
+  /* عرض المحتوى أوسع شوية */
+  .container { max-width: 1280px; }
+}
+</style>
+<style id="travel-unify">
+#travel-addons .grid.lg\:grid-cols-2{
+  gap: 0 !important;
+  border: 1px solid rgba(174,145,100,.25);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(79,96,112,.08);
+}
+#travel-addons .grid.lg\:grid-cols-2 > div{
+  border-radius: 0 !important;
+  border: none !important;
+  padding: 2rem !important;
+}
+#travel-addons .grid.lg\:grid-cols-2 > div:first-child{
+  border-right: 1px solid rgba(174,145,100,.2) !important;
+  background: linear-gradient(180deg,#FBF7EF 0%,#F6F3EE 100%) !important;
+}
+#travel-addons .grid.lg\:grid-cols-2 > div:last-child{
+  background: linear-gradient(180deg,#F6F3EE 0%,#EDE6DA 100%) !important;
+}
+@media (max-width: 1023px){
+  #travel-addons .grid.lg\:grid-cols-2 > div:first-child{
+    border-right: none !important;
+    border-bottom: 1px solid rgba(174,145,100,.2) !important;
+  }
+}
+</style>
 </body>
 </html>
