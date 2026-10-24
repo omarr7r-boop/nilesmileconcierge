@@ -3167,20 +3167,6 @@ body { padding-bottom: 90px !important; }
 .exit-popup-box { pointer-events: auto; }
 </style>
 
-
-<style id="fixJitterCSS">
-  html, body {
-    overflow-x: hidden !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    position: relative;
-  }
-  /* Prevent any section from causing horizontal scroll */
-  section, .container, .container-narrow {
-    max-width: 100%;
-  }
-</style>
-
 </head>
 <body>
 
@@ -6974,7 +6960,6 @@ body { padding-bottom: 90px !important; }
     </div>
   </div>
 </section>
-
 <section id="travel-addons" class="section bg-white reveal">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-12">
@@ -6992,8 +6977,6 @@ body { padding-bottom: 90px !important; }
           <h3 class="font-serif text-nile-blue text-2xl">Hotel Tier (10 Nights)</h3>
         </div>
         <div class="space-y-3">
-          
-          <!-- 3 Star -->
           <div class="bg-white p-4 rounded border-l-4 border-gray-400 shadow-sm flex justify-between items-center">
             <div>
               <h4 class="font-serif text-nile-blue text-lg">3★ Hotel</h4>
@@ -7004,14 +6987,10 @@ body { padding-bottom: 90px !important; }
               <p class="text-[10px] text-nile-muted">$70/night</p>
             </div>
           </div>
-
-          <!-- 4 Star -->
-          <div class="bg-white p-4 rounded border-l-4 border-nile-gold shadow-md flex justify-between items-center relative overflow-hidden">
+          <div class="bg-white p-4 rounded border-l-4 border-nile-gold shadow-md flex justify-between items-center relative">
+            <div class="absolute top-0 right-0 bg-nile-gold text-white text-[8px] font-bold px-2 py-1 rounded-bl">Most Chosen</div>
             <div>
-              <div class="flex items-center gap-2 mb-1">
-                <h4 class="font-serif text-nile-blue text-lg">4★ Hotel</h4>
-                <span class="bg-nile-gold text-white text-[8px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Most Chosen</span>
-              </div>
+              <h4 class="font-serif text-nile-blue text-lg">4★ Hotel</h4>
               <p class="text-nile-muted text-xs">Novotel / Hilton / Marriott · Breakfast & Transfers</p>
             </div>
             <div class="text-right">
@@ -7019,8 +6998,6 @@ body { padding-bottom: 90px !important; }
               <p class="text-[10px] text-nile-muted">$120/night</p>
             </div>
           </div>
-
-          <!-- 5 Star -->
           <div class="bg-white p-4 rounded border-l-4 border-nile-blue shadow-sm flex justify-between items-center">
             <div>
               <h4 class="font-serif text-nile-blue text-lg">5★ Hotel</h4>
@@ -7031,8 +7008,6 @@ body { padding-bottom: 90px !important; }
               <p class="text-[10px] text-nile-muted">$250/night</p>
             </div>
           </div>
-
-          <!-- 5 Star Suite -->
           <div class="bg-white p-4 rounded border-l-4 border-nile-blue shadow-sm flex justify-between items-center">
             <div>
               <h4 class="font-serif text-nile-blue text-lg">5★ Suite VIP</h4>
@@ -7053,8 +7028,6 @@ body { padding-bottom: 90px !important; }
           <h3 class="font-serif text-nile-blue text-2xl">Concierge Add-Ons</h3>
         </div>
         <div class="space-y-3">
-          
-          <!-- Recovery Care -->
           <div class="bg-white p-4 rounded border-l-4 border-nile-gold shadow-sm flex justify-between items-center">
             <div>
               <h4 class="font-serif text-nile-blue text-lg">Recovery Care</h4>
@@ -7065,14 +7038,10 @@ body { padding-bottom: 90px !important; }
               <p class="text-[10px] text-nile-muted">Per patient</p>
             </div>
           </div>
-
-          <!-- Premium Concierge -->
-          <div class="bg-white p-4 rounded border-l-4 border-nile-gold shadow-md flex justify-between items-center relative overflow-hidden">
+          <div class="bg-white p-4 rounded border-l-4 border-nile-gold shadow-md flex justify-between items-center relative">
+            <div class="absolute top-0 right-0 bg-nile-gold text-white text-[8px] font-bold px-2 py-1 rounded-bl">Most Chosen</div>
             <div>
-              <div class="flex items-center gap-2 mb-1">
-                <h4 class="font-serif text-nile-blue text-lg">Premium Concierge</h4>
-                <span class="bg-nile-gold text-white text-[8px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Most Chosen</span>
-              </div>
+              <h4 class="font-serif text-nile-blue text-lg">Premium Concierge</h4>
               <p class="text-nile-muted text-xs">Coordinator, unlimited transfers, Nile dinner cruise</p>
             </div>
             <div class="text-right">
@@ -7080,8 +7049,6 @@ body { padding-bottom: 90px !important; }
               <p class="text-[10px] text-nile-muted">Per patient</p>
             </div>
           </div>
-
-          <!-- Signature VIP -->
           <div class="bg-white p-4 rounded border-l-4 border-nile-blue shadow-sm flex justify-between items-center">
             <div>
               <h4 class="font-serif text-nile-blue text-lg">Signature VIP</h4>
@@ -7119,7 +7086,6 @@ body { padding-bottom: 90px !important; }
     </div>
   </div>
 </section>
-
 <section id="curated-tours" class="section bg-white reveal">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-14">
