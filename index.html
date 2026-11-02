@@ -3190,6 +3190,24 @@ body { padding-bottom: 90px !important; }
 .search-modal { z-index: 9500 !important; }
 .exit-popup { z-index: 10000 !important; }
 
+/* Cookie banner floating above Apple Dock */
+#cookieBanner {
+  z-index: 99999 !important;
+  bottom: 85px !important;
+}
+#cookieBanner button {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+@media (max-width: 767px) {
+  #cookieBanner .btn {
+    width: auto !important;
+    min-height: 40px !important;
+    padding: 0.6rem 1.4rem !important;
+    font-size: 0.75rem !important;
+  }
+}
+
 /* Ensure exit popup clickability */
 .exit-popup { pointer-events: none; }
 .exit-popup.open { pointer-events: auto; }
@@ -8932,12 +8950,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a href="tel:+201503308333" class="flex items-center justify-center gap-2" style="background:rgba(174,145,100,.15);color:#C9A96E;border:1px solid rgba(174,145,100,.4); border-radius: 4px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call Us</a>
 </div>
 <!-- ═══════════════════ COOKIE BANNER ═══════════════════ -->
-<div id="cookieBanner" class="fixed bottom-0 left-0 right-0 bg-nile-blue text-white p-4 z-[60] hidden shadow-[0_-10px_30px_rgba(0,0,0,0.2)]">
+<div id="cookieBanner" class="fixed left-0 right-0 bg-nile-blue text-white p-4 hidden shadow-[0_-10px_30px_rgba(0,0,0,0.2)]" style="z-index: 99999 !important; bottom: 85px !important;">
   <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
-    <p>We use cookies to improve your experience. By continuing, you agree to our <button onclick="openModal('privacyModal')" class="text-nile-gold-bright underline hover:text-white transition">Privacy Policy</button>.</p>
+    <p>We use cookies to improve your experience. By continuing, you agree to our <button type="button" onclick="openModal('privacyModal')" class="text-nile-gold-bright underline hover:text-white transition cursor-pointer">Privacy Policy</button>.</p>
     <div class="flex gap-2 flex-shrink-0">
-  <button onclick="document.getElementById('cookieBanner').classList.add('hidden'); document.body.classList.remove('has-cookie-banner'); localStorage.setItem('cookiesAccepted','rejected');" class="btn btn-outline-dark whitespace-nowrap" style="background:transparent;color:#F6F3EE;border-color:rgba(246,243,238,.3)">Reject</button>
-  <button onclick="document.getElementById('cookieBanner').classList.add('hidden'); document.body.classList.remove('has-cookie-banner'); localStorage.setItem('cookiesAccepted','true'); if(window.loadAnalytics) window.loadAnalytics();" class="btn btn-gold shine-auto whitespace-nowrap">Accept</button>
+  <button type="button" onclick="document.getElementById('cookieBanner').classList.add('hidden'); document.body.classList.remove('has-cookie-banner'); localStorage.setItem('cookiesAccepted','rejected');" class="btn btn-outline-dark whitespace-nowrap" style="background:transparent;color:#F6F3EE;border-color:rgba(246,243,238,.3);cursor:pointer;position:relative;z-index:999999;pointer-events:auto;">Reject</button>
+  <button type="button" onclick="document.getElementById('cookieBanner').classList.add('hidden'); document.body.classList.remove('has-cookie-banner'); localStorage.setItem('cookiesAccepted','true'); if(window.loadAnalytics) window.loadAnalytics();" class="btn btn-gold shine-auto whitespace-nowrap" style="cursor:pointer;position:relative;z-index:999999;pointer-events:auto;">Accept</button>
 </div>
   </div>
 </div>
@@ -9358,6 +9376,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
  /* ═════════ 6. SMOOTH SCROLL — CINEMATIC ═════════ */
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let scrollFrameId;
 
 document.querySelectorAll('a[href^="#"]').forEach(link=>{
   link.addEventListener('click', function(e){
@@ -9373,10 +9392,13 @@ document.querySelectorAll('a[href^="#"]').forEach(link=>{
     const targetY = target.getBoundingClientRect().top + window.pageYOffset - headerH;
     
     if(prefersReduced){
+      cancelAnimationFrame(scrollFrameId);
       window.scrollTo({ top: targetY, behavior: 'auto' });
       if(history.pushState) history.pushState(null, '', href);
       return;
     }
+    
+    cancelAnimationFrame(scrollFrameId);
     
     const startY = window.pageYOffset;
     const distance = targetY - startY;
@@ -9399,9 +9421,11 @@ document.querySelectorAll('a[href^="#"]').forEach(link=>{
       if(!startTs) startTs = ts;
       const p = Math.min((ts - startTs) / duration, 1);
       window.scrollTo(0, startY + distance * ease(p));
-      if(p < 1) requestAnimationFrame(step);
+      if(p < 1) {
+        scrollFrameId = requestAnimationFrame(step);
+      }
     }
-    requestAnimationFrame(step);
+    scrollFrameId = requestAnimationFrame(step);
     
     if(history.pushState) history.pushState(null,'',href);
   });
