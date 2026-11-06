@@ -76,8 +76,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- ═══════════════════ PERFORMANCE ═══════════════════ -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="dns-prefetch" href="https://images.unsplash.com">
-<!-- (محذوف — مش محتاجين preconnect للـ CDN بعد الآن) -->
+<!-- (لا يوجد CDN خارجي للصور — كل الصور من مجلد images/ المحلي) -->
 
 <!-- Tailwind build output — preload for fastest paint -->
 <link rel="preload" href="styles.css" as="style">
@@ -424,7 +423,7 @@ img{
 
 <!-- ═══════════ TAILWIND — BUILD TIME (Production) ═══════════ -->
 <link rel="stylesheet" href="styles.css">
-<script src="https://cdn.tailwindcss.com"></script>
+<!-- (CDN محذوف — نعتمد فقط على styles.css المبني) -->
 <!-- ═══════════════════ SCHEMA.ORG ═══════════════════ -->
 <script type="application/ld+json">
 {
@@ -436,7 +435,7 @@ img{
   "description":"خدمة كونسيرج فاخرة لطب وزراعة الأسنان في القاهرة مخصصة للمرضى من السعودية ودول الخليج العربي. باقات All-on-4 و All-on-6 بزرعات سويسرية Straumann وألمانية معتمدة، مع توفير يصل إلى 70% مقارنة بأسعار عيادات الرياض ودبي، وضمان ذهبي موثق مدى الحياة وجواز زراعة رسمي.",
   "url":"https://nilesmileconcierge.com/index-gulf.html",
   "logo":"https://nilesmileconcierge.com/logo.png",
-  "image":"https://images.unsplash.com/photo-1539650116574-8efeb43e2b45?auto=format&fit=crop&q=80&w=1200",
+  "image":"https://nilesmileconcierge.com/og-image.jpg",
   "telephone":"+201503308333",
   "email":"contact@nilesmileconcierge.com",
   "priceRange":"16,800 ريال - 75,000 ريال",
@@ -2069,26 +2068,26 @@ details.science-accordion > summary:hover{
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Home",
-      "item": "https://nilesmileconcierge.com/"
+      "name": "الرئيسية",
+      "item": "https://nilesmileconcierge.com/index-gulf.html"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Treatment Packages",
-      "item": "https://nilesmileconcierge.com/#packages"
+      "name": "باقات العلاج وزراعة الأسنان",
+      "item": "https://nilesmileconcierge.com/index-gulf.html#packages"
     },
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Dental Implants in Egypt",
-      "item": "https://nilesmileconcierge.com/#science"
+      "name": "زراعة الأسنان في مصر",
+      "item": "https://nilesmileconcierge.com/index-gulf.html#science"
     },
     {
       "@type": "ListItem",
       "position": 4,
-      "name": "Free Clinical Review",
-      "item": "https://nilesmileconcierge.com/#consult"
+      "name": "التقييم السريري المجاني",
+      "item": "https://nilesmileconcierge.com/index-gulf.html#consult"
     }
   ]
 }
@@ -4175,7 +4174,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         
         <!-- Founder Photo -->
         <div style="position:relative;width:120px;height:120px;border-radius:50%;overflow:hidden;border:2px solid rgba(174,145,100,.5);box-shadow:0 0 0 4px rgba(174,145,100,.12),inset 0 0 24px rgba(174,145,100,.08);margin-bottom:6px;">
-          <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400" width="400" height="400" alt="Dr. Omar Fathi" style="width:100%;height:100%;object-fit:cover;display:block;">
+          <img src="images/dr-omar.png" width="400" height="400" alt="د. عمر فتحي، بكالوريوس طب وجراحة الفم والأسنان — مؤسس نايل سمايل كونسيرج، القاهرة" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         
         <!-- Divider -->
@@ -7176,7 +7175,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="absolute top-3 left-3 bg-nile-gold text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">قبل</span>
           </div>
           <div class="relative">
-            <img src="https://images.unsplash.com/photo-1598256989800-fea5f95213b0?auto=format&fit=crop&q=80&w=400"
+            <img src="images/after1_9_2026-09-27_00-36-40.jpg"
 
  
                  alt="بعد — ترميم الفك الكامل، حالة سريرية"
@@ -7197,7 +7196,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="card overflow-hidden">
         <div class="grid grid-cols-2">
           <div class="relative">
-            <img src="https://images.unsplash.com/photo-1571772996211-2f02c9727629?auto=format&fit=crop&q=80&w=400" 
+            <img src="images/before2_4_2026-09-27_00-36-40.jpg" 
                  alt="قبل — تصميم ابتسامة بالزيركون، حالة سريرية"
                  loading="lazy"
                  decoding="async"
@@ -7206,7 +7205,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="absolute top-3 left-3 bg-nile-gold text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">قبل</span>
           </div>
           <div class="relative">
-            <img src="https://images.unsplash.com/photo-1522849696084-818b29dfe210?auto=format&fit=crop&q=80&w=400" 
+            <img src="images/after2_5_2026-09-27_00-36-40.jpg" 
                  alt="بعد — تصميم ابتسامة بالزيركون، حالة سريرية"
                  loading="lazy"
                  decoding="async"
@@ -7225,7 +7224,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="card overflow-hidden">
         <div class="grid grid-cols-2">
           <div class="relative">
-            <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=400" 
+            <img src="images/before3_7_2026-09-27_00-36-40.jpg" 
                  alt="قبل — زراعة مدعومة بتركيبة، حالة سريرية"
                  loading="lazy"
                  decoding="async"
@@ -7234,7 +7233,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="absolute top-3 left-3 bg-nile-gold text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">قبل</span>
           </div>
           <div class="relative">
-            <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&q=80&w=400" 
+            <img src="images/after3_6_2026-09-27_00-36-40.jpg" 
                  alt="بعد — زراعة مدعومة بتركيبة، حالة سريرية"
                  loading="lazy"
                  decoding="async"
