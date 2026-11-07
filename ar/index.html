@@ -33,11 +33,50 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 @keyframes fade-in {
   from { opacity: 0; transform: scale(1.02); }
 }
+/* ═══════════════════════════════════════════════════════════
+   إصلاحات طارئة لنسخة الموبايل العربية (RTL Fixes)
+   ═══════════════════════════════════════════════════════════ */
+
+/* 1. إيقاف الاهتزاز الأفقي وإظهار الخلفية الكحلية */
+html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    position: relative;
+}
+
+/* 2. إصلاح تقطع الحروف العربية ومنع التباعد بينها */
+[dir="rtl"] * {
+    letter-spacing: 0 !important; /* إجبار إلغاء المسافات بين الحروف */
+    word-spacing: normal !important;
+}
+[dir="rtl"] body {
+    font-family: 'IBM Plex Sans Arabic', 'Almarai', sans-serif !important;
+}
+
+/* 3. إصلاح لون الخط في الأقسام الداكنة (مثل قسم المؤسس) */
+section.bg-nile-blue-dark p, 
+section.bg-nile-blue-dark li,
+section.bg-nile-blue p,
+section.bg-nile-blue li {
+    color: #D1D5DB !important; /* لون رمادي فاتح مقروء */
+}
+section.bg-nile-blue-dark h2, 
+section.bg-nile-blue-dark h3 {
+    color: #E8C88A !important; /* لون ذهبي للعناوين */
+}
+
+/* 4. إصلاح أيقونة الواتساب العائمة في الموبايل (لتكون على اليسار في العربي) */
+@media(max-width: 767px) {
+    .float-wa {
+        right: auto !important;
+        left: 1.25rem !important;
+    }
+}
   </style>
 
 <!-- ═══════════════════ SEO ═══════════════════ -->
-<title>نايل سمايل كونسيرج | زراعة الأسنان الفورية All-on-4 في القاهرة لمرضى السعودية والخليج</title>
-<meta name="description" content="دفعة مرضى الخليج 2026. زراعة الأسنان الفورية والفك الكامل All-on-4 في القاهرة بزرعات سويسرية وألمانية معتمدة بأسعار تبدأ من 2,250 ريال للزرعة و16,800 ريال للفك الكامل. وفر 60–75% مقارنة بالرياض ودبي مع ضمان مدى الحياة وخدمة كونسيرج VIP.">
+<title>زراعة أسنان في القاهرة من 2,250 ريال | نايل سمايل كونسيرج</title>
+<meta name="description" content="زراعة أسنان سويسرية في القاهرة لمرضى الخليج. الفك الكامل من 16,800 ريال بدلاً من 190,000 في الرياض. وفر 65% + ضمان مدى الحياة + كونسيرج VIP.">
 <meta name="keywords" content="زراعة اسنان في مصر, زراعة الاسنان للسعوديين, All-on-4 مصر, اسعار زراعة الاسنان في مصر, كونسيرج اسنان القاهرة, زراعة اسنان الرياض, زراعة اسنان دبي">
 <meta name="author" content="Nile Smile Concierge">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -501,30 +540,7 @@ img{
   ]
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"FAQPage",
-  "mainEntity":[
-    {"@type":"Question","name":"كم مدة الطيران من مدن الخليج إلى القاهرة؟","acceptedAnswer":{"@type":"Answer","text":"القاهرة قريبة جداً! رحلة الطيران المباشرة من الرياض أو جدة تستغرق ساعتين إلى ساعتين ونصف فقط، ومن دبي وأبوظبي حوالي 3 ساعات إلى 3 ساعات ونصف، ومن الكويت والدوحة والمنامة أقل من 3 ساعات، مع توفر عشرات الرحلات اليومية المباشرة."}},
-    {"@type":"Question","name":"هل يحتاج مواطنو دول الخليج تأشيرة لدخول مصر؟","acceptedAnswer":{"@type":"Answer","text":"لا، يدخل مواطنو دول مجلس التعاون الخليجي (السعودية، الإمارات، الكويت، قطر، البحرين، عمان) مصر بكل سهولة إما بدون تأشيرة مسبقة أو بالحصول على تأشيرة فورية ميسرة عند الوصول بالمطار، ونوفر لكم خطاب تأكيد الموعد الطبي وكافة التسهيلات."}},
-    {"@type":"Question","name":"كم تبلغ أسعار زراعة الأسنان بالريال السعودي؟","acceptedAnswer":{"@type":"Answer","text":"تبدأ باقة زراعة الفك الكامل All-on-4 الأساسية من 16,800 ريال، وتصل باقة الفكين الكاملة الشاملة إلى 43,000 ريال، مع توفير يتجاوز 65% إلى 75% مقارنة بأسعار العيادات في الرياض ودبي التي تتراوح لنفس الحالة بين 190,000 و 300,000 ريال."}},
-    {"@type":"Question","name":"هل الزراعة تتم بدون ألم؟","acceptedAnswer":{"@type":"Answer","text":"نعم تماماً. تتم الجراحة تحت تخدير موضعي متطور جداً بدون ألم، مع توفير خيار التهدئة الواعية عبر الوريد (IV Sedation) بإشراف استشاري تخدير معتمد، لتنام وتصحى وتلقى كل شيء خالص براحة تامة."}},
-    {"@type":"Question","name":"وش يضمن لي جودة الزرعات وسلامتها؟","acceptedAnswer":{"@type":"Answer","text":"تستلم معنا ضماناً ذهبياً مزدوجاً: ضمان مصنعي معتمد مدى الحياة من كبرى الشركات العالمية (Straumann السويسرية و Nobel Biocare) + ضمان إكلينيكي لمدة 5 سنوات من المركز، بالإضافة إلى جواز زراعة رسمي يحتوي على الأرقام التسلسلية ورقم التشغيلة (Lot Number)."}},
-    {"@type":"Question","name":"وش يشمل برنامج خدمة الكونسيرج لمرضى الخليج؟","acceptedAnswer":{"@type":"Answer","text":"نهتم بكل تفاصيل رحلتك لترتاح تماماً: استقبال بسيارة خاصة وسائق خاص من لحظة وصولك لمطار القاهرة، حجز فنادق 5 نجوم راقية في الشيخ زايد، مرافق طبي خاص، وجولات سياحية اختيارية خاصة للأهرامات والمتاحف."}},
-    {"@type":"Question","name":"هل مصر آمنة للسياحة العلاجية؟","acceptedAnswer":{"@type":"Answer","text":"نعم. مصر من أبرز الوجهات السياحية في العالم، وتستقبل أكثر من 15 مليون زائر سنوياً. مراكزنا الشريكة تقع في أرقى وأكثر أحياء القاهرة أماناً (الشيخ زايد، التجمع الخامس، الزمالك). ونوفر لك النقل الخاص VIP طوال فترة إقامتك، ويرافقك منسق خاص في كل زياراتك للعيادة."}},
-    {"@type":"Question","name":"هل أطباؤكم معتمدون ومرخصون رسمياً؟","acceptedAnswer":{"@type":"Answer","text":"نعم. جميع الأطباء المعالجين استشاريون مرخصون من نقابة أطباء الأسنان المصرية، ويحملون درجات الماجستير والدكتوراه والزمالات الدولية من أرقى الجامعات (القاهرة، عين شمس، الإسكندرية، والزمالات البريطانية والأمريكية). نشارك معك السيرة الذاتية والشهادات الكاملة لجراحك قبل تأكيد الحجز."}},
-    {"@type":"Question","name":"ماذا يحدث في حال واجهت أي مشكلة بعد عودتي إلى بلدي؟","acceptedAnswer":{"@type":"Answer","text":"تغادر ومعك بروتوكول مكتوب ودقيق للرعاية اللاحقة، ومواعيد مجدولة للمتابعة الافتراضية عبر الفيديو (بعد أسبوع، وشهر، و3 أشهر)، بالإضافة إلى ضمان ثنائي المستويات على الزرعات. وإذا دعت الحاجة، ننسق مباشرة مع طبيب أسنان معتمد وموثوق في منطقتك بدول الخليج لمتابعة حالتك."}},
-    {"@type":"Question","name":"هل يمكنني الجمع بين العلاج وقضاء عطلة عائلية؟","acceptedAnswer":{"@type":"Answer","text":"بكل تأكيد. يسافر العديد من مرضانا بصحبة عائلاتهم. بينما تكون في جلسات العلاج أو فترات الراحة، يمكن لعائلتك الاستمتاع بجولات سياحية راقية لزيارة الأهرامات والمتحف المصري الكبير والرحلات النيلية أو الاستجمام في منتجعات البحر الأحمر. كما نرتب لكم خيارات إقامة فندقية فاخرة تناسب العائلات."}},
-    {"@type":"Question","name":"هل يغطي التأمين الطبي تكاليف العلاج في مصر؟","acceptedAnswer":{"@type":"Answer","text":"في معظم الحالات، لا تغطي وثائق التأمين الطبي العادية في الخليج أو الدول الغربية إجراءات زراعة الأسنان في الخارج إلا إذا كانت تشتمل على تغطية دولية إضافية. لذلك يُعامل العلاج عادةً كدفع مباشر. مع ذلك، نزودك بفواتير تفصيلية وتقارير طبية معتمدة باللغتين العربية والإنجليزية لتقديمها لشركة التأمين الخاصة بك للمطالبة بالتعويض إن وُجد."}},
-    {"@type":"Question","name":"ما هي المخاطر والمضاعفات المحتملة لزراعة الأسنان؟","acceptedAnswer":{"@type":"Answer","text":"تتجاوز معدلات نجاح زراعة الأسنان 94.6% إلى 98% في الدراسات السريرية المعتمدة عالمياً. وأبرز المضاعفات المحتملة على المدى الطويل هو التهاب الأنسجة المحيطة بالزرعة (Peri-implantitis) بنسبة تقارب 9.6%. يشمل بروتوكولنا الوقائي التخطيط الجراحي الرقمي ثلاثي الأبعاد CBCT، واستخدام زرعات تيتانيوم سويسرية وألمانية بأحدث المعالجات السطحية، مع المتابعة الدورية كل 6 أشهر. ونقدم لك إفصاحاً كتابياً كاملاً بكافة المخاطر قبل البدء."}},
-    {"@type":"Question","name":"ما هي اللغات التي يتحدث بها فريقكم؟","acceptedAnswer":{"@type":"Answer","text":"يتحدث كامل فريق الكونسيرج والمنسقين الطبيين وأطباء الأسنان الاستشاريين اللغتين العربية والإنجليزية بطلاقة تامة، مع إدراك كامل لخصوصية واحتياجات المريض الخليجي. كما يمكن توفير خدمات الترجمة للغات أخرى (كالفرنسية والألمانية) عند الطلب."}},
-    {"@type":"Question","name":"ما هي خيارات التخدير المتاحة أثناء الجراحة؟","acceptedAnswer":{"@type":"Answer","text":"نوفر ثلاثة مستويات من التخدير المعتمد: (1) التخدير الموضعي للزرعات المفردة والإجراءات البسيطة، (2) التخدير الموضعي مع المهدئ الفموي لمن يعانون من قلق أو رهاب عيادة الأسنان، (3) التهدئة الوريدية الواعية IV Sedation بإشراف استشاري تخدير معتمد، وهي مثالية لجراحات الفك الكامل. تُدار كافة إجراءات التهدئة والتخدير تحت إشراف أطباء تخدير مرخصين في مراكزنا الحاصلة على اعتماد GAHAR."}},
-    {"@type":"Question","name":"ما هي أنواع وأنظمة زرعات الأسنان التي تقدمونها؟","acceptedAnswer":{"@type":"Answer","text":"نعمل مع أرقى ثلاثة أنظمة زراعة: شترومان Straumann السويسرية (أعلى معدل نجاح 99.2%، من 4,500 ريال لجسم الزرعة فقط)، نوبل بيوكير Nobel Biocare السويدية/الأمريكية (نسبة نجاح 98.8%، من 4,125 ريال)، وأوستيم Osstem الكورية (الخيار الاقتصادي، من 2,250 ريال). سيوصي طبيبك الاستشاري بالنظام الأنسب بعد دراسة الأشعة المقطعية."}},
-    {"@type":"Question","name":"من هو المرشح المثالي لزراعة الأسنان؟","acceptedAnswer":{"@type":"Answer","text":"المرشحون المثاليون هم البالغون فوق 18 عاماً بكثافة عظمية كافية وأنسجة لثة سليمة، وبدون أمراض مزمنة غير منضبطة (مثل السكري غير المنضبط). يُنصح غير المدخنين أو من لديهم الاستعداد للإقلاع، والملتزمون بنظافة الفم والمتابعات الدورية. لا يُنصح بالزراعة لمرضى البايفوسفونيت الوريدي، أو من تعرضوا لأزمة قلبية حديثة (خلال 6 أشهر)، أو يعانون من سكري غير متحكم فيه إطلاقاً."}}
-  ]
-}
-</script>
+
 <!-- ═══════════════════ FULL STYLES ═══════════════════ -->
 <style>
     /* ============ FOUNDER IDENTITY CARD ============ */
@@ -1933,7 +1949,7 @@ details.science-accordion > summary:hover{
   .hero-content .eyebrow{
     margin-bottom: .75rem !important;
     font-size: .72rem !important;
-    letter-spacing: .2em !important;
+    letter-spacing: 0 !important;
   }
   .hero-content h1{
     margin-bottom: .75rem !important;
@@ -3278,6 +3294,173 @@ body { padding-bottom: 90px !important; }
   .ba-before-layer img { width: 100% !important; }
 </style>
 
+<!-- ═══════════════════════════════════════════════════════════
+     FINAL MOBILE & ARABIC SAFETY FIX — v1.0
+     يُصلح: تصلب الأسنان العربية + اهتزاز أفقي على iOS + hover على اللمس
+     ═══════════════════════════════════════════════════════════ -->
+<style id="finalArabicMobileFix">
+
+  /* ═══ 1. إصلاح اتصال الحروف العربية (يتغلب على أي letter-spacing بـ !important) ═══ */
+  [dir="rtl"] .hero-content .eyebrow,
+  [dir="rtl"] #packages .card .btn-gold,
+  [dir="rtl"] #packages .card .btn-outline-dark,
+  [dir="rtl"] #packages .card .btn-gold::before,
+  [dir="rtl"] #packages .card .btn-gold::after,
+  [dir="rtl"] .sticky-mobile > *,
+  [dir="rtl"] .top-bar,
+  [dir="rtl"] .top-bar span,
+  [dir="rtl"] .logo-slogan,
+  [dir="rtl"] .logo-tagline,
+  [dir="rtl"] #travel-addons .card a[href*="wa.me"],
+  [dir="rtl"] #curated-tours .btn-gold,
+  [dir="rtl"] #results .btn-gold,
+  [dir="rtl"] .eyebrow,
+  [dir="rtl"] .limited-badge,
+  [dir="rtl"] .tier-sub,
+  [dir="rtl"] .quick-chip {
+    letter-spacing: 0 !important;
+    word-spacing: normal !important;
+  }
+
+  /* ═══ 2. منع تجاوز الحدود أفقياً — إصلاح iOS 100vw ═══ */
+  html, body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    position: relative !important;
+    -webkit-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
+  }
+
+  /* ═══ 3. منع تمرير أفقياً على الموبايل (مع إبقاء السحب في الخريطة/الجداول/المعرض) ═══ */
+  body {
+    overscroll-behavior-x: none !important;
+    touch-action: pan-y !important;
+  }
+  .world-map-wrap,
+  .table-wrap,
+  .gallery-track,
+  .clinic-carousel-track {
+    touch-action: pan-x !important;
+    overscroll-behavior-x: contain !important;
+  }
+
+  /* ═══ 4. منع "العالق" من :hover على أجهزة اللمس (iOS Safari / Android) ═══ */
+  @media (hover: none), (pointer: coarse) {
+    /* إيقاف رفع الكروت عند اللمس — يمنع "العالق" */
+    .card:hover,
+    .card-top-gold:hover,
+    .card-left-gold:hover,
+    .card-top-blue:hover,
+    .gallery-card:hover,
+    .clinic-carousel-card:hover,
+    .clinic-grid-item:hover {
+      transform: none !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04) !important;
+      border-color: rgba(174,145,100,.15) !important;
+    }
+    /* إيقاف انزلاق الأزرار عند اللمس */
+    .btn-gold:hover,
+    .btn-outline:hover,
+    .btn-outline-dark:hover,
+    .btn:hover {
+      transform: none !important;
+    }
+    /* إبقاء تأثير الضغط (tap feedback) عبر :active */
+    .btn-gold:active,
+    .btn-outline:active,
+    .btn-outline-dark:active,
+    .btn:active {
+      transform: scale(0.97) !important;
+      transition-duration: 0.1s !important;
+    }
+    .card:active {
+      transform: scale(0.99) !important;
+    }
+    /* إيقاف تكبير الصور في المعرض عند اللمس */
+    .gallery-card:hover img,
+    .clinic-carousel-card:hover img,
+    .clinic-grid-item:hover img {
+      transform: none !important;
+    }
+  }
+
+  /* ═══ 5. منع كسر الكلمات العربية الطويلة ═══ */
+  [dir="rtl"] h1,
+  [dir="rtl"] h2,
+  [dir="rtl"] h3,
+  [dir="rtl"] p,
+  [dir="rtl"] li,
+  [dir="rtl"] span,
+  [dir="rtl"] a,
+  [dir="rtl"] button,
+  [dir="rtl"] summary {
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+    word-break: normal !important;
+    hyphens: none !important;
+  }
+
+  /* ═══ 6. منع تكبير النص تلقائياً في Safari iOS ═══ */
+  @media (max-width: 767px) {
+    input, textarea, select {
+      font-size: 16px !important; /* يمنع zoom التلقائي */
+    }
+  }
+
+  /* ═══ 7. منع الوميض الأزرق عند اللمس ═══ */
+  *, *::before, *::after {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none;
+  }
+  /* إعادة السماح بـ callout في النصوص المهمة */
+  p, h1, h2, h3, h4, li, td, .acc-body {
+    -webkit-touch-callout: default;
+  }
+
+  /* ═══ 8. ضمان ثبات الهيدر — لا يهتز مع التمرير ═══ */
+  .site-header {
+    will-change: background-color, border-color !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+  }
+
+  /* ═══ 9. منع أي عنصر من تجاوز عرض الشاشة ═══ */
+  #main, section, footer, header, .container, .container-narrow {
+    max-width: 100% !important;
+    overflow-x: clip !important;
+  }
+  /* استثناء المناطق التي تحتاج سحب أفقي */
+  .world-map-wrap,
+  .table-wrap,
+  .gallery-track,
+  .clinic-carousel-track,
+  .table-wrap table,
+  .world-map-svg {
+    overflow-x: auto !important;
+  }
+
+  /* ═══ 10. تحسين ملموس للأداء على الموبايل ═══ */
+  @media (max-width: 767px) {
+    .card,
+    .btn-gold,
+    .btn-outline,
+    .btn-outline-dark,
+    .gallery-card,
+    .clinic-carousel-card {
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    /* تقليل blur لتسريع الأداء على iOS القديم */
+    .site-header {
+      -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
+      backdrop-filter: blur(12px) saturate(160%) !important;
+    }
+  }
+
+</style>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -3296,6 +3479,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </a>
 
     <div class="header-actions">
+      <!-- زر تغيير اللغة -->
+      <a href="index.html" class="icon-btn" aria-label="Switch to English" style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 0.75rem; color: inherit; text-decoration: none; width: auto; padding: 0 8px;">
+        EN
+      </a>
+
       <button type="button" id="darkModeToggle" class="icon-btn" aria-label="تبديل الوضع الليلي">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
@@ -3351,18 +3539,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="eyebrow eyebrow-light mb-4">بإشراف كبار استشاريي طب وجراحة الأسنان • القاهرة، الشيخ زايد</p>
     <div style="display:inline-flex;align-items:center;gap:.4rem;background:rgba(232,200,138,.15);border:1px solid rgba(232,200,138,.5);padding:.3rem .85rem;border-radius:100px;font-family:'IBM Plex Sans Arabic','Montserrat',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.08em;color:#E8C88A;margin-bottom:1rem">
   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-  أسعار تفضيلية وتسهيلات حصرية لمرضى السعودية والخليج — دفعة 2026
+  🔥 عرض تأسيسي محدود — الأسعار تنتهي 31 ديسمبر 2026 — المقاعد تنفد
 </div>
     <h1 class="text-white mb-4" style="font-size:clamp(1.9rem,5.2vw,3.8rem);line-height:1.15;letter-spacing:0">
-      زراعة الأسنان في القاهرة: الزرعة المفردة تبدأ من <span class="gold-text">2,250 ريال</span> • والفك الكامل <span dir="ltr" class="inline-block">All-on-4</span> من <span class="gold-text">16,800 ريال</span>
-      <span class="block text-white font-normal" style="font-size:clamp(0.95rem,2.1vw,1.35rem);margin-top:.6rem;font-family:'Almarai','Playfair Display',serif;font-weight:600">3 مستويات واضحة ومدروسة — الأساسية · المتقدمة الأوروبية · الملكية السويسرية</span>
+      في الرياض تدفع <span style="text-decoration:line-through;text-decoration-color:rgba(200,90,90,.7);text-decoration-thickness:3px">190,000 ريال</span> • في القاهرة <span class="gold-text">43,000 ريال</span> لنفس الزرعات السويسرية
+      <span class="block text-white font-normal" style="font-size:clamp(0.95rem,2.1vw,1.35rem);margin-top:.6rem;font-family:'Almarai','Playfair Display',serif;font-weight:600">الزرعة المفردة من <span class="gold-text">2,250 ريال</span> · الفك الكامل All-on-4 من <span class="gold-text">16,800 ريال</span> — 3 مستويات واضحة</span>
     </h1>
     <p class="text-gray-200 mb-6 mx-auto" style="max-width:44rem;font-size:clamp(.95rem,1.8vw,1.05rem);font-weight:400;line-height:1.8">
       <strong class="text-white font-semibold">وش تنتظر؟ استرجع ابتسامتك وثقتك بدون ألم وبأعلى معايير الجودة العالمية.</strong> زرعات <span dir="ltr" class="inline-block">Straumann</span> السويسرية · <span dir="ltr" class="inline-block">Nobel Biocare</span> · <span dir="ltr" class="inline-block">Bego</span> الألمانية. وفر أكثر من 65% مع ضمان ذهبي موثق مدى الحياة وجواز زراعة دولي رسمي.
     </p>
 
     <div class="flex flex-col sm:flex-row gap-3 justify-center" style="max-width:34rem;margin:0 auto">
-      <a href="#consult" id="heroMainCta" class="btn btn-gold shine-auto">احصل على خطة وتكلفة مجانية لحالتك ←</a>
+      <a href="#consult" id="heroMainCta" class="btn btn-gold shine-auto">احجز استشارتك الطبية المجانية الآن ←</a>
       <a href="#turkey-rescue" class="btn btn-outline">تصحيح وإنقاذ الحالات المعقدة — 950 ريال ←</a>
     </div>
     <p class="text-center mt-4" style="font-size:.75rem;letter-spacing:.06em;color:#E8C88A;font-weight:700">
@@ -3468,7 +3656,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- Savings Banner -->
     <div style="background:rgba(174,145,100,.08);border:1px solid rgba(232,200,138,.25);border-radius:4px;padding:1.75rem 2rem;max-width:60rem;margin:0 auto 2.5rem;text-align:center">
       <p style="font-family:'IBM Plex Sans Arabic','Montserrat',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.08em;color:#C9A96E;margin-bottom:.75rem">
-        كم توفر في جيبك فعلياً؟
+        لا تدفع أضعاف التكلفة في الرياض أو دبي. احتفظ بفارق السعر لعائلتك.
       </p>
       <p style="font-family:'Almarai','Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);line-height:1;color:#E8C88A;font-weight:700">
         توفير من 144,000 إلى 257,000 ريال
@@ -4202,12 +4390,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="md:col-span-3">
       <p class="eyebrow mb-4">تعرف على المؤسس</p>
-      <h2 class="text-nile-blue mb-6" style="font-size:clamp(1.75rem,4vw,2.5rem)">إشراف طبي واستشاري حقيقي..<br class="hidden md:block"> وليس وساطة تجارية!</h2>
-      <p class="text-nile-muted mb-5">
-        <strong class="text-nile-blue">نايل سمايل كونسيرج</strong> أسسها <strong>د. عمر فتحي</strong>، طبيب أسنان مرخص وممارس إكلينيكي فاهم كل تفاصيل زراعة الأسنان، من قراءة الأشعة المقطعية ثلاثية الأبعاد CBCT وحتى تصميم وتثبيت الابتسامة النهائية بدقة متناهية.
-      </p>
-      <p class="text-nile-muted mb-8">
-        بعكس مكاتب وشركات السياحة العلاجية التجارية اللي يديرها مسوقين، كل خطة علاجية وتكلفة تمر علينا تخضع لـ <strong class="text-nile-blue">مراجعة طبية دقيقة من استشاري أسنان مختص</strong> قبل لا توصلك. نحرص على انتقاء أفضل الجراحين والاستشاريين في مصر، ونضمن لك عقداً وضماناً كتابياً يحميك ويوثق كل تفصيلة في علاجك.
+      <h2 class="text-nile-blue mb-6" style="font-size:clamp(1.75rem,4vw,2.5rem)">خبرة طبية حقيقية.<br class="hidden md:block"> تعرفها من أول استشارة.</h2>
+<p class="text-nile-muted mb-5">
+  <strong class="text-nile-blue">نايل سمايل كونسيرج</strong> أسسها <strong>د. عمر فتحي</strong>، طبيب أسنان مرخص يمتلك خبرة إكلينيكية عميقة في زراعة الأسنان. نحن نضمن لك إشرافاً طبياً مباشراً من قراءة الأشعة المقطعية ثلاثية الأبعاد CBCT وحتى تصميم وتثبيت الابتسامة النهائية بدقة متناهية.
+</p>      <p class="text-nile-muted mb-8">
+        نحن نضمن لك أن كل خطة علاجية وتكلفة تمر على طبيب أسنان مختص قبل لا توصلك. نحرص على انتقاء أفضل الجراحين والاستشاريين في مصر، ونضمن لك عقداً وضماناً كتابياً يحميك ويوثق كل تفصيلة في علاجك.
       </p>
 
       <ul class="space-y-4">
@@ -4424,7 +4611,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <span class="font-serif text-nile-beige">شترومان <span dir="ltr" class="inline-block">Straumann</span> (سويسرا)</span>
               <span class="text-nile-gold-bright font-bold text-sm whitespace-nowrap">مؤشر الجمال الوردي: 12.1/14</span>
             </div>
-            <p class="text-gray-400 text-xs leading-relaxed">أعلى درجة في مؤشر الجمال الوردي للثة (VAS 88.4). أفضل اندماج مع الأنسجة الحيوية — مع انخفاض خطر التهاب ما حول الزرعة بنسبة 33% بعد 9 سنوات.</p>
+            <p class="text-gray-400 text-xs leading-relaxed">الخيار الأول عالمياً (سويسرا). يمنحك أعلى درجات الجمال للثة، وأقل نسبة التهابات على المدى الطويل (مثالي للابتسامة الأمامية).</p>
           </div>
           <div class="bg-white/5 border border-nile-gold/30 p-5">
             <div class="flex justify-between items-center mb-2 gap-3">
@@ -4594,7 +4781,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <td><span class="implant-badge premium">المميز (Premium)</span></td>
             <td class="td-label"><strong><span dir="ltr" class="inline-block">Straumann</span></strong></td>
             <td>سويسرا</td>
-            <td>سبيكة <span dir="ltr" class="inline-block">Roxolid</span> (تيتانيوم وزركونيوم) / سطح <span dir="ltr" class="inline-block">SLActive</span></td>
+            <td>تيتانيوم فائق النقاء (تكنولوجيا سويسرية تمنع الكسر)</td>
             <td>
               <strong>98.2%</strong>
               <div class="survival-bar"><div class="survival-bar-fill" style="width:98.2%"></div></div>
@@ -4606,7 +4793,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <td><span class="implant-badge premium">المميز (Premium)</span></td>
             <td class="td-label"><strong><span dir="ltr" class="inline-block">Nobel Biocare</span></strong></td>
             <td>السويد / أمريكا</td>
-            <td>تيتانيوم فئة 4 طبي نقي / سطح <span dir="ltr" class="inline-block">TiUnite</span></td>
+            <td>تيتانيوم طبي معزز (يلتئم مع العظم بسرعة مضاعفة)</td>
             <td>
               <strong>98.8%</strong> (في تركيبات <span dir="ltr" class="inline-block">All-on-4</span>)
               <div class="survival-bar"><div class="survival-bar-fill" style="width:98.8%"></div></div>
@@ -4711,8 +4898,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-10">
       <p class="eyebrow mb-4" style="color:#C85A5A">الحقيقة المجردة بلا تجميل</p>
-      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.4rem,3vw,1.8rem);font-weight:800;color:#1F2A36">وش هي "الزرعة الرخيصة" فعلياً؟ ولماذا ستدفع ثمنها أضعافاً مضاعفة؟</h2>
-      <p class="text-nile-muted">زرعة بـ 1,500 ريال ليست صفقة أو توفيراً، بل هي مخاطرة غير محسوبة: أنت تراهن على ألا تفشل — وإذا فشلت لا قدر الله، ستدفع تكلفة علاجها مجدداً في عيادات الخليج بأسعار مضاعفة.</p>
+      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.4rem,3vw,1.8rem);font-weight:800;color:#1F2A36">الزرعة الرخيصة... وش قصتها؟ وليش بتكلفك ضعف السعر لاحقاً؟</h2>
+      <p class="text-nile-muted">في عالم زراعة الأسنان، "الرخيص" قد يكلفك ضعف الثمن لاحقاً. زرعة مجهولة المصدر بـ 1,500 ريال هي مجازفة غير محسوبة. نحن في نايل سمايل نمنحك "راحة البال"، لتضمن أن استثمارك في ابتسامتك سيدوم مدى الحياة دون مفاجآت.</p>
     </div>
 
     <div class="warning-box max-w-4xl mx-auto">
@@ -4818,22 +5005,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="protocol-grid">
       <div class="protocol-card">
-        <p class="protocol-level">المستوى 01 — الوقاية الأولية الشاملة</p>
+        <p class="protocol-level">الخطوة 01 — تجهيز فمك للنجاح (قبل الزراعة)</p>
         <h4>قبل الغرس: التخلص من عوامل الخطر</h4>
         <p>تنظيم السكر التراكمي (HbA1c أقل من 7%)، علاج كامل لالتهابات اللثة حتى استقرارها التام، وتوجيهات لنمط الحياة والتغذية. إذا كانت هناك عوامل خطر نشطة، تُؤجل الزراعة — ولا نتعجل أبداً على حساب سلامتك.</p>
       </div>
       <div class="protocol-card">
-        <p class="protocol-level">المستوى 02 — الرعاية الداعمة بعد الزراعة</p>
+        <p class="protocol-level">الخطوة 02 — الرعاية الداعمة بعد الزراعة</p>
         <h4>بعد الغرس: بروتوكول الصيانة الدورية (SPIC)</h4>
         <p>متابعة منظمة كل 3–6 أشهر للحالات المعرضة للمخاطر، وسنوياً للحالات العادية. تشمل فحص عمق الجيوب، ومستوى اللثة، وإزالة البلاك بجهاز مخصص دون خدش الزرعة لضمان سلامتها مدى الحياة.</p>
       </div>
       <div class="protocol-card">
-        <p class="protocol-level">المستوى 03 — الاكتشاف المبكر والعلاج التحفظي</p>
+        <p class="protocol-level">الخطوة 03 — الاكتشاف المبكر والعلاج التحفظي</p>
         <h4>معالجة التهاب الأنسجة فوراً قبل وصوله للعظم</h4>
         <p>استخدام مساحيق الجلايسين والإريثريتول الهوائية لتنظيف أسطح الزرعات بلطف ودون أي تلف لمعدن الزرعة، وتدارك أي التهاب في مهده دون جراحة مؤلمة.</p>
       </div>
       <div class="protocol-card">
-        <p class="protocol-level">المستوى 04 — التدخل المتقدم لحماية الزرعة</p>
+        <p class="protocol-level">الخطوة 04 — التدخل المتقدم لحماية الزرعة</p>
         <h4>إنقاذ الزرعة في حال حدوث التهاب عميق</h4>
         <p>بروتوكولات جراحية دقيقة لإعادة بناء العظم، مع خطة صيانة ممتدة تمنع تكرار المشكلة وتضمن استعادة الوظيفة الكاملة للسن واستقراره الدائم.</p>
       </div>
@@ -5296,17 +5483,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
           <div class="bg-white p-3 border-l-4 border-gray-400">
-            <p class="text-xs uppercase tracking-widest font-bold text-gray-600 mb-1">الأساسي (Essential)</p>
+            <p class="text-xs uppercase tracking-widest font-bold text-gray-600 mb-1">الباقة الاقتصادية الذكية (Smart Choice)</p>
             <p class="text-sm font-semibold text-nile-blue">زرعات كورية معتمدة</p>
             <p class="text-xs text-nile-muted mt-1"><span dir="ltr" class="inline-block">Osstem</span> / <span dir="ltr" class="inline-block">Dentium</span> — سعر اقتصادي مع الالتزام الكامل بالبروتوكول الطبي</p>
           </div>
           <div class="bg-white p-3 border-l-4 border-nile-gold">
-            <p class="text-xs uppercase tracking-widest font-bold text-nile-gold mb-1">المميز (Premium)</p>
+            <p class="text-xs uppercase tracking-widest font-bold text-nile-gold mb-1">الباقة المتميزة (Premium)</p>
             <p class="text-sm font-semibold text-nile-blue">زرعات أوروبية</p>
             <p class="text-xs text-nile-muted mt-1"><span dir="ltr" class="inline-block">Bego</span> / <span dir="ltr" class="inline-block">Camlog</span> / <span dir="ltr" class="inline-block">Anthogyr</span> — صناعة ألمانية وفرنسية معتمدة</p>
           </div>
           <div class="bg-white p-3 border-l-4 border-nile-blue">
-            <p class="text-xs uppercase tracking-widest font-bold text-nile-blue mb-1">سيجنتشر (Signature)</p>
+            <p class="text-xs uppercase tracking-widest font-bold text-nile-blue mb-1">باقة النخبة (VIP Signature)</p>
             <p class="text-sm font-semibold text-nile-blue">زرعات سويسرية وأمريكية رائدة</p>
             <p class="text-xs text-nile-muted mt-1"><span dir="ltr" class="inline-block">Straumann</span> / <span dir="ltr" class="inline-block">Nobel Biocare</span> / <span dir="ltr" class="inline-block">Zimmer</span> — القمة العالمية في زراعة الأسنان</p>
           </div>
@@ -5424,7 +5611,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="bg-nile-beige p-4 border border-nile-gold/20 mb-5 text-xs text-nile-muted">
                 <strong class="text-nile-blue">المدة الزمنية:</strong> زيارة واحدة فقط — 5 إلى 7 أيام.
               </div>
-              <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A7%D9%84%D8%B2%D8%B1%D8%B9%D8%A9%20%D8%A7%D9%84%D9%85%D9%81%D8%B1%D8%AF%D8%A9%20%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%D9%8A%D8%A9%20(2%D8%8C250%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">طلب هذه الباقة</a>
+              <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A7%D9%84%D8%B2%D8%B1%D8%B9%D8%A9%20%D8%A7%D9%84%D9%85%D9%81%D8%B1%D8%AF%D8%A9%20%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%D9%8A%D8%A9%20(2%D8%8C250%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">احجز الآن — احتفظ بسعر 2026 ←</a>
             </div>
           </div>
 
@@ -5455,7 +5642,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="bg-nile-beige p-4 border border-nile-gold/20 mb-5 text-xs text-nile-muted">
                 <strong class="text-nile-blue">المدة الزمنية:</strong> زيارة إلى زيارتين (فترة التئام 3 إلى 4 أشهر بينهما).
               </div>
-              <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A7%D9%84%D8%B7%D9%82%D9%85%20%D8%A7%D9%84%D9%85%D8%AB%D8%A8%D8%AA%20%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%D9%8A%D8%A9%20(11%D8%8C200%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">طلب هذه الباقة</a>
+              <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A7%D9%84%D8%B7%D9%82%D9%85%20%D8%A7%D9%84%D9%85%D8%AB%D8%A8%D8%AA%20%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%D9%8A%D8%A9%20(11%D8%8C200%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">احجز الآن — احتفظ بسعر 2026 ←</a>
             </div>
           </div>
 
@@ -5486,7 +5673,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="bg-nile-beige p-4 border border-nile-gold/20 mb-5 text-xs text-nile-muted">
                 <strong class="text-nile-blue">المدة الزمنية:</strong> زيارتان — 7–8 أيام ثم 5–7 أيام، وبينهما 3–6 أشهر التئام.
               </div>
-              <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20All-on-4%20%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%D9%8A%D8%A9%20(16%D8%8C800%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">طلب هذه الباقة</a>
+              <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20All-on-4%20%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%D9%8A%D8%A9%20(16%D8%8C800%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">احجز الآن — احتفظ بسعر 2026 ←</a>
             </div>
           </div>
 
@@ -5517,7 +5704,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="bg-nile-beige p-4 border border-nile-gold/20 mb-5 text-xs text-nile-muted">
                 <strong class="text-nile-blue">المدة الزمنية:</strong> زيارتان — 7–10 أيام ثم 5–7 أيام، وبينهما 3–6 أشهر التئام.
               </div>
-              <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20All-on-6%20%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%D9%8A%D8%A9%20(20%D8%8C800%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">طلب هذه الباقة</a>
+              <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20All-on-6%20%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%D9%8A%D8%A9%20(20%D8%8C800%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">احجز الآن — احتفظ بسعر 2026 ←</a>
             </div>
           </div>
 
@@ -5572,7 +5759,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="bg-nile-beige p-4 border border-nile-gold/20 mb-5 text-xs text-nile-muted">
             <strong class="text-nile-blue">المدة الزمنية:</strong> 7 إلى 8 أيام في <strong>زيارة واحدة فقط</strong> — تشكيل اللثة ← التحضير ← تهيئة الأنسجة ← التجربة والمطابقة ← التركيب النهائي الدائم
           </div>
-          <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20%D8%AA%D9%8A%D8%AC%D8%A7%D9%86%20%D8%A7%D9%84%D8%B2%D9%8A%D8%B1%D9%83%D9%88%D9%86%20%D8%A7%D9%84%D9%83%D8%A7%D9%85%D9%84%D8%A9%20%D8%A8%D8%B1%D9%8A%D9%85%D9%8A%D9%88%D9%85%20(18%D8%8C700%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">طلب هذه الباقة</a>
+          <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20%D8%AA%D9%8A%D8%AC%D8%A7%D9%86%20%D8%A7%D9%84%D8%B2%D9%8A%D8%B1%D9%83%D9%88%D9%86%20%D8%A7%D9%84%D9%83%D8%A7%D9%85%D9%84%D8%A9%20%D8%A8%D8%B1%D9%8A%D9%85%D9%8A%D9%88%D9%85%20(18%D8%8C700%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">احجز الآن — احتفظ بسعر 2026 ←</a>
         </div>
       </div>
 
@@ -5614,7 +5801,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="flex justify-between border-t border-nile-gold/30 pt-1 mt-1"><span class="font-semibold text-nile-blue">الإجمالي التقريبي:</span><span class="font-semibold text-nile-blue">حوالي 30,600 ريال</span></div>
             <p class="mt-2 italic text-[10px]">قارن مع السعر في عيادات الخليج للفك الواحد: 70,000 إلى 110,000 ريال</p>
           </div>
-          <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20%D8%AA%D8%B1%D9%85%D9%8A%D9%85%20%D9%81%D9%83%20%D9%83%D8%A7%D9%85%D9%84%20%D8%A8%D8%B1%D9%8A%D9%85%D9%8A%D9%88%D9%85%20(24%D8%8C300%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">طلب هذه الباقة</a>
+          <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20%D8%AA%D8%B1%D9%85%D9%8A%D9%85%20%D9%81%D9%83%20%D9%83%D8%A7%D9%85%D9%84%20%D8%A8%D8%B1%D9%8A%D9%85%D9%8A%D9%88%D9%85%20(24%D8%8C300%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">احجز الآن — احتفظ بسعر 2026 ←</a>
         </div>
       </div>
 
@@ -5655,7 +5842,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="flex justify-between border-t border-nile-gold/30 pt-1 mt-1"><span class="font-semibold text-nile-blue">الإجمالي التقريبي:</span><span class="font-semibold text-nile-blue">حوالي 51,000 ريال</span></div>
             <p class="mt-2 italic text-[10px]">قارن مع السعر في عيادات الخليج للفكين: 190,000 إلى 300,000+ ريال</p>
           </div>
-          <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A5%D8%B9%D8%A7%D8%AF%D8%A9%20%D8%AA%D8%A3%D9%87%D9%8A%D9%84%20%D8%A7%D9%84%D9%81%D9%83%D9%8A%D9%86%20%D8%A8%D8%A7%D9%84%D9%83%D8%A7%D9%85%D9%84%20(43%D8%8C000%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">طلب هذه الباقة</a>
+          <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A5%D8%B9%D8%A7%D8%AF%D8%A9%20%D8%AA%D8%A3%D9%87%D9%8A%D9%84%20%D8%A7%D9%84%D9%81%D9%83%D9%8A%D9%86%20%D8%A8%D8%A7%D9%84%D9%83%D8%A7%D9%85%D9%84%20(43%D8%8C000%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">احجز الآن — احتفظ بسعر 2026 ←</a>
         </div>
       </div>
 
@@ -5689,7 +5876,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="bg-nile-beige p-4 border border-nile-gold/20 mb-5 text-xs text-nile-muted">
             <strong class="text-nile-blue">المدة الزمنية:</strong> بروتوكول مرحلي: التقييم والإزالة في 7–14 يوماً. في حال الحاجة لترقيع عظمي، تترك 4–6 أشهر للالتئام قبل وضع الزرعات الجديدة. المجموع: 6–9 أشهر عبر زيارتين إلى ثلاث زيارات.
           </div>
-          <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A5%D9%86%D9%82%D8%A7%D8%B0%20%D9%88%D8%AA%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%B2%D8%B1%D8%B9%D8%A9%20%D8%A7%D9%84%D9%81%D8%A7%D8%B4%D9%84%D8%A9%20(30%D8%8C000%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">طلب هذه الباقة</a>
+          <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A5%D9%86%D9%82%D8%A7%D8%B0%20%D9%88%D8%AA%D8%B5%D8%AD%D9%8A%D8%AD%20%D8%A7%D9%84%D8%B2%D8%B1%D8%B9%D8%A9%20%D8%A7%D9%84%D9%81%D8%A7%D8%B4%D9%84%D8%A9%20(30%D8%8C000%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">احجز الآن — احتفظ بسعر 2026 ←</a>
         </div>
       </div>
 
@@ -5723,7 +5910,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="bg-nile-beige p-4 border border-nile-gold/20 mb-5 text-xs text-nile-muted">
             <strong class="text-nile-blue">المدة الزمنية:</strong> 6 إلى 12 شهراً إجمالاً. متابعة دورية عن بعد. النتيجة النهائية مضمونة ومحددة وفق خطة المحاكاة الرقمية.
           </div>
-          <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A7%D9%84%D8%AA%D9%82%D9%88%D9%8A%D9%85%20%D8%A7%D9%84%D8%B4%D9%81%D8%A7%D9%81%20%D8%A8%D8%B1%D9%8A%D9%85%D9%8A%D9%88%D9%85%20(33%D8%8C400%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">طلب هذه الباقة</a>
+          <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A7%D9%84%D8%AA%D9%82%D9%88%D9%8A%D9%85%20%D8%A7%D9%84%D8%B4%D9%81%D8%A7%D9%81%20%D8%A8%D8%B1%D9%8A%D9%85%D9%8A%D9%88%D9%85%20(33%D8%8C400%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">احجز الآن — احتفظ بسعر 2026 ←</a>
         </div>
       </div>
 
@@ -5755,7 +5942,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="bg-nile-beige p-4 border border-nile-gold/20 mb-5 text-xs text-nile-muted">
             <strong class="text-nile-blue">المدة الزمنية:</strong> زيارة واحدة — 5 إلى 7 أيام.
           </div>
-          <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A7%D9%84%D8%B2%D8%B1%D8%B9%D8%A9%20%D8%A7%D9%84%D9%85%D9%81%D8%B1%D8%AF%D8%A9%20%D8%A8%D8%B1%D9%8A%D9%85%D9%8A%D9%88%D9%85%20(3%D8%8C370%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">طلب هذه الباقة</a>
+          <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A7%D9%84%D8%B2%D8%B1%D8%B9%D8%A9%20%D8%A7%D9%84%D9%85%D9%81%D8%B1%D8%AF%D8%A9%20%D8%A8%D8%B1%D9%8A%D9%85%D9%8A%D9%88%D9%85%20(3%D8%8C370%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">احجز الآن — احتفظ بسعر 2026 ←</a>
         </div>
       </div>
 
@@ -5786,7 +5973,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="bg-nile-beige p-4 border border-nile-gold/20 mb-5 text-xs text-nile-muted">
             <strong class="text-nile-blue">المدة الزمنية:</strong> زيارة إلى زيارتين — 7–8 أيام ثم 4–5 أيام، وبينهما 3–4 أشهر التئام.
           </div>
-          <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A7%D9%84%D8%B7%D9%82%D9%85%20%D8%A7%D9%84%D9%85%D8%AB%D8%A8%D8%AA%20%D8%A8%D8%B1%D9%8A%D9%85%D9%8A%D9%88%D9%85%20(16%D8%8C800%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">طلب هذه الباقة</a>
+          <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A7%D9%84%D8%B7%D9%82%D9%85%20%D8%A7%D9%84%D9%85%D8%AB%D8%A8%D8%AA%20%D8%A8%D8%B1%D9%8A%D9%85%D9%8A%D9%88%D9%85%20(16%D8%8C800%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">احجز الآن — احتفظ بسعر 2026 ←</a>
         </div>
       </div>
 
@@ -5818,7 +6005,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="bg-nile-beige p-4 border border-nile-gold/20 mb-5 text-xs text-nile-muted">
             <strong class="text-nile-blue">المدة الزمنية:</strong> زيارتان — 7–10 أيام ثم 5–7 أيام، وبينهما 3–6 أشهر التئام.
           </div>
-          <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20All-on-6%20%D8%A8%D8%B1%D9%8A%D9%85%D9%8A%D9%88%D9%85%20(30%D8%8C000%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">طلب هذه الباقة</a>
+          <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20All-on-6%20%D8%A8%D8%B1%D9%8A%D9%85%D9%8A%D9%88%D9%85%20(30%D8%8C000%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">احجز الآن — احتفظ بسعر 2026 ←</a>
         </div>
       </div>
 
@@ -5874,7 +6061,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="bg-nile-beige p-4 border border-nile-gold/20 mb-5 text-xs text-nile-muted">
                 <strong class="text-nile-blue">المدة الزمنية:</strong> زيارتان — 7–8 أيام ثم 5–7 أيام، وبينهما 3–6 أشهر التئام.
               </div>
-              <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20All-on-4%20%D8%B3%D9%8A%D8%AC%D9%86%D8%AA%D8%B4%D8%B1%20(31%D8%8C800%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">طلب هذه الباقة</a>
+              <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20All-on-4%20%D8%B3%D9%8A%D8%AC%D9%86%D8%AA%D8%B4%D8%B1%20(31%D8%8C800%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">احجز الآن — احتفظ بسعر 2026 ←</a>
             </div>
           </div>
 
@@ -5905,7 +6092,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="bg-nile-beige p-4 border border-nile-gold/20 mb-5 text-xs text-nile-muted">
                 <strong class="text-nile-blue">المدة الزمنية:</strong> زيارتان — 7–10 أيام ثم 5–7 أيام، وبينهما 3–6 أشهر التئام.
               </div>
-              <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20All-on-6%20%D8%B3%D9%8A%D8%AC%D9%86%D8%AA%D8%B4%D8%B1%20(37%D8%8C500%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">طلب هذه الباقة</a>
+              <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20All-on-6%20%D8%B3%D9%8A%D8%AC%D9%86%D8%AA%D8%B4%D8%B1%20(37%D8%8C500%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">احجز الآن — احتفظ بسعر 2026 ←</a>
             </div>
           </div>
 
@@ -5936,7 +6123,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="bg-nile-beige p-4 border border-nile-gold/20 mb-5 text-xs text-nile-muted">
                 <strong class="text-nile-blue">المدة الزمنية:</strong> زيارتان إلى 3 زيارات — 7–14 يوماً ثم 5–7 أيام، وبينهما 4–6 أشهر التئام.
               </div>
-              <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%AC%D8%B1%D8%A7%D8%AD%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B2%D8%B1%D8%B9%D8%A7%D8%AA%20%D8%A7%D9%84%D9%88%D8%AC%D9%86%D9%8A%D8%A9%20(74%D8%8C600%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">طلب هذه الباقة</a>
+              <a href="https://wa.me/201503308333?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D8%A7%D9%8A%D9%84%20%D8%B3%D9%85%D8%A7%D9%8A%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%AC%D8%B1%D8%A7%D8%AD%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B2%D8%B1%D8%B9%D8%A7%D8%AA%20%D8%A7%D9%84%D9%88%D8%AC%D9%86%D9%8A%D8%A9%20(74%D8%8C600%20%D8%B1%D9%8A%D8%A7%D9%84)" target="_blank" rel="noopener" class="btn btn-gold shine-auto w-full">احجز الآن — احتفظ بسعر 2026 ←</a>
             </div>
           </div>
 
@@ -6149,7 +6336,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="text-center mb-12 max-w-3xl mx-auto">
       <p class="eyebrow mb-4">المقارنة الصريحة والشفافة</p>
-      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.4rem,3vw,1.8rem);font-weight:800;color:#1F2A36">أمامك 3 خيارات للعلاج. <span class="italic gold-text">وخيار واحد فقط هو المنطقي والآمن.</span></h2>
+      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.4rem,3vw,1.8rem);font-weight:800;color:#1F2A36">اختر الاستثمار الآمن لصحتك. <span class="italic gold-text">قارن بنفسك.</span></h2>
       <p class="text-nile-muted max-w-2xl mx-auto">تركيا رخيصة لسبب واضح (التنازل عن معايير الجودة)، والعيادات الخاصة في أمريكا والخليج باهظة التكلفة بسبب التشغيل. نحن نقدم المعادلة الذهبية: نفس المعايير السريرية السويسرية والأمريكية، بتكلفة عادلة لا تستطيع العيادات التجارية منافستها بأمانة.</p>
     </div>
 
@@ -6229,7 +6416,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <p class="text-xs text-nile-muted text-center mt-6 max-w-4xl mx-auto leading-relaxed">
-      <strong class="text-nile-blue">الخلاصة الصادقة في سطر واحد:</strong> تركيا تبيعك "سعراً إعلانياً رخيصاً"، بينما العيادات في أمريكا والخليج تبيعك "إجراءً بتكلفة مبالغ فيها". أما نحن، <strong class="text-nile-gold">فنقدم لك معياراً طبياً موثقاً — بضمان كتابي رسمي، ورقم تشغيلة دولي، واستشاري جراحة مرخص يجيب على اتصالاتك ويتابعك بعد عودتك لبلدك.</strong> إن كان همك الوحيد هو الحصول على أرخص رقم ممكن على حساب صحتك، فنحن لسنا الأرخص. ولكن إن كان هدفك هو ابتسامة تدوم معك وتثق بها بعد 10 سنوات، فأنت في المكان الصحيح.
+      <strong class="text-nile-blue">الخلاصة الصادقة في سطر واحد:</strong> تركيا تبيعك "سعراً إعلانياً رخيصاً"، بينما العيادات في أمريكا والخليج تبيعك "إجراءً بتكلفة مبالغ فيها". أما نحن، <strong class="text-nile-gold">فنقدم لك معياراً طبياً موثقاً — بضمان كتابي رسمي، ورقم تشغيلة دولي، واستشاري جراحة مرخص يجيب على اتصالاتك ويتابعك بعد عودتك لبلدك.</strong> نحن نؤمن أن صحة فمك تستحق استثماراً ذكياً وليس مجازفة. إذا كنت تبحث عن "الأرخص" فهناك خيارات كثيرة. أما إذا كنت تبحث عن "الأفضل" بأمان وضمان موثق، فقد وصلت إلى المكان الصحيح.
     </p>
   </div>
 </section>
@@ -6302,7 +6489,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-12">
       <p class="eyebrow mb-4">صمّم إقامتك — بأسلوبك وراحتك</p>
-      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.75rem)">مُنشئ باقات الإقامة الفندقية والكونسيرج</h2>
+      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.75rem)">صمم رحلتك العلاجية الملكية (VIP)</h2>
       <p class="text-nile-muted">اختر فئة الفندق المفضلة لديك وأضف خدمات الكونسيرج الراغبة بها. الأسعار استرشادية لإقامة قياسية مدتها 10 ليالٍ، وتُؤكد رسمياً في خطتك المكتوبة بعد المراجعة السريرية.</p>
     </div>
 
@@ -6889,7 +7076,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p class="text-nile-muted text-sm"><strong class="text-nile-blue">94.6%</strong> نسبة النجاح الكلية عبر المراجعات المنهجية العالمية. نسبة بقاء زراعة الفك <span dir="ltr" class="inline-block">All-on-4</span> على المدى القريب: <strong class="text-nile-blue">99.2%</strong>. وعلى المدى الطويل (5+ سنوات): <strong class="text-nile-blue">97.8%</strong>.</p>
       </div>
       <div class="card card-top-gold p-7 text-center">
-        <h3 class="font-serif text-nile-blue text-lg mb-3">التهاب محيط الزرعة</h3>
+        <h3 class="font-serif text-nile-blue text-lg mb-3">حمايتك من التهابات الزرعة</h3>
         <p class="text-nile-muted text-sm">يصيب ما بين <strong class="text-nile-blue">9.6% إلى 12.5%</strong> من الزرعات (وفق أحدث الدراسات العالمية 2022–2025). وعلى مستوى المرضى: حوالي <strong class="text-nile-blue">حوالي 20%</strong>. ينخفض هذا الخطر بشكل ملحوظ مع المتابعة كل 6 أشهر، واستخدام أسطح تيتانيوم بريميوم، والإقلاع عن التدخين.</p>
         <p class="text-xs text-nile-gold italic mt-2">نذكر لك النطاق الإحصائي بالكامل — مو بس أقل رقم تسويقي.</p>
       </div>
@@ -6907,7 +7094,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="flex gap-3"><span class="text-nile-gold-bright font-bold flex-shrink-0">رابعاً:</span><p><strong>بروتوكولات موثقة كتابياً:</strong> إرشادات الرعاية المنزلية، وجدول الأدوية، ودليل العلامات التحذيرية تُسلم لك كاملة قبل عودتك لبلدك.</p></div>
       </div>
     </div>
-    <p class="text-center mt-8 text-nile-gold italic">لسنا الأرخص إعلاناً — لكننا الأكثر التزاماً وأمانة وحرصاً على صحتك.</p>
+    <p class="text-center mt-8 text-nile-gold italic">نلتزم بأعلى المعايير — لأن صحتك تستحق الأفضل، بلا أي تنازل.</p>
   </div>
 </section>
 
@@ -6916,7 +7103,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-14">
       <p class="eyebrow mb-4">الشفافية الطبية الكاملة</p>
-      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.4rem,3vw,1.8rem);font-weight:800;color:#1F2A36">توقعات واقعية — <span class="italic gold-text">وش اللي ما يقوله لك غيرنا؟</span></h2>
+      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.4rem,3vw,1.8rem);font-weight:800;color:#1F2A36">الشفافية معك من أول يوم — <span class="italic gold-text">وش اللي ما راح يقوله لك غيرنا؟</span></h2>
       <p class="text-nile-muted" style="font-size:1.05rem">العيادات الموثوقة ما تخفي الحقائق — بل تشرحها بالتفصيل. إليك 5 حقائق جوهرية لازم يعرفها كل من يقدم على زراعة الفك الكامل <strong class="text-nile-blue">قبل الحجز وتأكيد السفر</strong>.</p>
     </div>
 
@@ -7999,12 +8186,79 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
+<!-- ═══════════════════ PATIENT STORIES ═══════════════════ -->
+<section id="patient-stories" class="section bg-nile-beige reveal">
+  <div class="container">
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <p class="eyebrow mb-4">قصص نجاح حقيقية</p>
+      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.75rem,4vw,2.5rem)">ماذا يقول مرضانا من الخليج؟</h2>
+      <p class="text-nile-muted">تجارب حقيقية لأشخاص واجهوا نفس التحديات، ووجدوا في نايل سمايل الحل الآمن الذي استعادوا به ثقتهم وابتسامتهم.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger">
+      
+      <!-- Review 1 (Saudi) -->
+      <div class="card p-7 border-t-4 border-nile-gold flex flex-col">
+        <div class="flex text-nile-gold mb-4 text-lg">
+          ★★★★★
+        </div>
+        <p class="text-nile-muted text-sm italic mb-6 leading-relaxed flex-1">
+          "عانيت من تآكل في عظام الفك ورفضت أكتر من عيادة في الرياض بسبب التكلفة العالية جداً (فوق 90 ألف ريال). في نايل سمايل، سويت زراعة لـ 6 أسنان (All-on-6) بمواد سويسرية أصلية بثمن يوفر أكتر من 60%. الفريق كان محترف، والمنسق كان معايا خطوة بخطوة من المطار لحد ما سافرت. تجربة تستاهل كل ريال."
+        </p>
+        <div class="flex items-center gap-3 pt-4 border-t border-nile-gold/20">
+          <div class="w-10 h-10 rounded-full bg-nile-blue text-white flex items-center justify-center font-bold">أ.م</div>
+          <div>
+            <p class="font-bold text-nile-blue text-sm">أحمد المطيري</p>
+            <p class="text-xs text-nile-muted">الرياض، السعودية</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review 2 (UAE) -->
+      <div class="card p-7 border-t-4 border-nile-gold flex flex-col">
+        <div class="flex text-nile-gold mb-4 text-lg">
+          ★★★★★
+        </div>
+        <p class="text-nile-muted text-sm italic mb-6 leading-relaxed flex-1">
+          "كان عندي رهبة شديدة من أطباء الأسنان، والموضوع زاد لما احتجت زراعة فك كامل. دكتور عمر فتحي شرحلي كل تفصيلة من الأشعة، والفريق هناك استخدم التهدئة الوريدية (IV Sedation) كأني نمت وصحيت وكل حاجة خلصت. رجعت دبي وأنا حاسس إني إنسان جديد، ونفسي بدأت آكل بشكل طبيعي من غير ألم."
+        </p>
+        <div class="flex items-center gap-3 pt-4 border-t border-nile-gold/20">
+          <div class="w-10 h-10 rounded-full bg-nile-blue text-white flex items-center justify-center font-bold">م.ع</div>
+          <div>
+            <p class="font-bold text-nile-blue text-sm">مريم العلي</p>
+            <p class="text-xs text-nile-muted">دبي، الإمارات</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review 3 (Kuwait) -->
+      <div class="card p-7 border-t-4 border-nile-gold flex flex-col">
+        <div class="flex text-nile-gold mb-4 text-lg">
+          ★★★★★
+        </div>
+        <p class="text-nile-muted text-sm italic mb-6 leading-relaxed flex-1">
+          "سويت زراعة في تركيا قبل كده وباظت بعد سنة، وكنت محتاج تصحيح (Implant Rescue). نايل سمايل كانوا الوحيدين اللي طلبوا مني الأشعة المقطعية (CBCT) قبل ما يعطوني أي سعر. صلحوا اللي العيادات التانية خربته، وعطوني (جواز زراعة) فيه أرقام التشغيلة والضمان المكتوب. الحمد لله دلوقتي أسناني ثابتة."
+        </p>
+        <div class="flex items-center gap-3 pt-4 border-t border-nile-gold/20">
+          <div class="w-10 h-10 rounded-full bg-nile-blue text-white flex items-center justify-center font-bold">ي.ع</div>
+          <div>
+            <p class="font-bold text-nile-blue text-sm">يوسف العنزي</p>
+            <p class="text-xs text-nile-muted">مدينة الكويت، الكويت</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- ═══════════════════ /PATIENT STORIES ═══════════════════ -->
+
 <!-- ═══════════════════ PEACE OF MIND — NEW ═══════════════════ -->
 <section id="peace-of-mind" class="section bg-white reveal">
   <div class="container">
     <div class="text-center mb-12 max-w-3xl mx-auto">
       <p class="eyebrow mb-4">ماذا بعد عودتك إلى وطنك؟</p>
-      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.4rem,3vw,1.8rem);font-weight:800;color:#1F2A36">راحة بال مطلقة — <span class="italic gold-text">قبل السفر، وأثناء العلاج، وبعد العودة.</span></h2>
+      <h2 class="text-nile-blue mb-5" style="font-size:clamp(1.4rem,3vw,1.8rem);font-weight:800;color:#1F2A36">ابتسامتك أمانة في أعناقنا — <span class="italic gold-text">لن تترك وحدك أبداً.</span></h2>
       <p class="text-nile-muted" style="font-size:1.05rem">رحلة العودة للوطن ليست نهاية علاقتنا بك، بل هي بداية الجزء الأكثر أهمية: الرعاية ومتابعة استقرار الابتسامة.</p>
     </div>
 
@@ -9494,7 +9748,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const items = category === 'all' ? galleryData : galleryData.filter(i => i.cat === category);
     track.innerHTML = items.map(item => `
       <div class="gallery-card">
-        <img src="${item.src}" loading="lazy" alt="${item.title} — ${item.desc}">
+        <img src="${item.src}" loading="lazy" width="320" height="380" alt="${item.title} — ${item.desc}">
         <div class="gallery-card-overlay"></div>
         <div class="gallery-card-text">
           <h3>${item.title}</h3>
@@ -11068,7 +11322,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   /* ───── Attach events ───── */
   var trigger = document.getElementById('searchTrigger');
   if(trigger){
-    trigger.addEventListener('click', openSearch);
+    /* معالج زر البحث موجود في dynamicUIScript — تم إزالة المستمع المكرر */
   }
 
   // Mobile search button
@@ -11818,5 +12072,39 @@ summary:focus-visible {
     }
   }
 </style>
+<!-- ═══ Dynamic FAQ Schema — Auto-synced with visible FAQ section ═══ -->
+<script id="dynamicFaqSchema">
+(function(){
+  'use strict';
+  var faq = document.getElementById('faq');
+  if(!faq) return;
+  var items = [];
+  faq.querySelectorAll('details').forEach(function(d){
+    var q = d.querySelector('summary');
+    var a = d.querySelector('.acc-body');
+    if(!q || !a) return;
+    var qText = q.textContent.replace(/[+]/g,'').trim();
+    var aText = a.textContent.trim();
+    if(!qText || !aText) return;
+    items.push({
+      "@type": "Question",
+      "name": qText,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": aText
+      }
+    });
+  });
+  if(items.length === 0) return;
+  var script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": items
+  });
+  document.body.appendChild(script);
+})();
+</script>
 </body>
 </html>
