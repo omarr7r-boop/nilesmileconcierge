@@ -9,6 +9,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-N68QQVKV');</script>
 <!-- End Google Tag Manager -->
 <meta charset="UTF-8">
+<base href="../">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style id="viewTransitionsStyles">
 /* ═══ VIEW TRANSITIONS — SMOOTH SPATIAL NAVIGATION ═══ */
@@ -858,7 +859,9 @@ img{
 .hero-content > *:nth-child(4){ animation-delay: 0.85s; }
 .hero-content > *:nth-child(5){ animation-delay: 1.0s; }
 .hero-content > *:nth-child(6){ animation-delay: 1.15s; }
-@keyframes heroStagger {
+@media(max-width:767px){
+  .hero-content > * { animation: none !important; opacity: 1 !important; transform: none !important; }
+}@keyframes heroStagger {
   to { opacity: 1; transform: translateY(0); }
 }
   /* ============ GOLD GRADIENT TEXT ============ */
@@ -3953,7 +3956,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 }
 </style>
 
-  <svg class="world-map-svg" viewBox="400 60 550 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="خريطة توضح خدمة نايل سمايل كونسيرج لمرضى دول الخليج حول مصر">
+  <svg class="world-map-svg" viewBox="50 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="خريطة عالمية توضح خدمة نايل سمايل كونسيرج للمرضى من حول العالم">
     <defs>
       <pattern id="mapGrid" width="50" height="50" patternUnits="userSpaceOnUse">
         <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#AE9164" stroke-width="0.3" opacity="0.08"/>
@@ -6295,7 +6298,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ═══════════════════ HOTEL & CONCIERGE ADD-ONS — SEPARATED ═══════════════════ -->
 
-<section id="travel-addons" class="section bg-white reveal">
+<section id="travel-addons" class="section bg-white reveal" style="position:relative">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto mb-12">
       <p class="eyebrow mb-4">صمّم إقامتك — بأسلوبك وراحتك</p>
