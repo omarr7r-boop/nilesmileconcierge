@@ -1,0 +1,17 @@
+# Backups and temporary files
+*.bak*
+*.backup*
+*backup*
+*.old
+*.fixed.html
+
+# Helper and scratch scripts
+*.ps1
+*.py
+*.cs
+scratch/
+
+# Build and environment
+tailwindcss.exe
+node_modules/
+.DS_Store
