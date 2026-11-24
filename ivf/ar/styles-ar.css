@@ -1,0 +1,56 @@
+/* ==========================================================================
+   Nile Smile IVF Concierge — Arabic RTL Typography & Refinement Layer
+   Pairs with ../styles.css for ivf.nilesmileconcierge.com/ar/
+   ========================================================================== */
+
+:root,
+[dir="rtl"] {
+  --font-heading: 'IBM Plex Sans Arabic', 'Tahoma', sans-serif;
+  --font-body: 'IBM Plex Sans Arabic', 'Tahoma', sans-serif;
+  --font-rtl-fallback: 'IBM Plex Sans Arabic', 'Tahoma', sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  line-height: 1.82;
+}
+
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.34;
+}
+
+/* Preserve connected Arabic script (never apply letter-spacing or faux italics) */
+.eyebrow,
+.brand__sub,
+.package-card__tag,
+.package-card__ribbon {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.highlight-rose {
+  font-style: normal;
+}
+
+.hero__title {
+  line-height: 1.28;
+}
+
+.brand__name {
+  font-size: 1.12rem;
+}
+
+.brand__sub {
+  font-size: 0.76rem;
+}
+
+.lang-switch {
+  font-family: 'Montserrat', 'IBM Plex Sans Arabic', sans-serif;
+}
+
+.pillar-card__stat,
+.package-card__amount {
+  font-family: var(--font-heading);
+}
