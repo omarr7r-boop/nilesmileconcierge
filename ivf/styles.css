@@ -892,34 +892,72 @@ h1, h2, h3, h4, .font-serif {
   background: var(--bg-cream);
   border-radius: var(--radius-md);
   padding: 1.5rem;
-  border: 1px solid var(--border-rose);
+  border: 1px solid rgba(217, 167, 96, 0.28);
+  box-shadow: var(--shadow-soft);
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
+  gap: 1.15rem;
+  transition: transform var(--transition-gentle), box-shadow var(--transition-gentle);
+}
+
+.doctor-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-rose);
 }
 
 .doctor-card__avatar {
-  height: 185px;
+  position: relative;
+  height: 198px;
   border-radius: var(--radius-sm);
-  background: linear-gradient(145deg, var(--blue-tint) 0%, #FFFFFF 55%, var(--pink-tint) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.95) 0%, rgba(252, 228, 236, 0.55) 55%, rgba(227, 242, 253, 0.65) 100%);
+  border: 1px solid rgba(217, 167, 96, 0.36);
+  box-shadow: inset 0 0 28px rgba(248, 187, 208, 0.28);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.65rem;
+  gap: 0.72rem;
   padding: 1rem;
   text-align: center;
 }
 
+.doctor-medallion {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(#FFFFFF, #FFFDFD) padding-box,
+    linear-gradient(135deg, #D9A760 0%, #E91E63 52%, #2196F3 100%) border-box;
+  border: 2px solid transparent;
+  box-shadow: 0 10px 24px -8px rgba(194, 24, 91, 0.24);
+  color: #B68443;
+}
+
+.doctor-medallion--rose {
+  color: var(--pink-deep);
+}
+
 .doctor-card__badge {
-  display: inline-block;
-  padding: 0.28rem 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  padding: 0.32rem 0.85rem;
   border-radius: var(--radius-pill);
-  background: var(--blue-tint);
-  color: var(--blue-deep);
-  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(217, 167, 96, 0.45);
+  color: var(--ink-primary);
+  font-size: 0.74rem;
   font-weight: 600;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 12px -4px rgba(45, 34, 43, 0.08);
+}
+
+.doctor-card__privacy-note {
+  font-size: 0.73rem;
+  color: var(--ink-muted);
 }
 
 .doctor-card h3 {
