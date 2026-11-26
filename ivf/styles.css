@@ -1171,20 +1171,19 @@ h1, h2, h3, h4, .font-serif {
   transition: transform var(--transition-gentle);
 }
 
-.faq-item[data-open="true"] .faq-icon {
+.faq-trigger[aria-expanded="true"] .faq-icon {
   transform: rotate(45deg);
 }
 
 .faq-panel {
-  display: none;
   padding-inline: 1.4rem;
   padding-block-end: 1.25rem;
   font-size: 0.93rem;
   color: var(--ink-secondary);
 }
 
-.faq-item[data-open="true"] .faq-panel {
-  display: block;
+.faq-panel[hidden] {
+  display: none;
 }
 
 /* ==========================================================================
@@ -1413,6 +1412,7 @@ h1, h2, h3, h4, .font-serif {
   inset-block-end: 1.35rem;
   inset-inline-end: 1.35rem;
   z-index: 95;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
@@ -1430,6 +1430,7 @@ h1, h2, h3, h4, .font-serif {
   content: "";
   position: absolute;
   inset: -4px;
+  z-index: -1;
   border-radius: var(--radius-pill);
   border: 2px solid rgba(37, 211, 102, 0.45);
   animation: gentlePulse 3.4s ease-in-out infinite;
