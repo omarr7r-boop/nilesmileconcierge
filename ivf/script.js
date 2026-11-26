@@ -1,30 +1,19 @@
 /* ==========================================================================
    Nile Smile IVF Concierge — Interactive Script
-   Self-contained for ivf.nilesmileconcierge.com
+   Standalone for ivf.nilesmileconcierge.com (English)
+   Progressive enhancement only: every feature degrades gracefully.
    ========================================================================== */
 
 (() => {
   'use strict';
 
   const CONCIERGE_WHATSAPP = '201503308333';
-
-  // Country phone hint mapping for smoother Gulf UX
-  const COUNTRY_PHONE_HINTS = {
-    'Saudi Arabia': '+966 5X XXX XXXX',
-    'United Arab Emirates': '+971 5X XXX XXXX',
-    Kuwait: '+965 XXXX XXXX',
-    Qatar: '+974 XXXX XXXX',
-    Bahrain: '+973 XXXX XXXX',
-    Oman: '+968 9XXX XXXX',
-    Other: '+XX XXX XXX XXXX',
-  };
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ------------------------------------------------------------------------
-     1. Sticky Header Elevation & Mobile Navigation
+     1. Fixed Header Elevation
      ------------------------------------------------------------------------ */
   const siteHeader = document.getElementById('siteHeader');
-  const menuToggle = document.getElementById('menuToggle');
-  const mobileMenu = document.getElementById('mobileMenu');
 
   if (siteHeader) {
     const updateHeaderShadow = () => {
@@ -34,210 +23,300 @@
     updateHeaderShadow();
   }
 
+  /* ------------------------------------------------------------------------
+     2. Mobile Navigation (fixed drawer + backdrop + focus restore)
+     ------------------------------------------------------------------------ */
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const navBackdrop = document.getElementById('navBackdrop');
+  const desktopNav = window.matchMedia('(min-width: 1024px)');
+
   if (menuToggle && mobileMenu) {
-    const closeMobileMenu = () => {
-      mobileMenu.classList.remove('is-open');
-      menuToggle.setAttribute('aria-expanded', 'false');
+    const setMenuState = (open, restoreFocus = false) => {
+      menuToggle.setAttribute('aria-expanded', String(open));
+      menuToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+      mobileMenu.hidden = !open;
+      if (navBackdrop) navBackdrop.hidden = !open;
+      document.body.classList.toggle('nav-open', open);
+
+      if (open) {
+        const firstItem = mobileMenu.querySelector('a, button');
+        firstItem?.focus({ preventScroll: true });
+      } else if (restoreFocus) {
+        menuToggle.focus();
+      }
     };
 
     menuToggle.addEventListener('click', () => {
-      const isOpen = mobileMenu.classList.toggle('is-open');
-      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      setMenuState(menuToggle.getAttribute('aria-expanded') !== 'true');
     });
 
     mobileMenu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', closeMobileMenu);
+      link.addEventListener('click', () => setMenuState(false));
     });
-  }
 
-  /* ------------------------------------------------------------------------
-     2. Gentle Scroll Reveal Animations (Respects Reduced Motion)
-     ------------------------------------------------------------------------ */
-  const revealItems = document.querySelectorAll('.reveal');
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-    revealItems.forEach((el) => el.classList.add('is-visible'));
-  } else {
-    const observer = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            obs.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -30px 0px' }
-    );
-
-    revealItems.forEach((el) => observer.observe(el));
-  }
-
-  /* ------------------------------------------------------------------------
-     3. Privacy Charter Modal
-     ------------------------------------------------------------------------ */
-  const privacyModal = document.getElementById('privacyModal');
-  const openPrivacyTriggers = [
-    document.getElementById('openPrivacyModal'),
-    document.getElementById('footerPrivacyBtn'),
-  ].filter(Boolean);
-  const closePrivacyTriggers = [
-    document.getElementById('closePrivacyModal'),
-    document.getElementById('acceptPrivacyModal'),
-  ].filter(Boolean);
-
-  const togglePrivacyModal = (open) => {
-    if (!privacyModal) return;
-    privacyModal.classList.toggle('is-open', open);
-    privacyModal.setAttribute('aria-hidden', String(!open));
-    if (open) {
-      document.getElementById('closePrivacyModal')?.focus();
-    }
-  };
-
-  openPrivacyTriggers.forEach((btn) => {
-    btn.addEventListener('click', () => togglePrivacyModal(true));
-  });
-
-  closePrivacyTriggers.forEach((btn) => {
-    btn.addEventListener('click', () => togglePrivacyModal(false));
-  });
-
-  if (privacyModal) {
-    privacyModal.addEventListener('click', (event) => {
-      if (event.target === privacyModal) {
-        togglePrivacyModal(false);
-      }
-    });
+    navBackdrop?.addEventListener('click', () => setMenuState(false, true));
 
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && privacyModal.classList.contains('is-open')) {
-        togglePrivacyModal(false);
+      if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+        setMenuState(false, true);
       }
     });
+
+    desktopNav.addEventListener('change', (event) => {
+      if (event.matches && menuToggle.getAttribute('aria-expanded') === 'true') {
+        setMenuState(false);
+      }
+    });
+  }
+
+  /* ------------------------------------------------------------------------
+     3. Gentle Scroll Reveal (respects reduced motion)
+     ------------------------------------------------------------------------ */
+  const revealItems = document.querySelectorAll('.reveal');
+
+  if (revealItems.length) {
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      revealItems.forEach((el) => el.classList.add('is-visible'));
+    } else {
+      const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -30px 0px' }
+      );
+
+      revealItems.forEach((el) => revealObserver.observe(el));
+    }
   }
 
   /* ------------------------------------------------------------------------
      4. Accessible FAQ Accordion
+        One panel open at a time; aria-expanded and [hidden] stay in sync.
      ------------------------------------------------------------------------ */
-  document.querySelectorAll('.faq-item').forEach((item) => {
+  const faqItems = Array.from(document.querySelectorAll('.faq-item'));
+
+  const setFaqState = (item, open) => {
+    const trigger = item.querySelector('.faq-trigger');
+    const panelId = trigger ? trigger.getAttribute('aria-controls') : null;
+    const panel = panelId ? document.getElementById(panelId) : item.querySelector('.faq-panel');
+
+    if (!trigger || !panel) return;
+
+    trigger.setAttribute('aria-expanded', String(open));
+    panel.hidden = !open;
+  };
+
+  faqItems.forEach((item) => {
     const trigger = item.querySelector('.faq-trigger');
     if (!trigger) return;
 
+    // Normalise the initial state so markup and ARIA never disagree.
+    setFaqState(item, trigger.getAttribute('aria-expanded') === 'true');
+
     trigger.addEventListener('click', () => {
-      const currentlyOpen = item.getAttribute('data-open') === 'true';
-      item.setAttribute('data-open', String(!currentlyOpen));
-      trigger.setAttribute('aria-expanded', String(!currentlyOpen));
+      const willOpen = trigger.getAttribute('aria-expanded') !== 'true';
+
+      faqItems.forEach((other) => {
+        if (other !== item) setFaqState(other, false);
+      });
+
+      setFaqState(item, willOpen);
     });
   });
 
   /* ------------------------------------------------------------------------
-     5. Package Selection Pre-Fill
+     5. Privacy Charter Modal (aria-hidden + focus management + focus trap)
      ------------------------------------------------------------------------ */
-  const packageSelect = document.getElementById('packageInterest');
-  const formSection = document.getElementById('confidential-form');
-  const nameInput = document.getElementById('patientName');
+  const privacyModal = document.getElementById('privacyModal');
 
-  document.querySelectorAll('.select-package-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const selectedPkg = btn.getAttribute('data-package');
-      if (packageSelect && selectedPkg) {
-        packageSelect.value = selectedPkg;
+  if (privacyModal) {
+    const openTriggers = [
+      document.getElementById('openPrivacyModal'),
+      document.getElementById('footerPrivacyBtn'),
+    ].filter(Boolean);
+
+    const closeTriggers = [
+      document.getElementById('closePrivacyModal'),
+      document.getElementById('acceptPrivacyModal'),
+    ].filter(Boolean);
+
+    let lastFocusedElement = null;
+
+    const getFocusable = () =>
+      Array.from(
+        privacyModal.querySelectorAll(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      ).filter((el) => el.offsetParent !== null || el === document.activeElement);
+
+    const openModal = (trigger) => {
+      lastFocusedElement = trigger || document.activeElement;
+      privacyModal.hidden = false;
+      privacyModal.classList.add('is-open');
+      privacyModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+
+      const firstFocusable = document.getElementById('closePrivacyModal') || getFocusable()[0] || privacyModal;
+      firstFocusable.focus();
+    };
+
+    const closeModal = () => {
+      privacyModal.classList.remove('is-open');
+      privacyModal.setAttribute('aria-hidden', 'true');
+      privacyModal.hidden = true;
+      document.body.style.overflow = '';
+
+      if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+        lastFocusedElement.focus();
       }
-      formSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setTimeout(() => nameInput?.focus({ preventScroll: true }), 550);
+    };
+
+    openTriggers.forEach((btn) => {
+      btn.addEventListener('click', () => openModal(btn));
     });
-  });
 
-  /* ------------------------------------------------------------------------
-     6. Confidential Lead Form Validation & Private WhatsApp Dispatch
-     ------------------------------------------------------------------------ */
-  const leadForm = document.getElementById('ivfLeadForm');
-  const countrySelect = document.getElementById('patientCountry');
-  const whatsappInput = document.getElementById('patientWhatsapp');
-  const contactTimeSelect = document.getElementById('contactTime');
-  const femaleCoordinatorCheck = document.getElementById('femaleCoordinator');
-  const formError = document.getElementById('formError');
-  const formSuccess = document.getElementById('formSuccess');
-  const successSummaryText = document.getElementById('successSummaryText');
-  const whatsappLaunchBtn = document.getElementById('whatsappLaunchBtn');
-  const resetFormBtn = document.getElementById('resetFormBtn');
+    closeTriggers.forEach((btn) => {
+      btn.addEventListener('click', closeModal);
+    });
 
-  if (countrySelect && whatsappInput) {
-    countrySelect.addEventListener('change', () => {
-      const hint = COUNTRY_PHONE_HINTS[countrySelect.value];
-      if (hint) {
-        whatsappInput.placeholder = hint;
+    privacyModal.addEventListener('click', (event) => {
+      if (event.target === privacyModal) closeModal();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (privacyModal.hidden) return;
+
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeModal();
+        return;
+      }
+
+      if (event.key === 'Tab') {
+        const focusable = getFocusable();
+        if (!focusable.length) return;
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
       }
     });
   }
 
-  const showError = (message) => {
-    if (!formError) return;
-    formError.textContent = message;
-    formError.classList.add('is-visible');
-  };
+  /* ------------------------------------------------------------------------
+     6. Package Selection Pre-Fill
+     ------------------------------------------------------------------------ */
+  const packageField = document.getElementById('patientPackage');
 
-  const clearError = () => {
-    if (!formError) return;
-    formError.textContent = '';
-    formError.classList.remove('is-visible');
-  };
+  document.querySelectorAll('[data-package]').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      if (!packageField) return;
+      packageField.value = trigger.getAttribute('data-package') || '';
+    });
+  });
+
+  /* ------------------------------------------------------------------------
+     7. Confidential Lead Form
+        Validate -> build a discreet, URL-encoded WhatsApp message ->
+        hide the form -> reveal the confirmation screen.
+     ------------------------------------------------------------------------ */
+  const leadForm = document.getElementById('consultForm');
+  const nameInput = document.getElementById('patientName');
+  const countrySelect = document.getElementById('patientCountry');
+  const notesInput = document.getElementById('patientNotes');
+  const nameError = document.getElementById('name-error');
+  const countryError = document.getElementById('country-error');
+  const formError = document.getElementById('formError');
+  const formSuccess = document.getElementById('formSuccess');
+  const successHeading = document.getElementById('successHeading');
+  const successSummaryText = document.getElementById('successSummaryText');
+  const whatsappLaunchBtn = document.getElementById('whatsappLaunchBtn');
+  const resetFormBtn = document.getElementById('resetFormBtn');
 
   if (leadForm) {
+    const setFieldError = (field, errorEl, message) => {
+      if (!errorEl) return;
+      if (message) {
+        errorEl.textContent = message;
+        errorEl.hidden = false;
+        field?.setAttribute('aria-invalid', 'true');
+      } else {
+        errorEl.textContent = '';
+        errorEl.hidden = true;
+        field?.removeAttribute('aria-invalid');
+      }
+    };
+
+    const clearErrors = () => {
+      setFieldError(nameInput, nameError, '');
+      setFieldError(countrySelect, countryError, '');
+      if (formError) {
+        formError.textContent = '';
+        formError.classList.remove('is-visible');
+      }
+    };
+
+    const showFormError = (message) => {
+      if (!formError) return;
+      formError.textContent = message;
+      formError.classList.add('is-visible');
+    };
+
     leadForm.addEventListener('submit', (event) => {
       event.preventDefault();
-      clearError();
+      clearErrors();
 
-      const name = nameInput?.value.trim() || '';
-      const whatsapp = whatsappInput?.value.trim() || '';
+      const name = (nameInput?.value || '').trim();
       const country = countrySelect?.value || '';
-      const contactTime = contactTimeSelect?.value || '';
-      const packageChoice = packageSelect?.value || 'General Confidential IVF Consultation';
-      const femalePref = femaleCoordinatorCheck?.checked
-        ? 'Yes — Female Coordinator Requested'
-        : 'No preference';
+      const packageChoice = (packageField?.value || '').trim() || 'General Confidential IVF Consultation';
+      const notes = (notesInput?.value || '').trim();
 
-      const digitsCount = whatsapp.replace(/\D/g, '').length;
+      let firstInvalidField = null;
 
       if (name.length < 2) {
-        showError('Please share your first name or preferred initials so we know how to address you warmly.');
-        nameInput?.focus();
-        return;
-      }
-
-      if (digitsCount < 8) {
-        showError('Please enter a valid WhatsApp number including your country code (at least 8 digits).');
-        whatsappInput?.focus();
-        return;
+        setFieldError(nameInput, nameError, 'Please share a first name or alias of at least 2 characters.');
+        firstInvalidField = firstInvalidField || nameInput;
       }
 
       if (!country) {
-        showError('Please select your country of residence so we can tailor travel timing.');
-        countrySelect?.focus();
+        setFieldError(countrySelect, countryError, 'Please select your country of residence.');
+        firstInvalidField = firstInvalidField || countrySelect;
+      }
+
+      if (firstInvalidField) {
+        showFormError('Please review the highlighted fields before continuing.');
+        firstInvalidField.focus();
         return;
       }
 
-      if (!contactTime) {
-        showError('Please choose your preferred private contact time.');
-        contactTimeSelect?.focus();
-        return;
-      }
-
-      // Generate discreet reference ID
+      // Discreet reference code (no personal data).
       const refCode = `NS-IVF-${Math.floor(1000 + Math.random() * 9000)}`;
 
       const messageLines = [
         `Confidential IVF Concierge Inquiry (${refCode})`,
         `Name / Alias: ${name}`,
-        `WhatsApp: ${whatsapp}`,
         `Country: ${country}`,
-        `Preferred Contact Time: ${contactTime}`,
         `Interest: ${packageChoice}`,
-        `Female Coordinator: ${femalePref}`,
       ];
 
+      if (notes) {
+        messageLines.push(`Notes: ${notes}`);
+      }
+
+      // encodeURIComponent keeps the payload safe inside the wa.me URL.
       const waUrl = `https://wa.me/${CONCIERGE_WHATSAPP}?text=${encodeURIComponent(messageLines.join('\n'))}`;
 
       if (whatsappLaunchBtn) {
@@ -245,19 +324,29 @@
       }
 
       if (successSummaryText) {
-        successSummaryText.textContent = `Thank you, ${name}. Your confidential reference code is ${refCode}. Tap below to open a private WhatsApp chat with our concierge (${femaleCoordinatorCheck?.checked ? 'Female Coordinator requested' : 'Dedicated Care Team'}) at your preferred time (${contactTime}).`;
+        successSummaryText.textContent = `Thank you, ${name}. Your confidential reference code is ${refCode}. Tap below to open a private WhatsApp chat with our concierge team.`;
       }
 
-      leadForm.style.display = 'none';
-      formSuccess?.classList.add('is-visible');
+      leadForm.hidden = true;
+      if (formSuccess) {
+        formSuccess.classList.add('is-visible');
+        successHeading?.focus({ preventScroll: true });
+        formSuccess.scrollIntoView({
+          behavior: prefersReducedMotion ? 'auto' : 'smooth',
+          block: 'center',
+        });
+      } else {
+        window.open(waUrl, '_blank', 'noopener');
+      }
     });
-  }
 
-  if (resetFormBtn && leadForm && formSuccess) {
-    resetFormBtn.addEventListener('click', () => {
-      formSuccess.classList.remove('is-visible');
-      leadForm.style.display = 'flex';
-      clearError();
-    });
+    if (resetFormBtn && formSuccess) {
+      resetFormBtn.addEventListener('click', () => {
+        formSuccess.classList.remove('is-visible');
+        leadForm.hidden = false;
+        clearErrors();
+        nameInput?.focus();
+      });
+    }
   }
 })();
