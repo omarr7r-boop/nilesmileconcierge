@@ -17,6 +17,7 @@
   --gold-300: #E8C88A;
   --gold-400: #D4AF6A;
   --gold-500: #B8934E;
+  --gold-600: #D4AF37;
 
   /* IVF accents */
   --pink-300: #F8BBD0;
@@ -363,7 +364,7 @@ button {
 
 .nav-link.is-active::after {
   transform: scaleX(1);
-  background: var(--gold-300);
+  background: var(--gold-600);
 }
 
 /* Actions */
@@ -376,6 +377,30 @@ button {
 
 .header-cta {
   display: none;
+}
+
+/* Language switch */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid rgba(232, 200, 138, 0.35);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--gold-200);
+  white-space: nowrap;
+  transition: background-color 0.3s var(--ease-lux), border-color 0.3s var(--ease-lux), color 0.3s var(--ease-lux);
+}
+
+.lang-switch:hover,
+.lang-switch:focus-visible {
+  background: rgba(232, 200, 138, 0.12);
+  border-color: var(--gold-300);
+  color: var(--gold-200);
 }
 
 /* Hamburger */
@@ -2545,4 +2570,669 @@ button {
   .form-grid {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+/* ==========================================================================
+   Phase 4 — Warm, comforting light surface
+   Cream content sections with dark ink; navy is retained for the header,
+   hero, footer and CTA band. Rose is the primary accent; gold is reserved
+   for subtle highlights on dark surfaces (e.g. the active nav underline).
+   Text pairs chosen to meet WCAG 2.2 AA (>= 4.5:1) for body copy.
+   ========================================================================== */
+
+/* ---- Surfaces ---------------------------------------------------------- */
+.page-main {
+  background: var(--cream);
+}
+
+/* The hero keeps its own navy field so its light text stays legible. */
+.hero {
+  background:
+    radial-gradient(circle at 18% 6%, rgba(233, 30, 99, 0.14) 0%, transparent 40%),
+    radial-gradient(circle at 84% 12%, rgba(33, 150, 243, 0.12) 0%, transparent 44%),
+    linear-gradient(180deg, var(--navy-950) 0%, var(--navy-900) 62%, var(--navy-850) 100%);
+}
+
+.section {
+  color: var(--ink);
+}
+
+.section--alt {
+  background: #F3EBE6;
+  border-block-color: rgba(212, 160, 160, 0.32);
+}
+
+/* ---- Section typography ----------------------------------------------- */
+.section .section-title {
+  color: var(--ink);
+}
+
+.section .section-lead,
+.section .prose {
+  color: #3F4E60;
+}
+
+.section .prose strong,
+.section .prose em {
+  color: var(--ink);
+}
+
+.section .prose a {
+  color: #8F5454;
+}
+
+.section .eyebrow {
+  color: #8F5454;
+}
+
+.section .eyebrow::before {
+  background: linear-gradient(90deg, var(--rose-500), var(--rose-700));
+}
+
+.section-head--center .eyebrow::after {
+  background: linear-gradient(90deg, var(--rose-700), var(--rose-400));
+}
+
+.section .text-link {
+  min-height: 44px;
+  color: #8F5454;
+}
+
+/* ---- Buttons ----------------------------------------------------------- */
+.section .btn-outline {
+  color: var(--ink);
+  border-color: rgba(143, 84, 84, 0.42);
+}
+
+.section .btn-outline:hover,
+.section .btn-outline:focus-visible {
+  background: rgba(212, 160, 160, 0.18);
+  border-color: var(--rose-600);
+  color: #8F5454;
+}
+
+.section :focus-visible {
+  outline-color: var(--rose-600);
+}
+
+/* ---- Cards, panels, lists --------------------------------------------- */
+.section .panel {
+  background: linear-gradient(165deg, #FFFFFF, #FBF7F3);
+  border-color: rgba(11, 23, 40, 0.08);
+  box-shadow: 0 22px 50px -34px rgba(11, 23, 40, 0.35);
+}
+
+.section .panel--gold {
+  background: linear-gradient(155deg, rgba(212, 160, 160, 0.2), rgba(212, 160, 160, 0.06) 55%, rgba(212, 160, 160, 0.1));
+  border-color: rgba(212, 160, 160, 0.5);
+  box-shadow: 0 24px 60px -34px rgba(169, 107, 107, 0.45);
+}
+
+.section .panel__label {
+  color: #8F5454;
+}
+
+.section .panel__footnote {
+  color: #5B6B7C;
+  border-block-start-color: rgba(11, 23, 40, 0.1);
+}
+
+.section .team-list li {
+  border-inline-start-color: rgba(212, 160, 160, 0.5);
+}
+
+.section .team-list__role {
+  color: #8F5454;
+}
+
+.section .team-list li span:last-child {
+  color: #45566A;
+}
+
+.section .check-list li {
+  color: #3F4E60;
+}
+
+.section .check-list li::before {
+  background: rgba(212, 160, 160, 0.18);
+  border-color: rgba(143, 84, 84, 0.5);
+  color: #8F5454;
+}
+
+.section .fear-card {
+  background: #FFFFFF;
+  border-color: rgba(11, 23, 40, 0.08);
+  box-shadow: 0 18px 40px -32px rgba(11, 23, 40, 0.3);
+}
+
+.section .fear-card__quote {
+  color: #8F5454;
+}
+
+.section .fear-card p:last-child {
+  color: #45566A;
+}
+
+.section .gateway-card {
+  background: #FFFFFF;
+  border-color: rgba(11, 23, 40, 0.08);
+  box-shadow: 0 18px 40px -34px rgba(11, 23, 40, 0.28);
+}
+
+.section .gateway-card:hover,
+.section .gateway-card:focus-visible {
+  border-color: rgba(169, 107, 107, 0.45);
+  box-shadow: 0 26px 54px -30px rgba(11, 23, 40, 0.42);
+}
+
+.section .gateway-card__icon {
+  color: #8F5454;
+}
+
+.section .gateway-card__title {
+  color: var(--ink);
+}
+
+.section .gateway-card__text {
+  color: #45566A;
+}
+
+.section .gateway-card__link {
+  color: #8F5454;
+}
+
+.section .trust-item {
+  background: #FFFFFF;
+  border-color: rgba(11, 23, 40, 0.08);
+}
+
+.section .trust-item__icon {
+  color: #8F5454;
+}
+
+.section .trust-item h3 {
+  color: var(--ink);
+}
+
+.section .trust-item p {
+  color: #45566A;
+}
+
+.section .nurse-emblem span {
+  color: #8F5454;
+}
+
+.section .nurse-panel__title {
+  color: var(--ink);
+}
+
+.section .nurse-panel__sub {
+  color: #8F5454;
+}
+
+.section .chip {
+  background: #FBF7F3;
+  border-color: rgba(11, 23, 40, 0.12);
+  color: #45566A;
+}
+
+.section .feature-card {
+  background: #FFFFFF;
+  border-color: rgba(11, 23, 40, 0.08);
+}
+
+.section .feature-card__num {
+  color: rgba(143, 84, 84, 0.55);
+}
+
+.section .feature-card h3 {
+  color: var(--ink);
+}
+
+.section .feature-card p {
+  color: #45566A;
+}
+
+.section .feature-card__label {
+  color: #8F5454;
+}
+
+.section .deep-dive {
+  border-block-start-color: rgba(11, 23, 40, 0.08);
+}
+
+.section .deep-dive__label {
+  color: #8F5454;
+}
+
+.section .deep-dive__label span {
+  border-color: rgba(143, 84, 84, 0.45);
+}
+
+.section .deep-dive h3 {
+  color: var(--ink);
+}
+
+.section .step {
+  background: #FFFFFF;
+  border-color: rgba(11, 23, 40, 0.08);
+}
+
+.section .step h3 {
+  color: var(--ink);
+}
+
+.section .step p {
+  color: #45566A;
+}
+
+.section .compare-wrap {
+  background: #FFFFFF;
+  border-color: rgba(212, 160, 160, 0.3);
+}
+
+.section .compare caption {
+  color: #8F5454;
+}
+
+.section .compare th,
+.section .compare td {
+  border-block-end-color: rgba(11, 23, 40, 0.08);
+}
+
+.section .compare thead th {
+  background: #F3EBE6;
+  color: #5B6B7C;
+}
+
+.section .compare tbody th {
+  color: var(--ink);
+}
+
+.section .compare td {
+  color: #45566A;
+}
+
+.section .compare .compare-us {
+  background: rgba(212, 160, 160, 0.16);
+  color: var(--ink);
+}
+
+.section .callout {
+  background: linear-gradient(90deg, rgba(212, 160, 160, 0.16), rgba(212, 160, 160, 0.04));
+}
+
+.section .callout p {
+  color: var(--ink);
+}
+
+.section .callout cite {
+  color: #8F5454;
+}
+
+.section .stat {
+  background: #FFFFFF;
+  border-color: rgba(11, 23, 40, 0.08);
+}
+
+.section .stat__value {
+  color: #8F5454;
+}
+
+.section .stat__label {
+  color: #5B6B7C;
+}
+
+/* ---- Article & FAQ ----------------------------------------------------- */
+.section .article h3 {
+  color: #8F5454;
+}
+
+.section .article p,
+.section .article li {
+  color: #45566A;
+}
+
+.section .faq-item {
+  background: #FFFFFF;
+  border-color: rgba(11, 23, 40, 0.1);
+}
+
+.section .faq-item summary {
+  color: var(--ink);
+}
+
+.section .faq-item summary::after,
+.section .faq-item summary:hover {
+  color: #8F5454;
+}
+
+.section .faq-item__body {
+  color: #45566A;
+}
+
+/* ---- Treatments, journey, packages ------------------------------------ */
+.section .treat {
+  background: #FFFFFF;
+  border-color: rgba(11, 23, 40, 0.08);
+}
+
+.section .treat__code {
+  color: #8F5454;
+}
+
+.section .treat h3 {
+  color: var(--ink);
+}
+
+.section .treat__tag {
+  color: #8F5454;
+  background: rgba(212, 160, 160, 0.14);
+  border-color: rgba(143, 84, 84, 0.4);
+}
+
+.section .treat__block h4 {
+  color: #8F5454;
+}
+
+.section .treat__block p,
+.section .treat__block li {
+  color: #45566A;
+}
+
+.section .treat__nurse {
+  color: #3F4E60;
+  background: rgba(212, 160, 160, 0.12);
+  border-color: rgba(212, 160, 160, 0.3);
+}
+
+.section .treat__nurse strong {
+  color: #8F5454;
+}
+
+.section .phase {
+  border-block-start-color: rgba(11, 23, 40, 0.08);
+}
+
+.section .phase__num {
+  color: #8F5454;
+  background: rgba(212, 160, 160, 0.14);
+  border-color: rgba(143, 84, 84, 0.4);
+}
+
+.section .phase__meta {
+  color: #8F5454;
+}
+
+.section .phase h2 {
+  color: var(--ink);
+}
+
+.section .phase__block h3 {
+  color: #8F5454;
+}
+
+.section .phase__block p,
+.section .phase__block li {
+  color: #45566A;
+}
+
+.section .phase__nurse {
+  color: #3F4E60;
+  background: linear-gradient(90deg, rgba(212, 160, 160, 0.16), rgba(212, 160, 160, 0.03));
+}
+
+.section .phase__nurse strong {
+  color: #8F5454;
+}
+
+.section .price-card {
+  background: #FFFFFF;
+  border-color: rgba(11, 23, 40, 0.08);
+}
+
+.section .price-card--featured {
+  background: linear-gradient(155deg, rgba(212, 160, 160, 0.2), rgba(212, 160, 160, 0.06) 55%, rgba(212, 160, 160, 0.1));
+  border-color: rgba(212, 160, 160, 0.5);
+  box-shadow: 0 30px 70px -44px rgba(169, 107, 107, 0.55);
+}
+
+.section .price-card h2 {
+  color: var(--ink);
+}
+
+.section .price-card__tagline {
+  color: #45566A;
+}
+
+.section .price-card__price {
+  color: #8F5454;
+}
+
+.section .price-card__note,
+.section .price-card__foot {
+  color: #6B7A88;
+}
+
+.section .price-list li {
+  color: #3F4E60;
+}
+
+.section .price-list li::before {
+  color: #8F5454;
+  background: rgba(212, 160, 160, 0.16);
+  border-color: rgba(143, 84, 84, 0.5);
+}
+
+.section .price-list li strong {
+  color: #8F5454;
+}
+
+.section .guarantee {
+  background: linear-gradient(135deg, rgba(212, 160, 160, 0.16), rgba(212, 160, 160, 0.04));
+}
+
+.section .guarantee h2 {
+  color: var(--ink);
+}
+
+.section .guarantee p {
+  color: #3F4E60;
+}
+
+/* ---- Consultation intake form ----------------------------------------- */
+.section .form-card {
+  background: #FFFFFF;
+  border-color: rgba(212, 160, 160, 0.35);
+  color-scheme: light;
+  box-shadow: 0 22px 50px -34px rgba(11, 23, 40, 0.3);
+}
+
+.section .form-card fieldset + fieldset {
+  border-block-start-color: rgba(11, 23, 40, 0.1);
+}
+
+.section .form-card legend,
+.section .form-card h2 {
+  color: var(--ink);
+}
+
+.section .form-intro {
+  color: #45566A;
+}
+
+.section .field label {
+  color: #3F4E60;
+}
+
+.section .field label .optional {
+  color: #7B8A98;
+}
+
+.section .field input,
+.section .field select,
+.section .field textarea {
+  background: #FFFFFF;
+  border-color: rgba(11, 23, 40, 0.2);
+  color: var(--ink);
+  font-size: 16px; /* 16px avoids the automatic iOS zoom on focus */
+}
+
+.section .field select option {
+  background: #FFFFFF;
+  color: var(--ink);
+}
+
+.section .field input:focus,
+.section .field select:focus,
+.section .field textarea:focus {
+  outline-color: var(--rose-600);
+  border-color: var(--rose-600);
+}
+
+.section .field input::placeholder,
+.section .field textarea::placeholder {
+  color: #97A3AF;
+}
+
+.section .field__hint {
+  color: #6B7A88;
+}
+
+.section .checkbox {
+  color: #45566A;
+}
+
+.section .checkbox input {
+  accent-color: var(--rose-600);
+}
+
+.section .form-status {
+  color: var(--ink);
+}
+
+.section .form-note {
+  color: #6B7A88;
+}
+
+.section .wa-card h2,
+.section .wa-card h3 {
+  color: var(--ink);
+}
+
+.section .wa-card p {
+  color: #45566A;
+}
+
+.section .trust-list li {
+  border-inline-start-color: rgba(212, 160, 160, 0.5);
+}
+
+.section .trust-list strong {
+  color: var(--ink);
+}
+
+.section .trust-list span {
+  color: #45566A;
+}
+
+/* ---- CTA band (kept navy so it reads as a highlight on the cream page) - */
+.cta-band {
+  background:
+    linear-gradient(135deg, rgba(212, 160, 160, 0.2), rgba(233, 30, 99, 0.12) 48%, rgba(33, 150, 243, 0.14)),
+    linear-gradient(180deg, var(--navy-800), var(--navy-900));
+  border-color: rgba(212, 160, 160, 0.38);
+}
+
+.cta-band .eyebrow {
+  color: var(--rose-300);
+}
+
+.cta-band .eyebrow::before {
+  background: linear-gradient(90deg, var(--rose-300), var(--gold-300));
+}
+
+.cta-band h2 {
+  color: var(--cream);
+}
+
+.cta-band p {
+  color: rgba(251, 248, 243, 0.75);
+}
+
+.cta-band .btn-outline {
+  color: var(--cream);
+  border-color: rgba(226, 183, 180, 0.55);
+}
+
+.cta-band .btn-outline:hover,
+.cta-band .btn-outline:focus-visible {
+  background: rgba(226, 183, 180, 0.12);
+  border-color: var(--rose-300);
+  color: var(--rose-200);
+}
+
+/* Stacked comparison colours on small screens */
+@media (max-width: 720px) {
+  .section .compare tbody tr {
+    background: #FFFFFF;
+    border-color: rgba(11, 23, 40, 0.08);
+  }
+
+  .section .compare tbody td::before {
+    color: #7B8A98;
+  }
+
+  .section .compare .compare-us::before {
+    color: #8F5454;
+  }
+}
+
+/* ==========================================================================
+   Responsive & mobile hardening
+   ========================================================================== */
+/* Respect notches / dynamic islands and home indicators */
+.site-header {
+  padding-block-start: env(safe-area-inset-top);
+}
+
+.site-footer {
+  padding-block-end: env(safe-area-inset-bottom);
+}
+
+/* Footer / inline text links get a 44px minimum touch target */
+.footer-col a,
+.footer-contact a,
+.footer-legal a,
+.footer-dental a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.footer-legal {
+  align-items: center;
+}
+
+/* Discreet cross-link to the dental clinic */
+.footer-dental {
+  margin-block-start: 1rem;
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+
+.footer-dental a {
+  color: rgba(226, 183, 180, 0.75);
+  transition: color 0.3s var(--ease-lux);
+}
+
+.footer-dental a:hover,
+.footer-dental a:focus-visible {
+  color: var(--rose-200);
+}
+
+/* Arabic (RTL) typography */
+[dir="rtl"] {
+  --font-body: 'IBM Plex Sans Arabic', 'Montserrat', sans-serif;
+  --font-display: 'IBM Plex Sans Arabic', 'Playfair Display', Georgia, serif;
 }
