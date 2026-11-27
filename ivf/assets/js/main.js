@@ -169,7 +169,54 @@
   }
 
   /* ------------------------------------------------------------------------
-     4. Footer year
+     4. Accessible clinical tabs (progressively enhanced)
+     Markup ships with every panel visible so the content is always readable;
+     JavaScript hides the inactive panels and wires roving-tabindex keyboard
+     navigation with correct RTL arrow-key direction.
+     ------------------------------------------------------------------------ */
+  const rtl = document.documentElement.getAttribute('dir') === 'rtl';
+
+  document.querySelectorAll('.tabset').forEach((tabset) => {
+    const tabs = Array.from(tabset.querySelectorAll('[role="tab"]'));
+    if (tabs.length < 2) return;
+
+    const panels = tabs.map((tab) => document.getElementById(tab.getAttribute('aria-controls')));
+    if (panels.some((panel) => !panel)) return;
+
+    const activate = (index, moveFocus = false) => {
+      tabs.forEach((tab, i) => {
+        const selected = i === index;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        panels[i].hidden = !selected;
+        if (selected && moveFocus) tab.focus();
+      });
+    };
+
+    const selectedIndex = tabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true');
+    activate(selectedIndex > -1 ? selectedIndex : 0);
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activate(index));
+
+      tab.addEventListener('keydown', (event) => {
+        const forward = rtl ? -1 : 1;
+        let next = null;
+
+        if (event.key === 'ArrowRight') next = (index + forward + tabs.length) % tabs.length;
+        else if (event.key === 'ArrowLeft') next = (index - forward + tabs.length) % tabs.length;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = tabs.length - 1;
+
+        if (next === null) return;
+        event.preventDefault();
+        activate(next, true);
+      });
+    });
+  });
+
+  /* ------------------------------------------------------------------------
+     5. Footer year
      ------------------------------------------------------------------------ */
   const year = document.getElementById('year');
   if (year) {
