@@ -5961,5 +5961,363 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ═══════════════════ CURRENCY CONVERTER ADDITION ═══════════════════ -->
 <!-- ═══════════════════ MODERN PILL BUTTONS (2026 UI/UX) ═══════════════════ -->
   <script src="extracted-scripts.js" defer></script>
+  <!-- ==================== NILE SMILE MASTER PATCH (DROP BEFORE </body>) ==================== -->
+<style id="nile-master-patch-css">
+  /* 1. إصلاح عدادات الأرقام ومنع ظهور أصفار CSS الوهمية */
+  .css-counter::before,
+  .css-counter::after {
+    content: none !important;
+    display: none !important;
+  }
+  .css-counter {
+    display: inline-block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* 2. الهيدر الديناميكي (شفاف فوق الهيرو ويتحول لزجاجي عند النزول) */
+  header#header,
+  header.site-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 9990 !important;
+    transition: background-color 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease !important;
+  }
+
+  /* حالة الهيدر في أعلى الصفحة (فوق صورة البداية) */
+  header#header.nile-top-transparent,
+  header.site-header.nile-top-transparent {
+    background: linear-gradient(180deg, rgba(10, 16, 24, 0.72) 0%, rgba(10, 16, 24, 0) 100%) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: none !important;
+  }
+  header#header.nile-top-transparent a:not([class*="bg-"]):not([class*="gold"]),
+  header#header.nile-top-transparent button:not([class*="bg-"]):not([class*="gold"]),
+  header#header.nile-top-transparent span:not([class*="gold"]),
+  header.site-header.nile-top-transparent a:not([class*="bg-"]):not([class*="gold"]),
+  header.site-header.nile-top-transparent button:not([class*="bg-"]):not([class*="gold"]) {
+    color: #ffffff !important;
+  }
+
+  /* حالة الهيدر عند التمرير لأسفل (Scrolled) */
+  header#header.nile-scrolled,
+  header.site-header.nile-scrolled {
+    background: rgba(255, 255, 255, 0.94) !important;
+    backdrop-filter: blur(14px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(14px) saturate(160%) !important;
+    border-bottom: 1px solid rgba(174, 145, 100, 0.28) !important;
+    box-shadow: 0 8px 30px rgba(15, 23, 32, 0.08) !important;
+  }
+  html.dark header#header.nile-scrolled,
+  body.dark header#header.nile-scrolled,
+  html.dark header.site-header.nile-scrolled {
+    background: rgba(15, 23, 32, 0.92) !important;
+    border-bottom: 1px solid rgba(232, 200, 138, 0.22) !important;
+  }
+
+  /* 3. شريط التنقل الجانبي على اليسار (Left Navigator Rail) */
+  #nile-left-rail {
+    position: fixed !important;
+    left: 18px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 9985 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 11px !important;
+    padding: 10px 6px !important;
+    border-radius: 999px !important;
+    background: rgba(15, 23, 32, 0.35) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(232, 200, 138, 0.2) !important;
+  }
+  #nile-left-rail .nile-rail-link {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    width: 14px !important;
+    height: 14px !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+  }
+  #nile-left-rail .nile-rail-dot {
+    width: 8px !important;
+    height: 8px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.55) !important;
+    border: 1.5px solid #AE9164 !important;
+    transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+  #nile-left-rail .nile-rail-link:hover .nile-rail-dot,
+  #nile-left-rail .nile-rail-link.active .nile-rail-dot {
+    width: 11px !important;
+    height: 11px !important;
+    background: #E8C88A !important;
+    border-color: #ffffff !important;
+    box-shadow: 0 0 10px rgba(232, 200, 138, 0.9) !important;
+  }
+  #nile-left-rail .nile-rail-tooltip {
+    position: absolute !important;
+    left: 24px !important;
+    background: rgba(15, 23, 32, 0.94) !important;
+    color: #E8C88A !important;
+    border: 1px solid rgba(232, 200, 138, 0.35) !important;
+    padding: 4px 10px !important;
+    border-radius: 6px !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+    opacity: 0 !important;
+    transform: translateX(-8px) !important;
+    pointer-events: none !important;
+    transition: opacity 0.2s ease, transform 0.2s ease !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+  }
+  #nile-left-rail .nile-rail-link:hover .nile-rail-tooltip,
+  #nile-left-rail .nile-rail-link.active .nile-rail-tooltip {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+  }
+  @media (max-width: 1024px) {
+    #nile-left-rail {
+      display: none !important;
+    }
+  }
+
+  /* 4. استعادة زجاجية وحركة الـ Apple Dock السفلي */
+  .nile-dock-enhanced {
+    background: rgba(15, 23, 32, 0.82) !important;
+    backdrop-filter: blur(18px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+    border: 1px solid rgba(232, 200, 138, 0.32) !important;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+    overflow: visible !important;
+  }
+  .nile-dock-enhanced a,
+  .nile-dock-enhanced button {
+    transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), color 0.2s ease !important;
+    transform-origin: bottom center !important;
+    position: relative !important;
+  }
+  .nile-dock-enhanced a.nile-dock-active::after,
+  .nile-dock-enhanced button.nile-dock-active::after {
+    content: "" !important;
+    position: absolute !important;
+    bottom: -5px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 5px !important;
+    height: 5px !important;
+    border-radius: 50% !important;
+    background: #E8C88A !important;
+    box-shadow: 0 0 8px #E8C88A !important;
+  }
+</style>
+
+<script id="nile-master-patch-js">
+(function () {
+  function initNileFixes() {
+    /* =========================================================
+       1. إصلاح الأرقام في قسم الإحصائيات (#trust-stats)
+       ========================================================= */
+    const fallbackTargets = [10, 20, 94.6, 24];
+    const counters = document.querySelectorAll('#trust-stats .css-counter, .css-counter');
+
+    counters.forEach((el, index) => {
+      const rawStyle = el.getAttribute('style') || '';
+      const match = rawStyle.match(/--target\s*:\s*([0-9.]+)/);
+      const targetVal = match ? parseFloat(match[1]) : (fallbackTargets[index] ?? 0);
+      const decimals = String(targetVal).includes('.') ? String(targetVal).split('.')[1].length : 0;
+
+      el.dataset.targetVal = targetVal;
+      el.dataset.decimals = decimals;
+      // نضع الرقم الحقيقي فوراً حتى لا يظهر صفر أبداً
+      el.textContent = targetVal.toFixed(decimals);
+    });
+
+    if ('IntersectionObserver' in window && counters.length) {
+      const counterObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const target = parseFloat(el.dataset.targetVal || '0');
+          const decimals = parseInt(el.dataset.decimals || '0', 10);
+          const duration = 1300;
+          const start = performance.now();
+
+          function step(now) {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = (target * eased).toFixed(decimals);
+            if (progress < 1) requestAnimationFrame(step);
+            else el.textContent = target.toFixed(decimals);
+          }
+          requestAnimationFrame(step);
+          obs.unobserve(el);
+        });
+      }, { threshold: 0.25 });
+
+      counters.forEach(c => counterObserver.observe(c));
+    }
+
+    /* =========================================================
+       2. إنشاء شريط التنقل الجانبي على اليسار وربطه بالأقسام الفعلية
+       ========================================================= */
+    const oldRail = document.getElementById('nile-left-rail');
+    if (oldRail) oldRail.remove();
+
+    const sectionLabelsMap = {
+      'main': 'Top',
+      'hero': 'Top',
+      'trust-stats': 'Track Record',
+      'brutal-truth': 'The Reality',
+      'price-anchor': 'Real Numbers',
+      'top-tier': '12-Point Protocol',
+      'implant-systems': 'Implant Brands',
+      'packages': 'Packages',
+      'turkey-rescue': 'Turkey Rescue',
+      'comparison': 'Comparison',
+      'estimator': 'Calculator',
+      'guarantees': 'Guarantees',
+      'faq': 'FAQ',
+      'consult': 'Free Quote'
+    };
+
+    const candidateSections = Array.from(document.querySelectorAll('main section[id], section[id]'))
+      .filter(sec => sec.offsetHeight > 80 && sectionLabelsMap[sec.id]);
+
+    const railNav = document.createElement('nav');
+    railNav.id = 'nile-left-rail';
+    railNav.setAttribute('aria-label', 'Quick Section Navigation');
+
+    candidateSections.forEach((sec, idx) => {
+      const link = document.createElement('a');
+      link.href = '#' + sec.id;
+      link.className = 'nile-rail-link' + (idx === 0 ? ' active' : '');
+      link.dataset.targetId = sec.id;
+
+      const dot = document.createElement('span');
+      dot.className = 'nile-rail-dot';
+
+      const tip = document.createElement('span');
+      tip.className = 'nile-rail-tooltip';
+      tip.textContent = sectionLabelsMap[sec.id];
+
+      link.appendChild(dot);
+      link.appendChild(tip);
+
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      railNav.appendChild(link);
+    });
+
+    if (candidateSections.length > 0) {
+      document.body.appendChild(railNav);
+    }
+
+    /* =========================================================
+       3. استعادة حركة وتكبير الـ Apple Dock السفلي
+       ========================================================= */
+    const dockEl = document.querySelector('#apple-dock, .apple-dock, [id*="dock"], [class*="dock"]');
+    let dockItems = [];
+
+    if (dockEl) {
+      dockEl.classList.add('nile-dock-enhanced');
+      dockItems = Array.from(dockEl.querySelectorAll('a, button'));
+
+      // تأثير التكبير المتدرج عند تمرير الماوس (macOS Dock Magnification)
+      dockEl.addEventListener('mousemove', (e) => {
+        if (window.innerWidth < 768) return;
+        dockItems.forEach(item => {
+          const rect = item.getBoundingClientRect();
+          const itemCenter = rect.left + rect.width / 2;
+          const dist = Math.abs(e.clientX - itemCenter);
+          const maxDist = 110;
+          if (dist < maxDist) {
+            const factor = 1 - dist / maxDist;
+            const scale = 1 + factor * 0.32;
+            const lift = factor * -6;
+            item.style.transform = `translateY(${lift}px) scale(${scale})`;
+          } else {
+            item.style.transform = 'translateY(0) scale(1)';
+          }
+        });
+      });
+
+      dockEl.addEventListener('mouseleave', () => {
+        dockItems.forEach(item => {
+          item.style.transform = 'translateY(0) scale(1)';
+        });
+      });
+    }
+
+    /* =========================================================
+       4. التحكم الموحد في الهيدر + تحديث القسم النشط أثناء التمرير
+       ========================================================= */
+    const headerEl = document.querySelector('header#header, header.site-header, header');
+    const railLinks = Array.from(document.querySelectorAll('#nile-left-rail .nile-rail-link'));
+
+    function onScrollUpdate() {
+      const y = window.scrollY || window.pageYOffset;
+
+      // تحديث شفافية الهيدر
+      if (headerEl) {
+        if (y <= 50) {
+          headerEl.classList.add('nile-top-transparent');
+          headerEl.classList.remove('nile-scrolled');
+        } else {
+          headerEl.classList.remove('nile-top-transparent');
+          headerEl.classList.add('nile-scrolled');
+        }
+      }
+
+      // تحديد القسم النشط في النافيجيتور الجانبي والـ Apple Dock
+      const triggerLine = y + window.innerHeight * 0.35;
+      let activeId = candidateSections[0]?.id || '';
+
+      for (let i = 0; i < candidateSections.length; i++) {
+        const sec = candidateSections[i];
+        const top = sec.offsetTop;
+        const bottom = top + sec.offsetHeight;
+        if (triggerLine >= top && triggerLine < bottom) {
+          activeId = sec.id;
+          break;
+        }
+      }
+
+      railLinks.forEach(link => {
+        link.classList.toggle('active', link.dataset.targetId === activeId);
+      });
+
+      dockItems.forEach(item => {
+        const href = item.getAttribute('href') || '';
+        item.classList.toggle('nile-dock-active', href === '#' + activeId);
+      });
+    }
+
+    window.addEventListener('scroll', onScrollUpdate, { passive: true });
+    onScrollUpdate();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNileFixes);
+  } else {
+    initNileFixes();
+  }
+})();
+</script>
 </body>
 </html>
