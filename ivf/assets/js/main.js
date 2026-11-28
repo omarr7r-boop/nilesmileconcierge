@@ -134,35 +134,52 @@
 
       const data = new FormData(consultForm);
       const get = (key) => String(data.get(key) || '').trim();
-      const lines = [
-        'Hello Nile Smile IVF Concierge,',
-        '',
-        'I would like a confidential consultation.',
-        '',
-        'Name: ' + get('firstName'),
-        'WhatsApp: ' + get('whatsapp'),
-        'Email: ' + (get('email') || 'Not provided'),
-        'Country: ' + get('country'),
-        'Interested in: ' + get('interest'),
-        'Previous treatment: ' + get('history'),
-        'Preferred language: ' + get('language'),
-        'Timeline: ' + get('timeline'),
-      ];
+      const isArabic = document.documentElement.lang === 'ar';
+      const lines = isArabic
+        ? [
+            'السلام عليكم، نايل سمايل.',
+            '',
+            'أرغب في استشارة خاصة.',
+            '',
+            'الاسم: ' + get('firstName'),
+            'واتساب: ' + get('whatsapp'),
+            'البريد: ' + (get('email') || 'غير مذكور'),
+            'بلد الإقامة: ' + get('country'),
+            'الاهتمام: ' + get('interest'),
+            'علاج سابق: ' + get('history'),
+            'اللغة المفضلة: ' + get('language'),
+            'وقت البدء: ' + get('timeline'),
+          ]
+        : [
+            'Hello Nile Smile IVF Concierge,',
+            '',
+            'I would like a confidential consultation.',
+            '',
+            'Name: ' + get('firstName'),
+            'WhatsApp: ' + get('whatsapp'),
+            'Email: ' + (get('email') || 'Not provided'),
+            'Country: ' + get('country'),
+            'Interested in: ' + get('interest'),
+            'Previous treatment: ' + get('history'),
+            'Preferred language: ' + get('language'),
+            'Timeline: ' + get('timeline'),
+          ];
 
       const notes = get('message');
       if (notes) {
-        lines.push('', 'Notes: ' + notes);
+        lines.push('', (isArabic ? 'ملاحظات: ' : 'Notes: ') + notes);
       }
 
-      lines.push('', 'I consent to being contacted privately.');
+      lines.push('', isArabic ? 'أوافق على التواصل معي بخصوصية.' : 'I consent to being contacted privately.');
 
       const url = 'https://wa.me/201503308333?text=' + encodeURIComponent(lines.join('\n'));
       window.open(url, '_blank', 'noopener');
 
       if (status) {
         status.hidden = false;
-        status.textContent =
-          'Your private summary has opened in WhatsApp. If it did not open, message us directly on +20 150 330 8333. Nothing has been stored on this website.';
+        status.textContent = isArabic
+          ? 'فتحت رسالتك الخاصة في واتساب. إذا لم تفتح، راسلينا مباشرة على ‎+20 150 330 8333. لم يُخزَّن شيء على هذا الموقع.'
+          : 'Your private summary has opened in WhatsApp. If it did not open, message us directly on +20 150 330 8333. Nothing has been stored on this website.';
         status.focus({ preventScroll: true });
       }
     });

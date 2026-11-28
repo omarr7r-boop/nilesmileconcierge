@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Image sheet</title>
+<style>
+  body{margin:0;background:#111;color:#eee;font:12px/1.4 monospace}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:6px}
+  figure{margin:0;background:#222}
+  img{display:block;width:100%;height:150px;object-fit:cover}
+  figcaption{padding:3px 5px;font-size:11px;color:#9cf}
+</style>
+</head>
+<body>
+<div class="grid" id="g"></div>
+<script>
+const names = ["couple-hope.jpg","embryology-microscope.jpg","psychological-support.jpg","medical-team.jpg","cairo-nile.jpg","cairo-suite.jpg","private-consultation.jpg","faq-consultation.jpg","ar-couple.jpg","ar-lab.jpg","ar-support.jpg","ar-nursing.jpg","ar-nile.jpg","ar-suite.jpg","ar-consultation.jpg","ar-microscope.jpg"];
+const g = document.getElementById('g');
+for (const n of names) {
+  const f = document.createElement('figure');
+  f.innerHTML = '<img src="assets/images/' + n + '" alt=""><figcaption>' + n + '</figcaption>';
+  g.appendChild(f);
+}
+</script>
+</body>
+</html>
